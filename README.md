@@ -1,2 +1,2 @@
-# Oratrix
-Translatio per orationem
+# Lexico
+Translatio per loquandum
