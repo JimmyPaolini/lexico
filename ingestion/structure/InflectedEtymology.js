@@ -8,8 +8,13 @@ class InflectedEtymology extends Etymology {
         this.principalParts[firstPrincipalPartName] = []
     }
 
-    principalParts = {}
+    ingest($, elt) {
+        super.ingest($, elt)
+        try { this.ingestPrincipalParts($, elt) }
+        catch (e) { this.errors.push(`Principal Parts ${e}`); delete this.principalParts }
+    }
 
+    principalParts = {}
     ingestPrincipalParts($, elt) {
         const addTermToLastPrincipalPart = part => {
             const keys = Object.keys(this.principalParts)
@@ -21,12 +26,8 @@ class InflectedEtymology extends Etymology {
             if (key === 'or') addTermToLastPrincipalPart($(b).text())
             else this.principalParts[key] = [$(b).text()]
         })
-    }
-
-    ingest($, elt) {
-        super.ingest($, elt)
-        try { this.ingestPrincipalParts($, elt) }
-        catch (e) { console.error(`Trouble ingesting principal parts - ${e}`)}
+        if (Object.keys(this.principalParts).length === 1) this.principalParts = this.principalParts[Object.keys(this.principalParts)[0]]
+        if (Object.keys(this.principalParts).length <= 0) throw new Error(`no principal parts found`)
     }
 
     inflections = {}

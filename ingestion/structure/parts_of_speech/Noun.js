@@ -9,11 +9,12 @@ class Noun extends InflectedEtymology {
     ingest($, elt) {
         super.ingest($, elt)
         try { super.ingestInflections($, elt) }
-        catch (e) { console.error(`Trouble ingesting inflections - ${e}`); delete this.inflections }
+        catch (e) { this.errors.push(`Inflections ${e}`); delete this.inflections }
         try { this.ingestDeclension($, elt) }
-        catch (e) { console.error(`Trouble ingesting declension - ${e}`); delete this.declension }
+        catch (e) { this.errors.push(`Declension ${e}`); delete this.declension }
         try { this.ingestGender($, elt) }
-        catch (e) { console.error(`Trouble ingesting gender - ${e}`); delete this.gender }
+        catch (e) { this.errors.push(`Gender ${e}`); delete this.gender }
+        if (!this.errors) delete this.errors
     }
 
     declension = ``

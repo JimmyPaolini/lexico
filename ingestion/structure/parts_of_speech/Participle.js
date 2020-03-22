@@ -5,7 +5,6 @@ class Participle extends Adjective {
         super()
         this.partOfSpeech = 'participle'
     }
-
 }
 
 module.exports = Participle

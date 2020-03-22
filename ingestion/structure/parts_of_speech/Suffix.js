@@ -5,7 +5,6 @@ class Suffix extends Adjective {
         super()
         this.partOfSpeech = 'suffix'
     }
-
 }
 
 module.exports = Suffix

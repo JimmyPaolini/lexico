@@ -5,6 +5,11 @@ class Adverb extends InflectedEtymology {
         super('positive')
         this.partOfSpeech = 'adverb'
     }
+
+    ingest($, elt) {
+        super.ingest($, elt)
+        if (!this.errors) delete this.errors
+    }
 }
 
 module.exports = Adverb

@@ -1,17 +1,14 @@
 const request = require('request-promise-native')
 const cheerio = require('cheerio')
-const cheerioTableparser = require('cheerio-tableparser')
-const fs = require('fs')
 
-const creds = require('../aws_credentials.json')
+const credentials = require('../aws_credentials.json')
 const AWS = require('aws-sdk')
-const dynamo = new AWS.DynamoDB.DocumentClient({accessKeyId: creds.accessKeyId, secretAccessKey: creds.secretAccessKey, region: creds.region})
-const TableName = creds.TableName
+const dynamo = new AWS.DynamoDB.DocumentClient({accessKeyId: credentials.accessKeyId, secretAccessKey: credentials.secretAccessKey, region: credentials.region})
+const TableName = credentials.TableName
 const putEntry = async entry => await dynamo.put({TableName, Item: entry}).promise()
 const getEntry = async word => (await dynamo.get({TableName, Key: {word}}).promise()).Item
 
 const Entry = require("./structure/Entry")
-const Etymology = require("./structure/Etymology")
 const Noun = require("./structure/parts_of_speech/Noun")
 const ProperNoun = require("./structure/parts_of_speech/ProperNoun")
 const Verb = require("./structure/parts_of_speech/Verb")
@@ -27,13 +24,13 @@ const Letter = require("./structure/parts_of_speech/Letter")
 
 async function ingestDictionary() {
     // const alphabet = [...Array(26)].map((q, w) => String.fromCharCode(w + 97))
-    const alphabet = ['a']
+    const alphabet = ['d']
     for (const letter of alphabet) {
         let entries = await ingestWordsAndHrefs(letter)
         for (let entry of entries) {
             entry = await ingestEntry(entry)
-            if (entry) putEntry(entry)
-            await new Promise(r => setTimeout(r, 250))
+            if (entry) await putEntry(entry)
+            // await new Promise(r => setTimeout(r, 250))
         }
     }
 }
@@ -48,34 +45,20 @@ async function ingestWordsAndHrefs(letter) {
 
 async function ingestEntry(entry) {
     try {
-        if (entry.href.includes(`/w/index.php`)) {
-            console.warn(`Skipped: ${entry.word} - unknown to wiktionary`)
-            return null
-        }
+        if (entry.href.includes(`/w/index.php`)) return console.warn(`Skipped ${entry.word} - unknown to wiktionary`)
         let $ = cheerio.load(await request.get(entry.href))
         const section = ($('span#Latin').length ? $('span#Latin') : $('span#Translingual')).parent().nextUntil('hr')
-        if (section.length < 1) {
-            console.warn(`Skipped: ${entry.word} - no Latin entry in Wiktionary`)
-            return null
-        }
+        if (section.length < 1) return console.warn(`Skipped ${entry.word} - no Latin entry in Wiktionary`)
 
         entry.html = `<div class="${entry.word}">${$.html(section)}</div>`
         $ = cheerio.load(entry.html)
 
-        $('div').children().each((_, elt) => {
-            // Skip siblings until a Latin headword is found
-            if (!($(elt)[0].name === 'p' && $(elt).children('strong.Latn.headword').length > 0)) return
+        $('p:has(strong.Latn.headword)').each((_, elt) => {
+            // Skip etymologies with only reference translations
+            if ($(elt).nextAll('ol').first().children('li').length <=  $(elt).nextAll('ol').first().find('li span.form-of-definition.use-with-mention').length) return
 
-            // Handle entries that only point to another principal word(s)
-            // if ($(elt).next('ol').children('li').children('span.form-of-definition.use-with-mention').length > 0) {
-            //     let etymology = new Etymology()
-            //     etymology.ingest($, elt)
-            //     entry.addEtymology(etymology)
-            //     return
-            // }
-
-            const partOfSpeech = $(elt).prevAll(':header').first().text().toLowerCase().replace('[edit]', '')
             let etymology
+            const partOfSpeech = $(elt).prevAll(':header').first().text().toLowerCase().replace('[edit]', '')
             if (partOfSpeech === 'noun') etymology = new Noun()
             else if (partOfSpeech === 'proper noun') etymology = new ProperNoun()
             else if (partOfSpeech === 'verb') etymology = new Verb()
@@ -93,21 +76,18 @@ async function ingestEntry(entry) {
                 entry.addEtymology(etymology)
             }
         })
-        if (!entry.etymologies.length) {
-            console.warn(`Skipped: ${entry.word} - unhandled Part of Speech`)
-            return null
-        }
+        if (!entry.etymologies.length) return console.warn(` Skipped ${entry.word} - no viable etymologies`)
 
-        console.log(`Translated "${entry.word}" - ${entry.etymologies.map(etym => etym.partOfSpeech).join(', ')}`)
+        console.log("\x1b[34m", `Translated "${entry.word}" - ${entry.etymologies.map(etymology => etymology.partOfSpeech).join(', ')}`)
+        for (const etymology of entry.etymologies)
+            if (etymology.errors.length) console.log("\x1b[33m", `\t${etymology.errors.join('\n\t')}`)
         return entry
 
-    } catch (e) {
-        console.error(`Error: ${entry.word} - ${e}`)
-        return null
-    }
+    } catch (e) { return console.error(`Error word: ${entry.word} - ${e}`) }
 }
 
 (async () => {
+    if (process.argv[2] === 'ingestDictionary') return await ingestDictionary()
     const firstDeclensionNouns = ['stella']
     const secondDeclensionNouns = ['filius', 'puer', 'bellum']
     const thirdDeclensionNouns = ['homo', 'nomen', 'turris', 'animal', 'nox', 'aer', 'tigris']
@@ -120,11 +100,11 @@ async function ingestEntry(entry) {
     const pronouns = ['hic', 'ille', 'qui', 'ego']
     const conjunctions = ['et', 'tamen', 'cum']
     const participles = ['amans', 'auditus']
-
-    const arr = []
-
-    // const word = 'ablepsia'
-    // const entry = await ingestEntry(new Entry(word, `/wiki/${word}#Latin`))
-    // console.log(JSON.stringify(entry.etymologies, null, 2))
-    ingestDictionary()
+    //
+    const word = 'baumannii'
+    const entry = await ingestEntry(new Entry(word, `/wiki/${word}#Latin`))
+    if (process.argv[2] === 'ingestWord' && entry)
+        await putEntry(entry)
+    else if (entry)
+        console.log("\x1b[0m", JSON.stringify(entry.etymologies, null, 2))
 })()

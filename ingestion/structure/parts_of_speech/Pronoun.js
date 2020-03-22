@@ -9,7 +9,8 @@ class Pronoun extends InflectedEtymology {
     ingest($, elt) {
         super.ingest($, elt)
         try { super.ingestInflections($, elt) }
-        catch (e) { console.error(`Trouble ingesting inflections - ${e}`)}
+        catch (e) { this.errors.push(`Inflections ${e}`); delete this.inflections }
+        if (!this.errors) delete this.errors
     }
 }
 

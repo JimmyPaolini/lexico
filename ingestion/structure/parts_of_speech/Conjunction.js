@@ -5,6 +5,11 @@ class Conjunction extends Etymology {
         super()
         this.partOfSpeech = 'conjunction'
     }
+
+    ingest($, elt) {
+        super.ingest($, elt)
+        if (!this.errors) delete this.errors
+    }
 }
 
 module.exports = Conjunction

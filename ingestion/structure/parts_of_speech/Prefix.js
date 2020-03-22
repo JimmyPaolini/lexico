@@ -5,7 +5,6 @@ class Prefix extends Adjective {
         super()
         this.partOfSpeech = 'prefix'
     }
-
 }
 
 module.exports = Prefix
