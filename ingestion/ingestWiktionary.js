@@ -88,18 +88,6 @@ async function ingestEntry(entry) {
 
 (async () => {
     if (process.argv[2] === 'ingestDictionary') return await ingestDictionary()
-    const firstDeclensionNouns = ['stella']
-    const secondDeclensionNouns = ['filius', 'puer', 'bellum']
-    const thirdDeclensionNouns = ['homo', 'nomen', 'turris', 'animal', 'nox', 'aer', 'tigris']
-    const fourthDeclensionNouns = ['manus', 'cornu']
-    const fifthDeclensionNouns = ['dies', 'res']
-    const verbs = ['amo', 'moneo', 'tego', 'audio']
-    const adjectives = ['caecus', 'brevis', 'bonus']
-    const adverbs = ['celeriter', 'usque']
-    const prepositions = ['a', 'de', 'in', 'propter']
-    const pronouns = ['hic', 'ille', 'qui', 'ego']
-    const conjunctions = ['et', 'tamen', 'cum']
-    const participles = ['amans', 'auditus']
     //
     const word = 'baumannii'
     const entry = await ingestEntry(new Entry(word, `/wiki/${word}#Latin`))
