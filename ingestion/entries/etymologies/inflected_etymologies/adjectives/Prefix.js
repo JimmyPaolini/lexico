@@ -1,10 +1,9 @@
 const Adjective = require("./Adjective")
 
 class Prefix extends Adjective {
-    constructor() {
-        super()
-        this.partOfSpeech = 'prefix'
-    }
+    partOfSpeech = 'prefix'
+    ingestInflection($, elt) {}
+    ingestForms($, elt) {}
 }
 
 module.exports = Prefix
