@@ -22,7 +22,7 @@ class Verb extends Etymology {
             const isVoice = word => ['active', 'passive'].includes(word)
             const isTense = word => ['present', 'imperfect', 'future', 'perfect', 'pluperfect', 'future perfect'].includes(word)
 
-            cell = cell.trim().replace(/\d+/, '')
+            cell = cell.trim().replace(/[\d*]+/, '')
             if (!/\w+/.test(cell)) return null
             else if (cell.includes(', ')) return cell.split(', ')
             else if (cell.includes(' + ')) {

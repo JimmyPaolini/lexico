@@ -7,10 +7,8 @@ class Adjective extends Etymology {
     ingestInflection($, elt) {
         if (!$(elt).text().includes(';')) throw new Error(`no inflection`)
         this.inflection = $(elt).text().split('; ')[1]
-        this.inflection = this.inflection.replace('declension', '')
-            .replace('-', '')
-            .replace('adjective', '')
-            .replace('participle', '')
+        this.inflection = this.inflection
+            .replace(/-|(declension)|(adjective)|(participle)|(numeral)/gi,'')
             .replace(/\s+/g,' ').trim()
     }
 }

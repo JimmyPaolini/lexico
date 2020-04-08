@@ -1,12 +1,13 @@
 const fs = require('fs'), path = require('path')
+const chalk = require('chalk')
 const cheerio = require('cheerio')
 const _ = require('lodash')
-const AWS = require('aws-sdk')
-const { accessKeyId, secretAccessKey, region, TableName } = require('../secrets/aws_credentials')
-const dynamo = new AWS.DynamoDB.DocumentClient({accessKeyId, secretAccessKey, region, httpOptions: {
-    agent: new (require('https')).Agent({keepAlive: true}) }})
-const putItem   = async entry => await dynamo.put({TableName, Item: entry}).promise()
-const getItem = async word => (await dynamo.get({TableName, Key: {word}}).promise()).Item
+const putItem = async entry => fs.writeFileSync(path.join(process.cwd(), `../latin/dictionary/${entry.word}.json`),
+    JSON.stringify(entry,null,2))
+const getItem = async word => {
+    try { return require(path.join(process.cwd(),`../latin/dictionary/${word}.json`)) }
+    catch (e) { return undefined }
+}
 String.prototype.norm = function() {return this.normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
 
 const Noun = require("./wordTypes/nouns/Noun")
@@ -26,14 +27,14 @@ const Interjection = require("./wordTypes/simple/Interjection")
 const Phrase = require("./wordTypes/simple/Phrase")
 
 function log(message) {
-    const logFilename = path.join(process.cwd(), `/logs/${process.pid}.txt`)
+    const logFilename = path.join(process.cwd(), `ingestion/ingestDictionary/logs/${process.pid}.txt`)
     if (process.argv.length === 2) fs.appendFileSync(logFilename, message + '\n')
-    return console.error(message)
+    return console.log(chalk.red(message))
 }
 
 class Entry {
     constructor(entry) {
-        this.word = entry.word
+        this.word = entry.word.toLowerCase()
         this.href = entry.href.includes('#Latin') ? entry.href : entry.href + '#Latin'
         this.etymologies = []
     }
@@ -44,13 +45,11 @@ class Entry {
             for (const elt of $('p:has(strong.Latn.headword)').get())
                 await this.ingestEtymology($, elt)
 
-            if (!this.etymologies.length)
-                return log(` Skipped "${this.word}" - ${this.href}`)
-            console.log("\x1b[34m", `Ingested "${this.word}" - ${
-                this.etymologies.map(etymology => etymology.partOfSpeech).join(', ')}`)
+            if (!this.etymologies.length) return log(`Skipped "${this.word}" - ${this.href}`)
+            console.log(chalk.blue(`Ingested "${this.word}" - ${this.etymologies.map(etymology => etymology.partOfSpeech).join(', ')}`))
             for (const etymology of this.etymologies) {
                 if (etymology.errors) {
-                    console.log("\x1b[33m", `\t${etymology.errors.join('\n\t')}`)
+                    console.log(chalk.yellow(`${etymology.errors.join('\n')}`))
                     delete etymology.errors
                 }
             }
@@ -58,8 +57,8 @@ class Entry {
             await this.ingestReferences()
             await putItem(this)
 
-            if (process.argv[2] === 'printWord') console.log("\x1b[0m", JSON.stringify(this.etymologies, null, 2))
-        } catch (e) { return log(` Error "${this.word}" - ${e}`) }
+            if (process.argv[2] === 'printWord') console.log(chalk.white(JSON.stringify(this.etymologies, null, 2)))
+        } catch (e) { return log(`Error "${this.word}" - ${e}`) }
     }
 
     ingestEtymology($, elt) {
@@ -109,7 +108,7 @@ class Entry {
                         newEntry.etymologies.push(ref)
                         putItem(newEntry)
                     }
-                    console.log("\x1b[36m", `\tRefer "${this.word}" - "${word.norm()}"`)
+                    console.log(chalk.cyan(`Referred "${this.word}" - ${word.norm()}`))
                 }
             }
             delete etymology.disorganizedForms
@@ -118,4 +117,4 @@ class Entry {
 
 }
 
-module.exports = Entry
+module.exports = { Entry, log }

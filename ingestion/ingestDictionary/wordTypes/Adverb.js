@@ -6,7 +6,7 @@ class Adverb extends Etymology {
 
     ingestInflection($, elt) {
         if (this.principalParts.length > 1) this.inflection = 'descriptive'
-        else this.inflectioni = 'conjunctional'
+        else this.inflection = 'conjunctional'
     }
 
     ingestForms($, elt) {

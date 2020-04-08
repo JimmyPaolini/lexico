@@ -57,7 +57,7 @@ class Etymology {
         if (!table) throw new Error(`no forms`)
 
         function parseWords(cell) {
-            cell = cell.trim().replace(/\d+/, '')
+            cell = cell.trim().replace(/[\d*]+/, '')
             if (!/\w+/.test(cell)) return null
             else if (cell.includes(', ')) return cell.split(', ')
             else return [cell]
@@ -165,7 +165,8 @@ class Etymology {
 
     ingestEtymology($, elt) {
         const etymologyHeader = $(elt).prevAll(':header:contains("Etymology")').first()
-        if ($(etymologyHeader).length <= 0 || $(etymologyHeader).next()[0].name !== 'p') throw new Error(`no etymology`)
+        if ($(etymologyHeader).length <= 0 || $(etymologyHeader).next()[0].name !== 'p' ||
+            !$(etymologyHeader).next().text().trim().length) throw new Error(`no etymology`)
         this.etymology = $(etymologyHeader).next().text().trim()
     }
 

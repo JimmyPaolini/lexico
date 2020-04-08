@@ -7,13 +7,9 @@ class Reference extends Etymology {
         this.inflection = 'referential'
         this.partOfSpeech = rootEtymology.partOfSpeech
         this.translations = rootEtymology.translations
-        this.principalParts = rootEtymology.principalParts
+        this.principalParts = [`macronized: ${word}`, ...rootEtymology.principalParts]
         this.forms = [rootEtymology.partOfSpeech === 'verb' ? forms : forms.reverse()]
-        this.pronunciation = {
-            classical: { phonemes: getPronunciations(word, 'classical') },
-            ecclesiastical: { phonemes: getPronunciations(word, 'ecclesiastical') },
-            vulgar: { phonemes: getPronunciations(word, 'vulgar') }
-        }
+        try { this.ingestPronunciation(0,0) } catch (e) { /*this.errors.push(`Pronunciation ${e}`);*/ }
     }
 }
 

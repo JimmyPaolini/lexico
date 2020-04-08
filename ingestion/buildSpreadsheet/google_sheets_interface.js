@@ -2,9 +2,9 @@ const fs = require('fs')
 const readline = require('readline')
 const {google} = require('googleapis')
 
-const {client_secret, client_id, redirect_uris, spreadsheetId, sheetIds} = require('../secrets/google_credentials').web
+const {client_secret, client_id, redirect_uris, spreadsheetId, sheetIds} = require('../../secrets/google_credentials').web
 const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0])
-try { oAuth2Client.setCredentials(require('../secrets/google_token.json')) }
+try { oAuth2Client.setCredentials(require('../../secrets/google_token.json')) }
 catch (e) {
     const authUrl = oAuth2Client.generateAuthUrl({
         access_type: 'offline',
@@ -67,7 +67,7 @@ function entriesToRows(entries) {
             row.push(etymology.principalParts ? etymology.principalParts.map(pp => pp.split(': ')[1]).join(', ') : '')
             row.push(etymology.translations.map(translation => translation.replace(/{\*.*\*}/g, '')).join('; '))
             row.push(etymology.pronunciation ? `C: ${etymology.pronunciation.classical.phonemes
-                .map(phoneme => phoneme.replace(/\s+/g,'')).join(',')}; E: ${
+                .map(phoneme => phoneme.replace(/\s+/g,'')).join(',')} E: ${
                 etymology.pronunciation.ecclesiastical.phonemes.map(phoneme => phoneme.replace(/\s+/g,'')).join(',')}`:'')
             row.push(etymology.etymology)
             row.push(Array.isArray(etymology.forms) ? etymology.forms.map(form => form.join(' ')).join('; ') :
