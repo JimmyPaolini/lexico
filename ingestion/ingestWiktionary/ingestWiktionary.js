@@ -4,17 +4,24 @@ const cheerio = require('cheerio')
 require('events').EventEmitter.defaultMaxListeners = 300;
 const { emailMe } = require('../../notifications')
 const putItem = async entry => fs.writeFileSync(path.join(process.cwd(),
-    `../latin/wiktionary/lemma/${entry.word.split('').map(c => 
+    `../dictionary/html/${entry.word.split('').map(c => 
         c.match(/[A-Z]/g) ? c + '`' : c).join('')}.json`),
     JSON.stringify(entry,null,2))
 
 const lemmasUrl = `https://en.wiktionary.org/wiki/Category:Latin_lemmas`
-const nonlemmasUrl = `https://en.wiktionary.org/wiki/Category:Latin_non-lemma_forms`
+const participlesUrl = `https://en.wiktionary.org/wiki/Category:Latin_participles`
+const comparativeAdjectivesUrl = `https://en.wiktionary.org/wiki/Category:Latin_comparative_adjectives`
+const superlativeAdjectivesUrl = `https://en.wiktionary.org/wiki/Category:Latin_superlative_adjectives`
 
-try { return ingestLemmas(process.argv[2]) }
-catch (e) { return emailMe('Error Ingesting Wiktionary', e.toString()) }
+try {
+    if (process.argv.length >= 3) return ingestCategory(process.argv[2])
+    else return ingestCategory(lemmasUrl).then(_ =>
+        ingestCategory(participlesUrl).then(_ =>
+            ingestCategory(comparativeAdjectivesUrl).then(_ =>
+                ingestCategory(superlativeAdjectivesUrl))))
+} catch (e) { return emailMe('Error Ingesting Wiktionary', e.toString()) }
 
-async function ingestLemmas(startUrl = lemmasUrl) {
+async function ingestCategory(startUrl = lemmasUrl) {
     console.error(`${(new Date()).toLocaleString()} - START`)
     let path = startUrl.replace('https://en.wiktionary.org','')
     try {
@@ -29,10 +36,23 @@ async function ingestLemmas(startUrl = lemmasUrl) {
         }
     } catch (e) {
         console.error(`Error on url "https://en.wiktionary.org${path}" - ${e}`)
-        return path ? await ingestLemmas(path) : null
+        return path ? await ingestCategory(path) : null
     }
     console.error(`${(new Date()).toLocaleString()} - FINISH`)
-    await emailMe('Finished Ingesting Wiktionary', process.argv.slice(2).join(' '))
+    await emailMe('Finished Ingesting Wiktionary', startUrl)
+}
+
+async function ingestWord(word, href) {
+    if (!word.match(/^[A-Za-z-.`,!; ]*\$/)) return log(`Error "${entry.word}" - contains special characters`)
+    const entry = {word, href: `https://en.wiktionary.org${href}`}
+    if (entry.href.includes(`/w/index.php`)) return log(`Error "${entry.word}" - no wiktionary page`)
+    let $ = cheerio.load(await request.get(entry.href, {timeout: 10000, forever: true}))
+    const section = $('span#Latin').parent().nextUntil('hr')
+    if (section.length < 1) return log(`Error "${entry.word}" - no latin entry in wiktionary`)
+
+    entry.html = `<div class="${entry.word}">${$.html(section)}</div>`
+    await putItem(entry)
+    console.log(`Ingested "${entry.word}" HTML`)
 }
 
 async function ingestLetters(alphabet = "abcdefghijklmnopqrstuvwxyz") {
@@ -44,18 +64,6 @@ async function ingestLetters(alphabet = "abcdefghijklmnopqrstuvwxyz") {
         }
     }
     log(`${(new Date()).toLocaleString()} - FINISH`)
-}
-
-async function ingestWord(word, href) {
-    const entry = {word, href: `https://en.wiktionary.org${href}`}
-    if (entry.href.includes(`/w/index.php`)) return log(`Error "${entry.word}" - no wiktionary page`)
-    let $ = cheerio.load(await request.get(entry.href, {timeout: 10000, forever: true}))
-    const section = $('span#Latin').parent().nextUntil('hr')
-    if (section.length < 1) return log(`Error "${entry.word}" - no latin entry in wiktionary`)
-
-    entry.html = `<div class="${entry.word}">${$.html(section)}</div>`
-    await putItem(entry)
-    console.log(`Ingested "${entry.word}" HTML`)
 }
 
 function log(message) {

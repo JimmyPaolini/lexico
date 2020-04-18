@@ -1,23 +1,77 @@
 const fs = require('fs'), path = require('path')
-const AWS = require('aws-sdk')
-const { accessKeyId, secretAccessKey, region, TableName } = require('../secrets/aws_credentials')
-const dynamo = new AWS.DynamoDB.DocumentClient({accessKeyId, secretAccessKey, region, httpOptions: {
-        agent: new (require('https')).Agent({keepAlive: true}) }})
-const getItem = async word => (await dynamo.get({TableName, Key: {word}}).promise()).Item
-String.prototype.norm = function() {return this.normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+const chalk = require('chalk')
+const getPronunciations = require('../ingestion/pronunciation')
+const getPronunciationsAndLog = word => {
+    console.error(`OOV: ${word}`)
+    return getPronunciations(word, 'classical')
+}
+const getItem = word => {
+    try { return require(path.join(process.cwd(),`../dictionary/json/${word}.json`)) }
+    catch (e) { return undefined }
+}
+String.prototype.norm = function() {
+    return this.normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+}
+const dataPath = p => path.join(process.cwd(), `./audio/data/${p}`)
 
-const textFilePath = path.join(process.cwd(), 'audio/data/text/virgil/aeneid_1.txt')
-const text = fs.readFileSync(textFilePath,'utf8')
-// console.log(normalizeText(text))
-return macronizeText(normalizeText(text)).then(console.log)
+
+// return generateTextSplits('cicero_de_anulo_gygis')
+return generateTextAnnotator('latinitium/cicero_de_anulo_gygis')
+
+function generateTextSplits(annotatorDirectoryName) {
+    const annotatorSplit = fs.readFileSync(dataPath(
+        `annotated/${annotatorDirectoryName}/${annotatorDirectoryName}_annotator.txt`),'utf8').split('1')
+    let longest = [0, '']
+    for (const phraseNum in annotatorSplit) {
+        const phrase = annotatorSplit[phraseNum].trim()
+        let label = phrase + ' \n' + phonemeateText(phrase) + ' _ '
+        console.log(phraseNum + '\n' + label + '\n')
+        fs.writeFileSync(dataPath(
+            `labelled/${annotatorDirectoryName}/${annotatorDirectoryName}_${phraseNum}.txt`), label)
+        if (phrase.trim().split(' ').length >= longest[0])
+            longest = [phrase.trim().split(' ').length, phrase]
+    }
+}
+
+function phonemeateText(text) {
+    let phonemeatedWords = []
+    for (const word of text.split(' ')) phonemeatedWords.push(phonemeateWord(word))
+    return phonemeatedWords.join(' _ ')
+}
+
+function phonemeateWord(word) {
+    let entry = getItem(word), phonemes = ''
+    if (!entry) {
+        if (word.match(/.*que/)) {
+            entry = getItem(word.slice(0,-3))
+            if (entry) phonemes = entry.etymologies[0].pronunciation.classical.phonemes + ' kw e'
+            else phonemes = getPronunciationsAndLog(word)
+        } else if (word.match(/.*ve/)) {
+            entry = getItem(word.slice(0,-2))
+            if (entry) phonemes = entry.etymologies[0].pronunciation.classical.phonemes + ' w e'
+            else phonemes = getPronunciationsAndLog(word)
+        } else if (word.match(/.*ne/)) {
+            entry = getItem(word.slice(0,-2))
+            if (entry) phonemes = entry.etymologies[0].pronunciation.classical.phonemes + ' n e'
+            else phonemes = getPronunciationsAndLog(word)
+        } else phonemes = getPronunciationsAndLog(word)
+    } else phonemes = entry.etymologies[0].pronunciation.classical.phonemes
+    return phonemes
+}
+
+function generateTextAnnotator(originalDirectoryPath) {
+    const originalText = fs.readFileSync(dataPath(
+        `original/text/${originalDirectoryPath}.txt`),'utf8')
+    const textAnnotator = normalizeText(originalText)
+    console.log(textAnnotator)
+    // fs.writeFileSync(dataPath(`labelled/${annotatorDirectoryName}/${annotatorDirectoryName}_${phraseNum}.txt`),
+    //     textAnnotator)
+}
 
 function normalizeText(text) {
-    text = text.replace(/[0-9]|[`—\-=~!@#$%^&*()_+\[\]\\;',\/{}|:"<>?]/g,'')
-    text = text.replace(/\s+|\//g,' ')
-    text = text.split('').map((c, i, arr) =>
-        c === '.' && i + 1 < arr.length && i > 0 && !arr[i+1].match(/[A-Z]/) && !arr[i-1].match(/[A-Z]/) ? '': c
-    ).join('')
-    return text.trim()
+    return text.toLowerCase().replace(/[^A-Za-z.\s]|(\.$)/g,'')
+        .replace(/((?<!\.[A-Za-z])\.[^A-Za-z])/g,' ')
+        .replace(/(\s+)|(\/)/g,' ').trim()
 }
 
 async function macronizeText(text) {
@@ -32,8 +86,6 @@ async function macronizeWord(word) {
 
     const detackoned = await removeTackons(word.norm())
     if (detackoned) return detackoned
-
-    if (word.match(/^[A-Z]/)) return await macronizeWord(word.toLowerCase())
 
     console.log(`\tOOV: ${word}`)
     return word

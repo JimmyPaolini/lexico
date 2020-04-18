@@ -1,25 +1,32 @@
+'use strict';
+const path = require('path')
 const cheerio = require('cheerio')
 const cheerioTableParser = require('cheerio-tableparser')
 const getPronunciations = require('../pronunciation')
+const getItem = word => {
+    try { return require(path.join(process.cwd(),`../dictionary/json/${word}.json`)) }
+    catch (e) { return undefined }
+}
 String.prototype.norm = function() {return this.normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
 
 class Etymology {
+    partOfSpeech
+    firstPrincipalPartName
 
     ingest($, elt) {
         this.errors = []
-        try { this.ingestTranslations($, elt) }
-        catch (e) { this.errors.push(`Translations ${e}`); delete this.translations }
-        try { this.ingestPrincipalParts($, elt) } catch (e) { this.errors.push(`Principal Parts ${e}`); delete this.principalParts }
+        try { this.ingestTranslations($, elt) } catch (e) { this.errors.push(`Translations ${e}`); delete this.translations }
+        try { this.ingestPrincipalParts($, elt) } catch (e) { this.errors.push(`Principal Parts ${e}`); delete this.translations }
         try { this.ingestInflection($, elt) } catch (e) { this.errors.push(`Inflection ${e}`); delete this.inflection }
         try { this.ingestForms($, elt) } catch (e) { this.errors.push(`Forms ${e}`); delete this.forms }
-        try { this.ingestPronunciation($, elt) } catch (e) { /*this.errors.push(`Pronunciation ${e}`);*/ }
-        try { this.ingestEtymology($, elt) } catch (e) { /*this.errors.push(`Etymology ${e}`);*/ }
-        if (this.translations.every(trans => trans.match(/{\*.*\*}/g)) && !this.forms)
-            if (this.translations.some(trans => trans.match(
-            /(Abbreviation )|(Alternative )|(Initialism )|(Superlative )|(Comparative )/i)))
+        if (this.translations.every(translation => translation.match(/{\*.*\*}/g))) {
+            if (this.translations.some(translation => translation.match(/(form of)|(spelling of)|(Syncopation)|(Syncopated)|(Diminutive)|(Female Equivalent)|(Archaic)|(Abbreviation)|(Alternative)|(Comparative)|(Superlative)|(Synonym)|(Initialism)|(Clipping)/ig))) {
                 this.inflection = 'referential'
-            else this.inflection = 'repeat'
-        if (!this.errors.length) delete this.errors
+                this.ingestReferenceTranslations()
+            } else return this.inflection = 'repeat'
+        }
+        try { this.ingestPronunciation($, elt) } catch (e) {}
+        try { this.ingestEtymology($, elt) } catch (e) {}
     }
 
     ingestTranslations($, elt) {
@@ -29,27 +36,43 @@ class Etymology {
 
         for (const li of $(translationsHeader).children('li').get()) {
             if ($(li).text().length <= 0) continue
-            $(li).children('ul').remove()
-            $(li).children('dl').remove()
+            $(li).children('ol, ul, dl').remove()
             this.translations.push($(li).text().trim())
-            if ($(li).find('span.form-of-definition-link').length > 0)
+            if ($(li).find('span.form-of-definition-link').length > 0) {
                 this.translations.push(this.translations.pop() + ' ' +
                     $(li).find('span.form-of-definition-link i.Latn.mention').get()
                         .map(ref => `{*${$(ref).text().norm()}*}`).join(' '))
+            }
         }
+    }
+
+    ingestReferenceTranslations() {
+        this.translations = this.translations.reduce((refs, translation) => {
+            if (!translation.match(/{\*.*\*}/g)) return [...refs, translation]
+            const refWord = translation.split('{*')[1].split('*}')[0]
+            if (refs.some(ref => ref.includes(`{*${refWord}*}`))) return [...refs, translation]
+            const refEntry = getItem(refWord)
+            if (!refEntry) return [...refs, translation]
+            const refEtymology = refEntry.etymologies.find(etymology =>
+                etymology.partOfSpeech === this.partOfSpeech)
+            if (!refEtymology) return [...refs, translation]
+            return [...refs, translation, ...refEtymology.translations]
+        }, [])
     }
 
     ingestPrincipalParts($, elt) {
         this.principalParts = []
 
-        this.principalParts.push(`${this.firstPrincipalPartName}: ${$(elt).children('strong.Latn.headword').text()}`)
+        this.principalParts.push(`${this.firstPrincipalPartName}: ${
+            $(elt).children('strong.Latn.headword').get().map(p1 => 
+                $(p1).text().toLowerCase()).join(' or ')}`)
         delete this.firstPrincipalPartName
 
         for (const b of $(elt).children('b').get())
             if ($(b).prev('i').text() === 'or')
-                this.principalParts.push(this.principalParts.pop() + ` or ${$(b).text()}`)
+                this.principalParts.push(this.principalParts.pop() + ` or ${$(b).text().toLowerCase()}`)
             else
-                this.principalParts.push(`${$(b).prev('i').text()}: ${$(b).text()}`)
+                this.principalParts.push(`${$(b).prev('i').text()}: ${$(b).text().toLowerCase()}`)
     }
 
     ingestForms($, elt) {
@@ -57,10 +80,8 @@ class Etymology {
         if (!table) throw new Error(`no forms`)
 
         function parseWords(cell) {
-            cell = cell.trim().replace(/[\d*]+/, '')
-            if (!/\w+/.test(cell)) return null
-            else if (cell.includes(', ')) return cell.split(', ')
-            else return [cell]
+            cell = cell.trim().replace(/[\d*]/g, '').toLowerCase()
+            return cell.includes(', ') ? cell.split(', ') : [cell]
         }
 
         function findIdentifiers(i, j, table) {
@@ -89,6 +110,7 @@ class Etymology {
                 if (cell.includes('<span ')) {
                     const c = cheerio.load(cell)
                     const words = c('span').map((_, s) => c(s).text()).get().join(', ')
+                    if (!words.match(/[A-Za-zāēīōūȳ\-\s]+/)) return disorganizedForms
                     disorganizedForms.push({
                         word: parseWords(words),
                         identifiers: findIdentifiers(i, j, table)
@@ -101,7 +123,7 @@ class Etymology {
             this.sortIdentifiers(inflection, this.forms)
     }
     parseFormTable($, elt) {
-        const tableHtml = $(elt).nextAll('table').first()
+        const tableHtml = $(elt).nextUntil('h3','table').first()
         if (tableHtml.length <= 0) return
         const $table = cheerio.load($.html(tableHtml))
         cheerioTableParser($table)
@@ -143,8 +165,8 @@ class Etymology {
         const parsePhonics = (pronunciations) => {
             const parsed = {}
             for (const pronunciation of pronunciations)
-                if (/\/.*\//.test(pronunciation)) parsed.phonemic = pronunciation
-                else if (/\[.*\]/.test(pronunciation)) parsed.phonetic = pronunciation
+                if (/\/.*\//.test(pronunciation)) parsed.phonemic = pronunciation.trim()
+                else if (/\[.*\]/.test(pronunciation)) parsed.phonetic = pronunciation.trim()
             return parsed
         }
 
@@ -170,6 +192,7 @@ class Etymology {
         this.etymology = $(etymologyHeader).next().text().trim()
     }
 
+    ingestInflection($, elt) {}
 }
 
 module.exports = Etymology

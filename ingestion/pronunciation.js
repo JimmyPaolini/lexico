@@ -11,7 +11,7 @@ function getClassicalPhonemes(wordString) {
         y: 'y', ȳ: 'y:',
         // diphthongs
         ae: 'ae', oe: 'oe', au: 'au', eu: 'eu', // ui: ['ui', ['u', 'i']],
-        ' ': '_', // space
+        ' ': '_', '.': '_', // space (also for abbreviations)
         '-': '' // dash for tackons
     }
     const phonemes = []
@@ -28,7 +28,7 @@ function getClassicalPhonemes(wordString) {
         if (word[i] === 'h') {
             if (i === 0 || isVowel(i+1) && i - 1 >= 0 && word[i-1] !== 'r') phonemes.push('h')
         } else if (word[i] === 'i') {
-            if (i === 0 || isVowel(i-1) && isVowel(i+1)) phonemes.push('j')
+            if (isVowel(i+1) && (i === 0 || isVowel(i-1))) phonemes.push('j')
             else phonemes.push(classicalPhonemes[word[i]])
         } else if (word[i] === 'j') {
             if (!isVowel(i-1) && ['l','m','n','q','t'].includes(word[i-1])) phonemes.push('i')
@@ -46,7 +46,7 @@ function getClassicalPhonemes(wordString) {
             phonemes.push(classicalPhonemes[word[i] + word[++i]])
         else phonemes.push(classicalPhonemes[word[i]])
     }
-    return phonemes
+    return phonemes.join(' ')
 }
 
 const classicalPhonemes = [
@@ -105,12 +105,12 @@ function getEcclesiasticalPhonemes(wordString) {
         // x can be ks, gz, or some sh sound
         z: 'dz',
         // vowels
-        a: 'a', ā: 'a',
-        e: 'e', ē: 'e',
-        i: 'i', ī: 'i',
-        o: 'o', ō: 'o',
-        u: 'u', ū: 'u',
-        y: 'y', ȳ: 'y',
+        a: 'a:', ā: 'a:',
+        e: 'e:', ē: 'e:',
+        i: 'i:', ī: 'i:',
+        o: 'o:', ō: 'o:',
+        u: 'u:', ū: 'u:',
+        y: 'y:', ȳ: 'y:',
         // diphthongs
         ae: 'e',
         oe: 'e',

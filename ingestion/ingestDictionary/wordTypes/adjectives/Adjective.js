@@ -5,11 +5,13 @@ class Adjective extends Etymology {
     firstPrincipalPartName = 'masculine'
 
     ingestInflection($, elt) {
-        if (!$(elt).text().includes(';')) throw new Error(`no inflection`)
-        this.inflection = $(elt).text().split('; ')[1]
-        this.inflection = this.inflection
-            .replace(/-|(declension)|(adjective)|(participle)|(numeral)/gi,'')
-            .replace(/\s+/g,' ').trim()
+        const inflectionHtml = $(elt).nextUntil('h3',':header:contains("Declension")').first().next()
+        if (!$(inflectionHtml).length) throw new Error(`no inflection`)
+        this.inflection = $(inflectionHtml).text()
+            .replace(/(-declension)|(declension)|(adjective)|(participle)|(numeral)|[.\d\[\]]/gi,'')
+            .replace(/\s+/g,' ').toLowerCase().trim()
+
+        if (!this.inflection.length) this.inflection = 'uninflected'
     }
 }
 

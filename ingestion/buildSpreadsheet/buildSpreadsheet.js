@@ -1,38 +1,38 @@
-const AWS = require('aws-sdk')
-const { accessKeyId, secretAccessKey, region, TableName } = require('../../secrets/aws_credentials')
-const dynamo = new AWS.DynamoDB.DocumentClient({accessKeyId, secretAccessKey, region, httpOptions: {
-        agent: new (require('https')).Agent({keepAlive: true}) }})
-const { appendRowsToSpreadsheet, entriesToRows, clearTable, sortTable } = require('./google_sheets_interface')
+'use strict';
+const fs = require('fs'), path = require('path'), chalk = require('chalk')
+const { appendRowsToSpreadsheet, entriesToRows, getLetter, clearTable, sortTable } = require('./google_sheets_interface')
 const { emailMe } = require('../../notifications')
-
-try { return buildSpreadsheet(process.argv[2]) }
-catch (e) { return emailMe('Error Ingesting Dictionary', e.toString()) }
-
-async function buildSpreadsheet(alphabet = "abcdefghijklmnopqrstuvwxyz") {
-    for (const letter of alphabet.split('')) await buildLetterSheet(letter)
-    console.log("\x1b[0m", `${(new Date()).toLocaleString()} - FINISH`)
-    await emailMe('Finished Building Spreadsheet', process.argv.slice(2).join(' '))
+const getItem = word => {
+    try { return require(path.join(process.cwd(),`../dictionary/json/${word}.json`)) }
+    catch (e) { return undefined }
 }
 
-async function buildLetterSheet(letter) {
-    try {
-        console.log("\x1b[0m", `${(new Date()).toLocaleString()} - Starting letter "${letter}"`)
-        await clearTable(letter)
-        let dCount = 0, sCount = 0
-        const params = {TableName, FilterExpression: 'begins_with( #word, :letter )',
-            ExpressionAttributeNames: {'#word': 'word'}, ExpressionAttributeValues: {":letter": letter} }
-        for (let scan = await dynamo.scan(params).promise(), first = true; scan.LastEvaluatedKey || first;
-             scan = await dynamo.scan({...params, ExclusiveStartKey: scan.LastEvaluatedKey}).promise(), first = false) {
-            dCount += scan.Items.reduce((acc, e) => acc + e.etymologies.length, 0)
-            const entries = scan.Items.filter(entry => entry.etymologies.some(e => e.inflection !== 'referential'))
-            sCount += entries.reduce((acc, e) => acc + e.etymologies.length, 0)
-            while (entries.length) await appendRowsToSpreadsheet(entriesToRows(entries.splice(0, 32)))
+try { return buildSpreadsheet(process.argv[2], process.argv[3]) }
+catch (e) { return emailMe('Error Ingesting Dictionary', e.toString()) }
+
+async function buildSpreadsheet(firstLetter = 'a', lastLetter = 'z') {
+    console.log(chalk.red(`${(new Date()).toLocaleString()} - START`))
+    const files = fs.readdirSync(path.join(process.cwd(), `../dictionary/json`))
+    files.splice(files.indexOf('.DS_Store'), 1)
+    files.sort((a,b) => getLetter(a).localeCompare(getLetter(b)))
+    let entries = []
+    let curLetter = firstLetter
+    await clearTable(curLetter)
+    for (let fileName of files) {
+        if (getLetter(fileName) < firstLetter || getLetter(fileName) > lastLetter) continue
+        if (entries.length >= 128 || getLetter(fileName) > curLetter) {
+            await appendRowsToSpreadsheet(entriesToRows(entries.splice(0, entries.length)))
+            if (getLetter(fileName) !== curLetter) {
+                await sortTable(curLetter)
+                curLetter = getLetter(fileName)
+                await clearTable(curLetter)
+            }
         }
-        await sortTable(letter)
-        console.log("\x1b[0m", `Etymologies beginning with "${letter}" in dynamo: ${dCount}`)
-        console.log("\x1b[0m", `Etymologies beginning with "${letter}" in sheets: ${sCount}`)
-    } catch (e) {
-        console.error(` Error building letter "${letter}" sheet, retrying from it`)
-        return await buildLetterSheet(letter)
+        const entry = require(path.join(process.cwd(), `../dictionary/json/${fileName}`))
+        if (entry.etymologies.some(etymology => etymology.inflection !== 'inflection')) entries.push(entry)
     }
+    if (entries.length) await appendRowsToSpreadsheet(entriesToRows(entries.splice(0, entries.length)))
+    await sortTable(curLetter)
+    console.log(chalk.red(`${(new Date()).toLocaleString()} - FINISH`))
+    await emailMe('Finished Building Spreadsheet', `firstLetter: ${firstLetter}\nlastLetter: ${lastLetter}`)
 }

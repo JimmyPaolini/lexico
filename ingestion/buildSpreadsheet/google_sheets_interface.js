@@ -1,6 +1,5 @@
-const fs = require('fs')
-const readline = require('readline')
-const {google} = require('googleapis')
+const fs = require('fs'), chalk = require('chalk')
+const {google} = require('googleapis'), readline = require('readline')
 
 const {client_secret, client_id, redirect_uris, spreadsheetId, sheetIds} = require('../../secrets/google_credentials').web
 const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0])
@@ -36,8 +35,8 @@ google.options({
 const spreadsheet = google.sheets({version: 'v4'}).spreadsheets
 
 async function appendRowsToSpreadsheet(rows) {
-    let letter = rows[0][1].split('","')[1].slice(0,1).toLowerCase()
-    if (letter === '-') letter = rows[0][1].split('","')[1].slice(1,2).toLowerCase()
+    if (!rows.length) return
+    let letter = getLetter(rows[0][1].split('","')[1].split('")')[0])
     await spreadsheet.values.append({ spreadsheetId,
         valueInputOption: 'USER_ENTERED', insertDataOption: 'INSERT_ROWS',
         range: letter + '!A1', resource: { values: rows }
@@ -56,22 +55,20 @@ function entriesToRows(entries) {
     }
     const rows = []
     for (const entry of entries) {
-        console.log("\x1b[34m", `Transferring "${entry.word}" - ${
-            entry.etymologies.map(etymology => etymology.partOfSpeech).join(', ')}`)
         for (const etymology of entry.etymologies) {
+            if (etymology.inflection === 'inflection') continue
+            console.log(chalk.blue(`Transferring "${entry.word}" - ${etymology.partOfSpeech}`))
             const row = []
             row.push((new Date()).toLocaleString())
             row.push(`=HYPERLINK("${entry.href}","${entry.word}")`)
             row.push(etymology.partOfSpeech)
             row.push(etymology.inflection)
             row.push(etymology.principalParts ? etymology.principalParts.map(pp => pp.split(': ')[1]).join(', ') : '')
-            row.push(etymology.translations.map(translation => translation.replace(/{\*.*\*}/g, '')).join('; '))
-            row.push(etymology.pronunciation ? `C: ${etymology.pronunciation.classical.phonemes
-                .map(phoneme => phoneme.replace(/\s+/g,'')).join(',')} E: ${
-                etymology.pronunciation.ecclesiastical.phonemes.map(phoneme => phoneme.replace(/\s+/g,'')).join(',')}`:'')
-            row.push(etymology.etymology)
+            row.push(etymology.translations.map(translation => translation.replace(/\s*{\*.*\*}\s*/g, '')).join('; '))
+            row.push(etymology.pronunciation.classical.phonemes)
             row.push(Array.isArray(etymology.forms) ? etymology.forms.map(form => form.join(' ')).join('; ') :
                 (etymology.forms ? formsFlatten(etymology.forms).join(', ') : ''))
+            row.push(etymology.etymology)
             rows.push(row)
         }
     }
@@ -112,6 +109,7 @@ async function clearTable(letter) {
             ]
         }
     })
+    console.log(chalk.yellow(`Cleared table: "${letter}"`))
 }
 
 async function sortTable(letter) {
@@ -138,6 +136,14 @@ async function sortTable(letter) {
             ]
         }
     })
+    console.log(chalk.yellow(`Sorted table: "${letter}"`))
 }
 
-module.exports = { appendRowsToSpreadsheet, entriesToRows, clearTable, sortTable }
+function getLetter(word) {
+    const [l1, l2, ..._] = word.split('')
+    if (!l1.match(/[a-z-]/) && !l1.match(/[a-z-]/)) return '*'
+    if (l1 === '-') return l2
+    else return l1
+}
+
+module.exports = { appendRowsToSpreadsheet, entriesToRows, getLetter, clearTable, sortTable }

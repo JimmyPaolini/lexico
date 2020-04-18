@@ -1,14 +1,17 @@
+'use strict';
 const fs = require('fs'), path = require('path')
 const chalk = require('chalk')
 const cheerio = require('cheerio')
 const _ = require('lodash')
-const putItem = async entry => fs.writeFileSync(path.join(process.cwd(), `../latin/dictionary/${entry.word}.json`),
+const putItem = entry => fs.writeFileSync(path.join(process.cwd(), `../dictionary/json/${entry.word}.json`),
     JSON.stringify(entry,null,2))
-const getItem = async word => {
-    try { return require(path.join(process.cwd(),`../latin/dictionary/${word}.json`)) }
+const getItem = word => {
+    try { return require(path.join(process.cwd(),`../dictionary/json/${word}.json`)) }
     catch (e) { return undefined }
 }
-String.prototype.norm = function() {return this.normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+String.prototype.norm = function() {
+    return this.normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+}
 
 const Noun = require("./wordTypes/nouns/Noun")
 const ProperNoun = require("./wordTypes/nouns/ProperNoun")
@@ -21,13 +24,13 @@ const Verb = require("./wordTypes/Verb")
 const Adverb = require("./wordTypes/Adverb")
 const Pronoun = require("./wordTypes/adjectives/Pronoun")
 const Preposition = require("./wordTypes/Preposition")
-const Reference = require("./wordTypes/Reference")
 const Conjunction = require("./wordTypes/simple/Conjunction")
 const Interjection = require("./wordTypes/simple/Interjection")
 const Phrase = require("./wordTypes/simple/Phrase")
+const Inflection = require("./wordTypes/Inflection")
 
 function log(message) {
-    const logFilename = path.join(process.cwd(), `ingestion/ingestDictionary/logs/${process.pid}.txt`)
+    const logFilename = path.join(process.cwd(), `./ingestion/ingestDictionary/logs/${process.pid}.txt`)
     if (process.argv.length === 2) fs.appendFileSync(logFilename, message + '\n')
     return console.log(chalk.red(message))
 }
@@ -39,23 +42,25 @@ class Entry {
         this.etymologies = []
     }
 
-    async ingest(html) {
+    ingest(html) {
         try {
             const $ = cheerio.load(html)
             for (const elt of $('p:has(strong.Latn.headword)').get())
-                await this.ingestEtymology($, elt)
+                this.ingestEtymology($, elt)
 
-            if (!this.etymologies.length) return log(`Skipped "${this.word}" - ${this.href}`)
+            if (!this.etymologies)
+                return log(`Skipped "${this.word}" - ${this.href}`)
             console.log(chalk.blue(`Ingested "${this.word}" - ${this.etymologies.map(etymology => etymology.partOfSpeech).join(', ')}`))
             for (const etymology of this.etymologies) {
-                if (etymology.errors) {
+                if (etymology.errors.length)
                     console.log(chalk.yellow(`${etymology.errors.join('\n')}`))
-                    delete etymology.errors
-                }
+                delete etymology.errors
             }
 
-            await this.ingestReferences()
-            await putItem(this)
+            putItem({word: this.word, href: this.href,
+                etymologies: this.etymologies.map(({ disorganizedForms, ...etymology }) => etymology)
+            })
+            this.ingestInflections()
 
             if (process.argv[2] === 'printWord') console.log(chalk.white(JSON.stringify(this.etymologies, null, 2)))
         } catch (e) { return log(`Error "${this.word}" - ${e}`) }
@@ -81,31 +86,35 @@ class Entry {
         else if (['phrase','proverb','idiom'].includes(partOfSpeech)) etymology = new Phrase()
         else return
         etymology.ingest($, elt)
-        if (etymology && etymology.inflection !== 'repeat') this.etymologies.push(etymology)
+        if (etymology.inflection === 'repeat')
+            return log(`Repeat "${this.word}" - ${this.href}\n\t${
+                this.etymologies.reduce((output,etymology) =>
+                    output + etymology.translations.join('\n\t') + '\n\t', '').trim()
+            }`)
+        else return this.etymologies.push(etymology)
     }
 
-    async ingestReferences() {
+    ingestInflections() {
         for (const etymology of this.etymologies) {
             if (!etymology.disorganizedForms) continue
             for (const form of etymology.disorganizedForms) {
                 for (const word of form.word) {
-                    if (word.norm() === this.word) continue
-                    const ref = new Reference(word, etymology, form.identifiers)
-                    const existingEntry = await getItem(word.norm())
+                    const inf = new Inflection(word, etymology, form.identifiers)
+                    const existingEntry = getItem(word.norm())
                     if (existingEntry) {
                         const sameEtymology = existingEntry.etymologies.find(etymology =>
-                            etymology.inflection === 'referential'
-                            && _.isEqual(etymology.principalParts, ref.principalParts)
-                            && _.isEqual(etymology.translations, ref.translations))
+                            etymology.inflection === 'inflection'
+                            && _.isEqual(etymology.principalParts, inf.principalParts)
+                            && _.isEqual(etymology.translations, inf.translations))
 
-                        if (sameEtymology && sameEtymology.forms.every(form => !_.isEqual(form, ref.forms[0])))
-                            sameEtymology.forms.push(...ref.forms)
-                        else if (!sameEtymology) existingEntry.etymologies.push(ref)
+                        if (sameEtymology && sameEtymology.forms.every(form => !_.isEqual(form, inf.forms[0])))
+                            sameEtymology.forms.push(...inf.forms)
+                        else if (!sameEtymology) existingEntry.etymologies.push(inf)
                         putItem(existingEntry)
                     } else {
                         const newEntry = new Entry({word: word.norm(),
                             href: `https://en.wiktionary.org/wiki/${word.norm()}#Latin`})
-                        newEntry.etymologies.push(ref)
+                        newEntry.etymologies.push(inf)
                         putItem(newEntry)
                     }
                     console.log(chalk.cyan(`Referred "${this.word}" - ${word.norm()}`))

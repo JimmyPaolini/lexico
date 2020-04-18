@@ -8,9 +8,11 @@ class Verb extends Etymology {
     ingestInflection($, elt) {
         if (!$(elt).text().includes(';')) throw new Error(`no inflection`)
         this.inflection = $(elt).text().trim().split('; ')[1]
-        this.inflection = this.inflection.replace('conjugation', '')
+        this.inflection = this.inflection.replace(/(conjugation)|[\d\[\]]/ig, '')
             .replace(' ,',',')
             .replace(/\s+/g,' ').trim()
+
+        if (!this.inflection.length) this.inflection = 'uninflected'
     }
 
     ingestForms($, elt) {
@@ -22,17 +24,16 @@ class Verb extends Etymology {
             const isVoice = word => ['active', 'passive'].includes(word)
             const isTense = word => ['present', 'imperfect', 'future', 'perfect', 'pluperfect', 'future perfect'].includes(word)
 
-            cell = cell.trim().replace(/[\d*]+/, '')
-            if (!/\w+/.test(cell)) return null
-            else if (cell.includes(', ')) return cell.split(', ')
+            cell = cell.trim().replace(/[\d*]+/g, '').toLowerCase()
+            if (cell.includes(', ')) return cell.split(', ')
             else if (cell.includes(' + ')) {
-                const parts = cell.split(' ')
+                const identifiers = cell.split(' ')
                 let mood, voice, tense;
-                for (const part of parts)
-                    if (isMood(part)) mood = part
-                    else if (isVoice(part)) voice = part
-                    else if (isTense(part)) tense = part
-                return sum_esse_fui[mood][voice][tense][number][person].map(ext => parts[0] + ' ' + ext)
+                for (const identifier of identifiers)
+                    if (isMood(identifier)) mood = identifier
+                    else if (isVoice(identifier)) voice = identifier
+                    else if (isTense(identifier)) tense = identifier
+                return sum_esse_fui[mood][voice][tense][number][person].map(ext => identifiers[0] + ' ' + ext)
             } else return [cell]
         }
 
@@ -63,6 +64,7 @@ class Verb extends Etymology {
                 if (cell.includes('<span ') || cell.includes(' + ')) {
                     const c = cheerio.load(cell)
                     const identifiers = findIdentifiers(i, j, table)
+                    if (!c.text().match(/[A-Za-zāēīōūȳ\-\s]+/)) return disorganizedForms
                     disorganizedForms.push({
                         word: parseWords(c.text(), identifiers[1], identifiers[0]),
                         identifiers
