@@ -1,7 +1,5 @@
 const Adjective = require("./Adjective")
 
-class Numeral extends Adjective {
-    partOfSpeech = 'numeral'
-}
+class Numeral extends Adjective {}
 
 module.exports = Numeral

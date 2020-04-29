@@ -1,8 +1,7 @@
 const Etymology = require('../Etymology')
 
 class Adverb extends Etymology {
-    partOfSpeech = 'adverb'
-    firstPrincipalPartName = 'positive'
+    firstPrincipalPartName() { return 'positive'; }
 
     ingestInflection($, elt) {
         if (this.principalParts.length > 1) this.inflection = 'descriptive'

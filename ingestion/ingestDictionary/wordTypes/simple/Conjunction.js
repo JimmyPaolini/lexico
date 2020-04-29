@@ -1,8 +1,7 @@
 const Etymology = require("../../Etymology")
 
 class Conjunction extends Etymology {
-    partOfSpeech = 'conjunction'
-    firstPrincipalPartName = 'conjunction'
+    firstPrincipalPartName() { return this.partOfSpeech; }
     ingestInflection($, elt) { this.inflection = 'uninflected' }
     ingestForms($, elt) {}
 }

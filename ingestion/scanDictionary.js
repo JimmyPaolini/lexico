@@ -1,21 +1,30 @@
-const fs = require('fs'), path = require('path')
+const fs = require('fs'), path = require('path');
 const putItem = entry => fs.writeFileSync(path.join(process.cwd(), `../dictionary/json/${entry.word}.json`),
-    JSON.stringify(entry,null,2))
+    JSON.stringify(entry,null,2));
 const getItem = word => {
-    try { return require(path.join(process.cwd(),`../dictionary/json/${word}.json`)) }
-    catch (e) { return undefined }
-}
-String.prototype.norm = function() {return this.normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
-const getPronunciations = require('./pronunciation')
+    try { return require(path.join(process.cwd(),`../dictionary/json/${word}.json`)); }
+    catch (e) { return undefined; }
+};
+String.prototype.norm = function() {return this.normalize("NFD").replace(/[\u0300-\u036f]/g,"")};
+const getPronunciations = require('./pronunciation');
 
-return countEntries()
+return countEntries();
+
+function generateWordList() {
+    let files = fs.readdirSync(path.join(process.cwd(),`../dictionary/json`));
+    files.splice(files.indexOf('.DS_Store'), 1);
+    const words = files.map(fileName => fileName.replace(/\.json$/,''));
+    fs.writeFileSync(path.join(process.cwd(),`../dictionary/words.json`), JSON.stringify(words,null,2));
+    fs.writeFileSync(path.join(process.cwd(),`../dictionary/words.txt`), words.join('\n'));
+    fs.writeFileSync(path.join(process.cwd(),`../dictionary/words_delin.txt`), words.map(word => `<s>${word}</s>`).join('\n'));
+    console.log(JSON.stringify(words,null,2), files.length);
+}
 
 function countEntries() {
-    let files = fs.readdirSync(path.join(process.cwd(),`../dictionary/json`))
-    files.splice(files.indexOf('.DS_Store'), 1)
-    // files = files.filter(fileName => !fileName.match(/^[A-Za-z`, ]*\.json$/))
+    let files = fs.readdirSync(path.join(process.cwd(),`../dictionary/json`));
+    files.splice(files.indexOf('.DS_Store'), 1);
+    // files = files.filter(fileName => !fileName.match(/^a.*/));
     console.log(JSON.stringify(files,null,2), files.length)
-    // for (const file of files) fs.unlinkSync(path.join(process.cwd(),`../dictionary/html/${file}`))
 }
 
 async function compareClassicalPronunciation() {
@@ -52,22 +61,3 @@ async function compareClassicalPronunciation() {
     console.log("\x1b[0m", `${(new Date()).toLocaleString()} - FINISHED: ${count}`)
 }
 
-async function findTackons() {
-    console.log("\x1b[0m", `${(new Date()).toLocaleString()} - START`)
-    const tackons = {}
-    const params = { TableName,
-        FilterExpression: 'contains( #word, :letter )',
-        ExpressionAttributeNames: {'#word': 'word'},
-        ExpressionAttributeValues: {":letter": '-'}
-    }
-    for (let scan = await dynamo.scan(params).promise(), first = true; scan.LastEvaluatedKey || first;
-         scan = await dynamo.scan({...params,ExclusiveStartKey:scan.LastEvaluatedKey}).promise(),first=false) {
-        for (const entry of scan.Items) {
-            console.log(`Found "${entry.word}" - "${entry.etymologies[0].principalParts[0].split(': ')[1]}"`)
-            tackons[entry.word] = entry.etymologies[0].principalParts[0].split(': ')[1]
-        }
-    }
-    console.log("\x1b[0m", `${(new Date()).toLocaleString()} - FINISH`)
-    console.log(JSON.stringify(tackons,null,2))
-    return tackons
-}

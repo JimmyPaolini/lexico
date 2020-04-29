@@ -1,73 +1,68 @@
-const fs = require('fs'), path = require('path')
-const request = require('request-promise-native')
-const cheerio = require('cheerio')
-require('events').EventEmitter.defaultMaxListeners = 300;
-const { emailMe } = require('../../notifications')
-const putItem = async entry => fs.writeFileSync(path.join(process.cwd(),
+const fs = require('fs'), path = require('path'), chalk = require('chalk');
+const request = require('request-promise-native');
+const cheerio = require('cheerio');
+const { getFirstLetter } = require('../buildSpreadsheet/google_sheets_interface');
+const { emailMe } = require('../../notifications');
+const putItemHtml = entry => fs.writeFileSync(path.join(process.cwd(),
     `../dictionary/html/${entry.word.split('').map(c => 
         c.match(/[A-Z]/g) ? c + '`' : c).join('')}.json`),
-    JSON.stringify(entry,null,2))
+    JSON.stringify(entry,null,2));
 
-const lemmasUrl = `https://en.wiktionary.org/wiki/Category:Latin_lemmas`
-const participlesUrl = `https://en.wiktionary.org/wiki/Category:Latin_participles`
-const comparativeAdjectivesUrl = `https://en.wiktionary.org/wiki/Category:Latin_comparative_adjectives`
-const superlativeAdjectivesUrl = `https://en.wiktionary.org/wiki/Category:Latin_superlative_adjectives`
+const categories = {
+    'lemma': 'Latin_lemmas',
+    'nonlemma': 'Latin_non-lemma_forms',
+    'participle': 'Latin_participle_forms',
+    'comparativeadverb': 'Latin_comparative_adverbs',
+};
 
 try {
-    if (process.argv.length >= 3) return ingestCategory(process.argv[2])
-    else return ingestCategory(lemmasUrl).then(_ =>
-        ingestCategory(participlesUrl).then(_ =>
-            ingestCategory(comparativeAdjectivesUrl).then(_ =>
-                ingestCategory(superlativeAdjectivesUrl))))
-} catch (e) { return emailMe('Error Ingesting Wiktionary', e.toString()) }
+    return ingestWiktionary(...process.argv.slice(2,5));
+} catch (e) {
+    return emailMe(`Error Ingesting Wiktionary`, `category="${process.argv[2]}", firstLetter="${process.argv[3]}", lastLetter="${process.argv[4]}"
+    error="${e.toString()}"`);
+}
 
-async function ingestCategory(startUrl = lemmasUrl) {
-    console.error(`${(new Date()).toLocaleString()} - START`)
-    let path = startUrl.replace('https://en.wiktionary.org','')
+async function ingestWiktionary(category = 'lemma', firstLetter = 'a', lastLetter = 'z') {
+    console.log(chalk.red(`${(new Date()).toLocaleString()} - START - category="${category}", `
+        + `firstLetter="${firstLetter}", lastLetter="${lastLetter}"`));
+    const host = `https://en.wiktionary.org`;
+    let path = categories[category] ? `/w/index.php?title=Category:${categories[category]}&pagefrom=${firstLetter}` :
+        category.replace(host,'');
+    firstLetter = firstLetter.toLowerCase();
+    lastLetter = lastLetter.toLowerCase();
     try {
         while (path) {
-            console.error(`${(new Date()).toLocaleString()} - ${path}`)
-            let $ = cheerio.load(await request.get('https://en.wiktionary.org' + path, {forever: true}))
+            console.log(chalk.yellow(`${(new Date()).toLocaleString()} - ${host + path}`));
+            let $ = cheerio.load(await request.get(host + path, {forever: true}));
             for (const a of $('#mw-pages div.mw-category > div.mw-category-group > ul > li a').get()) {
-                if ($(a).text().match(/(Reconstruction:)|(Appendix:)/gi)) continue
-                await ingestWord($(a).text(), $(a).attr('href'))
+                const word = $(a).text(), href = $(a).attr('href');
+                if (word.match(/(Reconstruction:)|(Appendix:)/gi)) continue;
+                if (getFirstLetter(word) < firstLetter || getFirstLetter(word) > lastLetter) {
+                    console.log(chalk.red(`${(new Date()).toLocaleString()} - FINISH - category="${category}", `
+                        + `firstLetter="${firstLetter}", lastLetter="${lastLetter}"`));
+                    return await emailMe(`Finished Ingesting Wiktionary`, `category="${category}", `
+                        + `firstLetter="${firstLetter}", lastLetter="${lastLetter}"`);
+                }
+                await ingestWord(word, href);
             }
             path = $('a:contains("next page")').eq(0).attr('href')
         }
     } catch (e) {
-        console.error(`Error on url "https://en.wiktionary.org${path}" - ${e}`)
-        return path ? await ingestCategory(path) : null
+        console.log(chalk.red(`Error on url "https://en.wiktionary.org${path}" - ${e.toString()}`));
+        return await ingestWiktionary(path, firstLetter, lastLetter);
     }
-    console.error(`${(new Date()).toLocaleString()} - FINISH`)
-    await emailMe('Finished Ingesting Wiktionary', startUrl)
 }
 
-async function ingestWord(word, href) {
-    if (!word.match(/^[A-Za-z-.`,!; ]*\$/)) return log(`Error "${entry.word}" - contains special characters`)
-    const entry = {word, href: `https://en.wiktionary.org${href}`}
-    if (entry.href.includes(`/w/index.php`)) return log(`Error "${entry.word}" - no wiktionary page`)
-    let $ = cheerio.load(await request.get(entry.href, {timeout: 10000, forever: true}))
-    const section = $('span#Latin').parent().nextUntil('hr')
-    if (section.length < 1) return log(`Error "${entry.word}" - no latin entry in wiktionary`)
+async function ingestWord(word, path) {
+    // if (!word.match(/^[A-Za-z-.`,!; ]*\$/)) return console.log(chalk.error(`Error "${entry.word}" - contains special characters`));
+    if (!path.math(/.*#Latin/)) path += '#Latin';
+    const entry = {word, href: `https://en.wiktionary.org${path}`};
+    if (entry.href.includes(`/w/index.php`)) return console.log(chalk.red(`Error "${entry.word}" - no wiktionary page`));
+    const $ = cheerio.load(await request.get(entry.href, {timeout: 10000, forever: true}));
+    const section = $('span#Latin').parent().nextUntil('hr');
+    if (section.length < 1) return console.log(chalk.red(`Error "${entry.word}" - no latin entry in wiktionary`));
 
-    entry.html = `<div class="${entry.word}">${$.html(section)}</div>`
-    await putItem(entry)
-    console.log(`Ingested "${entry.word}" HTML`)
-}
-
-async function ingestLetters(alphabet = "abcdefghijklmnopqrstuvwxyz") {
-    for (const letter of alphabet.split('')) {
-        log(`${(new Date()).toLocaleString()} - Starting letter "${letter}"`)
-        const $ = cheerio.load(await request.get(`https://en.wiktionary.org/wiki/Index:Latin/${letter}`, {forever: true}))
-        for (const wordLink of $('div.index>ol>li>a:first-child').get()) {
-            await ingestWord($(wordLink).text(), $(wordLink).attr('href'))
-        }
-    }
-    log(`${(new Date()).toLocaleString()} - FINISH`)
-}
-
-function log(message) {
-    const logFilename = path.join(process.cwd(), `ingestion/ingestWiktionary/logs/${process.pid}.txt`)
-    if (process.argv.length === 2) fs.appendFileSync(logFilename, message + '\n')
-    return console.error(message)
+    entry.html = `<div class="${entry.word}">${$.html(section)}</div>`;
+    await putItemHtml(entry);
+    console.log(chalk.blue(`Ingested "${entry.word}" HTML`));
 }

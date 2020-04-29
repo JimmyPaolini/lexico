@@ -1,8 +1,7 @@
 const Etymology = require('../../Etymology')
 
 class Noun extends Etymology {
-    partOfSpeech = 'noun'
-    firstPrincipalPartName = 'nominative'
+    firstPrincipalPartName() { return 'nominative'; }
 
     ingestInflection($, elt) {
         const inflectionHtml = $(elt).nextUntil('h3',':header:contains("Declension")').first().next()

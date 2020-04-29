@@ -1,8 +1,7 @@
 const Etymology = require('../Etymology')
 
 class Preposition extends Etymology {
-    partOfSpeech = 'preposition'
-    firstPrincipalPartName = 'preposition'
+    firstPrincipalPartName() { return this.partOfSpeech; }
 
     ingestInflection($, elt) {
         this.inflection = $(elt).text().split('(+ ')[1].split(')')[0]

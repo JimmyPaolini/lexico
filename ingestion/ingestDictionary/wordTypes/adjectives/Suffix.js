@@ -1,7 +1,5 @@
 const Adjective = require("./Adjective")
 
-class Suffix extends Adjective {
-    partOfSpeech = 'suffix'
-}
+class Suffix extends Adjective {}
 
 module.exports = Suffix

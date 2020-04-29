@@ -2,8 +2,7 @@ const cheerio = require('cheerio')
 const Etymology = require('../Etymology')
 
 class Verb extends Etymology {
-    partOfSpeech = 'verb'
-    firstPrincipalPartName = 'present active'
+    firstPrincipalPartName() {return 'present active'; }
 
     ingestInflection($, elt) {
         if (!$(elt).text().includes(';')) throw new Error(`no inflection`)

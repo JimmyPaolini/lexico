@@ -1,8 +1,6 @@
 const Adjective = require("./Adjective")
 
 class Pronoun extends Adjective {
-    partOfSpeech = 'pronoun'
-
     ingestInflection($, elt) {
         if (!$(elt).text().includes(';')) throw new Error(`no inflection`)
         this.inflection = $(elt).text().split('; ')[1]
