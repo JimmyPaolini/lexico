@@ -36,7 +36,7 @@ const spreadsheet = google.sheets({version: 'v4'}).spreadsheets;
 
 async function appendRowsToSpreadsheet(rows) {
     if (!rows.length) return;
-    let letter = getFirstLetter(rows[0][1].split('","')[1].split('")')[0]);
+    let letter = getFirstLetter(rows[0][0].split('","')[1].split('")')[0]);
     await spreadsheet.values.append({ spreadsheetId,
         valueInputOption: 'USER_ENTERED', insertDataOption: 'INSERT_ROWS',
         range: letter + '!A1', resource: { values: rows }
@@ -59,7 +59,7 @@ function entriesToRows(entries) {
             if (etymology.inflection === 'inflection') continue;
             console.log(chalk.blue(`Transferring "${entry.word}" - ${etymology.partOfSpeech}`));
             const row = [];
-            row.push((new Date()).toLocaleString());
+            // row.push((new Date()).toLocaleString());
             row.push(`=HYPERLINK("${entry.href}","${entry.word}")`);
             row.push(etymology.partOfSpeech);
             row.push(etymology.inflection);

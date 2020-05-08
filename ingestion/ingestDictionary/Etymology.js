@@ -15,43 +15,45 @@ const getItem = word => {
 String.prototype.norm = function() {
     return this.normalize("NFD").replace(/[\u0300-\u036f]/g,"");
 };
+const cap1 = text => text.charAt(0).toUpperCase() + text.slice(1);
 
 class Etymology {
     partOfSpeech = this.constructor.name.toLowerCase();
 
     constructor($, elt) {
-        try { this.ingestTranslations($, elt); } catch (e) { delete this.translations; }
-        try { this.ingestPrincipalParts($, elt); } catch (e) { delete this.principalParts; delete this.firstPrincipalPartName; }
+        try { this.ingestTranslations($, elt); } catch (e) { return this.inflection = 'skip'; }
+        try { this.ingestPrincipalParts($, elt); } catch (e) { delete this.principalParts; }
         try { this.ingestInflection($, elt); } catch (e) { delete this.inflection; }
         try { this.ingestForms($, elt); } catch (e) { delete this.forms; }
         try { this.ingestPronunciation($, elt); } catch (e) {}
         try { this.ingestEtymology($, elt); } catch (e) {}
         if (this.translations.every(translation => translation.match(/{\*.*\*}/g))) {
 
-            const refs = this.translations.reduce((refs, translation) => {
-                if (!translation.match(/{\*.*\*}/g) || translation.match(/{\*.*\*}/g).length !== 1) return refs;
-                let ref = translation.match(/{\*.*\*}/)[0].slice(2,-2);
-                if (refs.includes(ref)) return refs;
-                return [...refs, ref];
-            }, []);
-            if (refs.length !== 1) {
-                this.inflection = 'skip';
-                return
-            }
-            let ref = refs[0];
+            const root = this.translations.reduce((root, translation) => {
+                if (!translation.match(/{\*.*\*}/g)) return root;
+                if (translation.match(/{\*.*\*}/g).length !== 1) return 'skip';
+                const ref = translation.match(/{\*.*\*}/)[0].slice(2,-2);
+                return !root || root === ref ? ref : 'skip';
+            }, '');
+            if (root === 'skip') return this.inflection = 'skip';
+            this.root = root;
 
-            let entry = getItem(ref) || new (require('./Entry').Entry)(getItemHtml(ref));
-            const etymology = entry.etymologies.find(etymology => etymology.partOfSpeech.includes(this.partOfSpeech)) || entry.etymologies[0];
-            this.inflection = this.inflection || etymology.inflection;
-            this.principalParts = this.principalParts.length > 1 ? this.principalParts : etymology.principalParts;
+            let entry = getItem(root);
+            if (!entry) {
+                const html = getItemHtml(root);
+                if (!html) return 'skip';
+                entry = new (require('./Entry').Entry)(html);
+            }
+            const etymology = entry.etymologies.find(etymology =>
+                etymology.partOfSpeech.includes(this.partOfSpeech)) || entry.etymologies[0];
+
             this.forms = this.translations.map(translation => this.extractForm(translation));
             this.translations = etymology.translations;
+            this.principalParts = this.principalParts.length > 1 ? this.principalParts : etymology.principalParts;
+            this.inflection = this.inflection || etymology.inflection;
             this.etymology = etymology.etymology;
 
-            // /(form of)|(spelling of)|(Syncopation)|(Syncopated)|(Diminutive)
-            // |(Female Equivalent)|(Archaic)|(Abbreviation)|(Alternative)
-            // |(Comparative)|(Superlative)|(Synonym)|(Initialism)|(Clipping)/ig
-        }
+        } else this.root = this.getNormWord();
     }
 
     ingestTranslations($, elt) {
@@ -63,13 +65,22 @@ class Etymology {
             if ($(li).text().length <= 0) continue;
             if ($(li).find('span.form-of-definition-link .selflink').length) continue;
             $(li).children('ol, ul, dl').remove();
-            this.translations.push($(li).text().trim());
-            if ($(li).find('span.form-of-definition-link').length > 0) {
+            let translation = $(li).text().trim();
+            if (translation.match(/This term needs a translation to English/)) continue;
+            if (translation.match(/^ *\((\w+ ?)+\)/)) {
+                this.etymology = (this.etymology || '') + translation.match(/^ *\((\w+ ?)+\)/)[0].trim() + '\n';
+                translation = translation.replace(/^ *\((\w+ ?)+\)/, '').trim();
+            }
+            translation = translation.replace(/\.$/,'');
+            this.translations.push(cap1(translation));
+
+            if ($(li).find('span.form-of-definition-link').length > 0)
                 this.translations.push(this.translations.pop() + ' ' +
                     $(li).find('span.form-of-definition-link i.Latn.mention').get()
                         .map(ref => `{*${$(ref).text().norm()}*}`).join(' '));
-            }
         }
+
+        if (!this.translations.length) throw new Error('no translations');
     }
 
     firstPrincipalPartName() {}
@@ -86,6 +97,8 @@ class Etymology {
             else
                 this.principalParts.push(`${$(b).prev('i').text()}: ${$(b).text().toLowerCase()}`);
     }
+    getMacWord() { return this.principalParts[0].split(': ')[1]; }
+    getNormWord() { return this.getMacWord.norm(); }
 
     ingestForms($, elt) {
         const table = this.parseFormTable($, elt);
@@ -167,9 +180,9 @@ class Etymology {
 
     ingestPronunciation($, elt) {
         this.pronunciation = {
-            classical: { phonemes: getPronunciations(this.principalParts[0].split(': ')[1], 'classical') },
-            ecclesiastical: { phonemes: getPronunciations(this.principalParts[0].split(': ')[1], 'ecclesiastical') },
-            vulgar: { phonemes: getPronunciations(this.principalParts[0].split(': ')[1], 'vulgar') }
+            classical: { phonemes: getPronunciations(this.getMacWord(), 'classical') },
+            ecclesiastical: { phonemes: getPronunciations(this.getMacWord(), 'ecclesiastical') },
+            vulgar: { phonemes: getPronunciations(this.getMacWord(), 'vulgar') }
         };
 
         const pronunciationHeader = $(elt).prevAll(':header:contains("Pronunciation")').first();
@@ -202,7 +215,11 @@ class Etymology {
         const etymologyHeader = $(elt).prevAll(':header:contains("Etymology")').first();
         if ($(etymologyHeader).length <= 0 || $(etymologyHeader).next()[0].name !== 'p' ||
             !$(etymologyHeader).next().text().trim().length) throw new Error(`no etymology`);
-        this.etymology = $(etymologyHeader).next().text().trim()
+        this.etymology = (this.etymology || '') + $(etymologyHeader).next().text().trim();
+
+        const participle = this.etymology.match(
+            /((present)|(perfect)|(future)) ((active)|(passive) )?participle (\(gerundive\) )?of [A-Za-z\u00C0-\u017F]+/i);
+        if (participle) this.translations.push(cap1(participle[0].trim()));
     }
 
     ingestInflection($, elt) {}
@@ -228,6 +245,7 @@ class Etymology {
         function getMood() {
             if (text.match(/indicative/i)) return 'indicative';
             if (text.match(/subjunctive/i)) return 'subjunctive';
+            if (text.match(/imperative/i)) return 'imperative';
             return null;
         }
 
@@ -274,7 +292,23 @@ class Etymology {
                 number: getNumber()
             };
         if (this.partOfSpeech === 'verb')
-            return {
+            if (text.match(/gerund/i))
+                return {
+                    mood: 'gerund',
+                    case: getCase()
+                };
+            else if (text.match(/infinitive/i))
+                return {
+                    mood: 'infintive',
+                    voice: getVoice(),
+                    tense: getTense()
+                };
+            else if (text.match(/supine/i))
+                return {
+                    mood: 'supine',
+                    case: getCase()
+                };
+            else return {
                 mood: getMood(),
                 voice: getVoice(),
                 tense: getTense(),

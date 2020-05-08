@@ -7,22 +7,31 @@ const getItem = word => {
     catch (e) { return undefined }
 };
 
-if (process.argv[2] === 'clear') return clearSpreadsheet();
+const BATCH_SIZE = 256;
+let action = 'roots';
+if (process.argv.length >= 2 && ['roots','all','clear'].includes(process.argv[2])) action = process.argv[2];
+let firstLetter = 'a';
+if (process.argv.length >= 3 && process.argv[3].match(/[a-z]/)) firstLetter = process.argv[3];
+let lastLetter = 'z';
+if (process.argv.length >= 4 && process.argv[4].match(/[a-z]/)) lastLetter = process.argv[4];
 
-try { return buildSpreadsheet(process.argv[2], process.argv[3]); }
-catch (e) { return emailMe('Error Ingesting Dictionary', e.toString()); }
+try {
+    if (action === 'roots') return buildSpreadsheet();
+    if (action === 'all') return buildSpreadsheet();
+    if (action === 'clear') return clearSpreadsheet();
+} catch (e) { return emailMe('Error Spreadsheet', `e.toString()`); }
 
-async function buildSpreadsheet(firstLetter = 'a', lastLetter = 'z') {
+async function buildSpreadsheet() {
     console.log(chalk.red(`${(new Date()).toLocaleString()} - START`));
-    const files = fs.readdirSync(path.join(process.cwd(), `../dictionary/json`));
-    files.splice(files.indexOf('.DS_Store'), 1);
+    let files = fs.readdirSync(path.join(process.cwd(), `../dictionary/json`));
+    files = files.filter(fileName => getFirstLetter(fileName) >= firstLetter && getFirstLetter(fileName) <= lastLetter);
     files.sort((a, b) => getFirstLetter(a).localeCompare(getFirstLetter(b)));
+
     let entries = [];
     let curLetter = firstLetter;
     await clearTable(curLetter);
     for (let fileName of files) {
-        if (getFirstLetter(fileName) < firstLetter || getFirstLetter(fileName) > lastLetter) continue;
-        if (entries.length >= 128 || getFirstLetter(fileName) > curLetter) {
+        if (entries.length >= BATCH_SIZE || getFirstLetter(fileName) > curLetter) {
             await appendRowsToSpreadsheet(entriesToRows(entries.splice(0, entries.length)));
             if (getFirstLetter(fileName) !== curLetter) {
                 await sortTable(curLetter);
@@ -31,14 +40,24 @@ async function buildSpreadsheet(firstLetter = 'a', lastLetter = 'z') {
             }
         }
         const entry = require(path.join(process.cwd(), `../dictionary/json/${fileName}`));
-        if (entry.etymologies.some(etymology => etymology.inflection !== 'inflection')) entries.push(entry);
+        if (action === 'all') entries.push(entry);
+        else if (entry.etymologies.some(etymology => etymology.root))
+            entries.push({etymologies: entry.etymologies.filter(etymology => etymology.root), ...entry});
     }
     if (entries.length) await appendRowsToSpreadsheet(entriesToRows(entries.splice(0, entries.length)));
     await sortTable(curLetter);
+
     console.log(chalk.red(`${(new Date()).toLocaleString()} - FINISH`));
     await emailMe('Finished Building Spreadsheet', `firstLetter: ${firstLetter}\nlastLetter: ${lastLetter}`);
 }
 
 async function clearSpreadsheet() {
-    for (const letter of [..."abcdefghijklmnopqrstuvwxyz"]) await clearTable(letter);
+    console.log(chalk.red(`${(new Date()).toLocaleString()} - START`));
+    const letters = [..."abcdefghijklmnopqrstuvwxyz"].filter(fileName =>
+        getFirstLetter(fileName) >= firstLetter && getFirstLetter(fileName) <= lastLetter);
+    for (const letter of letters) await clearTable(letter);
+    console.log(chalk.red(`${(new Date()).toLocaleString()} - FINISH`));
+    await emailMe('Finished Clearing Spreadsheet', `firstLetter: ${firstLetter}\nlastLetter: ${lastLetter}`);
 }
+
+
