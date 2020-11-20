@@ -1,0 +1,50 @@
+{
+  "title": "virgil",
+  "author": "publius vergilius maro",
+  "children": [
+    {
+      "title": "aeneid",
+      "author": "publius vergilius maro",
+      "children": [
+        "book 1.txt",
+        "book 2.txt",
+        "book 3.txt",
+        "book 4.txt",
+        "book 5.txt",
+        "book 6.txt",
+        "book 7.txt",
+        "book 8.txt",
+        "book 9.txt",
+        "book 10.txt",
+        "book 11.txt",
+        "book 12.txt"
+      ]
+    },
+    {
+      "title": "eclogues",
+      "author": "publius vergilius maro",
+      "children": [
+        "book 1.txt",
+        "book 2.txt",
+        "book 3.txt",
+        "book 4.txt",
+        "book 5.txt",
+        "book 6.txt",
+        "book 7.txt",
+        "book 8.txt",
+        "book 9.txt",
+        "book 10.txt"
+      ]
+    },
+    {
+      "title": "georgicon",
+      "author": "publius vergilius maro",
+      "children": [
+        "book 1.txt",
+        "book 2.txt",
+        "book 3.txt",
+        "book 4.txt"
+      ]
+    }
+  ]
+}

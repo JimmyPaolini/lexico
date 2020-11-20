@@ -1,3 +1,7 @@
+const AWS = require("aws-sdk");
+const {region, accessKeyId, secretAccessKey} = require("../secrets/aws_credentials.json");
+const dynamo = new AWS.DynamoDB.DocumentClient({region, accessKeyId, secretAccessKey});
+const s3 = new AWS.S3({region, accessKeyId, secretAccessKey});
 const fs = require('fs'), path = require('path');
 const putItem = entry => fs.writeFileSync(path.join(process.cwd(), `../dictionary/json/${entry.word}.json`),
     JSON.stringify(entry,null,2));
@@ -8,7 +12,51 @@ const getItem = word => {
 String.prototype.norm = function() {return this.normalize("NFD").replace(/[\u0300-\u036f]/g,"")};
 const getPronunciations = require('./pronunciation');
 
-return countEntries();
+main();
+async function main() {
+    let files = fs.readdirSync(path.join(process.cwd(),`../dictionary/json`));
+    files.splice(files.indexOf('.DS_Store'), 1);
+    console.log("Read files");
+    const roots = [];
+    for (const file of files) {
+        const entry = require(path.join(process.cwd(),`../dictionary/json/${file}`));
+        if (entry.etymologies.some(etymology => etymology.root)) {
+            roots.push(entry.word);
+            console.log(file);
+        }
+    }
+    fs.writeFileSync(path.join(process.cwd(),`../dictionary/words.json`), JSON.stringify(words,null,2));
+}
+
+async function uploadDictionaryToS3() {
+    const Bucket = "lexico-dictionary";
+    let files = fs.readdirSync(path.join(process.cwd(),`../dictionary/json`));
+    files.splice(files.indexOf('.DS_Store'), 1);
+    let count = 0;
+    for (const file of files) {
+        const Body = fs.readFileSync("../dictionary/json/" + file);
+        await s3.putObject({
+            Bucket,
+            Key: file,
+            Body
+        }).promise();
+        console.log(file);
+        if (++count >= 1000) await new Promise(r => setTimeout(r, 500));
+    }
+}
+
+async function uploadDictionaryToDynamo() {
+    const TableName = "lexico";
+    let files = fs.readdirSync(path.join(process.cwd(),`../dictionary/json`));
+    files.splice(files.indexOf('.DS_Store'), 1);
+    files = files.filter(file => file.charAt(0).match(/a/i));
+    for (const file of files) {
+        const Item = require("../../dictionary/json/" + file);
+        await dynamo.put({TableName, Item}).promise();
+        console.log(Item);
+        await new Promise(r => setTimeout(r, 300));
+    }
+}
 
 function generateWordList() {
     let files = fs.readdirSync(path.join(process.cwd(),`../dictionary/json`));

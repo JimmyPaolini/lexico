@@ -1,0 +1,47 @@
+{
+  "title": "literature",
+  "children": [
+    {
+      "title": "augustus",
+      "author": "caesar divi filius augustus",
+      "children": [
+        "res gestae divi augusti"
+      ]
+    },
+    {
+      "title": "caesar",
+      "author": "gaius iulius caesar",
+      "children": [
+        "de bello africo.txt",
+        "de bello alexandrino.txt",
+        "de bello civili",
+        "de bello gallico",
+        "de bello hispaniensi.txt"
+      ]
+    },
+    {
+      "title": "ovid",
+      "author": "publius ovidius naso",
+      "children": [
+        "amores",
+        "ars amatoria",
+        "ex ponto",
+        "fasti",
+        "heroides",
+        "ibis.txt",
+        "metamorphoses",
+        "remedia amoris.txt",
+        "tristia"
+      ]
+    },
+    {
+      "title": "virgil",
+      "author": "publius vergilius maro",
+      "children": [
+        "aeneid",
+        "eclogues",
+        "georgicon"
+      ]
+    }
+  ]
+}

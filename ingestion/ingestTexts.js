@@ -1,4 +1,7 @@
-const fs = require('fs'), path = require('path'), chalk = require('chalk');
+const fs = require('fs');
+const fse = require('fs-extra');
+const path = require('path');
+const chalk = require('chalk');
 const request = require('request-promise-native');
 const cheerio = require('cheerio');
 const cheerioTableParser = require('cheerio-tableparser');
@@ -30,12 +33,35 @@ class Work {
     }
 }
 
+const map = {
+    "aen": "aeneid",
+    "ec": "eclogues",
+    "geo": "georgicon",
+    "gall": "de bello gallico",
+    "bc": "de bello civili",
+    "alex": "de bello alexandrino",
+    "bellafr": "de bello africo",
+    "hisp": "de bello hispaniensi",
+    "met": "metamorphoses",
+    "amor": "amores",
+    "her": "heroides",
+    "artis": "ars amatoria",
+    "tristia": "tristia",
+    "ponto": "ex ponto",
+    "fasti": "fasti",
+    "rem": "remedia amoris",
+    "ibis": "ibis",
+    "pontoalone": "ponto",
+    "resgestae": "res gestae divi augusti",
+}
+
 const host = 'https://www.thelatinlibrary.com/';
 const errors = [];
 
 // return ingestAuthors();
-return ingestWorks().then(_=> console.log(JSON.stringify(errors,null,2)));
-// return ingestWork({ "name": "caesar" }, { "path": "caesar/gall8.shtml" });
+// return ingestWorks().then(() => console.log(JSON.stringify(errors,null,2)));
+const authors = JSON.parse(fs.readFileSync(`learning/authors.json`));
+ingestAuthor(authors.find(author => author.name === "augustus"));
 
 async function ingestAuthors() {
     const tableHtml = cheerio.load(await request(host));
@@ -81,12 +107,20 @@ async function ingestWorks() {
     }
 }
 
+async function ingestAuthor(author) {
+    if (!fs.existsSync(`learning/data/original/${author.name}`)) fs.mkdirSync(`learning/data/original/${author.name}`);
+    for (const work of author.works) {
+        // if (work.path === 'resgestae1.html') continue
+        await ingestWork(author, work)
+    }
+}
+
 async function ingestWork(author, work) {
     try {
         const html = (await request(host + work.path))
-            .replace(/[^\x00-\x7F]/g, "")
+            // .replace(/[^\x00-\x7F]/g, "")
             .match(/<html>(.|\n)*<\/html>/i)[0];
-        const $ = cheerio.load(html);
+        const $ = cheerio.load(html, {decodeEntities: false});
 
         work.title = $('head title').text().toLowerCase().trim()
             .replace(/\s/g, '_')
@@ -94,14 +128,29 @@ async function ingestWork(author, work) {
         work.title = unabbreviateText(work.title);
         if (!work.title.length) throw new Error(`no title`);
 
-        $('body').find('.pagehead, .internal_navigation, .footer').remove();
+        $('body').find('.pagehead, .internal_navigation, .footer, :header').remove();
 
-        for (const p of $('p, :header').get())
-            work.text += $(p).clone().children().remove().end().text();
-        work.text = work.text.replace(/\n\n+/g, '\n\n').replace(/[\[\]]+ ?/g, '').trim();
+        $('p').children("br, font, span, a").html("\n");
+        for (const p of $('p').get()) {
+            const x = $(p).text();
+            work.text += $(p).text();
+        }
+        work.text = work.text.replace(/undefined/g, '');
+        work.text = work.text.replace(/[\[\]]+ ?/g, '');
+        work.text = work.text.replace(/(\s)(\s+)/g, '\n');
+        work.text = work.text.split("\n").map(line => line.trim()).join("\n").trim();
         if (!work.text.length) throw new Error(`no text`);
 
-        fs.writeFileSync(path.join(process.cwd(), `./learning/data/original/${author.name}/${work.title}.txt`), work.text);
+        work.title = work.path.split("/").slice(-1)[0]
+            .replace(new RegExp(author.name + "\."), '')
+            .replace("ponto.shtml", "pontoalone.shtml")
+            .replace("resgestae1.html", "resgestae2.html")
+            .replace("resgestae.html", "resgestae1.html")
+            .replace(/\.s?html/, '')
+            .replace(/[a-z]+/, (w) => map[w])
+            .replace(/[0-9]+/, (d) => "/book " + d);
+        fse.ensureFileSync(`learning/data/original/${author.name}/${work.title}.txt`);
+        fs.writeFileSync(`learning/data/original/${author.name}/${work.title}.txt`, work.text);
         console.log(`Ingested ${author.name}/${work.title}.txt`)
     } catch (e) {
         console.error(`Error ${author.name} - ${work.path} - ${e.toString()}`);
