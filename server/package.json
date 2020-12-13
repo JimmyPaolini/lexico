@@ -1,0 +1,27 @@
+{
+  "name": "lexico-server",
+  "version": "1.0.0",
+  "description": "lexico-server",
+  "main": "dist/app.js",
+  "dependencies": {
+    "@types/cheerio": "^0.22.23",
+    "@types/express": "^4.17.9",
+    "@types/node": "^14.14.11",
+    "cheerio": "^1.0.0-rc.3",
+    "cheerio-tableparser": "^1.0.1",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.29",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "watch": "clear; tsc -w",
+    "start": "clear; node dist/app.js",
+    "dictionary": "node dist/ingestion/dictionary/index.js"
+  },
+  "repository": "https://github.com/JimmyPaolini/Lexico",
+  "author": "Jimmy Paolini",
+  "license": "ISC"
+}
