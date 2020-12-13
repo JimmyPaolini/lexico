@@ -1,4 +1,5 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany } from "typeorm"
+import PrincipalPart from "./PrincipalPart"
 import { Pronunciation } from "./Pronunciation"
 import Record from "./Record"
 import Translation from "./Translation"
@@ -8,7 +9,7 @@ export default class Word extends Record {
   @Column({ unique: true })
   word: string
 
-  @ManyToMany(() => Word, word => word.roots)
+  @ManyToMany(() => Word, (word) => word.roots)
   @JoinTable()
   roots: Word[] | undefined
 
@@ -21,7 +22,7 @@ export default class Word extends Record {
   @Column("json", { nullable: true })
   principalParts?: PrincipalPart[]
 
-  @OneToMany(() => Translation, translation => translation.word, {
+  @OneToMany(() => Translation, (translation) => translation.word, {
     nullable: true,
     eager: true,
     cascade: true,
@@ -37,11 +38,11 @@ export default class Word extends Record {
   @Column({ nullable: true })
   etymology?: string
 
-  @ManyToMany(() => Word, word => word.synonyms)
+  @ManyToMany(() => Word, (word) => word.synonyms)
   @JoinTable()
   synonyms?: Word[] | undefined
 
-  @ManyToMany(() => Word, word => word.antonyms)
+  @ManyToMany(() => Word, (word) => word.antonyms)
   @JoinTable()
   antonyms?: Word[] | undefined
 }

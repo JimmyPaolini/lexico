@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Ingestion Test",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/server/dist/ingestion/dictionary/index.test.js"
+    }
+  ]
+}

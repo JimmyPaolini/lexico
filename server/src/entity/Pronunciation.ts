@@ -1,16 +1,20 @@
-export type Pronunciation = {
+export class Pronunciation {
   classical: PronunciationParts
   ecclesiastical: PronunciationParts
   vulgar: PronunciationParts
+
+  constructor() {
+    return defaultPronunciation
+  }
 }
 
-type PronunciationParts = {
+export class PronunciationParts {
   phonemes: string
   phonemic: string
   phonetic: string
 }
 
-export const defaultPronunciation = {
+export const defaultPronunciation: Pronunciation = {
   classical: {
     phonemes: "",
     phonemic: "",

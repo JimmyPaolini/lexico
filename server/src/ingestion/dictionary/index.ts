@@ -3,7 +3,10 @@ import path from "path"
 import ingestHtml from "./ingestHtml"
 
 main(process.argv[2], process.argv[3])
-async function main(firstLetter: string = "a", lastLetter: string = "z") {
+export default async function main(
+  firstLetter: string = "a",
+  lastLetter: string = "z",
+) {
   console.log(`${new Date().toLocaleString()} - READING HTML FILES`)
   const files = getHtmlFiles(firstLetter, lastLetter)
   console.log(`${new Date().toLocaleString()} - STARTING INGESTION`)
@@ -20,11 +23,11 @@ function getHtmlFiles(
 ): string[] {
   let files = fs.readdirSync(path.join(process.cwd(), `./data/html`))
   files = files.filter(
-    fileName =>
+    (fileName) =>
       getFirstLetter(fileName) >= firstLetter &&
       getFirstLetter(fileName) <= lastLetter,
   )
-  files = files.filter(fileName => !fileName.slice(0, -5).match(/\s|\.|-/g))
+  files = files.filter((fileName) => !fileName.slice(0, -5).match(/\s|\.|-/g))
   files.sort((a, b) => getFirstLetter(a).localeCompare(getFirstLetter(b)))
   return files
 }

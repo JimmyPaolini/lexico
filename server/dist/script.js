@@ -389,11 +389,11 @@ function create(em) {
         word.word = "amo";
         word.partOfSpeech = json.partOfSpeech;
         word.inflection = json.inflection;
-        word.principalParts = json.principalParts.map(pp => {
+        word.principalParts = json.principalParts.map((pp) => {
             const [name, text] = pp.split(": ");
             return { name, text };
         });
-        word.translations = json.translations.map(t => new Translation_1.default(t, word));
+        word.translations = json.translations.map((t) => new Translation_1.default(t, word));
         word.roots = [word];
         yield wordRepository.save(word);
         const amat = new Word_1.default();

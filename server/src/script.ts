@@ -1,4 +1,5 @@
 import { EntityManager, Like } from "typeorm"
+import PrincipalPart from "./entity/PrincipalPart"
 import Translation from "./entity/Translation"
 import Word from "./entity/Word"
 
@@ -377,11 +378,11 @@ export async function create(em: EntityManager) {
   word.word = "amo"
   word.partOfSpeech = json.partOfSpeech as PartOfSpeech
   word.inflection = json.inflection as Inflection
-  word.principalParts = json.principalParts.map(pp => {
+  word.principalParts = json.principalParts.map((pp) => {
     const [name, text] = pp.split(": ")
     return { name, text }
   }) as PrincipalPart[]
-  word.translations = json.translations.map(t => new Translation(t, word))
+  word.translations = json.translations.map((t) => new Translation(t, word))
   word.roots = [word]
 
   await wordRepository.save(word)

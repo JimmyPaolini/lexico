@@ -1,0 +1,92 @@
+import cheerio from "cheerio"
+import cheerioTableParser from "cheerio-tableparser"
+import { Forms } from "../../../entity/forms/Forms"
+
+export default function parseForms($: cheerio.Root, elt: any): Forms {
+  const table = parseFormTable($, elt)
+  if (!table) throw new Error(`no forms`)
+
+  function parseWords(cell: string) {
+    cell = cell.trim().replace(/[\d*]/g, "").toLowerCase()
+    return cell.includes(", ") ? cell.split(", ") : [cell]
+  }
+
+  function findIdentifiers(i: number, j: number, table: any) {
+    const identifiers = new Set()
+    const isForm = (cell: string) =>
+      cell.includes("<span ") ||
+      cell.includes("—") ||
+      cell.includes(" + ") ||
+      !cell.length
+
+    let m = i
+    while (isForm(table[m][j])) m--
+    while (m >= 0 && !isForm(table[m][j]))
+      identifiers.add(table[m--][j].replace(/\.|\//g, "").toLowerCase().trim())
+
+    let n = j
+    while (isForm(table[i][n])) n--
+    while (n >= 0 && !isForm(table[i][n]))
+      identifiers.add(table[i][n--].replace(/\.|\//g, "").toLowerCase().trim())
+
+    if (["Singular", "Plural"].includes(table[++m][++n]))
+      identifiers.add(table[m][n].toLowerCase().trim())
+    return Array.from(identifiers)
+  }
+
+  let forms = {}
+  let disorganizedForms = table.reduce(
+    (disorganizedForms: any, row: string[], i: number) => {
+      return row.reduce((_, cell, j) => {
+        if (cell.includes("<span ")) {
+          const c = cheerio.load(cell)
+          const words = c("span")
+            .map((_, s) => c(s).text())
+            .get()
+            .join(", ")
+          if (!words.match(/[A-Za-zāēīōūȳ\-\s]+/)) return disorganizedForms
+          disorganizedForms.push({
+            word: parseWords(words),
+            identifiers: findIdentifiers(i, j, table),
+          })
+        }
+        return disorganizedForms
+      })
+    },
+    [],
+  )
+  for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
+    sortIdentifiers(inflection, forms)
+  }
+  return forms as Forms
+}
+function parseFormTable($: cheerio.Root, elt: any) {
+  const tableHtml = $(elt).nextUntil("h3", "table").first()
+  if (tableHtml.length <= 0) return
+  const $table = cheerio.load($.html(tableHtml))
+  cheerioTableParser($table)
+  let table = $table("table").parsetable(true, true, false)
+
+  table = table[0].map((col, i) => table.map((row) => row[i]))
+  table = table.map((tr) => {
+    return tr.map((tc) => {
+      const c = cheerio.load(tc)
+      if (c("span").length <= 0) return c.text().trim()
+      // Headers
+      else return c("body").html()
+    })
+  })
+
+  return table
+}
+function sortIdentifiers(inflection: any, obj: any) {
+  const identifier = inflection.identifiers.pop()
+  if (!inflection.identifiers.length) {
+    obj[identifier] = inflection.word
+    return obj
+  } else {
+    if (!obj[identifier]) obj[identifier] = {}
+    obj[identifier] = sortIdentifiers(inflection, obj[identifier])
+    return obj
+  }
+}

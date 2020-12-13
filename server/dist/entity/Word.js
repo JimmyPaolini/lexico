@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 var Word_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const Pronunciation_1 = require("./Pronunciation");
 const Record_1 = __importDefault(require("./Record"));
 const Translation_1 = __importDefault(require("./Translation"));
 let Word = Word_1 = class Word extends Record_1.default {
@@ -23,7 +24,7 @@ __decorate([
     __metadata("design:type", String)
 ], Word.prototype, "word", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => Word_1, word => word.roots),
+    typeorm_1.ManyToMany(() => Word_1, (word) => word.roots),
     typeorm_1.JoinTable(),
     __metadata("design:type", Object)
 ], Word.prototype, "roots", void 0);
@@ -40,7 +41,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Word.prototype, "principalParts", void 0);
 __decorate([
-    typeorm_1.OneToMany(() => Translation_1.default, translation => translation.word, {
+    typeorm_1.OneToMany(() => Translation_1.default, (translation) => translation.word, {
         nullable: true,
         eager: true,
         cascade: true,
@@ -53,19 +54,19 @@ __decorate([
 ], Word.prototype, "forms", void 0);
 __decorate([
     typeorm_1.Column("json", { nullable: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Pronunciation_1.Pronunciation)
 ], Word.prototype, "pronunciation", void 0);
 __decorate([
     typeorm_1.Column({ nullable: true }),
     __metadata("design:type", String)
 ], Word.prototype, "etymology", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => Word_1, word => word.synonyms),
+    typeorm_1.ManyToMany(() => Word_1, (word) => word.synonyms),
     typeorm_1.JoinTable(),
     __metadata("design:type", Object)
 ], Word.prototype, "synonyms", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => Word_1, word => word.antonyms),
+    typeorm_1.ManyToMany(() => Word_1, (word) => word.antonyms),
     typeorm_1.JoinTable(),
     __metadata("design:type", Object)
 ], Word.prototype, "antonyms", void 0);

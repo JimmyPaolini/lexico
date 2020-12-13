@@ -28,11 +28,12 @@ function main(firstLetter = "a", lastLetter = "z") {
         console.log(`${new Date().toLocaleString()} - FINISHED INGESTION`);
     });
 }
+exports.default = main;
 function getHtmlFiles(firstLetter = "a", lastLetter = "z") {
     let files = fs_1.default.readdirSync(path_1.default.join(process.cwd(), `./data/html`));
-    files = files.filter(fileName => getFirstLetter(fileName) >= firstLetter &&
+    files = files.filter((fileName) => getFirstLetter(fileName) >= firstLetter &&
         getFirstLetter(fileName) <= lastLetter);
-    files = files.filter(fileName => !fileName.slice(0, -5).match(/\s|\.|-/g));
+    files = files.filter((fileName) => !fileName.slice(0, -5).match(/\s|\.|-/g));
     files.sort((a, b) => getFirstLetter(a).localeCompare(getFirstLetter(b)));
     return files;
 }
