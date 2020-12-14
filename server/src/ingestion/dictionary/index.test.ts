@@ -16,7 +16,7 @@ import ingestHtml from "./ingestHtml"
 
 // const adjectives = ["aeternus", "sapiens"]
 
-const word = "filius"
+const word = "aeternus"
 ingestHtml(
   require(path.join(process.cwd(), `server/data/html/${word}.json`)),
 ).then(() => console.log("done"))

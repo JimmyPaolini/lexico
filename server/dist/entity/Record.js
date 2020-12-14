@@ -13,8 +13,8 @@ const typeorm_1 = require("typeorm");
 let Record = class Record {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn("uuid"),
-    __metadata("design:type", String)
+    typeorm_1.PrimaryGeneratedColumn(),
+    __metadata("design:type", Number)
 ], Record.prototype, "id", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.sortIdentifiers = exports.parseFormTable = void 0;
 const cheerio_1 = __importDefault(require("cheerio"));
 const cheerio_tableparser_1 = __importDefault(require("cheerio-tableparser"));
 function parseForms($, elt) {
@@ -77,6 +78,7 @@ function parseFormTable($, elt) {
     });
     return table;
 }
+exports.parseFormTable = parseFormTable;
 function sortIdentifiers(inflection, obj) {
     const identifier = inflection.identifiers.pop();
     if (!inflection.identifiers.length) {
@@ -90,4 +92,5 @@ function sortIdentifiers(inflection, obj) {
         return obj;
     }
 }
+exports.sortIdentifiers = sortIdentifiers;
 //# sourceMappingURL=forms.js.map

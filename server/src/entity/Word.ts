@@ -1,4 +1,5 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany } from "typeorm"
+import { Forms } from "./forms/Forms"
 import PrincipalPart from "./PrincipalPart"
 import { Pronunciation } from "./Pronunciation"
 import Record from "./Record"
@@ -30,7 +31,7 @@ export default class Word extends Record {
   translations?: Translation[]
 
   @Column("json", { nullable: true })
-  forms?: Forms
+  forms?: Forms | null
 
   @Column("json", { nullable: true })
   pronunciation?: Pronunciation

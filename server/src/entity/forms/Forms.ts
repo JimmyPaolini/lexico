@@ -1,1 +1,1 @@
-export type Forms = NounForms | VerbForms | AdjectiveForms
+export type Forms = NounForms | VerbForms | AdjectiveForms | null

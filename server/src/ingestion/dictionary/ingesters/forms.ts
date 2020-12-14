@@ -60,7 +60,7 @@ export default function parseForms($: cheerio.Root, elt: any): Forms {
   }
   return forms as Forms
 }
-function parseFormTable($: cheerio.Root, elt: any) {
+export function parseFormTable($: cheerio.Root, elt: any) {
   const tableHtml = $(elt).nextUntil("h3", "table").first()
   if (tableHtml.length <= 0) return
   const $table = cheerio.load($.html(tableHtml))
@@ -79,7 +79,7 @@ function parseFormTable($: cheerio.Root, elt: any) {
 
   return table
 }
-function sortIdentifiers(inflection: any, obj: any) {
+export function sortIdentifiers(inflection: any, obj: any) {
   const identifier = inflection.identifiers.pop()
   if (!inflection.identifiers.length) {
     obj[identifier] = inflection.word

@@ -1,7 +1,7 @@
 type VerbForms = {
-  "indicative": Indicative
-  "subjunctive": Subjunctive
-  "imperative": Imperative
-  "non-finite": NonFinite
-  "verbal-noun": VerbalNoun
+  indicative: Indicative
+  subjunctive: Subjunctive
+  imperative: Imperative
+  nonFinite: NonFinite
+  verbalNoun: VerbalNoun
 }

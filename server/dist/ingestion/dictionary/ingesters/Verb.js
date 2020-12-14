@@ -1,11 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const cheerio_1 = __importDefault(require("cheerio"));
-const Ingester_1 = __importDefault(require("../Ingester"));
-class Verb extends Ingester_1.default {
+const cheerio = require("cheerio");
+const Etymology = require("../Etymology");
+class Verb extends Etymology {
     firstPrincipalPartName() {
         return "present active";
     }
@@ -26,15 +21,15 @@ class Verb extends Ingester_1.default {
         if (!table)
             throw new Error(`no forms`);
         function parseWords(cell, number, person) {
-            const isMood = word => [
+            const isMood = (word) => [
                 "indicative",
                 "subjunctive",
                 "imperative",
                 "non-finite",
                 "verbal nouns",
             ].includes(word);
-            const isVoice = word => ["active", "passive"].includes(word);
-            const isTense = word => [
+            const isVoice = (word) => ["active", "passive"].includes(word);
+            const isTense = (word) => [
                 "present",
                 "imperfect",
                 "future",
@@ -58,14 +53,14 @@ class Verb extends Ingester_1.default {
                         voice = identifier;
                     else if (isTense(identifier))
                         tense = identifier;
-                return sum_esse_fui[mood][voice][tense][number][person].map(ext => identifiers[0] + " " + ext);
+                return sum_esse_fui[mood][voice][tense][number][person].map((ext) => identifiers[0] + " " + ext);
             }
             else
                 return [cell];
         }
         function findIdentifiers(i, j, table) {
             const identifiers = new Set();
-            const isForm = cell => cell.includes("<span ") || cell.includes("—") || cell.includes(" + ");
+            const isForm = (cell) => cell.includes("<span ") || cell.includes("—") || cell.includes(" + ");
             let m = i;
             while (isForm(table[m][j]))
                 m--;
@@ -79,7 +74,7 @@ class Verb extends Ingester_1.default {
                 .add(table[i][n].toLowerCase().trim())
                 .add(table[i][n - 1].toLowerCase().trim());
             identifiers.add(table[m][n].toLowerCase().trim());
-            return Array.from(identifiers).map(id => id
+            return Array.from(identifiers).map((id) => id
                 .replace("non-finite forms", "non-finite")
                 .replace("verbal nouns", "verbal-nouns")
                 .replace(/s$/, ""));
@@ -88,7 +83,7 @@ class Verb extends Ingester_1.default {
         this.disorganizedForms = table.reduce((disorganizedForms, row, i) => {
             return row.reduce((_, cell, j) => {
                 if (cell.includes("<span ") || cell.includes(" + ")) {
-                    const c = cheerio_1.default.load(cell);
+                    const c = cheerio.load(cell);
                     const identifiers = findIdentifiers(i, j, table);
                     if (!c.text().match(/[A-Za-zāēīōūȳ\-\s]+/))
                         return disorganizedForms;
@@ -104,7 +99,7 @@ class Verb extends Ingester_1.default {
             super.sortIdentifiers(inflection, this.forms);
     }
 }
-exports.default = Verb;
+module.exports = Verb;
 const sum_esse_fui = {
     "indicative": {
         active: {

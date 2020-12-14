@@ -24,7 +24,9 @@ class Ingester {
             .trim();
     }
     ingestPrincipalParts() {
-        return principalParts_1.default(this, this.$, this.elt, this.firstPrincipalPartName);
+        this.principalParts;
+        principalParts_1.default(this, this.$, this.elt, this.firstPrincipalPartName);
+        return this.principalParts;
     }
     ingestTranslations() {
         return translations_1.default(this.$, this.elt);

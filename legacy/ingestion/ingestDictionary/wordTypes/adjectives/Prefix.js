@@ -10,7 +10,6 @@ class Prefix extends Adjective {
         // const derived = []
         // for (const term of derivedTerms) console.log($(term).find('div.CategoryTreeItem a').attr('title'))
         // this.forms = {derived}
+        return null
     }
 }
-
-module.exports = Prefix

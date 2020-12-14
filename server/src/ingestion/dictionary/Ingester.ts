@@ -31,13 +31,15 @@ export default abstract class Ingester {
   abstract ingestInflection(): Inflection
 
   firstPrincipalPartName: string = ""
+  principalParts: PrincipalPart[]
   ingestPrincipalParts(): PrincipalPart[] {
-    return parsePrincipalParts(
+    this.principalParts parsePrincipalParts(
       this,
       this.$,
       this.elt,
       this.firstPrincipalPartName,
     )
+    return this.principalParts
   }
 
   ingestTranslations(): Translation[] {
