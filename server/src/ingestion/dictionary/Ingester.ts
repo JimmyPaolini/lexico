@@ -33,7 +33,7 @@ export default abstract class Ingester {
   firstPrincipalPartName: string = ""
   principalParts: PrincipalPart[]
   ingestPrincipalParts(): PrincipalPart[] {
-    this.principalParts parsePrincipalParts(
+    this.principalParts = parsePrincipalParts(
       this,
       this.$,
       this.elt,
