@@ -65,7 +65,7 @@ function parseFormTable($, elt) {
     const $table = cheerio_1.default.load($.html(tableHtml));
     cheerio_tableparser_1.default($table);
     let table = $table("table").parsetable(true, true, false);
-    table = table[0].map((col, i) => table.map((row) => row[i]));
+    table = table[0].map((_, i) => table.map((row) => row[i]));
     table = table.map((tr) => {
         return tr.map((tc) => {
             const c = cheerio_1.default.load(tc);

@@ -65,13 +65,13 @@ function parseFormTable($: cheerio.Root, elt: any) {
   if (tableHtml.length <= 0) return
   const $table = cheerio.load($.html(tableHtml))
   cheerioTableParser($table)
-  let table = $table("table").parsetable(true, true, false)
+  let table = ($table("table") as any).parsetable(true, true, false)
 
-  table = table[0].map((col, i) => table.map((row) => row[i]))
-  table = table.map((tr) => {
-    return tr.map((tc) => {
+  table = table[0].map((_: any, i: number) => table.map((row: any) => row[i]))
+  table = table.map((tr: any) => {
+    return tr.map((tc: any) => {
       const c = cheerio.load(tc)
-      if (c("span").length <= 0) return c.text().trim()
+      if (c("span").length <= 0) return (c as any).text().trim()
       // Headers
       else return c("body").html()
     })

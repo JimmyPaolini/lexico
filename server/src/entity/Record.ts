@@ -7,8 +7,8 @@ import {
 
 @Entity()
 export default abstract class Record {
-  @PrimaryGeneratedColumn("uuid")
-  id: string
+  @PrimaryGeneratedColumn()
+  id: number
 
   @CreateDateColumn()
   createdAt: Date
