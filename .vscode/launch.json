@@ -7,6 +7,13 @@
       "name": "Ingestion Test",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/server/dist/ingestion/dictionary/index.test.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Wiktionary",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/server/dist/ingestion/wiktionary/index.js"
     }
   ]
 }

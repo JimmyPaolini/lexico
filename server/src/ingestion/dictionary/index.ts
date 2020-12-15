@@ -1,5 +1,6 @@
 import fs from "fs"
 import path from "path"
+import { getFirstLetter } from "../../utils/getFirstLetter"
 import ingestHtml from "./ingestHtml"
 
 main(process.argv[2], process.argv[3])
@@ -30,11 +31,4 @@ function getHtmlFiles(
   files = files.filter((fileName) => !fileName.slice(0, -5).match(/\s|\.|-/g))
   files.sort((a, b) => getFirstLetter(a).localeCompare(getFirstLetter(b)))
   return files
-}
-
-function getFirstLetter(word: string) {
-  const [l1, l2] = [...word.toLowerCase()]
-  if (!l1.match(/[a-z-]/) && !l1.match(/[a-z-]/)) return "*"
-  if (l1 === "-") return l2
-  else return l1
 }
