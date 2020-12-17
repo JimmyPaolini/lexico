@@ -1,12 +1,34 @@
-type VerbalNoun = {
-  gerund: {
-    genitive: string[]
-    dative: string[]
-    accusative: string[]
-    ablative: string[]
-  }
-  supine: {
-    accusative: string[]
-    ablative: string[]
-  }
+import { Field, ObjectType } from "type-graphql"
+
+@ObjectType()
+export class Gerund {
+  @Field(() => [String])
+  genitive: string[]
+
+  @Field(() => [String])
+  dative: string[]
+
+  @Field(() => [String])
+  accusative: string[]
+
+  @Field(() => [String])
+  ablative: string[]
+}
+
+@ObjectType()
+export class Supine {
+  @Field(() => [String])
+  accusative: string[]
+
+  @Field(() => [String])
+  ablative: string[]
+}
+
+@ObjectType()
+export default class VerbalNoun {
+  @Field(() => Gerund)
+  gerund: Gerund
+
+  @Field(() => Supine)
+  supine: Supine
 }

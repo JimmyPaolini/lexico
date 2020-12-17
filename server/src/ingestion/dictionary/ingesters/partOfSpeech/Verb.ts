@@ -1,7 +1,9 @@
 import cheerio from "cheerio"
 import { Forms } from "src/entity/forms/Forms"
+import { getConnection } from "typeorm"
+import Word from "../../../../entity/Word"
 import Ingester from "../../Ingester"
-import { parseFormTable, sortIdentifiers } from "../forms"
+import { insertForm, parseFormTable, sortIdentifiers } from "../forms"
 
 export default class Verb extends Ingester {
   firstPrincipalPartName = "present active"
@@ -21,9 +23,10 @@ export default class Verb extends Ingester {
     return inflection
   }
 
-  ingestForms() {
+  async ingestForms(): Promise<Forms> {
     const $ = this.$
     const elt = this.elt
+    const word = this.word
     const table = parseFormTable($, elt)
     if (!table) throw new Error(`no forms`)
 
@@ -116,8 +119,12 @@ export default class Verb extends Ingester {
       },
       [],
     )
+    const Words = getConnection().getRepository(Word)
     for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
       sortIdentifiers(inflection, forms)
+      for (const wordString of inflection.word) {
+        await insertForm(wordString, word, Words)
+      }
     }
     return forms as Forms
   }

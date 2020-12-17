@@ -1,20 +1,46 @@
-type AdjectiveForms = {
-  nominative: AdjectiveSgPl
-  genitive: AdjectiveSgPl
-  dative: AdjectiveSgPl
-  accusative: AdjectiveSgPl
-  ablative: AdjectiveSgPl
-  vocative: AdjectiveSgPl
-  locative: AdjectiveSgPl
+import { Field, ObjectType } from "type-graphql"
+
+@ObjectType()
+export class MascFemNeu {
+  @Field(() => [String])
+  masculine: string[]
+
+  @Field(() => [String])
+  feminine: string[]
+
+  @Field(() => [String])
+  neuter: string[]
 }
 
-type AdjectiveSgPl = {
+@ObjectType()
+export class AdjectiveSgPl {
+  @Field(() => MascFemNeu)
   singular: MascFemNeu
+
+  @Field(() => MascFemNeu)
   plural: MascFemNeu
 }
 
-type MascFemNeu = {
-  masculine: string[]
-  feminine: string[]
-  neuter: string[]
+@ObjectType()
+export default class AdjectiveForms {
+  @Field(() => AdjectiveSgPl)
+  nominative: AdjectiveSgPl
+
+  @Field(() => AdjectiveSgPl)
+  genitive: AdjectiveSgPl
+
+  @Field(() => AdjectiveSgPl)
+  dative: AdjectiveSgPl
+
+  @Field(() => AdjectiveSgPl)
+  accusative: AdjectiveSgPl
+
+  @Field(() => AdjectiveSgPl)
+  ablative: AdjectiveSgPl
+
+  @Field(() => AdjectiveSgPl)
+  vocative: AdjectiveSgPl
+
+  @Field(() => AdjectiveSgPl)
+  locative: AdjectiveSgPl
 }

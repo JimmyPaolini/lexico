@@ -13,32 +13,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var Word_1;
 Object.defineProperty(exports, "__esModule", { value: true });
+const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
+const Forms_1 = __importDefault(require("./forms/Forms"));
+const PrincipalPart_1 = __importDefault(require("./PrincipalPart"));
 const Pronunciation_1 = require("./Pronunciation");
 const Record_1 = __importDefault(require("./Record"));
 const Translation_1 = __importDefault(require("./Translation"));
 let Word = Word_1 = class Word extends Record_1.default {
 };
 __decorate([
-    typeorm_1.Column({ unique: true }),
+    typeorm_1.Column(),
+    type_graphql_1.Field(),
     __metadata("design:type", String)
 ], Word.prototype, "word", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => Word_1, (word) => word.roots),
+    typeorm_1.ManyToMany(() => Word_1, (word) => word.roots, {
+        cascade: ["insert", "update", "recover", "soft-remove"],
+    }),
     typeorm_1.JoinTable(),
-    __metadata("design:type", Object)
+    type_graphql_1.Field(() => Word_1),
+    __metadata("design:type", Array)
 ], Word.prototype, "roots", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: true }),
+    typeorm_1.Column("varchar", { length: 16, nullable: true }),
+    type_graphql_1.Field(() => String),
     __metadata("design:type", String)
 ], Word.prototype, "partOfSpeech", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: true }),
-    __metadata("design:type", String)
+    typeorm_1.Column("varchar", { length: 1028, nullable: true }),
+    type_graphql_1.Field(() => String),
+    __metadata("design:type", Object)
 ], Word.prototype, "inflection", void 0);
 __decorate([
     typeorm_1.Column("json", { nullable: true }),
-    __metadata("design:type", Array)
+    type_graphql_1.Field(() => [PrincipalPart_1.default]),
+    __metadata("design:type", Object)
 ], Word.prototype, "principalParts", void 0);
 __decorate([
     typeorm_1.OneToMany(() => Translation_1.default, (translation) => translation.word, {
@@ -46,32 +56,39 @@ __decorate([
         eager: true,
         cascade: true,
     }),
-    __metadata("design:type", Array)
+    type_graphql_1.Field(() => [Translation_1.default]),
+    __metadata("design:type", Object)
 ], Word.prototype, "translations", void 0);
 __decorate([
     typeorm_1.Column("json", { nullable: true }),
+    type_graphql_1.Field(() => Forms_1.default, { nullable: true }),
     __metadata("design:type", Object)
 ], Word.prototype, "forms", void 0);
 __decorate([
     typeorm_1.Column("json", { nullable: true }),
-    __metadata("design:type", Pronunciation_1.Pronunciation)
+    type_graphql_1.Field(() => Pronunciation_1.Pronunciation),
+    __metadata("design:type", Object)
 ], Word.prototype, "pronunciation", void 0);
 __decorate([
-    typeorm_1.Column({ nullable: true }),
-    __metadata("design:type", String)
+    typeorm_1.Column("varchar", { length: 1028, nullable: true }),
+    type_graphql_1.Field(() => String),
+    __metadata("design:type", Object)
 ], Word.prototype, "etymology", void 0);
 __decorate([
     typeorm_1.ManyToMany(() => Word_1, (word) => word.synonyms),
     typeorm_1.JoinTable(),
+    type_graphql_1.Field(() => [Word_1]),
     __metadata("design:type", Object)
 ], Word.prototype, "synonyms", void 0);
 __decorate([
     typeorm_1.ManyToMany(() => Word_1, (word) => word.antonyms),
     typeorm_1.JoinTable(),
+    type_graphql_1.Field(() => [Word_1]),
     __metadata("design:type", Object)
 ], Word.prototype, "antonyms", void 0);
 Word = Word_1 = __decorate([
-    typeorm_1.Entity()
+    typeorm_1.Entity(),
+    type_graphql_1.ObjectType({ implements: Record_1.default })
 ], Word);
 exports.default = Word;
 //# sourceMappingURL=Word.js.map

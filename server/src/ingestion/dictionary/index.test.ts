@@ -16,7 +16,11 @@ import ingestHtml from "./ingestHtml"
 
 // const adjectives = ["aeternus", "sapiens"]
 
-const word = "aeternus"
-ingestHtml(
-  require(path.join(process.cwd(), `server/data/html/${word}.json`)),
-).then(() => console.log("done"))
+export default async function main(word = "amo") {
+  const obj = require(path.join(
+    process.cwd(),
+    `data/wiktionary/lemma/${word}.json`,
+  ))
+  await ingestHtml(obj)
+  console.log("done")
+}

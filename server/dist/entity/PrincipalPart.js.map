@@ -1,1 +1,1 @@
-{"version":3,"file":"PrincipalPart.js","sourceRoot":"","sources":["../../src/entity/PrincipalPart.ts"],"names":[],"mappings":";;AAAA,MAAqB,aAAa;CAGjC;AAHD,gCAGC"}
+{"version":3,"file":"PrincipalPart.js","sourceRoot":"","sources":["../../src/entity/PrincipalPart.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA,+CAAgD;AAGhD,IAAqB,aAAa,GAAlC,MAAqB,aAAa;CAMjC,CAAA;AAJC;IADC,oBAAK,EAAE;;2CACI;AAGZ;IADC,oBAAK,EAAE;;2CACI;AALO,aAAa;IADjC,yBAAU,EAAE;GACQ,aAAa,CAMjC;kBANoB,aAAa"}

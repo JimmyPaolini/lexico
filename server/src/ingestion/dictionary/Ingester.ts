@@ -12,10 +12,12 @@ import parseTranslations from "./ingesters/translations"
 export default abstract class Ingester {
   $: cheerio.Root
   elt: any
+  word: Word
 
-  constructor($: cheerio.Root, elt: any) {
+  constructor($: cheerio.Root, elt: any, word: Word) {
     this.$ = $
     this.elt = elt
+    this.word = word
   }
 
   static getPartOfSpeech($: cheerio.Root, elt: any): PartOfSpeech {
@@ -43,11 +45,11 @@ export default abstract class Ingester {
   }
 
   ingestTranslations(): Translation[] {
-    return parseTranslations(this.$, this.elt)
+    return parseTranslations(this.$, this.elt, this.word)
   }
 
-  ingestForms(): Forms {
-    return parseForms(this.$, this.elt)
+  async ingestForms(): Promise<Forms> {
+    return await parseForms(this.$, this.elt, this.word)
   }
 
   macronizedWord: string

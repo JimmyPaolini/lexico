@@ -1,49 +1,64 @@
+import { Field, ObjectType } from "type-graphql"
 import { Column, Entity, JoinTable, ManyToMany, OneToMany } from "typeorm"
-import { Forms } from "./forms/Forms"
+import FormsUnion, { Forms } from "./forms/Forms"
 import PrincipalPart from "./PrincipalPart"
 import { Pronunciation } from "./Pronunciation"
 import Record from "./Record"
 import Translation from "./Translation"
 
 @Entity()
+@ObjectType({ implements: Record })
 export default class Word extends Record {
-  @Column({ unique: true })
+  @Column()
+  @Field()
   word: string
 
-  @ManyToMany(() => Word, (word) => word.roots)
+  @ManyToMany(() => Word, (word) => word.roots, {
+    cascade: ["insert", "update", "recover", "soft-remove"],
+  })
   @JoinTable()
-  roots: Word[] | undefined
+  @Field(() => Word)
+  roots: Word[]
 
-  @Column({ nullable: true })
+  @Column("varchar", { length: 16, nullable: true })
+  @Field(() => String)
   partOfSpeech?: PartOfSpeech
 
-  @Column({ nullable: true })
-  inflection?: Inflection
+  @Column("varchar", { length: 1028, nullable: true })
+  @Field(() => String)
+  inflection?: Inflection | null
 
   @Column("json", { nullable: true })
-  principalParts?: PrincipalPart[]
+  @Field(() => [PrincipalPart])
+  principalParts?: PrincipalPart[] | null
 
   @OneToMany(() => Translation, (translation) => translation.word, {
     nullable: true,
     eager: true,
     cascade: true,
   })
-  translations?: Translation[]
+  @Field(() => [Translation])
+  translations?: Translation[] | null
 
   @Column("json", { nullable: true })
+  @Field(() => FormsUnion, { nullable: true })
   forms?: Forms | null
 
   @Column("json", { nullable: true })
-  pronunciation?: Pronunciation
+  @Field(() => Pronunciation)
+  pronunciation?: Pronunciation | null
 
-  @Column({ nullable: true })
-  etymology?: string
+  @Column("varchar", { length: 1028, nullable: true })
+  @Field(() => String)
+  etymology?: string | null
 
   @ManyToMany(() => Word, (word) => word.synonyms)
   @JoinTable()
+  @Field(() => [Word])
   synonyms?: Word[] | undefined
 
   @ManyToMany(() => Word, (word) => word.antonyms)
   @JoinTable()
+  @Field(() => [Word])
   antonyms?: Word[] | undefined
 }

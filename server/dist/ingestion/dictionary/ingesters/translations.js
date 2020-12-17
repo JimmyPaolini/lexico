@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const string_1 = require("../../../utils/string");
-function parseTranslations($, elt) {
+function parseTranslations($, elt, word) {
     var _a;
     const translationsHeader = $(elt).nextAll("ol").first();
     if (translationsHeader.length <= 0)
@@ -19,6 +19,7 @@ function parseTranslations($, elt) {
         translation = translation.trim().replace(/\.$/, "");
         translations.push({
             text: translation.charAt(0).toUpperCase() + translation.slice(1),
+            word,
         });
         if ($(li).find("span.form-of-definition-link").length > 0)
             translations.push({
@@ -29,6 +30,7 @@ function parseTranslations($, elt) {
                         .get()
                         .map((ref) => `{*${string_1.normalize($(ref).text())}*}`)
                         .join(" "),
+                word,
             });
     }
     translations = translations.filter((translation) => !!translation);

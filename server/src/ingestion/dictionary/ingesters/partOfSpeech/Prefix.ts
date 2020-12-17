@@ -5,7 +5,7 @@ export default class Prefix extends Adjective {
     return ""
   }
 
-  ingestForms() {
+  async ingestForms() {
     // const derivedTerms = $(elt).nextAll('.derivedterms').first()
     //     .find('.CategoryTreeSection .CategoryTreeChildren')
     // if (!derivedTerms.length) throw new Error(`no forms`)

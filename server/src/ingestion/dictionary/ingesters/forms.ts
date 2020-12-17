@@ -1,14 +1,20 @@
 import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
+import { getConnection, Repository } from "typeorm"
 import { Forms } from "../../../entity/forms/Forms"
+import Word from "../../../entity/Word"
+import { normalize } from "../../../utils/string"
 
-export default function parseForms($: cheerio.Root, elt: any): Forms {
+export default async function parseForms(
+  $: cheerio.Root,
+  elt: any,
+  word: Word,
+): Promise<Forms> {
   const table = parseFormTable($, elt)
   if (!table) throw new Error(`no forms`)
 
   function parseWords(cell: string) {
-    cell = cell.trim().replace(/[\d*]/g, "").toLowerCase()
-    return cell.includes(", ") ? cell.split(", ") : [cell]
+    return cell.trim().replace(/[\d*]/g, "").toLowerCase().split(", ")
   }
 
   function findIdentifiers(i: number, j: number, table: any) {
@@ -55,8 +61,12 @@ export default function parseForms($: cheerio.Root, elt: any): Forms {
     },
     [],
   )
+  const Words = getConnection().getRepository(Word)
   for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
     sortIdentifiers(inflection, forms)
+    for (const wordString of inflection.word) {
+      await insertForm(wordString, word, Words)
+    }
   }
   return forms as Forms
 }
@@ -89,4 +99,24 @@ export function sortIdentifiers(inflection: any, obj: any) {
     obj[identifier] = sortIdentifiers(inflection, obj[identifier])
     return obj
   }
+}
+
+export async function insertForm(
+  wordString: string,
+  word: Word,
+  Words: Repository<Word>,
+) {
+  if (normalize(wordString) === word.word) return
+  let wordForm = await Words.findOne({
+    word: normalize(wordString),
+    partOfSpeech: word.partOfSpeech,
+  })
+  if (!wordForm)
+    wordForm = Words.create({
+      word: normalize(wordString),
+      partOfSpeech: word.partOfSpeech,
+    })
+  if (!wordForm.roots) wordForm.roots = []
+  wordForm.roots = [...wordForm.roots, word]
+  await Words.save(wordForm)
 }

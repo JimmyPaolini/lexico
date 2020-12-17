@@ -7,7 +7,7 @@ export default class Conjunction extends Ingester {
     return "uninflected"
   }
 
-  ingestForms() {
+  async ingestForms() {
     return null
   }
 }

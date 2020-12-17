@@ -9,23 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 let Record = class Record {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
+    type_graphql_1.Field(() => type_graphql_1.ID),
     __metadata("design:type", Number)
 ], Record.prototype, "id", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),
+    type_graphql_1.Field(),
     __metadata("design:type", Date)
 ], Record.prototype, "createdAt", void 0);
 __decorate([
     typeorm_1.UpdateDateColumn(),
+    type_graphql_1.Field(),
     __metadata("design:type", Date)
 ], Record.prototype, "updatedAt", void 0);
 Record = __decorate([
-    typeorm_1.Entity()
+    typeorm_1.Entity(),
+    type_graphql_1.InterfaceType()
 ], Record);
 exports.default = Record;
 //# sourceMappingURL=Record.js.map

@@ -9,7 +9,7 @@ export default class Preposition extends Ingester {
     return inflection
   }
 
-  ingestForms() {
+  async ingestForms() {
     return null
   }
 }

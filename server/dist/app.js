@@ -12,31 +12,45 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const apollo_server_express_1 = require("apollo-server-express");
 const express_1 = __importDefault(require("express"));
 require("reflect-metadata");
 const typeorm_1 = require("typeorm");
-const Translation_1 = __importDefault(require("./entity/Translation"));
-const Word_1 = __importDefault(require("./entity/Word"));
-main();
+const apolloServer_config_1 = __importDefault(require("./apolloServer.config"));
+const index_1 = __importDefault(require("./ingestion/dictionary/index"));
+const index_test_1 = __importDefault(require("./ingestion/dictionary/index.test"));
+const typeorm_config_1 = __importDefault(require("./typeorm.config"));
+const clearDatabase_1 = __importDefault(require("./utils/clearDatabase"));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const connection = yield typeorm_1.createConnection({
-            type: "mysql",
-            host: "localhost",
-            port: 3306,
-            username: "admin",
-            password: "admin",
-            database: "lexico",
-            entities: [Word_1.default, Translation_1.default],
-            migrations: ["src/migration/**/*.ts"],
-            logging: true,
-            synchronize: true,
-        });
+        const orm = yield typeorm_1.createConnection(typeorm_config_1.default);
         const app = express_1.default();
-        app.listen(4020, () => {
-            console.log("app.ts listening on localhost:4020");
-        });
-        connection.createEntityManager();
+        app.listen(2048);
+        app.use(express_1.default.json());
+        const api = new apollo_server_express_1.ApolloServer(yield apolloServer_config_1.default({ orm }));
+        api.applyMiddleware({ app });
+        app.get("/clear-database", clearDatabase_1.default);
+        app.get("/dictionary-test", (_, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield index_test_1.default();
+                res.status(200).send();
+            }
+            catch (e) {
+                res.status(500).send(e);
+            }
+        }));
+        app.post("/ingest", (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                console.log(req.body);
+                yield index_test_1.default(req.body.latin);
+                res.status(200).send();
+            }
+            catch (e) {
+                res.status(500).send(e);
+            }
+        }));
+        app.get("/ingest-all", () => __awaiter(this, void 0, void 0, function* () { return yield index_1.default(); }));
     });
 }
+main();
 //# sourceMappingURL=app.js.map

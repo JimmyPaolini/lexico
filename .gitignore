@@ -1,4 +1,16 @@
-lib-cov
+.DS_Store
+node_modules
+yarn.lock
+dist
+
+data/*
+
+.vscode
+.idea
+
+logs
+.env
+
 *.seed
 *.log
 *.csv
@@ -8,30 +20,6 @@ lib-cov
 *.gz
 *.swp
 
-pids
-logs
-results
-tmp
-
-# Coverage reports
-coverage
-
-# API keys and secrets
-.env
-
-# Dependency directory
-node_modules
-bower_components
-data
-
-yarn.lock
-
-# Editors
-.idea
-.vscode
-*.iml
-
-.DS_Store
 Thumbs.db
-
-/dist
+bower_components
+*.iml

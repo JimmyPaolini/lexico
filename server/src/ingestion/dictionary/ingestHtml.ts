@@ -1,6 +1,8 @@
 import cheerio from "cheerio"
+import { Logger } from "tslog"
+import { getConnection } from "typeorm"
 import Word from "../../entity/Word"
-import { getCircularReplacer } from "../../utils/circularReplacer"
+import { normalize } from "../../utils/string"
 import Ingester from "./Ingester"
 import Adjective from "./ingesters/partOfSpeech/Adjective"
 import Adverb from "./ingesters/partOfSpeech/Adverb"
@@ -11,16 +13,29 @@ import Preposition from "./ingesters/partOfSpeech/Preposition"
 import Pronoun from "./ingesters/partOfSpeech/Pronoun"
 import Verb from "./ingesters/partOfSpeech/Verb"
 
-export default async function ingestHtml(word: { word: string; html: string }) {
-  console.log("ingesting", word)
-  const $ = cheerio.load(word.html)
-  for (const elt of $("p:has(strong.Latn.headword)").get()) {
-    ingestWord($, elt)
+const log = new Logger()
+
+export default async function ingestHtml(data: { word: string; html: string }) {
+  log.info("ingesting", data)
+  const Words = getConnection().getRepository(Word)
+  const $ = cheerio.load(data.html)
+  try {
+    for (const elt of $("p:has(strong.Latn.headword)").get()) {
+      const word = await ingestWord($, elt, data.word)
+      await Words.save(word)
+    }
+  } catch (e) {
+    log.error(e)
   }
 }
 
-function ingestWord($: cheerio.Root, elt: any) {
+async function ingestWord(
+  $: cheerio.Root,
+  elt: any,
+  wordString: string,
+): Promise<Word> {
   const word = new Word()
+  word.word = normalize(wordString)
   word.partOfSpeech = Ingester.getPartOfSpeech($, elt)
 
   const ingestersMap: { [key: string]: any } = {
@@ -42,15 +57,15 @@ function ingestWord($: cheerio.Root, elt: any) {
     "proverb": Conjunction,
     "idiom": Conjunction,
   }
-  const ingester: Ingester = new ingestersMap[word.partOfSpeech]($, elt)
+  const ingester: Ingester = new ingestersMap[word.partOfSpeech]($, elt, word)
 
   word.inflection = ingester.ingestInflection()
   word.principalParts = ingester.ingestPrincipalParts()
   word.translations = ingester.ingestTranslations()
-  word.forms = ingester.ingestForms()
+  word.forms = await ingester.ingestForms()
   word.pronunciation = ingester.ingestPronunciation()
   word.etymology = ingester.ingestEtymology()
   word.roots = [word]
 
-  console.log(JSON.stringify(word, getCircularReplacer(), 2))
+  return word
 }

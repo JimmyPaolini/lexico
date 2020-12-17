@@ -1,4 +1,7 @@
+import { getConnection } from "typeorm"
+import Word from "../../../../entity/Word"
 import Ingester from "../../Ingester"
+import { insertForm } from "../forms"
 
 export default class Adverb extends Ingester {
   firstPrincipalPartName = "positive"
@@ -9,7 +12,7 @@ export default class Adverb extends Ingester {
     return inflection
   }
 
-  ingestForms() {
+  async ingestForms() {
     let disorganizedForms = []
     for (const pp of this.principalParts.slice(1)) {
       for (const word of pp.text.split(" or ")) {
@@ -19,6 +22,13 @@ export default class Adverb extends Ingester {
         })
       }
     }
+    const Words = getConnection().getRepository(Word)
+    for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
+      for (const wordString of inflection.word) {
+        await insertForm(wordString, this.word, Words)
+      }
+    }
+
     return null
   }
 }
