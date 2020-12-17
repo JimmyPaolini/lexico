@@ -18,7 +18,7 @@ require("reflect-metadata");
 const typeorm_1 = require("typeorm");
 const apolloServer_config_1 = __importDefault(require("./apolloServer.config"));
 const index_1 = __importDefault(require("./ingestion/dictionary/index"));
-const index_test_1 = __importDefault(require("./ingestion/dictionary/index.test"));
+const ingestWord_1 = __importDefault(require("./ingestion/dictionary/ingestWord"));
 const typeorm_config_1 = __importDefault(require("./typeorm.config"));
 const clearDatabase_1 = __importDefault(require("./utils/clearDatabase"));
 function main() {
@@ -27,13 +27,10 @@ function main() {
         const app = express_1.default();
         app.listen(2048);
         app.use(express_1.default.json());
-        const api = new apollo_server_express_1.ApolloServer(yield apolloServer_config_1.default());
-        api.applyMiddleware({ app });
         app.get("/clear-database", clearDatabase_1.default);
         app.post("/ingest-word", (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log(req.body);
-                yield index_test_1.default(req.body.latin);
+                yield ingestWord_1.default(req.body.latin);
                 res.status(200).send();
             }
             catch (e) {
@@ -50,6 +47,8 @@ function main() {
                 res.status(500).send(e);
             }
         }));
+        const api = new apollo_server_express_1.ApolloServer(yield apolloServer_config_1.default());
+        api.applyMiddleware({ app });
     });
 }
 main();

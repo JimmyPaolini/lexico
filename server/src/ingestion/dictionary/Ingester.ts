@@ -3,11 +3,11 @@ import PrincipalPart from "../../entity/PrincipalPart"
 import { Pronunciation } from "../../entity/Pronunciation"
 import Translation from "../../entity/Translation"
 import Word from "../../entity/Word"
-import parseEtymology from "./ingesters/etymology"
-import parseForms from "./ingesters/forms"
-import parsePrincipalParts from "./ingesters/principalParts"
-import parsePronunciation from "./ingesters/pronunciation"
-import parseTranslations from "./ingesters/translations"
+import parseEtymology from "./ingester/etymology"
+import parseForms from "./ingester/form"
+import parsePrincipalParts from "./ingester/principalPart"
+import parsePronunciation from "./ingester/pronunciation"
+import parseTranslations from "./ingester/translation"
 
 export default abstract class Ingester {
   $: cheerio.Root

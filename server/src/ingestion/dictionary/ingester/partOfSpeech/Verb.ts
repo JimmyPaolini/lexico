@@ -3,7 +3,7 @@ import { Forms } from "src/entity/forms/Forms"
 import { getConnection } from "typeorm"
 import Word from "../../../../entity/Word"
 import Ingester from "../../Ingester"
-import { insertForm, parseFormTable, sortIdentifiers } from "../forms"
+import { insertForm, parseFormTable, sortIdentifiers } from "../form"
 
 export default class Verb extends Ingester {
   firstPrincipalPartName = "present active"

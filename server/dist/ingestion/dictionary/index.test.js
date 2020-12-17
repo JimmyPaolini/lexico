@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
-const ingestHtml_1 = __importDefault(require("./ingestHtml"));
+const ingestWord_1 = __importDefault(require("./ingestWord"));
 function main(word = "amo") {
     return __awaiter(this, void 0, void 0, function* () {
         const obj = require(path_1.default.join(process.cwd(), `data/wiktionary/lemma/${word}.json`));
-        yield ingestHtml_1.default(obj);
+        yield ingestWord_1.default(obj);
         console.log("done");
     });
 }

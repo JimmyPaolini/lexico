@@ -2,25 +2,24 @@ import fs from "fs"
 import path from "path"
 import { Logger } from "tslog"
 import { getFirstLetter } from "../../utils/getFirstLetter"
-import ingestHtml from "./ingestHtml"
+import ingestWord from "./ingestWord"
 
 const log = new Logger()
-const pj = (key: string) => path.join(process.cwd(), key)
 
 export default async function main(firstLetter = "a", lastLetter = "z") {
   log.info(`READING HTML FILES`)
   const files = getHtmlFiles(firstLetter, lastLetter)
   log.info(`STARTING INGESTION`)
   for (let fileName of files) {
-    const data = require(pj(`./data/wiktionary/lemma/${fileName}`))
-    await ingestHtml(data)
+    log.info("fileName", fileName)
+    await ingestWord(fileName.replace(/\.json$/gi, ""))
   }
   log.info(`FINISHED INGESTION`)
 }
 
 function getHtmlFiles(firstLetter: string, lastLetter: string): string[] {
   return fs
-    .readdirSync(pj(`./data/wiktionary/lemma`))
+    .readdirSync(path.join(process.cwd(), `./data/wiktionary/lemma`))
     .filter(
       (fileName) =>
         getFirstLetter(fileName) >= firstLetter &&

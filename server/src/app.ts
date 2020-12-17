@@ -4,7 +4,7 @@ import "reflect-metadata"
 import { createConnection } from "typeorm"
 import apolloServerConfig from "./apolloServer.config"
 import ingestAll from "./ingestion/dictionary/index"
-import dictoinaryTest from "./ingestion/dictionary/index.test"
+import ingestWord from "./ingestion/dictionary/ingestWord"
 import typeormConfig from "./typeorm.config"
 import clearDatabase from "./utils/clearDatabase"
 
@@ -15,15 +15,11 @@ async function main() {
   app.listen(2048)
   app.use(express.json())
 
-  const api = new ApolloServer(await apolloServerConfig())
-  api.applyMiddleware({ app })
-
   app.get("/clear-database", clearDatabase)
 
   app.post("/ingest-word", async (req, res) => {
     try {
-      console.log(req.body)
-      await dictoinaryTest(req.body.latin)
+      await ingestWord(req.body.latin)
       res.status(200).send()
     } catch (e) {
       res.status(500).send(e)
@@ -39,5 +35,8 @@ async function main() {
       res.status(500).send(e)
     }
   })
+
+  const api = new ApolloServer(await apolloServerConfig())
+  api.applyMiddleware({ app })
 }
 main()

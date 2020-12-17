@@ -22,7 +22,7 @@ export default class Word extends Record {
 
   @Column("varchar", { length: 16, nullable: true })
   @Field(() => String)
-  partOfSpeech?: PartOfSpeech
+  partOfSpeech: PartOfSpeech
 
   @Column("varchar", { length: 1028, nullable: true })
   @Field(() => String)

@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm"
 import Word from "../../../../entity/Word"
 import Ingester from "../../Ingester"
-import { insertForm } from "../forms"
+import { insertForm } from "../form"
 
 export default class Adverb extends Ingester {
   firstPrincipalPartName = "positive"

@@ -16,17 +16,16 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const tslog_1 = require("tslog");
 const getFirstLetter_1 = require("../../utils/getFirstLetter");
-const ingestHtml_1 = __importDefault(require("./ingestHtml"));
+const ingestWord_1 = __importDefault(require("./ingestWord"));
 const log = new tslog_1.Logger();
-const pj = (key) => path_1.default.join(process.cwd(), key);
 function main(firstLetter = "a", lastLetter = "z") {
     return __awaiter(this, void 0, void 0, function* () {
         log.info(`READING HTML FILES`);
         const files = getHtmlFiles(firstLetter, lastLetter);
         log.info(`STARTING INGESTION`);
         for (let fileName of files) {
-            const data = require(pj(`./data/wiktionary/lemma/${fileName}`));
-            yield ingestHtml_1.default(data);
+            log.info("fileName", fileName);
+            yield ingestWord_1.default(fileName.replace(/\.json$/gi, ""));
         }
         log.info(`FINISHED INGESTION`);
     });
@@ -34,7 +33,7 @@ function main(firstLetter = "a", lastLetter = "z") {
 exports.default = main;
 function getHtmlFiles(firstLetter, lastLetter) {
     return fs_1.default
-        .readdirSync(pj(`./data/wiktionary/lemma`))
+        .readdirSync(path_1.default.join(process.cwd(), `./data/wiktionary/lemma`))
         .filter((fileName) => getFirstLetter_1.getFirstLetter(fileName) >= firstLetter &&
         getFirstLetter_1.getFirstLetter(fileName) <= lastLetter &&
         !fileName.slice(0, -5).match(/\s|\.|-/g))

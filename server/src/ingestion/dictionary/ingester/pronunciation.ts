@@ -1,10 +1,10 @@
 import { Pronunciation } from "../../../entity/Pronunciation"
 import Ingester from "../Ingester"
-import getClassicalPhonemes from "../pronunciation/classical"
+import getClassicalPhonemes from "./pronunciation/classical"
 import {
   getEcclesiasticalPronunciations,
   parsePhonics,
-} from "../pronunciation/pronunciation"
+} from "./pronunciation/pronunciation"
 
 export default function parsePronunciation(
   ingester: Ingester,
