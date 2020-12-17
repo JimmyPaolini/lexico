@@ -11,8 +11,17 @@ export default class WordResolver {
 
   @Query(() => [Word])
   async latin(@Arg("search") search: string) {
-    const words = await this.wordRepository.find({ word: search })
-    log.info(words)
+    const words = (
+      await this.wordRepository.find({
+        where: { word: search },
+        relations: ["roots"],
+      })
+    )
+      .reduce((words: Word[], word) => {
+        if (!word.principalParts) return [...words, ...word.roots]
+        else return [...words, word]
+      }, [])
+      .forEach((word) => log.info(word.word))
     return words
   }
 }

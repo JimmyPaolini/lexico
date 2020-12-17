@@ -43,12 +43,12 @@ __decorate([
 __decorate([
     typeorm_1.Column("varchar", { length: 1028, nullable: true }),
     type_graphql_1.Field(() => String),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], Word.prototype, "inflection", void 0);
 __decorate([
     typeorm_1.Column("json", { nullable: true }),
     type_graphql_1.Field(() => [PrincipalPart_1.default]),
-    __metadata("design:type", Object)
+    __metadata("design:type", Array)
 ], Word.prototype, "principalParts", void 0);
 __decorate([
     typeorm_1.OneToMany(() => Translation_1.default, (translation) => translation.word, {
@@ -57,7 +57,7 @@ __decorate([
         cascade: true,
     }),
     type_graphql_1.Field(() => [Translation_1.default]),
-    __metadata("design:type", Object)
+    __metadata("design:type", Array)
 ], Word.prototype, "translations", void 0);
 __decorate([
     typeorm_1.Column("json", { nullable: true }),
@@ -67,24 +67,24 @@ __decorate([
 __decorate([
     typeorm_1.Column("json", { nullable: true }),
     type_graphql_1.Field(() => Pronunciation_1.Pronunciation),
-    __metadata("design:type", Object)
+    __metadata("design:type", Pronunciation_1.Pronunciation)
 ], Word.prototype, "pronunciation", void 0);
 __decorate([
     typeorm_1.Column("varchar", { length: 1028, nullable: true }),
     type_graphql_1.Field(() => String),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], Word.prototype, "etymology", void 0);
 __decorate([
     typeorm_1.ManyToMany(() => Word_1, (word) => word.synonyms),
     typeorm_1.JoinTable(),
     type_graphql_1.Field(() => [Word_1]),
-    __metadata("design:type", Object)
+    __metadata("design:type", Array)
 ], Word.prototype, "synonyms", void 0);
 __decorate([
     typeorm_1.ManyToMany(() => Word_1, (word) => word.antonyms),
     typeorm_1.JoinTable(),
     type_graphql_1.Field(() => [Word_1]),
-    __metadata("design:type", Object)
+    __metadata("design:type", Array)
 ], Word.prototype, "antonyms", void 0);
 Word = Word_1 = __decorate([
     typeorm_1.Entity(),

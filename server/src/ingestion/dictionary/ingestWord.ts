@@ -17,13 +17,14 @@ import Verb from "./ingester/partOfSpeech/Verb"
 const log = new Logger()
 
 export default async function ingestWord(wordString: string) {
-  log.info("ingesting", wordString)
+  log.info("ingesting root", wordString)
   const data = require(path.join(
     process.cwd(),
     `./data/wiktionary/lemma/${wordString}.json`,
   ))
   const Words = getConnection().getRepository(Word)
   const $ = cheerio.load(data.html)
+
   try {
     for (const elt of $("p:has(strong.Latn.headword)").get()) {
       const word = await ingestEtymology($, elt, data.word, Words)
@@ -44,28 +45,7 @@ async function ingestEtymology(
     word: normalize(wordString),
     partOfSpeech: Ingester.getPartOfSpeech($, elt),
   })
-  // word.word = normalize(wordString)
-  // word.partOfSpeech = Ingester.getPartOfSpeech($, elt)
 
-  const ingestersMap: { [key: string]: any } = {
-    noun: Noun,
-    properNoun: Noun,
-    verb: Verb,
-    adjective: Adjective,
-    participle: Adjective,
-    numeral: Adjective,
-    suffix: Adjective,
-    prefix: Prefix,
-    pronoun: Pronoun,
-    determiner: Pronoun,
-    adverb: Adverb,
-    preposition: Preposition,
-    conjunction: Conjunction,
-    interjection: Conjunction,
-    phrase: Conjunction,
-    proverb: Conjunction,
-    idiom: Conjunction,
-  }
   const ingester: Ingester = new ingestersMap[word.partOfSpeech]($, elt, word)
 
   word.inflection = ingester.ingestInflection()
@@ -77,4 +57,24 @@ async function ingestEtymology(
   word.roots = [word]
 
   return word
+}
+
+const ingestersMap: { [key: string]: any } = {
+  noun: Noun,
+  properNoun: Noun,
+  verb: Verb,
+  adjective: Adjective,
+  participle: Adjective,
+  numeral: Adjective,
+  suffix: Adjective,
+  prefix: Prefix,
+  pronoun: Pronoun,
+  determiner: Pronoun,
+  adverb: Adverb,
+  preposition: Preposition,
+  conjunction: Conjunction,
+  interjection: Conjunction,
+  phrase: Conjunction,
+  proverb: Conjunction,
+  idiom: Conjunction,
 }

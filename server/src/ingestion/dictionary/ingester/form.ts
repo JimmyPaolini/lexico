@@ -109,8 +109,8 @@ export async function insertForm(
   word: Word,
   Words: Repository<Word>,
 ) {
-  if (normalize(wordString) === word.word) return
-  log.info("ingesting", normalize(wordString))
+  if (normalize(wordString).toLowerCase() === word.word.toLowerCase()) return
+  log.info("ingesting form", normalize(wordString))
   let wordForm = await Words.findOne({
     word: normalize(wordString),
     partOfSpeech: word.partOfSpeech,

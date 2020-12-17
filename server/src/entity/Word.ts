@@ -26,11 +26,11 @@ export default class Word extends Record {
 
   @Column("varchar", { length: 1028, nullable: true })
   @Field(() => String)
-  inflection?: Inflection | null
+  inflection?: Inflection
 
   @Column("json", { nullable: true })
   @Field(() => [PrincipalPart])
-  principalParts?: PrincipalPart[] | null
+  principalParts?: PrincipalPart[]
 
   @OneToMany(() => Translation, (translation) => translation.word, {
     nullable: true,
@@ -38,7 +38,7 @@ export default class Word extends Record {
     cascade: true,
   })
   @Field(() => [Translation])
-  translations?: Translation[] | null
+  translations?: Translation[]
 
   @Column("json", { nullable: true })
   @Field(() => FormsUnion, { nullable: true })
@@ -46,19 +46,19 @@ export default class Word extends Record {
 
   @Column("json", { nullable: true })
   @Field(() => Pronunciation)
-  pronunciation?: Pronunciation | null
+  pronunciation?: Pronunciation
 
   @Column("varchar", { length: 1028, nullable: true })
   @Field(() => String)
-  etymology?: string | null
+  etymology?: string
 
   @ManyToMany(() => Word, (word) => word.synonyms)
   @JoinTable()
   @Field(() => [Word])
-  synonyms?: Word[] | undefined
+  synonyms?: Word[]
 
   @ManyToMany(() => Word, (word) => word.antonyms)
   @JoinTable()
   @Field(() => [Word])
-  antonyms?: Word[] | undefined
+  antonyms?: Word[]
 }
