@@ -34,7 +34,7 @@
   },
   "scripts": {
     "watch": "tsc -w",
-    "start": "nodemon dist/app.js",
+    "start": "clear; node dist/app.js",
     "dictionary": "node dist/ingestion/dictionary/index.js",
     "wiktionary": "node dist/ingestion/wiktionary/index.js"
   },

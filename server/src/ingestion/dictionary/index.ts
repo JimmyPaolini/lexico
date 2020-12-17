@@ -1,7 +1,7 @@
 import fs from "fs"
 import path from "path"
 import { Logger } from "tslog"
-import { getFirstLetter } from "../../utils/getFirstLetter"
+import { getFirstLetter } from "../../utils/string"
 import ingestWord from "./ingestWord"
 
 const log = new Logger()

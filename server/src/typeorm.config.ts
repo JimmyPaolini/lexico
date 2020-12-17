@@ -4,6 +4,7 @@ import Translation from "./entity/Translation"
 import Word from "./entity/Word"
 
 export default {
+  name: "default",
   type: "mysql",
   host: "localhost",
   port: 3306,
@@ -11,6 +12,6 @@ export default {
   password: "admin",
   database: "lexico",
   entities: [Word, Translation],
-  logging: ["info"],
+  logging: ["log", "info", "warn", "error"],
   synchronize: true,
 } as Parameters<typeof createConnection>[0]

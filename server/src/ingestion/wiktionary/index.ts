@@ -3,7 +3,7 @@ import fs from "fs"
 import fp from "path"
 import request from "request-promise-native"
 import { Logger } from "tslog"
-import { getFirstLetter } from "../../utils/getFirstLetter"
+import { getFirstLetter } from "../../utils/string"
 const putItemHtml = (entry: any) =>
   fs.writeFileSync(
     fp.join(
