@@ -16,7 +16,7 @@ import Verb from "./ingesters/partOfSpeech/Verb"
 const log = new Logger()
 
 export default async function ingestHtml(data: { word: string; html: string }) {
-  log.info("ingesting", data)
+  log.info("ingesting", data.word)
   const Words = getConnection().getRepository(Word)
   const $ = cheerio.load(data.html)
   try {
@@ -39,23 +39,23 @@ async function ingestWord(
   word.partOfSpeech = Ingester.getPartOfSpeech($, elt)
 
   const ingestersMap: { [key: string]: any } = {
-    "noun": Noun,
-    "proper noun": Noun,
-    "verb": Verb,
-    "adjective": Adjective,
-    "participle": Adjective,
-    "numeral": Adjective,
-    "suffix": Adjective,
-    "prefix": Prefix,
-    "pronoun": Pronoun,
-    "determiner": Pronoun,
-    "adverb": Adverb,
-    "preposition": Preposition,
-    "conjunction": Conjunction,
-    "interjection": Conjunction,
-    "phrase": Conjunction,
-    "proverb": Conjunction,
-    "idiom": Conjunction,
+    noun: Noun,
+    properNoun: Noun,
+    verb: Verb,
+    adjective: Adjective,
+    participle: Adjective,
+    numeral: Adjective,
+    suffix: Adjective,
+    prefix: Prefix,
+    pronoun: Pronoun,
+    determiner: Pronoun,
+    adverb: Adverb,
+    preposition: Preposition,
+    conjunction: Conjunction,
+    interjection: Conjunction,
+    phrase: Conjunction,
+    proverb: Conjunction,
+    idiom: Conjunction,
   }
   const ingester: Ingester = new ingestersMap[word.partOfSpeech]($, elt, word)
 

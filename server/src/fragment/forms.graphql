@@ -1,0 +1,11 @@
+fragment all on Forms {
+  ... on NounForms {
+    ...all
+  }
+  ... on VerbForms {
+    ...all
+  }
+  ... on AdjectiveForms {
+    ...all
+  }
+}

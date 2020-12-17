@@ -23,23 +23,14 @@ const typeorm_config_1 = __importDefault(require("./typeorm.config"));
 const clearDatabase_1 = __importDefault(require("./utils/clearDatabase"));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const orm = yield typeorm_1.createConnection(typeorm_config_1.default);
+        yield typeorm_1.createConnection(typeorm_config_1.default);
         const app = express_1.default();
         app.listen(2048);
         app.use(express_1.default.json());
-        const api = new apollo_server_express_1.ApolloServer(yield apolloServer_config_1.default({ orm }));
+        const api = new apollo_server_express_1.ApolloServer(yield apolloServer_config_1.default());
         api.applyMiddleware({ app });
         app.get("/clear-database", clearDatabase_1.default);
-        app.get("/dictionary-test", (_, res) => __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield index_test_1.default();
-                res.status(200).send();
-            }
-            catch (e) {
-                res.status(500).send(e);
-            }
-        }));
-        app.post("/ingest", (req, res) => __awaiter(this, void 0, void 0, function* () {
+        app.post("/ingest-word", (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 console.log(req.body);
                 yield index_test_1.default(req.body.latin);
@@ -49,7 +40,16 @@ function main() {
                 res.status(500).send(e);
             }
         }));
-        app.get("/ingest-all", () => __awaiter(this, void 0, void 0, function* () { return yield index_1.default(); }));
+        app.post("/ingest-all", (req, res) => __awaiter(this, void 0, void 0, function* () {
+            yield index_1.default();
+            try {
+                yield index_1.default(req.body.firstLetter, req.body.lastLetter);
+                res.status(200).send();
+            }
+            catch (e) {
+                res.status(500).send(e);
+            }
+        }));
     });
 }
 main();

@@ -1,0 +1,28 @@
+fragment all on NounForms {
+  nominative {
+    ...all
+  }
+  genitive {
+    ...all
+  }
+  dative {
+    ...all
+  }
+  accusative {
+    ...all
+  }
+  ablative {
+    ...all
+  }
+  vocative {
+    ...all
+  }
+  locative {
+    ...all
+  }
+}
+
+fragment all on NounSgPl {
+  singular
+  plural
+}

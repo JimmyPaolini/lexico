@@ -29,7 +29,7 @@ const Verb_1 = __importDefault(require("./ingesters/partOfSpeech/Verb"));
 const log = new tslog_1.Logger();
 function ingestHtml(data) {
     return __awaiter(this, void 0, void 0, function* () {
-        log.info("ingesting", data);
+        log.info("ingesting", data.word);
         const Words = typeorm_1.getConnection().getRepository(Word_1.default);
         const $ = cheerio_1.default.load(data.html);
         try {
@@ -50,23 +50,23 @@ function ingestWord($, elt, wordString) {
         word.word = string_1.normalize(wordString);
         word.partOfSpeech = Ingester_1.default.getPartOfSpeech($, elt);
         const ingestersMap = {
-            "noun": Noun_1.default,
-            "proper noun": Noun_1.default,
-            "verb": Verb_1.default,
-            "adjective": Adjective_1.default,
-            "participle": Adjective_1.default,
-            "numeral": Adjective_1.default,
-            "suffix": Adjective_1.default,
-            "prefix": Prefix_1.default,
-            "pronoun": Pronoun_1.default,
-            "determiner": Pronoun_1.default,
-            "adverb": Adverb_1.default,
-            "preposition": Preposition_1.default,
-            "conjunction": Conjunction_1.default,
-            "interjection": Conjunction_1.default,
-            "phrase": Conjunction_1.default,
-            "proverb": Conjunction_1.default,
-            "idiom": Conjunction_1.default,
+            noun: Noun_1.default,
+            properNoun: Noun_1.default,
+            verb: Verb_1.default,
+            adjective: Adjective_1.default,
+            participle: Adjective_1.default,
+            numeral: Adjective_1.default,
+            suffix: Adjective_1.default,
+            prefix: Prefix_1.default,
+            pronoun: Pronoun_1.default,
+            determiner: Pronoun_1.default,
+            adverb: Adverb_1.default,
+            preposition: Preposition_1.default,
+            conjunction: Conjunction_1.default,
+            interjection: Conjunction_1.default,
+            phrase: Conjunction_1.default,
+            proverb: Conjunction_1.default,
+            idiom: Conjunction_1.default,
         };
         const ingester = new ingestersMap[word.partOfSpeech]($, elt, word);
         word.inflection = ingester.ingestInflection();

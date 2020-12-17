@@ -1,0 +1,38 @@
+fragment all on AdjectiveForms {
+  nominative {
+    ...all
+  }
+  genitive {
+    ...all
+  }
+  dative {
+    ...all
+  }
+  accusative {
+    ...all
+  }
+  ablative {
+    ...all
+  }
+  vocative {
+    ...all
+  }
+  locative {
+    ...all
+  }
+}
+
+fragment all on AdjectiveSgPl {
+  singular {
+    ...all
+  }
+  plural {
+    ...all
+  }
+}
+
+fragment all on MascFemNeu {
+  masculine
+  feminine
+  neuter
+}

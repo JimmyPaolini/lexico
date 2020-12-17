@@ -15,9 +15,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.insertForm = exports.sortIdentifiers = exports.parseFormTable = void 0;
 const cheerio_1 = __importDefault(require("cheerio"));
 const cheerio_tableparser_1 = __importDefault(require("cheerio-tableparser"));
+const tslog_1 = require("tslog");
 const typeorm_1 = require("typeorm");
 const Word_1 = __importDefault(require("../../../entity/Word"));
 const string_1 = require("../../../utils/string");
+const log = new tslog_1.Logger();
 function parseForms($, elt, word) {
     return __awaiter(this, void 0, void 0, function* () {
         const table = parseFormTable($, elt);
@@ -114,6 +116,7 @@ function insertForm(wordString, word, Words) {
     return __awaiter(this, void 0, void 0, function* () {
         if (string_1.normalize(wordString) === word.word)
             return;
+        log.info("ingesting", string_1.normalize(wordString));
         let wordForm = yield Words.findOne({
             word: string_1.normalize(wordString),
             partOfSpeech: word.partOfSpeech,

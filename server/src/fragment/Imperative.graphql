@@ -1,0 +1,66 @@
+fragment all on Imperative {
+  active {
+    ...all
+  }
+  plural {
+    ...all
+  }
+}
+
+fragment all on ImperativeActive {
+  present {
+    ...all
+  }
+  future {
+    ...all
+  }
+}
+
+fragment all on ImperativePassive {
+  present {
+    ...all
+  }
+  future {
+    ...all
+  }
+}
+
+fragment all on ImperativePresent {
+  singular {
+    ...all
+  }
+  plural {
+    ...all
+  }
+}
+
+fragment all on ImperativeActiveFuture {
+  singular {
+    ...all
+  }
+  plural {
+    ...all
+  }
+}
+
+fragment all on ImperativePassiveFuture {
+  singular {
+    ...all
+  }
+  plural {
+    ...all
+  }
+}
+
+fragment all on ImperativeSecondThird {
+  second
+  third
+}
+
+fragment all on ImperativeSecond {
+  second
+}
+
+fragment all on ImperativeThird {
+  third
+}

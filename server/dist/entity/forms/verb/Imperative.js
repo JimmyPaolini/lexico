@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ImperativePassive = exports.ImperativePassiveFuture = exports.ImperativeActive = exports.ImperativeActiveFuture = exports.ImperativePresent = exports.ImperativeThird = exports.ImperativeSecond = exports.ImperativeSecondThird = void 0;
+exports.ImperativePassive = exports.ImperativeActive = exports.ImperativePassiveFuture = exports.ImperativeActiveFuture = exports.ImperativePresent = exports.ImperativeThird = exports.ImperativeSecond = exports.ImperativeSecondThird = void 0;
 const type_graphql_1 = require("type-graphql");
 let ImperativeSecondThird = class ImperativeSecondThird {
 };
@@ -73,20 +73,6 @@ ImperativeActiveFuture = __decorate([
     type_graphql_1.ObjectType()
 ], ImperativeActiveFuture);
 exports.ImperativeActiveFuture = ImperativeActiveFuture;
-let ImperativeActive = class ImperativeActive {
-};
-__decorate([
-    type_graphql_1.Field(() => ImperativePresent),
-    __metadata("design:type", ImperativePresent)
-], ImperativeActive.prototype, "present", void 0);
-__decorate([
-    type_graphql_1.Field(() => ImperativeActiveFuture),
-    __metadata("design:type", ImperativeActiveFuture)
-], ImperativeActive.prototype, "future", void 0);
-ImperativeActive = __decorate([
-    type_graphql_1.ObjectType()
-], ImperativeActive);
-exports.ImperativeActive = ImperativeActive;
 let ImperativePassiveFuture = class ImperativePassiveFuture {
 };
 __decorate([
@@ -101,6 +87,20 @@ ImperativePassiveFuture = __decorate([
     type_graphql_1.ObjectType()
 ], ImperativePassiveFuture);
 exports.ImperativePassiveFuture = ImperativePassiveFuture;
+let ImperativeActive = class ImperativeActive {
+};
+__decorate([
+    type_graphql_1.Field(() => ImperativePresent),
+    __metadata("design:type", ImperativePresent)
+], ImperativeActive.prototype, "present", void 0);
+__decorate([
+    type_graphql_1.Field(() => ImperativeActiveFuture),
+    __metadata("design:type", ImperativeActiveFuture)
+], ImperativeActive.prototype, "future", void 0);
+ImperativeActive = __decorate([
+    type_graphql_1.ObjectType()
+], ImperativeActive);
+exports.ImperativeActive = ImperativeActive;
 let ImperativePassive = class ImperativePassive {
 };
 __decorate([

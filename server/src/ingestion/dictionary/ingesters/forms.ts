@@ -1,9 +1,12 @@
 import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
+import { Logger } from "tslog"
 import { getConnection, Repository } from "typeorm"
 import { Forms } from "../../../entity/forms/Forms"
 import Word from "../../../entity/Word"
 import { normalize } from "../../../utils/string"
+
+const log = new Logger()
 
 export default async function parseForms(
   $: cheerio.Root,
@@ -107,6 +110,7 @@ export async function insertForm(
   Words: Repository<Word>,
 ) {
   if (normalize(wordString) === word.word) return
+  log.info("ingesting", normalize(wordString))
   let wordForm = await Words.findOne({
     word: normalize(wordString),
     partOfSpeech: word.partOfSpeech,

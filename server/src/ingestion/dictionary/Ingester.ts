@@ -27,7 +27,8 @@ export default abstract class Ingester {
       .text()
       .toLowerCase()
       .replace(/(\[edit])|\d+/g, "")
-      .trim() as PartOfSpeech
+      .trim()
+      .replace("proper noun", "properNoun") as PartOfSpeech
   }
 
   abstract ingestInflection(): Inflection
@@ -48,7 +49,7 @@ export default abstract class Ingester {
     return parseTranslations(this.$, this.elt, this.word)
   }
 
-  async ingestForms(): Promise<Forms> {
+  async ingestForms(): Promise<Forms | null> {
     return await parseForms(this.$, this.elt, this.word)
   }
 

@@ -1,0 +1,38 @@
+fragment all on Subjunctive {
+  active {
+    ...all
+  }
+  plural {
+    ...all
+  }
+}
+
+fragment all on SubjunctiveTense {
+  present {
+    ...all
+  }
+  imperfect {
+    ...all
+  }
+  perfect {
+    ...all
+  }
+  pluperfect {
+    ...all
+  }
+}
+
+fragment all on SubjunctiveNumber {
+  singular {
+    ...all
+  }
+  plural {
+    ...all
+  }
+}
+
+fragment all on SubjunctivePerson {
+  first
+  second
+  third
+}

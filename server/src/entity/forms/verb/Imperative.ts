@@ -40,21 +40,21 @@ export class ImperativeActiveFuture {
 }
 
 @ObjectType()
-export class ImperativeActive {
-  @Field(() => ImperativePresent)
-  present: ImperativePresent
-
-  @Field(() => ImperativeActiveFuture)
-  future: ImperativeActiveFuture
-}
-
-@ObjectType()
 export class ImperativePassiveFuture {
   @Field(() => ImperativeSecondThird)
   singular: ImperativeSecondThird
 
   @Field(() => ImperativeThird)
   plural: ImperativeThird
+}
+
+@ObjectType()
+export class ImperativeActive {
+  @Field(() => ImperativePresent)
+  present: ImperativePresent
+
+  @Field(() => ImperativeActiveFuture)
+  future: ImperativeActiveFuture
 }
 
 @ObjectType()

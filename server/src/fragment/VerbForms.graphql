@@ -1,0 +1,17 @@
+fragment all on VerbForms {
+  indicative {
+    ...all
+  }
+  subjunctive {
+    ...all
+  }
+  imperative {
+    ...all
+  }
+  nonFinite {
+    ...all
+  }
+  verbalNoun {
+    ...all
+  }
+}

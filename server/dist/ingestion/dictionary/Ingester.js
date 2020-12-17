@@ -31,7 +31,8 @@ class Ingester {
             .text()
             .toLowerCase()
             .replace(/(\[edit])|\d+/g, "")
-            .trim();
+            .trim()
+            .replace("proper noun", "properNoun");
     }
     ingestPrincipalParts() {
         this.principalParts = principalParts_1.default(this, this.$, this.elt, this.firstPrincipalPartName);
