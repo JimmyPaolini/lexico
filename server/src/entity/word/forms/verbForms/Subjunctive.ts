@@ -3,44 +3,44 @@ import { Field, ObjectType } from "type-graphql"
 @ObjectType()
 export class SubjunctivePerson {
   @Field(() => [String])
-  first: string[]
+  first: string[] = []
 
   @Field(() => [String])
-  second: string[]
+  second: string[] = []
 
   @Field(() => [String])
-  third: string[]
+  third: string[] = []
 }
 
 @ObjectType()
 export class SubjunctiveNumber {
   @Field(() => SubjunctivePerson)
-  singular: SubjunctivePerson
+  singular: SubjunctivePerson = new SubjunctivePerson()
 
   @Field(() => SubjunctivePerson)
-  plural: SubjunctivePerson
+  plural: SubjunctivePerson = new SubjunctivePerson()
 }
 
 @ObjectType()
 export class SubjunctiveTense {
   @Field(() => SubjunctiveNumber)
-  "present": SubjunctiveNumber
+  "present": SubjunctiveNumber = new SubjunctiveNumber()
 
   @Field(() => SubjunctiveNumber)
-  "imperfect": SubjunctiveNumber
+  "imperfect": SubjunctiveNumber = new SubjunctiveNumber()
 
   @Field(() => SubjunctiveNumber)
-  "perfect": SubjunctiveNumber
+  "perfect": SubjunctiveNumber = new SubjunctiveNumber()
 
   @Field(() => SubjunctiveNumber)
-  "pluperfect": SubjunctiveNumber
+  "pluperfect": SubjunctiveNumber = new SubjunctiveNumber()
 }
 
 @ObjectType()
 export default class Subjunctive {
   @Field(() => SubjunctiveTense)
-  active: SubjunctiveTense
+  active: SubjunctiveTense = new SubjunctiveTense()
 
   @Field(() => SubjunctiveTense)
-  passive: SubjunctiveTense
+  passive: SubjunctiveTense = new SubjunctiveTense()
 }

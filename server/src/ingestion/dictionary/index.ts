@@ -6,12 +6,11 @@ import ingestWord from "./ingestWord"
 
 const log = new Logger()
 
-export default async function main(firstLetter = "a", lastLetter = "z") {
+export default async function ingest(firstLetter = "a", lastLetter = "z") {
   log.info(`READING HTML FILES`)
   const files = getHtmlFiles(firstLetter, lastLetter)
   log.info(`STARTING INGESTION`)
   for (let fileName of files) {
-    log.info("fileName", fileName)
     await ingestWord(fileName.replace(/\.json$/gi, ""))
   }
   log.info(`FINISHED INGESTION`)

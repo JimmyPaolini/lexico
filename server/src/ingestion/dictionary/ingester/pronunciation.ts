@@ -1,4 +1,4 @@
-import { Pronunciation } from "../../../entity/Pronunciation"
+import { Pronunciation } from "../../../entity/word/Pronunciation"
 import Ingester from "../Ingester"
 import getClassicalPhonemes from "./pronunciation/classical"
 import {

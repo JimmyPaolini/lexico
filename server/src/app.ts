@@ -1,43 +1,33 @@
 import { ApolloServer } from "apollo-server-express"
+import dotenv from "dotenv"
 import express from "express"
 import "reflect-metadata"
 import { Logger } from "tslog"
 import { createConnection } from "typeorm"
-import apolloServerConfig from "./apolloServer.config"
-import ingestAll from "./ingestion/dictionary/index"
-import ingestWord from "./ingestion/dictionary/ingestWord"
+import apolloServerConfig from "./apollo.config"
 import typeormConfig from "./typeorm.config"
-import clearDatabase from "./utils/clearDatabase"
-
+import script from "./utils/script"
 export const log = new Logger()
 
 async function main() {
+  dotenv.config()
+
   await createConnection(typeormConfig)
 
   const app = express()
-  app.listen(2048, () => console.log("Listening @ http://localhost:2048"))
   app.use(express.json())
-
-  app.get("/clear-database", clearDatabase)
-
-  app.post("/ingest-word", async (req, res) => {
+  app.listen(process.env.PORT, () =>
+    log.info(`Listening @ http://localhost:${process.env.PORT}`),
+  )
+  app.get("/script", async (_, res) => {
     try {
-      await ingestWord(req.body.latin)
+      await script()
       res.status(200).send()
     } catch (e) {
       res.status(500).send(e)
     }
   })
-
-  app.post("/ingest-all", async (req, res) => {
-    await ingestAll()
-    try {
-      await ingestAll(req.body.firstLetter, req.body.lastLetter)
-      res.status(200).send()
-    } catch (e) {
-      res.status(500).send(e)
-    }
-  })
+  // await script()
 
   const api = new ApolloServer(await apolloServerConfig())
   api.applyMiddleware({ app })

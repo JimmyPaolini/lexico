@@ -2,7 +2,7 @@ import Adjective from "./Adjective"
 
 export default class Prefix extends Adjective {
   ingestInflection() {
-    return ""
+    return null
   }
 
   async ingestForms() {

@@ -1,9 +1,11 @@
 import cheerio from "cheerio"
-import { Forms } from "src/entity/forms/Forms"
-import { getConnection } from "typeorm"
-import Word from "../../../../entity/Word"
+import { Forms } from "../../../../entity/word/Forms"
+import VerbInflection, {
+  VerbConjugation,
+  verbConjugationRegex,
+} from "../../../../entity/word/inflection/VerbInflection"
 import Ingester from "../../Ingester"
-import { insertForm, parseFormTable, sortIdentifiers } from "../form"
+import { parseFormTable, sortIdentifiers } from "../form"
 
 export default class Verb extends Ingester {
   firstPrincipalPartName = "present active"
@@ -12,21 +14,24 @@ export default class Verb extends Ingester {
     const $ = this.$
     const elt = this.elt
     if (!$(elt).text().includes(";")) throw new Error(`no inflection`)
-    let inflection = $(elt).text().trim().split("; ")[1]
-    inflection = inflection
+    let conjugation = $(elt).text().trim().split("; ")[1]
+    conjugation = conjugation
       .replace(/(conjugation)|[\d\[\]]/gi, "")
       .replace(" ,", ",")
       .replace(/\s+/g, " ")
       .trim()
+    let other = conjugation
+    if (conjugation.match(/third.*io-variant/)) conjugation = "third-io"
+    else conjugation = conjugation.match(verbConjugationRegex)?.[0] || ""
 
-    if (!inflection.length) return "uninflected"
-    return inflection
+    if (!conjugation.length) return new VerbInflection()
+    return new VerbInflection(conjugation as VerbConjugation, other)
   }
 
   async ingestForms(): Promise<Forms> {
     const $ = this.$
     const elt = this.elt
-    const word = this.word
+    // const word = this.word
     const table = parseFormTable($, elt)
     if (!table) throw new Error(`no forms`)
 
@@ -119,12 +124,12 @@ export default class Verb extends Ingester {
       },
       [],
     )
-    const Words = getConnection().getRepository(Word)
+    // const Words = getConnection().getRepository(Word)
     for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
       sortIdentifiers(inflection, forms)
-      for (const wordString of inflection.word) {
-        await insertForm(wordString, word, Words)
-      }
+      // for (const wordString of inflection.word) {
+      //   await insertForm(wordString, word, Words)
+      // }
     }
     return forms as Forms
   }

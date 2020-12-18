@@ -1,4 +1,4 @@
-fragment all on AdjectiveForms {
+fragment allAdjectiveForms on AdjectiveForms {
   nominative {
     ...all
   }
@@ -22,7 +22,7 @@ fragment all on AdjectiveForms {
   }
 }
 
-fragment all on AdjectiveSgPl {
+fragment allAdjectiveNumber on AdjectiveNumber {
   singular {
     ...all
   }
@@ -31,7 +31,7 @@ fragment all on AdjectiveSgPl {
   }
 }
 
-fragment all on MascFemNeu {
+fragment allAdjectiveGender on AdjectiveGender {
   masculine
   feminine
   neuter

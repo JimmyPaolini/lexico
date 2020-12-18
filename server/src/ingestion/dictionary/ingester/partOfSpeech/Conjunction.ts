@@ -4,7 +4,7 @@ export default class Conjunction extends Ingester {
   firstPrincipalPartName = Ingester.getPartOfSpeech(this.$, this.elt)
 
   ingestInflection() {
-    return "uninflected"
+    return null
   }
 
   async ingestForms() {

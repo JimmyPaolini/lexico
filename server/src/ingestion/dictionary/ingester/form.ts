@@ -1,17 +1,13 @@
 import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
-import { Logger } from "tslog"
-import { getConnection, Repository } from "typeorm"
-import { Forms } from "../../../entity/forms/Forms"
-import Word from "../../../entity/Word"
-import { normalize } from "../../../utils/string"
+import { Forms } from "../../../entity/word/Forms"
 
-const log = new Logger()
+// const log = new Logger()
 
 export default async function parseForms(
   $: cheerio.Root,
   elt: any,
-  word: Word,
+  // word: Word,
 ): Promise<Forms> {
   const table = parseFormTable($, elt)
   if (!table) throw new Error(`no forms`)
@@ -64,12 +60,12 @@ export default async function parseForms(
     },
     [],
   )
-  const Words = getConnection().getRepository(Word)
+  // const Words = getConnection().getRepository(Word)
   for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
     sortIdentifiers(inflection, forms)
-    for (const wordString of inflection.word) {
-      await insertForm(wordString, word, Words)
-    }
+    // for (const wordString of inflection.word) {
+    //   await insertForm(wordString, word, Words)
+    // }
   }
   return forms as Forms
 }
@@ -104,23 +100,23 @@ export function sortIdentifiers(inflection: any, obj: any) {
   }
 }
 
-export async function insertForm(
-  wordString: string,
-  word: Word,
-  Words: Repository<Word>,
-) {
-  if (normalize(wordString).toLowerCase() === word.word.toLowerCase()) return
-  log.info("ingesting form", normalize(wordString))
-  let wordForm = await Words.findOne({
-    word: normalize(wordString),
-    partOfSpeech: word.partOfSpeech,
-  })
-  if (!wordForm)
-    wordForm = Words.create({
-      word: normalize(wordString),
-      partOfSpeech: word.partOfSpeech,
-    })
-  if (!wordForm.roots) wordForm.roots = []
-  wordForm.roots = [...wordForm.roots, word]
-  await Words.save(wordForm)
-}
+// export async function insertForm(
+//   wordString: string,
+//   word: Word,
+//   Words: Repository<Word>,
+// ) {
+//   if (normalize(wordString).toLowerCase() === word.word.toLowerCase()) return
+//   log.info("ingesting form", normalize(wordString))
+//   let wordForm = await Words.findOne({
+//     word: normalize(wordString),
+//     partOfSpeech: word.partOfSpeech,
+//   })
+//   if (!wordForm)
+//     wordForm = Words.create({
+//       word: normalize(wordString),
+//       partOfSpeech: word.partOfSpeech,
+//     })
+//   if (!wordForm.roots) wordForm.roots = []
+//   wordForm.roots = [...wordForm.roots, word]
+//   await Words.save(wordForm)
+// }

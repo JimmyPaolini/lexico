@@ -16,12 +16,11 @@ export default class WordResolver {
         where: { word: search },
         relations: ["roots"],
       })
-    )
-      .reduce((words: Word[], word) => {
-        if (!word.principalParts) return [...words, ...word.roots]
-        else return [...words, word]
-      }, [])
-      .forEach((word) => log.info(word.word))
+    ).reduce((words: Word[], word) => {
+      if (!word.principalParts) return [...words, ...word.roots]
+      else return [...words, word]
+    }, [])
+    words.forEach((word) => log.info(word.word))
     return words
   }
 }

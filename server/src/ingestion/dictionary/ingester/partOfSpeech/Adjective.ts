@@ -1,9 +1,15 @@
+import AdjectiveInflection, {
+  AdjectiveDeclension,
+  AdjectiveDegree,
+  adjectiveDegreeRegex,
+  adjectiveDelensionRegex,
+} from "../../../../entity/word/inflection/AdjectiveInflection"
 import Ingester from "../../Ingester"
 
 export default class Adjective extends Ingester {
   firstPrincipalPartName = "masculine"
 
-  ingestInflection() {
+  ingestInflection(): AdjectiveInflection | null {
     const $ = this.$
     const elt = this.elt
     const inflectionHtml = $(elt)
@@ -11,7 +17,7 @@ export default class Adjective extends Ingester {
       .first()
       .next()
     if (!$(inflectionHtml).length) throw new Error(`no inflection`)
-    let inflection = $(inflectionHtml)
+    let declension = $(inflectionHtml)
       .text()
       .replace(
         /(-declension)|(declension)|(adjective)|(participle)|(numeral)|[.\d\[\]]/gi,
@@ -21,7 +27,14 @@ export default class Adjective extends Ingester {
       .toLowerCase()
       .trim()
 
-    if (!inflection.length) return "uninflected"
-    return inflection
+    if (!declension.length) return new AdjectiveInflection()
+    let other = declension
+    let degree = declension.match(adjectiveDegreeRegex)?.[0] || ""
+    declension = declension.match(adjectiveDelensionRegex)?.[0] || ""
+    return new AdjectiveInflection(
+      declension as AdjectiveDeclension,
+      degree as AdjectiveDegree,
+      other,
+    )
   }
 }

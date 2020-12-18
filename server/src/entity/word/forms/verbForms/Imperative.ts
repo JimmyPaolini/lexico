@@ -3,10 +3,10 @@ import { Field, ObjectType } from "type-graphql"
 @ObjectType()
 export class ImperativeSecondThird {
   @Field(() => [String])
-  second: string[]
+  second: string[] = []
 
   @Field(() => [String])
-  third: string[]
+  third: string[] = []
 }
 
 @ObjectType()
@@ -24,53 +24,53 @@ export class ImperativeThird {
 @ObjectType()
 export class ImperativePresent {
   @Field(() => ImperativeSecond)
-  singular: ImperativeSecond
+  singular: ImperativeSecond = new ImperativeSecond()
 
   @Field(() => ImperativeSecond)
-  plural: ImperativeSecond
+  plural: ImperativeSecond = new ImperativeSecond()
 }
 
 @ObjectType()
 export class ImperativeActiveFuture {
   @Field(() => ImperativeSecondThird)
-  singular: ImperativeSecondThird
+  singular: ImperativeSecondThird = new ImperativeSecondThird()
 
   @Field(() => ImperativeSecondThird)
-  plural: ImperativeSecondThird
+  plural: ImperativeSecondThird = new ImperativeSecondThird()
 }
 
 @ObjectType()
 export class ImperativePassiveFuture {
   @Field(() => ImperativeSecondThird)
-  singular: ImperativeSecondThird
+  singular: ImperativeSecondThird = new ImperativeSecondThird()
 
   @Field(() => ImperativeThird)
-  plural: ImperativeThird
+  plural: ImperativeThird = new ImperativeThird()
 }
 
 @ObjectType()
 export class ImperativeActive {
   @Field(() => ImperativePresent)
-  present: ImperativePresent
+  present: ImperativePresent = new ImperativePresent()
 
   @Field(() => ImperativeActiveFuture)
-  future: ImperativeActiveFuture
+  future: ImperativeActiveFuture = new ImperativeActiveFuture()
 }
 
 @ObjectType()
 export class ImperativePassive {
   @Field(() => ImperativePresent)
-  present: ImperativePresent
+  present: ImperativePresent = new ImperativePresent()
 
   @Field(() => ImperativePassiveFuture)
-  future: ImperativePassiveFuture
+  future: ImperativePassiveFuture = new ImperativePassiveFuture()
 }
 
 @ObjectType()
 export default class Imperative {
   @Field(() => ImperativeActive)
-  active: ImperativeActive
+  active: ImperativeActive = new ImperativeActive()
 
   @Field(() => ImperativePassive)
-  passive: ImperativePassive
+  passive: ImperativePassive = new ImperativePassive()
 }

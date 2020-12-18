@@ -1,34 +1,30 @@
-import { getConnection } from "typeorm"
-import Word from "../../../../entity/Word"
+import AdverbForms from "../../../../entity/word/forms/AdverbForms"
+import AdverbInflection from "../../../../entity/word/inflection/AdverbInflection"
 import Ingester from "../../Ingester"
-import { insertForm } from "../form"
 
 export default class Adverb extends Ingester {
   firstPrincipalPartName = "positive"
 
   ingestInflection() {
-    let inflection =
-      this.principalParts.length > 1 ? "descriptive" : "conjunctional"
-    return inflection
+    if (!this.principalParts) this.ingestPrincipalParts()
+    if (this.principalParts.length === 1)
+      return new AdverbInflection("conjunctional")
+    return this.principalParts.length > 1
+      ? new AdverbInflection("descriptive")
+      : new AdverbInflection("conjunctional")
   }
 
   async ingestForms() {
-    let disorganizedForms = []
-    for (const pp of this.principalParts.slice(1)) {
-      for (const word of pp.text.split(" or ")) {
-        disorganizedForms.push({
-          word: [word],
-          identifiers: [pp.name],
-        })
-      }
-    }
-    const Words = getConnection().getRepository(Word)
-    for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
-      for (const wordString of inflection.word) {
-        await insertForm(wordString, this.word, Words)
-      }
-    }
+    const pp = this.principalParts || this.ingestPrincipalParts()
+    if (pp.length === 1) return new AdverbForms(pp[0].text)
+    if (pp.length === 2) return new AdverbForms(pp[0].text, pp[1].text)
+    return new AdverbForms(pp[0].text, pp[1].text, pp[2].text)
 
-    return null
+    // const Words = getConnection().getRepository(Word)
+    // for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
+    //   for (const wordString of inflection.word) {
+    //     await insertForm(wordString, this.word, Words)
+    //   }
+    // }
   }
 }

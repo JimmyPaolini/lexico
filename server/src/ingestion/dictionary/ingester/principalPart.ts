@@ -1,4 +1,4 @@
-import PrincipalPart from "../../../entity/PrincipalPart"
+import PrincipalPart from "../../../entity/word/PrincipalPart"
 import Ingester from "../Ingester"
 
 export default function parsePrincipalParts(
@@ -14,24 +14,26 @@ export default function parsePrincipalParts(
     text: $(elt)
       .children("strong.Latn.headword")
       .get()
-      .map((p1) => $(p1).text().toLowerCase())
-      .join(" or "),
+      .map((p1) => $(p1).text().toLowerCase()),
   } as PrincipalPart)
 
   for (const b of $(elt).children("b").get()) {
     if ($(b).prev("i").text() === "or") {
       const lastPrincipalPart = principalParts.pop()
       if (!lastPrincipalPart) continue
-      lastPrincipalPart.text += ` or ${$(b).text().toLowerCase()}`
+      lastPrincipalPart.text = [
+        ...lastPrincipalPart.text,
+        $(b).text().toLowerCase(),
+      ]
       principalParts.push(lastPrincipalPart)
     } else {
       principalParts.push({
         name: $(b).prev("i").text(),
-        text: $(b).text().toLowerCase(),
+        text: [$(b).text().toLowerCase()],
       } as PrincipalPart)
     }
   }
 
-  ingester.macronizedWord = principalParts[0].text
+  ingester.macronizedWord = principalParts[0].text[0]
   return principalParts
 }

@@ -3,56 +3,56 @@ import { Field, ObjectType } from "type-graphql"
 @ObjectType()
 export class NonFinitePresentPerfectFuture {
   @Field(() => [String])
-  present: string[]
+  present: string[] = []
 
   @Field(() => [String])
-  perfect: string[]
+  perfect: string[] = []
 
   @Field(() => [String])
-  future: string[]
+  future: string[] = []
 }
 
 @ObjectType()
 export class NonFinitePresentFuture {
   @Field(() => [String])
-  present: string[]
+  present: string[] = []
 
   @Field(() => [String])
-  future: string[]
+  future: string[] = []
 }
 
 @ObjectType()
 export class NonFinitePerfectFuture {
   @Field(() => [String])
-  perfect: string[]
+  perfect: string[] = []
 
   @Field(() => [String])
-  future: string[]
+  future: string[] = []
 }
 
 @ObjectType()
 export class NonFiniteInfinitive {
   @Field(() => NonFinitePresentPerfectFuture)
-  active: NonFinitePresentPerfectFuture
+  active: NonFinitePresentPerfectFuture = new NonFinitePresentPerfectFuture()
 
   @Field(() => NonFinitePresentPerfectFuture)
-  passive: NonFinitePresentPerfectFuture
+  passive: NonFinitePresentPerfectFuture = new NonFinitePresentPerfectFuture()
 }
 
 @ObjectType()
 export class NonFiniteParticiple {
   @Field()
-  active: NonFinitePresentFuture
+  active: NonFinitePresentFuture = new NonFinitePresentFuture()
 
   @Field()
-  passive: NonFinitePerfectFuture
+  passive: NonFinitePerfectFuture = new NonFinitePerfectFuture()
 }
 
 @ObjectType()
 export default class NonFinite {
   @Field(() => NonFiniteInfinitive)
-  infinitive: NonFiniteInfinitive
+  infinitive: NonFiniteInfinitive = new NonFiniteInfinitive()
 
   @Field(() => NonFiniteParticiple)
-  participle: NonFiniteParticiple
+  participle: NonFiniteParticiple = new NonFiniteParticiple()
 }

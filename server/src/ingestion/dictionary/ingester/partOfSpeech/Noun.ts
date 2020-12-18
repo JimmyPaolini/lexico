@@ -1,3 +1,10 @@
+import { Inflection } from "../../../../entity/word/Inflection"
+import NounInflection, {
+  genderRegex,
+  NounDeclension,
+  nounDeclensionRegex,
+  NounGender,
+} from "../../../../entity/word/inflection/NounInflection"
 import Ingester from "../../Ingester"
 
 export default class Noun extends Ingester {
@@ -11,7 +18,7 @@ export default class Noun extends Ingester {
       .first()
       .next()
     if (!$(inflectionHtml).length) throw new Error(`no inflection`)
-    let inflection = $(inflectionHtml)
+    let declension = $(inflectionHtml)
       .text()
       .replace(/(-declension)|(declension)|(noun)|[.\d\[\]]/gi, "")
       .replace(/\s+/g, " ")
@@ -26,9 +33,15 @@ export default class Noun extends Ingester {
       .replace(/^n|n$/, "neuter")
       .replace("sg", "singular")
       .replace("pl", "plural")
-    inflection += ", " + gender
 
-    if (!inflection.length) inflection = "uninflected"
-    return inflection
+    if (!declension.length && !gender.length) return new NounInflection()
+    let other = declension + ", " + gender
+    declension = declension.match(nounDeclensionRegex)?.[0] || ""
+    gender = gender.match(genderRegex)?.[0] || ""
+    return new NounInflection(
+      declension as NounDeclension,
+      gender as NounGender,
+      other,
+    )
   }
 }

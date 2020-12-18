@@ -10,7 +10,10 @@ export default class Translation extends Record {
   @Field(() => String)
   text: string
 
-  @ManyToOne(() => Word, (word) => word.translations)
+  @ManyToOne(() => Word, (word) => word.translations, {
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  })
   @JoinColumn()
   @Field(() => Word)
   word: Word

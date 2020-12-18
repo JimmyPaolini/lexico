@@ -1,15 +1,17 @@
+import dotenv from "dotenv"
 import "reflect-metadata"
 import { createConnection } from "typeorm"
 import Translation from "./entity/Translation"
 import Word from "./entity/Word"
 
+dotenv.config()
 export default {
   name: "default",
   type: "mysql",
-  host: "localhost",
-  port: 3306,
-  username: "admin",
-  password: "admin",
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
   database: "lexico",
   entities: [Word, Translation],
   logging: ["log", "info", "warn", "error"],

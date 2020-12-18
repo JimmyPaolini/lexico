@@ -1,8 +1,9 @@
-import { Forms } from "../../entity/forms/Forms"
-import PrincipalPart from "../../entity/PrincipalPart"
-import { Pronunciation } from "../../entity/Pronunciation"
 import Translation from "../../entity/Translation"
 import Word from "../../entity/Word"
+import { Forms } from "../../entity/word/Forms"
+import { Inflection } from "../../entity/word/Inflection"
+import PrincipalPart from "../../entity/word/PrincipalPart"
+import { Pronunciation } from "../../entity/word/Pronunciation"
 import parseEtymology from "./ingester/etymology"
 import parseForms from "./ingester/form"
 import parsePrincipalParts from "./ingester/principalPart"
@@ -50,7 +51,7 @@ export default abstract class Ingester {
   }
 
   async ingestForms(): Promise<Forms | null> {
-    return await parseForms(this.$, this.elt, this.word)
+    return await parseForms(this.$, this.elt)
   }
 
   macronizedWord: string

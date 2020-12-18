@@ -3,8 +3,8 @@ import { Field, ObjectType } from "type-graphql"
 @ObjectType()
 export default class PrincipalPart {
   @Field()
-  name: string
+  name: string = ""
 
-  @Field()
-  text: string
+  @Field(() => [String])
+  text: string[] = []
 }

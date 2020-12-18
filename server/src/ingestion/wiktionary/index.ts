@@ -19,6 +19,7 @@ const cleanup = (word: string): string =>
     .join("")
 
 const log = new Logger()
+
 const categories: { [key: string]: string } = {
   lemma: "Latin_lemmas",
   nonlemma: "Latin_non-lemma_forms",
