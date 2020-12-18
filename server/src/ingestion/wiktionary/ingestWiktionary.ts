@@ -8,7 +8,7 @@ const putItemHtml = (entry: any) =>
   fs.writeFileSync(
     fp.join(
       process.cwd(),
-      `./data/wiktionary/${entry.category}/${cleanup(entry.word)}.json`,
+      `./data/wiktionary/lemma/${cleanup(entry.word)}.json`,
     ),
     JSON.stringify(entry, null, 2),
   )
@@ -23,8 +23,8 @@ const log = new Logger()
 export const categories: { [key: string]: string } = {
   lemma: "Latin_lemmas",
   participle: "Latin_participles",
-  // nonlemma: "Latin_non-lemma_forms",
-  // comparativeadverb: "Latin_comparative_adverbs",
+  comparative: "Latin_comparative_adjectives",
+  superlative: "Latin_superlative_adjectives",
 }
 
 export default async function ingestWiktionary(

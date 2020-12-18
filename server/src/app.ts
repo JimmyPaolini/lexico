@@ -27,7 +27,6 @@ async function main() {
       res.status(500).send(e)
     }
   })
-  // await script()
 
   const api = new ApolloServer(await apolloServerConfig())
   api.applyMiddleware({ app })

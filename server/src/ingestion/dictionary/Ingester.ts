@@ -1,3 +1,5 @@
+import { getConnection, Repository } from "typeorm"
+import Entry from "../../entity/Entry"
 import Translation from "../../entity/Translation"
 import Word from "../../entity/Word"
 import { Forms } from "../../entity/word/Forms"
@@ -13,12 +15,14 @@ import parseTranslations from "./ingester/translation"
 export default abstract class Ingester {
   $: cheerio.Root
   elt: any
-  word: Word
+  entry: Entry
+  Words: Repository<Word>
 
-  constructor($: cheerio.Root, elt: any, word: Word) {
+  constructor($: cheerio.Root, elt: any, entry: Entry) {
     this.$ = $
     this.elt = elt
-    this.word = word
+    this.entry = entry
+    this.Words = getConnection().getRepository(Word)
   }
 
   static getPartOfSpeech($: cheerio.Root, elt: any): PartOfSpeech {
@@ -36,8 +40,8 @@ export default abstract class Ingester {
 
   firstPrincipalPartName: string = ""
   principalParts: PrincipalPart[]
-  ingestPrincipalParts(): PrincipalPart[] {
-    this.principalParts = parsePrincipalParts(
+  async ingestPrincipalParts(): Promise<PrincipalPart[]> {
+    this.principalParts = await parsePrincipalParts(
       this,
       this.$,
       this.elt,
@@ -48,14 +52,14 @@ export default abstract class Ingester {
 
   translations: Translation[]
   ingestTranslations(): Translation[] {
-    const translations = parseTranslations(this.$, this.elt, this.word)
+    const translations = parseTranslations(this.$, this.elt, this.entry)
     if (this.translations) this.translations.unshift(...translations)
     else this.translations = translations
     return this.translations
   }
 
   async ingestForms(): Promise<Forms | null> {
-    return await parseForms(this.$, this.elt)
+    return await parseForms(this.$, this.elt, this.entry, this.Words)
   }
 
   macronizedWord: string
@@ -67,11 +71,11 @@ export default abstract class Ingester {
     return parseEtymology(this, this.$, this.elt)
   }
 
-  ingestSynonyms(): Word[] {
+  ingestSynonyms(): Entry[] {
     return []
   }
 
-  ingestAntonyms(): Word[] {
+  ingestAntonyms(): Entry[] {
     return []
   }
 }

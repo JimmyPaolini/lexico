@@ -1,12 +1,13 @@
 import PrincipalPart from "../../../entity/word/PrincipalPart"
 import Ingester from "../Ingester"
+import { insertWord } from "./form"
 
-export default function parsePrincipalParts(
+export default async function parsePrincipalParts(
   ingester: Ingester,
   $: cheerio.Root,
   elt: any,
   firstPrincipalPartName: string,
-): PrincipalPart[] {
+): Promise<PrincipalPart[]> {
   let principalParts: PrincipalPart[] = []
 
   principalParts.push({
@@ -31,6 +32,12 @@ export default function parsePrincipalParts(
         name: $(b).prev("i").text(),
         text: [$(b).text().toLowerCase()],
       } as PrincipalPart)
+    }
+  }
+
+  for (const pp of principalParts) {
+    for (const macronized of pp.text) {
+      await insertWord(macronized, ingester.entry, ingester.Words)
     }
   }
 

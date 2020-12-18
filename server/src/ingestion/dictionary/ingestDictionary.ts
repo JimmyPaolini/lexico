@@ -6,7 +6,10 @@ import ingestWord from "./ingestWord"
 
 const log = new Logger()
 
-export default async function ingest(firstLetter = "a", lastLetter = "z") {
+export default async function ingestDictionary(
+  firstLetter = "a",
+  lastLetter = "z",
+) {
   log.info(`READING HTML FILES`)
   const files = getHtmlFiles(firstLetter, lastLetter)
   log.info(`STARTING INGESTION`)

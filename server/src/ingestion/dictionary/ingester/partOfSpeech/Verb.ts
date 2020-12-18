@@ -5,7 +5,7 @@ import VerbInflection, {
   verbConjugationRegex,
 } from "../../../../entity/word/inflection/VerbInflection"
 import Ingester from "../../Ingester"
-import { parseFormTable, sortIdentifiers } from "../form"
+import { insertWord, parseFormTable, sortIdentifiers } from "../form"
 
 export default class Verb extends Ingester {
   firstPrincipalPartName = "present active"
@@ -31,7 +31,6 @@ export default class Verb extends Ingester {
   async ingestForms(): Promise<Forms> {
     const $ = this.$
     const elt = this.elt
-    // const word = this.word
     const table = parseFormTable($, elt)
     if (!table) throw new Error(`no forms`)
 
@@ -124,12 +123,11 @@ export default class Verb extends Ingester {
       },
       [],
     )
-    // const Words = getConnection().getRepository(Word)
     for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
       sortIdentifiers(inflection, forms)
-      // for (const wordString of inflection.word) {
-      //   await insertForm(wordString, word, Words)
-      // }
+      for (const macronized of inflection.word) {
+        await insertWord(macronized, this.entry, this.Words)
+      }
     }
     return forms as Forms
   }

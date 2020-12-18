@@ -1,7 +1,7 @@
 import { Field, ObjectType } from "type-graphql"
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm"
+import Entry from "./Entry"
 import Record from "./Record"
-import Word from "./Word"
 
 @Entity()
 @ObjectType({ implements: Record })
@@ -10,17 +10,17 @@ export default class Translation extends Record {
   @Field(() => String)
   text: string
 
-  @ManyToOne(() => Word, (word) => word.translations, {
+  @ManyToOne(() => Entry, (entry) => entry.translations, {
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
   })
   @JoinColumn()
-  @Field(() => Word)
-  word: Word
+  @Field(() => Entry)
+  entry: Entry
 
-  constructor(text: string, word: Word) {
+  constructor(text: string, entry: Entry) {
     super()
     this.text = text
-    this.word = word
+    this.entry = entry
   }
 }

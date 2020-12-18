@@ -1,8 +1,8 @@
 import { Logger } from "tslog"
 import { Arg, Query, Resolver } from "type-graphql"
 import { getConnection, Like } from "typeorm"
+import Entry from "../entity/Entry"
 import Translation from "../entity/Translation"
-import Word from "../entity/Word"
 
 const log = new Logger()
 
@@ -10,13 +10,13 @@ const log = new Logger()
 export default class TranslationResolver {
   translationRepository = getConnection().getRepository(Translation)
 
-  @Query(() => [Word])
+  @Query(() => [Entry])
   async english(@Arg("search") search: string) {
     const translations = await this.translationRepository.find({
       relations: ["word"],
       where: { text: Like(`%${search}%`) },
     })
-    const words = translations.map((t) => t.word)
+    const words = translations.map((t) => t.entry)
     log.info(words)
     return words
   }

@@ -1,11 +1,11 @@
+import Entry from "../../../entity/Entry"
 import Translation from "../../../entity/Translation"
-import Word from "../../../entity/Word"
 import { normalize } from "../../../utils/string"
 
 export default function parseTranslations(
   $: cheerio.Root,
   elt: any,
-  word: Word,
+  entry: Entry,
 ): Translation[] {
   const translationsHeader = $(elt).nextAll("ol").first()
   if (translationsHeader.length <= 0) throw new Error(`no translations`)
@@ -20,10 +20,10 @@ export default function parseTranslations(
     translation = translation.trim().replace(/\.$/, "")
     translations.push({
       text: translation.charAt(0).toUpperCase() + translation.slice(1),
-      word,
+      entry,
     } as Translation)
 
-    if ($(li).find("span.form-of-definition-link").length > 0)
+    if ($(li).find("span.form-of-definition-link").length > 0) {
       translations.push({
         text:
           translations.pop()?.text +
@@ -33,8 +33,9 @@ export default function parseTranslations(
             .get()
             .map((ref) => `{*${normalize($(ref).text())}*}`)
             .join(" "),
-        word,
+        entry,
       } as Translation)
+    }
   }
   translations = translations.filter((translation) => !!translation)
   if (!translations.length) throw new Error("no translations")

@@ -2,8 +2,7 @@ import cheerio from "cheerio"
 import path from "path"
 import { Logger } from "tslog"
 import { getConnection, Repository } from "typeorm"
-import Word from "../../entity/Word"
-import { normalize } from "../../utils/string"
+import Entry from "../../entity/Entry"
 import Ingester from "./Ingester"
 import Adjective from "./ingester/partOfSpeech/Adjective"
 import Adverb from "./ingester/partOfSpeech/Adverb"
@@ -17,18 +16,18 @@ import Verb from "./ingester/partOfSpeech/Verb"
 const log = new Logger()
 
 export default async function ingestWord(wordString: string) {
-  log.info("ingesting root", wordString)
+  log.info("ingesting entry", wordString)
   const data = require(path.join(
     process.cwd(),
     `./data/wiktionary/lemma/${wordString}.json`,
   ))
-  const Words = getConnection().getRepository(Word)
+  const Entries = getConnection().getRepository(Entry)
   const $ = cheerio.load(data.html)
 
   try {
     for (const elt of $("p:has(strong.Latn.headword)").get()) {
-      const word = await ingestEtymology($, elt, data.word, Words)
-      await Words.save(word)
+      const word = await ingestEtymology(wordString, $, elt, Entries)
+      await Entries.save(word)
     }
   } catch (e) {
     log.error(e.toString())
@@ -36,25 +35,24 @@ export default async function ingestWord(wordString: string) {
 }
 
 async function ingestEtymology(
+  wordString: string,
   $: cheerio.Root,
   elt: any,
-  wordString: string,
-  Words: Repository<Word>,
-): Promise<Word> {
-  const word = Words.create({
-    word: normalize(wordString),
+  Entries: Repository<Entry>,
+): Promise<Entry> {
+  const word = await Entries.save({
+    word: wordString,
     partOfSpeech: Ingester.getPartOfSpeech($, elt),
   })
 
   const ingester: Ingester = new ingestersMap[word.partOfSpeech]($, elt, word)
 
   word.inflection = ingester.ingestInflection()
-  word.principalParts = ingester.ingestPrincipalParts()
+  word.principalParts = await ingester.ingestPrincipalParts()
   word.etymology = ingester.ingestEtymology()
   word.translations = ingester.ingestTranslations()
   word.pronunciation = ingester.ingestPronunciation()
   word.forms = await ingester.ingestForms()
-  word.roots = [word]
 
   return word
 }

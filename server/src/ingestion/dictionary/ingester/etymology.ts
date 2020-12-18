@@ -24,7 +24,7 @@ export default function parseEtymology(
   if (participleMatch) {
     if (!ingester.translations) ingester.translations = []
     ingester.translations.push(
-      new Translation(sentenceCase(participleMatch[0].trim()), ingester.word),
+      new Translation(sentenceCase(participleMatch[0].trim()), ingester.entry),
     )
   }
 

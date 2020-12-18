@@ -1,19 +1,31 @@
 import { Logger } from "tslog"
 import { Arg, Query, Resolver } from "type-graphql"
 import { getConnection } from "typeorm"
+import Entry from "../entity/Entry"
 import Word from "../entity/Word"
 
 const log = new Logger()
 
-@Resolver(Word)
-export default class WordResolver {
+@Resolver(Entry)
+export default class EntryResolver {
   wordRepository = getConnection().getRepository(Word)
+  entryRepository = getConnection().getRepository(Entry)
 
-  @Query(() => [Word])
+  @Query(() => [Entry])
   async latin(@Arg("search") search: string) {
+    if (!search) return []
+    const word = await this.wordRepository.findOne({ word: search })
+    log.info("search latin", word?.word)
+    return word?.entries
+  }
+
+  @Query(() => [Entry])
+  async brute(@Arg("search") search: string) {
     const macronSearch = macronOptionize(search)
-    const words = await this.wordRepository.find({
-      where: `REGEXP_LIKE(forms, '"${macronSearch}"', "i")`,
+    const fieldMatch = (field: string): string =>
+      `REGEXP_LIKE(${field}, '"${macronSearch}"', "i")`
+    const words = await this.entryRepository.find({
+      where: fieldMatch("principalParts") + " OR " + fieldMatch("forms"),
     })
     words.forEach((word) => log.info(word.word))
     return words
