@@ -1,4 +1,12 @@
-export default function parseEtymology($: cheerio.Root, elt: any): string {
+import Translation from "../../../entity/Translation"
+import { sentenceCase } from "../../../utils/string"
+import Ingester from "../Ingester"
+
+export default function parseEtymology(
+  ingester: Ingester,
+  $: cheerio.Root,
+  elt: any,
+): string {
   const etymologyHeader = $(elt)
     .prevAll(':header:contains("Etymology")')
     .first()
@@ -10,10 +18,15 @@ export default function parseEtymology($: cheerio.Root, elt: any): string {
     return ""
   let etymology: string = $(etymologyHeader).next().text().trim()
 
-  // const participle = etymology.match(
-  //   /((present)|(perfect)|(future)) ((active)|(passive) )?participle (\(gerundive\) )?of [A-Za-z\u00C0-\u017F]+/i,
-  // )
-  // if (participle) this.translations.push(cap1(participle[0].trim()))
+  const participleMatch = etymology.match(
+    /((present)|(perfect)|(future)) ((active)|(passive) )?participle (\(gerundive\) )?of [A-Za-z\u00C0-\u017F]+/i,
+  )
+  if (participleMatch) {
+    if (!ingester.translations) ingester.translations = []
+    ingester.translations.push(
+      new Translation(sentenceCase(participleMatch[0].trim()), ingester.word),
+    )
+  }
 
   return etymology
 }

@@ -50,9 +50,9 @@ async function ingestEtymology(
 
   word.inflection = ingester.ingestInflection()
   word.principalParts = ingester.ingestPrincipalParts()
+  word.etymology = ingester.ingestEtymology()
   word.translations = ingester.ingestTranslations()
   word.pronunciation = ingester.ingestPronunciation()
-  word.etymology = ingester.ingestEtymology()
   word.forms = await ingester.ingestForms()
   word.roots = [word]
 

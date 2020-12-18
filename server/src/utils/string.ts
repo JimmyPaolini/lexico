@@ -9,3 +9,7 @@ export function getFirstLetter(word: string) {
   if (l1 === "-") return l2
   else return l1
 }
+
+export function sentenceCase(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}

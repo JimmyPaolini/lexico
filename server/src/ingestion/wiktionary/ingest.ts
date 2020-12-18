@@ -20,23 +20,20 @@ const cleanup = (word: string): string =>
 
 const log = new Logger()
 
-const categories: { [key: string]: string } = {
+export const categories: { [key: string]: string } = {
   lemma: "Latin_lemmas",
-  nonlemma: "Latin_non-lemma_forms",
-  participle: "Latin_participle_forms",
-  comparativeadverb: "Latin_comparative_adverbs",
+  participle: "Latin_participles",
+  // nonlemma: "Latin_non-lemma_forms",
+  // comparativeadverb: "Latin_comparative_adverbs",
 }
 
-ingestWiktionary(...process.argv.slice(2, 5))
-
-async function ingestWiktionary(
+export default async function ingestWiktionary(
   category = "lemma",
   firstLetter = "a",
   lastLetter = "z",
 ): Promise<any> {
   log.info(
-    `${new Date().toLocaleString()} - START - category="${category}", ` +
-      `firstLetter="${firstLetter}", lastLetter="${lastLetter}"`,
+    `START - category="${category}", firstLetter="${firstLetter}", lastLetter="${lastLetter}"`,
   )
   const host = `https://en.wiktionary.org`
   let path = categories[category]
@@ -59,8 +56,7 @@ async function ingestWiktionary(
           getFirstLetter(word) > lastLetter
         ) {
           log.info(
-            `${new Date().toLocaleString()} - FINISH - category="${category}", ` +
-              `firstLetter="${firstLetter}", lastLetter="${lastLetter}"`,
+            `FINISH - category="${category}", firstLetter="${firstLetter}", lastLetter="${lastLetter}"`,
           )
           return
         }
@@ -98,6 +94,6 @@ async function ingestWord(
     return log.info(`Error "${entry.word}" - no latin entry in wiktionary`)
 
   entry.html = `<div class="${entry.word}">${$.html(section)}</div>`
+  log.info(`ingesting raw "${entry.word}"`)
   putItemHtml(entry)
-  log.info(`Ingested "${entry.word}" HTML`)
 }

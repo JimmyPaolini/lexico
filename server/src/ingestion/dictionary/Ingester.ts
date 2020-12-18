@@ -46,8 +46,12 @@ export default abstract class Ingester {
     return this.principalParts
   }
 
+  translations: Translation[]
   ingestTranslations(): Translation[] {
-    return parseTranslations(this.$, this.elt, this.word)
+    const translations = parseTranslations(this.$, this.elt, this.word)
+    if (this.translations) this.translations.unshift(...translations)
+    else this.translations = translations
+    return this.translations
   }
 
   async ingestForms(): Promise<Forms | null> {
@@ -60,7 +64,7 @@ export default abstract class Ingester {
   }
 
   ingestEtymology(): string {
-    return parseEtymology(this.$, this.elt)
+    return parseEtymology(this, this.$, this.elt)
   }
 
   ingestSynonyms(): Word[] {

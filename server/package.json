@@ -38,7 +38,7 @@
   "scripts": {
     "watch": "tsc -w",
     "dev": "clear; nodemon --max-old-space-size=1024 dist/app.js",
-    "start": "clear; node --max-old-space-size=1024 dist/app.js",
+    "start": "clear; node --max-old-space-size=2048 dist/app.js",
     "wiktionary": "node dist/ingestion/wiktionary/index.js"
   },
   "nodemonConfig": {

@@ -17,13 +17,15 @@ export default async function ingest(firstLetter = "a", lastLetter = "z") {
 }
 
 function getHtmlFiles(firstLetter: string, lastLetter: string): string[] {
-  return fs
-    .readdirSync(path.join(process.cwd(), `./data/wiktionary/lemma`))
-    .filter(
-      (fileName) =>
-        getFirstLetter(fileName) >= firstLetter &&
-        getFirstLetter(fileName) <= lastLetter &&
-        !fileName.slice(0, -5).match(/\s|\.|-/g),
-    )
-    .sort((a, b) => getFirstLetter(a).localeCompare(getFirstLetter(b)))
+  const files = fs.readdirSync(
+    path.join(process.cwd(), `./data/wiktionary/lemma`),
+  )
+  files.filter(
+    (fileName) =>
+      getFirstLetter(fileName) >= firstLetter &&
+      getFirstLetter(fileName) <= lastLetter &&
+      !fileName.slice(0, -5).match(/\s|\.|-/g),
+  )
+  files.sort((a, b) => getFirstLetter(a).localeCompare(getFirstLetter(b)))
+  return files
 }
