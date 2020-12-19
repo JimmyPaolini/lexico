@@ -19,13 +19,13 @@ export default class Entry extends Record {
   @Field(() => String)
   partOfSpeech: PartOfSpeech
 
-  @Column("json", { nullable: true })
-  @Field(() => [PrincipalPart], { nullable: true })
-  principalParts?: PrincipalPart[] | null
+  @Column("json")
+  @Field(() => [PrincipalPart])
+  principalParts: PrincipalPart[]
 
   @Column("json", { nullable: true })
   @Field(() => InflectionUnion, { nullable: true })
-  inflection?: Inflection | null
+  inflection?: Inflection
 
   @OneToMany(() => Translation, (translation) => translation.entry, {
     nullable: true,
@@ -43,9 +43,9 @@ export default class Entry extends Record {
   @Field(() => [Word])
   words?: Word[]
 
-  @Column("json", { nullable: true })
-  @Field(() => Pronunciation, { nullable: true })
-  pronunciation?: Pronunciation | null
+  @Column("json")
+  @Field(() => Pronunciation)
+  pronunciation?: Pronunciation
 
   @Column("varchar", { length: 1028, nullable: true })
   @Field(() => String, { nullable: true })

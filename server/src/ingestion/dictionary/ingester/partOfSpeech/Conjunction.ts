@@ -1,10 +1,11 @@
+import Uninflected from "../../../../entity/word/inflection/Uninflected"
 import Ingester from "../../Ingester"
 
 export default class Conjunction extends Ingester {
   firstPrincipalPartName = Ingester.getPartOfSpeech(this.$, this.elt)
 
-  ingestInflection() {
-    return null
+  async ingestInflection() {
+    return new Uninflected()
   }
 
   async ingestForms() {

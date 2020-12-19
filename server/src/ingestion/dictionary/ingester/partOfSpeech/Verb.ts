@@ -1,5 +1,6 @@
 import cheerio from "cheerio"
 import { Forms } from "../../../../entity/word/Forms"
+import Uninflected from "../../../../entity/word/inflection/Uninflected"
 import VerbInflection, {
   VerbConjugation,
   verbConjugationRegex,
@@ -10,10 +11,10 @@ import { insertWord, parseFormTable, sortIdentifiers } from "../form"
 export default class Verb extends Ingester {
   firstPrincipalPartName = "present active"
 
-  ingestInflection() {
+  async ingestInflection() {
     const $ = this.$
     const elt = this.elt
-    if (!$(elt).text().includes(";")) throw new Error(`no inflection`)
+    if (!$(elt).text().includes(";")) return new Uninflected()
     let conjugation = $(elt).text().trim().split("; ")[1]
     conjugation = conjugation
       .replace(/(conjugation)|[\d\[\]]/gi, "")
@@ -24,7 +25,7 @@ export default class Verb extends Ingester {
     if (conjugation.match(/third.*io-variant/)) conjugation = "third-io"
     else conjugation = conjugation.match(verbConjugationRegex)?.[0] || ""
 
-    if (!conjugation.length) return new VerbInflection()
+    if (!conjugation.length) return new VerbInflection("", other)
     return new VerbInflection(conjugation as VerbConjugation, other)
   }
 

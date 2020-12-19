@@ -1,8 +1,9 @@
+import Uninflected from "../../../../entity/word/inflection/Uninflected"
 import Adjective from "./Adjective"
 
 export default class Prefix extends Adjective {
-  ingestInflection() {
-    return null
+  async ingestInflection() {
+    return new Uninflected()
   }
 
   async ingestForms() {

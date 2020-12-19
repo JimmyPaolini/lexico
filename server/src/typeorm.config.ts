@@ -14,6 +14,7 @@ export default {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: "lexico",
+  charset: "utf8mb4",
   entities: [Entry, Translation, Word],
   logging: ["log", "info", "schema", "migration", "warn", "error"],
   synchronize: true,

@@ -4,12 +4,11 @@ import { Logger } from "tslog"
 import { getFirstLetter } from "../../utils/string"
 import ingestWord from "./ingestWord"
 
-const log = new Logger()
-
 export default async function ingestDictionary(
   firstLetter = "a",
   lastLetter = "z",
 ) {
+  const log = new Logger()
   log.info(`READING HTML FILES`)
   const files = getHtmlFiles(firstLetter, lastLetter)
   log.info(`STARTING INGESTION`)

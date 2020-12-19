@@ -35,7 +35,8 @@ export default function parsePronunciation(
         .match(/^audio/i)
     )
       continue
-    const pronunciations = $(pr).text().split("IPA(key):")[1].split(", ")
+    const pronunciations = $(pr).text().split("IPA(key):")[1]?.split(", ")
+    if (!pronunciations) continue
     if ($(pr).find("a").text().includes("Classical")) {
       pronunciation.classical = {
         ...pronunciation.classical,

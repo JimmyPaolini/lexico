@@ -2,13 +2,14 @@ import AdjectiveInflection, {
   AdjectiveDeclension,
   adjectiveDelensionRegex,
 } from "../../../../entity/word/inflection/AdjectiveInflection"
+import Uninflected from "../../../../entity/word/inflection/Uninflected"
 import Adjective from "./Adjective"
 
 export default class Pronoun extends Adjective {
-  ingestInflection() {
+  async ingestInflection() {
     const $ = this.$
     const elt = this.elt
-    if (!$(elt).text().includes(";")) throw new Error(`no inflection`)
+    if (!$(elt).text().includes(";")) return new Uninflected()
     let declension = $(elt)
       .text()
       .split("; ")[1]
@@ -18,7 +19,7 @@ export default class Pronoun extends Adjective {
       .replace(/\s+/g, " ")
       .trim()
 
-    if (!declension.length) return new AdjectiveInflection()
+    if (!declension.length) return new Uninflected()
     declension = declension.match(adjectiveDelensionRegex)?.[0] || ""
     return new AdjectiveInflection(declension as AdjectiveDeclension)
   }

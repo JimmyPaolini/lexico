@@ -3,6 +3,7 @@ import path from "path"
 import { Logger } from "tslog"
 import { getConnection, Repository } from "typeorm"
 import Entry from "../../entity/Entry"
+import Word from "../../entity/Word"
 import Ingester from "./Ingester"
 import Adjective from "./ingester/partOfSpeech/Adjective"
 import Adverb from "./ingester/partOfSpeech/Adverb"
@@ -13,9 +14,8 @@ import Preposition from "./ingester/partOfSpeech/Preposition"
 import Pronoun from "./ingester/partOfSpeech/Pronoun"
 import Verb from "./ingester/partOfSpeech/Verb"
 
-const log = new Logger()
-
 export default async function ingestWord(wordString: string) {
+  const log = new Logger()
   log.info("ingesting entry", wordString)
   const data = require(path.join(
     process.cwd(),
@@ -30,7 +30,7 @@ export default async function ingestWord(wordString: string) {
       await Entries.save(word)
     }
   } catch (e) {
-    log.error(e.toString())
+    log.error(e)
   }
 }
 
@@ -45,9 +45,30 @@ async function ingestEtymology(
     partOfSpeech: Ingester.getPartOfSpeech($, elt),
   })
 
-  const ingester: Ingester = new ingestersMap[word.partOfSpeech]($, elt, word)
+  const ingestersMap: { [key: string]: any } = {
+    noun: Noun,
+    properNoun: Noun,
+    verb: Verb,
+    adjective: Adjective,
+    participle: Adjective,
+    numeral: Adjective,
+    suffix: Adjective,
+    prefix: Prefix,
+    pronoun: Pronoun,
+    determiner: Pronoun,
+    adverb: Adverb,
+    preposition: Preposition,
+    conjunction: Conjunction,
+    interjection: Conjunction,
+    phrase: Conjunction,
+    proverb: Conjunction,
+    idiom: Conjunction,
+  }
+  const Words = getConnection().getRepository(Word)
+  const IngesterConstructor = ingestersMap[word.partOfSpeech]
+  const ingester: Ingester = new IngesterConstructor($, elt, word, Words)
 
-  word.inflection = ingester.ingestInflection()
+  word.inflection = await ingester.ingestInflection()
   word.principalParts = await ingester.ingestPrincipalParts()
   word.etymology = ingester.ingestEtymology()
   word.translations = ingester.ingestTranslations()
@@ -55,24 +76,4 @@ async function ingestEtymology(
   word.forms = await ingester.ingestForms()
 
   return word
-}
-
-const ingestersMap: { [key: string]: any } = {
-  noun: Noun,
-  properNoun: Noun,
-  verb: Verb,
-  adjective: Adjective,
-  participle: Adjective,
-  numeral: Adjective,
-  suffix: Adjective,
-  prefix: Prefix,
-  pronoun: Pronoun,
-  determiner: Pronoun,
-  adverb: Adverb,
-  preposition: Preposition,
-  conjunction: Conjunction,
-  interjection: Conjunction,
-  phrase: Conjunction,
-  proverb: Conjunction,
-  idiom: Conjunction,
 }

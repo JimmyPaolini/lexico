@@ -8,7 +8,7 @@ export default function parseTranslations(
   entry: Entry,
 ): Translation[] {
   const translationsHeader = $(elt).nextAll("ol").first()
-  if (translationsHeader.length <= 0) throw new Error(`no translations`)
+  if (translationsHeader.length <= 0) return []
   let translations: Translation[] = []
 
   for (const li of $(translationsHeader).children("li").get()) {
@@ -38,6 +38,5 @@ export default function parseTranslations(
     }
   }
   translations = translations.filter((translation) => !!translation)
-  if (!translations.length) throw new Error("no translations")
   return translations
 }

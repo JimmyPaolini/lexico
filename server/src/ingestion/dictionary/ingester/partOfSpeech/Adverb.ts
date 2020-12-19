@@ -5,10 +5,8 @@ import Ingester from "../../Ingester"
 export default class Adverb extends Ingester {
   firstPrincipalPartName = "positive"
 
-  ingestInflection() {
-    if (!this.principalParts) this.ingestPrincipalParts()
-    if (this.principalParts.length === 1)
-      return new AdverbInflection("conjunctional")
+  async ingestInflection() {
+    if (!this.principalParts) await this.ingestPrincipalParts()
     return this.principalParts.length > 1
       ? new AdverbInflection("descriptive")
       : new AdverbInflection("conjunctional")

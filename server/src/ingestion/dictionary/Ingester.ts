@@ -1,4 +1,4 @@
-import { getConnection, Repository } from "typeorm"
+import { Repository } from "typeorm"
 import Entry from "../../entity/Entry"
 import Translation from "../../entity/Translation"
 import Word from "../../entity/Word"
@@ -18,11 +18,16 @@ export default abstract class Ingester {
   entry: Entry
   Words: Repository<Word>
 
-  constructor($: cheerio.Root, elt: any, entry: Entry) {
+  constructor(
+    $: cheerio.Root,
+    elt: any,
+    entry: Entry,
+    Words: Repository<Word>,
+  ) {
     this.$ = $
     this.elt = elt
     this.entry = entry
-    this.Words = getConnection().getRepository(Word)
+    this.Words = Words
   }
 
   static getPartOfSpeech($: cheerio.Root, elt: any): PartOfSpeech {
@@ -36,7 +41,7 @@ export default abstract class Ingester {
       .replace("proper noun", "properNoun") as PartOfSpeech
   }
 
-  abstract ingestInflection(): Inflection
+  abstract ingestInflection(): Promise<Inflection>
 
   firstPrincipalPartName: string = ""
   principalParts: PrincipalPart[]

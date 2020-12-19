@@ -6,7 +6,7 @@ import Record from "./Record"
 @Entity()
 @ObjectType({ implements: Record })
 export default class Translation extends Record {
-  @Column()
+  @Column("varchar", { length: 2048 })
   @Field(() => String)
   text: string
 

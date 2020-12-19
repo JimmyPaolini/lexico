@@ -4,6 +4,7 @@ import AdjectiveInflection from "./inflection/AdjectiveInflection"
 import AdverbInflection from "./inflection/AdverbInflection"
 import NounInflection from "./inflection/NounInflection"
 import PrepositionInflection from "./inflection/PrepositionInflection"
+import Uninflected from "./inflection/Uninflected"
 import VerbInflection from "./inflection/VerbInflection"
 
 export type Inflection =
@@ -12,7 +13,7 @@ export type Inflection =
   | AdjectiveInflection
   | AdverbInflection
   | PrepositionInflection
-  | null
+  | Uninflected
 
 export const InflectionUnion: UnionFromClasses<
   [
@@ -21,6 +22,7 @@ export const InflectionUnion: UnionFromClasses<
     AdjectiveInflection,
     AdverbInflection,
     PrepositionInflection,
+    Uninflected,
   ]
 > = createUnionType({
   name: "Inflection",
@@ -31,6 +33,7 @@ export const InflectionUnion: UnionFromClasses<
       AdjectiveInflection,
       AdverbInflection,
       PrepositionInflection,
+      Uninflected,
     ] as const,
   resolveType: () => {
     return undefined
