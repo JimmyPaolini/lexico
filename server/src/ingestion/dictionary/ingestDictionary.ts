@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 import { Logger } from "tslog"
 import { getFirstLetter } from "../../utils/string"
-import ingestWord from "./ingestWord"
+import ingestWord from "./ingestEntry"
 
 export default async function ingestDictionary(
   firstLetter = "a",

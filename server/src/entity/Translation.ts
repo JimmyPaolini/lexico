@@ -8,7 +8,7 @@ import Record from "./Record"
 export default class Translation extends Record {
   @Column("varchar", { length: 2048 })
   @Field(() => String)
-  text: string
+  translation: string
 
   @ManyToOne(() => Entry, (entry) => entry.translations, {
     onDelete: "CASCADE",
@@ -18,9 +18,9 @@ export default class Translation extends Record {
   @Field(() => Entry)
   entry: Entry
 
-  constructor(text: string, entry: Entry) {
+  constructor(translation: string, entry: Entry) {
     super()
-    this.text = text
+    this.translation = translation
     this.entry = entry
   }
 }

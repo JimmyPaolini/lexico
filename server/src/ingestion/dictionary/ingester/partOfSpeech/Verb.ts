@@ -6,7 +6,7 @@ import VerbInflection, {
   verbConjugationRegex,
 } from "../../../../entity/word/inflection/VerbInflection"
 import Ingester from "../../Ingester"
-import { insertWord, parseFormTable, sortIdentifiers } from "../form"
+import { parseFormTable, sortIdentifiers } from "../form"
 
 export default class Verb extends Ingester {
   firstPrincipalPartName = "present active"
@@ -126,9 +126,6 @@ export default class Verb extends Ingester {
     )
     for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
       sortIdentifiers(inflection, forms)
-      for (const macronized of inflection.word) {
-        await insertWord(macronized, this.entry, this.Words)
-      }
     }
     return forms as Forms
   }

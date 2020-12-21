@@ -8,23 +8,23 @@ const log = new Logger()
 
 @Resolver(Entry)
 export default class EntryResolver {
-  wordRepository = getConnection().getRepository(Word)
-  entryRepository = getConnection().getRepository(Entry)
+  Words = getConnection().getRepository(Word)
+  Entries = getConnection().getRepository(Entry)
 
   @Query(() => [Entry])
-  async latin(@Arg("search") search: string) {
+  async searchLatin(@Arg("search") search: string) {
     if (!search) return []
-    const word = await this.wordRepository.findOne({ word: search })
-    log.info("search latin", word?.word)
+    const word = await this.Words.findOne({ word: search })
+    log.info("search latin", word)
     return word?.entries
   }
 
   @Query(() => [Entry])
-  async brute(@Arg("search") search: string) {
+  async searchLatinBrute(@Arg("search") search: string) {
     const macronSearch = macronOptionize(search)
     const fieldMatch = (field: string): string =>
       `REGEXP_LIKE(${field}, '"${macronSearch}"', "i")`
-    const words = await this.entryRepository.find({
+    const words = await this.Entries.find({
       where: fieldMatch("principalParts") + " OR " + fieldMatch("forms"),
     })
     words.forEach((word) => log.info(word.word))

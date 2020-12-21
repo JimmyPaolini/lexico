@@ -1,0 +1,38 @@
+import { Logger } from "tslog"
+import { getConnection } from "typeorm"
+import Entry from "../../entity/Entry"
+import Translation from "../../entity/Translation"
+
+const log = new Logger()
+
+export async function ingestTranslationReference(translation: Translation) {
+  const Translations = getConnection().getRepository(Translation)
+  const Entries = getConnection().getRepository(Entry)
+  const references = [
+    ...(translation.translation.match(/(?<=\{\*)\w*(?=\*\})/) || []),
+  ]
+  for (const reference of references) {
+    log.info("ingesting translation ref", reference)
+    const referencedEntry = await Entries.findOne({ word: reference })
+    for (const referencedTranslation of referencedEntry?.translations || []) {
+      // log.info("ingesting translation", referencedTranslation.translation)
+      const newTranslation = new Translation(
+        referencedTranslation.translation,
+        translation.entry,
+      )
+      await Translations.createQueryBuilder()
+        .insert()
+        .values(newTranslation)
+        .updateEntity(false)
+        .execute()
+    }
+  }
+  const translationWithoutReferences = translation.translation
+    .replace(/{\*.*\*}/g, "")
+    .trim()
+  await Translations.createQueryBuilder()
+    .update()
+    .set({ translation: translationWithoutReferences })
+    .where({ id: translation.id })
+    .execute()
+}

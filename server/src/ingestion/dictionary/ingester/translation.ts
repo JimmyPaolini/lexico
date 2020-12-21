@@ -2,11 +2,11 @@ import Entry from "../../../entity/Entry"
 import Translation from "../../../entity/Translation"
 import { normalize } from "../../../utils/string"
 
-export default function parseTranslations(
+export default async function parseTranslations(
   $: cheerio.Root,
   elt: any,
   entry: Entry,
-): Translation[] {
+): Promise<Translation[]> {
   const translationsHeader = $(elt).nextAll("ol").first()
   if (translationsHeader.length <= 0) return []
   let translations: Translation[] = []
@@ -19,14 +19,14 @@ export default function parseTranslations(
     if (translation.match(/This term needs a translation to English/)) continue
     translation = translation.trim().replace(/\.$/, "")
     translations.push({
-      text: translation.charAt(0).toUpperCase() + translation.slice(1),
+      translation: translation.charAt(0).toUpperCase() + translation.slice(1),
       entry,
     } as Translation)
 
     if ($(li).find("span.form-of-definition-link").length > 0) {
       translations.push({
-        text:
-          translations.pop()?.text +
+        translation:
+          translations.pop()?.translation +
           " " +
           $(li)
             .find("span.form-of-definition-link i.Latn.mention")

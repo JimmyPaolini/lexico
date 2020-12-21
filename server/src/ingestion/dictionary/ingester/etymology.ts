@@ -22,10 +22,8 @@ export default function parseEtymology(
     /((present)|(perfect)|(future)) ((active)|(passive) )?participle (\(gerundive\) )?of [A-Za-z\u00C0-\u017F]+/i,
   )
   if (participleMatch) {
-    if (!ingester.translations) ingester.translations = []
-    ingester.translations.push(
-      new Translation(sentenceCase(participleMatch[0].trim()), ingester.entry),
-    )
+    const text = sentenceCase(participleMatch[0].trim())
+    ingester.translations.push(new Translation(text, ingester.entry))
   }
 
   return etymology

@@ -1,12 +1,11 @@
 import { Field, ObjectType } from "type-graphql"
-import { Column, Entity, JoinTable, ManyToMany } from "typeorm"
+import { Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm"
 import Entry from "./Entry"
-import Record from "./Record"
 
 @Entity()
-@ObjectType({ implements: Record })
-export default class Word extends Record {
-  @Column()
+@ObjectType()
+export default class Word {
+  @PrimaryColumn()
   @Field()
   word: string
 

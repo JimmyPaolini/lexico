@@ -1,7 +1,5 @@
-import { Repository } from "typeorm"
 import Entry from "../../entity/Entry"
 import Translation from "../../entity/Translation"
-import Word from "../../entity/Word"
 import { Forms } from "../../entity/word/Forms"
 import { Inflection } from "../../entity/word/Inflection"
 import PrincipalPart from "../../entity/word/PrincipalPart"
@@ -16,18 +14,11 @@ export default abstract class Ingester {
   $: cheerio.Root
   elt: any
   entry: Entry
-  Words: Repository<Word>
 
-  constructor(
-    $: cheerio.Root,
-    elt: any,
-    entry: Entry,
-    Words: Repository<Word>,
-  ) {
+  constructor($: cheerio.Root, elt: any, entry: Entry) {
     this.$ = $
     this.elt = elt
     this.entry = entry
-    this.Words = Words
   }
 
   static getPartOfSpeech($: cheerio.Root, elt: any): PartOfSpeech {
@@ -55,16 +46,15 @@ export default abstract class Ingester {
     return this.principalParts
   }
 
-  translations: Translation[]
-  ingestTranslations(): Translation[] {
-    const translations = parseTranslations(this.$, this.elt, this.entry)
-    if (this.translations) this.translations.unshift(...translations)
-    else this.translations = translations
+  translations: Translation[] = []
+  async ingestTranslations(): Promise<Translation[]> {
+    const translations = await parseTranslations(this.$, this.elt, this.entry)
+    this.translations.unshift(...translations)
     return this.translations
   }
 
   async ingestForms(): Promise<Forms | null> {
-    return await parseForms(this.$, this.elt, this.entry, this.Words)
+    return await parseForms(this.$, this.elt)
   }
 
   macronizedWord: string

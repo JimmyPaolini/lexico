@@ -10,6 +10,10 @@ export function getFirstLetter(word: string) {
   else return l1
 }
 
-export function sentenceCase(str: string) {
+export function sentenceCase(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+export function unescapeCapitals(str: string): string {
+  return str.replace(/([A-Z])`/, "$1")
 }

@@ -8,11 +8,11 @@ const log = new Logger()
 
 @Resolver(Translation)
 export default class TranslationResolver {
-  translationRepository = getConnection().getRepository(Translation)
+  Translations = getConnection().getRepository(Translation)
 
   @Query(() => [Entry])
-  async english(@Arg("search") search: string) {
-    const translations = await this.translationRepository.find({
+  async searchEnglish(@Arg("search") search: string) {
+    const translations = await this.Translations.find({
       relations: ["word"],
       where: { text: Like(`%${search}%`) },
     })

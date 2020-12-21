@@ -1,6 +1,5 @@
 import PrincipalPart from "../../../entity/word/PrincipalPart"
 import Ingester from "../Ingester"
-import { insertWord } from "./form"
 
 export default async function parsePrincipalParts(
   ingester: Ingester,
@@ -35,12 +34,7 @@ export default async function parsePrincipalParts(
     }
   }
 
-  for (const pp of principalParts) {
-    for (const macronized of pp.text) {
-      await insertWord(macronized, ingester.entry, ingester.Words)
-    }
-  }
-
+  if (!principalParts.length) throw new Error("no principle parts")
   ingester.macronizedWord = principalParts[0].text[0]
   return principalParts
 }

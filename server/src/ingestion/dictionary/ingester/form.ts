@@ -1,8 +1,5 @@
 import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
-import { Repository } from "typeorm"
-import Entry from "../../../entity/Entry"
-import Word from "../../../entity/Word"
 import { Forms } from "../../../entity/word/Forms"
 
 // const log = new Logger()
@@ -10,8 +7,6 @@ import { Forms } from "../../../entity/word/Forms"
 export default async function parseForms(
   $: cheerio.Root,
   elt: any,
-  entry: Entry,
-  Words: Repository<Word>,
 ): Promise<Forms | null> {
   const table = parseFormTable($, elt)
   if (!table) return null
@@ -66,9 +61,6 @@ export default async function parseForms(
   )
   for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
     sortIdentifiers(inflection, forms)
-    for (const macronized of inflection.word) {
-      await insertWord(macronized, entry, Words)
-    }
   }
   return forms as Forms
 }
@@ -103,30 +95,4 @@ export function sortIdentifiers(inflection: any, obj: any) {
   }
 }
 
-export async function insertWord(
-  macronized: string,
-  entry: Entry,
-  Words: Repository<Word>,
-) {
-  macronized
-  entry
-  Words
-  return
-  // const word = normalize(macronized)
-  // // log.info("ingesting word", word)
-  // const existingWord = await Words.findOne({ word })
-  // if (existingWord) {
-  //   if (
-  //     !existingWord.entries.some(
-  //       (existingEntry) => existingEntry.id === entry.id,
-  //     )
-  //   ) {
-  //     await Words.createQueryBuilder()
-  //       .relation(Word, "entries")
-  //       .of(existingWord)
-  //       .add(entry)
-  //   }
-  // } else {
-  //   await Words.save({ word, entries: [entry] })
-  // }
-}
+
