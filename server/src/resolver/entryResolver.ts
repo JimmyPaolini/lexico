@@ -1,8 +1,8 @@
 import { Logger } from "tslog"
 import { Arg, Query, Resolver } from "type-graphql"
 import { getConnection } from "typeorm"
-import Entry from "../entity/Entry"
-import Word from "../entity/Word"
+import Entry from "../entity/dictionary/Entry"
+import Word from "../entity/dictionary/Word"
 
 const log = new Logger()
 
@@ -16,7 +16,7 @@ export default class EntryResolver {
     if (!search) return []
     const word = await this.Words.findOne({ word: search })
     log.info("search latin", word)
-    return word?.entries
+    return word?.entries.filter((entry) => !!entry.translations)
   }
 
   @Query(() => [Entry])
@@ -24,11 +24,16 @@ export default class EntryResolver {
     const macronSearch = macronOptionize(search)
     const fieldMatch = (field: string): string =>
       `REGEXP_LIKE(${field}, '"${macronSearch}"', "i")`
-    const words = await this.Entries.find({
+    const entries = await this.Entries.find({
       where: fieldMatch("principalParts") + " OR " + fieldMatch("forms"),
     })
-    words.forEach((word) => log.info(word.word))
-    return words
+    entries.forEach((entry) => log.info(entry.word))
+    return entries.filter((entry) => !!entry.translations)
+  }
+
+  @Query(() => [Entry])
+  async untranslated() {
+    return await this.Entries.query(`SELECT * FROM untranslated`)
   }
 }
 

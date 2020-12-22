@@ -1,9 +1,9 @@
 import { Logger } from "tslog"
 import { Arg, Mutation, Resolver } from "type-graphql"
 import { FindManyOptions, getConnection, Like } from "typeorm"
-import Entry from "../entity/Entry"
-import Translation from "../entity/Translation"
-import Word from "../entity/Word"
+import Entry from "../entity/dictionary/Entry"
+import Translation from "../entity/dictionary/Translation"
+import Word from "../entity/dictionary/Word"
 import ingestDictionary from "../ingestion/dictionary/ingestDictionary"
 import ingestEntry from "../ingestion/dictionary/ingestEntry"
 import { ingestTranslationReference } from "../ingestion/dictionary/ingestTranslationReferences"
@@ -12,6 +12,7 @@ import ingestWiktionary, {
   categories,
 } from "../ingestion/wiktionary/ingestWiktionary"
 import backupDatabase from "../utils/backup"
+import { escapeCapitals } from "../utils/string"
 
 const log = new Logger()
 
@@ -28,7 +29,6 @@ export default class IngestionResolver {
   ) {
     validateLetters([firstLetter, lastLetter])
     await ingestDictionary(firstLetter, lastLetter)
-    backupDatabase()
     return true
   }
 
@@ -39,7 +39,7 @@ export default class IngestionResolver {
   ) {
     validateLetters([firstLetter, lastLetter])
     let params = {
-      where: `REGEXP_LIKE(word, "^[${firstLetter}-${lastLetter}]", "i")`,
+      where: `REGEXP_LIKE(word, "^-?[${firstLetter}-${lastLetter}]", "i")`,
       order: { word: "ASC" },
       take: 100,
     } as FindManyOptions<Entry>
@@ -53,7 +53,6 @@ export default class IngestionResolver {
       skip += params.take as number
       entries = await this.Entries.find({ ...params, skip })
     }
-    backupDatabase()
     return true
   }
 
@@ -75,13 +74,12 @@ export default class IngestionResolver {
       skip += params.take as number
       translations = await this.Translations.find({ ...params, skip })
     }
-    backupDatabase()
     return true
   }
 
   @Mutation(() => Boolean)
   async ingestEntry(@Arg("word") word: string) {
-    await ingestEntry(word)
+    await ingestEntry(escapeCapitals(word))
     return true
   }
 
@@ -90,14 +88,9 @@ export default class IngestionResolver {
     @Arg("firstLetter") firstLetter: string,
     @Arg("lastLetter") lastLetter: string,
   ) {
-    if (firstLetter === "-") {
-      const regex = `REGEXP_LIKE(word, "^\\-", "i")`
-      await this.Words.query(`DELETE FROM entry WHERE ${regex}`)
-      firstLetter = "a"
-    }
     validateLetters([firstLetter, lastLetter])
     log.info("Clearing entries")
-    const regex = `REGEXP_LIKE(word, "^[${firstLetter}-${lastLetter}]", "i")`
+    const regex = `REGEXP_LIKE(word, "^-?[${firstLetter}-${lastLetter}]", "i")`
     await this.Entries.query(`DELETE FROM entry WHERE ${regex}`)
     log.info("Cleared entries")
     return true
@@ -108,14 +101,9 @@ export default class IngestionResolver {
     @Arg("firstLetter") firstLetter: string,
     @Arg("lastLetter") lastLetter: string,
   ) {
-    if (firstLetter === "-") {
-      const regex = `REGEXP_LIKE(word, "^\\-", "i")`
-      await this.Words.query(`DELETE FROM word WHERE ${regex}`)
-      firstLetter = "a"
-    }
     validateLetters([firstLetter, lastLetter])
     log.info("Clearing words")
-    const regex = `REGEXP_LIKE(word, "^[${firstLetter}-${lastLetter}]", "i")`
+    const regex = `REGEXP_LIKE(word, "^-?[${firstLetter}-${lastLetter}]", "i")`
     await this.Words.query(`DELETE FROM word WHERE ${regex}`)
     log.info("Cleared words")
     return true
@@ -134,8 +122,20 @@ export default class IngestionResolver {
   }
 
   @Mutation(() => Boolean)
+  async ingestAll(
+    @Arg("firstLetter") firstLetter: string,
+    @Arg("lastLetter") lastLetter: string,
+  ) {
+    await this.ingestEntries(firstLetter, lastLetter)
+    await this.ingestTranslationReferences()
+    await this.ingestWords(firstLetter, lastLetter)
+    backupDatabase("backup")
+    return true
+  }
+
+  @Mutation(() => Boolean)
   async backupDatabase() {
-    backupDatabase()
+    backupDatabase("backup")
     return true
   }
 }

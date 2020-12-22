@@ -1,6 +1,6 @@
 import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
-import { Forms } from "../../../entity/word/Forms"
+import { Forms } from "../../../entity/dictionary/word/Forms"
 
 // const log = new Logger()
 

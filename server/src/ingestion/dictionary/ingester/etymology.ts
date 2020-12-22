@@ -1,4 +1,4 @@
-import Translation from "../../../entity/Translation"
+import Translation from "../../../entity/dictionary/Translation"
 import { sentenceCase } from "../../../utils/string"
 import Ingester from "../Ingester"
 

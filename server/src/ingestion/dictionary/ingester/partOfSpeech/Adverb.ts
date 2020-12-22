@@ -1,5 +1,5 @@
-import AdverbForms from "../../../../entity/word/forms/AdverbForms"
-import AdverbInflection from "../../../../entity/word/inflection/AdverbInflection"
+import AdverbForms from "../../../../entity/dictionary/word/forms/AdverbForms"
+import AdverbInflection from "../../../../entity/dictionary/word/inflection/AdverbInflection"
 import Ingester from "../../Ingester"
 
 export default class Adverb extends Ingester {

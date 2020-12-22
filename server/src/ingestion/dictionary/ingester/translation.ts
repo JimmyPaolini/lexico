@@ -1,6 +1,10 @@
-import Entry from "../../../entity/Entry"
-import Translation from "../../../entity/Translation"
-import { normalize } from "../../../utils/string"
+import Entry from "../../../entity/dictionary/Entry"
+import Translation from "../../../entity/dictionary/Translation"
+import {
+  normalize,
+  sentenceCase,
+  translationSkipRegex,
+} from "../../../utils/string"
 
 export default async function parseTranslations(
   $: cheerio.Root,
@@ -17,26 +21,22 @@ export default async function parseTranslations(
     $(li).children("ol, ul, dl").remove()
     let translation = $(li).text()
     if (translation.match(/This term needs a translation to English/)) continue
-    translation = translation.trim().replace(/\.$/, "")
-    translations.push({
-      translation: translation.charAt(0).toUpperCase() + translation.slice(1),
-      entry,
-    } as Translation)
+    translation = sentenceCase(translation.trim().replace(/\.$/, ""))
 
     if ($(li).find("span.form-of-definition-link").length > 0) {
-      translations.push({
-        translation:
-          translations.pop()?.translation +
-          " " +
-          $(li)
-            .find("span.form-of-definition-link i.Latn.mention")
-            .get()
-            .map((ref) => `{*${normalize($(ref).text())}*}`)
-            .join(" "),
-        entry,
-      } as Translation)
+      if (!translation.match(translationSkipRegex)) continue
+      translation +=
+        " " +
+        $(li)
+          .find("span.form-of-definition-link")
+          .get()
+          .map((ref) => `{*${normalize($(ref).text())}*}`)
+          .join(" ")
     }
+
+    translations.push({ translation, entry } as Translation)
   }
-  translations = translations.filter((translation) => !!translation)
+
+  translations = translations.filter((translation) => !!translation.translation)
   return translations
 }

@@ -1,9 +1,12 @@
 import dotenv from "dotenv"
 import "reflect-metadata"
 import { createConnection, getConnection } from "typeorm"
-import Entry from "./entity/Entry"
-import Translation from "./entity/Translation"
-import Word from "./entity/Word"
+import Entry from "./entity/dictionary/Entry"
+import Translation from "./entity/dictionary/Translation"
+import Word from "./entity/dictionary/Word"
+import Author from "./entity/literature/Author"
+import Line from "./entity/literature/Line"
+import Work from "./entity/literature/Work"
 
 dotenv.config()
 export default {
@@ -15,7 +18,7 @@ export default {
   password: process.env.DB_PASSWORD,
   database: "lexico",
   charset: "utf8mb4",
-  entities: [Entry, Translation, Word],
+  entities: [Entry, Translation, Word, Author, Work, Line],
   logging: ["log", "info", "schema", "migration", "warn", "error"],
   synchronize: true,
 } as Parameters<typeof createConnection>[0]
@@ -48,9 +51,27 @@ export async function createViews() {
   await createPartOfSpeechView("adjective")
   await createPartOfSpeechView("adverb")
 
-  await getConnection().query(`CREATE OR REPLACE VIEW part_of_speech_counts AS
-  SELECT partOfSpeech, COUNT(DISTINCT(word)) as count FROM entry GROUP BY partOfSpeech`)
+  await getConnection().query(
+    `CREATE OR REPLACE VIEW part_of_speech_counts AS ` +
+      `SELECT partOfSpeech, ` +
+      `COUNT(DISTINCT(word)) as count, ` +
+      `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM entry) * 100 as percent ` +
+      `FROM entry GROUP BY partOfSpeech`,
+  )
 
-  await getConnection().query(`CREATE OR REPLACE VIEW letter_counts AS
-  SELECT DISTINCT(LOWER(LEFT(word, 1))) as firstLetter, COUNT(DISTINCT(word)) as count FROM entry GROUP BY LOWER(LEFT(word, 1))`)
+  await getConnection().query(
+    `CREATE OR REPLACE VIEW entry_letter_counts AS ` +
+      `SELECT LOWER(LEFT(word, 1)) as letter, ` +
+      `COUNT(DISTINCT(word)) as count, ` +
+      `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM entry) * 100 as percent ` +
+      `FROM entry GROUP BY LOWER(LEFT(word, 1))`,
+  )
+
+  await getConnection().query(
+    `CREATE OR REPLACE VIEW word_letter_counts AS ` +
+      `SELECT LOWER(LEFT(word, 1)) as letter, ` +
+      `COUNT(DISTINCT(word)) as count, ` +
+      `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM word) * 100 as percent ` +
+      `FROM word GROUP BY LOWER(LEFT(word, 1))`,
+  )
 }

@@ -12,10 +12,12 @@ export default async function ingestDictionary(
   log.info(`READING HTML FILES`)
   const files = getHtmlFiles(firstLetter, lastLetter)
   log.info(`STARTING INGESTION`)
+  // const t0 = performance.now()
   for (let fileName of files) {
-    await ingestWord(fileName.replace(/\.json$/gi, ""))
+    await ingestWord(fileName.replace(/\.json$/, ""))
   }
-  log.info(`FINISHED INGESTION`)
+  // const runtimeInMinutes = (performance.now() - t0) / 1000 / 60
+  // log.info(`FINISHED INGESTION`, runtimeInMinutes, "minutes")
 }
 
 function getHtmlFiles(firstLetter: string, lastLetter: string): string[] {
@@ -25,8 +27,7 @@ function getHtmlFiles(firstLetter: string, lastLetter: string): string[] {
   files.filter(
     (fileName) =>
       getFirstLetter(fileName) >= firstLetter &&
-      getFirstLetter(fileName) <= lastLetter &&
-      !fileName.slice(0, -5).match(/\s|\.|-/g),
+      getFirstLetter(fileName) <= lastLetter,
   )
   files.sort((a, b) => getFirstLetter(a).localeCompare(getFirstLetter(b)))
   return files

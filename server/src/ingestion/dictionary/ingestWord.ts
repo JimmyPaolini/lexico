@@ -1,14 +1,14 @@
 import { Logger } from "tslog"
 import { getConnection } from "typeorm"
-import Entry from "../../entity/Entry"
-import Word from "../../entity/Word"
+import Entry from "../../entity/dictionary/Entry"
+import Word from "../../entity/dictionary/Word"
 import flattenForms from "../../utils/flattenForms"
-import { normalize } from "../../utils/string"
+import { escapeCapitals, normalize } from "../../utils/string"
 
 const log = new Logger()
 
 export async function getEntryForms(entry: Entry) {
-  log.info("ingesting forms", entry.word)
+  log.info("ingesting words", entry.word)
   for (const form of getForms(entry)) {
     await ingestWord(form, entry)
   }
@@ -22,7 +22,8 @@ export function getForms(entry: Entry): string[] {
 
 export async function ingestWord(form: string, entry: Entry) {
   const Words = getConnection().getRepository(Word)
-  const word = normalize(form)
+  const word = escapeCapitals(normalize(form))
+  if (!word.match(/^-?[A-Za-z]/)) return
   const existingWord = await Words.findOne({ word })
   if (existingWord) {
     if (
@@ -36,7 +37,6 @@ export async function ingestWord(form: string, entry: Entry) {
         .add(entry)
     }
   } else {
-    // await Words.insert({ word, entries: [entry] })
     await Words.createQueryBuilder()
       .insert()
       .values({ word, entries: [entry] })

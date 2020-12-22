@@ -1,8 +1,8 @@
 import AdjectiveInflection, {
   AdjectiveDeclension,
   adjectiveDelensionRegex,
-} from "../../../../entity/word/inflection/AdjectiveInflection"
-import Uninflected from "../../../../entity/word/inflection/Uninflected"
+} from "../../../../entity/dictionary/word/inflection/AdjectiveInflection"
+import Uninflected from "../../../../entity/dictionary/word/inflection/Uninflected"
 import Adjective from "./Adjective"
 
 export default class Pronoun extends Adjective {

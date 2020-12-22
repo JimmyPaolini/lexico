@@ -1,7 +1,8 @@
 import { Logger } from "tslog"
 import { getConnection } from "typeorm"
-import Entry from "../../entity/Entry"
-import Translation from "../../entity/Translation"
+import Entry from "../../entity/dictionary/Entry"
+import Translation from "../../entity/dictionary/Translation"
+import { escapeCapitals } from "../../utils/string"
 
 const log = new Logger()
 
@@ -12,8 +13,10 @@ export async function ingestTranslationReference(translation: Translation) {
     ...(translation.translation.match(/(?<=\{\*)\w*(?=\*\})/) || []),
   ]
   for (const reference of references) {
-    log.info("ingesting translation ref", reference)
-    const referencedEntry = await Entries.findOne({ word: reference })
+    log.info("ingesting translation reference", reference)
+    const referencedEntry = await Entries.findOne({
+      word: escapeCapitals(reference),
+    })
     for (const referencedTranslation of referencedEntry?.translations || []) {
       // log.info("ingesting translation", referencedTranslation.translation)
       const newTranslation = new Translation(

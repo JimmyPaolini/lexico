@@ -1,6 +1,9 @@
 export function normalize(str: string): string {
   if (!str) return ""
-  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/æ/g, "ae")
 }
 
 export function getFirstLetter(word: string) {
@@ -14,6 +17,48 @@ export function sentenceCase(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+export function escapeCapitals(str: string): string {
+  return str
+    .split("")
+    .map((c: string) => (c.match(/[A-Z]/g) ? c + "`" : c))
+    .join("")
+}
+
 export function unescapeCapitals(str: string): string {
   return str.replace(/([A-Z])`/, "$1")
+}
+
+export const translationSkipRegex = new RegExp(
+  /(alternative)|(alternate)|(abbreviation)|(initialism)|(archaic)|(synonym)|(clipping)|(spelling)/gi,
+)
+
+export function unabbreviateText(text: string): string {
+  return text
+    .replace(/Agr\./gi, "agrippa")
+    .replace(/Ap\./gi, "appius")
+    .replace(/A\./gi, "aulus")
+    .replace(/K\./gi, "caeso")
+    .replace(/D\./gi, "decimo")
+    .replace(/F\./gi, "faustus")
+    .replace(/C\./gi, "gaius")
+    .replace(/Gn\./gi, "gnaeus")
+    .replace(/L\./gi, "lucius")
+    .replace(/Mam\./gi, "mamercus")
+    .replace(/M'\./gi, "manius")
+    .replace(/M\./gi, "marcus")
+    .replace(/N\./gi, "numerius")
+    .replace(/O\./gi, "octavius")
+    .replace(/Opt\./gi, "opiter")
+    .replace(/Post\./gi, "postumus")
+    .replace(/Pr\./gi, "proculus")
+    .replace(/P\./gi, "publius")
+    .replace(/A\./gi, "quintus")
+    .replace(/Sert\./gi, "sertor")
+    .replace(/Ser\./gi, "servius")
+    .replace(/Sex\./gi, "sextus")
+    .replace(/Ti\./gi, "tiberius")
+    .replace(/T\./gi, "titus")
+    .replace(/V\./gi, "vibius")
+    .replace(/Vol\./gi, "volesus")
+    .replace(/Vop\./gi, "vopiscus")
 }

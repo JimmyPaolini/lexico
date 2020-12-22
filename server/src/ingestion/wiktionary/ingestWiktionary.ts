@@ -3,20 +3,15 @@ import fs from "fs"
 import fp from "path"
 import request from "request-promise-native"
 import { Logger } from "tslog"
-import { getFirstLetter } from "../../utils/string"
+import { escapeCapitals, getFirstLetter } from "../../utils/string"
 const putItemHtml = (entry: any) =>
   fs.writeFileSync(
     fp.join(
       process.cwd(),
-      `./data/wiktionary/lemma/${cleanup(entry.word)}.json`,
+      `./data/wiktionary/lemma/${escapeCapitals(entry.word)}.json`,
     ),
     JSON.stringify(entry, null, 2),
   )
-const cleanup = (word: string): string =>
-  word
-    .split("")
-    .map((c: string) => (c.match(/[A-Z]/g) ? c + "`" : c))
-    .join("")
 
 const log = new Logger()
 

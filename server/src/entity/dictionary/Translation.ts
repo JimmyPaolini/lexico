@@ -1,11 +1,20 @@
-import { Field, ObjectType } from "type-graphql"
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm"
+import { Field, ID, ObjectType } from "type-graphql"
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm"
 import Entry from "./Entry"
-import Record from "./Record"
 
 @Entity()
-@ObjectType({ implements: Record })
-export default class Translation extends Record {
+@ObjectType()
+export default class Translation {
+  @PrimaryGeneratedColumn()
+  @Field(() => ID)
+  id: number
+
   @Column("varchar", { length: 2048 })
   @Field(() => String)
   translation: string
@@ -19,7 +28,6 @@ export default class Translation extends Record {
   entry: Entry
 
   constructor(translation: string, entry: Entry) {
-    super()
     this.translation = translation
     this.entry = entry
   }

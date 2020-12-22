@@ -1,10 +1,10 @@
 import cheerio from "cheerio"
-import { Forms } from "../../../../entity/word/Forms"
-import Uninflected from "../../../../entity/word/inflection/Uninflected"
+import { Forms } from "../../../../entity/dictionary/word/Forms"
+import Uninflected from "../../../../entity/dictionary/word/inflection/Uninflected"
 import VerbInflection, {
   VerbConjugation,
   verbConjugationRegex,
-} from "../../../../entity/word/inflection/VerbInflection"
+} from "../../../../entity/dictionary/word/inflection/VerbInflection"
 import Ingester from "../../Ingester"
 import { parseFormTable, sortIdentifiers } from "../form"
 
@@ -29,11 +29,11 @@ export default class Verb extends Ingester {
     return new VerbInflection(conjugation as VerbConjugation, other)
   }
 
-  async ingestForms(): Promise<Forms> {
+  async ingestForms(): Promise<Forms | null> {
     const $ = this.$
     const elt = this.elt
     const table = parseFormTable($, elt)
-    if (!table) throw new Error(`no forms`)
+    if (!table) return null
 
     function parseWords(cell: string, number: string, person: string) {
       const isMood = (word: string) =>

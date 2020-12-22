@@ -1,6 +1,11 @@
-import { Field, ObjectType } from "type-graphql"
-import { Column, Entity, ManyToMany, OneToMany } from "typeorm"
-import Record from "./Record"
+import { Field, ID, ObjectType } from "type-graphql"
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm"
 import Translation from "./Translation"
 import Word from "./Word"
 import { Forms, FormsUnion } from "./word/Forms"
@@ -9,9 +14,13 @@ import PrincipalPart from "./word/PrincipalPart"
 import { Pronunciation } from "./word/Pronunciation"
 
 @Entity()
-@ObjectType({ implements: Record })
-export default class Entry extends Record {
-  @Column("varchar", { length: 64 })
+@ObjectType()
+export default class Entry {
+  @PrimaryGeneratedColumn()
+  @Field(() => ID)
+  id: number
+
+  @Column("varchar", { length: 128 })
   @Field()
   word: string
 
