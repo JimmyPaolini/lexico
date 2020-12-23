@@ -17,7 +17,7 @@ import { escapeCapitals } from "../utils/string"
 const log = new Logger()
 
 @Resolver()
-export default class IngestionResolver {
+export default class DictionaryIngestionResolver {
   Entries = getConnection().getRepository(Entry)
   Words = getConnection().getRepository(Word)
   Translations = getConnection().getRepository(Translation)
@@ -80,6 +80,16 @@ export default class IngestionResolver {
   @Mutation(() => Boolean)
   async ingestEntry(@Arg("word") word: string) {
     await ingestEntry(escapeCapitals(word))
+    return true
+  }
+
+  @Mutation(() => Boolean)
+  async clearDictionary(
+    @Arg("firstLetter") firstLetter: string,
+    @Arg("lastLetter") lastLetter: string,
+  ) {
+    await this.clearEntries(firstLetter, lastLetter)
+    await this.clearWords(firstLetter, lastLetter)
     return true
   }
 

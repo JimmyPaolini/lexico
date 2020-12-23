@@ -1,14 +1,20 @@
 import { ApolloServer } from "apollo-server-express"
 import "reflect-metadata"
 import { buildSchema } from "type-graphql"
-import EntryResolver from "./resolver/entryResolver"
-import IngestionResolver from "./resolver/ingestionResolver"
-import TranslationResolver from "./resolver/translationResolver"
+import DictionaryIngestionResolver from "./resolver/dictionaryIngestionResolver"
+import DictionaryResolver from "./resolver/dictionaryResolver"
+import LiteratureIngestionResolver from "./resolver/literatureIngestionResolver"
+import LiteratureResolver from "./resolver/literatureResolver"
 
 export default async function apolloServerConfig(): Promise<ApolloServerExpressConfig> {
   return {
     schema: await buildSchema({
-      resolvers: [EntryResolver, TranslationResolver, IngestionResolver],
+      resolvers: [
+        DictionaryResolver,
+        DictionaryIngestionResolver,
+        LiteratureResolver,
+        LiteratureIngestionResolver,
+      ],
     }),
   }
 }

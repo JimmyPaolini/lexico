@@ -15,7 +15,7 @@ export default class Translation {
   @Field(() => ID)
   id: number
 
-  @Column("varchar", { length: 2048 })
+  @Column("varchar", { length: 2047 })
   @Field(() => String)
   translation: string
 

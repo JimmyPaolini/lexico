@@ -5,13 +5,25 @@ import Work from "./Work"
 @Entity()
 @ObjectType()
 export default class Author {
-  @PrimaryColumn()
+  @PrimaryColumn("varchar", { length: 64 })
   @Field()
-  name: string
+  name!: string
 
   @Column("varchar", { length: 64 })
   @Field()
-  nickname: string
+  nickname!: string
+
+  @Column("date", { nullable: true })
+  @Field(() => Date, { nullable: true })
+  birthDate?: Date
+
+  @Column("date", { nullable: true })
+  @Field(() => Date, { nullable: true })
+  deathDate?: Date
+
+  @Column("varchar", { length: 2047, nullable: true })
+  @Field({ nullable: true })
+  biography?: string
 
   @OneToMany(() => Work, (text) => text.author, {
     cascade: true,

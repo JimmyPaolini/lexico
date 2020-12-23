@@ -20,7 +20,7 @@ export default class Entry {
   @Field(() => ID)
   id: number
 
-  @Column("varchar", { length: 128 })
+  @Column("varchar", { length: 127 })
   @Field()
   word: string
 
@@ -56,7 +56,7 @@ export default class Entry {
   @Field(() => Pronunciation, { nullable: true })
   pronunciation?: Pronunciation
 
-  @Column("varchar", { length: 1028, nullable: true })
+  @Column("varchar", { length: 1027, nullable: true })
   @Field(() => String, { nullable: true })
   etymology?: string | null
 

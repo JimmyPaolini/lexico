@@ -1,23 +1,25 @@
+import { getConnection } from "typeorm"
+import Author from "../../entity/literature/Author"
 import ingestionAuthors from "./ingestionAuthors.json"
 import { ingestWork } from "./ingestWork"
-import { IngestionAuthor } from "./literatureIngestionTypes"
+import { IngestionAuthor, IngestionWork } from "./literatureIngestionTypes"
+import { authorNameMap } from "./literatureMaps"
 
-// const authorMap: { [key: string]: string } = {
-//   virgil: "publius vergilius maro",
-//   caesar: "gaius iulius caesar",
-//   ovid: "publius ovidius naso",
-//   augustus: "caesar divi filius augustus",
-// }
-
-export default async function ingestAuthors() {
-  const authors: IngestionAuthor[] = ingestionAuthors
-  const authorNames = ["vergil", "caesar", "ovid", "augustus"]
+export default async function ingestWorks() {
+  const Authors = getConnection().getRepository(Author)
+  const authorNames = ["virgil", "caesar", "ovid", "augustus"]
   for (const authorName of authorNames) {
-    const author = authors.find((author) => author.name === authorName)
-    if (!author) continue
-    for (const work of author.works) {
-      // if (work.path === 'resgestae1.html') continue
-      await ingestWork(author, work)
+    const ingestionAuthor = (ingestionAuthors as IngestionAuthor[]).find(
+      (ingestionAuthor) => ingestionAuthor.name === authorName,
+    )
+    if (!ingestionAuthor) continue
+    const author = await Authors.save({
+      name: authorNameMap[ingestionAuthor.name],
+      nickname: ingestionAuthor.name,
+    })
+    for (const ingestionWork of ingestionAuthor.works as IngestionWork[]) {
+      // if (ingestionWork.path === 'resgestae1.html') continue
+      await ingestWork(ingestionAuthor.name, ingestionWork.path, author)
     }
   }
 }

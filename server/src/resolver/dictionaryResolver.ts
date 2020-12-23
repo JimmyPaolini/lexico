@@ -1,15 +1,17 @@
 import { Logger } from "tslog"
 import { Arg, Query, Resolver } from "type-graphql"
-import { getConnection } from "typeorm"
+import { getConnection, Like } from "typeorm"
 import Entry from "../entity/dictionary/Entry"
+import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
 
 const log = new Logger()
 
 @Resolver(Entry)
-export default class EntryResolver {
-  Words = getConnection().getRepository(Word)
+export default class DictionaryResolver {
   Entries = getConnection().getRepository(Entry)
+  Translations = getConnection().getRepository(Translation)
+  Words = getConnection().getRepository(Word)
 
   @Query(() => [Entry])
   async searchLatin(@Arg("search") search: string) {
@@ -17,6 +19,18 @@ export default class EntryResolver {
     const word = await this.Words.findOne({ word: search })
     log.info("search latin", word)
     return word?.entries.filter((entry) => !!entry.translations)
+  }
+
+  @Query(() => [Entry])
+  async searchEnglish(@Arg("search") search: string) {
+    if (!search) return []
+    const translations = await this.Translations.find({
+      where: { translation: Like(`%${search}%`) },
+      relations: ["entry"],
+    })
+    const words = translations.map((t) => t.entry)
+    words.forEach((word) => log.info(word.word))
+    return words
   }
 
   @Query(() => [Entry])

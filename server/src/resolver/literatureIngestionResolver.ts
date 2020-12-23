@@ -1,19 +1,46 @@
 import { Logger } from "tslog"
-import { Query, Resolver } from "type-graphql"
+import { Mutation, Resolver } from "type-graphql"
 import { getConnection } from "typeorm"
+import Author from "../entity/literature/Author"
+import Line from "../entity/literature/Line"
 import Work from "../entity/literature/Work"
-import ingestAuthors from "../ingestion/literature/ingestLiterature"
+import ingestWorks from "../ingestion/literature/ingestLiterature"
 
 const log = new Logger()
 
 @Resolver(Work)
 export default class LiteratureIngestionResolver {
+  Authors = getConnection().getRepository(Author)
   Works = getConnection().getRepository(Work)
+  Lines = getConnection().getRepository(Line)
 
-  @Query(() => Boolean)
+  @Mutation(() => Boolean)
   async ingestWorks() {
-    log.info("going")
-    await ingestAuthors()
+    await ingestWorks()
+    return true
+  }
+
+  @Mutation(() => Boolean)
+  async clearAuthors() {
+    log.info("clearing authors")
+    await this.Authors.query(`DELETE FROM author`)
+    log.info("cleared authors")
+    return true
+  }
+
+  @Mutation(() => Boolean)
+  async clearWorks() {
+    log.info("clearing works")
+    await this.Lines.query(`DELETE FROM line`)
+    await this.Works.query(`DELETE FROM work`)
+    log.info("cleared works")
+    return true
+  }
+
+  @Mutation(() => Boolean)
+  async clearLiterature() {
+    await this.clearWorks()
+    await this.clearAuthors()
     return true
   }
 }

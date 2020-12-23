@@ -14,14 +14,21 @@ import Work from "./Work"
 export default class Line {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  id: number
+  id!: number
+
+  @Column()
+  @Field()
+  lineNumber!: number
 
   @Column("varchar", { length: 4095 })
   @Field()
-  word: string
+  text!: string
+
+  @Column("varchar", { length: 4095, nullable: true })
+  @Field({ nullable: true })
+  comments?: string
 
   @ManyToOne(() => Author, (author) => author.works, {
-    eager: true,
     onUpdate: "CASCADE",
   })
   @JoinColumn()
