@@ -61,6 +61,7 @@ async function ingestEtymology(
       preposition: Preposition,
       conjunction: Conjunction,
       interjection: Conjunction,
+      particle: Conjunction,
       phrase: Conjunction,
       proverb: Conjunction,
       idiom: Conjunction,

@@ -4,6 +4,6 @@
 **/*.env
 **/node_modules
 **/dist
-/data/
+data/wiktionary
 yarn.lock
 *.log

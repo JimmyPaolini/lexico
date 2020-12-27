@@ -1,5 +1,6 @@
 import { Field, ObjectType } from "type-graphql"
 import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm"
+import Book from "./Book"
 import Work from "./Work"
 
 @Entity()
@@ -25,9 +26,15 @@ export default class Author {
   @Field({ nullable: true })
   biography?: string
 
-  @OneToMany(() => Work, (text) => text.author, {
+  @OneToMany(() => Work, (work) => work.author, {
     cascade: true,
   })
   @Field(() => [Work])
   works: Work[]
+
+  @OneToMany(() => Book, (book) => book.author, {
+    cascade: true,
+  })
+  @Field(() => [Book])
+  books: Book[]
 }

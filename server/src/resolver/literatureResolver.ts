@@ -20,7 +20,11 @@ export default class LiteratureResolver {
   @Query(() => Author)
   async findAuthor(@Arg("name") name: string) {
     const where = [{ name }, { nickname: name }]
-    const author = await this.Authors.findOne({ where, relations: ["works"] })
+    const author = await this.Authors.findOne({
+      where,
+      relations: ["works"],
+      order: { name: "ASC" },
+    })
     return author
   }
 
@@ -30,6 +34,7 @@ export default class LiteratureResolver {
     const works = await this.Works.find({
       where,
       relations: ["author", "lines"],
+      order: { title: "ASC" },
     })
     works.forEach((work) =>
       work.lines.sort((l1, l2) => l1.lineNumber - l2.lineNumber),

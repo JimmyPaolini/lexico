@@ -4,6 +4,7 @@ import { getConnection } from "typeorm"
 import Author from "../entity/literature/Author"
 import Line from "../entity/literature/Line"
 import Work from "../entity/literature/Work"
+import ingestLibrary from "../ingestion/literature/ingestLibrary"
 import ingestWorks from "../ingestion/literature/ingestLiterature"
 
 const log = new Logger()
@@ -13,6 +14,12 @@ export default class LiteratureIngestionResolver {
   Authors = getConnection().getRepository(Author)
   Works = getConnection().getRepository(Work)
   Lines = getConnection().getRepository(Line)
+
+  @Mutation(() => Boolean)
+  async ingestLibrary() {
+    await ingestLibrary()
+    return true
+  }
 
   @Mutation(() => Boolean)
   async ingestWorks() {

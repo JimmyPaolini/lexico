@@ -60,6 +60,9 @@ export default class Entry {
   @Field(() => String, { nullable: true })
   etymology?: string | null
 
+  @Field(() => [String], { nullable: true })
+  identifiers?: string[]
+
   // @ManyToMany(() => Entry, (entry) => entry.synonyms)
   // @JoinTable()
   // @Field(() => [Entry])

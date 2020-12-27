@@ -5,6 +5,7 @@ import Entry from "./entity/dictionary/Entry"
 import Translation from "./entity/dictionary/Translation"
 import Word from "./entity/dictionary/Word"
 import Author from "./entity/literature/Author"
+import Book from "./entity/literature/Book"
 import Line from "./entity/literature/Line"
 import Work from "./entity/literature/Work"
 
@@ -18,7 +19,7 @@ export default {
   password: process.env.DB_PASSWORD,
   database: "lexico",
   charset: "utf8mb4",
-  entities: [Entry, Translation, Word, Author, Work, Line],
+  entities: [Entry, Translation, Word, Author, Book, Work, Line],
   logging: ["log", "info", "schema", "migration", "warn", "error"],
   synchronize: true,
 } as Parameters<typeof createConnection>[0]

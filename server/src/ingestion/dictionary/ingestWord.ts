@@ -1,14 +1,11 @@
-import { Logger } from "tslog"
 import { getConnection } from "typeorm"
 import Entry from "../../entity/dictionary/Entry"
 import Word from "../../entity/dictionary/Word"
-import flattenForms from "../../utils/flattenForms"
+import flattenForms from "../../utils/forms"
 import { escapeCapitals, normalize } from "../../utils/string"
 
-const log = new Logger()
-
 export async function getEntryForms(entry: Entry) {
-  log.info("ingesting words", entry.word)
+  // log.info("ingesting words", entry.word)
   for (const form of getForms(entry)) {
     await ingestWord(form, entry)
   }

@@ -8,6 +8,7 @@ import {
   PrimaryColumn,
 } from "typeorm"
 import Author from "./Author"
+import Book from "./Book"
 import Line from "./Line"
 
 @Entity()
@@ -28,6 +29,15 @@ export default class Work {
   @JoinColumn()
   @Field(() => Author)
   author: Author
+
+  @ManyToOne(() => Book, (author) => author.works, {
+    eager: true,
+    onUpdate: "CASCADE",
+    nullable: true,
+  })
+  @JoinColumn()
+  @Field(() => Book, { nullable: true })
+  book?: Book
 
   @OneToMany(() => Line, (line) => line.work, {
     cascade: true,

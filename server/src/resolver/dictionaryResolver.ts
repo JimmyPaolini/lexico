@@ -4,6 +4,7 @@ import { getConnection, Like } from "typeorm"
 import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
+import { identifyWord } from "../utils/forms"
 
 const log = new Logger()
 
@@ -15,10 +16,36 @@ export default class DictionaryResolver {
 
   @Query(() => [Entry])
   async searchLatin(@Arg("search") search: string) {
-    if (!search) return []
+    if (!search) throw new Error("empty search")
+    if (!search.match(/^-?\w+$/)) throw new Error("invalid search")
+    const entries = []
+    const pushSuffix = async (suffix: string) => {
+      if (search.match(new RegExp(suffix + "$"))) {
+        const entry = await this.Entries.findOne({ word: "-" + suffix })
+        if (entry) entries.push(entry)
+        search = search.replace(new RegExp(suffix + "$"), "")
+      }
+    }
+    await pushSuffix("que")
+    await pushSuffix("ve")
+    await pushSuffix("ne")
     const word = await this.Words.findOne({ word: search })
-    log.info("search latin", word)
-    return word?.entries.filter((entry) => !!entry.translations)
+    if (word) entries.unshift(...word?.entries)
+    for (const entry of entries) {
+      if (
+        [
+          "noun",
+          "verb",
+          "adjective",
+          "participle",
+          "numeral",
+          "suffix",
+        ].includes(entry.partOfSpeech)
+      ) {
+        entry.identifiers = identifyWord(search, entry.forms, [], [])
+      }
+    }
+    return entries.filter((entry) => !!entry.translations?.length)
   }
 
   @Query(() => [Entry])
@@ -35,7 +62,7 @@ export default class DictionaryResolver {
 
   @Query(() => [Entry])
   async searchLatinBrute(@Arg("search") search: string) {
-    const macronSearch = macronOptionize(search)
+    const macronSearch = getMacronOptionRegex(search)
     const fieldMatch = (field: string): string =>
       `REGEXP_LIKE(${field}, '"${macronSearch}"', "i")`
     const entries = await this.Entries.find({
@@ -51,7 +78,7 @@ export default class DictionaryResolver {
   }
 }
 
-function macronOptionize(str: string) {
+function getMacronOptionRegex(str: string) {
   return str
     .replace(/a/g, "(a|ā)")
     .replace(/A/g, "(A|Ā)")
