@@ -10,6 +10,7 @@ import Translation from "./Translation"
 import Word from "./Word"
 import { Forms, FormsUnion } from "./word/Forms"
 import { Inflection, InflectionUnion } from "./word/Inflection"
+import { PartOfSpeech } from "./word/PartOfSpeech"
 import PrincipalPart from "./word/PrincipalPart"
 import { Pronunciation } from "./word/Pronunciation"
 

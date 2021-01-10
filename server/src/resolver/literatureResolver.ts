@@ -2,12 +2,12 @@ import { Arg, Query, Resolver } from "type-graphql"
 import { getConnection, Like } from "typeorm"
 import Author from "../entity/literature/Author"
 import Line from "../entity/literature/Line"
-import Work from "../entity/literature/Work"
+import Text from "../entity/literature/Text"
 
-@Resolver(Work)
+@Resolver(Text)
 export default class LiteratureResolver {
   Authors = getConnection().getRepository(Author)
-  Works = getConnection().getRepository(Work)
+  Works = getConnection().getRepository(Text)
   Lines = getConnection().getRepository(Line)
 
   @Query(() => [Author])
@@ -28,7 +28,7 @@ export default class LiteratureResolver {
     return author
   }
 
-  @Query(() => [Work])
+  @Query(() => [Text])
   async searchWorks(@Arg("title") title: string) {
     const where = [{ title: Like(`%${title}%`) }]
     const works = await this.Works.find({

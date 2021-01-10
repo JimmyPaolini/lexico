@@ -1,5 +1,5 @@
 import Translation from "../../../entity/dictionary/Translation"
-import { sentenceCase } from "../../../utils/string"
+import { capitalizeFirstLetter } from "../../../utils/string"
 import Ingester from "../Ingester"
 
 export default function parseEtymology(
@@ -22,7 +22,7 @@ export default function parseEtymology(
     /((present)|(perfect)|(future)) ((active)|(passive) )?participle (\(gerundive\) )?of [A-Za-z\u00C0-\u017F]+/i,
   )
   if (participleMatch) {
-    const text = sentenceCase(participleMatch[0].trim())
+    const text = capitalizeFirstLetter(participleMatch[0].trim())
     ingester.translations.push(new Translation(text, ingester.entry))
   }
 

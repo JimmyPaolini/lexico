@@ -13,7 +13,7 @@ import Line from "./Line"
 
 @Entity()
 @ObjectType()
-export default class Work {
+export default class Text {
   @PrimaryColumn()
   @Field()
   title: string
@@ -22,7 +22,7 @@ export default class Work {
   @Field(() => Date, { nullable: true })
   publishDate?: Date
 
-  @ManyToOne(() => Author, (author) => author.works, {
+  @ManyToOne(() => Author, (author) => author.texts, {
     eager: true,
     onUpdate: "CASCADE",
   })
@@ -30,7 +30,7 @@ export default class Work {
   @Field(() => Author)
   author: Author
 
-  @ManyToOne(() => Book, (author) => author.works, {
+  @ManyToOne(() => Book, (author) => author.texts, {
     eager: true,
     onUpdate: "CASCADE",
     nullable: true,
@@ -39,7 +39,7 @@ export default class Work {
   @Field(() => Book, { nullable: true })
   book?: Book
 
-  @OneToMany(() => Line, (line) => line.work, {
+  @OneToMany(() => Line, (line) => line.text, {
     cascade: true,
   })
   @Field(() => [Line])

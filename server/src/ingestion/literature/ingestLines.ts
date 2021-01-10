@@ -1,18 +1,18 @@
 import { getConnection } from "typeorm"
 import Author from "../../entity/literature/Author"
 import Line from "../../entity/literature/Line"
-import Work from "../../entity/literature/Work"
+import Text from "../../entity/literature/Text"
 
 export default async function ingestLines(
   $: cheerio.Root,
-  work: Work,
+  text: Text,
   author: Author,
 ) {
   const Lines = getConnection().getRepository(Line)
-  const text = getText($)
+  const lines = getText($)
   await Promise.all(
-    text.split("\n").map(async (text, lineNumber) => {
-      await Lines.insert({ text, lineNumber, work, author })
+    lines.split("\n").map(async (line, lineNumber) => {
+      await Lines.insert({ line, lineNumber, text, author })
     }),
   )
 }

@@ -1,15 +1,14 @@
-import dotenv from "dotenv"
 import "reflect-metadata"
 import { createConnection, getConnection } from "typeorm"
 import Entry from "./entity/dictionary/Entry"
 import Translation from "./entity/dictionary/Translation"
 import Word from "./entity/dictionary/Word"
+import { PartOfSpeech } from "./entity/dictionary/word/PartOfSpeech"
 import Author from "./entity/literature/Author"
 import Book from "./entity/literature/Book"
 import Line from "./entity/literature/Line"
-import Work from "./entity/literature/Work"
+import Text from "./entity/literature/Text"
 
-dotenv.config()
 export default {
   name: "default",
   type: "mysql",
@@ -19,7 +18,7 @@ export default {
   password: process.env.DB_PASSWORD,
   database: "lexico",
   charset: "utf8mb4",
-  entities: [Entry, Translation, Word, Author, Book, Work, Line],
+  entities: [Entry, Translation, Word, Author, Book, Text, Line],
   logging: ["log", "info", "schema", "migration", "warn", "error"],
   synchronize: true,
 } as Parameters<typeof createConnection>[0]
@@ -41,6 +40,9 @@ export async function createViews() {
   await createCountView("entry")
   await createCountView("word")
   await createCountView("translation")
+  await createCountView("author")
+  await createCountView("book")
+  await createCountView("text")
 
   async function createPartOfSpeechView(partOfSpeech: PartOfSpeech) {
     await getConnection().query(`CREATE OR REPLACE VIEW ${partOfSpeech} AS

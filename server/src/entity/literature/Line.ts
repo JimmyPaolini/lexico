@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm"
 import Author from "./Author"
-import Work from "./Work"
+import Text from "./Text"
 
 @Entity()
 @ObjectType()
@@ -22,22 +22,22 @@ export default class Line {
 
   @Column("varchar", { length: 4095 })
   @Field()
-  text!: string
+  line!: string
 
   @Column("varchar", { length: 4095, nullable: true })
   @Field({ nullable: true })
   comments?: string
 
-  @ManyToOne(() => Author, (author) => author.works, {
+  @ManyToOne(() => Author, {
     onUpdate: "CASCADE",
   })
   @JoinColumn()
   @Field(() => Author)
   author: Author
 
-  @ManyToOne(() => Work, (work) => work.lines, {
+  @ManyToOne(() => Text, (text) => text.lines, {
     onUpdate: "CASCADE",
   })
-  @Field(() => Work)
-  work: Work
+  @Field(() => Text)
+  text: Text
 }

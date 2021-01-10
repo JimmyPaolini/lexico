@@ -1,10 +1,9 @@
 {
-  "name": "lexico-server",
-  "version": "1.0.0",
-  "description": "lexico-server",
-  "main": "dist/app.js",
+  "scripts": {
+    "dev": "nodemon dist/app.js",
+    "prod": "node dist/app.js"
+  },
   "dependencies": {
-    "@apollo/client": "^3.3.6",
     "apollo-server-express": "^2.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -35,16 +34,14 @@
     "eslint": "^7.15.0",
     "prettier": "^2.2.1"
   },
-  "scripts": {
-    "watch": "tsc -w",
-    "dev": "nodemon --max-old-space-size=1024 dist/app.js",
-    "start": "node --max-old-space-size=2048 dist/app.js",
-    "wiktionary": "node dist/ingestion/wiktionary/index.js"
-  },
   "nodemonConfig": {
     "delay": "1000"
   },
-  "repository": "https://github.com/JimmyPaolini/Lexico",
+  "name": "lexico-server",
+  "main": "dist/app.js",
   "author": "Jimmy Paolini",
+  "description": "lexico-server",
+  "repository": "https://github.com/JimmyPaolini/Lexico",
+  "version": "1.0.0",
   "license": "ISC"
 }

@@ -1,4 +1,4 @@
-type PartOfSpeech =
+export type PartOfSpeech =
   | "verb"
   | "noun"
   | "proper noun"

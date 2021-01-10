@@ -1,5 +1,5 @@
 /* spellchecker: disable */
-export function normalize(str: string): string {
+export function normalize(str: string) {
   if (!str) return ""
   return str
     .normalize("NFD")
@@ -7,7 +7,7 @@ export function normalize(str: string): string {
     .replace(/æ/g, "ae")
 }
 
-export function capitalizeFirstLetter(str: string): string {
+export function capitalizeFirstLetter(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
@@ -34,14 +34,14 @@ export function getFirstLetter(word: string) {
   else return l1
 }
 
-export function escapeCapitals(str: string): string {
+export function escapeCapitals(str: string) {
   return str
     .split("")
     .map((c: string) => (c.match(/[A-Z]/g) ? c + "`" : c))
     .join("")
 }
 
-export function unescapeCapitals(str: string): string {
+export function unescapeCapitals(str: string) {
   return str.replace(/([A-Z])`/, "$1")
 }
 
@@ -49,7 +49,7 @@ export const translationSkipRegex = new RegExp(
   /(alternative)|(alternate)|(abbreviation)|(initialism)|(archaic)|(synonym)|(clipping)|(spelling)/gi,
 )
 
-export function unabbreviateText(text: string): string {
+export function unabbreviateText(text: string) {
   return text
     .replace(/Agr\./gi, "agrippa")
     .replace(/Ap\./gi, "appius")

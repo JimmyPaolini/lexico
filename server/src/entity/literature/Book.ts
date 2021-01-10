@@ -8,7 +8,7 @@ import {
   PrimaryColumn,
 } from "typeorm"
 import Author from "./Author"
-import Work from "./Work"
+import Text from "./Text"
 
 @Entity()
 @ObjectType()
@@ -21,11 +21,11 @@ export default class Book {
   @Field(() => Date, { nullable: true })
   publishDate?: Date
 
-  @OneToMany(() => Work, (work) => work.author, {
+  @OneToMany(() => Text, (work) => work.author, {
     cascade: true,
   })
-  @Field(() => [Work])
-  works: Work[]
+  @Field(() => [Text])
+  texts: Text[]
 
   @ManyToOne(() => Author, (author) => author.books, {
     eager: true,

@@ -2,7 +2,7 @@ import Entry from "../../../entity/dictionary/Entry"
 import Translation from "../../../entity/dictionary/Translation"
 import {
   normalize,
-  sentenceCase,
+  capitalizeFirstLetter,
   translationSkipRegex,
 } from "../../../utils/string"
 
@@ -21,7 +21,7 @@ export default async function parseTranslations(
     $(li).children("ol, ul, dl").remove()
     let translation = $(li).text()
     if (translation.match(/This term needs a translation to English/)) continue
-    translation = sentenceCase(translation.trim().replace(/\.$/, ""))
+    translation = capitalizeFirstLetter(translation.trim().replace(/\.$/, ""))
 
     if ($(li).find("span.form-of-definition-link").length > 0) {
       if (!translation.match(translationSkipRegex)) continue

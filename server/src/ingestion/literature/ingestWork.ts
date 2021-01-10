@@ -3,7 +3,7 @@ import request from "request-promise-native"
 import { Logger } from "tslog"
 import { getConnection } from "typeorm"
 import Author from "../../entity/literature/Author"
-import Work from "../../entity/literature/Work"
+import Text from "../../entity/literature/Text"
 import ingestLines from "./ingestLines"
 import { worksMap } from "./literatureMaps"
 
@@ -14,7 +14,7 @@ export async function ingestWork(
   path: string,
   author: Author,
 ) {
-  const Works = getConnection().getRepository(Work)
+  const Works = getConnection().getRepository(Text)
   try {
     const host = "https://www.thelatinlibrary.com/"
     const html = (await request(host + path))

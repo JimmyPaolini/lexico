@@ -1,0 +1,13 @@
+**/.DS_Store
+**/.vscode
+**/.idea
+**/*.env
+**/node_modules
+**/dist
+data/wiktionary
+yarn.lock
+*.log
+
+# next.js
+/.next/
+/out/

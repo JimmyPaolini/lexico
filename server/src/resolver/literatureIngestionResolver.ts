@@ -3,16 +3,16 @@ import { Mutation, Resolver } from "type-graphql"
 import { getConnection } from "typeorm"
 import Author from "../entity/literature/Author"
 import Line from "../entity/literature/Line"
-import Work from "../entity/literature/Work"
+import Text from "../entity/literature/Text"
 import ingestLibrary from "../ingestion/literature/ingestLibrary"
 import ingestWorks from "../ingestion/literature/ingestLiterature"
 
 const log = new Logger()
 
-@Resolver(Work)
+@Resolver(Text)
 export default class LiteratureIngestionResolver {
   Authors = getConnection().getRepository(Author)
-  Works = getConnection().getRepository(Work)
+  Works = getConnection().getRepository(Text)
   Lines = getConnection().getRepository(Line)
 
   @Mutation(() => Boolean)
