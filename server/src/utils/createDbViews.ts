@@ -1,29 +1,8 @@
 import "reflect-metadata"
-import { createConnection, getConnection } from "typeorm"
-import Entry from "./entity/dictionary/Entry"
-import Translation from "./entity/dictionary/Translation"
-import Word from "./entity/dictionary/Word"
-import { PartOfSpeech } from "./entity/dictionary/word/PartOfSpeech"
-import Author from "./entity/literature/Author"
-import Book from "./entity/literature/Book"
-import Line from "./entity/literature/Line"
-import Text from "./entity/literature/Text"
+import { getConnection } from "typeorm"
+import { PartOfSpeech } from "../entity/dictionary/word/PartOfSpeech"
 
-export default {
-  name: "default",
-  type: "mysql",
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: "lexico",
-  charset: "utf8mb4",
-  entities: [Entry, Translation, Word, Author, Book, Text, Line],
-  logging: ["log", "info", "schema", "migration", "warn", "error"],
-  synchronize: true,
-} as Parameters<typeof createConnection>[0]
-
-export async function createViews() {
+export default async function createDbViews() {
   await getConnection().query(`
     CREATE OR REPLACE VIEW untranslated AS
     SELECT word, partOfSpeech, principalParts, inflection, translation, forms, etymology, pronunciation
