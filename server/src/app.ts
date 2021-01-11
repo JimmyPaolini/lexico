@@ -11,10 +11,10 @@ export const log = new Logger()
 
 async function main() {
   dotenv.config()
-  console.log("here")
+
   await createConnection(typeormConfig)
   await createViews()
-  console.log("there")
+
   const app = express()
   app.use(express.json())
   app.listen(process.env.PORT, () =>

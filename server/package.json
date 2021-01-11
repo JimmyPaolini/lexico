@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "nodemon dist/app.js",
-    "prod": "node dist/app.js"
+    "start": "node dist/app.js"
   },
   "dependencies": {
     "apollo-server-express": "^2.19.0",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/cheerio": "^0.22.23",
     "@types/express": "^4.17.9",
+    "@types/mysql": "^2.15.17",
     "@types/node": "^14.14.11",
     "@types/passport": "^1.0.4",
     "@types/prettier": "^2.1.5",

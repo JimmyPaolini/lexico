@@ -54,27 +54,17 @@ export async function createViews() {
   await createPartOfSpeechView("adjective")
   await createPartOfSpeechView("adverb")
 
-  await getConnection().query(
-    `CREATE OR REPLACE VIEW part_of_speech_counts AS ` +
-      `SELECT partOfSpeech, ` +
-      `COUNT(DISTINCT(word)) as count, ` +
-      `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM entry) * 100 as percent ` +
-      `FROM entry GROUP BY partOfSpeech`,
-  )
+  async function createCountsView(name: string, selector: string) {
+    await getConnection().query(
+      `CREATE OR REPLACE VIEW ${name}_counts AS ` +
+        `SELECT ${selector}, ` +
+        `COUNT(DISTINCT(word)) as count, ` +
+        `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM entry) * 100 as percent ` +
+        `FROM entry GROUP BY ${selector}`,
+    )
+  }
 
-  await getConnection().query(
-    `CREATE OR REPLACE VIEW entry_letter_counts AS ` +
-      `SELECT LOWER(LEFT(word, 1)) as letter, ` +
-      `COUNT(DISTINCT(word)) as count, ` +
-      `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM entry) * 100 as percent ` +
-      `FROM entry GROUP BY LOWER(LEFT(word, 1))`,
-  )
-
-  await getConnection().query(
-    `CREATE OR REPLACE VIEW word_letter_counts AS ` +
-      `SELECT LOWER(LEFT(word, 1)) as letter, ` +
-      `COUNT(DISTINCT(word)) as count, ` +
-      `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM word) * 100 as percent ` +
-      `FROM word GROUP BY LOWER(LEFT(word, 1))`,
-  )
+  await createCountsView("part_of_speech", "partOfSpeech")
+  await createCountsView("entry_letter", "LOWER(LEFT(word, 1))")
+  await createCountsView("word_letter", "LOWER(LEFT(word, 1))")
 }
