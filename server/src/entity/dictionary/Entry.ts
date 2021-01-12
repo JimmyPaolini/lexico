@@ -25,7 +25,7 @@ export default class Entry {
   @Field()
   word: string
 
-  @Column("varchar", { length: 16 })
+  @Column("varchar", { length: 32 })
   @Field(() => String)
   partOfSpeech: PartOfSpeech
 

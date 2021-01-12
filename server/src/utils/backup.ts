@@ -12,6 +12,9 @@ export default function backupDatabase(name: string) {
       // `-P ${process.env.DB_PORT} ` +
       // `-u ${process.env.DB_USERNAME} ` +
       // `-p ${process.env.DB_PASSWORD} ` +
+      `--protocol=tcp` +
+      `--single-transaction=TRUE ` +
+      `--skip-triggers "lexico"` +
       `lexico > ${fileKey}`,
   )
   log.info("backed up database:", fileKey)

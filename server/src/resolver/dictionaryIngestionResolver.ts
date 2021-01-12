@@ -5,7 +5,7 @@ import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
 import ingestDictionary from "../ingestion/dictionary/ingestDictionary"
-import ingestEntry from "../ingestion/dictionary/ingestEntry"
+import ingestEntries from "../ingestion/dictionary/ingestEntry"
 import { ingestTranslationReference } from "../ingestion/dictionary/ingestTranslationReferences"
 import { getEntryForms } from "../ingestion/dictionary/ingestWord"
 import ingestWiktionary, {
@@ -79,7 +79,7 @@ export default class DictionaryIngestionResolver {
 
   @Mutation(() => Boolean)
   async ingestEntry(@Arg("word") word: string) {
-    await ingestEntry(escapeCapitals(word))
+    await ingestEntries(escapeCapitals(word))
     return true
   }
 

@@ -4,6 +4,7 @@ import { Logger } from "tslog"
 import { getConnection } from "typeorm"
 import Entry from "../../entity/dictionary/Entry"
 import Translation from "../../entity/dictionary/Translation"
+import { PartOfSpeech } from "../../entity/dictionary/word/PartOfSpeech"
 import { normalize } from "../../utils/string"
 import Ingester from "./Ingester"
 import Adjective from "./ingester/partOfSpeech/Adjective"
@@ -17,7 +18,7 @@ import Verb from "./ingester/partOfSpeech/Verb"
 
 const log = new Logger()
 
-export default async function ingestEntry(wordString: string) {
+export default async function ingestEntries(wordString: string) {
   // log.info("ingesting entry", wordString)
   const data = require(path.join(
     process.cwd(),
@@ -27,11 +28,11 @@ export default async function ingestEntry(wordString: string) {
 
   wordString = normalize(wordString)
   for (const elt of $("p:has(strong.Latn.headword)").get()) {
-    await ingestEtymology(wordString, $, elt)
+    await ingestEntry(wordString, $, elt)
   }
 }
 
-async function ingestEtymology(
+async function ingestEntry(
   word: string,
   $: cheerio.Root,
   elt: any,
@@ -44,7 +45,7 @@ async function ingestEtymology(
     partOfSpeech: Ingester.getPartOfSpeech($, elt),
   })
   try {
-    const ingestersMap: { [key: string]: any } = {
+    const ingestersMap: { [key in PartOfSpeech]: any } = {
       noun: Noun,
       properNoun: Noun,
       verb: Verb,
@@ -61,6 +62,7 @@ async function ingestEtymology(
       preposition: Preposition,
       conjunction: Conjunction,
       interjection: Conjunction,
+      inflection: Conjunction,
       particle: Conjunction,
       phrase: Conjunction,
       proverb: Conjunction,
@@ -68,7 +70,7 @@ async function ingestEtymology(
     }
     const IngesterConstructor = ingestersMap[entry.partOfSpeech]
     if (!IngesterConstructor) {
-      log.info("skipping entry", entry.word)
+      log.info("skipping entry", entry)
       await Entries.delete(entry.id)
       return
     }
