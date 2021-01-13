@@ -7,18 +7,18 @@ import VerbalNoun from "./verbForms/VerbalNoun"
 
 @ObjectType()
 export default class VerbForms {
-  @Field(() => Indicative)
-  indicative: Indicative = new Indicative()
+  @Field(() => Indicative, { nullable: true })
+  indicative?: Indicative = new Indicative()
 
-  @Field(() => Subjunctive)
-  subjunctive: Subjunctive = new Subjunctive()
+  @Field(() => Subjunctive, { nullable: true })
+  subjunctive?: Subjunctive = new Subjunctive()
 
-  @Field(() => Imperative)
-  imperative: Imperative = new Imperative()
+  @Field(() => Imperative, { nullable: true })
+  imperative?: Imperative = new Imperative()
 
-  @Field(() => NonFinite)
-  nonFinite: NonFinite = new NonFinite()
+  @Field(() => NonFinite, { nullable: true })
+  nonFinite?: NonFinite = new NonFinite()
 
-  @Field(() => VerbalNoun)
-  verbalNoun: VerbalNoun = new VerbalNoun()
+  @Field(() => VerbalNoun, { nullable: true })
+  verbalNoun?: VerbalNoun = new VerbalNoun()
 }

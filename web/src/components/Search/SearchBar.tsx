@@ -13,9 +13,9 @@ import { Context } from "../Context"
 
 interface Props {
   search: string
-  handleSearchChange: any
+  setSearch: Dispatch<SetStateAction<string>>
   handleSearchExecute: any
-  loading: boolean
+  isLoading: boolean
   target: string
   isLatin: boolean
   setLatin: Dispatch<SetStateAction<boolean>>
@@ -23,12 +23,10 @@ interface Props {
 
 export default function SearchBar({
   search,
-  handleSearchChange,
+  setSearch,
   handleSearchExecute,
-  loading,
+  isLoading,
   target = "",
-  // isLatin,
-  // setLatin,
 }: Props) {
   const classes = useStyles()
   const { isNavOpen, setNavOpen } = useContext(Context)
@@ -64,7 +62,7 @@ export default function SearchBar({
         placeholder={"Search " + pascalCase(target)}
         inputProps={{ "aria-label": "search", "ref": input }}
         value={search}
-        onChange={handleSearchChange}
+        onChange={(e) => setSearch(e.target.value)}
         onKeyDown={(e) => {
           if (e.keyCode === 13) handleSearchExecute()
         }}
@@ -75,7 +73,7 @@ export default function SearchBar({
         className={classes.iconButton}
         aria-label="search"
       >
-        {!loading ? (
+        {!isLoading ? (
           <SearchIcon />
         ) : (
           <CircularProgress size={24} thickness={5.4} color="secondary" />

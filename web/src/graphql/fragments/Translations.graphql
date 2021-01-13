@@ -1,0 +1,3 @@
+fragment allTranslations on Translation {
+  translation
+}

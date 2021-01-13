@@ -1,5 +1,4 @@
 import Entry from "../../../server/src/entity/dictionary/Entry"
-import { getId } from "./globals"
 
 function validateBookmarks() {
   if (!window.localStorage.bookmarks)
@@ -28,19 +27,19 @@ export function setBookmarks(bookmarks: Entry[]) {
 export function isBookmarked(entry: Entry) {
   validateBookmarks()
   const bookmarks = getBookmarks()
-  return !!bookmarks[getId(entry)]
+  return !!bookmarks[entry.id]
 }
 
 export function createBookmark(entry: Entry) {
   validateBookmarks()
   const bookmarks = getBookmarks()
-  bookmarks[getId(entry)] = entry
+  bookmarks[entry.id] = entry
   setBookmarks(bookmarks)
 }
 
 export function deleteBookmark(entry: Entry) {
   validateBookmarks()
   const bookmarks = getBookmarks()
-  delete bookmarks[getId(entry)]
+  delete bookmarks[entry.id]
   setBookmarks(bookmarks)
 }

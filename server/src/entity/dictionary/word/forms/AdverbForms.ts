@@ -2,13 +2,13 @@ import { Field, ObjectType } from "type-graphql"
 
 @ObjectType()
 export default class AdverbForms {
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   positive: string[]
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   comparative?: string[]
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   superlative?: string[]
 
   constructor(

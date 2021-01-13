@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core/styles"
+import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles"
 
 export default createMuiTheme({
   palette: {
@@ -26,4 +26,4 @@ export default createMuiTheme({
   custom: {
     cardWidth: 382,
   },
-} as any)
+} as ThemeOptions)

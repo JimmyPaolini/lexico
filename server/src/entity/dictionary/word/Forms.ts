@@ -16,7 +16,8 @@ export const FormsUnion: UnionFromClasses<
     if ("indicative" in value) return VerbForms
     if ("positive" in value) return AdverbForms
     else if ("nominative" in value) {
-      if ("masculine" in value.nominative.singular) return AdjectiveForms
+      if (value?.nominative?.singular?.hasOwnProperty("masculine"))
+        return AdjectiveForms
       else return NounForms
     } else return undefined
   },

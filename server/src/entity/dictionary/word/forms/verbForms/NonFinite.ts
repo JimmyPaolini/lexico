@@ -2,57 +2,57 @@ import { Field, ObjectType } from "type-graphql"
 
 @ObjectType()
 export class NonFinitePresentPerfectFuture {
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   present: string[] = []
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   perfect: string[] = []
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   future: string[] = []
 }
 
 @ObjectType()
 export class NonFinitePresentFuture {
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   present: string[] = []
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   future: string[] = []
 }
 
 @ObjectType()
 export class NonFinitePerfectFuture {
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   perfect: string[] = []
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   future: string[] = []
 }
 
 @ObjectType()
 export class NonFiniteInfinitive {
-  @Field(() => NonFinitePresentPerfectFuture)
+  @Field(() => NonFinitePresentPerfectFuture, { nullable: true })
   active: NonFinitePresentPerfectFuture = new NonFinitePresentPerfectFuture()
 
-  @Field(() => NonFinitePresentPerfectFuture)
+  @Field(() => NonFinitePresentPerfectFuture, { nullable: true })
   passive: NonFinitePresentPerfectFuture = new NonFinitePresentPerfectFuture()
 }
 
 @ObjectType()
 export class NonFiniteParticiple {
-  @Field()
+  @Field(() => NonFinitePresentFuture, { nullable: true })
   active: NonFinitePresentFuture = new NonFinitePresentFuture()
 
-  @Field()
+  @Field(() => NonFinitePerfectFuture, { nullable: true })
   passive: NonFinitePerfectFuture = new NonFinitePerfectFuture()
 }
 
 @ObjectType()
 export default class NonFinite {
-  @Field(() => NonFiniteInfinitive)
+  @Field(() => NonFiniteInfinitive, { nullable: true })
   infinitive: NonFiniteInfinitive = new NonFiniteInfinitive()
 
-  @Field(() => NonFiniteParticiple)
+  @Field(() => NonFiniteParticiple, { nullable: true })
   participle: NonFiniteParticiple = new NonFiniteParticiple()
 }

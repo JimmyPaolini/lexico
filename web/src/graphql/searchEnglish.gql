@@ -1,0 +1,21 @@
+#import "./fragments/PrincipalParts.graphql"
+#import "./fragments/Translations.graphql"
+#import "./fragments/forms/Forms.graphql"
+
+query SearchEnglish($search: String!) {
+  searchEnglish(search: $search) {
+    id
+    word
+    partOfSpeech
+    principalParts {
+      ...allPrincipalParts
+    }
+    translations {
+      ...allTranslations
+    }
+    forms {
+      ...allForms
+    }
+    identifiers
+  }
+}

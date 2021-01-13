@@ -2,75 +2,75 @@ import { Field, ObjectType } from "type-graphql"
 
 @ObjectType()
 export class ImperativeSecondThird {
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   second: string[] = []
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   third: string[] = []
 }
 
 @ObjectType()
 export class ImperativeSecond {
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   second: string[]
 }
 
 @ObjectType()
 export class ImperativeThird {
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   third: string[]
 }
 
 @ObjectType()
 export class ImperativePresent {
-  @Field(() => ImperativeSecond)
+  @Field(() => ImperativeSecond, { nullable: true })
   singular: ImperativeSecond = new ImperativeSecond()
 
-  @Field(() => ImperativeSecond)
+  @Field(() => ImperativeSecond, { nullable: true })
   plural: ImperativeSecond = new ImperativeSecond()
 }
 
 @ObjectType()
 export class ImperativeActiveFuture {
-  @Field(() => ImperativeSecondThird)
+  @Field(() => ImperativeSecondThird, { nullable: true })
   singular: ImperativeSecondThird = new ImperativeSecondThird()
 
-  @Field(() => ImperativeSecondThird)
+  @Field(() => ImperativeSecondThird, { nullable: true })
   plural: ImperativeSecondThird = new ImperativeSecondThird()
 }
 
 @ObjectType()
 export class ImperativePassiveFuture {
-  @Field(() => ImperativeSecondThird)
+  @Field(() => ImperativeSecondThird, { nullable: true })
   singular: ImperativeSecondThird = new ImperativeSecondThird()
 
-  @Field(() => ImperativeThird)
+  @Field(() => ImperativeThird, { nullable: true })
   plural: ImperativeThird = new ImperativeThird()
 }
 
 @ObjectType()
 export class ImperativeActive {
-  @Field(() => ImperativePresent)
+  @Field(() => ImperativePresent, { nullable: true })
   present: ImperativePresent = new ImperativePresent()
 
-  @Field(() => ImperativeActiveFuture)
+  @Field(() => ImperativeActiveFuture, { nullable: true })
   future: ImperativeActiveFuture = new ImperativeActiveFuture()
 }
 
 @ObjectType()
 export class ImperativePassive {
-  @Field(() => ImperativePresent)
+  @Field(() => ImperativePresent, { nullable: true })
   present: ImperativePresent = new ImperativePresent()
 
-  @Field(() => ImperativePassiveFuture)
+  @Field(() => ImperativePassiveFuture, { nullable: true })
   future: ImperativePassiveFuture = new ImperativePassiveFuture()
 }
 
 @ObjectType()
 export default class Imperative {
-  @Field(() => ImperativeActive)
+  @Field(() => ImperativeActive, { nullable: true })
   active: ImperativeActive = new ImperativeActive()
 
-  @Field(() => ImperativePassive)
+  @Field(() => ImperativePassive, { nullable: true })
   passive: ImperativePassive = new ImperativePassive()
 }

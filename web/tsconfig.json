@@ -7,6 +7,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
+    "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -23,7 +24,6 @@
     "baseUrl": ".",
     "strictPropertyInitialization": false,
     "allowJs": true,
-    "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -32,5 +32,5 @@
     "strict": true
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*.tsx", "./src/**/*.ts"]
+  "include": ["./src/**/*.tsx", "./src/**/*.ts", "./src/**/*.gql"]
 }

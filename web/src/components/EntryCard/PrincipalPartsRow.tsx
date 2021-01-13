@@ -8,7 +8,6 @@ import {
   deleteBookmark,
   isBookmarked,
 } from "../../utils/bookmarksController"
-import { getId } from "../../utils/globals"
 
 interface Props {
   entry: Entry
@@ -16,7 +15,10 @@ interface Props {
 
 export default function PrincipalPartsRow({ entry }: Props) {
   const classes = useStyles()
-  const principalPartsRestructured = getId(entry)
+  
+  const principalPartsFormatted = entry?.principalParts
+    ?.map((principalPart) => principalPart.text.join("/"))
+    .join(", ")
 
   const [bookmarked, setBookmarked] = useState(isBookmarked(entry))
   const toggleBookmark = () => {
@@ -24,9 +26,10 @@ export default function PrincipalPartsRow({ entry }: Props) {
     else createBookmark(entry)
     setBookmarked(!bookmarked)
   }
+
   return (
     <CardHeader
-      title={principalPartsRestructured}
+      title={principalPartsFormatted}
       titleTypographyProps={{ variant: "subtitle1" }}
       subheader={`${entry.partOfSpeech}, ${entry.inflection}`}
       subheaderTypographyProps={{ variant: "subtitle2" }}

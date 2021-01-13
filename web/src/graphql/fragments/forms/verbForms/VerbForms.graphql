@@ -1,0 +1,23 @@
+#import "./Indicative.graphql"
+#import "./Subjunctive.graphql"
+#import "./Imperative.graphql"
+#import "./NonFinite.graphql"
+#import "./VerbalNoun.graphql"
+
+fragment allVerbForms on VerbForms {
+  indicative {
+    ...allIndicative
+  }
+  subjunctive {
+    ...allSubjunctive
+  }
+  imperative {
+    ...allImperative
+  }
+  nonFinite {
+    ...allNonFinite
+  }
+  verbalNoun {
+    ...allVerbalNoun
+  }
+}

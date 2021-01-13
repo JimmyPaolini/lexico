@@ -2,33 +2,33 @@ import { Field, ObjectType } from "type-graphql"
 
 @ObjectType()
 export class Gerund {
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   genitive: string[] = []
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   dative: string[] = []
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   accusative: string[] = []
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   ablative: string[] = []
 }
 
 @ObjectType()
 export class Supine {
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   accusative: string[] = []
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   ablative: string[] = []
 }
 
 @ObjectType()
 export default class VerbalNoun {
-  @Field(() => Gerund)
+  @Field(() => Gerund, { nullable: true })
   gerund: Gerund = new Gerund()
 
-  @Field(() => Supine)
+  @Field(() => Supine, { nullable: true })
   supine: Supine = new Supine()
 }
