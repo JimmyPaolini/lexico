@@ -22,23 +22,26 @@ const log = new Logger()
 
 async function main() {
   dotenv.config()
+  const DB_PORT = parseInt(process.env.DB_PORT || "")
+  const PORT = parseInt(process.env.PORT || "")
+  const logSQL = false
 
   await createConnection({
-    type: "mysql",
+    type: "postgres",
     host: process.env.DB_HOST,
-    port: parseInt(process.env.DB_PORT || ""),
+    port: DB_PORT,
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: "lexico",
-    charset: "utf8mb4",
     entities: [Entry, Translation, Word, Author, Book, Text, Line],
-    logging: ["log", "info", "schema", "migration", "warn", "error"],
+    logging: logSQL || ["log", "info", "schema", "migration", "warn", "error"],
     synchronize: true,
   })
+  log.info("Connected to database")
   await createDbViews()
 
   const app = express()
-  app.listen(parseInt(process.env.PORT || ""), () =>
+  app.listen(PORT, () =>
     log.info(`Listening at http://localhost:${process.env.PORT}`),
   )
 

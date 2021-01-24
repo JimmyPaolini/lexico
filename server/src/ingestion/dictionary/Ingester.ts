@@ -24,7 +24,8 @@ export default abstract class Ingester {
 
   static getPartOfSpeech($: cheerio.Root, elt: any): PartOfSpeech {
     return $(elt)
-      .prev(":header")
+      .prevAll(":header, h3, h4")
+      .first()
       .text()
       .toLowerCase()
       .replace(/(\[edit])|\d+/g, "")
@@ -54,7 +55,7 @@ export default abstract class Ingester {
   }
 
   async ingestForms(): Promise<Forms | null> {
-    return await parseForms(this.$, this.elt)
+    return await parseForms(this.$, this.elt, this.entry)
   }
 
   macronizedWord: string

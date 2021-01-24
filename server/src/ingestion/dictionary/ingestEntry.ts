@@ -62,6 +62,7 @@ async function ingestEntry(
       preposition: Preposition,
       conjunction: Conjunction,
       interjection: Conjunction,
+      abbreviation: Conjunction,
       inflection: Conjunction,
       particle: Conjunction,
       phrase: Conjunction,
@@ -70,7 +71,10 @@ async function ingestEntry(
     }
     const IngesterConstructor = ingestersMap[entry.partOfSpeech]
     if (!IngesterConstructor) {
-      log.info("skipping entry", entry)
+      if ((entry.partOfSpeech as any) === "")
+        log.info("No partOfSpeech:", entry.word)
+      else if ((entry.partOfSpeech as any) !== "letter")
+        log.info("skipping entry", entry)
       await Entries.delete(entry.id)
       return
     }

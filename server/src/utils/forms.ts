@@ -39,6 +39,20 @@ export function identifyWord(
   return identifiers
 }
 
+export function isNumber(str: string) {
+  return !!str.match(/^((singular)|(plural))$/i)
+}
+
+export function isCase(str: string) {
+  return !!str.match(
+    /^((nominative)|(genitive)|(dative)|(accusative)|(ablative)|(vocative)|(locative))$/i,
+  )
+}
+
+export function isGender(str: string) {
+  return !!str.match(/^((masculine)|(feminine)|(neuter))$/i)
+}
+
 // const formNameAbbreviations: { [key: string]: string } = {
 //   "nominative": "NOM",
 //   "genitive": "GEN",

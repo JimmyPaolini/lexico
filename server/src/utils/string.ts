@@ -1,10 +1,19 @@
-/* spellchecker: disable */
 export function normalize(str: string): string {
   if (!str) return ""
   return str
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/æ/g, "ae")
+}
+
+export function timestampFormated(): string {
+  const now = new Date()
+  const date = now.toISOString().slice(0, 10)
+  const time = ("0" + now.toLocaleString().slice(11, 18)).slice(-8)
+  const milliseconds = (now.getMilliseconds() + "000").slice(0, 3)
+  const meridian = now.getHours() > 12 ? "PM" : "AM"
+  const offset = now.getTimezoneOffset() / 60
+  return `${date}T${time}.${milliseconds}${meridian}-GMT-${offset}`
 }
 
 export function capitalizeFirstLetter(str: string): string {
@@ -44,10 +53,6 @@ export function escapeCapitals(str: string): string {
 export function unescapeCapitals(str: string): string {
   return str.replace(/([A-Z])`/, "$1")
 }
-
-export const translationSkipRegex = new RegExp(
-  /(alternative)|(alternate)|(abbreviation)|(initialism)|(archaic)|(synonym)|(clipping)|(spelling)/gi,
-)
 
 export function unabbreviateText(text: string): string {
   return text

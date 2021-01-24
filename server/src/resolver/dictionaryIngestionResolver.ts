@@ -1,5 +1,6 @@
+import fs from "fs"
 import { Logger } from "tslog"
-import { Arg, Mutation, Resolver } from "type-graphql"
+import { Arg, Mutation, Query, Resolver } from "type-graphql"
 import { FindManyOptions, getConnection, Like } from "typeorm"
 import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
@@ -11,7 +12,7 @@ import { getEntryForms } from "../ingestion/dictionary/ingestWord"
 import ingestWiktionary, {
   categories,
 } from "../ingestion/wiktionary/ingestWiktionary"
-import backupDatabase from "../utils/backup"
+import { backupDatabase, restoreDatabase } from "../utils/database"
 import { escapeCapitals } from "../utils/string"
 
 const log = new Logger()
@@ -38,8 +39,9 @@ export default class DictionaryIngestionResolver {
     @Arg("lastLetter") lastLetter: string,
   ) {
     validateLetters([firstLetter, lastLetter])
+    const regex = `^-?[${firstLetter}-${lastLetter}]`
     let params = {
-      where: `REGEXP_LIKE(word, "^-?[${firstLetter}-${lastLetter}]", "i")`,
+      where: `"word" ~* '${regex}'`,
       order: { word: "ASC" },
       take: 100,
     } as FindManyOptions<Entry>
@@ -100,8 +102,10 @@ export default class DictionaryIngestionResolver {
   ) {
     validateLetters([firstLetter, lastLetter])
     log.info("Clearing entries")
-    const regex = `REGEXP_LIKE(word, "^-?[${firstLetter}-${lastLetter}]", "i")`
-    await this.Entries.query(`DELETE FROM entry WHERE ${regex}`)
+    await this.Entries.createQueryBuilder()
+      .delete()
+      .where(`word ~* '^-?[${firstLetter}-${lastLetter}]'`)
+      .execute()
     log.info("Cleared entries")
     return true
   }
@@ -113,8 +117,10 @@ export default class DictionaryIngestionResolver {
   ) {
     validateLetters([firstLetter, lastLetter])
     log.info("Clearing words")
-    const regex = `REGEXP_LIKE(word, "^-?[${firstLetter}-${lastLetter}]", "i")`
-    await this.Words.query(`DELETE FROM word WHERE ${regex}`)
+    await this.Words.createQueryBuilder()
+      .delete()
+      .where(`word ~* '^-?[${firstLetter}-${lastLetter}]'`)
+      .execute()
     log.info("Cleared words")
     return true
   }
@@ -139,14 +145,36 @@ export default class DictionaryIngestionResolver {
     await this.ingestEntries(firstLetter, lastLetter)
     await this.ingestTranslationReferences()
     await this.ingestWords(firstLetter, lastLetter)
-    backupDatabase("backup")
+    await backupDatabase("backup")
     return true
   }
 
   @Mutation(() => Boolean)
   async backupDatabase() {
-    backupDatabase("backup")
+    await backupDatabase("backup")
     return true
+  }
+
+  @Query(() => [String])
+  backups() {
+    return fs
+      .readdirSync(`data/backup`)
+      .filter((fileName) => !fileName.match(/\.DS_Store/))
+      .map((fileName) => fileName.replace(/\.sql\.zip$/g, ""))
+      .sort()
+      .reverse()
+  }
+
+  @Mutation(() => Boolean)
+  async restoreDatabase(@Arg("backupFileName") backupFileName: string) {
+    await restoreDatabase(backupFileName)
+    return true
+  }
+
+  @Mutation(() => Boolean)
+  async restoreDatabaseFromLatestBackup() {
+    const latestBackup = this.backups()[0]
+    return await restoreDatabase(latestBackup)
   }
 }
 

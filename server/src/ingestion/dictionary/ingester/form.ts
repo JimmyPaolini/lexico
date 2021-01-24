@@ -1,12 +1,15 @@
 import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
+import Entry from "../../../entity/dictionary/Entry"
 import { Forms } from "../../../entity/dictionary/word/Forms"
+import { isCase, isGender, isNumber } from "../../../utils/forms"
 
 // const log = new Logger()
 
 export default async function parseForms(
   $: cheerio.Root,
   elt: any,
+  entry: Entry,
 ): Promise<Forms | null> {
   const table = parseFormTable($, elt)
   if (!table) return null
@@ -16,7 +19,7 @@ export default async function parseForms(
   }
 
   function findIdentifiers(i: number, j: number, table: any) {
-    const identifiers = new Set()
+    const identifiers = new Set<string>()
     const isForm = (cell: string) =>
       cell.includes("<span ") ||
       cell.includes("—") ||
@@ -35,7 +38,19 @@ export default async function parseForms(
 
     if (["Singular", "Plural"].includes(table[++m][++n]))
       identifiers.add(table[m][n].toLowerCase().trim())
-    return Array.from(identifiers)
+
+    if (
+      ["adjective", "participle", "numeral", "suffix"].includes(
+        entry.partOfSpeech,
+      )
+    ) {
+      return [
+        [...identifiers].find((identifier: string) => isNumber(identifier)),
+        [...identifiers].find((identifier: string) => isCase(identifier)),
+        [...identifiers].find((identifier: string) => isGender(identifier)) ||
+          "neuter",
+      ]
+    } else return [...identifiers]
   }
 
   let forms = {}
@@ -83,6 +98,7 @@ export function parseFormTable($: cheerio.Root, elt: any) {
 
   return table
 }
+
 export function sortIdentifiers(inflection: any, obj: any) {
   const identifier = inflection.identifiers.pop()
   if (!inflection.identifiers.length) {
@@ -94,5 +110,3 @@ export function sortIdentifiers(inflection: any, obj: any) {
     return obj
   }
 }
-
-

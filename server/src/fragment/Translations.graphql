@@ -1,3 +1,0 @@
-fragment all on Translations {
-  text
-}

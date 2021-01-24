@@ -1,4 +1,0 @@
-fragment all on PrincipleParts {
-  name
-  text
-}

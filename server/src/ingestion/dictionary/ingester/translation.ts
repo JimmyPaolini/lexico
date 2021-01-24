@@ -1,10 +1,10 @@
 import Entry from "../../../entity/dictionary/Entry"
 import Translation from "../../../entity/dictionary/Translation"
-import {
-  normalize,
-  capitalizeFirstLetter,
-  translationSkipRegex,
-} from "../../../utils/string"
+import { capitalizeFirstLetter, normalize } from "../../../utils/string"
+
+const translationSkipRegex = new RegExp(
+  /(alternative)|(alternate)|(abbreviation)|(initialism)|(archaic)|(synonym)|(clipping)|(spelling)/gi,
+)
 
 export default async function parseTranslations(
   $: cheerio.Root,

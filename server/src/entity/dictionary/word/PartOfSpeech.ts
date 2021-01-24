@@ -15,6 +15,7 @@ export type PartOfSpeech =
   | "preposition"
   | "inflection"
   | "conjunction"
+  | "abbreviation"
   | "particle"
   | "interjection"
   | "phrase"

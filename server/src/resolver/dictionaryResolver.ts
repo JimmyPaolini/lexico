@@ -64,7 +64,7 @@ export default class DictionaryResolver {
   async searchLatinBrute(@Arg("search") search: string) {
     const macronSearch = getMacronOptionRegex(search)
     const fieldMatch = (field: string): string =>
-      `REGEXP_LIKE(${field}, '"${macronSearch}"', "i")`
+      `"${field}" ~* '"${macronSearch}"'`
     const entries = await this.Entries.find({
       where: fieldMatch("principalParts") + " OR " + fieldMatch("forms"),
     })

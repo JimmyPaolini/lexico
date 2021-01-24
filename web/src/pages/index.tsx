@@ -50,7 +50,7 @@ export default function Search() {
       </Grid>
       <Grid item container justify="center">
         {!data ? (
-          <Image src="/logo.png" alt="Lexico" height={500} width={375} />
+          <Image src="/lexico_logo.png" alt="Lexico" height={500} width={375} />
         ) : noEntriesFound ? (
           <Typography variant="h4">Not Found</Typography>
         ) : entriesFound ? (

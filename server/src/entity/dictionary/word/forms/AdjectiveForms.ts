@@ -1,28 +1,16 @@
 import { Field, ObjectType } from "type-graphql"
 
 @ObjectType()
-export class AdjectiveGender {
-  @Field(() => [String], { nullable: true })
-  masculine?: string[]
-
-  @Field(() => [String], { nullable: true })
-  feminine?: string[]
-
-  @Field(() => [String], { nullable: true })
-  neuter?: string[]
-}
-
-@ObjectType()
 export class AdjectiveNumber {
-  @Field(() => AdjectiveGender, { nullable: true })
-  singular?: AdjectiveGender
+  @Field(() => [String], { nullable: true })
+  singular?: string[]
 
-  @Field(() => AdjectiveGender, { nullable: true })
-  plural?: AdjectiveGender
+  @Field(() => [String], { nullable: true })
+  plural?: string[]
 }
 
 @ObjectType()
-export default class AdjectiveForms {
+export default class AdjectiveCase {
   @Field(() => AdjectiveNumber, { nullable: true })
   nominative?: AdjectiveNumber
 
@@ -43,4 +31,16 @@ export default class AdjectiveForms {
 
   @Field(() => AdjectiveNumber, { nullable: true })
   locative?: AdjectiveNumber
+}
+
+@ObjectType()
+export class AdjectiveForms {
+  @Field(() => [String], { nullable: true })
+  masculine?: AdjectiveCase
+
+  @Field(() => [String], { nullable: true })
+  feminine?: AdjectiveCase
+
+  @Field(() => [String], { nullable: true })
+  neuter?: AdjectiveCase
 }
