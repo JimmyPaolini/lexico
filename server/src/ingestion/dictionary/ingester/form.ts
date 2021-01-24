@@ -4,7 +4,7 @@ import Entry from "../../../entity/dictionary/Entry"
 import { Forms } from "../../../entity/dictionary/word/Forms"
 import { isCase, isGender, isNumber } from "../../../utils/forms"
 
-// const log = new Logger()
+// const log = logger.getChildLogger()
 
 export default async function parseForms(
   $: cheerio.Root,

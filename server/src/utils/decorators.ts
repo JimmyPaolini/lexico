@@ -1,6 +1,6 @@
-import { Logger } from "tslog"
+import logger from "./log"
 
-const log = new Logger()
+const log = logger.getChildLogger()
 
 export const logResult = (
   _: Object,

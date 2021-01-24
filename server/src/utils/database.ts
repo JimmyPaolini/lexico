@@ -1,20 +1,22 @@
 import { exec } from "child_process"
-import { Logger } from "tslog"
+import logger from "./log"
 import { timestampFormated } from "./string"
 
-const log = new Logger()
+const log = logger.getChildLogger()
+
+export const backupFileNameExtension = ".tar.zip"
 
 export async function backupDatabase(name: string) {
   log.info("backing up database")
   const fileKey = `data/backup/${timestampFormated()}_${name}`
-  const command = `pg_dump --dbname "lexico" --format "p" --compress 9 > "${fileKey}.sql.zip"`
+  const command = `pg_dump --dbname lexico --format c --compress 9 > "${fileKey}${backupFileNameExtension}"`
   return await execute(command, "backed up database")
 }
 
 export async function restoreDatabase(backupName: string) {
   log.info("restoring database")
   const fileKey = `data/backup/${backupName}`
-  const command = `pg_restore --clean -f "${fileKey}.sql.zip"`
+  const command = `pg_restore --dbname lexico --format c --clean "${fileKey}${backupFileNameExtension}"`
   return await execute(command, "restored database")
 }
 

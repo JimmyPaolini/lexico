@@ -1,4 +1,3 @@
-import { Logger } from "tslog"
 import { Mutation, Resolver } from "type-graphql"
 import { getConnection } from "typeorm"
 import Author from "../entity/literature/Author"
@@ -6,8 +5,9 @@ import Line from "../entity/literature/Line"
 import Text from "../entity/literature/Text"
 import ingestLibrary from "../ingestion/literature/ingestLibrary"
 import ingestWorks from "../ingestion/literature/ingestLiterature"
+import logger from "../utils/log"
 
-const log = new Logger()
+const log = logger.getChildLogger()
 
 @Resolver(Text)
 export default class LiteratureIngestionResolver {

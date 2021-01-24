@@ -1,12 +1,12 @@
-import { Logger } from "tslog"
 import { Arg, Query, Resolver } from "type-graphql"
 import { getConnection, Like } from "typeorm"
 import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
 import { identifyWord } from "../utils/forms"
+import logger from "../utils/log"
 
-const log = new Logger()
+const log = logger.getChildLogger()
 
 @Resolver(Entry)
 export default class DictionaryResolver {

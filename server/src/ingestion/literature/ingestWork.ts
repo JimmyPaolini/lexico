@@ -1,13 +1,13 @@
 import cheerio from "cheerio"
 import request from "request-promise-native"
-import { Logger } from "tslog"
 import { getConnection } from "typeorm"
 import Author from "../../entity/literature/Author"
 import Text from "../../entity/literature/Text"
+import logger from "../../utils/log"
 import ingestLines from "./ingestLines"
 import { worksMap } from "./literatureMaps"
 
-const log = new Logger()
+const log = logger.getChildLogger()
 
 export async function ingestWork(
   authorName: string,

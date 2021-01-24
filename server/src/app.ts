@@ -2,7 +2,6 @@ import { ApolloServer } from "apollo-server-express"
 import dotenv from "dotenv"
 import express from "express"
 import "reflect-metadata"
-import { Logger } from "tslog"
 import { buildSchema } from "type-graphql"
 import { createConnection } from "typeorm"
 import Entry from "./entity/dictionary/Entry"
@@ -17,8 +16,9 @@ import DictionaryResolver from "./resolver/dictionaryResolver"
 import LiteratureIngestionResolver from "./resolver/literatureIngestionResolver"
 import LiteratureResolver from "./resolver/literatureResolver"
 import createDbViews from "./utils/createDbViews"
+import logger from "./utils/log"
 
-const log = new Logger()
+const log = logger.getChildLogger()
 
 async function main() {
   dotenv.config()

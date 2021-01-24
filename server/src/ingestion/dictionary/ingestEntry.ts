@@ -1,10 +1,10 @@
 import cheerio from "cheerio"
 import path from "path"
-import { Logger } from "tslog"
 import { getConnection } from "typeorm"
 import Entry from "../../entity/dictionary/Entry"
 import Translation from "../../entity/dictionary/Translation"
 import { PartOfSpeech } from "../../entity/dictionary/word/PartOfSpeech"
+import logger from "../../utils/log"
 import { normalize } from "../../utils/string"
 import Ingester from "./Ingester"
 import Adjective from "./ingester/partOfSpeech/Adjective"
@@ -16,7 +16,7 @@ import Preposition from "./ingester/partOfSpeech/Preposition"
 import Pronoun from "./ingester/partOfSpeech/Pronoun"
 import Verb from "./ingester/partOfSpeech/Verb"
 
-const log = new Logger()
+const log = logger.getChildLogger()
 
 export default async function ingestEntries(wordString: string) {
   // log.info("ingesting entry", wordString)

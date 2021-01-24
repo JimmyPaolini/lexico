@@ -2,10 +2,10 @@ import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
 import fs from "fs"
 import request from "request-promise-native"
-import { Logger } from "tslog"
+import logger from "../../utils/log"
 import { authorNameMap } from "./literatureMaps"
 
-const log = new Logger()
+const log = logger.getChildLogger()
 
 const host = "https://www.thelatinlibrary.com/"
 

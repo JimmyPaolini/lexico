@@ -1,7 +1,6 @@
-import fs from "fs"
-import { Logger } from "tslog"
+import { readdirSync } from "fs"
 import { Arg, Mutation, Query, Resolver } from "type-graphql"
-import { FindManyOptions, getConnection, Like } from "typeorm"
+import { FindManyOptions, getConnection } from "typeorm"
 import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
@@ -12,10 +11,15 @@ import { getEntryForms } from "../ingestion/dictionary/ingestWord"
 import ingestWiktionary, {
   categories,
 } from "../ingestion/wiktionary/ingestWiktionary"
-import { backupDatabase, restoreDatabase } from "../utils/database"
+import {
+  backupDatabase,
+  backupFileNameExtension,
+  restoreDatabase,
+} from "../utils/database"
+import logger from "../utils/log"
 import { escapeCapitals } from "../utils/string"
 
-const log = new Logger()
+const log = logger.getChildLogger()
 
 @Resolver()
 export default class DictionaryIngestionResolver {
@@ -39,9 +43,8 @@ export default class DictionaryIngestionResolver {
     @Arg("lastLetter") lastLetter: string,
   ) {
     validateLetters([firstLetter, lastLetter])
-    const regex = `^-?[${firstLetter}-${lastLetter}]`
-    let params = {
-      where: `"word" ~* '${regex}'`,
+    const params = {
+      where: `"word" ~* '^-?[${firstLetter}-${lastLetter}]'`,
       order: { word: "ASC" },
       take: 100,
     } as FindManyOptions<Entry>
@@ -60,8 +63,8 @@ export default class DictionaryIngestionResolver {
 
   @Mutation(() => Boolean)
   async ingestTranslationReferences() {
-    let params = {
-      where: { translation: Like("%{*%*}%") },
+    const params = {
+      where: `"translation" ~* '{\*.*\*}'`,
       order: { translation: "ASC" },
       relations: ["entry"],
       take: 100,
@@ -82,6 +85,18 @@ export default class DictionaryIngestionResolver {
   @Mutation(() => Boolean)
   async ingestEntry(@Arg("word") word: string) {
     await ingestEntries(escapeCapitals(word))
+    return true
+  }
+
+  @Mutation(() => Boolean)
+  async ingestDictionary(
+    @Arg("firstLetter") firstLetter: string,
+    @Arg("lastLetter") lastLetter: string,
+  ) {
+    await this.ingestEntries(firstLetter, lastLetter)
+    await this.ingestTranslationReferences()
+    await this.ingestWords(firstLetter, lastLetter)
+    await backupDatabase("ingestion")
     return true
   }
 
@@ -138,29 +153,16 @@ export default class DictionaryIngestionResolver {
   }
 
   @Mutation(() => Boolean)
-  async ingestAll(
-    @Arg("firstLetter") firstLetter: string,
-    @Arg("lastLetter") lastLetter: string,
-  ) {
-    await this.ingestEntries(firstLetter, lastLetter)
-    await this.ingestTranslationReferences()
-    await this.ingestWords(firstLetter, lastLetter)
-    await backupDatabase("backup")
-    return true
-  }
-
-  @Mutation(() => Boolean)
   async backupDatabase() {
-    await backupDatabase("backup")
+    await backupDatabase("manual")
     return true
   }
 
   @Query(() => [String])
   backups() {
-    return fs
-      .readdirSync(`data/backup`)
+    return readdirSync(`data/backup`)
       .filter((fileName) => !fileName.match(/\.DS_Store/))
-      .map((fileName) => fileName.replace(/\.sql\.zip$/g, ""))
+      .map((fileName) => fileName.replace(backupFileNameExtension, ""))
       .sort()
       .reverse()
   }
@@ -174,7 +176,8 @@ export default class DictionaryIngestionResolver {
   @Mutation(() => Boolean)
   async restoreDatabaseFromLatestBackup() {
     const latestBackup = this.backups()[0]
-    return await restoreDatabase(latestBackup)
+    await restoreDatabase(latestBackup)
+    return true
   }
 }
 
