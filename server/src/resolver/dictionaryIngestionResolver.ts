@@ -1,6 +1,6 @@
 import { readdirSync } from "fs"
 import { Arg, Mutation, Query, Resolver } from "type-graphql"
-import { FindManyOptions, getConnection } from "typeorm"
+import { FindManyOptions, getConnection, Like } from "typeorm"
 import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
@@ -33,7 +33,9 @@ export default class DictionaryIngestionResolver {
     @Arg("lastLetter") lastLetter: string,
   ) {
     validateLetters([firstLetter, lastLetter])
+    log.info("Ingesting Entries")
     await ingestDictionary(firstLetter, lastLetter)
+    log.info("Ingested Entries")
     return true
   }
 
@@ -43,6 +45,7 @@ export default class DictionaryIngestionResolver {
     @Arg("lastLetter") lastLetter: string,
   ) {
     validateLetters([firstLetter, lastLetter])
+    log.info("Ingesting Words")
     const params = {
       where: `"word" ~* '^-?[${firstLetter}-${lastLetter}]'`,
       order: { word: "ASC" },
@@ -51,20 +54,22 @@ export default class DictionaryIngestionResolver {
     let skip = 0
     let entries = await this.Entries.find({ ...params, skip })
     while (entries.length) {
-      log.info(skip, "selected", entries.length, "from", entries[0].word)
+      log.info("selected", entries.length, "from entry", skip, entries[0].word)
       for (const entry of entries) {
         await getEntryForms(entry)
       }
       skip += params.take as number
       entries = await this.Entries.find({ ...params, skip })
     }
+    log.info("Ingested Words")
     return true
   }
 
   @Mutation(() => Boolean)
   async ingestTranslationReferences() {
+    log.info("Ingesting Translation References")
     const params = {
-      where: `"translation" ~* '{\*.*\*}'`,
+      where: { translation: Like("%{*%*}%") }, //`"translation" ~* '{\\*.*\\*}'`,
       order: { translation: "ASC" },
       relations: ["entry"],
       take: 100,
@@ -72,13 +77,20 @@ export default class DictionaryIngestionResolver {
     let skip = 0
     let translations = await this.Translations.find({ ...params, skip })
     while (translations.length) {
-      log.info(skip, "selected", translations.length)
+      log.info(
+        "selected",
+        translations.length,
+        "from translation",
+        skip,
+        translations[0].translation,
+      )
       for (const translation of translations) {
         await ingestTranslationReference(translation)
       }
       skip += params.take as number
       translations = await this.Translations.find({ ...params, skip })
     }
+    log.info("Ingested Translation References")
     return true
   }
 
@@ -94,9 +106,11 @@ export default class DictionaryIngestionResolver {
     @Arg("lastLetter") lastLetter: string,
   ) {
     await this.ingestEntries(firstLetter, lastLetter)
-    await this.ingestTranslationReferences()
-    await this.ingestWords(firstLetter, lastLetter)
-    await backupDatabase("ingestion")
+    await Promise.all([
+      this.ingestTranslationReferences(),
+      this.ingestWords(firstLetter, lastLetter),
+    ])
+    await backupDatabase("dictionary-ingestion")
     return true
   }
 

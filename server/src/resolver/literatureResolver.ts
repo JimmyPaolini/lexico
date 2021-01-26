@@ -7,7 +7,7 @@ import Text from "../entity/literature/Text"
 @Resolver(Text)
 export default class LiteratureResolver {
   Authors = getConnection().getRepository(Author)
-  Works = getConnection().getRepository(Text)
+  Texts = getConnection().getRepository(Text)
   Lines = getConnection().getRepository(Line)
 
   @Query(() => [Author])
@@ -29,17 +29,17 @@ export default class LiteratureResolver {
   }
 
   @Query(() => [Text])
-  async searchWorks(@Arg("title") title: string) {
+  async searchTexts(@Arg("title") title: string) {
     const where = [{ title: Like(`%${title}%`) }]
-    const works = await this.Works.find({
+    const texts = await this.Texts.find({
       where,
       relations: ["author", "lines"],
       order: { title: "ASC" },
     })
-    works.forEach((work) =>
-      work.lines.sort((l1, l2) => l1.lineNumber - l2.lineNumber),
+    texts.forEach((text) =>
+      text.lines.sort((l1, l2) => l1.lineNumber - l2.lineNumber),
     )
-    return works
+    return texts
   }
 
   @Query(() => [Line])

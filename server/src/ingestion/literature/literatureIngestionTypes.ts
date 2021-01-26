@@ -1,11 +1,11 @@
 export class IngestionAuthor {
   name: string
   path: string
-  works: IngestionWork[]
+  texts: IngestionText[]
 }
 
-export class IngestionWork {
-  path: string
+export class IngestionText {
   title: string
-  text: string
+  book: string
+  path: string
 }

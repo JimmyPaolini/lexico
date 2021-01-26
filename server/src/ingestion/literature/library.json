@@ -3,7 +3,7 @@
     "nickname": "ammianus",
     "name": "ammianus marcellinus",
     "path": "ammianus.html",
-    "works": [
+    "texts": [
       {
         "title": "liber xiv",
         "book": "res gestae a fine corneli taciti",
@@ -100,7 +100,7 @@
     "nickname": "apuleius",
     "name": "lucius apuleius madaurensis",
     "path": "apuleius.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "metamorphoses",
@@ -197,7 +197,7 @@
     "nickname": "augustus",
     "name": "caesar divi filius augustus",
     "path": "aug.html",
-    "works": [
+    "texts": [
       {
         "title": "res gestae i",
         "book": "res gestae divi avgvsti",
@@ -214,7 +214,7 @@
     "nickname": "aurelius victor",
     "name": "sextus aurelius victor",
     "path": "victor.html",
-    "works": [
+    "texts": [
       {
         "title": "de caesaribus",
         "book": "liber et incertorvm libri",
@@ -236,7 +236,7 @@
     "nickname": "caesar",
     "name": "gaius iulius caesar",
     "path": "caes.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "commentariorum libri vii de bello gallicocum a. hirti supplemento",
@@ -313,7 +313,7 @@
     "nickname": "cato",
     "name": "marcus porcius cato censor",
     "path": "cato.html",
-    "works": [
+    "texts": [
       {
         "title": "orationum fragmenta",
         "book": "(234 – 149 b.c.)",
@@ -330,7 +330,7 @@
     "nickname": "catullus",
     "name": "gaius valerius catullus",
     "path": "catullus.shtml",
-    "works": [
+    "texts": [
       {
         "title": "catullus",
         "path": "catullus.shtml"
@@ -341,7 +341,7 @@
     "nickname": "christian",
     "name": "christian",
     "path": "christian.html",
-    "works": [
+    "texts": [
       {
         "title": "abelard",
         "book": "",
@@ -638,7 +638,7 @@
     "nickname": "cicero",
     "name": "marcus tullius cicero",
     "path": "cic.html",
-    "works": [
+    "texts": [
       {
         "title": "pro quinctio",
         "book": "oratoria",
@@ -935,7 +935,7 @@
     "nickname": "claudian",
     "name": "claudius claudianus",
     "path": "claudian.html",
-    "works": [
+    "texts": [
       {
         "title": "panegyricus dictus probino et olybrio consulibus",
         "book": "",
@@ -972,7 +972,7 @@
     "nickname": "curtius rufus",
     "name": "quintus curtius rufus",
     "path": "curtius.html",
-    "works": [
+    "texts": [
       {
         "title": "liber  iii",
         "book": "historiarum alexandri magni libri qui supersunt",
@@ -1019,13 +1019,13 @@
     "nickname": "ennius",
     "name": "quintus ennius",
     "path": "enn.html",
-    "works": []
+    "texts": []
   },
   {
     "nickname": "eutropius",
     "name": "eutropius",
     "path": "eutropius.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "breviarivm historiae romanae",
@@ -1082,7 +1082,7 @@
     "nickname": "florus",
     "name": "florus",
     "path": "florus.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "epitome de t. livio bellorum omnium annorum dcc libri duo",
@@ -1099,7 +1099,7 @@
     "nickname": "frontinus",
     "name": "sextus iulius frontinus",
     "path": "frontinus.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "strategemata",
@@ -1156,7 +1156,7 @@
     "nickname": "gellius",
     "name": "aulus gellius",
     "path": "gellius.html",
-    "works": [
+    "texts": [
       {
         "title": "praefatio",
         "book": "",
@@ -1243,7 +1243,7 @@
     "nickname": "historia augusta",
     "name": "scriptores historiae augustae",
     "path": "sha.html",
-    "works": [
+    "texts": [
       {
         "title": "hadrianus",
         "book": "(4th century a.d.)",
@@ -1400,7 +1400,7 @@
     "nickname": "horace",
     "name": "quintus horacius flaccus",
     "path": "hor.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "sermones",
@@ -1462,7 +1462,7 @@
     "nickname": "ius romanum",
     "name": "ius romanum",
     "path": "ius.html",
-    "works": [
+    "texts": [
       {
         "title": "leges rei publicae",
         "book": "ivs romanvm",
@@ -1489,7 +1489,7 @@
     "nickname": "justin",
     "name": "marcus iunianus iustinus",
     "path": "justin.html",
-    "works": [
+    "texts": [
       {
         "title": "prologi",
         "book": "historiarvm philippicarvm t. pompeii trogi libri xlivin epitomen redacti",
@@ -1726,7 +1726,7 @@
     "nickname": "juvenal",
     "name": "decimus iunius iuvenalis",
     "path": "juvenal.html",
-    "works": [
+    "texts": [
       {
         "title": "satura i",
         "book": "satvrae",
@@ -1813,7 +1813,7 @@
     "nickname": "livy",
     "name": "titus livius",
     "path": "liv.html",
-    "works": [
+    "texts": [
       {
         "title": "praefatio",
         "book": "ab vrbe condita libri",
@@ -2005,7 +2005,7 @@
     "nickname": "lucan",
     "name": "marcus annaeus lucanus",
     "path": "lucan.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "de bello civili sive pharsalia",
@@ -2062,7 +2062,7 @@
     "nickname": "lucretius",
     "name": "titus lucretius carus",
     "path": "lucretius.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "de rervm natvra libri sex",
@@ -2099,7 +2099,7 @@
     "nickname": "martial",
     "name": "marcus valerius martialis",
     "path": "martial.html",
-    "works": [
+    "texts": [
       {
         "title": "de spectaculis",
         "book": "epigrammaton libri",
@@ -2181,7 +2181,7 @@
     "nickname": "medieval",
     "name": "medieval",
     "path": "medieval.html",
-    "works": [
+    "texts": [
       {
         "title": "abbo floriacensis",
         "book": "",
@@ -2593,7 +2593,7 @@
     "nickname": "miscellany",
     "name": "miscellany",
     "path": "misc.html",
-    "works": [
+    "texts": [
       {
         "title": "anonymus valesianus",
         "book": "",
@@ -2910,7 +2910,7 @@
     "nickname": "neo-latin",
     "name": "neo-latin",
     "path": "neo.html",
-    "works": [
+    "texts": [
       {
         "title": "addison",
         "book": "",
@@ -3267,7 +3267,7 @@
     "nickname": "nepos",
     "name": "cornelius nepos",
     "path": "nepos.html",
-    "works": [
+    "texts": [
       {
         "title": "praefatio",
         "book": "liber de excellentibus dvcibus exterarvm gentivm",
@@ -3409,7 +3409,7 @@
     "nickname": "ovid",
     "name": "publius ovidius naso",
     "path": "ovid.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "metamorphoses",
@@ -3716,7 +3716,7 @@
     "nickname": "persius",
     "name": "aulus persius flaccus",
     "path": "persius.html",
-    "works": [
+    "texts": [
       {
         "title": "persius",
         "path": "persius.html"
@@ -3727,7 +3727,7 @@
     "nickname": "petronius",
     "name": "gaius petronius",
     "path": "petronius.html",
-    "works": [
+    "texts": [
       {
         "title": "satiricon liber",
         "book": "(c. 27 – 66 a.d.)",
@@ -3744,7 +3744,7 @@
     "nickname": "phaedrus",
     "name": "phaedrus",
     "path": "phaedrus.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "fabvlarvm aesopiarvm libri qvinqve",
@@ -3781,7 +3781,7 @@
     "nickname": "plautus",
     "name": "titus maccius plautus",
     "path": "plautus.html",
-    "works": [
+    "texts": [
       {
         "title": "amphitruo",
         "book": "(born c. 254 b.c.)",
@@ -3893,7 +3893,7 @@
     "nickname": "pliny maior",
     "name": "gaius plinius secundus",
     "path": "pliny1.html",
-    "works": [
+    "texts": [
       {
         "title": " praefatio",
         "book": "natvralis historia",
@@ -3930,7 +3930,7 @@
     "nickname": "pliny minor",
     "name": "gaius plinius caecilius secundus",
     "path": "pliny.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "epistvlarvm libri decem",
@@ -3992,7 +3992,7 @@
     "nickname": "propertius",
     "name": "sextus propertius",
     "path": "prop.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "elegiae",
@@ -4019,7 +4019,7 @@
     "nickname": "quintilian",
     "name": "marcus fabius quiintilianus",
     "path": "quintilian.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "institutiones",
@@ -4176,7 +4176,7 @@
     "nickname": "sallust",
     "name": "gaius sallustius crispus",
     "path": "sall.html",
-    "works": [
+    "texts": [
       {
         "title": "bellum catilinae     ",
         "book": "(86 – 34 b.c.)",
@@ -4243,7 +4243,7 @@
     "nickname": "seneca maior",
     "name": "lucius annaeus seneca maior",
     "path": "seneca.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "controversiae",
@@ -4310,7 +4310,7 @@
     "nickname": "seneca minor",
     "name": "lucius annaeus seneca",
     "path": "sen.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "epistulae morales ad lucilium",
@@ -4562,7 +4562,7 @@
     "nickname": "silius italicus",
     "name": "silius italicus",
     "path": "silius.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "punica",
@@ -4654,7 +4654,7 @@
     "nickname": "statius",
     "name": "publius papinius statius",
     "path": "statius.html",
-    "works": [
+    "texts": [
       {
         "title": "liber primus",
         "book": "thebaid",
@@ -4756,7 +4756,7 @@
     "nickname": "suetonius",
     "name": "gaius suetonius tranquillus",
     "path": "suet.html",
-    "works": [
+    "texts": [
       {
         "title": "divus iulius",
         "book": "de vitis caesarum",
@@ -4873,13 +4873,13 @@
     "nickname": "sulpicia",
     "name": "sulpicia",
     "path": "sulpicia.html",
-    "works": []
+    "texts": []
   },
   {
     "nickname": "tacitus",
     "name": "publius cornelius tacitus",
     "path": "tac.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "annales",
@@ -4986,7 +4986,7 @@
     "nickname": "terence",
     "name": "publius terentius afer",
     "path": "ter.html",
-    "works": [
+    "texts": [
       {
         "title": "andria",
         "book": "(195/185 – c. 159 b.c.)",
@@ -5023,7 +5023,7 @@
     "nickname": "tibullus",
     "name": "albius tibullus",
     "path": "tib.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "tibvlli aliorvmque carminvm libri tres",
@@ -5045,7 +5045,7 @@
     "nickname": "valerius flaccus",
     "name": "gaius valereius flaccus",
     "path": "valeriusflaccus.html",
-    "works": [
+    "texts": [
       {
         "title": "liber primus",
         "book": "argonavtica",
@@ -5092,7 +5092,7 @@
     "nickname": "valerius maximus",
     "name": "valerius maximus",
     "path": "valmax.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "factorvm et dictorvm memorabilivm libri novem",
@@ -5144,7 +5144,7 @@
     "nickname": "varro",
     "name": "marcus terentius varro",
     "path": "varro.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "rervm rvsticarvm de agri cvltura",
@@ -5201,7 +5201,7 @@
     "nickname": "velleius",
     "name": "velleius",
     "path": "vell.html",
-    "works": [
+    "texts": [
       {
         "title": "liber prior",
         "book": "historiae romanae",
@@ -5215,10 +5215,10 @@
     ]
   },
   {
-    "nickname": "vergil",
-    "name": "vergil",
+    "nickname": "virgil",
+    "name": "virgil",
     "path": "verg.html",
-    "works": [
+    "texts": [
       {
         "title": "aeneid i",
         "book": "aeneid",
@@ -5355,7 +5355,7 @@
     "nickname": "vitruvius",
     "name": "marcus vitruvius pollio",
     "path": "vitruvius.html",
-    "works": [
+    "texts": [
       {
         "title": "liber i",
         "book": "de architectvra",

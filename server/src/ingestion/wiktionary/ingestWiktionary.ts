@@ -1,7 +1,7 @@
+import axios from "axios"
 import cheerio from "cheerio"
 import fs from "fs"
 import fp from "path"
-import request from "request-promise-native"
 import logger from "../../utils/log"
 import { escapeCapitals, getFirstLetter } from "../../utils/string"
 const putItemHtml = (entry: any) =>
@@ -39,7 +39,7 @@ export default async function ingestWiktionary(
   try {
     while (path) {
       log.info(`${new Date().toLocaleString()} - ${host + path}`)
-      let $ = cheerio.load(await request.get(host + path, { forever: true }))
+      let $ = cheerio.load((await axios.get(host + path)).data)
       for (const a of $(
         "#mw-pages div.mw-category > div.mw-category-group > ul > li a",
       ).get()) {
@@ -81,9 +81,7 @@ async function ingestWord(
   }
   if (entry.href.includes(`/w/index.php`))
     return log.info(`Error "${entry.word}" - no wiktionary page`)
-  const $ = cheerio.load(
-    await request.get(entry.href, { timeout: 10000, forever: true }),
-  )
+  const $ = cheerio.load((await axios.get(entry.href)).data)
   const section = $("span#Latin").parent().nextUntil("hr")
   if (section.length < 1)
     return log.info(`Error "${entry.word}" - no latin entry in wiktionary`)

@@ -1,11 +1,11 @@
-import { Field, ObjectType } from "type-graphql"
+import { Field, ID, ObjectType } from "type-graphql"
 import {
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
 } from "typeorm"
 import Author from "./Author"
 import Text from "./Text"
@@ -13,7 +13,10 @@ import Text from "./Text"
 @Entity()
 @ObjectType()
 export default class Book {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
+  @Field(() => ID)
+  id: number
+
   @Field()
   title: string
 

@@ -38,17 +38,33 @@ export default async function createDbViews() {
     name: string,
     selector: string,
     table: string,
+    groupBy: string,
   ) {
     await getConnection().query(
       `CREATE OR REPLACE VIEW ${name}_counts AS ` +
         `SELECT ${selector}, ` +
         `COUNT(DISTINCT(word)) as count, ` +
-        `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM ${table}) * 100 as percent ` +
-        `FROM ${table} GROUP BY ${selector}`,
+        `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM ${table})::float * 100 as percent ` +
+        `FROM ${table} GROUP BY ${groupBy}`,
     )
   }
 
-  await createCountsView("part_of_speech", '"partOfSpeech"', "entry")
-  await createCountsView("entry_letter", "LOWER(LEFT(word, 1))", "entry")
-  await createCountsView("word_letter", "LOWER(LEFT(word, 1))", "word")
+  await createCountsView(
+    "part_of_speech",
+    '"partOfSpeech"',
+    "entry",
+    '"partOfSpeech"',
+  )
+  await createCountsView(
+    "entry_letter",
+    "LOWER(LEFT(word, 1)) as letter",
+    "entry",
+    "LOWER(LEFT(word, 1))",
+  )
+  await createCountsView(
+    "word_letter",
+    "LOWER(LEFT(word, 1)) as letter",
+    "word",
+    "LOWER(LEFT(word, 1))",
+  )
 }

@@ -1,24 +1,29 @@
 import { getConnection } from "typeorm"
 import Author from "../../entity/literature/Author"
-import { ingestWork } from "./ingestWork"
+import { ingestText } from "./ingestText"
 import library from "./library.json"
-import { IngestionWork } from "./literatureIngestionTypes"
-import { authorNameMap } from "./literatureMaps"
+import { IngestionText } from "./literatureIngestionTypes"
+import { authorNicknameToName } from "./literatureMaps"
 
-export default async function ingestWorks() {
+export default async function ingestLiterature() {
   const Authors = getConnection().getRepository(Author)
-  const authorNames = Object.keys(authorNameMap)
+  const authorNames = Object.keys(authorNicknameToName)
   for (const authorName of authorNames) {
+    console.log(authorName)
     const ingestionAuthor = library.find(
       (ingestionAuthor) => ingestionAuthor.nickname === authorName,
     )
     if (!ingestionAuthor) continue
-    const author = await Authors.save({
-      name: authorNameMap[ingestionAuthor.nickname],
-      nickname: ingestionAuthor.nickname,
+    // const author = await Authors.save({
+    //   name: authorNicknameToName[authorName],
+    //   nickname: authorName,
+    // })
+    const author = Authors.create({
+      name: authorNicknameToName[authorName],
+      nickname: authorName,
     })
-    for (const ingestionWork of ingestionAuthor.works as IngestionWork[]) {
-      await ingestWork(ingestionAuthor.nickname, ingestionWork.path, author)
+    for (const ingestionText of ingestionAuthor.texts as IngestionText[]) {
+      await ingestText(author, ingestionText)
     }
   }
 }

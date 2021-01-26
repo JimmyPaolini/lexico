@@ -31,21 +31,23 @@ export default class DictionaryResolver {
     await pushSuffix("ne")
     const word = await this.Words.findOne({ word: search })
     if (word) entries.unshift(...word?.entries)
-    for (const entry of entries) {
-      if (
-        [
-          "noun",
-          "verb",
-          "adjective",
-          "participle",
-          "numeral",
-          "suffix",
-        ].includes(entry.partOfSpeech)
-      ) {
-        entry.identifiers = identifyWord(search, entry.forms, [], [])
-      }
-    }
-    return entries.filter((entry) => !!entry.translations?.length)
+    return entries
+      .filter((entry) => !!entry.translations?.length)
+      .map((entry) => {
+        if (
+          [
+            "noun",
+            "verb",
+            "adjective",
+            "participle",
+            "numeral",
+            "suffix",
+          ].includes(entry.partOfSpeech)
+        ) {
+          entry.identifiers = identifyWord(search, entry.forms, [], [])
+        }
+        return entry
+      })
   }
 
   @Query(() => [Entry])

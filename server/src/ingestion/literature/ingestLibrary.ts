@@ -1,16 +1,16 @@
+import axios from "axios"
 import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
 import fs from "fs"
-import request from "request-promise-native"
 import logger from "../../utils/log"
-import { authorNameMap } from "./literatureMaps"
+import { authorNicknameToName } from "./literatureMaps"
 
 const log = logger.getChildLogger()
 
 const host = "https://www.thelatinlibrary.com/"
 
 export default async function ingestLibrary() {
-  const tableHtml = cheerio.load(await request(host))
+  const tableHtml = cheerio.load((await axios.get(host)).data)
   cheerioTableParser(tableHtml)
   let authors = (tableHtml("p>table").first() as any)
     .parsetable(true, true, false)
@@ -18,7 +18,7 @@ export default async function ingestLibrary() {
     .map((elt: any) => {
       const a = cheerio.load(elt.trim())("a")
       const nickname = a.text().replace(/\s/, " ").trim().toLowerCase()
-      const name = authorNameMap[nickname] || nickname
+      const name = authorNicknameToName[nickname] || nickname
       const path = a.attr("href")
       return { nickname, name, path, works: [] }
     })
@@ -28,7 +28,7 @@ export default async function ingestLibrary() {
     const author = authors[i]
     log.info(author.nickname)
 
-    const $ = cheerio.load(await request(host + author.path))
+    const $ = cheerio.load((await axios.get(host + author.path)).data)
     for (const a of $("a").get()) {
       const href = $(a).attr("href")
       if (!href || href.match(/index.html/) || href.match(/classics.html/))

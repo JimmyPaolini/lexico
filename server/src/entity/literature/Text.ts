@@ -1,11 +1,11 @@
-import { Arg, Field, ObjectType } from "type-graphql"
+import { Arg, Field, ID, ObjectType } from "type-graphql"
 import {
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
 } from "typeorm"
 import Author from "./Author"
 import Book from "./Book"
@@ -14,9 +14,13 @@ import Line from "./Line"
 @Entity()
 @ObjectType()
 export default class Text {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
+  @Field(() => ID)
+  id: number
+
+  @Column("varchar", { length: 64 })
   @Field()
-  title: string
+  title!: string
 
   @Column("date", { nullable: true })
   @Field(() => Date, { nullable: true })
@@ -28,7 +32,7 @@ export default class Text {
   })
   @JoinColumn()
   @Field(() => Author)
-  author: Author
+  author!: Author
 
   @ManyToOne(() => Book, (author) => author.texts, {
     eager: true,
@@ -43,7 +47,7 @@ export default class Text {
     cascade: true,
   })
   @Field(() => [Line])
-  lines: Line[]
+  lines!: Line[]
 
   @Field(() => [Line])
   linesSlice(

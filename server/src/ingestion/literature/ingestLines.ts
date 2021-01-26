@@ -1,3 +1,4 @@
+import fs from "fs-extra"
 import { getConnection } from "typeorm"
 import Author from "../../entity/literature/Author"
 import Line from "../../entity/literature/Line"
@@ -9,15 +10,20 @@ export default async function ingestLines(
   author: Author,
 ) {
   const Lines = getConnection().getRepository(Line)
-  const lines = getText($)
-  await Promise.all(
-    lines.split("\n").map(async (line, lineNumber) => {
-      await Lines.insert({ line, lineNumber, text, author })
-    }),
-  )
+  const lines = getLines($)
+  // await Promise.all(
+  //   lines.split("\n").map(async (line, lineNumber) => {
+  //     await Lines.insert({ line, lineNumber, text, author })
+  //   }),
+  // )
+  Lines
+  text
+  const fileName = `data/literature/${author.nickname}/${text.title}.txt`
+  fs.ensureFileSync(fileName)
+  fs.writeFileSync(fileName, lines)
 }
 
-function getText($: cheerio.Root): string {
+function getLines($: cheerio.Root): string {
   const text = $("p")
     .text()
     .replace(/undefined/g, "")

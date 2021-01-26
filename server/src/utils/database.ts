@@ -4,7 +4,7 @@ import { timestampFormated } from "./string"
 
 const log = logger.getChildLogger()
 
-export const backupFileNameExtension = ".tar.zip"
+export const backupFileNameExtension = ".zip"
 
 export async function backupDatabase(name: string) {
   log.info("backing up database")

@@ -7,9 +7,11 @@ const es = new elasticsearch.Client({
   host: "localhost:9200",
   keepAlive: true,
 })
+const index = "lexico"
+const type = "_doc"
 
 function logToELK(logObject: any) {
-  es.index({ index: "lexico", type: "_doc", body: logObject })
+  es.index({ index, type, body: logObject }).catch((err) => logger.error(err))
 }
 
 logger.attachTransport(

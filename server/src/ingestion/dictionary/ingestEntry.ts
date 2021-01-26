@@ -98,7 +98,7 @@ async function ingestEntry(
       .where({ id: entry.id })
       .execute()
   } catch (e) {
-    log.error(entry.word, e)
+    log.warn(entry.word, e)
     await Entries.delete(entry.id)
   }
 }
