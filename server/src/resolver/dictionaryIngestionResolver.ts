@@ -110,7 +110,7 @@ export default class DictionaryIngestionResolver {
       this.ingestTranslationReferences(),
       this.ingestWords(firstLetter, lastLetter),
     ])
-    await backupDatabase("dictionary-ingestion")
+    // await backupDatabase("dictionary-ingestion")
     return true
   }
 

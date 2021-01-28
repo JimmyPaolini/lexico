@@ -3,7 +3,7 @@ import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
 import fs from "fs"
 import logger from "../../utils/log"
-import { authorNicknameToName } from "./literatureMaps"
+import { authorNameToFullname } from "./literatureMaps"
 
 const log = logger.getChildLogger()
 
@@ -18,7 +18,7 @@ export default async function ingestLibrary() {
     .map((elt: any) => {
       const a = cheerio.load(elt.trim())("a")
       const nickname = a.text().replace(/\s/, " ").trim().toLowerCase()
-      const name = authorNicknameToName[nickname] || nickname
+      const name = authorNameToFullname[nickname] || nickname
       const path = a.attr("href")
       return { nickname, name, path, works: [] }
     })

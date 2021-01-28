@@ -15,9 +15,7 @@ import DictionaryIngestionResolver from "./resolver/dictionaryIngestionResolver"
 import DictionaryResolver from "./resolver/dictionaryResolver"
 import LiteratureIngestionResolver from "./resolver/literatureIngestionResolver"
 import LiteratureResolver from "./resolver/literatureResolver"
-import createDbViews from "./utils/createDbViews"
 import logger from "./utils/log"
-
 const log = logger.getChildLogger()
 
 async function main() {
@@ -38,7 +36,7 @@ async function main() {
     synchronize: true,
   })
   log.info("Connected to database")
-  await createDbViews()
+  // await createDbViews()
 
   const app = express()
   app.listen(PORT, () =>

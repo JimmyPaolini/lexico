@@ -1,38 +1,26 @@
 import fs from "fs-extra"
 import { getConnection } from "typeorm"
-import Author from "../../entity/literature/Author"
 import Line from "../../entity/literature/Line"
 import Text from "../../entity/literature/Text"
+import logger from "../../utils/log"
 
-export default async function ingestLines(
-  $: cheerio.Root,
-  text: Text,
-  author: Author,
-) {
+const log = logger.getChildLogger()
+
+export default async function ingestLines(text: Text) {
   const Lines = getConnection().getRepository(Line)
-  const lines = getLines($)
-  // await Promise.all(
-  //   lines.split("\n").map(async (line, lineNumber) => {
-  //     await Lines.insert({ line, lineNumber, text, author })
-  //   }),
-  // )
-  Lines
-  text
-  const fileName = `data/literature/${author.nickname}/${text.title}.txt`
-  fs.ensureFileSync(fileName)
-  fs.writeFileSync(fileName, lines)
-}
-
-function getLines($: cheerio.Root): string {
-  const text = $("p")
-    .text()
-    .replace(/undefined/g, "")
-    .replace(/[\[\]]+ ?/g, "")
-    .replace(/(\s)(\s+)/g, "\n")
-    .split("\n")
-    .map((line) => line.trim())
-    .join("\n")
-    .trim()
-  if (!text.length) throw new Error(`no text`)
-  return text
+  const author = text.author.name
+  const book = text.book ? text.book.title + "/" : ""
+  log.info(`Ingesting ${author}/${book}${text.title}`)
+  const lines = fs
+    .readFileSync(`data/literature/${author}/${book}${text.title}.txt`)
+    .toString() as string
+  if (!lines.includes("\n")) log.info("NO LINES")
+  await Promise.all(
+    lines
+      .split("\n")
+      .map(
+        async (line, lineNumber) =>
+          await Lines.save({ line, lineNumber, text }),
+      ),
+  )
 }

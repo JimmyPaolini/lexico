@@ -17,24 +17,16 @@ export default class Book {
   @Field(() => ID)
   id: number
 
+  @Column("varchar", { length: 64 })
   @Field()
-  title: string
+  title!: string
 
-  @Column("date", { nullable: true })
-  @Field(() => Date, { nullable: true })
-  publishDate?: Date
-
-  @OneToMany(() => Text, (work) => work.author, {
-    cascade: true,
-  })
-  @Field(() => [Text])
-  texts: Text[]
-
-  @ManyToOne(() => Author, (author) => author.books, {
-    eager: true,
-    onUpdate: "CASCADE",
-  })
+  @ManyToOne(() => Author, (author) => author.books, { eager: true })
   @JoinColumn()
   @Field(() => Author)
   author: Author
+
+  @OneToMany(() => Text, (text) => text.book, { cascade: true })
+  @Field(() => [Text])
+  texts: Text[]
 }

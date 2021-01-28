@@ -1,4 +1,4 @@
-export const authorNicknameToName: { [key: string]: string } = {
+export const authorNameToFullname: { [key: string]: string } = {
   // "ammianus": "ammianus marcellinus",
   // "apuleius": "lucius apuleius madaurensis",
   augustus: "caesar divi filius augustus",

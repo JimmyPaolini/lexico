@@ -1,54 +1,112 @@
 import { Arg, Query, Resolver } from "type-graphql"
 import { getConnection, Like } from "typeorm"
 import Author from "../entity/literature/Author"
+import Book from "../entity/literature/Book"
 import Line from "../entity/literature/Line"
 import Text from "../entity/literature/Text"
 
 @Resolver(Text)
 export default class LiteratureResolver {
   Authors = getConnection().getRepository(Author)
+  Books = getConnection().getRepository(Book)
   Texts = getConnection().getRepository(Text)
   Lines = getConnection().getRepository(Line)
 
-  @Query(() => [Author])
-  async searchAuthors(@Arg("name") name: string) {
-    const where = [{ name: Like(`%${name}%`) }, { nickname: Like(`%${name}%`) }]
-    const author = await this.Authors.find({ where, relations: ["works"] })
-    return author
-  }
+  // LIST
 
-  @Query(() => Author)
-  async findAuthor(@Arg("name") name: string) {
-    const where = [{ name }, { nickname: name }]
-    const author = await this.Authors.findOne({
-      where,
-      relations: ["works"],
+  @Query(() => [Author])
+  async getAuthors() {
+    return await this.Authors.find({
+      relations: ["books", "texts"],
       order: { name: "ASC" },
     })
-    return author
+  }
+
+  @Query(() => [Book])
+  async getBooks() {
+    return await this.Books.find({
+      relations: ["texts"],
+      order: { title: "ASC" },
+    })
   }
 
   @Query(() => [Text])
-  async searchTexts(@Arg("title") title: string) {
-    const where = [{ title: Like(`%${title}%`) }]
-    const texts = await this.Texts.find({
-      where,
-      relations: ["author", "lines"],
+  async getTexts() {
+    return await this.Texts.find({
       order: { title: "ASC" },
     })
-    texts.forEach((text) =>
-      text.lines.sort((l1, l2) => l1.lineNumber - l2.lineNumber),
-    )
-    return texts
+  }
+
+  // GET
+
+  @Query(() => Author)
+  async getAuthor(@Arg("name") name: string) {
+    return await this.Authors.findOne({
+      where: { name },
+    })
+  }
+
+  @Query(() => Book)
+  async getBook(@Arg("author") author: string, @Arg("title") title: string) {
+    return await this.Books.findOne({
+      where: { title, author: { name: author } },
+    })
+  }
+
+  // @Query(() => Text)
+  // async getText(
+  //   @Arg("author") author: string,
+  //   @Arg("title") title: string,
+  //   @Arg("book", { nullable: true }) book?: string,
+  // ) {
+  //   const where = {
+  //     title,
+  //     author: { name: author },
+  //     book: book ? { title: book } : undefined,
+  //   } as FindConditions<Text>
+  //   console.log(where)
+  //   const text = await this.Texts.findOne({
+  //     where,
+  //     relations: ["lines"],
+  //   })
+  //   text?.lines.sort((l1, l2) => l1.lineNumber - l2.lineNumber)
+  //   return text
+  // }
+
+  // SEARCH
+
+  @Query(() => [Author])
+  async searchAuthors(@Arg("search") search: string) {
+    return await this.Authors.find({
+      where: [{ name: Like(`%${search}%`) }, { fullname: Like(`%${search}%`) }],
+      relations: ["texts"],
+      order: { name: "ASC" },
+    })
+  }
+
+  @Query(() => [Book])
+  async searchBooks(@Arg("search") search: string) {
+    return await this.Books.find({
+      where: { title: Like(`%${search}%`) },
+      relations: ["texts"],
+      order: { title: "ASC" },
+    })
+  }
+
+  @Query(() => [Text])
+  async searchTexts(@Arg("search") search: string) {
+    return await this.Texts.find({
+      where: { title: Like(`%${search}%`) },
+      relations: ["lines"],
+      order: { title: "ASC" },
+    })
   }
 
   @Query(() => [Line])
   async searchLines(@Arg("search") search: string) {
-    const where = [
-      { text: Like(`%${search}%`) },
-      { comments: Like(`%${search}%`) },
-    ]
-    const lines = await this.Lines.find({ where, order: { lineNumber: "ASC" } })
-    return lines
+    return await this.Lines.find({
+      where: [{ line: Like(`%${search}%`) }],
+      order: { lineNumber: "ASC" },
+    })
   }
 }

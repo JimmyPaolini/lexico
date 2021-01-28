@@ -13,7 +13,7 @@ export function timestampFormated(): string {
   const milliseconds = (now.getMilliseconds() + "000").slice(0, 3)
   const meridian = now.getHours() > 12 ? "PM" : "AM"
   const offset = now.getTimezoneOffset() / 60
-  return `${date}T${time}.${milliseconds}${meridian}-GMT-${offset}`
+  return `${date}_${time}.${milliseconds}${meridian}-GMT-${offset}`
 }
 
 export function capitalizeFirstLetter(str: string): string {

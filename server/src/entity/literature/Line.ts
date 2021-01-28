@@ -1,12 +1,5 @@
 import { Field, ID, ObjectType } from "type-graphql"
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm"
-import Author from "./Author"
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import Text from "./Text"
 
 @Entity()
@@ -16,28 +9,15 @@ export default class Line {
   @Field(() => ID)
   id!: number
 
-  @Column()
-  @Field()
-  lineNumber!: number
-
   @Column("varchar", { length: 4095 })
   @Field()
   line!: string
 
-  @Column("varchar", { length: 4095, nullable: true })
-  @Field({ nullable: true })
-  comments?: string
+  @Column()
+  @Field()
+  lineNumber!: number
 
-  @ManyToOne(() => Author, {
-    onUpdate: "CASCADE",
-  })
-  @JoinColumn()
-  @Field(() => Author)
-  author: Author
-
-  @ManyToOne(() => Text, (text) => text.lines, {
-    onUpdate: "CASCADE",
-  })
+  @ManyToOne(() => Text, (text) => text.lines, { eager: true })
   @Field(() => Text)
   text: Text
 }

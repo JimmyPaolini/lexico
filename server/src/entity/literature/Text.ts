@@ -22,30 +22,20 @@ export default class Text {
   @Field()
   title!: string
 
-  @Column("date", { nullable: true })
-  @Field(() => Date, { nullable: true })
-  publishDate?: Date
-
-  @ManyToOne(() => Author, (author) => author.texts, {
-    eager: true,
-    onUpdate: "CASCADE",
-  })
+  @ManyToOne(() => Author, (author) => author.texts, { eager: true })
   @JoinColumn()
   @Field(() => Author)
   author!: Author
 
-  @ManyToOne(() => Book, (author) => author.texts, {
+  @ManyToOne(() => Book, (book) => book.texts, {
     eager: true,
-    onUpdate: "CASCADE",
     nullable: true,
   })
   @JoinColumn()
   @Field(() => Book, { nullable: true })
   book?: Book
 
-  @OneToMany(() => Line, (line) => line.text, {
-    cascade: true,
-  })
+  @OneToMany(() => Line, (line) => line.text, { cascade: true })
   @Field(() => [Line])
   lines!: Line[]
 
@@ -55,6 +45,8 @@ export default class Text {
     @Arg("end", { defaultValue: Number.MAX_VALUE })
     end: number = Number.MAX_VALUE,
   ): Line[] {
-    return this.lines.slice(start, end)
+    return this.lines
+      .sort((l1, l2) => l1.lineNumber - l2.lineNumber)
+      .slice(start, end)
   }
 }
