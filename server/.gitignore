@@ -6,4 +6,5 @@
 **/dist
 data/wiktionary
 data/literature_original
+src/config.json
 *.log

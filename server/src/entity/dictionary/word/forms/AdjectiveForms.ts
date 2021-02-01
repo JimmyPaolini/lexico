@@ -10,7 +10,7 @@ export class AdjectiveNumber {
 }
 
 @ObjectType()
-export default class AdjectiveCase {
+export class AdjectiveCase {
   @Field(() => AdjectiveNumber, { nullable: true })
   nominative?: AdjectiveNumber
 
@@ -34,13 +34,13 @@ export default class AdjectiveCase {
 }
 
 @ObjectType()
-export class AdjectiveForms {
-  @Field(() => [String], { nullable: true })
+export default class AdjectiveForms {
+  @Field(() => AdjectiveCase, { nullable: true })
   masculine?: AdjectiveCase
 
-  @Field(() => [String], { nullable: true })
+  @Field(() => AdjectiveCase, { nullable: true })
   feminine?: AdjectiveCase
 
-  @Field(() => [String], { nullable: true })
+  @Field(() => AdjectiveCase, { nullable: true })
   neuter?: AdjectiveCase
 }

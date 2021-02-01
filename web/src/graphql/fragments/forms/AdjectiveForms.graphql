@@ -1,38 +1,40 @@
 fragment allAdjectiveForms on AdjectiveForms {
-  adjectiveNominative: nominative {
+  masculine {
+    ...allAdjectiveCase
+  }
+  feminine {
+    ...allAdjectiveCase
+  }
+  neuter {
+    ...allAdjectiveCase
+  }
+}
+
+fragment allAdjectiveCase on AdjectiveCase {
+  nominative {
     ...allAdjectiveNumber
   }
-  adjectiveGenitive: genitive {
+  genitive {
     ...allAdjectiveNumber
   }
-  adjectiveDative: dative {
+  dative {
     ...allAdjectiveNumber
   }
-  adjectiveAccusative: accusative {
+  accusative {
     ...allAdjectiveNumber
   }
-  adjectiveAblative: ablative {
+  ablative {
     ...allAdjectiveNumber
   }
-  adjectiveVocative: vocative {
+  vocative {
     ...allAdjectiveNumber
   }
-  adjectiveLocative: locative {
+  locative {
     ...allAdjectiveNumber
   }
 }
 
 fragment allAdjectiveNumber on AdjectiveNumber {
-  singular {
-    ...allAdjectiveGender
-  }
-  plural {
-    ...allAdjectiveGender
-  }
-}
-
-fragment allAdjectiveGender on AdjectiveGender {
-  masculine
-  feminine
-  neuter
+  singular
+  plural
 }

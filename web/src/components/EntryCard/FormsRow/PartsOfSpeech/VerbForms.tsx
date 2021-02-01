@@ -127,13 +127,17 @@ const verbFormsRestructure = (conjugations: any) => {
     conjugations?.indicative?.passive?.pluperfect,
     structure.IND.PLUP.PAS,
   )
-  const futp =
-    Object.keys(conjugations?.indicative?.active || {}).find((tense) =>
-      tense.match(/future\sperfect/),
-    ) || ""
-  toFormsTable(conjugations?.indicative?.active?.[futp], structure.IND.FUTP.ACT)
+  // const futp =
+  //   Object.keys(conjugations?.indicative?.active || {}).find((tense) =>
+  //     tense.match(/futurePerfect/),
+  //   ) || ""
+  console.log(conjugations?.indicative?.active)
   toFormsTable(
-    conjugations?.indicative?.passive?.[futp],
+    conjugations?.indicative?.active?.futurePerfect,
+    structure.IND.FUTP.ACT,
+  )
+  toFormsTable(
+    conjugations?.indicative?.passive?.futurePerfect,
     structure.IND.FUTP.PAS,
   )
 
@@ -227,55 +231,75 @@ const verbFormsRestructure = (conjugations: any) => {
     ",\n",
   )
 
-  structure.INF["INFINITIVE"]["-"][0].center = conjugations?.[
-    "non-finite"
-  ]?.infinitive?.active?.present?.join?.(",\n")
-  structure.INF["INFINITIVE"]["-"][2].center = conjugations?.[
-    "non-finite"
-  ]?.infinitive?.passive?.present?.join?.(",\n")
-  structure.INF["INFINITIVE"]["-"][4].center = conjugations?.[
-    "non-finite"
-  ]?.infinitive?.active?.perfect?.join?.(",\n")
-  structure.INF["INFINITIVE"]["-"][1].center = conjugations?.[
-    "non-finite"
-  ]?.infinitive?.passive?.perfect?.join?.(",\n")
-  structure.INF["INFINITIVE"]["-"][3].center = conjugations?.[
-    "non-finite"
-  ]?.infinitive?.active?.future?.join?.(",\n")
-  structure.INF["INFINITIVE"]["-"][5].center = conjugations?.[
-    "non-finite"
-  ]?.infinitive?.passive?.future?.join?.(",\n")
+  structure.INF["INFINITIVE"][
+    "-"
+  ][0].center = conjugations?.nonFinite?.infinitive?.active?.present?.join?.(
+    ",\n",
+  )
+  structure.INF["INFINITIVE"][
+    "-"
+  ][2].center = conjugations?.nonFinite?.infinitive?.passive?.present?.join?.(
+    ",\n",
+  )
+  structure.INF["INFINITIVE"][
+    "-"
+  ][4].center = conjugations?.nonFinite?.infinitive?.active?.perfect?.join?.(
+    ",\n",
+  )
+  structure.INF["INFINITIVE"][
+    "-"
+  ][1].center = conjugations?.nonFinite?.infinitive?.passive?.perfect?.join?.(
+    ",\n",
+  )
+  structure.INF["INFINITIVE"][
+    "-"
+  ][3].center = conjugations?.nonFinite?.infinitive?.active?.future?.join?.(
+    ",\n",
+  )
+  structure.INF["INFINITIVE"][
+    "-"
+  ][5].center = conjugations?.nonFinite?.infinitive?.passive?.future?.join?.(
+    ",\n",
+  )
 
-  structure.NONF["NON FINITE"].PARTICIPLE[0].center = conjugations?.[
-    "non-finite"
-  ]?.participle?.active?.present?.join?.(",\n")
-  structure.NONF["NON FINITE"].PARTICIPLE[1].center = conjugations?.[
-    "non-finite"
-  ]?.participle?.passive?.perfect?.join?.(",\n")
-  structure.NONF["NON FINITE"].PARTICIPLE[2].center = conjugations?.[
-    "non-finite"
-  ]?.participle?.active?.future?.join?.(",\n")
-  structure.NONF["NON FINITE"].PARTICIPLE[3].center = conjugations?.[
-    "non-finite"
-  ]?.participle?.passive?.future?.join?.(",\n")
-  structure.NONF["NON FINITE"]["GERUND/SUPINE"][0].center = conjugations?.[
-    "verbal-noun"
-  ]?.gerund?.genitive?.join?.(",\n")
-  structure.NONF["NON FINITE"]["GERUND/SUPINE"][1].center = conjugations?.[
-    "verbal-noun"
-  ]?.gerund?.dative?.join?.(",\n")
-  structure.NONF["NON FINITE"]["GERUND/SUPINE"][2].center = conjugations?.[
-    "verbal-noun"
-  ]?.gerund?.accusative?.join?.(",\n")
-  structure.NONF["NON FINITE"]["GERUND/SUPINE"][3].center = conjugations?.[
-    "verbal-noun"
-  ]?.gerund?.ablative?.join?.(",\n")
-  structure.NONF["NON FINITE"]["GERUND/SUPINE"][4].center = conjugations?.[
-    "verbal-noun"
-  ]?.supine?.accusative?.join?.(",\n")
-  structure.NONF["NON FINITE"]["GERUND/SUPINE"][5].center = conjugations?.[
-    "verbal-noun"
-  ]?.supine?.ablative?.join?.(",\n")
+  structure.NONF[
+    "NON FINITE"
+  ].PARTICIPLE[0].center = conjugations?.nonFinite?.participle?.active?.present?.join?.(
+    ",\n",
+  )
+  structure.NONF[
+    "NON FINITE"
+  ].PARTICIPLE[1].center = conjugations?.nonFinite?.participle?.passive?.perfect?.join?.(
+    ",\n",
+  )
+  structure.NONF[
+    "NON FINITE"
+  ].PARTICIPLE[2].center = conjugations?.nonFinite?.participle?.active?.future?.join?.(
+    ",\n",
+  )
+  structure.NONF[
+    "NON FINITE"
+  ].PARTICIPLE[3].center = conjugations?.nonFinite?.participle?.passive?.future?.join?.(
+    ",\n",
+  )
+  structure.NONF["NON FINITE"][
+    "GERUND/SUPINE"
+  ][0].center = conjugations?.verbalNoun?.gerund?.genitive?.join?.(",\n")
+  structure.NONF["NON FINITE"][
+    "GERUND/SUPINE"
+  ][1].center = conjugations?.verbalNoun?.gerund?.dative?.join?.(",\n")
+  structure.NONF["NON FINITE"][
+    "GERUND/SUPINE"
+  ][2].center = conjugations?.verbalNoun?.gerund?.accusative?.join?.(",\n")
+  structure.NONF["NON FINITE"][
+    "GERUND/SUPINE"
+  ][3].center = conjugations?.verbalNoun?.gerund?.ablative?.join?.(",\n")
+  structure.NONF["NON FINITE"][
+    "GERUND/SUPINE"
+  ][4].center = conjugations?.verbalNoun?.supine?.accusative?.join?.(",\n")
+  structure.NONF["NON FINITE"][
+    "GERUND/SUPINE"
+  ][5].center = conjugations?.verbalNoun?.supine?.ablative?.join?.(",\n")
 
   return structure
 }

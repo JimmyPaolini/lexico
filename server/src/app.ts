@@ -1,9 +1,21 @@
 import { ApolloServer } from "apollo-server-express"
-import dotenv from "dotenv"
+import cors from "cors"
 import express from "express"
+import session from "express-session"
+import passport from "passport"
 import "reflect-metadata"
 import { buildSchema } from "type-graphql"
 import { createConnection } from "typeorm"
+import {
+  DB_DATABASE,
+  DB_HOST,
+  DB_PASSWORD,
+  DB_PORT,
+  DB_USERNAME,
+  LOG_SQL,
+  PORT,
+  SESSION_SECRET,
+} from "./config.json"
 import Entry from "./entity/dictionary/Entry"
 import Translation from "./entity/dictionary/Translation"
 import Word from "./entity/dictionary/Word"
@@ -11,48 +23,72 @@ import Author from "./entity/literature/Author"
 import Book from "./entity/literature/Book"
 import Line from "./entity/literature/Line"
 import Text from "./entity/literature/Text"
-import DictionaryIngestionResolver from "./resolver/dictionaryIngestionResolver"
-import DictionaryResolver from "./resolver/dictionaryResolver"
-import LiteratureIngestionResolver from "./resolver/literatureIngestionResolver"
-import LiteratureResolver from "./resolver/literatureResolver"
+import User from "./entity/user/User"
+import DictionaryResolver from "./resolver/dictionary"
+import DictionaryIngestionResolver from "./resolver/dictionaryIngestion"
+import LiteratureResolver from "./resolver/literature"
+import LiteratureIngestionResolver from "./resolver/literatureIngestion"
+import UserResolver from "./resolver/user"
 import logger from "./utils/log"
+
 const log = logger.getChildLogger()
 
 async function main() {
-  dotenv.config()
-  const DB_PORT = parseInt(process.env.DB_PORT || "")
-  const PORT = parseInt(process.env.PORT || "")
-  const logSQL = false
-
   await createConnection({
     type: "postgres",
-    host: process.env.DB_HOST,
+    host: DB_HOST,
     port: DB_PORT,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: "lexico",
-    entities: [Entry, Translation, Word, Author, Book, Text, Line],
-    logging: logSQL || ["log", "info", "schema", "migration", "warn", "error"],
+    username: DB_USERNAME,
+    password: DB_PASSWORD,
+    database: DB_DATABASE,
+    entities: [Entry, Translation, Word, Author, Book, Text, Line, User],
+    logging: LOG_SQL || ["log", "info", "schema", "migration", "warn", "error"],
     synchronize: true,
   })
   log.info("Connected to database")
   // await createDbViews()
 
   const app = express()
-  app.listen(PORT, () =>
-    log.info(`Listening at http://localhost:${process.env.PORT}`),
+
+  app.use(cors())
+  app.use(
+    session({
+      secret: SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
+    }),
   )
 
-  const api = new ApolloServer({
+  app.use(passport.initialize())
+  app.use(passport.session())
+
+  const server = new ApolloServer({
     schema: await buildSchema({
       resolvers: [
         DictionaryResolver,
         DictionaryIngestionResolver,
         LiteratureResolver,
         LiteratureIngestionResolver,
+        UserResolver,
       ],
     }),
+    context: ({ req, res }) => ({ req, res }),
   })
-  api.applyMiddleware({ app })
+  server.applyMiddleware({ app })
+
+  app.get(
+    "/auth/google",
+    passport.authenticate("google", { scope: ["profile", "email"] }),
+  )
+
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google"),
+    (_, res) => {
+      res.redirect("/graphql")
+    },
+  )
+
+  app.listen(PORT, () => log.info(`Listening at http://localhost:${PORT}`))
 }
 main()

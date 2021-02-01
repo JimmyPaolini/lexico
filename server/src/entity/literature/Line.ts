@@ -1,5 +1,12 @@
 import { Field, ID, ObjectType } from "type-graphql"
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm"
+import User from "../user/User"
 import Text from "./Text"
 
 @Entity()
@@ -20,4 +27,8 @@ export default class Line {
   @ManyToOne(() => Text, (text) => text.lines, { eager: true })
   @Field(() => Text)
   text: Text
+
+  @ManyToMany(() => User, (user) => user.readings, { nullable: true })
+  @Field(() => [User], { nullable: true })
+  users?: User[]
 }

@@ -6,6 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm"
+import User from "../user/User"
 import Translation from "./Translation"
 import Word from "./Word"
 import { Forms, FormsUnion } from "./word/Forms"
@@ -59,10 +60,14 @@ export default class Entry {
 
   @Column("varchar", { length: 1027, nullable: true })
   @Field(() => String, { nullable: true })
-  etymology?: string | null
+  etymology?: string
 
   @Field(() => [String], { nullable: true })
   identifiers?: string[]
+
+  @ManyToMany(() => User, (user) => user.bookmarks, { nullable: true })
+  @Field(() => [User], { nullable: true })
+  users?: User[]
 
   // @ManyToMany(() => Entry, (entry) => entry.synonyms)
   // @JoinTable()

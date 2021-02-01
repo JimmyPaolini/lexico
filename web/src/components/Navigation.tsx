@@ -11,11 +11,20 @@ import {
   useMediaQuery,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { ChevronLeft, Menu } from "@material-ui/icons"
+import {
+  AccountBalance,
+  Bookmark,
+  ChevronLeft,
+  Create,
+  Inbox,
+  Menu,
+  MenuBook,
+  Search,
+  Settings,
+} from "@material-ui/icons"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React, { useContext, useState } from "react"
-import pages from "../pages"
 import { Context } from "./Context"
 
 export default function Navigation() {
@@ -109,3 +118,48 @@ const useStyles = makeStyles((theme) => ({
     left: 12,
   },
 }))
+
+const pages = [
+  {
+    Name: "Search",
+    name: "",
+    icon: <Search />,
+    keybind: " ",
+  },
+  {
+    Name: "Bookmarks",
+    name: "bookmarks",
+    icon: <Bookmark />,
+    keybind: "b",
+  },
+  {
+    Name: "Literature",
+    name: "literature",
+    icon: <MenuBook />,
+    keybind: "l",
+  },
+  {
+    Name: "Grammar",
+    name: "grammar",
+    icon: <Create />,
+    keybind: "g",
+  },
+  {
+    Name: "Settings",
+    name: "settings",
+    icon: <Settings />,
+    keybind: "s",
+  },
+  {
+    Name: "Suggestions",
+    name: "suggestions",
+    icon: <Inbox />,
+    keybind: "",
+  },
+  {
+    Name: "About",
+    name: "about",
+    icon: <AccountBalance />,
+    keybind: "",
+  },
+]

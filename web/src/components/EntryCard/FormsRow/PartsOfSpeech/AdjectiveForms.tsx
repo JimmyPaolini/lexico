@@ -31,16 +31,16 @@ const adjectiveFormsRestructure = (forms: any) => {
   const structure = JSON.parse(JSON.stringify(structureTemplate))
 
   function structureGender(struc: any, GEN: any, gender: any) {
-    struc[GEN][0].center = forms?.nominative?.singular?.[gender]?.join?.(",\n")
-    struc[GEN][1].center = forms?.nominative?.plural?.[gender]?.join?.(",\n")
-    struc[GEN][2].center = forms?.genitive?.singular?.[gender]?.join?.(",\n")
-    struc[GEN][3].center = forms?.genitive?.plural?.[gender]?.join?.(",\n")
-    struc[GEN][4].center = forms?.dative?.singular?.[gender]?.join?.(",\n")
-    struc[GEN][5].center = forms?.dative?.plural?.[gender]?.join?.(",\n")
-    struc[GEN][6].center = forms?.accusative?.singular?.[gender]?.join?.(",\n")
-    struc[GEN][7].center = forms?.accusative?.plural?.[gender]?.join?.(",\n")
-    struc[GEN][8].center = forms?.ablative?.singular?.[gender]?.join?.(",\n")
-    struc[GEN][9].center = forms?.ablative?.plural?.[gender]?.join?.(",\n")
+    struc[GEN][0].center = forms?.[gender]?.nominative?.singular?.join?.(",\n")
+    struc[GEN][1].center = forms?.[gender]?.nominative?.plural?.join?.(",\n")
+    struc[GEN][2].center = forms?.[gender]?.genitive?.singular?.join?.(",\n")
+    struc[GEN][3].center = forms?.[gender]?.genitive?.plural?.join?.(",\n")
+    struc[GEN][4].center = forms?.[gender]?.dative?.singular?.join?.(",\n")
+    struc[GEN][5].center = forms?.[gender]?.dative?.plural?.join?.(",\n")
+    struc[GEN][6].center = forms?.[gender]?.accusative?.singular?.join?.(",\n")
+    struc[GEN][7].center = forms?.[gender]?.accusative?.plural?.join?.(",\n")
+    struc[GEN][8].center = forms?.[gender]?.ablative?.singular?.join?.(",\n")
+    struc[GEN][9].center = forms?.[gender]?.ablative?.plural?.join?.(",\n")
 
     if (forms.vocative) {
       struc[GEN].splice(
@@ -48,10 +48,10 @@ const adjectiveFormsRestructure = (forms: any) => {
         0,
         {
           topLeft: "VOC",
-          center: forms?.vocative?.singular?.[gender]?.join(",\n"),
+          center: forms?.[gender]?.vocative?.singular?.join(",\n"),
         },
         {
-          center: forms?.vocative?.plural?.[gender]?.join(",\n"),
+          center: forms?.[gender]?.vocative?.plural?.join(",\n"),
         },
       )
     }
@@ -62,10 +62,10 @@ const adjectiveFormsRestructure = (forms: any) => {
         0,
         {
           topLeft: "LOC",
-          center: forms?.locative?.singular?.[gender]?.join(",\n"),
+          center: forms?.[gender]?.locative?.singular?.join(",\n"),
         },
         {
-          center: forms?.locative?.plural?.[gender]?.join(",\n"),
+          center: forms?.[gender]?.locative?.plural?.join(",\n"),
         },
       )
     }

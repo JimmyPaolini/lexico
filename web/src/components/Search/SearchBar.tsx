@@ -15,24 +15,27 @@ interface Props {
   search: string
   setSearch: Dispatch<SetStateAction<string>>
   handleSearchExecute: any
-  isLoading: boolean
+  isLoading?: boolean
   target: string
-  isLatin: boolean
-  setLatin: Dispatch<SetStateAction<boolean>>
+  isLatin?: boolean
+  setLatin?: Dispatch<SetStateAction<boolean>>
 }
 
 export default function SearchBar({
   search,
   setSearch,
   handleSearchExecute,
-  isLoading,
+  isLoading = false,
   target = "",
+  isLatin = false,
+  setLatin = () => null
 }: Props) {
   const classes = useStyles()
   const { isNavOpen, setNavOpen } = useContext(Context)
   const input = useRef<any>()
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
-
+  isLatin
+  setLatin
   // useEffect(() => input.current.focus(), []);
 
   useEventListener("keypress", (e: any) => {

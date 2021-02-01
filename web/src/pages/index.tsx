@@ -42,10 +42,10 @@ export default function Search() {
             setSearch,
             isLoading,
             handleSearchExecute: () => setSearched(search),
+            target: "lexico",
             isLatin,
             setLatin,
           }}
-          target="lexico"
         />
       </Grid>
       <Grid item container justify="center">

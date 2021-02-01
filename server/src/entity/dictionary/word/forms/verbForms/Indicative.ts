@@ -24,22 +24,22 @@ export class IndicativeNumber {
 @ObjectType()
 export class IndicativeTense {
   @Field(() => IndicativeNumber, { nullable: true })
-  "present": IndicativeNumber = new IndicativeNumber()
+  present: IndicativeNumber = new IndicativeNumber()
 
   @Field(() => IndicativeNumber, { nullable: true })
-  "imperfect": IndicativeNumber = new IndicativeNumber()
+  imperfect: IndicativeNumber = new IndicativeNumber()
 
   @Field(() => IndicativeNumber, { nullable: true })
-  "future": IndicativeNumber = new IndicativeNumber()
+  future: IndicativeNumber = new IndicativeNumber()
 
   @Field(() => IndicativeNumber, { nullable: true })
-  "perfect": IndicativeNumber = new IndicativeNumber()
+  perfect: IndicativeNumber = new IndicativeNumber()
 
   @Field(() => IndicativeNumber, { nullable: true })
-  "pluperfect": IndicativeNumber = new IndicativeNumber()
+  pluperfect: IndicativeNumber = new IndicativeNumber()
 
   @Field(() => IndicativeNumber, { nullable: true })
-  "futurePerfect": IndicativeNumber = new IndicativeNumber()
+  futurePerfect: IndicativeNumber = new IndicativeNumber()
 }
 
 @ObjectType()

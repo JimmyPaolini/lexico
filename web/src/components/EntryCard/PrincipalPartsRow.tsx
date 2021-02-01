@@ -7,7 +7,7 @@ import {
   createBookmark,
   deleteBookmark,
   isBookmarked,
-} from "../../utils/bookmarksController"
+} from "../../utils/bookmarks"
 
 interface Props {
   entry: Entry
@@ -15,7 +15,7 @@ interface Props {
 
 export default function PrincipalPartsRow({ entry }: Props) {
   const classes = useStyles()
-  
+
   const principalPartsFormatted = entry?.principalParts
     ?.map((principalPart) => principalPart.text.join("/"))
     .join(", ")

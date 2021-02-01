@@ -13,12 +13,10 @@ export const FormsUnion: UnionFromClasses<
   name: "Forms",
   types: () => [NounForms, VerbForms, AdjectiveForms, AdverbForms] as const,
   resolveType: (value) => {
+    if ("nominative" in value) return NounForms
     if ("indicative" in value) return VerbForms
+    if ("masculine" in value) return AdjectiveForms
     if ("positive" in value) return AdverbForms
-    else if ("nominative" in value) {
-      if (value?.nominative?.singular?.hasOwnProperty("masculine"))
-        return AdjectiveForms
-      else return NounForms
-    } else return undefined
+    else return undefined
   },
 })

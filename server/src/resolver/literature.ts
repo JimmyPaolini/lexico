@@ -41,14 +41,14 @@ export default class LiteratureResolver {
 
   @Query(() => Author)
   async getAuthor(@Arg("name") name: string) {
-    return await this.Authors.findOne({
+    return await this.Authors.findOneOrFail({
       where: { name },
     })
   }
 
   @Query(() => Book)
   async getBook(@Arg("author") author: string, @Arg("title") title: string) {
-    return await this.Books.findOne({
+    return await this.Books.findOneOrFail({
       where: { title, author: { name: author } },
     })
   }
