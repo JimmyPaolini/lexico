@@ -2,6 +2,7 @@ import { ApolloServer } from "apollo-server-express"
 import cors from "cors"
 import express from "express"
 import session from "express-session"
+import { buildContext } from "graphql-passport"
 import passport from "passport"
 import "reflect-metadata"
 import { buildSchema } from "type-graphql"
@@ -29,6 +30,7 @@ import DictionaryIngestionResolver from "./resolver/dictionaryIngestion"
 import LiteratureResolver from "./resolver/literature"
 import LiteratureIngestionResolver from "./resolver/literatureIngestion"
 import UserResolver from "./resolver/user"
+import "./utils/authentication"
 import logger from "./utils/log"
 
 const log = logger.getChildLogger()
@@ -54,8 +56,8 @@ async function main() {
   app.use(
     session({
       secret: SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
+      resave: true,
+      saveUninitialized: true,
     }),
   )
 
@@ -72,23 +74,17 @@ async function main() {
         UserResolver,
       ],
     }),
-    context: ({ req, res }) => ({ req, res }),
+    context: ({ req, res }) => buildContext({ req, res }),
   })
-  server.applyMiddleware({ app })
+
+  app.get("/google", passport.authenticate("google", { scope: ["email"] }))
 
   app.get(
-    "/auth/google",
-    passport.authenticate("google", { scope: ["profile", "email"] }),
-  )
-
-  app.get(
-    "/auth/google/callback",
-    passport.authenticate("google"),
-    (_, res) => {
-      res.redirect("/graphql")
-    },
+    "/google/callback",
+    passport.authenticate("google", { successRedirect: "/graphql" }),
   )
 
   app.listen(PORT, () => log.info(`Listening at http://localhost:${PORT}`))
+  server.applyMiddleware({ app })
 }
 main()

@@ -36,13 +36,8 @@ export default class User {
   email: string
 
   @Column({ nullable: true })
-  @Field({ nullable: true })
   @Length(8, 64)
   password: string
-
-  @Column({ nullable: true })
-  @Field({ nullable: true })
-  profle: string
 
   @Column({ unique: true, nullable: true })
   @Field({ nullable: true })

@@ -22,6 +22,10 @@ export default class UserResolver {
   ) {
     if (!validateEmail(email)) throw new Error("invalid email")
     if (!validatePassword(password)) throw new Error("invalid password")
+    const existingUser = await this.Users.findOne({
+      email: email.toLowerCase(),
+    })
+    if (existingUser)
     const user = await this.Users.save({
       email: email.toLowerCase(),
       password: await hash(password),
@@ -37,11 +41,10 @@ export default class UserResolver {
     @Arg("password") password: string,
     @Ctx() context: ResolverContext,
   ) {
-    const { user, info } = await context.authenticate("graphql-local", {
+    const { user } = await context.authenticate("graphql-local", {
       email,
       password,
     })
-    console.log(user, info)
     context.login(user)
     return { user }
   }
@@ -88,7 +91,8 @@ export default class UserResolver {
   }
 
   @Query(() => [User])
-  async users() {
+  async users(@Ctx() { req }: ResolverContext) {
+    console.log(req.session)
     return await this.Users.find()
   }
 }
