@@ -4,7 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
+  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -30,30 +30,37 @@ export default class User {
   @Field()
   updatedAt: Date
 
+  @Column()
+  @Field()
+  provider: "local" | "google" | "facebook"
+
   @Column({ nullable: true, unique: true })
   @Field({ nullable: true })
-  @Length(4, 32)
-  email: string
+  email?: string
 
   @Column({ nullable: true })
   @Length(8, 64)
-  password: string
+  password?: string
 
   @Column({ unique: true, nullable: true })
   @Field({ nullable: true })
-  googleId: string
+  googleId?: string
+
+  @Column({ unique: true, nullable: true })
+  @Field({ nullable: true })
+  facebookId?: string
 
   @ManyToMany(() => Entry, (entry) => entry.users, { nullable: true })
-  @JoinColumn()
+  @JoinTable()
   @Field(() => [Entry], { nullable: true })
   bookmarks?: Entry[]
 
   @ManyToMany(() => Line, (line) => line.users, { nullable: true })
-  @JoinColumn()
+  @JoinTable()
   @Field(() => [Line], { nullable: true })
   readings?: Line[]
 
-  @Column("json", { nullable: true })
-  @Field(() => Settings, { nullable: true })
-  settings?: Settings
+  @Column("json", { default: new Settings() })
+  @Field(() => Settings, { defaultValue: new Settings() })
+  settings: Settings = new Settings()
 }

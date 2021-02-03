@@ -54,6 +54,28 @@ export function unescapeCapitals(str: string): string {
   return str.replace(/([A-Z])`/, "$1")
 }
 
+export function getMacronOptionRegex(str: string) {
+  return str
+    .replace(/a/g, "(a|ā)")
+    .replace(/A/g, "(A|Ā)")
+    .replace(/e/g, "(e|ē)")
+    .replace(/E/g, "(E|Ē)")
+    .replace(/i/g, "(i|ī)")
+    .replace(/I/g, "(I|Ī)")
+    .replace(/o/g, "(o|ō)")
+    .replace(/O/g, "(O|Ō)")
+    .replace(/u/g, "(u|ū)")
+    .replace(/U/g, "(U|Ū)")
+    .replace(/y/g, "(y|ȳ)")
+    .replace(/Y/g, "(Y|Ȳ)")
+}
+
+export function validateLetters(letters: string[]): void {
+  for (const letter of letters) {
+    if (!letter.match(/[a-z]/i)) throw new Error("invalid letter")
+  }
+}
+
 export function unabbreviateText(text: string): string {
   return text
     .replace(/Agr\./gi, "agrippa")

@@ -25,6 +25,7 @@ import Book from "./entity/literature/Book"
 import Line from "./entity/literature/Line"
 import Text from "./entity/literature/Text"
 import User from "./entity/user/User"
+import DatabaseResolver from "./resolver/database"
 import DictionaryResolver from "./resolver/dictionary"
 import DictionaryIngestionResolver from "./resolver/dictionaryIngestion"
 import LiteratureResolver from "./resolver/literature"
@@ -57,12 +58,17 @@ async function main() {
     session({
       secret: SESSION_SECRET,
       resave: true,
-      saveUninitialized: true,
+      saveUninitialized: false,
     }),
   )
 
   app.use(passport.initialize())
   app.use(passport.session())
+  const redirects = { successRedirect: "/graphql", failureRedirect: "/graphql" }
+  app.get("/google", passport.authenticate("google", { scope: ["email"] }))
+  app.get("/google/callback", passport.authenticate("google", redirects))
+  app.get("/facebook", passport.authenticate("facebook", { scope: ["email"] }))
+  app.get("/facebook/callback", passport.authenticate("facebook", redirects))
 
   const server = new ApolloServer({
     schema: await buildSchema({
@@ -71,20 +77,14 @@ async function main() {
         DictionaryIngestionResolver,
         LiteratureResolver,
         LiteratureIngestionResolver,
+        DatabaseResolver,
         UserResolver,
       ],
     }),
     context: ({ req, res }) => buildContext({ req, res }),
   })
-
-  app.get("/google", passport.authenticate("google", { scope: ["email"] }))
-
-  app.get(
-    "/google/callback",
-    passport.authenticate("google", { successRedirect: "/graphql" }),
-  )
+  server.applyMiddleware({ app })
 
   app.listen(PORT, () => log.info(`Listening at http://localhost:${PORT}`))
-  server.applyMiddleware({ app })
 }
 main()

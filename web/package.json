@@ -1,6 +1,4 @@
 {
-  "name": "with-typescript",
-  "version": "1.0.0",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -27,5 +25,10 @@
     "@types/react-query": "^1.1.2",
     "typescript": "4.0"
   },
+  "name": "lexico-web",
+  "author": "Jimmy Paolini",
+  "description": "lexico-web",
+  "repository": "https://github.com/JimmyPaolini/Lexico",
+  "version": "1.0.0",
   "license": "MIT"
 }

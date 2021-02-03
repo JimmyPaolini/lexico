@@ -5,6 +5,7 @@ import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
 import { identifyWord } from "../utils/forms"
 import logger from "../utils/log"
+import { getMacronOptionRegex } from "../utils/string"
 
 const log = logger.getChildLogger()
 
@@ -78,20 +79,4 @@ export default class DictionaryResolver {
   async untranslated() {
     return await this.Entries.query(`SELECT * FROM untranslated`)
   }
-}
-
-function getMacronOptionRegex(str: string) {
-  return str
-    .replace(/a/g, "(a|ā)")
-    .replace(/A/g, "(A|Ā)")
-    .replace(/e/g, "(e|ē)")
-    .replace(/E/g, "(E|Ē)")
-    .replace(/i/g, "(i|ī)")
-    .replace(/I/g, "(I|Ī)")
-    .replace(/o/g, "(o|ō)")
-    .replace(/O/g, "(O|Ō)")
-    .replace(/u/g, "(u|ū)")
-    .replace(/U/g, "(U|Ū)")
-    .replace(/y/g, "(y|ȳ)")
-    .replace(/Y/g, "(Y|Ȳ)")
 }

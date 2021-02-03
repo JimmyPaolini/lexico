@@ -1,5 +1,4 @@
-import { readdirSync } from "fs"
-import { Arg, Mutation, Query, Resolver } from "type-graphql"
+import { Arg, Mutation, Resolver } from "type-graphql"
 import { FindManyOptions, getConnection, Like } from "typeorm"
 import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
@@ -11,13 +10,8 @@ import { getEntryForms } from "../ingestion/dictionary/ingestWord"
 import ingestWiktionary, {
   categories,
 } from "../ingestion/wiktionary/ingestWiktionary"
-import {
-  backupDatabase,
-  backupFileNameExtension,
-  restoreDatabase,
-} from "../utils/database"
 import logger from "../utils/log"
-import { escapeCapitals } from "../utils/string"
+import { escapeCapitals, validateLetters } from "../utils/string"
 
 const log = logger.getChildLogger()
 
@@ -26,6 +20,20 @@ export default class DictionaryIngestionResolver {
   Entries = getConnection().getRepository(Entry)
   Words = getConnection().getRepository(Word)
   Translations = getConnection().getRepository(Translation)
+
+  @Mutation(() => Boolean)
+  async ingestDictionary(
+    @Arg("firstLetter") firstLetter: string,
+    @Arg("lastLetter") lastLetter: string,
+  ) {
+    await this.ingestEntries(firstLetter, lastLetter)
+    await Promise.all([
+      this.ingestTranslationReferences(),
+      this.ingestWords(firstLetter, lastLetter),
+    ])
+    // await backupDatabase("dictionary-ingestion")
+    return true
+  }
 
   @Mutation(() => Boolean)
   async ingestEntries(
@@ -101,60 +109,6 @@ export default class DictionaryIngestionResolver {
   }
 
   @Mutation(() => Boolean)
-  async ingestDictionary(
-    @Arg("firstLetter") firstLetter: string,
-    @Arg("lastLetter") lastLetter: string,
-  ) {
-    await this.ingestEntries(firstLetter, lastLetter)
-    await Promise.all([
-      this.ingestTranslationReferences(),
-      this.ingestWords(firstLetter, lastLetter),
-    ])
-    // await backupDatabase("dictionary-ingestion")
-    return true
-  }
-
-  @Mutation(() => Boolean)
-  async clearDictionary(
-    @Arg("firstLetter") firstLetter: string,
-    @Arg("lastLetter") lastLetter: string,
-  ) {
-    await this.clearEntries(firstLetter, lastLetter)
-    await this.clearWords(firstLetter, lastLetter)
-    return true
-  }
-
-  @Mutation(() => Boolean)
-  async clearEntries(
-    @Arg("firstLetter") firstLetter: string,
-    @Arg("lastLetter") lastLetter: string,
-  ) {
-    validateLetters([firstLetter, lastLetter])
-    log.info("Clearing entries")
-    await this.Entries.createQueryBuilder()
-      .delete()
-      .where(`word ~* '^-?[${firstLetter}-${lastLetter}]'`)
-      .execute()
-    log.info("Cleared entries")
-    return true
-  }
-
-  @Mutation(() => Boolean)
-  async clearWords(
-    @Arg("firstLetter") firstLetter: string,
-    @Arg("lastLetter") lastLetter: string,
-  ) {
-    validateLetters([firstLetter, lastLetter])
-    log.info("Clearing words")
-    await this.Words.createQueryBuilder()
-      .delete()
-      .where(`word ~* '^-?[${firstLetter}-${lastLetter}]'`)
-      .execute()
-    log.info("Cleared words")
-    return true
-  }
-
-  @Mutation(() => Boolean)
   async ingestWiktionary(
     @Arg("category") category: string,
     @Arg("firstLetter") firstLetter: string,
@@ -164,39 +118,5 @@ export default class DictionaryIngestionResolver {
     validateLetters([firstLetter, lastLetter])
     await ingestWiktionary(category, firstLetter, lastLetter)
     return true
-  }
-
-  @Mutation(() => Boolean)
-  async backupDatabase() {
-    await backupDatabase("manual")
-    return true
-  }
-
-  @Query(() => [String])
-  backups() {
-    return readdirSync(`data/backup`)
-      .filter((fileName) => !fileName.match(/\.DS_Store/))
-      .map((fileName) => fileName.replace(backupFileNameExtension, ""))
-      .sort()
-      .reverse()
-  }
-
-  @Mutation(() => Boolean)
-  async restoreDatabase(@Arg("backupFileName") backupFileName: string) {
-    await restoreDatabase(backupFileName)
-    return true
-  }
-
-  @Mutation(() => Boolean)
-  async restoreDatabaseFromLatestBackup() {
-    const latestBackup = this.backups()[0]
-    await restoreDatabase(latestBackup)
-    return true
-  }
-}
-
-function validateLetters(letters: string[]): void {
-  for (const letter of letters) {
-    if (!letter.match(/[a-z]/i)) throw new Error("invalid letter")
   }
 }

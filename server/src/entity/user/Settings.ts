@@ -1,22 +1,43 @@
-import { Field, ObjectType } from "type-graphql"
+import { Field, InputType, ObjectType } from "type-graphql"
 
 @ObjectType()
 export default class Settings {
-  @Field()
+  @Field({ defaultValue: "dark" })
   theme: "dark" | "light" = "dark"
 
-  @Field()
+  @Field({ defaultValue: 12 })
   fontSize: number = 12
 
-  @Field()
+  @Field({ defaultValue: false })
   defaultFormsRowOpen: boolean = false
 
-  @Field()
+  @Field({ defaultValue: false })
   defaultTranslationsRowOpen: boolean = false
 
-  @Field()
+  @Field({ defaultValue: true })
   macronizeDictionary: boolean = true
 
-  @Field()
+  @Field({ defaultValue: false })
+  macronizeLiterature: boolean = false
+}
+
+@InputType()
+export class SettingsInput implements Partial<Settings> {
+  @Field({ defaultValue: "dark" })
+  theme: "dark" | "light" = "dark"
+
+  @Field({ defaultValue: 12 })
+  fontSize: number = 12
+
+  @Field({ defaultValue: false })
+  defaultFormsRowOpen: boolean = false
+
+  @Field({ defaultValue: false })
+  defaultTranslationsRowOpen: boolean = false
+
+  @Field({ defaultValue: true })
+  macronizeDictionary: boolean = true
+
+  @Field({ defaultValue: false })
   macronizeLiterature: boolean = false
 }

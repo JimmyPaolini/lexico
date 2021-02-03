@@ -20,18 +20,17 @@
     "reflect-metadata": "^0.1.13",
     "tslog": "^3.0.2",
     "type-graphql": "^1.1.1",
-    "typeorm": "^0.2.29",
-    "uuid": "^8.3.2"
+    "typeorm": "^0.2.29"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.9",
-    "@types/passport-facebook": "^2.1.10",
     "@types/cheerio": "^0.22.23",
+    "@types/cors": "^2.8.9",
     "@types/elasticsearch": "^5.0.37",
     "@types/express": "^4.17.9",
     "@types/express-session": "^1.17.3",
     "@types/node": "^14.14.11",
     "@types/passport": "^1.0.5",
+    "@types/passport-facebook": "^2.1.10",
     "@types/passport-google-oauth20": "^2.0.6",
     "@types/prettier": "^2.1.5",
     "@typescript-eslint/eslint-plugin": "^4.9.1",

@@ -33,15 +33,4 @@ export default class LiteratureIngestionResolver {
     // await backupDatabase("literature-ingestion")
     return true
   }
-
-  @Mutation(() => Boolean)
-  async clearLiterature() {
-    log.info("clearing literature")
-    await this.Lines.createQueryBuilder().delete().execute()
-    await this.Texts.createQueryBuilder().delete().execute()
-    await this.Books.createQueryBuilder().delete().execute()
-    await this.Authors.createQueryBuilder().delete().execute()
-    log.info("cleared literature")
-    return true
-  }
 }

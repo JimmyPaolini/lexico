@@ -32,5 +32,10 @@
     "strict": true
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*.tsx", "./src/**/*.ts", "./src/**/*.gql"]
+  "include": [
+    "./src/**/*.tsx",
+    "./src/**/*.ts",
+    "./src/**/*.graphql",
+    "./src/**/*.gql"
+  ]
 }
