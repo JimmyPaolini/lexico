@@ -1,17 +1,18 @@
 import elasticsearch from "elasticsearch"
 import { Logger } from "tslog"
 
-const logger = new Logger({ displayFunctionName: false })
+const logger = new Logger({ displayFunctionName: false, minLevel: "info" })
 
 const es = new elasticsearch.Client({
   host: "localhost:9200",
   keepAlive: true,
 })
-const index = "lexico"
-const type = "_doc"
 
 function logToELK(logObject: any) {
-  es.index({ index, type, body: logObject }).catch((err) => logger.error(err))
+  es.index({ index: "lexico", type: "_doc", body: logObject }).catch((err) => {
+    console.log("error logging to elasticsearch")
+    logger.debug(err)
+  })
 }
 
 logger.attachTransport(

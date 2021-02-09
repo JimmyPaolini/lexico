@@ -31,7 +31,7 @@ export default function Navigation() {
   const classes = useStyles()
   const router = useRouter()
   const isMobile = useMediaQuery((theme: any) => theme?.breakpoints.down("sm"))
-  const { isNavOpen: open, setNavOpen: setOpen } = useContext(Context) as any
+  const { isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
   const pageName = router.pathname.split("/")[1]
   const [selected, setSelected] = useState(pageName || "search")
 

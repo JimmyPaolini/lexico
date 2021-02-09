@@ -1,92 +1,71 @@
-import { verify } from "argon2"
-import { GraphQLLocalStrategy as LocalStrategy } from "graphql-passport"
-import passport from "passport"
-import {
-  Profile as FacebookProfile,
-  Strategy as FacebookStrategy,
-} from "passport-facebook"
-import {
-  Profile as GoogleProfile,
-  Strategy as GoogleStrategy,
-  VerifyCallback as VerifyCallback,
-} from "passport-google-oauth20"
+import axios from "axios"
+import { sign, verify } from "jsonwebtoken"
+import { MiddlewareFn } from "type-graphql"
 import { getConnection } from "typeorm"
-import {
-  FACEBOOK_ID,
-  FACEBOOK_SECRET,
-  GOOGLE_ID,
-  GOOGLE_SECRET,
-} from "../config.json"
+import { GOOGLE_ID, GOOGLE_SECRET, JWT_SECRET } from "../config.json"
 import User from "../entity/user/User"
-import { validateEmail, validatePassword } from "./string"
+import logger from "./log"
+import { ResolverContext } from "./ResolverContext"
 
-passport.use(
-  new LocalStrategy(async (email: any, password: any, done: VerifyCallback) => {
-    if (!validateEmail(email)) return done(new Error("invalid email"))
-    if (!validatePassword(password)) return done(new Error("invalid password"))
-    const Users = getConnection().getRepository(User)
-    const user = await Users.findOne({ email: email.toLowerCase() })
-    if (!user) return done(new Error("user not found"))
-    if (!user.password) return done(new Error("user has no password"))
-    if (!(await verify(user.password, password)))
-      return done(new Error("incorrect password"))
-    done(undefined, user)
-  }),
-)
+const log = logger.getChildLogger()
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: GOOGLE_ID,
-      clientSecret: GOOGLE_SECRET,
-      callbackURL: "http://localhost:3001/google/callback",
-    },
-    async (_, __, profile: GoogleProfile, done: VerifyCallback) => {
-      const Users = getConnection().getRepository(User)
-      let user = await Users.findOne({ googleId: profile.id })
-      if (!user) {
-        user = await Users.save({
-          googleId: profile.id,
-          email: profile._json.email,
-          provider: "google",
-        })
-      }
-      return done(undefined, user)
-    },
-  ),
-)
+export function createAccessToken(user: User) {
+  return sign({ sub: user.id, iss: "https://lexicolatin.com" }, JWT_SECRET, {
+    expiresIn: "7d",
+  })
+}
 
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: FACEBOOK_ID,
-      clientSecret: FACEBOOK_SECRET,
-      callbackURL: "http://localhost:3001/facebook/callback",
-      profileFields: ["id", "email"],
-    },
-    async (_, __, profile: FacebookProfile, done: VerifyCallback) => {
-      console.log(profile)
-      const Users = getConnection().getRepository(User)
-      let user = await Users.findOne({ facebookId: profile.id })
-      if (!user) {
-        user = await Users.save({
-          facebookId: profile.id,
-          email: profile._json.email,
-          provider: "facebook",
-        })
-      }
-      return done(undefined, user)
-    },
-  ),
-)
+export const Authenticate: MiddlewareFn<ResolverContext> = async (
+  { context },
+  next,
+) => {
+  if (!context.req.cookies.accessToken) throw new Error("missing access token")
+  const claims = verify(context.req.cookies.accessToken, JWT_SECRET) as any
+  if (!claims) throw new Error("invalid access token")
+  const user = await getConnection().getRepository(User).findOne(claims.sub)
+  if (!user) throw new Error("user does not exist")
+  context.user = user
+  return next()
+}
 
-passport.serializeUser((user, done) => {
-  done(null, (user as User).id)
-})
+export const IsAuthenticated: MiddlewareFn<ResolverContext> = (
+  { context: { req } },
+  next,
+) => {
+  const accessToken = req.cookies.accessToken
+  if (!verify(accessToken, JWT_SECRET)) throw new Error("invalid access token")
+  return next()
+}
 
-passport.deserializeUser(async (id: number, done) => {
-  const Users = getConnection().getRepository(User)
-  let user = await Users.findOne(id)
-  if (!user) return done(new Error("user not found"))
-  return done(null, user)
-})
+export async function fetchGoogleUser(code: string) {
+  const {
+    data: { access_token },
+  } = await axios
+    .post("https://oauth2.googleapis.com/token", null, {
+      params: {
+        code: code,
+        client_id: GOOGLE_ID,
+        client_secret: GOOGLE_SECRET,
+        redirect_uri: "http://localhost:3000/google",
+        grant_type: "authorization_code",
+      },
+    })
+    .catch(() => {
+      const error = new Error("error fetching google access token")
+      log.error(error)
+      throw error
+    })
+  const { data: profile } = await axios
+    .get("https://www.googleapis.com/oauth2/v1/userinfo", {
+      params: {
+        alt: "json",
+        access_token,
+      },
+    })
+    .catch(() => {
+      const error = new Error("error fetching google user info")
+      log.error(error)
+      throw error
+    })
+  return profile
+}

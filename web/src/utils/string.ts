@@ -79,3 +79,13 @@ export function unabbreviateText(text: string) {
     .replace(/Vol\./gi, "volesus")
     .replace(/Vop\./gi, "vopiscus")
 }
+
+export function validateEmail(email: string) {
+  return email.match(
+    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+  )
+}
+
+export function validatePassword(password: string) {
+  return password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
+}

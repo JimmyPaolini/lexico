@@ -4,7 +4,7 @@ import React, { useMemo, useState } from "react"
 import Entry from "../../../server/src/entity/dictionary/Entry"
 import CardDeck from "../components/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
-import SearchBar from "../components/Search/SearchBar"
+import SearchBar from "../components/search/SearchBar"
 import { getBookmarks } from "../utils/bookmarks"
 
 export default function Search() {

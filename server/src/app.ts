@@ -1,9 +1,7 @@
 import { ApolloServer } from "apollo-server-express"
+import cookieParser from "cookie-parser"
 import cors from "cors"
 import express from "express"
-import session from "express-session"
-import { buildContext } from "graphql-passport"
-import passport from "passport"
 import "reflect-metadata"
 import { buildSchema } from "type-graphql"
 import { createConnection } from "typeorm"
@@ -15,7 +13,6 @@ import {
   DB_USERNAME,
   LOG_SQL,
   PORT,
-  SESSION_SECRET,
 } from "./config.json"
 import Entry from "./entity/dictionary/Entry"
 import Translation from "./entity/dictionary/Translation"
@@ -25,13 +22,13 @@ import Book from "./entity/literature/Book"
 import Line from "./entity/literature/Line"
 import Text from "./entity/literature/Text"
 import User from "./entity/user/User"
+import AuthenticationResolver from "./resolver/authentication"
 import DatabaseResolver from "./resolver/database"
 import DictionaryResolver from "./resolver/dictionary"
 import DictionaryIngestionResolver from "./resolver/dictionaryIngestion"
 import LiteratureResolver from "./resolver/literature"
 import LiteratureIngestionResolver from "./resolver/literatureIngestion"
 import UserResolver from "./resolver/user"
-import "./utils/authentication"
 import logger from "./utils/log"
 
 const log = logger.getChildLogger()
@@ -52,23 +49,12 @@ async function main() {
   // await createDbViews()
 
   const app = express()
-
-  app.use(cors())
-  app.use(
-    session({
-      secret: SESSION_SECRET,
-      resave: true,
-      saveUninitialized: false,
-    }),
-  )
-
-  app.use(passport.initialize())
-  app.use(passport.session())
-  const redirects = { successRedirect: "/graphql", failureRedirect: "/graphql" }
-  app.get("/google", passport.authenticate("google", { scope: ["email"] }))
-  app.get("/google/callback", passport.authenticate("google", redirects))
-  app.get("/facebook", passport.authenticate("facebook", { scope: ["email"] }))
-  app.get("/facebook/callback", passport.authenticate("facebook", redirects))
+  const corsOptions = {
+    credentials: true,
+    origin: ["http://localhost:3000", "https://lexicolatin.com"],
+  }
+  app.use(cors(corsOptions))
+  app.use(cookieParser())
 
   const server = new ApolloServer({
     schema: await buildSchema({
@@ -78,12 +64,13 @@ async function main() {
         LiteratureResolver,
         LiteratureIngestionResolver,
         DatabaseResolver,
+        AuthenticationResolver,
         UserResolver,
       ],
     }),
-    context: ({ req, res }) => buildContext({ req, res }),
+    context: ({ req, res }) => ({ req, res }),
   })
-  server.applyMiddleware({ app })
+  server.applyMiddleware({ app, cors: corsOptions })
 
   app.listen(PORT, () => log.info(`Listening at http://localhost:${PORT}`))
 }

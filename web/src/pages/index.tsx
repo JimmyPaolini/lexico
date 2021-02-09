@@ -1,15 +1,14 @@
 import { Grid, Typography } from "@material-ui/core"
-import { request } from "graphql-request"
 import Image from "next/image"
 import React, { useEffect, useMemo, useState } from "react"
 import { QueryFunctionContext, useQuery } from "react-query"
 import Entry from "../../../server/src/entity/dictionary/Entry"
 import CardDeck from "../components/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
-import SearchBar from "../components/Search/SearchBar"
+import SearchBar from "../components/search/SearchBar"
 import searchEnglish from "../graphql/searchEnglish.gql"
 import searchLatin from "../graphql/searchLatin.gql"
-import { endpoint } from "../pages/_app"
+import { graphQLClient } from "./_app"
 
 export default function Search() {
   const [isLatin, setLatin] = useState<boolean>(true)
@@ -73,6 +72,6 @@ async function useSearchQuery({
 }: QueryFunctionContext<any>) {
   if (!search) return null
   const query = isLatin ? searchLatin : searchEnglish
-  const { searchLatin: data } = await request(endpoint, query, { search })
+  const { searchLatin: data } = await graphQLClient.request(query, { search })
   return data
 }

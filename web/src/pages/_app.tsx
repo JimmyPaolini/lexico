@@ -3,6 +3,7 @@ import {
   ServerStyleSheets,
   ThemeProvider,
 } from "@material-ui/core"
+import { GraphQLClient } from "graphql-request"
 import type { AppProps } from "next/app"
 import React from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
@@ -10,7 +11,11 @@ import { ContextProvider } from "../components/Context"
 import Layout from "../components/Layout"
 import theme from "../theme"
 
-export const endpoint = "http://localhost:2048/graphql"
+export const endpoint = "http://localhost:3001/graphql"
+export const graphQLClient = new GraphQLClient(endpoint, {
+  credentials: "include",
+  mode: "cors",
+})
 
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient()
@@ -18,13 +23,13 @@ export default function App({ Component, pageProps }: AppProps) {
   return sheets.collect(
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ContextProvider>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <ContextProvider>
           <Layout>
             <Component {...pageProps} />
           </Layout>
-        </QueryClientProvider>
-      </ContextProvider>
+        </ContextProvider>
+      </QueryClientProvider>
     </ThemeProvider>,
   )
 }
