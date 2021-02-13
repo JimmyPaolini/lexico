@@ -1,4 +1,4 @@
-query google($code: String!) {
+query Google($code: String!) {
   google(code: $code) {
     id
     email

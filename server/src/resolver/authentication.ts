@@ -38,7 +38,7 @@ export default class AuthenticationResolver {
     const user = await this.Users.save({
       email: email.toLowerCase(),
       password: await hash(password),
-      provider: "local",
+      provider: "basic",
     })
     log.info("registered user:", user.provider, user.id, email)
     return await this.login(email, password, ctx)
@@ -60,7 +60,10 @@ export default class AuthenticationResolver {
   ) {
     if (!validateEmail(email)) throw new Error("invalid email")
     if (!validatePassword(password)) throw new Error("invalid password")
-    const user = await this.Users.findOne({ email: email.toLowerCase() })
+    const user = await this.Users.findOne({
+      email: email.toLowerCase(),
+      provider: "basic",
+    })
     if (!user) throw new Error("email not found")
     if (!(await verify(user.password!, password)))
       throw new Error("incorrect password")

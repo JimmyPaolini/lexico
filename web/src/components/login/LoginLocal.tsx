@@ -5,7 +5,7 @@ import request from "graphql-request"
 import React, { Dispatch, useState } from "react"
 import { useQuery } from "react-query"
 import loginQuery from "../../graphql/login.gql"
-import registerQuery from "../../graphql/register.gql"
+import registerMutation from "../../graphql/register.gql"
 import { endpoint } from "../../pages/_app"
 import {
   capitalizeFirstLetter,
@@ -70,7 +70,7 @@ const useRegister = (userInfo: UserInfo) =>
     async () => {
       const { searchLatin: data } = await request(
         endpoint,
-        registerQuery,
+        registerMutation,
         userInfo,
       )
       return data

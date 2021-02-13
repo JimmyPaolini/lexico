@@ -35,7 +35,12 @@ export const InflectionUnion: UnionFromClasses<
       PrepositionInflection,
       Uninflected,
     ] as const,
-  resolveType: () => {
-    return undefined
+  resolveType: (value) => {
+    if ("declension" in value && "gender" in value) return NounInflection
+    if ("conjugation" in value) return VerbInflection
+    if ("declension" in value && "degree" in value) return AdjectiveInflection
+    if ("type" in value && "degree" in value) return AdverbInflection
+    if ("case" in value) return PrepositionInflection
+    else return Uninflected
   },
 })

@@ -86,10 +86,10 @@ const verbFormsRestructure = (conjugations: any) => {
   const structure = { ...structureTemplate }
   function toFormsTable(conj: any, struc: any) {
     struc[0].center = conj?.singular?.first?.join?.(",\n")
-    struc[1].center = conj?.singular?.second?.join?.(",\n")
-    struc[2].center = conj?.singular?.third?.join?.(",\n")
-    struc[3].center = conj?.plural?.first?.join?.(",\n")
-    struc[4].center = conj?.plural?.second?.join?.(",\n")
+    struc[2].center = conj?.singular?.second?.join?.(",\n")
+    struc[4].center = conj?.singular?.third?.join?.(",\n")
+    struc[1].center = conj?.plural?.first?.join?.(",\n")
+    struc[3].center = conj?.plural?.second?.join?.(",\n")
     struc[5].center = conj?.plural?.third?.join?.(",\n")
   }
 

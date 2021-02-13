@@ -3,7 +3,8 @@ import { getConnection, Like } from "typeorm"
 import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
-import { identifyWord } from "../utils/forms"
+import VerbForms from "../entity/dictionary/word/forms/VerbForms"
+import { camelCaseFuturePerfect, identifyWord } from "../utils/forms"
 import logger from "../utils/log"
 import { getMacronOptionRegex } from "../utils/string"
 
@@ -14,38 +15,43 @@ export default class DictionaryResolver {
   Entries = getConnection().getRepository(Entry)
   Translations = getConnection().getRepository(Translation)
   Words = getConnection().getRepository(Word)
+  identifiablePartsOfSpeech = [
+    "noun",
+    "verb",
+    "adjective",
+    "adverb",
+    "participle",
+    "numeral",
+    "suffix",
+  ]
 
   @Query(() => [Entry])
   async searchLatin(@Arg("search") search: string) {
     if (!search) throw new Error("empty search")
     if (!search.match(/^-?\w+$/)) throw new Error("invalid search")
-    const entries = []
     const pushSuffix = async (suffix: string) => {
       if (search.match(new RegExp(suffix + "$"))) {
-        const entry = await this.Entries.findOne({ word: "-" + suffix })
-        if (entry) entries.push(entry)
+        const suffixEntry = await this.Entries.findOne({ word: "-" + suffix })
+        if (suffixEntry) entries.push(suffixEntry)
         search = search.replace(new RegExp(suffix + "$"), "")
       }
     }
+
+    const entries = []
+    const word = await this.Words.findOne({ word: search })
+    if (word) entries.push(...word.entries)
     await pushSuffix("que")
     await pushSuffix("ve")
     await pushSuffix("ne")
-    const word = await this.Words.findOne({ word: search })
-    if (word) entries.unshift(...word?.entries)
+
     return entries
       .filter((entry) => !!entry.translations?.length)
       .map((entry) => {
-        if (
-          [
-            "noun",
-            "verb",
-            "adjective",
-            "participle",
-            "numeral",
-            "suffix",
-          ].includes(entry.partOfSpeech)
-        ) {
+        if (this.identifiablePartsOfSpeech.includes(entry.partOfSpeech)) {
           entry.identifiers = identifyWord(search, entry.forms, [], [])
+        }
+        if (entry.partOfSpeech === "verb" && entry.forms) {
+          entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
         }
         return entry
       })

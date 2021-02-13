@@ -8,7 +8,10 @@ export default class PrepositionInflection {
   @Field()
   other?: string = ""
 
-  constructor(prepositionCase: PrepositionCase = "accusative", other: string = "") {
+  constructor(
+    prepositionCase: PrepositionCase = "accusative",
+    other: string = "",
+  ) {
     this.case = prepositionCase
     this.other = other
   }

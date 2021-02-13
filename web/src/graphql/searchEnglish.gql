@@ -1,14 +1,18 @@
 #import "./fragments/PrincipalParts.graphql"
+#import "./fragments/inflections/Inflections.graphql"
 #import "./fragments/Translations.graphql"
 #import "./fragments/forms/Forms.graphql"
 
 query SearchEnglish($search: String!) {
-  searchEnglish(search: $search) {
+  searchLatin(search: $search) {
     id
     word
     partOfSpeech
     principalParts {
       ...allPrincipalParts
+    }
+    inflection {
+      ...allInflections
     }
     translations {
       ...allTranslations

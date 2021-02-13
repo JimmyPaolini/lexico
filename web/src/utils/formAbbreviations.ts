@@ -1,4 +1,3 @@
-/* spellchecker: disable */
 export default {
   "nominative": "NOM",
   "genitive": "GEN",

@@ -32,7 +32,7 @@ export default class User {
 
   @Column()
   @Field()
-  provider: "local" | "google" | "facebook"
+  provider: "basic" | "google" | "facebook"
 
   @Column({ nullable: true, unique: true })
   @Field({ nullable: true })

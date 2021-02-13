@@ -20,4 +20,8 @@ export default class AdverbForms {
     if (comparative) this.comparative = comparative
     if (superlative) this.superlative = superlative
   }
+
+  get __typename() {
+    return "AdverbForms"
+  }
 }

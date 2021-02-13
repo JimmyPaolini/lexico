@@ -1,4 +1,5 @@
 #import "./fragments/PrincipalParts.graphql"
+#import "./fragments/inflections/Inflections.graphql"
 #import "./fragments/Translations.graphql"
 #import "./fragments/forms/Forms.graphql"
 
@@ -9,6 +10,9 @@ query SearchLatin($search: String!) {
     partOfSpeech
     principalParts {
       ...allPrincipalParts
+    }
+    inflection {
+      ...allInflections
     }
     translations {
       ...allTranslations

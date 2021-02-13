@@ -1,7 +1,8 @@
-/* spellchecker: disable */
+import VerbForms from "../entity/dictionary/word/forms/VerbForms"
+import { IndicativeTense } from "../entity/dictionary/word/forms/verbForms/Indicative"
 import { normalize } from "./string"
 
-export default function flattenForms(
+export function flattenForms(
   obj: object | string[] | undefined | null,
 ): string[] {
   if (!obj) return []
@@ -10,6 +11,25 @@ export default function flattenForms(
     (acc, val) => [...acc, ...flattenForms(val)],
     [],
   )
+}
+
+export function camelCaseFuturePerfect(forms: VerbForms) {
+  const futp =
+    Object.keys(forms?.indicative?.active || {}).find((tense) =>
+      tense.match(/future\sperfect/i),
+    ) || ""
+  if (forms.indicative?.active && futp in forms.indicative?.active) {
+    ;(forms.indicative.active as IndicativeTense).futurePerfect = (forms
+      .indicative?.active as any)?.[futp]
+  }
+  if (
+    forms.indicative?.passive &&
+    "futurePerfect" in forms.indicative?.passive
+  ) {
+    forms.indicative.passive.futurePerfect = (forms.indicative
+      ?.passive as any)?.[futp]
+  }
+  return forms
 }
 
 export function identifyWord(
@@ -80,7 +100,7 @@ export function isGender(str: string) {
 //   "future": "FUT",
 //   "perfect": "PERF",
 //   "pluperfect": "PLUP",
-//   "future perfect": "FUTP",
+//   futp: "FUTP",
 
 //   "active": "ACT",
 //   "passive": "PAS",

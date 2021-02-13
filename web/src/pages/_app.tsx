@@ -17,8 +17,9 @@ export const graphQLClient = new GraphQLClient(endpoint, {
   mode: "cors",
 })
 
+export const queryClient = new QueryClient()
+
 export default function App({ Component, pageProps }: AppProps) {
-  const queryClient = new QueryClient()
   const sheets = new ServerStyleSheets()
   return sheets.collect(
     <ThemeProvider theme={theme}>

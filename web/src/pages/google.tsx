@@ -7,11 +7,10 @@ export default function googleCallback() {
   const router = useRouter()
   const code = router.query.code as string
   if (!code) return <></>
-  const { data: user, isSuccess } = useQuery("google", async () => {
+  const { isSuccess } = useQuery("google", async () => {
     const { google: data } = await graphQLClient.request(googleQuery, { code })
     return data
   })
-  console.log(user)
   if (isSuccess) router.push("/settings")
   return <></>
 }
