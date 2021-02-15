@@ -20,7 +20,7 @@ import { Pronunciation } from "./word/Pronunciation"
 export default class Entry {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  id: number
+  id: string
 
   @Column("varchar", { length: 127 })
   @Field()
@@ -69,13 +69,6 @@ export default class Entry {
   @Field(() => [User], { nullable: true })
   users?: User[]
 
-  // @ManyToMany(() => Entry, (entry) => entry.synonyms)
-  // @JoinTable()
-  // @Field(() => [Entry])
-  // synonyms?: Entry[]
-
-  // @ManyToMany(() => Entry, (entry) => entry.antonyms)
-  // @JoinTable()
-  // @Field(() => [Entry])
-  // antonyms?: Entry[]
+  @Field(() => Boolean, { nullable: true })
+  bookmarked?: boolean
 }

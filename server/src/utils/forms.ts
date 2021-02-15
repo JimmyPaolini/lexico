@@ -1,5 +1,4 @@
 import VerbForms from "../entity/dictionary/word/forms/VerbForms"
-import { IndicativeTense } from "../entity/dictionary/word/forms/verbForms/Indicative"
 import { normalize } from "./string"
 
 export function flattenForms(
@@ -16,16 +15,14 @@ export function flattenForms(
 export function camelCaseFuturePerfect(forms: VerbForms) {
   const futp =
     Object.keys(forms?.indicative?.active || {}).find((tense) =>
-      tense.match(/future\sperfect/i),
+      tense.match(/future\s?perfect/i),
     ) || ""
   if (forms.indicative?.active && futp in forms.indicative?.active) {
-    ;(forms.indicative.active as IndicativeTense).futurePerfect = (forms
-      .indicative?.active as any)?.[futp]
+    forms.indicative.active.futurePerfect = (forms.indicative?.active as any)?.[
+      futp
+    ]
   }
-  if (
-    forms.indicative?.passive &&
-    "futurePerfect" in forms.indicative?.passive
-  ) {
+  if (forms.indicative?.passive && futp in forms.indicative?.passive) {
     forms.indicative.passive.futurePerfect = (forms.indicative
       ?.passive as any)?.[futp]
   }

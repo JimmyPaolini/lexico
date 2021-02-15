@@ -1,19 +1,62 @@
 import { Grid } from "@material-ui/core"
-import Image from "next/image"
-import React, { useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import Entry from "../../../server/src/entity/dictionary/Entry"
 import CardDeck from "../components/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
 import SearchBar from "../components/search/SearchBar"
-import { getBookmarks } from "../utils/bookmarks"
+import { useBookmarks } from "../utils/bookmarks"
+
+type Card = { key: string; Card: () => JSX.Element }
 
 export default function Search() {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
-  const bookmarks = useMemo<Entry[]>(() => getBookmarks(), [])
-  const data = useMemo<Entry[]>(() => {
-    const re = new RegExp(search, "i")
-    return bookmarks.filter((entry) => {
+
+  const { data: bookmarks, isLoading, isError } = useBookmarks()
+  const bookmarksFiltered = useMemo<Entry[]>(
+    () => filterEntries(bookmarks, searched),
+    [searched],
+  )
+
+  const [cards, setCards] = useState<Card[]>([])
+
+  useEffect(() => {
+    setCards(
+      bookmarksFiltered?.map((entry: Entry) => ({
+        key: entry.id,
+        Card: () => <EntryCard {...{ entry, searched: searched }} />,
+      })),
+    )
+  }, [bookmarksFiltered])
+
+  return (
+    <Grid container direction="column" alignItems="center">
+      <Grid item>
+        <SearchBar
+          {...{
+            search,
+            setSearch,
+            isLoading,
+            handleSearchExecute: () => setSearched(search),
+            target: "bookmarks",
+          }}
+        />
+      </Grid>
+      <Grid item container justify="center">
+        {isLoading ? null : isError ? (
+          <div>no bookmarks</div>
+        ) : (
+          <CardDeck cards={cards} />
+        )}
+      </Grid>
+    </Grid>
+  )
+}
+
+const filterEntries = (entries: Entry[], search: string) => {
+  const re = new RegExp(search, "i")
+  return (
+    entries?.filter((entry: Entry) => {
       return (
         entry.principalParts?.some((principalPart) =>
           principalPart.text.some((principalPartText) =>
@@ -25,39 +68,6 @@ export default function Search() {
         ) ||
         entry.partOfSpeech.match(re)
       )
-    })
-  }, [searched])
-
-  const entriesFound = Array.isArray(data) && data.length
-  const cards = useMemo(
-    () =>
-      data?.map((entry: Entry) => ({
-        key: entry.id,
-        Card: () =>
-          useMemo(() => <EntryCard {...{ entry, searched: searched }} />, []),
-      })),
-    [data],
-  )
-
-  return (
-    <Grid container direction="column" alignItems="center">
-      <Grid item>
-        <SearchBar
-          {...{
-            search,
-            setSearch,
-            handleSearchExecute: () => setSearched(search),
-            target: "bookmarks",
-          }}
-        />
-      </Grid>
-      <Grid item container justify="center">
-        {!data ? (
-          <Image src="/lexico_logo.png" alt="Lexico" height={500} width={375} />
-        ) : entriesFound ? (
-          <CardDeck cards={cards} />
-        ) : null}
-      </Grid>
-    </Grid>
+    }) || []
   )
 }

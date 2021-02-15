@@ -1,45 +1,59 @@
-import Entry from "../../../server/src/entity/dictionary/Entry"
+import { Dispatch, SetStateAction } from "react"
+import { useMutation, useQuery } from "react-query"
+import bookmarkMutation from "../graphql/bookmark.gql"
+import bookmarksQuery from "../graphql/bookmarks.gql"
+import unbookmarkMutation from "../graphql/unbookmark.gql"
+import { graphQLClient, queryClient } from "../pages/_app"
 
-function validateBookmarks() {
-  if (!window.localStorage.bookmarks)
-    window.localStorage.bookmarks = JSON.stringify({})
+export const useBookmarks = () =>
+  useQuery(
+    "bookmarks",
+    async () => {
+      const { bookmarks: data } = await graphQLClient.request(bookmarksQuery)
+      return data
+    },
+    { cacheTime: 0 },
+  )
 
-  try {
-    JSON.parse(window.localStorage.bookmarks)
-  } catch (e) {
-    console.error(
-      "Malformed bookmarks object in local storage. Clearing bookmarks to fix the issue",
-    )
-    window.localStorage.bookmarks = JSON.stringify({})
-  }
-}
+export const useBookmark = (setBookmarked: Dispatch<SetStateAction<boolean>>) =>
+  useMutation(
+    async (entryId: string) => {
+      console.log(typeof entryId)
+      const { bookmark: data } = await graphQLClient.request(bookmarkMutation, {
+        entryId,
+      })
+      return data
+    },
+    {
+      onMutate: async () => {
+        await queryClient.cancelMutations()
+        setBookmarked(true)
+      },
+      onError: async () => {
+        await queryClient.cancelMutations()
+        setBookmarked(false)
+      },
+    },
+  )
 
-export function getBookmarks() {
-  validateBookmarks()
-  return JSON.parse(window.localStorage.bookmarks)
-}
-
-export function setBookmarks(bookmarks: Entry[]) {
-  validateBookmarks()
-  window.localStorage.bookmarks = JSON.stringify(bookmarks)
-}
-
-export function isBookmarked(entry: Entry) {
-  validateBookmarks()
-  const bookmarks = getBookmarks()
-  return !!bookmarks[entry.id]
-}
-
-export function createBookmark(entry: Entry) {
-  validateBookmarks()
-  const bookmarks = getBookmarks()
-  bookmarks[entry.id] = entry
-  setBookmarks(bookmarks)
-}
-
-export function deleteBookmark(entry: Entry) {
-  validateBookmarks()
-  const bookmarks = getBookmarks()
-  delete bookmarks[entry.id]
-  setBookmarks(bookmarks)
-}
+export const useUnbookmark = (
+  setBookmarked: Dispatch<SetStateAction<boolean>>,
+) =>
+  useMutation(
+    async (entryId: string) => {
+      const {
+        unbookmark: data,
+      } = await graphQLClient.request(unbookmarkMutation, { entryId })
+      return data
+    },
+    {
+      onMutate: async () => {
+        await queryClient.cancelMutations()
+        setBookmarked(false)
+      },
+      onError: async () => {
+        await queryClient.cancelMutations()
+        setBookmarked(true)
+      },
+    },
+  )

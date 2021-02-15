@@ -30,10 +30,6 @@ export default class User {
   @Field()
   updatedAt: Date
 
-  @Column()
-  @Field()
-  provider: "basic" | "google" | "facebook"
-
   @Column({ nullable: true, unique: true })
   @Field({ nullable: true })
   email?: string

@@ -7,7 +7,7 @@ import {
   Resolver,
   UseMiddleware,
 } from "type-graphql"
-import { getConnection } from "typeorm"
+import { getConnection, IsNull } from "typeorm"
 import User from "../entity/user/User"
 import {
   Authenticate,
@@ -38,9 +38,8 @@ export default class AuthenticationResolver {
     const user = await this.Users.save({
       email: email.toLowerCase(),
       password: await hash(password),
-      provider: "basic",
     })
-    log.info("registered user:", user.provider, user.id, email)
+    log.info("registered basic user:", user.id, email)
     return await this.login(email, password, ctx)
   }
 
@@ -48,7 +47,7 @@ export default class AuthenticationResolver {
   @UseMiddleware(Authenticate)
   async unregister(@Ctx() { user }: ResolverContext) {
     await this.Users.delete(user.id)
-    log.info("unregistered user:", user.provider, user.id, user.email)
+    log.info("unregistered user:", user.id, user.email)
     return true
   }
 
@@ -62,12 +61,13 @@ export default class AuthenticationResolver {
     if (!validatePassword(password)) throw new Error("invalid password")
     const user = await this.Users.findOne({
       email: email.toLowerCase(),
-      provider: "basic",
+      googleId: IsNull(),
+      facebookId: IsNull(),
     })
     if (!user) throw new Error("email not found")
     if (!(await verify(user.password!, password)))
       throw new Error("incorrect password")
-    log.info("login user:", user.provider, user.id, email)
+    log.info("login basic user:", user.id, email)
     res.cookie("accessToken", createAccessToken(user), { httpOnly: true })
     return user
   }
@@ -80,10 +80,9 @@ export default class AuthenticationResolver {
       user = await this.Users.save({
         googleId: profile.id,
         email: profile.email,
-        provider: "google",
       })
     }
-    log.info("login user:", user.provider, user.id, user.email)
+    log.info("login google user:", user.id, user.email)
     res.cookie("accessToken", createAccessToken(user), { httpOnly: true })
     return user
   }

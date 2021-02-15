@@ -1,11 +1,13 @@
-import { Arg, Query, Resolver } from "type-graphql"
+import { Arg, Ctx, Query, Resolver, UseMiddleware } from "type-graphql"
 import { getConnection, Like } from "typeorm"
 import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
 import VerbForms from "../entity/dictionary/word/forms/VerbForms"
+import { GetBookmarks } from "../utils/authentication"
 import { camelCaseFuturePerfect, identifyWord } from "../utils/forms"
 import logger from "../utils/log"
+import { ResolverContext } from "../utils/ResolverContext"
 import { getMacronOptionRegex } from "../utils/string"
 
 const log = logger.getChildLogger()
@@ -26,7 +28,11 @@ export default class DictionaryResolver {
   ]
 
   @Query(() => [Entry])
-  async searchLatin(@Arg("search") search: string) {
+  @UseMiddleware(GetBookmarks)
+  async searchLatin(
+    @Arg("search") search: string,
+    @Ctx() { bookmarks }: ResolverContext,
+  ) {
     if (!search) throw new Error("empty search")
     if (!search.match(/^-?\w+$/)) throw new Error("invalid search")
     const pushSuffix = async (suffix: string) => {
@@ -53,6 +59,9 @@ export default class DictionaryResolver {
         if (entry.partOfSpeech === "verb" && entry.forms) {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
         }
+        entry.bookmarked = bookmarks?.some(
+          (bookmark) => bookmark.id === entry.id,
+        )
         return entry
       })
   }

@@ -3,7 +3,6 @@
 query User {
   user {
     id
-    provider
     email
     googleId
     settings {

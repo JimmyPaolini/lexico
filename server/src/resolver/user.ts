@@ -32,21 +32,28 @@ export default class UserResolver {
 
   @Query(() => [Entry])
   @UseMiddleware(Authenticate)
-  async bookmarks(@Ctx() { user }: ResolverContext) {
-    return await this.Users.createQueryBuilder()
-      .relation(User, "bookmarks")
-      .of(user)
-      .loadMany()
+  async bookmarks(@Ctx() { user: { id } }: ResolverContext): Promise<Entry[]> {
+    const user = await this.Users.findOne(id, {
+      relations: ["bookmarks"],
+    })
+    if (!user!.bookmarks) throw new Error("user has no bookmarks")
+    return user!.bookmarks.map((entry) => {
+      entry.bookmarked = true
+      return entry
+    })
   }
 
   @Mutation(() => Boolean)
   @UseMiddleware(Authenticate)
   async bookmark(
-    @Arg("entryId") entryId: number,
+    @Arg("entryId") entryId: string,
     @Ctx() { user }: ResolverContext,
   ) {
-    if (user.bookmarks && user.bookmarks.some((entry) => entry.id === entryId))
+    const bookmarks = await this.bookmarks({ user } as ResolverContext)
+    if (bookmarks.some((entry) => entry.id == entryId))
       throw new Error("user already has entry bookmarked")
+    if (bookmarks.length > 1000)
+      throw new Error("user cannot have over 1000 bookmarks")
     await this.Users.createQueryBuilder()
       .relation(User, "bookmarks")
       .of(user)
@@ -57,13 +64,11 @@ export default class UserResolver {
   @Mutation(() => Boolean)
   @UseMiddleware(Authenticate)
   async unbookmark(
-    @Arg("entryId") entryId: number,
+    @Arg("entryId") entryId: string,
     @Ctx() { user }: ResolverContext,
   ) {
-    user = (await this.Users.findOne(user.id, {
-      relations: ["bookmarks"],
-    })) as User
-    if (!user?.bookmarks?.every((entry) => entry.id !== entryId))
+    const bookmarks = await this.bookmarks({ user } as ResolverContext)
+    if (!bookmarks.some((entry) => entry.id == entryId))
       throw new Error("user does not have entry bookmarked")
     await this.Users.createQueryBuilder()
       .relation(User, "bookmarks")
@@ -113,7 +118,7 @@ export default class UserResolver {
       .remove(lineId)
     return true
   }
-  
+
   @Query(() => Line)
   @UseMiddleware(Authenticate)
   async readingSavePoint(

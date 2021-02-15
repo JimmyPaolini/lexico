@@ -9,29 +9,25 @@ import NounInflection from "../../../../server/src/entity/dictionary/word/inflec
 import PrepositionInflection from "../../../../server/src/entity/dictionary/word/inflection/PrepositionInflection"
 import Uninflected from "../../../../server/src/entity/dictionary/word/inflection/Uninflected"
 import VerbInflection from "../../../../server/src/entity/dictionary/word/inflection/VerbInflection"
-import {
-  createBookmark,
-  deleteBookmark,
-  isBookmarked,
-} from "../../utils/bookmarks"
+import { useBookmark, useUnbookmark } from "../../utils/bookmarks"
 
 interface Props {
   entry: Entry
 }
-
 export default function PrincipalPartsRow({ entry }: Props) {
   const classes = useStyles()
+
+  const [bookmarked, setBookmarked] = useState<boolean>(!!entry.bookmarked)
+  const { mutateAsync: bookmark } = useBookmark(setBookmarked)
+  const { mutateAsync: unbookmark } = useUnbookmark(setBookmarked)
+  const toggleBookmark = async () => {
+    if (!bookmarked) await bookmark(entry.id)
+    else await unbookmark(entry.id)
+  }
 
   const principalPartsFormatted = entry?.principalParts
     ?.map((principalPart) => principalPart.text.join("/"))
     .join(", ")
-
-  const [bookmarked, setBookmarked] = useState(isBookmarked(entry))
-  const toggleBookmark = () => {
-    if (bookmarked) deleteBookmark(entry)
-    else createBookmark(entry)
-    setBookmarked(!bookmarked)
-  }
 
   return (
     <CardHeader
@@ -83,11 +79,11 @@ function inflectiontoString(entry: Entry) {
     if (declension) return declension + " declension"
     if (degree) return degree
   } else if (entry.partOfSpeech === "adverb") {
-    const degree = (entry?.inflection as AdverbInflection)?.degree
     const type = (entry?.inflection as AdverbInflection)?.type
-    if (degree && type) return degree + ", " + type
-    if (degree) return degree
+    const degree = (entry?.inflection as AdverbInflection)?.degree
+    if (type && degree) return type + ", " + degree
     if (type) return type
+    if (degree) return degree
   } else if (entry.partOfSpeech === "preposition") {
     const case_ = (entry?.inflection as PrepositionInflection)?.case
     return case_

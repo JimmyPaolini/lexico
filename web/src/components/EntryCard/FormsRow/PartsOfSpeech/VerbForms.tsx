@@ -127,11 +127,6 @@ const verbFormsRestructure = (conjugations: any) => {
     conjugations?.indicative?.passive?.pluperfect,
     structure.IND.PLUP.PAS,
   )
-  // const futp =
-  //   Object.keys(conjugations?.indicative?.active || {}).find((tense) =>
-  //     tense.match(/futurePerfect/),
-  //   ) || ""
-  console.log(conjugations?.indicative?.active)
   toFormsTable(
     conjugations?.indicative?.active?.futurePerfect,
     structure.IND.FUTP.ACT,

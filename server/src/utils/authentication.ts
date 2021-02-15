@@ -19,7 +19,7 @@ export const Authenticate: MiddlewareFn<ResolverContext> = async (
   { context },
   next,
 ) => {
-  if (!context.req.cookies.accessToken) throw new Error("missing access token")
+  if (!context.req.cookies.accessToken) throw new Error("no user signed in")
   const claims = verify(context.req.cookies.accessToken, JWT_SECRET) as any
   if (!claims) throw new Error("invalid access token")
   const user = await getConnection().getRepository(User).findOne(claims.sub)
@@ -29,11 +29,27 @@ export const Authenticate: MiddlewareFn<ResolverContext> = async (
 }
 
 export const IsAuthenticated: MiddlewareFn<ResolverContext> = (
-  { context: { req } },
+  { context },
   next,
 ) => {
-  const accessToken = req.cookies.accessToken
-  if (!verify(accessToken, JWT_SECRET)) throw new Error("invalid access token")
+  if (!context.req.cookies.accessToken) throw new Error("no user signed in")
+  const claims = verify(context.req.cookies.accessToken, JWT_SECRET) as any
+  if (!claims) throw new Error("invalid access token")
+  return next()
+}
+
+export const GetBookmarks: MiddlewareFn<ResolverContext> = async (
+  { context },
+  next,
+) => {
+  if (!context.req.cookies.accessToken) return next()
+  const claims = verify(context.req.cookies.accessToken, JWT_SECRET) as any
+  if (!claims) return next()
+  const user = await getConnection()
+    .getRepository(User)
+    .findOne(claims.sub, { relations: ["bookmarks"] })
+  if (!user) return next()
+  context.bookmarks = user.bookmarks
   return next()
 }
 

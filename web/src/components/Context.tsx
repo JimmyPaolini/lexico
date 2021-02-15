@@ -21,7 +21,6 @@ export interface ReactContext {
 
 export function ContextProvider({ children }: Props) {
   const [isNavOpen, setNavOpen] = useState(false)
-
   const context = { isNavOpen, setNavOpen } as ReactContext
   return <Context.Provider value={context}>{children}</Context.Provider>
 }

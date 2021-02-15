@@ -1,0 +1,3 @@
+mutation Bookmark($entryId: String!) {
+  bookmark(entryId: $entryId)
+}
