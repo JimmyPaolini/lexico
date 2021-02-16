@@ -13,7 +13,12 @@ export default function Home() {
   return (
     <Box position="relative">
       <Box>
-        <Image src="/logo.png" alt="lexico logo" height={500} width={375} />
+        <Image
+          src="/lexico_logo.png"
+          alt="lexico logo"
+          height={500}
+          width={375}
+        />
       </Box>
       {!!announcement ? (
         <Typography
