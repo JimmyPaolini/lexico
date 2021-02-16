@@ -18,11 +18,13 @@ export default function EntryCard({ entry, searched = "" }: Props) {
     <Card elevation={4} className={classes.entryCard}>
       <PrincipalPartsRow entry={entry} />
       <Divider variant="inset" />
-      <TranslationsRow translations={entry.translations} />
+      <TranslationsRow translations={entry.translations!} />
+      <Divider variant="inset" />
       <FormsRow
         partOfSpeech={entry.partOfSpeech}
         forms={entry.forms}
         searched={searched}
+        identifiers={entry.identifiers || []}
       />
     </Card>
   )

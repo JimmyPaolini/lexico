@@ -36,7 +36,7 @@ export default function PrincipalPartsRow({ entry }: Props) {
       subheader={`${entry.partOfSpeech}, ${inflectiontoString(entry)}`}
       subheaderTypographyProps={{ variant: "subtitle2" }}
       className={classes.principalPartsRow}
-      aria-label="Principal Parts and Inflection"
+      aria-label="Principal Parts, Inflection, and Bookmark"
       action={
         <IconButton
           onClick={toggleBookmark}
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function inflectiontoString(entry: Entry) {
-  if (entry.partOfSpeech === "noun") {
+  if (["noun", "properNoun"].includes(entry.partOfSpeech)) {
     const declension = (entry?.inflection as NounInflection)?.declension
     const gender = (entry?.inflection as NounInflection)?.gender
     if (declension && gender) return declension + " declension, " + gender
@@ -72,7 +72,11 @@ function inflectiontoString(entry: Entry) {
   } else if (entry.partOfSpeech === "verb") {
     const conjugation = (entry?.inflection as VerbInflection)?.conjugation
     if (conjugation) return conjugation + " conjugation"
-  } else if (entry.partOfSpeech === "adjective") {
+  } else if (
+    ["adjective", "participle", "numeral", "suffix"].includes(
+      entry.partOfSpeech,
+    )
+  ) {
     const declension = (entry?.inflection as AdjectiveInflection)?.declension
     const degree = (entry?.inflection as AdjectiveInflection)?.degree
     if (declension && degree) return declension + " declension, " + degree

@@ -1,69 +1,52 @@
 import {
-  Accordion as MuiAccordion,
-  AccordionDetails as MuiAccordionDetails,
-  AccordionSummary as MuiAccordionSummary,
+  CardActionArea,
+  CardContent,
+  Collapse,
   Divider,
   Grid,
+  IconButton,
   Typography,
 } from "@material-ui/core"
-import { makeStyles, withStyles } from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles"
 import ExpandMore from "@material-ui/icons/ExpandMore"
 import React, { useState } from "react"
 import { Forms } from "../../../../../server/src/entity/dictionary/word/Forms"
 import { PartOfSpeech } from "../../../../../server/src/entity/dictionary/word/PartOfSpeech"
-import formNameAbbreviations from "../../../utils/formAbbreviations"
-import { normalize } from "../../../utils/string"
+import identifierAbbreviations from "../../../utils/identifierAbbreviations"
 import useEventListener from "../../../utils/useEventListener"
 import AdjectiveForms from "./PartsOfSpeech/AdjectiveForms"
 import NounForms from "./PartsOfSpeech/NounForms"
 import VerbForms from "./PartsOfSpeech/VerbForms"
 
-const Accordion = withStyles((theme) => ({
-  root: {
-    "&:before": {
-      display: "none",
-    },
-    "&$expanded": {
-      margin: "auto",
-    },
-  },
-  disabled: {
-    "&$disabled": {
-      backgroundColor: theme.palette.grey[800],
-      textColor: theme.palette.text.primary,
-    },
-  },
-  expanded: {},
-}))(MuiAccordion)
-
-const AccordionSummary = withStyles(() => ({
-  content: {
-    "&$expanded": {
-      margin: "12px 0",
-    },
-  },
-  expanded: {},
-}))(MuiAccordionSummary)
-
-const AccordionDetails = withStyles(() => ({
-  root: {
-    padding: 0,
-  },
-}))(MuiAccordionDetails)
-
 interface Props {
   searched: string
   forms: Forms | null | undefined
   partOfSpeech: PartOfSpeech
+  identifiers: string[]
 }
 
-export default function FormsRow({ searched, forms, partOfSpeech }: Props) {
+export default function FormsRow({
+  searched,
+  forms,
+  partOfSpeech,
+  identifiers = [],
+}: Props) {
   const classes = useStyles()
   const [expanded, setExpanded] = useState(false)
-  let searchedForms = [] as string[]
-  try {
-    searchedForms = getSearchedForms(searched, forms as any, [], searchedForms)
-  } catch (e) {}
+  identifiers = identifiers.map((identifier) =>
+    identifier
+      .split(" ")
+      .map((inflector) => identifierAbbreviations[inflector])
+      .join(" "),
+  )
+
+  if (!searched)
+    searched =
+      partOfSpeech === "verb" ? "Conjugation Table" : "Declension Table"
+
+  const FormsCard = !forms ? null : partOfSpeechToFormsCard[partOfSpeech]
+
+  const expandable = !!FormsCard
 
   useEventListener("keypress", (e: any) => {
     if (window.location.pathname.match(/^\/bookmarks/)) return
@@ -71,93 +54,85 @@ export default function FormsRow({ searched, forms, partOfSpeech }: Props) {
       setExpanded(!expanded)
   })
 
-  if (!searched)
-    searched =
-      partOfSpeech === "verb" ? "Conjugation Table" : "Declension Table"
-
-  const FormsCard = !forms
-    ? null
-    : ({
-        "verb": VerbForms,
-        "noun": NounForms,
-        "proper noun": NounForms,
-        "adjective": AdjectiveForms,
-        "participle": AdjectiveForms,
-        "pronoun": AdjectiveForms,
-      } as { [key: string]: any })[partOfSpeech]
-
-  const expandable = !!FormsCard
-
   if (searched.match(/Table/i) && !expandable) return null
 
   return (
     <>
-      <Divider variant="inset" />
-      <Accordion
-        expanded={expanded}
-        onClick={() => setExpanded(!expanded)}
-        disabled={!expandable}
-        className={classes.accordion}
-        elevation={0}
-        square
-      >
-        <AccordionSummary
-          expandIcon={expandable ? <ExpandMore /> : undefined}
-          className={classes.accordion}
+      <CardContent className={classes.formsRow}>
+        <CardActionArea
+          onClick={() => setExpanded((expanded) => !expanded)}
+          disabled={!expandable}
+          disableRipple
+          disableTouchRipple
+          classes={{ focusHighlight: classes.hide }}
         >
-          <Grid container direction="column" justify="center">
-            <Grid item>
+          <Grid container direction="row" justify="space-evenly">
+            <Grid container item direction="column" justify="center" xs={true}>
               <Typography variant="body1">{searched}</Typography>
+              {identifiers.map((identifier) => (
+                <Typography variant="button">{identifier}</Typography>
+              ))}
             </Grid>
-            {searchedForms.map((searchedForm) => (
+            {FormsCard && (
               <Grid item>
-                <Typography variant="button" key={searchedForm}>
-                  {searchedForm}
-                </Typography>
+                <IconButton
+                  disableRipple
+                  disableTouchRipple
+                  className={classes.disableHoverGlow}
+                >
+                  <ExpandMore
+                    className={
+                      expanded ? classes.upSideDown : classes.rightSideUp
+                    }
+                  />
+                </IconButton>
               </Grid>
-            ))}
+            )}
           </Grid>
-        </AccordionSummary>
-        {expandable && (
-          <AccordionDetails>
-            <Divider variant="inset" absolute />
-            <FormsCard forms={forms} />
-          </AccordionDetails>
-        )}
-      </Accordion>
+        </CardActionArea>
+      </CardContent>
+      {FormsCard && (
+        <Collapse in={expanded && FormsCard}>
+          <Divider variant="inset" />
+          <FormsCard forms={forms} />
+        </Collapse>
+      )}
     </>
   )
 }
 
-function getSearchedForms(
-  searched: string,
-  forms: { [key: string]: any },
-  currentForm: string[],
-  searchedForms: string[],
-) {
-  if (Array.isArray(forms)) {
-    if (
-      forms.some((form) =>
-        normalize(form).match(new RegExp("^" + searched + "$", "i")),
-      )
-    ) {
-      return [...searchedForms, currentForm.join(" ")]
-    }
-  } else {
-    for (const key in forms) {
-      searchedForms = getSearchedForms(
-        searched,
-        forms[key],
-        [...currentForm, formNameAbbreviations[key]],
-        searchedForms,
-      )
-    }
-  }
-  return searchedForms
-}
+const partOfSpeechToFormsCard = {
+  verb: VerbForms,
+  noun: NounForms,
+  properNoun: NounForms,
+  adjective: AdjectiveForms,
+  participle: AdjectiveForms,
+  suffix: AdjectiveForms,
+  numeral: AdjectiveForms,
+  pronoun: AdjectiveForms,
+  determiner: AdjectiveForms,
+} as { [key: string]: any }
 
-const useStyles = makeStyles(() => ({
-  accordion: {
-    minHeight: 64,
+const useStyles = makeStyles((theme: any) => ({
+  formsRow: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+  },
+  rightSideUp: {
+    transition: "250ms ease",
+    transform: "rotateZ(0deg)",
+  },
+  upSideDown: {
+    transition: "250ms ease",
+    transform: "rotateZ(-180deg)",
+  },
+  disableHoverGlow: {
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+  hide: {
+    display: "none",
   },
 }))

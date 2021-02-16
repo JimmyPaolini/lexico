@@ -1,10 +1,10 @@
 import { Grid, Typography } from "@material-ui/core"
-import Image from "next/image"
 import React, { useEffect, useMemo, useState } from "react"
 import { QueryFunctionContext, useQuery } from "react-query"
 import Entry from "../../../server/src/entity/dictionary/Entry"
 import CardDeck from "../components/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
+import Home from "../components/search/Home"
 import SearchBar from "../components/search/SearchBar"
 import searchEnglish from "../graphql/searchEnglish.gql"
 import searchLatin from "../graphql/searchLatin.gql"
@@ -49,7 +49,7 @@ export default function Search() {
       </Grid>
       <Grid item container justify="center">
         {!data ? (
-          <Image src="/lexico_logo.png" alt="Lexico" height={500} width={375} />
+          <Home />
         ) : noEntriesFound ? (
           <Typography variant="h4">Not Found</Typography>
         ) : entriesFound ? (

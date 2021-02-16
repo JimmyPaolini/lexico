@@ -23,9 +23,9 @@ export default function SettingsCard() {
   const { refetch: logout } = useQuery(
     "logout",
     async () => {
-      queryClient.invalidateQueries("user")
+      await queryClient.invalidateQueries("user")
       const { logout: data } = await graphQLClient.request(logoutQuery)
-      queryClient.invalidateQueries("user")
+      await queryClient.invalidateQueries("user")
       return data
     },
     { enabled: false },
@@ -52,7 +52,7 @@ export default function SettingsCard() {
               <IconButton
                 onClick={() => null}
                 aria-label="empty space"
-                style={{ marginTop: 8, marginRight: 8 }}
+                className={classes.hiddenAction}
               >
                 <Menu />
               </IconButton>
@@ -85,5 +85,10 @@ const useStyles = makeStyles((theme: any) => ({
   },
   columnItem: {
     marginBottom: theme.spacing(2),
+  },
+  hiddenAction: {
+    marginTop: 8,
+    marginRight: 8,
+    visibility: "hidden",
   },
 }))

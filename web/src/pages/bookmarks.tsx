@@ -1,33 +1,26 @@
 import { Grid } from "@material-ui/core"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 import Entry from "../../../server/src/entity/dictionary/Entry"
 import CardDeck from "../components/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
 import SearchBar from "../components/search/SearchBar"
 import { useBookmarks } from "../utils/bookmarks"
+import { normalize } from "../utils/string"
 
-type Card = { key: string; Card: () => JSX.Element }
-
-export default function Search() {
+export default function Bookmarks() {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
 
   const { data: bookmarks, isLoading, isError } = useBookmarks()
-  const bookmarksFiltered = useMemo<Entry[]>(
-    () => filterEntries(bookmarks, searched),
-    [searched],
-  )
 
-  const [cards, setCards] = useState<Card[]>([])
-
-  useEffect(() => {
-    setCards(
-      bookmarksFiltered?.map((entry: Entry) => ({
+  const cards = useMemo(
+    () =>
+      filterEntries(bookmarks, searched).map((entry: Entry) => ({
         key: entry.id,
         Card: () => <EntryCard {...{ entry, searched: searched }} />,
-      })),
-    )
-  }, [bookmarksFiltered])
+      })) || [],
+    [searched, bookmarks],
+  )
 
   return (
     <Grid container direction="column" alignItems="center">
@@ -60,7 +53,7 @@ const filterEntries = (entries: Entry[], search: string) => {
       return (
         entry.principalParts?.some((principalPart) =>
           principalPart.text.some((principalPartText) =>
-            principalPartText.match(re),
+            normalize(principalPartText).match(re),
           ),
         ) ||
         entry.translations?.some((translation) =>

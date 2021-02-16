@@ -1,22 +1,21 @@
 import {
-  Accordion as MuiAccordion,
-  AccordionDetails as MuiAccordionDetails,
-  AccordionSummary as MuiAccordionSummary,
+  CardActionArea,
+  CardContent,
+  Collapse,
   Grid,
+  IconButton,
   Typography,
 } from "@material-ui/core"
-import { makeStyles, withStyles } from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles"
 import { ExpandMore, FiberManualRecord } from "@material-ui/icons"
 import React, { useState } from "react"
 import Translation from "../../../../server/src/entity/dictionary/Translation"
 import useEventListener from "../../utils/useEventListener"
 
 interface Props {
-  translations: Translation[] | null | undefined
+  translations: Translation[]
 }
 export default function TranslationsRow({ translations }: Props) {
-  if (translations === null || translations === undefined) return null
-  translations = translations?.filter((translation) => !!translation)
   const classes = useStyles()
   const [expanded, setExpanded] = useState(false)
   const expandable = translations?.length > 2
@@ -30,34 +29,43 @@ export default function TranslationsRow({ translations }: Props) {
   const Translation = CreateTranslation(classes)
 
   return (
-    <Accordion
-      expanded={expandable && expanded}
-      onClick={() => setExpanded(!expanded)}
-      className={classes.accordion}
-      elevation={0}
-      square
-    >
-      <AccordionSummary
-        expandIcon={expandable ? <ExpandMore /> : undefined}
-        {...(!expandable ? { style: { cursor: "default" } } : {})}
-        className={classes.accordionSummary}
+    <CardContent className={classes.translationsRow}>
+      <CardActionArea
+        onClick={() => setExpanded((expanded) => !expanded)}
+        disabled={!expandable}
+        disableRipple
+        disableTouchRipple
+        classes={{ focusHighlight: classes.hide }}
       >
-        <Grid container direction="column" justify="center">
-          {translations
-            .slice(0, 2)
-            .map((translation) => Translation(translation))}
-        </Grid>
-      </AccordionSummary>
-      {expandable && (
-        <AccordionDetails className={classes.accordionDetails}>
-          <Grid container direction="column" justify="center">
+        <Grid container direction="row" justify="space-evenly">
+          <Grid container item direction="column" xs={expandable}>
             {translations
-              .slice(2)
+              .slice(0, 2)
               .map((translation) => Translation(translation))}
+            <Collapse in={expanded || !expandable} timeout={250}>
+              {translations
+                .slice(2)
+                .map((translation) => Translation(translation))}
+            </Collapse>
           </Grid>
-        </AccordionDetails>
-      )}
-    </Accordion>
+          {expandable && (
+            <Grid item>
+              <IconButton
+                disableRipple
+                disableTouchRipple
+                className={classes.disableHoverGlow}
+              >
+                <ExpandMore
+                  className={
+                    expanded ? classes.upSideDown : classes.rightSideUp
+                  }
+                />
+              </IconButton>
+            </Grid>
+          )}
+        </Grid>
+      </CardActionArea>
+    </CardContent>
   )
 }
 
@@ -74,80 +82,32 @@ const CreateTranslation = (classes: Record<string, any>) => (
   </Grid>
 )
 
-const Accordion = withStyles((theme) => ({
-  root: {
-    "&:before": {
-      display: "none",
-      color: theme.palette.primary.contrastText,
-    },
-  },
-  expanded: {
-    "&$expanded": {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
-    },
-  },
-  // disabled: {
-  //     color: theme.palette.primary.contrastText,
-  //     '&$disabled': {
-  //         backgroundColor: theme.palette.grey[800],
-  //         color: theme.palette.primary.contrastText,
-  //         opacity: 1
-  //     },
-  // },
-}))(MuiAccordion)
-
-const AccordionSummary = withStyles(() => ({
-  root: {
-    "minHeight": 0,
-    "&$expanded": {
-      minHeight: 0,
-      maxHeight: "none",
-    },
-  },
-  content: {
-    "margin": 0,
-    "&$expanded": {
-      margin: 0,
-    },
-  },
-  expanded: {
-    "&$expanded": {
-      maxHeight: "none",
-    },
-  },
-  disabled: {
-    "&$disabled": {
-      backgroundColor: "inherit",
-    },
-  },
-}))(MuiAccordionSummary)
-
-const AccordionDetails = withStyles(() => ({}))(MuiAccordionDetails)
-
 const useStyles = makeStyles((theme) => ({
+  translationsRow: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+  },
   bullet: {
     position: "relative",
     top: 4,
     fontSize: 12,
     color: theme.palette.text.primary,
   },
-  accordion: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+  rightSideUp: {
+    transition: "250ms ease",
+    transform: "rotateZ(0deg)",
   },
-  accordionSummary: {
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 0,
-    paddingBottom: 0,
+  upSideDown: {
+    transition: "250ms ease",
+    transform: "rotateZ(-180deg)",
   },
-  accordionDetails: {
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 0,
-    paddingBottom: 0,
+  disableHoverGlow: {
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+  hide: {
+    display: "none",
   },
 }))
