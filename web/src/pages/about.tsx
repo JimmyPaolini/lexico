@@ -28,17 +28,14 @@ import React, { useState } from "react"
 // ]
 
 const upcomingFeatures = [
-  "Voice translation, so that you can speak commansd to Lexico and it will respond",
-  // "English-to-Latin translation",
+  "Collaborations with Latinists/Classics Organizations (email me through the Suggestions page!)",
   "More Literature (suggest some through the Suggestions page!)",
+  "Voice translation, so that you can speak commansd to Lexico and it will speak its response!",
+  // "English-to-Latin translation",
   // "Ελληνικά (Greek) translation and literature!",
-  "Possible collaboration with other Latinists/Classics Organizations (email me through the Suggestions page!)",
 ]
 
-const dataCollection = [
-  "On Client - all searches, Literature downloads & scroll positions",
-  "On Server - global word search frequency (can't trace back to user)",
-]
+const dataCollection = ["User logins; literature views; word searches"]
 
 export default function About() {
   const classes = useStyles()

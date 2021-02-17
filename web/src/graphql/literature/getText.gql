@@ -1,0 +1,11 @@
+query GetText($id: String!) {
+  getText(id: $id) {
+    id
+    title
+    lines {
+      id
+      line
+      lineNumber
+    }
+  }
+}

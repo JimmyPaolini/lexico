@@ -17,7 +17,7 @@ export default function Bookmarks() {
     () =>
       filterEntries(bookmarks, searched).map((entry: Entry) => ({
         key: entry.id,
-        Card: () => <EntryCard {...{ entry, searched: searched }} />,
+        Card: () => <EntryCard {...{ entry, searched }} />,
       })) || [],
     [searched, bookmarks],
   )

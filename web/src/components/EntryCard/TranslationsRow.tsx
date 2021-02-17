@@ -3,14 +3,14 @@ import {
   CardContent,
   Collapse,
   Grid,
-  IconButton,
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { ExpandMore, FiberManualRecord } from "@material-ui/icons"
+import { FiberManualRecord } from "@material-ui/icons"
 import React, { useState } from "react"
 import Translation from "../../../../server/src/entity/dictionary/Translation"
 import useEventListener from "../../utils/useEventListener"
+import ExpandIcon from "../accessories/ExpandIcon"
 
 interface Props {
   translations: Translation[]
@@ -50,17 +50,7 @@ export default function TranslationsRow({ translations }: Props) {
           </Grid>
           {expandable && (
             <Grid item>
-              <IconButton
-                disableRipple
-                disableTouchRipple
-                className={classes.disableHoverGlow}
-              >
-                <ExpandMore
-                  className={
-                    expanded ? classes.upSideDown : classes.rightSideUp
-                  }
-                />
-              </IconButton>
+              <ExpandIcon {...{ expanded }} />
             </Grid>
           )}
         </Grid>

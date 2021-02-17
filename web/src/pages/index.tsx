@@ -6,8 +6,8 @@ import CardDeck from "../components/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
 import Home from "../components/search/Home"
 import SearchBar from "../components/search/SearchBar"
-import searchEnglish from "../graphql/searchEnglish.gql"
-import searchLatin from "../graphql/searchLatin.gql"
+import searchEnglish from "../graphql/search/searchEnglish.gql"
+import searchLatin from "../graphql/search/searchLatin.gql"
 import { graphQLClient } from "./_app"
 
 export default function Search() {

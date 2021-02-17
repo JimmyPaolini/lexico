@@ -4,16 +4,15 @@ import {
   Collapse,
   Divider,
   Grid,
-  IconButton,
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import ExpandMore from "@material-ui/icons/ExpandMore"
 import React, { useState } from "react"
 import { Forms } from "../../../../../server/src/entity/dictionary/word/Forms"
 import { PartOfSpeech } from "../../../../../server/src/entity/dictionary/word/PartOfSpeech"
 import identifierAbbreviations from "../../../utils/identifierAbbreviations"
 import useEventListener from "../../../utils/useEventListener"
+import ExpandIcon from "../../accessories/ExpandIcon"
 import AdjectiveForms from "./PartsOfSpeech/AdjectiveForms"
 import NounForms from "./PartsOfSpeech/NounForms"
 import VerbForms from "./PartsOfSpeech/VerbForms"
@@ -75,17 +74,7 @@ export default function FormsRow({
             </Grid>
             {FormsCard && (
               <Grid item>
-                <IconButton
-                  disableRipple
-                  disableTouchRipple
-                  className={classes.disableHoverGlow}
-                >
-                  <ExpandMore
-                    className={
-                      expanded ? classes.upSideDown : classes.rightSideUp
-                    }
-                  />
-                </IconButton>
+                <ExpandIcon {...{ expanded }} />
               </Grid>
             )}
           </Grid>

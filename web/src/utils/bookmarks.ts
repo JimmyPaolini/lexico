@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react"
 import { useMutation, useQuery } from "react-query"
-import bookmarkMutation from "../graphql/bookmark.gql"
-import bookmarksQuery from "../graphql/bookmarks.gql"
-import unbookmarkMutation from "../graphql/unbookmark.gql"
+import bookmarkMutation from "../graphql/bookmarks/bookmark.gql"
+import bookmarksQuery from "../graphql/bookmarks/bookmarks.gql"
+import unbookmarkMutation from "../graphql/bookmarks/unbookmark.gql"
 import { graphQLClient, queryClient } from "../pages/_app"
 
 export const useBookmarks = () =>

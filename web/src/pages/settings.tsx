@@ -1,9 +1,9 @@
 import { Grid } from "@material-ui/core"
 import React from "react"
 import { useQuery } from "react-query"
-import LoginCard from "../components/login/LoginCard"
-import SettingsCard from "../components/login/SettingsCard"
-import userQuery from "../graphql/user.gql"
+import LoginCard from "../components/settings/LoginCard"
+import SettingsCard from "../components/settings/SettingsCard"
+import userQuery from "../graphql/authentication/user.gql"
 import { graphQLClient } from "./_app"
 
 export default function Settings() {

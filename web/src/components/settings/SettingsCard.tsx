@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Menu } from "@material-ui/icons"
 import React, { useContext } from "react"
 import { useQuery } from "react-query"
-import logoutQuery from "../../graphql/logout.gql"
+import logoutQuery from "../../graphql/authentication/logout.gql"
 import { graphQLClient, queryClient } from "../../pages/_app"
 import { Context } from "../Context"
 

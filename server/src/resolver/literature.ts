@@ -16,9 +16,15 @@ export default class LiteratureResolver {
 
   @Query(() => [Author])
   async getAuthors() {
-    return await this.Authors.find({
-      relations: ["books", "texts"],
+    const authors = await this.Authors.find({
+      relations: ["books", "books.texts", "texts"],
       order: { name: "ASC" },
+    })
+    return authors.map((author) => {
+      author.books?.sort().reverse()
+      author.books?.map((book) => book.texts.sort().reverse())
+      author.texts.sort().reverse()
+      return author
     })
   }
 
@@ -41,16 +47,19 @@ export default class LiteratureResolver {
 
   @Query(() => Author)
   async getAuthor(@Arg("name") name: string) {
-    return await this.Authors.findOneOrFail({
-      where: { name },
+    return await this.Authors.findOneOrFail(name, {
+      relations: ["books", "books.texts", "texts"],
     })
   }
 
   @Query(() => Book)
-  async getBook(@Arg("author") author: string, @Arg("title") title: string) {
-    return await this.Books.findOneOrFail({
-      where: { title, author: { name: author } },
-    })
+  async getBook(@Arg("id") id: string) {
+    return await this.Books.findOneOrFail(id, { relations: ["texts"] })
+  }
+
+  @Query(() => Text)
+  async getText(@Arg("id") id: string) {
+    return await this.Texts.findOneOrFail(id, { relations: ["lines"] })
   }
 
   // @Query(() => Text)

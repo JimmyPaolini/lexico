@@ -4,8 +4,8 @@ import { useFormik } from "formik"
 import request from "graphql-request"
 import React, { Dispatch, useState } from "react"
 import { useQuery } from "react-query"
-import loginQuery from "../../graphql/login.gql"
-import registerMutation from "../../graphql/register.gql"
+import loginQuery from "../../graphql/authentication/login.gql"
+import registerMutation from "../../graphql/authentication/register.gql"
 import { endpoint } from "../../pages/_app"
 import {
   capitalizeFirstLetter,
