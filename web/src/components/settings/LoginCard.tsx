@@ -2,19 +2,15 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   Divider,
   Grid,
   Grow,
-  IconButton,
-  useMediaQuery,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Menu } from "@material-ui/icons"
 import Image from "next/image"
-import React, { useContext } from "react"
+import React from "react"
 import { sentenceCase } from "../../utils/string"
-import { Context } from "../Context"
+import CardHeader from "../accessories/CardHeader"
 import LoginLocal from "./LoginLocal"
 
 interface Props {
@@ -22,26 +18,13 @@ interface Props {
 }
 export default function LoginCard({ title }: Props) {
   const classes = useStyles()
-  const { isNavOpen, setNavOpen } = useContext(Context)
-  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
+  const googleUrl = useGoogleUrl()
+  const facebookUrl = useFacebookUrl()
 
   return (
     <Grow in={true}>
       <Card className={classes.card}>
-        <CardHeader
-          title={sentenceCase(title)}
-          titleTypographyProps={{ variant: "h5", align: "center" }}
-          avatar={
-            isMobile && (
-              <IconButton
-                onClick={() => setNavOpen(!isNavOpen)}
-                aria-label="menu"
-              >
-                <Menu />
-              </IconButton>
-            )
-          }
-        />
+        <CardHeader {...{ title }} />
         <Divider variant="middle" />
         <CardContent>
           <Grid container direction="column" alignItems="center">
@@ -60,18 +43,29 @@ export default function LoginCard({ title }: Props) {
   )
 }
 
-const googleUrl =
-  "https://accounts.google.com/o/oauth2/auth" +
-  "?response_type=code" +
-  "&client_id=581175821772-acc3epk92kl7n8bna0m6md2p4gvtrfpa.apps.googleusercontent.com" +
-  "&scope=email" +
-  "&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fgoogle"
-const facebookUrl =
-  "https://www.facebook.com/v3.2/dialog/oauth" +
-  "?response_type=code" +
-  "&client_id=1348031495536829" +
-  "&scope=email" +
-  "&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Ffacebook"
+function useGoogleUrl() {
+  if (typeof window === "undefined") return ""
+  return (
+    "https://accounts.google.com/o/oauth2/auth" +
+    "?response_type=code" +
+    "&client_id=581175821772-acc3epk92kl7n8bna0m6md2p4gvtrfpa.apps.googleusercontent.com" +
+    "&scope=email" +
+    "&redirect_uri=" +
+    encodeURIComponent(window.location.origin + "/google")
+  )
+}
+
+function useFacebookUrl() {
+  if (typeof window === "undefined") return ""
+  return (
+    "https://www.facebook.com/v3.2/dialog/oauth" +
+    "?response_type=code" +
+    "&client_id=1348031495536829" +
+    "&scope=email" +
+    "&redirect_uri=" +
+    encodeURIComponent(window.location.origin + "/facebook")
+  )
+}
 
 interface OAuthLoginProps {
   provider: string
@@ -106,5 +100,10 @@ const useStyles = makeStyles((theme: any) => ({
   },
   columnItem: {
     marginBottom: theme.spacing(2),
+  },
+  hiddenAction: {
+    marginTop: 8,
+    marginRight: 8,
+    visibility: "hidden",
   },
 }))

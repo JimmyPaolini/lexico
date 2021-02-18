@@ -14,8 +14,7 @@ interface Props {
   isLast: boolean
   searched: string
 }
-
-export default function TextRow({
+export default function LiteratureText({
   author,
   book,
   text,

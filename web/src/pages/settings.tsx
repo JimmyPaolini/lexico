@@ -7,15 +7,7 @@ import userQuery from "../graphql/authentication/user.gql"
 import { graphQLClient } from "./_app"
 
 export default function Settings() {
-  const { data: user, isSuccess } = useQuery(
-    "user",
-    async () => {
-      const { user: data } = await graphQLClient.request(userQuery)
-      return data
-    },
-    { retryDelay: 0 },
-  )
-  console.log("user", user)
+  const { isSuccess } = useQuery("user", user, { retryDelay: 0 })
 
   return (
     <Grid container justify="center" alignItems="center">
@@ -28,4 +20,9 @@ export default function Settings() {
       </Grid>
     </Grid>
   )
+}
+
+const user = async () => {
+  const { user: data } = await graphQLClient.request(userQuery)
+  return data
 }

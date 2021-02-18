@@ -4,15 +4,15 @@ import React from "react"
 import Author from "../../../../server/src/entity/literature/Author"
 import Book from "../../../../server/src/entity/literature/Book"
 import { sentenceCase } from "../../utils/string"
-import BookRow from "./BookRow"
-import TextRow from "./TextRow"
+import BookRow from "./LiteratureBook"
+import TextRow from "./LiteratureText"
 
 interface Props {
   author: Author
   searched: string
 }
 
-export default function AuthorCard({ author, searched = "" }: Props) {
+export default function LiteratureAuthor({ author, searched = "" }: Props) {
   const classes = useStyles()
   searched
   const books = author.books || ([] as Book[])

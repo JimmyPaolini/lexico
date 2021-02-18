@@ -15,7 +15,7 @@ import Text from "./Text"
 export default class Book {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  id: number
+  id: string
 
   @Column("varchar", { length: 64 })
   @Field()

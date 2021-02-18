@@ -26,8 +26,6 @@ export default function TranslationsRow({ translations }: Props) {
       setExpanded(!expanded)
   })
 
-  const Translation = CreateTranslation(classes)
-
   return (
     <CardContent className={classes.translationsRow}>
       <CardActionArea
@@ -39,13 +37,13 @@ export default function TranslationsRow({ translations }: Props) {
       >
         <Grid container direction="row" justify="space-evenly">
           <Grid container item direction="column" xs={expandable}>
-            {translations
-              .slice(0, 2)
-              .map((translation) => Translation(translation))}
+            {translations.slice(0, 2).map((translation) => (
+              <TranslationBullet {...{ translation }} key={translation.id} />
+            ))}
             <Collapse in={expanded || !expandable} timeout={250}>
-              {translations
-                .slice(2)
-                .map((translation) => Translation(translation))}
+              {translations.slice(2).map((translation) => (
+                <TranslationBullet {...{ translation }} key={translation.id} />
+              ))}
             </Collapse>
           </Grid>
           {expandable && (
@@ -59,18 +57,22 @@ export default function TranslationsRow({ translations }: Props) {
   )
 }
 
-const CreateTranslation = (classes: Record<string, any>) => (
-  translation: Translation,
-) => (
-  <Grid container item spacing={1} wrap="nowrap" key={translation.id}>
-    <Grid item>
-      <FiberManualRecord className={classes.bullet} />
+interface TranslationBulletProps {
+  translation: Translation
+}
+function TranslationBullet({ translation }: TranslationBulletProps) {
+  const classes = useStyles()
+  return (
+    <Grid container item spacing={1} wrap="nowrap" key={translation.id}>
+      <Grid item>
+        <FiberManualRecord className={classes.bullet} />
+      </Grid>
+      <Grid item>
+        <Typography color="textPrimary">{translation.translation}</Typography>
+      </Grid>
     </Grid>
-    <Grid item>
-      <Typography color="textPrimary">{translation.translation}</Typography>
-    </Grid>
-  </Grid>
-)
+  )
+}
 
 const useStyles = makeStyles((theme) => ({
   translationsRow: {

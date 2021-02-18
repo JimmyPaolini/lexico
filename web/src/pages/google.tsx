@@ -1,42 +1,21 @@
-import { useRouter } from "next/router"
-import { useQuery } from "react-query"
-import googleQuery from "../graphql/google.gql"
+import { print } from "graphql"
+import { GetServerSideProps } from "next"
+import googleQuery from "../graphql/authentication/google.gql"
 import { graphQLClient } from "./_app"
 
-export default function googleCallback() {
-  const router = useRouter()
-  const code = router.query.code as string
-  if (!code) return <></>
-  const { isSuccess } = useQuery("google", async () => {
-    const { google: data } = await graphQLClient.request(googleQuery, { code })
-    return data
-  })
-  if (isSuccess) router.push("/settings")
-  return <></>
-}
+export default function google() {}
 
-// interface ServerSideProps {
-//   query: {
-//     code: string
-//   }
-//   req: IncomingMessage
-//   res: ServerResponse
-// }
-// export async function getServerSideProps({
-//   query: { code },
-//   req,
-//   res,
-// }: ServerSideProps) {
-//   const {google: user} = await graphQLClient.request(googleQuery, { code })
-//   const cookies = new Cookies(req, res)
-//   console.log("cookies", cookies)
-//   if (user) {
-//     return {
-//       redirect: {
-//         destination: "/settings",
-//       },
-//     }
-//   } else {
-//     return { isSuccess: false }
-//   }
-// }
+export const getServerSideProps: GetServerSideProps = async ({
+  query: { code },
+  res,
+}) => {
+  const { headers, errors } = await graphQLClient.rawRequest(
+    print(googleQuery),
+    { code },
+  )
+  if (!errors) res.setHeader("set-cookie", headers.get("set-cookie")!)
+
+  res.writeHead(302, { Location: "/settings" })
+  res.end()
+  return { props: {} }
+}

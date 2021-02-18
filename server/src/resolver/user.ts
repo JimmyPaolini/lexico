@@ -122,7 +122,7 @@ export default class UserResolver {
   @Query(() => Line)
   @UseMiddleware(Authenticate)
   async readingSavePoint(
-    @Arg("textId") textId: number,
+    @Arg("textId") textId: string,
     @Ctx() { user }: ResolverContext,
   ) {
     user = (await this.Users.findOne(user.id, {

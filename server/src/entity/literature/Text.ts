@@ -16,7 +16,7 @@ import Line from "./Line"
 export default class Text {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  id: number
+  id: string
 
   @Column("varchar", { length: 64 })
   @Field()

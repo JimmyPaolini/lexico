@@ -57,6 +57,7 @@ export default function FormsRow({
 
   return (
     <>
+      <Divider variant="inset" />
       <CardContent className={classes.formsRow}>
         <CardActionArea
           onClick={() => setExpanded((expanded) => !expanded)}

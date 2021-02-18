@@ -1,12 +1,13 @@
 import { Grid } from "@material-ui/core"
+import { GetStaticProps } from "next"
 import React, { useMemo, useState } from "react"
 import { useQuery } from "react-query"
 import Author from "../../../server/src/entity/literature/Author"
 import CardDeck from "../components/CardDeck"
-import AuthorCard from "../components/literature/AuthorCard"
+import AuthorCard from "../components/literature/LiteratureAuthor"
 import SearchBar from "../components/search/SearchBar"
 import getAuthorsQuery from "../graphql/literature/getAuthors.gql"
-import { graphQLClient } from "./_app"
+import { graphQLClient, queryClient } from "./_app"
 
 export default function Literature() {
   const [search, setSearch] = useState<string>("")
@@ -14,10 +15,7 @@ export default function Literature() {
 
   const { data: authors, isLoading, isError } = useQuery(
     "getAuthors",
-    async () => {
-      const { getAuthors: data } = await graphQLClient.request(getAuthorsQuery)
-      return data as Author[]
-    },
+    getAuthors,
   )
 
   const cards = useMemo(
@@ -51,6 +49,16 @@ export default function Literature() {
       </Grid>
     </Grid>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  await queryClient.prefetchQuery("getText", getAuthors)
+  return { props: {} }
+}
+
+const getAuthors = async () => {
+  const { getAuthors: data } = await graphQLClient.request(getAuthorsQuery)
+  return data as Author[]
 }
 
 // const filterEntries = (entries: Entry[], search: string) => {

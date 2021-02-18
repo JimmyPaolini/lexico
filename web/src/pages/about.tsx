@@ -2,12 +2,11 @@ import {
   Box,
   Card,
   CardActionArea,
-  CardHeader,
+  CardHeader as CardHeaderMui,
   Collapse,
   Divider,
   Fade,
   Grid,
-  IconButton,
   Link,
   List,
   ListItem,
@@ -16,16 +15,12 @@ import {
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { ExpandMore } from "@material-ui/icons"
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord"
+import { GetStaticProps } from "next"
 import Image from "next/image"
 import React, { useState } from "react"
-
-// const gratiasMaximasAd = [
-//   "wiktionary.com for providing the dictionary content",
-//   "thelatinlibrary.com for providing the literature content",
-//   "Magistri sodalesque Latinorum",
-// ]
+import CardHeader from "../components/accessories/CardHeader"
+import ExpandIcon from "../components/accessories/ExpandIcon"
 
 const upcomingFeatures = [
   "Collaborations with Latinists/Classics Organizations (email me through the Suggestions page!)",
@@ -40,13 +35,12 @@ const dataCollection = ["User logins; literature views; word searches"]
 export default function About() {
   const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(false)
+
   return (
     <Grid container justify="center" alignItems="center">
       <Fade in={true}>
         <Card className={classes.card}>
-          <Typography variant="h4" className={classes.body} align="center">
-            About
-          </Typography>
+          <CardHeader title="About" />
           <Divider className={classes.divider} />
           <Typography variant="body1" className={classes.body}>
             I love reading and writing Latin, so I built Lexico to help others
@@ -61,68 +55,48 @@ export default function About() {
             disableTouchRipple
             classes={{ focusHighlight: classes.hide }}
           >
-            <CardHeader
-              title="Tools"
-              titleTypographyProps={{ variant: "h5" }}
+            <CardHeaderMui
+              title="Software libraries and tools"
+              titleTypographyProps={{ variant: "body1" }}
+              className={classes.toolsHeader}
               action={
-                <IconButton
-                  disableRipple
-                  disableTouchRipple
-                  className={classes.disableHoverGlow}
-                >
-                  <ExpandMore
-                    className={
-                      expanded ? classes.upSideDown : classes.rightSideUp
-                    }
-                  />
-                </IconButton>
+                <Box style={{ paddingTop: 8, paddingRight: 8 }}>
+                  <ExpandIcon {...{ expanded }} />
+                </Box>
               }
             />
-            <Collapse in={expanded}>
-              <Grid container spacing={2}>
-                {tools.map((tool) => (
-                  <Grid
-                    item
-                    key={tool.name}
-                    xs={3}
-                    className={classes.tool}
-                    container
-                    justify="center"
-                  >
-                    <Link
-                      href={tool.url}
-                      target="_blank"
-                      onClick={(e: any) => e.stopPropagation()}
-                    >
-                      <Image
-                        src={`/icon/${tool.name}.png`}
-                        alt={tool.name}
-                        width={128}
-                        height={128}
-                      />
-                    </Link>
-                  </Grid>
-                ))}
-              </Grid>
-            </Collapse>
           </CardActionArea>
+          <Collapse in={expanded}>
+            <Grid container spacing={2}>
+              {tools.map((tool) => (
+                <Grid
+                  item
+                  key={tool.name}
+                  xs={3}
+                  className={classes.tool}
+                  container
+                  justify="center"
+                >
+                  <Link
+                    href={tool.url}
+                    target="_blank"
+                    onClick={(e: any) => e.stopPropagation()}
+                  >
+                    <Image
+                      src={`/icon/${tool.name}.png`}
+                      alt={tool.name}
+                      width={128}
+                      height={128}
+                    />
+                  </Link>
+                </Grid>
+              ))}
+            </Grid>
+          </Collapse>
           <Divider className={classes.divider} />
-          {/* <Typography variant="subtitle1">Gratias Maximas Ad:</Typography>
-          <List dense>
-            {gratiasMaximasAd.map((text, i) => (
-              <ListItem key={i} style={{ padding: 0 }}>
-                <ListItemIcon>
-                  <FiberManualRecordIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>
-                  <Typography variant="body2" className={classes.bullet}>
-                    {text}
-                  </Typography>
-                </ListItemText>
-              </ListItem>
-            ))}
-          </List> */}
-          <Typography variant="subtitle1">Upcoming Features:</Typography>
+          <Typography variant="subtitle1" className={classes.body}>
+            Upcoming Features:
+          </Typography>
           <List dense className={classes.list}>
             {upcomingFeatures.map((text, i) => (
               <ListItem key={i} style={{ padding: 0 }}>
@@ -137,7 +111,9 @@ export default function About() {
               </ListItem>
             ))}
           </List>
-          <Typography variant="subtitle1">Data collection:</Typography>
+          <Typography variant="subtitle1" className={classes.body}>
+            Data collection:
+          </Typography>
           <List dense className={classes.list}>
             {dataCollection.map((text, i) => (
               <ListItem key={i} style={{ padding: 0 }}>
@@ -160,6 +136,12 @@ export default function About() {
       </Fade>
     </Grid>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  }
 }
 
 const tools = [
@@ -198,8 +180,14 @@ const useStyles = makeStyles((theme: any) => ({
     margin: theme.spacing(1),
   },
   list: {
+    padding: theme.spacing(1),
     listStyleType: "circle",
     listStylePosition: "inside",
+  },
+  toolsHeader: {
+    paddingTop: 0,
+    paddingBottom: 0,
+    padding: theme.spacing(1),
   },
   bullet: {
     position: "relative",
@@ -224,5 +212,10 @@ const useStyles = makeStyles((theme: any) => ({
   },
   tool: {
     marginBottom: theme.spacing(2),
+  },
+  hiddenAction: {
+    marginTop: 8,
+    marginRight: 8,
+    visibility: "hidden",
   },
 }))

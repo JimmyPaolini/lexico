@@ -19,7 +19,6 @@ export default function EntryCard({ entry, searched = "" }: Props) {
       <PrincipalPartsRow entry={entry} />
       <Divider variant="inset" />
       <TranslationsRow translations={entry.translations!} />
-      <Divider variant="inset" />
       <FormsRow
         partOfSpeech={entry.partOfSpeech}
         forms={entry.forms}

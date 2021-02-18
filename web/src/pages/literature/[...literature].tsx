@@ -1,49 +1,71 @@
 import { Grid, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { useRouter } from "next/router"
+import { GetStaticPaths, GetStaticProps } from "next"
 import React from "react"
-import { useQuery } from "react-query"
+import { QueryFunctionContext, useQuery } from "react-query"
 import Text from "../../../../server/src/entity/literature/Text"
+import ReaderText from "../../components/literature/ReaderText"
 import getTextQuery from "../../graphql/literature/getText.gql"
-import { graphQLClient } from "../_app"
+import getTextsQuery from "../../graphql/literature/getTexts.gql"
+import { graphQLClient, queryClient } from "../_app"
 
-export default function Reader() {
+interface Props {
+  textId: string
+}
+export default function Reader({ textId }: Props) {
   const classes = useStyles()
-  const router = useRouter()
-  console.log(router.query)
-  const {
-    authorName,
-    bookTitle,
-    bookId,
-    textTitle,
-    textId,
-  } = useLiteraturePath(router.query.literature as string[])
-  if (!textId) return null
-  const { data: text, isLoading } = useQuery(["getText", textId], async () => {
-    const { getText: data } = await graphQLClient.request(getTextQuery, {
-      id: textId,
-    })
-    return data as Text
-  })
-  authorName
-  bookTitle
-  bookId
-  textTitle
+  const { data: text, isLoading } = useQuery(["getText", textId], getText)
 
   return (
-    <Paper square elevation={0} className={classes.paper}>
+    <Paper square elevation={0} className={classes.reader}>
       <Grid container justify="center">
-        {!isLoading
-          ? text?.lines.map((line) => {
-              return <div>{line.line}</div>
-            })
-          : null}
+        {!isLoading && !!text ? (
+          <ReaderText
+            {...{
+              lines: text.lines!,
+              openModal: (word: string) => {
+                word
+                return null
+              },
+            }}
+          />
+        ) : null}
       </Grid>
     </Paper>
   )
 }
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { getTexts: texts } = await graphQLClient.request(getTextsQuery)
+  return {
+    fallback: true,
+    paths: texts.map((text: Text) => {
+      const literature = [text.author.name]
+      if (text.book) literature.push(text.book.title, text.book.id)
+      literature.push(text.title, text.id)
+      return { params: { literature } }
+    }),
+  }
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { textId } = useLiteraturePath(context.params?.literature as string[])
+  await queryClient.prefetchQuery(["getText", textId], getText)
+  return {
+    notFound: !textId,
+    props: { textId },
+  }
+}
+
+const getText = async ({ queryKey: [, textId] }: QueryFunctionContext<any>) => {
+  const { getText: data } = await graphQLClient.request(getTextQuery, {
+    id: textId,
+  })
+  return data as Text
+}
+
 const useLiteraturePath = (literatueQueryPath: string[]) => {
+  if (!literatueQueryPath) return {}
   if (literatueQueryPath.length === 3) {
     const [authorName, textTitle, textId] = literatueQueryPath
     return { authorName, textTitle, textId }
@@ -60,8 +82,9 @@ const useLiteraturePath = (literatueQueryPath: string[]) => {
 }
 
 const useStyles = makeStyles((theme: any) => ({
-  paper: {
+  reader: {
     width: "100%",
+    height: "100%",
     backgroundColor: "black",
     padding: theme.spacing(8),
     fontFamily: theme.typography.literature.fontFamily,

@@ -21,19 +21,24 @@ export default class LiteratureResolver {
       order: { name: "ASC" },
     })
     return authors.map((author) => {
-      author.books?.sort().reverse()
-      author.books?.map((book) => book.texts.sort().reverse())
-      author.texts.sort().reverse()
+      author.books?.sort((a, b) => a.title.localeCompare(b.title))
+      author.books?.map((book) =>
+        book.texts.sort((a, b) => a.title.localeCompare(b.title)),
+      )
+      author.texts.sort((a, b) => a.title.localeCompare(b.title))
       return author
     })
   }
 
   @Query(() => [Book])
   async getBooks() {
-    return await this.Books.find({
+    const books = await this.Books.find({
       relations: ["texts"],
       order: { title: "ASC" },
     })
+    return books.map((book) =>
+      book.texts.sort((a, b) => a.title.localeCompare(b.title)),
+    )
   }
 
   @Query(() => [Text])
@@ -47,19 +52,29 @@ export default class LiteratureResolver {
 
   @Query(() => Author)
   async getAuthor(@Arg("name") name: string) {
-    return await this.Authors.findOneOrFail(name, {
+    const author = await this.Authors.findOneOrFail(name, {
       relations: ["books", "books.texts", "texts"],
     })
+    author.books?.sort((a, b) => a.title.localeCompare(b.title))
+    author.books?.map((book) =>
+      book.texts.sort((a, b) => a.title.localeCompare(b.title)),
+    )
+    author.texts.sort((a, b) => a.title.localeCompare(b.title))
+    return author
   }
 
   @Query(() => Book)
   async getBook(@Arg("id") id: string) {
-    return await this.Books.findOneOrFail(id, { relations: ["texts"] })
+    const book = await this.Books.findOneOrFail(id, { relations: ["texts"] })
+    book.texts.sort((a, b) => a.title.localeCompare(b.title))
+    return book
   }
 
   @Query(() => Text)
   async getText(@Arg("id") id: string) {
-    return await this.Texts.findOneOrFail(id, { relations: ["lines"] })
+    const text = await this.Texts.findOneOrFail(id, { relations: ["lines"] })
+    text.lines.sort((a, b) => a.lineNumber - b.lineNumber)
+    return text
   }
 
   // @Query(() => Text)

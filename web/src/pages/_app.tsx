@@ -5,8 +5,9 @@ import {
 } from "@material-ui/core"
 import { GraphQLClient } from "graphql-request"
 import type { AppProps } from "next/app"
-import React from "react"
+import React, { useEffect } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
+import { Hydrate } from "react-query/hydration"
 import { ContextProvider } from "../components/Context"
 import Layout from "../components/Layout"
 import theme from "../theme"
@@ -21,17 +22,25 @@ export const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppProps) {
   const sheets = new ServerStyleSheets()
-  return sheets.collect(
+  sheets
+  useEffect(() => {
+    const jssStyles = document.querySelector("#jss-server-side")
+    if (jssStyles) jssStyles.parentElement!.removeChild(jssStyles)
+  }, [])
+
+  return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <QueryClientProvider client={queryClient}>
-        <ContextProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ContextProvider>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ContextProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ContextProvider>
+        </Hydrate>
       </QueryClientProvider>
-    </ThemeProvider>,
+    </ThemeProvider>
   )
 }
 

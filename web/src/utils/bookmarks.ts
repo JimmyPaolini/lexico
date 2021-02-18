@@ -5,14 +5,14 @@ import bookmarksQuery from "../graphql/bookmarks/bookmarks.gql"
 import unbookmarkMutation from "../graphql/bookmarks/unbookmark.gql"
 import { graphQLClient, queryClient } from "../pages/_app"
 
-export const useBookmarks = () =>
+export const useBookmarks = (enabled: boolean) =>
   useQuery(
     "bookmarks",
     async () => {
       const { bookmarks: data } = await graphQLClient.request(bookmarksQuery)
       return data
     },
-    { cacheTime: 0 },
+    { cacheTime: 0, enabled },
   )
 
 export const useBookmark = (setBookmarked: Dispatch<SetStateAction<boolean>>) =>

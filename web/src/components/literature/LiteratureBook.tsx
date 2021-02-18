@@ -11,7 +11,7 @@ import Author from "../../../../server/src/entity/literature/Author"
 import Book from "../../../../server/src/entity/literature/Book"
 import { sentenceCase } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
-import TextRow from "./TextRow"
+import TextRow from "./LiteratureText"
 
 interface Props {
   author: Author
@@ -20,7 +20,12 @@ interface Props {
   searched: string
 }
 
-export default function BookRow({ author, book, isLast, searched = "" }: Props) {
+export default function LiteratureBook({
+  author,
+  book,
+  isLast,
+  searched = "",
+}: Props) {
   const classes = useStyles()
   searched
   const [expanded, setExpanded] = useState<boolean>(false)
@@ -44,7 +49,11 @@ export default function BookRow({ author, book, isLast, searched = "" }: Props) 
         <List className={classes.noPadding} dense>
           {book.texts.map((text, i) => {
             const isTextLast = i === book.texts.length - 1 && isLast
-            return <TextRow {...{ author, book, text, isLast: isTextLast, searched }} />
+            return (
+              <TextRow
+                {...{ author, book, text, isLast: isTextLast, searched }}
+              />
+            )
           })}
         </List>
       </Collapse>
