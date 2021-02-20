@@ -8,6 +8,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
+    "@types/react-lazyload": "^3.1.0",
+    "@types/react-virtualized-auto-sizer": "^1.0.0",
     "formik": "^2.2.6",
     "graphql": "^15.4.0",
     "graphql-request": "^3.4.0",
@@ -15,7 +17,11 @@
     "next": "latest",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-query": "^3.5.11"
+    "react-lazy-load": "^3.1.13",
+    "react-lazyload": "^3.2.0",
+    "react-query": "^3.5.11",
+    "react-virtualized-auto-sizer": "^1.0.4",
+    "react-window": "^1.8.6"
   },
   "devDependencies": {
     "@types/material-ui": "^0.21.8",
@@ -23,6 +29,7 @@
     "@types/react": "^16.14.4",
     "@types/react-dom": "^16.9.11",
     "@types/react-query": "^1.1.2",
+    "@types/react-window": "^1.8.2",
     "typescript": "4.0"
   },
   "name": "lexico-web",

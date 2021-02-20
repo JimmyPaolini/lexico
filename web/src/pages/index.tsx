@@ -18,18 +18,18 @@ export default function Search() {
     refetch()
   }, [searched])
 
-  const { data, error, isLoading, refetch } = useSearch(searched, isLatin)
+  const { data: entries, error, isLoading, refetch } = useSearch(searched, isLatin)
 
-  const noEntriesFound = Array.isArray(data) && !data.length
-  const entriesFound = !error && Array.isArray(data) && data.length
+  const noEntriesFound = Array.isArray(entries) && !entries.length
+  const entriesFound = !error && Array.isArray(entries) && entries.length
   const cards = useMemo(
     () =>
-      data?.map((entry: Entry) => ({
+      entries?.map((entry: Entry) => ({
         key: entry.id,
         Card: () =>
           useMemo(() => <EntryCard {...{ entry, searched: searched }} />, []),
       })),
-    [data],
+    [entries],
   )
 
   return (
@@ -48,7 +48,7 @@ export default function Search() {
         />
       </Grid>
       <Grid item container justify="center">
-        {!data ? (
+        {!entries ? (
           <Home />
         ) : noEntriesFound ? (
           <Typography variant="h4">Not Found</Typography>

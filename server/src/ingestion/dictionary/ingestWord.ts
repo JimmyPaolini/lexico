@@ -4,7 +4,7 @@ import Word from "../../entity/dictionary/Word"
 import { flattenForms } from "../../utils/forms"
 import { escapeCapitals, normalize } from "../../utils/string"
 
-export async function getEntryForms(entry: Entry) {
+export async function ingestWords(entry: Entry) {
   // log.info("ingesting words", entry.word)
   for (const form of getForms(entry)) {
     await ingestWord(form, entry)

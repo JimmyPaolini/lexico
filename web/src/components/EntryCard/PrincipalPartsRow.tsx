@@ -1,6 +1,7 @@
 import { CardHeader, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Bookmark, BookmarkBorder } from "@material-ui/icons"
+import { useRouter } from "next/router"
 import React, { useState } from "react"
 import Entry from "../../../../server/src/entity/dictionary/Entry"
 import AdjectiveInflection from "../../../../server/src/entity/dictionary/word/inflection/AdjectiveInflection"
@@ -16,13 +17,18 @@ interface Props {
 }
 export default function PrincipalPartsRow({ entry }: Props) {
   const classes = useStyles()
+  const router = useRouter()
 
   const [bookmarked, setBookmarked] = useState<boolean>(!!entry.bookmarked)
   const { mutateAsync: bookmark } = useBookmark(setBookmarked)
   const { mutateAsync: unbookmark } = useUnbookmark(setBookmarked)
   const toggleBookmark = async () => {
-    if (!bookmarked) await bookmark(entry.id)
-    else await unbookmark(entry.id)
+    try {
+      if (!bookmarked) await bookmark(entry.id)
+      else await unbookmark(entry.id)
+    } catch (e) {
+      router.push("/bookmarks")
+    }
   }
 
   const principalPartsFormatted = entry?.principalParts

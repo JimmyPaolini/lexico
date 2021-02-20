@@ -12,6 +12,7 @@ export default class MyDocument extends Document {
           <meta charSet="utf-8" />
           <meta name="theme-color" content="#000000" />
           <link rel="icon" href="icon/favicon.ico" />
+          <link rel="preconnect" href="http://localhost:3001/graphql" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"

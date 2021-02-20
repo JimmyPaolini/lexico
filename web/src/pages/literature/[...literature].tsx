@@ -1,9 +1,10 @@
 import { Grid, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { GetStaticPaths, GetStaticProps } from "next"
-import React from "react"
+import React, { useState } from "react"
 import { QueryFunctionContext, useQuery } from "react-query"
 import Text from "../../../../server/src/entity/literature/Text"
+import ReaderModal from "../../components/literature/ReaderModal"
 import ReaderText from "../../components/literature/ReaderText"
 import getTextQuery from "../../graphql/literature/getText.gql"
 import getTextsQuery from "../../graphql/literature/getTexts.gql"
@@ -14,7 +15,16 @@ interface Props {
 }
 export default function Reader({ textId }: Props) {
   const classes = useStyles()
-  const { data: text, isLoading } = useQuery(["getText", textId], getText)
+  const { data: text, isLoading } = useQuery(["getText", textId], getText, {
+    keepPreviousData: true,
+  })
+
+  const [searched, setSearched] = useState<string>("")
+  const [open, setOpen] = useState<boolean>(false)
+  const openModal = (word: string) => {
+    setSearched(word)
+    setOpen(true)
+  }
 
   return (
     <Paper square elevation={0} className={classes.reader}>
@@ -22,15 +32,13 @@ export default function Reader({ textId }: Props) {
         {!isLoading && !!text ? (
           <ReaderText
             {...{
-              lines: text.lines!,
-              openModal: (word: string) => {
-                word
-                return null
-              },
+              text,
+              openModal,
             }}
           />
         ) : null}
       </Grid>
+      <ReaderModal {...{ searched, open, setOpen }} />
     </Paper>
   )
 }

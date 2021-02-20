@@ -21,6 +21,14 @@ export default createMuiTheme({
       fontSize: "1.5rem",
       lineHeight: 2.5,
       letterSpacing: "0.00938em",
+      title: {
+        fontSize: "2.5rem",
+        lineHeight: 1.5,
+      },
+      subtitle: {
+        fontSize: "2.0rem",
+        lineHeight: 1.5,
+      },
     },
   },
   custom: {

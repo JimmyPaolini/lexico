@@ -6,7 +6,7 @@ import Word from "../entity/dictionary/Word"
 import ingestDictionary from "../ingestion/dictionary/ingestDictionary"
 import ingestEntries from "../ingestion/dictionary/ingestEntry"
 import { ingestTranslationReference } from "../ingestion/dictionary/ingestTranslationReferences"
-import { getEntryForms } from "../ingestion/dictionary/ingestWord"
+import { ingestWords } from "../ingestion/dictionary/ingestWord"
 import ingestWiktionary, {
   categories,
 } from "../ingestion/wiktionary/ingestWiktionary"
@@ -64,7 +64,7 @@ export default class DictionaryIngestionResolver {
     while (entries.length) {
       log.info("selected", entries.length, "from entry", skip, entries[0].word)
       for (const entry of entries) {
-        await getEntryForms(entry)
+        await ingestWords(entry)
       }
       skip += params.take as number
       entries = await this.Entries.find({ ...params, skip })

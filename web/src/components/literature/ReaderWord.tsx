@@ -4,19 +4,22 @@ import React from "react"
 
 interface Props {
   word: string
-  openModal: (word: string) => null
+  openModal: (word: string) => void
 }
 export default function ReaderWord({ word, openModal }: Props) {
   const classes = useStyles()
+  const isWord = word.match(/\w+/i)
 
-  return (
+  return isWord ? (
     <CardActionArea
       className={classes.readerWord}
       component="span"
-      onClick={() => openModal(word.replace(/\W/g, ""))}
+      onClick={() => openModal(word.toLowerCase())}
     >
       {word}
     </CardActionArea>
+  ) : (
+    <>{word}</>
   )
 }
 

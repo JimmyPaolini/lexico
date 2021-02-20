@@ -24,21 +24,25 @@ import {
 } from "@material-ui/icons"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Context } from "./Context"
 
 export default function Navigation() {
   const classes = useStyles()
   const router = useRouter()
-  const isMobile = useMediaQuery((theme: any) => theme?.breakpoints.down("sm"))
   const { isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
+  const isMobile = useMediaQuery((theme: any) => theme?.breakpoints.down("sm"))
   const pageName = router.pathname.split("/")[1]
   const [selected, setSelected] = useState(pageName || "search")
 
-  const onSelect = (pageName: any) => {
+  const handleSelection = (pageName: any) => {
     setSelected(pageName)
     if (isMobile) setOpen(!open)
   }
+
+  useEffect(() => {
+    setSelected(pageName)
+  }, [pageName])
 
   return (
     <SwipeableDrawer
@@ -71,7 +75,7 @@ export default function Navigation() {
               <ListItem
                 button
                 selected={selected === page.name}
-                onClick={() => onSelect(page.name)}
+                onClick={() => handleSelection(page.name)}
               >
                 <ListItemIcon>{page.icon}</ListItemIcon>
                 <ListItemText primary={page.Name} />

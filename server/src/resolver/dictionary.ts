@@ -33,24 +33,27 @@ export default class DictionaryResolver {
     @Arg("search") search: string,
     @Ctx() { bookmarks }: ResolverContext,
   ) {
+    log.info("searchLatin req:", { search })
     if (!search) throw new Error("empty search")
     if (!search.match(/^-?\w+$/)) throw new Error("invalid search")
+    const hasSuffix = (suffix: string) => search.match(new RegExp(suffix + "$"))
     const pushSuffix = async (suffix: string) => {
-      if (search.match(new RegExp(suffix + "$"))) {
-        const suffixEntry = await this.Entries.findOne({ word: "-" + suffix })
-        if (suffixEntry) entries.push(suffixEntry)
-        search = search.replace(new RegExp(suffix + "$"), "")
-      }
+      const nonSuffixWord = await this.Words.findOne({
+        word: search.replace(new RegExp(suffix + "$"), ""),
+      })
+      if (nonSuffixWord) entries.push(...nonSuffixWord.entries)
+      const suffixEntry = await this.Entries.findOne({ word: "-" + suffix })
+      entries.push(suffixEntry)
     }
 
-    const entries = []
+    let entries = []
     const word = await this.Words.findOne({ word: search })
     if (word) entries.push(...word.entries)
-    await pushSuffix("que")
-    await pushSuffix("ve")
-    await pushSuffix("ne")
+    if (hasSuffix("que")) await pushSuffix("que")
+    else if (hasSuffix("ve")) await pushSuffix("ve")
+    else if (hasSuffix("ne")) await pushSuffix("ne")
 
-    return entries
+    entries = entries
       .filter((entry) => !!entry.translations?.length)
       .map((entry) => {
         if (this.identifiablePartsOfSpeech.includes(entry.partOfSpeech)) {
@@ -64,18 +67,29 @@ export default class DictionaryResolver {
         )
         return entry
       })
+    log.info(
+      "searchLatin res:",
+      entries.map(({ id, word }) => ({ id, word })),
+    )
+    if (!entries.length) throw new Error("not found")
+    return entries
   }
 
   @Query(() => [Entry])
   async searchEnglish(@Arg("search") search: string) {
     if (!search) return []
+    log.info("searchEnglish req:", { search })
     const translations = await this.Translations.find({
       where: { translation: Like(`%${search}%`) },
       relations: ["entry"],
     })
-    const words = translations.map((t) => t.entry)
-    words.forEach((word) => log.info(word.word))
-    return words
+    const entries = translations.map((t) => t.entry)
+    log.info(
+      "searchEnglish res:",
+      entries.map(({ id, word }) => ({ id, word })),
+    )
+    if (!entries.length) throw new Error("not found")
+    return entries
   }
 
   @Query(() => [Entry])

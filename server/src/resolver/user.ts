@@ -89,7 +89,7 @@ export default class UserResolver {
   @Mutation(() => Boolean)
   @UseMiddleware(Authenticate)
   async saveReading(
-    @Arg("lineId") lineId: number,
+    @Arg("lineId") lineId: string,
     @Ctx() { user }: ResolverContext,
   ) {
     if (user.readings && user.readings.some((line) => line.id === lineId))
@@ -104,7 +104,7 @@ export default class UserResolver {
   @Mutation(() => Boolean)
   @UseMiddleware(Authenticate)
   async unsaveReading(
-    @Arg("lineId") lineId: number,
+    @Arg("lineId") lineId: string,
     @Ctx() { user }: ResolverContext,
   ) {
     user = (await this.Users.findOne(user.id, {
