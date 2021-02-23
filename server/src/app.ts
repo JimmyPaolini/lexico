@@ -29,6 +29,7 @@ import DictionaryIngestionResolver from "./resolver/dictionaryIngestion"
 import LiteratureResolver from "./resolver/literature"
 import LiteratureIngestionResolver from "./resolver/literatureIngestion"
 import UserResolver from "./resolver/user"
+import { createDbViews } from "./utils/database"
 import logger from "./utils/log"
 
 const log = logger.getChildLogger()
@@ -43,10 +44,11 @@ async function main() {
     database: DB_DATABASE,
     entities: [Entry, Translation, Word, Author, Book, Text, Line, User],
     logging: LOG_SQL || ["log", "info", "schema", "migration", "warn", "error"],
+    maxQueryExecutionTime: 1000,
     synchronize: true,
   })
   log.info("Connected to database")
-  // await createDbViews()
+  await createDbViews()
 
   const app = express()
   const corsOptions = {

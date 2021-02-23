@@ -4,6 +4,7 @@ import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
 import VerbForms from "../entity/dictionary/word/forms/VerbForms"
+import { ingestWords } from "../ingestion/dictionary/ingestWord"
 import { GetBookmarks } from "../utils/authentication"
 import { camelCaseFuturePerfect, identifyWord } from "../utils/forms"
 import logger from "../utils/log"
@@ -35,7 +36,7 @@ export default class DictionaryResolver {
   ) {
     log.info("searchLatin req:", { search })
     if (!search) throw new Error("empty search")
-    if (!search.match(/^-?\w+$/)) throw new Error("invalid search")
+    if (!search.match(/^-?(\w| )+$/)) throw new Error("invalid search")
     const hasSuffix = (suffix: string) => search.match(new RegExp(suffix + "$"))
     const pushSuffix = async (suffix: string) => {
       const nonSuffixWord = await this.Words.findOne({
@@ -71,6 +72,7 @@ export default class DictionaryResolver {
       "searchLatin res:",
       entries.map(({ id, word }) => ({ id, word })),
     )
+    if (!!word && !entries.length) throw new Error("word has no entries")
     if (!entries.length) throw new Error("not found")
     return entries
   }
@@ -107,5 +109,12 @@ export default class DictionaryResolver {
   @Query(() => [Entry])
   async untranslated() {
     return await this.Entries.query(`SELECT * FROM untranslated`)
+  }
+
+  @Query(() => Boolean)
+  async script() {
+    const porrigo = await this.Entries.findOneOrFail("325306")
+    await ingestWords(porrigo)
+    return true
   }
 }

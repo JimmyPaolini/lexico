@@ -1,7 +1,7 @@
 import fs from "fs"
 import path from "path"
 import { getFirstLetter } from "../../utils/string"
-import ingestWord from "./ingestEntry"
+import ingestEntries from "./ingestEntry"
 
 export default async function ingestDictionary(
   firstLetter = "a",
@@ -9,14 +9,12 @@ export default async function ingestDictionary(
 ) {
   const files = getHtmlFiles(firstLetter, lastLetter)
   for (let fileName of files) {
-    await ingestWord(fileName.replace(/\.json$/, ""))
+    await ingestEntries(fileName.replace(/\.json$/, ""))
   }
 }
 
 function getHtmlFiles(firstLetter: string, lastLetter: string): string[] {
-  const files = fs.readdirSync(
-    path.join(process.cwd(), `./data/wiktionary/lemma`),
-  )
+  const files = fs.readdirSync(path.join(process.cwd(), `./data/wiktionary`))
   files.filter(
     (fileName) =>
       getFirstLetter(fileName) >= firstLetter &&

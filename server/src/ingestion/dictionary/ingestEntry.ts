@@ -18,30 +18,37 @@ import Verb from "./ingester/partOfSpeech/Verb"
 
 const log = logger.getChildLogger()
 
-export default async function ingestEntries(wordString: string) {
-  // log.info("ingesting entry", wordString)
+export default async function ingestEntries(entryWord: string) {
+  // log.info("ingesting entry", entryWord)
   const data = require(path.join(
     process.cwd(),
-    `./data/wiktionary/lemma/${wordString}.json`,
+    `./data/wiktionary/${entryWord}.json`,
   ))
   const $ = cheerio.load(data.html)
 
-  wordString = normalize(wordString)
-  for (const elt of $("p:has(strong.Latn.headword)").get()) {
-    await ingestEntry(wordString, $, elt)
-  }
+  entryWord = normalize(entryWord)
+  await Promise.all(
+    $("p:has(strong.Latn.headword)")
+      .get()
+      .map(async (elt, i) => await ingestEntry(entryWord, $, elt, i)),
+  )
+  // for (const elt of $("p:has(strong.Latn.headword)").get()) {
+  //   await ingestEntry(entryWord, $, elt)
+  // }
 }
 
 async function ingestEntry(
   word: string,
   $: cheerio.Root,
   elt: any,
+  i: number,
 ): Promise<void> {
   const Entries = getConnection().getRepository(Entry)
   const Translations = getConnection().getRepository(Translation)
 
   const entry = await Entries.save({
     word,
+    wikid: word + "-" + i,
     partOfSpeech: Ingester.getPartOfSpeech($, elt),
   })
   try {

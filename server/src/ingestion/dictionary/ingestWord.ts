@@ -2,42 +2,35 @@ import { getConnection } from "typeorm"
 import Entry from "../../entity/dictionary/Entry"
 import Word from "../../entity/dictionary/Word"
 import { flattenForms } from "../../utils/forms"
+import logger from "../../utils/log"
 import { escapeCapitals, normalize } from "../../utils/string"
 
+const log = logger.getChildLogger()
+
 export async function ingestWords(entry: Entry) {
-  // log.info("ingesting words", entry.word)
-  for (const form of getForms(entry)) {
-    await ingestWord(form, entry)
+  log.info("ingesting words", entry.word)
+  for (const word of getWords(entry)) {
+    await ingestWord(word, entry)
   }
 }
 
-export function getForms(entry: Entry): string[] {
+export function getWords(entry: Entry): string[] {
   const forms = flattenForms(entry.forms)
   entry.principalParts?.forEach((pp) => forms.push(...pp.text))
   return forms
 }
 
-export async function ingestWord(form: string, entry: Entry) {
+export async function ingestWord(word: string, entry: Entry) {
   const Words = getConnection().getRepository(Word)
-  const word = escapeCapitals(normalize(form))
+  word = escapeCapitals(normalize(word))
   if (!word.match(/^-?[A-Za-z]/)) return
   const existingWord = await Words.findOne({ word })
   if (existingWord) {
-    if (
-      !existingWord.entries.some(
-        (existingEntry) => existingEntry.id === entry.id,
-      )
-    ) {
-      await Words.createQueryBuilder()
-        .relation(Word, "entries")
-        .of(existingWord)
-        .add(entry)
+    if (!existingWord.entries.some((e) => e.id === entry.id)) {
+      existingWord.entries.push(entry)
+      await Words.save(existingWord)
     }
   } else {
-    await Words.createQueryBuilder()
-      .insert()
-      .values({ word, entries: [entry] })
-      .updateEntity(false)
-      .execute()
+    await Words.save({ word, entries: [entry] })
   }
 }

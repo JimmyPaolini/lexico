@@ -105,18 +105,20 @@ export default class DictionaryIngestionResolver {
   @Mutation(() => Boolean)
   async ingestEntry(@Arg("word") word: string) {
     await ingestEntries(escapeCapitals(word))
+    const entries = await this.Entries.find({ word })
+    for (const entry of entries) await ingestWords(entry)
     return true
   }
 
   @Mutation(() => Boolean)
-  async ingestWiktionary(
-    @Arg("category") category: string,
-    @Arg("firstLetter") firstLetter: string,
-    @Arg("lastLetter") lastLetter: string,
-  ) {
-    if (!categories[category]) throw new Error("unknown category")
-    validateLetters([firstLetter, lastLetter])
-    await ingestWiktionary(category, firstLetter, lastLetter)
+  async ingestWiktionary() {
+    // @Arg("lastLetter") lastLetter: string, // @Arg("firstLetter") firstLetter: string, // @Arg("category") category: string,
+    // if (!categories[category]) throw new Error("unknown category")
+    for (const category of Object.keys(categories)) {
+      await ingestWiktionary(category, "a", "z")
+    }
+    // validateLetters([firstLetter, lastLetter])
+    // await ingestWiktionary(category, firstLetter, lastLetter)
     return true
   }
 }

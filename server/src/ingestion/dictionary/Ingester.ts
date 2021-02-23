@@ -25,7 +25,7 @@ export default abstract class Ingester {
   static getPartOfSpeech($: cheerio.Root, elt: any): PartOfSpeech {
     return $(elt)
       .prevAll(":header, h3, h4")
-      .first()
+      .last()
       .text()
       .toLowerCase()
       .replace(/(\[edit])|\d+/g, "")
