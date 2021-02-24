@@ -12,9 +12,10 @@ import User from "../entity/user/User"
 import {
   Authenticate,
   createAccessToken,
-  fetchGoogleUser,
   IsAuthenticated,
 } from "../utils/authentication"
+import fetchFacebookUser from "../utils/facebook"
+import fetchGoogleUser from "../utils/google"
 import logger from "../utils/log"
 import { ResolverContext } from "../utils/ResolverContext"
 import { validateEmail, validatePassword } from "../utils/string"
@@ -83,6 +84,21 @@ export default class AuthenticationResolver {
       })
     }
     log.info("login google user:", user.id, user.email)
+    res.cookie("accessToken", createAccessToken(user), { httpOnly: true })
+    return user
+  }
+
+  @Query(() => User)
+  async facebook(@Arg("code") code: string, @Ctx() { res }: ResolverContext) {
+    const profile: any = await fetchFacebookUser(code)
+    let user = await this.Users.findOne({ facebookId: profile.id })
+    if (!user) {
+      user = await this.Users.save({
+        facebookId: profile.id,
+        email: profile.email,
+      })
+    }
+    log.info("login facebook user:", user.id, user.email)
     res.cookie("accessToken", createAccessToken(user), { httpOnly: true })
     return user
   }

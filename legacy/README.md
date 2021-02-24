@@ -1,2 +1,0 @@
-# Lexico
-Translatio per loquandum

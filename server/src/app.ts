@@ -44,7 +44,7 @@ async function main() {
     database: DB_DATABASE,
     entities: [Entry, Translation, Word, Author, Book, Text, Line, User],
     logging: LOG_SQL || ["log", "info", "schema", "migration", "warn", "error"],
-    maxQueryExecutionTime: 1000,
+    maxQueryExecutionTime: 100,
     synchronize: true,
   })
   log.info("Connected to database")
