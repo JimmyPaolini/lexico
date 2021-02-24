@@ -1,0 +1,10 @@
+**/.DS_Store
+**/.vscode
+**/.idea
+**/*.env
+**/node_modules
+**/dist
+data/wiktionary
+data/literature_original
+src/config.json
+*.log

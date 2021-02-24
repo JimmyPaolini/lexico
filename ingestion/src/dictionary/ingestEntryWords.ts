@@ -1,0 +1,36 @@
+import { getConnection } from "typeorm"
+import Entry from "../../../server/src/entity/dictionary/Entry"
+import Word from "../../../server/src/entity/dictionary/Word"
+import { flattenForms } from "../utils/forms"
+import logger from "../utils/log"
+import { escapeCapitals, normalize } from "../utils/string"
+
+const log = logger.getChildLogger()
+
+export async function ingestEntryWords(entry: Entry) {
+  log.info("ingesting words", entry.word)
+  for (const word of getEntryWords(entry)) {
+    await ingestEntryWord(word, entry)
+  }
+}
+
+export function getEntryWords(entry: Entry): string[] {
+  const forms = flattenForms(entry.forms)
+  entry.principalParts?.forEach((pp) => forms.push(...pp.text))
+  return forms
+}
+
+export async function ingestEntryWord(word: string, entry: Entry) {
+  const Words = getConnection().getRepository(Word)
+  word = escapeCapitals(normalize(word))
+  if (!word.match(/^-?[A-Za-z]/)) return
+  const existingWord = await Words.findOne({ word })
+  if (existingWord) {
+    if (!existingWord.entries.some((e) => e.id === entry.id)) {
+      existingWord.entries.push(entry)
+      await Words.save(existingWord)
+    }
+  } else {
+    await Words.save({ word, entries: [entry] })
+  }
+}

@@ -14,7 +14,7 @@ export default function Home() {
     <Box position="relative">
       <Box>
         <Image
-          src="/lexico_logo.png"
+          src="/lexico_logo.svg"
           alt="lexico logo"
           height={500}
           width={375}

@@ -7,9 +7,7 @@ import ingestDictionary from "../ingestion/dictionary/ingestDictionary"
 import ingestEntries from "../ingestion/dictionary/ingestEntry"
 import { ingestTranslationReference } from "../ingestion/dictionary/ingestTranslationReferences"
 import { ingestWords } from "../ingestion/dictionary/ingestWord"
-import ingestWiktionary, {
-  categories,
-} from "../ingestion/wiktionary/ingestWiktionary"
+import ingestWiktionary from "../ingestion/wiktionary/ingestWiktionary"
 import logger from "../utils/log"
 import { escapeCapitals, validateLetters } from "../utils/string"
 
@@ -112,13 +110,7 @@ export default class DictionaryIngestionResolver {
 
   @Mutation(() => Boolean)
   async ingestWiktionary() {
-    // @Arg("lastLetter") lastLetter: string, // @Arg("firstLetter") firstLetter: string, // @Arg("category") category: string,
-    // if (!categories[category]) throw new Error("unknown category")
-    for (const category of Object.keys(categories)) {
-      await ingestWiktionary(category, "a", "z")
-    }
-    // validateLetters([firstLetter, lastLetter])
-    // await ingestWiktionary(category, firstLetter, lastLetter)
+    await ingestWiktionary()
     return true
   }
 }

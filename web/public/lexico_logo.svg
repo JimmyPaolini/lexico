@@ -1,0 +1,30 @@
+<svg width="1200" height="1600" viewBox="0 0 1200 1600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="225" width="975" height="1390" fill="#66023C"/>
+<rect x="811.397" y="1165.79" width="415" height="188.388" transform="rotate(35.5 811.397 1165.79)" fill="#66023C"/>
+<rect x="74" y="1410" width="966" height="150" fill="#66023C"/>
+<g clip-path="url(#clip0)">
+<rect y="1369.96" width="1200" height="40" rx="20" fill="#E4E4E4"/>
+<g clip-path="url(#clip1)">
+<rect y="1419.96" width="1140" height="4" rx="2" fill="#E4E4E4"/>
+<rect y="1433.96" width="1130" height="4" rx="2" fill="#E4E4E4"/>
+<rect y="1447.96" width="1120" height="4" rx="2" fill="#E4E4E4"/>
+<rect y="1461.96" width="1110" height="4" rx="2" fill="#E4E4E4"/>
+<rect y="1475.96" width="1100" height="4" rx="2" fill="#E4E4E4"/>
+<rect y="1489.96" width="1090" height="4" rx="2" fill="#E4E4E4"/>
+<rect y="1503.96" width="1080" height="4" rx="2" fill="#E4E4E4"/>
+<rect y="1517.96" width="1070" height="4" rx="2" fill="#E4E4E4"/>
+<rect y="1531.96" width="1060" height="4" rx="2" fill="#E4E4E4"/>
+<rect y="1545.96" width="1050" height="4" rx="2" fill="#E4E4E4"/>
+</g>
+<rect y="1559.96" width="1100" height="40" rx="20" fill="#E4E4E4"/>
+</g>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.03648 191.434C2.91342 196.166 5.97018e-05 202.823 5.9399e-05 209.798L0 1577.54C-5.38822e-07 1589.94 10.0579 1600 22.465 1600C28.1153 1600 33.558 1597.87 37.7085 1594.04L241.964 1405.36C247.087 1400.63 250 1393.97 250 1386.99V24.9614C250 11.1756 238.824 0 225.039 0C218.76 0 212.713 2.36577 208.101 6.62577L8.03648 191.434Z" fill="#E4E4E4"/>
+<defs>
+<clipPath id="clip0">
+<rect width="1200" height="230" fill="white" transform="translate(0 1369.96)"/>
+</clipPath>
+<clipPath id="clip1">
+<rect width="1140" height="130" fill="white" transform="translate(0 1419.96)"/>
+</clipPath>
+</defs>
+</svg>

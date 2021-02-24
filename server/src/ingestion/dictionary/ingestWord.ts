@@ -2,13 +2,10 @@ import { getConnection } from "typeorm"
 import Entry from "../../entity/dictionary/Entry"
 import Word from "../../entity/dictionary/Word"
 import { flattenForms } from "../../utils/forms"
-import logger from "../../utils/log"
 import { escapeCapitals, normalize } from "../../utils/string"
 
-const log = logger.getChildLogger()
-
 export async function ingestWords(entry: Entry) {
-  log.info("ingesting words", entry.word)
+  // log.info("ingesting words", entry.word)
   for (const word of getWords(entry)) {
     await ingestWord(word, entry)
   }

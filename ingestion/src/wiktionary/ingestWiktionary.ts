@@ -2,15 +2,15 @@ import axios from "axios"
 import cheerio from "cheerio"
 import fs from "fs"
 import fp from "path"
-import logger from "../../utils/log"
-import { escapeCapitals } from "../../utils/string"
+import logger from "../utils/log"
+import { escapeCapitals } from "../utils/string"
 const putItemHtml = (entry: any) =>
   fs.writeFileSync(
     fp.join(
       process.cwd(),
       `./data/wiktionary/${escapeCapitals(entry.word)}.json`,
     ),
-    JSON.stringify(entry, null, 2),
+    JSON.stringify(entry),
   )
 
 const log = logger.getChildLogger()
@@ -28,7 +28,7 @@ export default async function ingestWiktionary() {
   }
 }
 
-export async function ingestCategory(category = "lemma"): Promise<any> {
+async function ingestCategory(category = "lemma"): Promise<any> {
   log.info(`START - ${category}`)
   const host = `https://en.wiktionary.org`
   let path = categories[category]
