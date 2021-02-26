@@ -1,14 +1,11 @@
 import { Grid, Typography } from "@material-ui/core"
 import React, { useEffect, useMemo, useState } from "react"
-import { QueryFunctionContext, useQuery } from "react-query"
 import Entry from "../../../server/src/entity/dictionary/Entry"
 import CardDeck from "../components/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
 import Home from "../components/search/Home"
 import SearchBar from "../components/search/SearchBar"
-import searchEnglish from "../graphql/search/searchEnglish.gql"
-import searchLatin from "../graphql/search/searchLatin.gql"
-import { graphQLClient } from "./_app"
+import useSearch from "../hooks/search/useSearch"
 
 export default function Search() {
   const [isLatin, setLatin] = useState<boolean>(true)
@@ -18,7 +15,10 @@ export default function Search() {
     refetch()
   }, [searched])
 
-  const { data: entries, error, isLoading, refetch } = useSearch(searched, isLatin)
+  const { data: entries, error, isLoading, refetch } = useSearch(
+    searched,
+    isLatin,
+  )
 
   const noEntriesFound = Array.isArray(entries) && !entries.length
   const entriesFound = !error && Array.isArray(entries) && entries.length
@@ -58,20 +58,4 @@ export default function Search() {
       </Grid>
     </Grid>
   )
-}
-
-function useSearch(search: string, isLatin: boolean) {
-  return useQuery(["search", search, isLatin], useSearchQuery, {
-    enabled: false,
-    keepPreviousData: true,
-  })
-}
-
-async function useSearchQuery({
-  queryKey: [, search, isLatin],
-}: QueryFunctionContext<any>) {
-  if (!search) return null
-  const query = isLatin ? searchLatin : searchEnglish
-  const { searchLatin: data } = await graphQLClient.request(query, { search })
-  return data
 }

@@ -11,9 +11,9 @@ import { Context } from "../Context"
 
 interface Props {
   title: string
-  props?: any
+  [key: string]: any
 }
-export default function CardHeader({ title, props }: Props) {
+export default function CardHeader({ title, ...props }: Props) {
   const classes = useStyles()
   const { isNavOpen, setNavOpen } = useContext(Context)
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))

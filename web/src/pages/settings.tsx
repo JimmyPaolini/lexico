@@ -1,18 +1,16 @@
 import { Grid } from "@material-ui/core"
-import React from "react"
-import { useQuery } from "react-query"
+import React, { useContext } from "react"
+import { Context } from "../components/Context"
 import LoginCard from "../components/settings/LoginCard"
 import SettingsCard from "../components/settings/SettingsCard"
-import userQuery from "../graphql/authentication/user.gql"
-import { graphQLClient } from "./_app"
 
 export default function Settings() {
-  const { isSuccess } = useQuery("user", user, { retryDelay: 0 })
+  const { user } = useContext(Context)
 
   return (
     <Grid container justify="center" alignItems="center">
       <Grid item>
-        {isSuccess ? (
+        {!!user ? (
           <SettingsCard />
         ) : (
           <LoginCard title="login to access settings" />
@@ -20,9 +18,4 @@ export default function Settings() {
       </Grid>
     </Grid>
   )
-}
-
-const user = async () => {
-  const { user: data } = await graphQLClient.request(userQuery)
-  return data
 }

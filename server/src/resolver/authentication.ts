@@ -8,14 +8,14 @@ import {
   UseMiddleware,
 } from "type-graphql"
 import { getConnection, IsNull } from "typeorm"
-import User from "../entity/user/User"
 import {
   Authenticate,
   createAccessToken,
   IsAuthenticated,
-} from "../utils/authentication"
-import fetchFacebookUser from "../utils/facebook"
-import fetchGoogleUser from "../utils/google"
+} from "../auth/authentication"
+import fetchFacebookUser from "../auth/facebook"
+import fetchGoogleUser from "../auth/google"
+import User from "../entity/user/User"
 import logger from "../utils/log"
 import { ResolverContext } from "../utils/ResolverContext"
 import { validateEmail, validatePassword } from "../utils/string"
@@ -34,7 +34,13 @@ export default class AuthenticationResolver {
   ) {
     if (!validateEmail(email)) throw new Error("invalid email")
     if (!validatePassword(password)) throw new Error("invalid password")
-    if (await this.Users.findOne({ email: email.toLowerCase() }))
+    if (
+      await this.Users.findOne({
+        email: email.toLowerCase(),
+        facebookId: IsNull(),
+        googleId: IsNull(),
+      })
+    )
       throw new Error("user with this email already exists")
     const user = await this.Users.save({
       email: email.toLowerCase(),
@@ -118,6 +124,31 @@ export default class AuthenticationResolver {
   ) {
     if (!validatePassword(password)) throw new Error("invalid password")
     await this.Users.update(user.id, { password: await hash(password) })
+    return true
+  }
+
+  @Mutation(() => Boolean)
+  @UseMiddleware(Authenticate)
+  async sendEmail(
+    @Arg("subject") subject: string,
+    @Arg("body") body: string,
+    @Ctx() { user }: ResolverContext,
+  ) {
+    // let act = await nodemailer.createTestAccount()
+    // const transporter = nodemailer.createTransport({
+    //   service: "smtp.ethereal.email",
+    //   auth: { user: act.user, pass: act.pass },
+    //   port: 587,
+    //   secure: false,
+    // })
+    // var params = {
+    //   from: "jimmypaolini@gmail.com",
+    //   to: SUGGESTIONS_EMAIL,
+    //   subject: subject,
+    //   text: body,
+    // }
+    // await transporter.sendMail(params)
+    log.info(`Email sent from ${user.email}: ${subject}\n${body}`)
     return true
   }
 }

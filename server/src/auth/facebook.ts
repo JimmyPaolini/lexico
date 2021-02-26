@@ -1,0 +1,43 @@
+import axios from "axios"
+import { FACEBOOK_ID, FACEBOOK_SECRET } from "../config.json"
+import logger from "../utils/log"
+
+const log = logger.getChildLogger()
+
+export default async function fetchFacebookUser(code: string) {
+  const {
+    data: { access_token },
+  } = await axios
+    .get("https://graph.facebook.com/v10.0/oauth/access_token", {
+      params: {
+        code: code,
+        client_id: FACEBOOK_ID,
+        client_secret: FACEBOOK_SECRET,
+        redirect_uri: "http://localhost:3000/facebook",
+      },
+    })
+    .catch(() => {
+      const error = new Error("error fetching facebook access token")
+      log.error(error)
+      throw error
+    })
+  const { data: profile } = await axios
+    .get("https://graph.facebook.com/v10.0/me", {
+      params: {
+        access_token,
+        fields: "id,email",
+        format: "json",
+        // transport: "cors",
+        // pretty: 0,
+        // debug: "all",
+        // method: "get",
+        // suppress_http_code: 1,
+      },
+    })
+    .catch(() => {
+      const error = new Error("error fetching facebook user info")
+      log.error(error)
+      throw error
+    })
+  return profile
+}

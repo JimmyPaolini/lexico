@@ -10,7 +10,8 @@ import NounInflection from "../../../../server/src/entity/dictionary/word/inflec
 import PrepositionInflection from "../../../../server/src/entity/dictionary/word/inflection/PrepositionInflection"
 import Uninflected from "../../../../server/src/entity/dictionary/word/inflection/Uninflected"
 import VerbInflection from "../../../../server/src/entity/dictionary/word/inflection/VerbInflection"
-import { useBookmark, useUnbookmark } from "../../utils/bookmarks"
+import useBookmark from "../../hooks/bookmarks/useBookmark"
+import useUnbookmark from "../../hooks/bookmarks/useUnbookmark"
 
 interface Props {
   entry: Entry

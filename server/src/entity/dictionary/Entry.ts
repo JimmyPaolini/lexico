@@ -22,9 +22,9 @@ export default class Entry {
   @Field(() => ID)
   id: string
 
-  @Column("varchar", { length: 127, nullable: true })
-  @Field({ nullable: true })
-  wikid?: string
+  @Column("varchar", { length: 127 })
+  @Field()
+  wikid: string
 
   @Column("varchar", { length: 127 })
   @Field()

@@ -30,9 +30,9 @@ export default class User {
   @Field()
   updatedAt: Date
 
-  @Column({ nullable: true, unique: true })
-  @Field({ nullable: true })
-  email?: string
+  @Column()
+  @Field()
+  email: string
 
   @Column({ nullable: true })
   @Length(8, 64)

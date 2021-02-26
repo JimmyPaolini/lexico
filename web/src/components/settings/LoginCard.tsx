@@ -1,25 +1,15 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  Grid,
-  Grow,
-} from "@material-ui/core"
+import { Card, CardContent, Divider, Grid, Grow } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import Image from "next/image"
 import React from "react"
-import { sentenceCase } from "../../utils/string"
 import CardHeader from "../accessories/CardHeader"
-import LoginLocal from "./LoginLocal"
+import LoginLocal from "./BasicLogin"
+import OAuthLogin from "./OAuthLogin"
 
 interface Props {
   title: string
 }
 export default function LoginCard({ title }: Props) {
   const classes = useStyles()
-  const googleUrl = useGoogleUrl()
-  const facebookUrl = useFacebookUrl()
 
   return (
     <Grow in={true}>
@@ -29,10 +19,10 @@ export default function LoginCard({ title }: Props) {
         <CardContent>
           <Grid container direction="column" alignItems="center">
             <Grid item className={classes.columnItem}>
-              <OAuthLogin provider="google" href={googleUrl} />
+              <OAuthLogin provider="google" />
             </Grid>
             <Grid item className={classes.columnItem}>
-              <OAuthLogin provider="facebook" href={facebookUrl} />
+              <OAuthLogin provider="facebook" />
             </Grid>
           </Grid>
           <Divider className={classes.columnItem} />
@@ -40,56 +30,6 @@ export default function LoginCard({ title }: Props) {
         </CardContent>
       </Card>
     </Grow>
-  )
-}
-
-function useGoogleUrl() {
-  if (typeof window === "undefined") return ""
-  return (
-    "https://accounts.google.com/o/oauth2/auth" +
-    "?response_type=code" +
-    "&client_id=581175821772-acc3epk92kl7n8bna0m6md2p4gvtrfpa.apps.googleusercontent.com" +
-    "&scope=email" +
-    "&redirect_uri=" +
-    encodeURIComponent(window.location.origin + "/google")
-  )
-}
-
-function useFacebookUrl() {
-  if (typeof window === "undefined") return ""
-  return (
-    "https://www.facebook.com/v3.2/dialog/oauth" +
-    "?response_type=code" +
-    "&client_id=1348031495536829" +
-    "&scope=email" +
-    "&redirect_uri=" +
-    encodeURIComponent(window.location.origin + "/facebook")
-  )
-}
-
-interface OAuthLoginProps {
-  provider: string
-  href: string
-}
-function OAuthLogin({ provider, href }: OAuthLoginProps) {
-  return (
-    <Button
-      variant="contained"
-      color="primary"
-      disableElevation
-      size="large"
-      href={href}
-      startIcon={
-        <Image
-          src={`/icon/${provider}.png`}
-          alt={`${provider} logo`}
-          height={24}
-          width={24}
-        />
-      }
-    >
-      {`Sign in with ${sentenceCase(provider)}`}
-    </Button>
   )
 }
 

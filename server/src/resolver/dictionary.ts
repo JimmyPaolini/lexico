@@ -1,11 +1,11 @@
 import { Arg, Ctx, Query, Resolver, UseMiddleware } from "type-graphql"
 import { getConnection, Like } from "typeorm"
+import { GetBookmarks } from "../auth/authentication"
 import Entry from "../entity/dictionary/Entry"
 import Translation from "../entity/dictionary/Translation"
 import Word from "../entity/dictionary/Word"
 import VerbForms from "../entity/dictionary/word/forms/VerbForms"
 import { ingestWords } from "../ingestion/dictionary/ingestWord"
-import { GetBookmarks } from "../utils/authentication"
 import { camelCaseFuturePerfect, identifyWord } from "../utils/forms"
 import logger from "../utils/log"
 import { ResolverContext } from "../utils/ResolverContext"
@@ -70,7 +70,7 @@ export default class DictionaryResolver {
       })
     log.info(
       "searchLatin res:",
-      entries.map(({ id, word }) => ({ id, word })),
+      entries.map(({ id, wikid }) => ({ id, wikid })),
     )
     if (!!word && !entries.length) throw new Error("word has no entries")
     if (!entries.length) throw new Error("not found")
@@ -88,7 +88,7 @@ export default class DictionaryResolver {
     const entries = translations.map((t) => t.entry)
     log.info(
       "searchEnglish res:",
-      entries.map(({ id, word }) => ({ id, word })),
+      entries.map(({ id, wikid }) => ({ id, wikid })),
     )
     if (!entries.length) throw new Error("not found")
     return entries

@@ -7,7 +7,7 @@ import EntryCard from "../components/EntryCard/EntryCard"
 import SearchBar from "../components/search/SearchBar"
 import LoginCard from "../components/settings/LoginCard"
 import bookmarksQuery from "../graphql/bookmarks/bookmarks.gql"
-import { useBookmarks } from "../utils/bookmarks"
+import useBookmarks from "../hooks/bookmarks/useBookmarks"
 import { normalize } from "../utils/string"
 import { graphQLClient, queryClient } from "./_app"
 

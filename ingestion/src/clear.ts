@@ -50,7 +50,8 @@ async function main() {
       getConnection().query(`DELETE FROM "user_bookmarks_entry"`),
   } as { [key: string]: () => any }
 
-  if (!(command in Object.keys(commandMap))) throw new Error("unknown command")
+  if (!(command in commandMap)) throw new Error("unknown command")
   await commandMap[command]()
+  return
 }
 main()

@@ -15,6 +15,7 @@ import { PartOfSpeech } from "../../../server/src/entity/dictionary/word/PartOfS
 import Author from "../../../server/src/entity/literature/Author"
 import Book from "../../../server/src/entity/literature/Book"
 import Line from "../../../server/src/entity/literature/Line"
+import Text from "../../../server/src/entity/literature/Text"
 import User from "../../../server/src/entity/user/User"
 import logger from "./log"
 import { timestampFormated } from "./string"
@@ -34,7 +35,7 @@ export async function connectDatabase() {
     maxQueryExecutionTime: 1000,
     synchronize: true,
   })
-  log.info("Connected to database")
+  log.info("connected to database")
 }
 
 export const backupFileNameExtension = ".zip"
@@ -42,28 +43,44 @@ export const backupFileNameExtension = ".zip"
 export async function backupDatabase(name: string) {
   log.info("backing up database")
   const fileKey = `data/backup/${timestampFormated()}_${name}`
-  const command = `pg_dump --dbname lexico --format c --compress 9 > "${fileKey}${backupFileNameExtension}"`
-  return await execute(command, "backed up database")
+  const command =
+    `PGPASSWORD="${DB_PASSWORD}" ` +
+    `pg_dump ` +
+    `--host ${DB_HOST} ` +
+    `--port ${DB_PORT} ` +
+    `--username ${DB_USERNAME} ` +
+    `--dbname ${DB_DATABASE} ` +
+    `--format c ` +
+    `--compress 9 ` +
+    `> "${fileKey}${backupFileNameExtension}"`
+  await execute(command)
+  log.info("backed up database")
 }
 
 export async function restoreDatabase(backupName: string) {
   log.info("restoring database")
   const fileKey = `data/backup/${backupName}`
-  const command = `pg_restore --dbname lexico --format c --clean "${fileKey}${backupFileNameExtension}"`
-  return await execute(command, "restored database")
+  const command =
+    `PGPASSWORD="${DB_PASSWORD}" ` +
+    `pg_restore ` +
+    `--host ${DB_HOST} ` +
+    `--port ${DB_PORT} ` +
+    `--username ${DB_USERNAME} ` +
+    `--dbname ${DB_DATABASE} ` +
+    `--format c ` +
+    `--clean ` +
+    `"${fileKey}${backupFileNameExtension}"`
+  await execute(command)
+  log.info("restored database")
 }
 
-async function execute(command: string, successMessage: string) {
-  log.info(command)
+async function execute(command: string) {
   return await new Promise((resolve, reject) => {
     exec(command, (error) => {
       if (error) {
         log.error(error.message)
         reject(error)
-      } else {
-        log.info(successMessage)
-        resolve(successMessage)
-      }
+      } else resolve(true)
     })
   })
 }

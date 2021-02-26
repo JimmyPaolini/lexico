@@ -15,8 +15,7 @@ import {
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord"
-import { GetStaticProps } from "next"
+import { FiberManualRecord } from "@material-ui/icons"
 import Image from "next/image"
 import React, { useState } from "react"
 import CardHeader from "../components/accessories/CardHeader"
@@ -30,7 +29,7 @@ const upcomingFeatures = [
   // "Ελληνικά (Greek) translation and literature!",
 ]
 
-const dataCollection = ["User logins; literature views; word searches"]
+const dataCollection = ["Word searches, literature views, user logins"]
 
 export default function About() {
   const classes = useStyles()
@@ -101,7 +100,7 @@ export default function About() {
             {upcomingFeatures.map((text, i) => (
               <ListItem key={i} style={{ padding: 0 }}>
                 <ListItemIcon>
-                  <FiberManualRecordIcon fontSize="small" />
+                  <FiberManualRecord fontSize="small" />
                 </ListItemIcon>
                 <ListItemText>
                   <Typography variant="body2" className={classes.bullet}>
@@ -118,7 +117,7 @@ export default function About() {
             {dataCollection.map((text, i) => (
               <ListItem key={i} style={{ padding: 0 }}>
                 <ListItemIcon>
-                  <FiberManualRecordIcon fontSize="small" />
+                  <FiberManualRecord fontSize="small" />
                 </ListItemIcon>
                 <ListItemText>
                   <Typography variant="body2" className={classes.bullet}>
@@ -129,19 +128,13 @@ export default function About() {
             ))}
           </List>
           <Divider className={classes.divider} />
-          <Box display="flex" justifyContent="center">
+          <Grid container justify="center">
             <Typography variant="h6">Omnia mūtantur, nihil īnterit</Typography>
-          </Box>
+          </Grid>
         </Card>
       </Fade>
     </Grid>
   )
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {},
-  }
 }
 
 const tools = [

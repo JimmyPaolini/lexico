@@ -41,7 +41,8 @@ async function main() {
     },
   } as { [key: string]: () => any }
 
-  if (!(command in Object.keys(commandMap))) throw new Error("unknown command")
+  if (!(command in commandMap)) throw new Error("unknown command")
   await commandMap[command]()
+  return
 }
 main()

@@ -1,8 +1,4 @@
-import {
-  CssBaseline,
-  ServerStyleSheets,
-  ThemeProvider,
-} from "@material-ui/core"
+import { CssBaseline, ThemeProvider } from "@material-ui/core"
 import { GraphQLClient } from "graphql-request"
 import type { AppProps } from "next/app"
 import React, { useEffect } from "react"
@@ -16,13 +12,12 @@ export const endpoint = "http://localhost:3001/graphql"
 export const graphQLClient = new GraphQLClient(endpoint, {
   credentials: "include",
   mode: "cors",
+  keepalive: true,
 })
 
 export const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppProps) {
-  const sheets = new ServerStyleSheets()
-  sheets
   useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side")
     if (jssStyles) jssStyles.parentElement!.removeChild(jssStyles)
@@ -30,10 +25,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ContextProvider>
+            <CssBaseline />
             <Layout>
               <Component {...pageProps} />
             </Layout>

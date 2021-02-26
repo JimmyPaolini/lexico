@@ -1,6 +1,6 @@
 import { Box, CardHeader, IconButton, useMediaQuery } from "@material-ui/core"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
-import { Bookmark, Menu } from "@material-ui/icons"
+import { Menu } from "@material-ui/icons"
 import React, { useContext } from "react"
 import Text from "../../../../server/src/entity/literature/Text"
 import { romanNumeralize } from "../../utils/romanNumeral"
@@ -53,8 +53,12 @@ export default function ReaderText({ text, openModal }: Props) {
           </IconButton>
         }
         action={
-          <IconButton onClick={() => null} aria-label="bookmark">
-            <Bookmark />
+          <IconButton
+            onClick={() => null}
+            aria-label="empty space"
+            className={classes.hiddenAction}
+          >
+            <Menu />
           </IconButton>
         }
         classes={{ action: classes.shownAction }}

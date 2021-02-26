@@ -6,6 +6,8 @@ services:
       - 5432:5432
     networks:
       - lexico
+    volumes:
+      - database_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: ${DB_DATABASE}
       POSTGRES_USER: ${DB_USERNAME}
@@ -42,6 +44,8 @@ services:
 
 volumes:
   elasticsearch_data:
+    driver: local
+  database_data:
     driver: local
 
 networks:

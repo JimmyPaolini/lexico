@@ -5,6 +5,7 @@ import ingestEntryWord from "./dictionary/ingestEntry"
 import { ingestEntryWords } from "./dictionary/ingestEntryWords"
 import ingestTranslationReferences from "./dictionary/ingestTranslationReferences"
 import ingestWords from "./dictionary/ingestWords"
+import ingestLiterature from "./literature/ingestLiterature"
 import { connectDatabase } from "./utils/database"
 import { escapeCapitals } from "./utils/string"
 import ingestWiktionary from "./wiktionary/ingestWiktionary"
@@ -32,9 +33,11 @@ async function main() {
       const entries = await Entries.find({ word })
       for (const entry of entries) await ingestEntryWords(entry)
     },
+    literature: () => ingestLiterature(),
   } as { [key: string]: () => any }
 
-  if (!(command in Object.keys(commandMap))) throw new Error("unknown command")
+  if (!(command in commandMap)) throw new Error("unknown command")
   await commandMap[command]()
+  return
 }
 main()

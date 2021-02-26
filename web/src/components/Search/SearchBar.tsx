@@ -8,7 +8,7 @@ import MenuIcon from "@material-ui/icons/Menu"
 import SearchIcon from "@material-ui/icons/Search"
 import React, { Dispatch, SetStateAction, useContext, useRef } from "react"
 import { pascalCase } from "../../utils/string"
-import useEventListener from "../../utils/useEventListener"
+import useEventListener from "../../hooks/useEventListener"
 import { Context } from "../Context"
 
 interface Props {

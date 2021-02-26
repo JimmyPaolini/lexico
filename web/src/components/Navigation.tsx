@@ -13,14 +13,13 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import {
   AccountBalance,
+  AccountCircle,
   Bookmark,
   ChevronLeft,
-  Create,
   Inbox,
   Menu,
   MenuBook,
   Search,
-  Settings,
 } from "@material-ui/icons"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -142,16 +141,16 @@ const pages = [
     icon: <MenuBook />,
     keybind: "l",
   },
-  {
-    Name: "Grammar",
-    name: "grammar",
-    icon: <Create />,
-    keybind: "g",
-  },
+  // {
+  //   Name: "Grammar",
+  //   name: "grammar",
+  //   icon: <Create />,
+  //   keybind: "g",
+  // },
   {
     Name: "Settings",
     name: "settings",
-    icon: <Settings />,
+    icon: <AccountCircle />,
     keybind: "s",
   },
   {

@@ -1,0 +1,7 @@
+query Facebook($code: String!) {
+  facebook(code: $code) {
+    id
+    email
+    facebookId
+  }
+}

@@ -11,7 +11,7 @@ import Entry from "../entity/dictionary/Entry"
 import Line from "../entity/literature/Line"
 import Settings, { SettingsInput } from "../entity/user/Settings"
 import User from "../entity/user/User"
-import { Authenticate } from "../utils/authentication"
+import { Authenticate } from "../auth/authentication"
 import { ResolverContext } from "../utils/ResolverContext"
 
 @Resolver(User)

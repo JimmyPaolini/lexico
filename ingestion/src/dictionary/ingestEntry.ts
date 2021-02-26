@@ -48,7 +48,7 @@ async function ingestEntry(
 
   const entry = await Entries.save({
     word,
-    wikid: word + "-" + i,
+    wikid: word + ":" + i,
     partOfSpeech: Ingester.getPartOfSpeech($, elt),
   })
   try {
