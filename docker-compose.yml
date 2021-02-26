@@ -1,4 +1,17 @@
 services:
+  server:
+    build: ./server
+    container_name: server
+    ports:
+      - 3001:3001
+    networks:
+      - lexico
+    links:
+      - database:database
+    depends_on:
+      - elasticsearch
+      - database
+
   database:
     image: postgres
     container_name: database
@@ -41,6 +54,8 @@ services:
     environment:
       ELASTICSEARCH_URL: http://elasticsearch:9200
       ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+    depends_on:
+      - elasticsearch
 
 volumes:
   elasticsearch_data:
