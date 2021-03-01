@@ -1,9 +1,9 @@
 import { getConnection } from "typeorm"
-import Entry from "../../../server/src/entity/dictionary/Entry"
-import Word from "../../../server/src/entity/dictionary/Word"
+import Entry from "../../../entity/dictionary/Entry"
+import Word from "../../../entity/dictionary/Word"
 import { flattenForms } from "../utils/forms"
-import logger from "../utils/log"
-import { escapeCapitals, normalize } from "../utils/string"
+import logger from "../../../utils/log"
+import { escapeCapitals, normalize } from "../../../utils/string"
 
 const log = logger.getChildLogger()
 

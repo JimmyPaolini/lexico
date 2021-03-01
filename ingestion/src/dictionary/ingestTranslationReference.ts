@@ -1,7 +1,7 @@
 import { getConnection } from "typeorm"
-import Entry from "../../../server/src/entity/dictionary/Entry"
-import Translation from "../../../server/src/entity/dictionary/Translation"
-import { escapeCapitals } from "../utils/string"
+import Entry from "../../../entity/dictionary/Entry"
+import Translation from "../../../entity/dictionary/Translation"
+import { escapeCapitals } from "../../../utils/string"
 
 export async function ingestTranslationReference(translation: Translation) {
   const Translations = getConnection().getRepository(Translation)

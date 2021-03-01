@@ -1,8 +1,8 @@
 import fs from "fs-extra"
 import { getConnection } from "typeorm"
-import Line from "../../../server/src/entity/literature/Line"
-import Text from "../../../server/src/entity/literature/Text"
-import logger from "../utils/log"
+import Line from "../../../entity/literature/Line"
+import Text from "../../../entity/literature/Text"
+import logger from "../../../utils/log"
 
 const log = logger.getChildLogger()
 

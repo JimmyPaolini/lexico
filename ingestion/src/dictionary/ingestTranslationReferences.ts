@@ -1,6 +1,6 @@
 import { FindManyOptions, getConnection, Like } from "typeorm"
-import Translation from "../../../server/src/entity/dictionary/Translation"
-import logger from "../utils/log"
+import Translation from "../../../entity/dictionary/Translation"
+import logger from "../../../utils/log"
 import { ingestTranslationReference } from "./ingestTranslationReference"
 
 const log = logger.getChildLogger()

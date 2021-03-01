@@ -1,5 +1,5 @@
-import Translation from "../../../../server/src/entity/dictionary/Translation"
-import { capitalizeFirstLetter } from "../../utils/string"
+import Translation from "../../../../entity/dictionary/Translation"
+import { capitalizeFirstLetter } from "../../../../utils/string"
 import Ingester from "../Ingester"
 
 export default function parseEtymology(

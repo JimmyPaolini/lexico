@@ -31,10 +31,12 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "exclude": ["node_modules"],
+  "exclude": ["../ingestion", "../server", "**/node_modules", "**/dist"],
   "include": [
-    "./src/**/*.tsx",
     "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "../**/*.ts",
+    "../**/*.tsx",
     "./src/**/*.graphql",
     "./src/**/*.gql"
   ]

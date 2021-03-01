@@ -1,6 +1,6 @@
 import { Grid, Typography } from "@material-ui/core"
 import React, { useEffect, useMemo, useState } from "react"
-import Entry from "../../../server/src/entity/dictionary/Entry"
+import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
 import Home from "../components/search/Home"

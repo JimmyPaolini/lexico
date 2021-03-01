@@ -1,6 +1,6 @@
 import fs from "fs-extra"
 import { getConnection } from "typeorm"
-import Author from "../../../server/src/entity/literature/Author"
+import Author from "../../../entity/literature/Author"
 import ingestBook from "./ingestBook"
 import ingestText from "./ingestText"
 import { authorNameToFullname } from "./literatureMaps"

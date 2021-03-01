@@ -1,21 +1,19 @@
 import elasticsearch from "elasticsearch"
 import { Logger } from "tslog"
 
-const logger = new Logger({
-  name: "ingestion",
-  displayFunctionName: false,
-  minLevel: "info",
-})
+const logger = new Logger({ displayFunctionName: false })
 
 const es = new elasticsearch.Client({
-  host: "localhost:9200",
+  host: "elasticsearch:9200",
   keepAlive: true,
+  maxRetries: 5,
+  pingTimeout: 1000,
 })
 
 function logToELK(logObject: any) {
-  es.index({ index: "lexico", type: "_doc", body: logObject }).catch((err) => {
-    console.log("error logging to elasticsearch")
-    logger.debug(err)
+  es.index({ index: "lexico", type: "_doc", body: logObject }).catch(() => {
+    // console.log("error logging to elasticsearch")
+    // logger.debug(err)
   })
 }
 

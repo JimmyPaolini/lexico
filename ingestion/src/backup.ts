@@ -1,11 +1,11 @@
 import { readdirSync } from "fs"
+import { connectDatabase } from "../../utils/database"
 import {
   backupDatabase,
   backupFileNameExtension,
-  connectDatabase,
   restoreDatabase,
-} from "./utils/database"
-import logger from "./utils/log"
+} from "./utils/backup"
+import logger from "../../utils/log"
 
 const log = logger.getChildLogger()
 

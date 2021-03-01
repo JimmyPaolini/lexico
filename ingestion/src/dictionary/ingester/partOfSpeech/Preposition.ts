@@ -1,7 +1,7 @@
 import PrepositionInflection, {
   PrepositionCase,
   prepositionCaseRegex,
-} from "../../../../../server/src/entity/dictionary/word/inflection/PrepositionInflection"
+} from "../../../../../entity/dictionary/word/inflection/PrepositionInflection"
 import Ingester from "../../Ingester"
 
 export default class Preposition extends Ingester {

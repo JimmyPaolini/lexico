@@ -2,8 +2,8 @@ import axios from "axios"
 import cheerio from "cheerio"
 import fs from "fs"
 import fp from "path"
-import logger from "../utils/log"
-import { escapeCapitals } from "../utils/string"
+import logger from "../../../utils/log"
+import { escapeCapitals } from "../../../utils/string"
 const putItemHtml = (entry: any) =>
   fs.writeFileSync(
     fp.join(

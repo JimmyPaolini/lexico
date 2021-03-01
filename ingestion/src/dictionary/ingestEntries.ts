@@ -1,6 +1,6 @@
 import fs from "fs"
 import path from "path"
-import { getFirstLetter } from "../utils/string"
+import { getFirstLetter } from "../../../utils/string"
 import ingestEntryWord from "./ingestEntry"
 
 export default async function ingestEntries() {

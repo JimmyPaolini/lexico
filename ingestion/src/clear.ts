@@ -1,13 +1,13 @@
 import { getConnection } from "typeorm"
-import Entry from "../../server/src/entity/dictionary/Entry"
-import Translation from "../../server/src/entity/dictionary/Translation"
-import Word from "../../server/src/entity/dictionary/Word"
-import Author from "../../server/src/entity/literature/Author"
-import Book from "../../server/src/entity/literature/Book"
-import Line from "../../server/src/entity/literature/Line"
-import Text from "../../server/src/entity/literature/Text"
-import User from "../../server/src/entity/user/User"
-import { connectDatabase } from "./utils/database"
+import Entry from "../../entity/dictionary/Entry"
+import Translation from "../../entity/dictionary/Translation"
+import Word from "../../entity/dictionary/Word"
+import Author from "../../entity/literature/Author"
+import Book from "../../entity/literature/Book"
+import Line from "../../entity/literature/Line"
+import Text from "../../entity/literature/Text"
+import User from "../../entity/user/User"
+import { connectDatabase } from "../../utils/database"
 
 async function main() {
   const command = process.argv[2]

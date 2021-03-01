@@ -5,7 +5,7 @@ import {
   SetStateAction,
   useState,
 } from "react"
-import User from "../../../server/src/entity/user/User"
+import User from "../../../entity/user/User"
 import useUser from "../hooks/authentication/useUser"
 
 export const Context = createContext({} as { [key: string]: any })

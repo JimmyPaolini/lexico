@@ -1,8 +1,8 @@
 import { sign, verify } from "jsonwebtoken"
 import { MiddlewareFn } from "type-graphql"
 import { getConnection } from "typeorm"
-import { JWT_SECRET } from "../config.json"
-import User from "../entity/user/User"
+import { JWT_SECRET } from "../../../config.json"
+import User from "../../../entity/user/User"
 import { ResolverContext } from "../utils/ResolverContext"
 
 export function createAccessToken(user: User) {

@@ -1,13 +1,13 @@
 import { getConnection } from "typeorm"
-import Entry from "../../server/src/entity/dictionary/Entry"
+import Entry from "../../entity/dictionary/Entry"
+import { connectDatabase } from "../../utils/database"
+import { escapeCapitals } from "../../utils/string"
 import ingestEntries from "./dictionary/ingestEntries"
 import ingestEntryWord from "./dictionary/ingestEntry"
 import { ingestEntryWords } from "./dictionary/ingestEntryWords"
 import ingestTranslationReferences from "./dictionary/ingestTranslationReferences"
 import ingestWords from "./dictionary/ingestWords"
 import ingestLiterature from "./literature/ingestLiterature"
-import { connectDatabase } from "./utils/database"
-import { escapeCapitals } from "./utils/string"
 import ingestWiktionary from "./wiktionary/ingestWiktionary"
 
 async function main() {

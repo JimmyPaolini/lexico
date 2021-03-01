@@ -7,9 +7,9 @@ COPY tsconfig.json ./
 RUN apk add npm
 RUN npm install
 
-COPY ../ .
-WORKDIR /code/server
-RUN npm run tsc
+COPY . .
+RUN yarn tsc
+RUN yarn build
 
-EXPOSE 3001
+EXPOSE 3000
 CMD yarn start

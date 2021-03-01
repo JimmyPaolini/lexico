@@ -1,4 +1,4 @@
-import Uninflected from "../../../../../server/src/entity/dictionary/word/inflection/Uninflected"
+import Uninflected from "../../../../../entity/dictionary/word/inflection/Uninflected"
 import Ingester from "../../Ingester"
 
 export default class Conjunction extends Ingester {

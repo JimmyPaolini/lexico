@@ -1,15 +1,14 @@
 import { Arg, Ctx, Query, Resolver, UseMiddleware } from "type-graphql"
 import { getConnection, Like } from "typeorm"
+import Entry from "../../../entity/dictionary/Entry"
+import Translation from "../../../entity/dictionary/Translation"
+import Word from "../../../entity/dictionary/Word"
+import VerbForms from "../../../entity/dictionary/word/forms/VerbForms"
+import { getMacronOptionRegex } from "../../../utils/string"
 import { GetBookmarks } from "../auth/authentication"
-import Entry from "../entity/dictionary/Entry"
-import Translation from "../entity/dictionary/Translation"
-import Word from "../entity/dictionary/Word"
-import VerbForms from "../entity/dictionary/word/forms/VerbForms"
-import { ingestWords } from "../ingestion/dictionary/ingestWord"
 import { camelCaseFuturePerfect, identifyWord } from "../utils/forms"
-import logger from "../utils/log"
+import logger from "../../../utils/log"
 import { ResolverContext } from "../utils/ResolverContext"
-import { getMacronOptionRegex } from "../utils/string"
 
 const log = logger.getChildLogger()
 
@@ -113,8 +112,6 @@ export default class DictionaryResolver {
 
   @Query(() => Boolean)
   async script() {
-    const porrigo = await this.Entries.findOneOrFail("325306")
-    await ingestWords(porrigo)
     return true
   }
 }

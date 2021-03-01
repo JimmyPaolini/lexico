@@ -1,7 +1,7 @@
 import { Grid } from "@material-ui/core"
 import { GetServerSideProps } from "next"
 import React, { useMemo, useState } from "react"
-import Entry from "../../../server/src/entity/dictionary/Entry"
+import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
 import SearchBar from "../components/search/SearchBar"

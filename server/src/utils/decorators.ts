@@ -1,4 +1,4 @@
-import logger from "./log"
+import logger from "../../../utils/log"
 
 const log = logger.getChildLogger()
 

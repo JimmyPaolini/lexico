@@ -1,7 +1,7 @@
 import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
-import Entry from "../../../../server/src/entity/dictionary/Entry"
-import { Forms } from "../../../../server/src/entity/dictionary/word/Forms"
+import Entry from "../../../../entity/dictionary/Entry"
+import { Forms } from "../../../../entity/dictionary/word/Forms"
 import { isCase, isGender, isNumber } from "../../utils/forms"
 
 // const log = logger.getChildLogger()

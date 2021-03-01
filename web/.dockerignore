@@ -2,6 +2,8 @@
 **/.vscode
 **/node_modules
 **/dist
+yarn.lock
+*.log
 
 # next.js
 /.next/

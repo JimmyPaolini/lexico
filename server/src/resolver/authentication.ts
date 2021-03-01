@@ -8,6 +8,8 @@ import {
   UseMiddleware,
 } from "type-graphql"
 import { getConnection, IsNull } from "typeorm"
+import User from "../../../entity/user/User"
+import { validateEmail, validatePassword } from "../../../utils/string"
 import {
   Authenticate,
   createAccessToken,
@@ -15,10 +17,8 @@ import {
 } from "../auth/authentication"
 import fetchFacebookUser from "../auth/facebook"
 import fetchGoogleUser from "../auth/google"
-import User from "../entity/user/User"
-import logger from "../utils/log"
+import logger from "../../../utils/log"
 import { ResolverContext } from "../utils/ResolverContext"
-import { validateEmail, validatePassword } from "../utils/string"
 
 const log = logger.getChildLogger()
 

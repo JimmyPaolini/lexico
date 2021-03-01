@@ -1,24 +1,20 @@
 services:
-  server:
-    build: ./server
-    container_name: server
-    ports:
-      - 3001:3001
-    networks:
-      - lexico
-    links:
-      - database:database
-    depends_on:
-      - elasticsearch
-      - database
+  # server:
+  #   build: ./server
+  #   # container_name: server
+  #   ports:
+  #     - 3001:3001
+  #   depends_on:
+  #     - elasticsearch
+  #     - database
 
   database:
     image: postgres
-    container_name: database
+    # container_name: database
     ports:
       - 5432:5432
-    networks:
-      - lexico
+    # networks:
+    #   - lexico
     volumes:
       - database_data:/var/lib/postgresql/data
     environment:
@@ -28,11 +24,11 @@ services:
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.11.1
-    container_name: elasticsearch
+    # container_name: elasticsearch
     ports:
       - 9200:9200
-    networks:
-      - lexico
+    # networks:
+    #   - lexico
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     environment:
@@ -46,11 +42,11 @@ services:
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.11.1
-    container_name: kibana
+    # container_name: kibana
     ports:
       - 5601:5601
-    networks:
-      - lexico
+    # networks:
+    #   - lexico
     environment:
       ELASTICSEARCH_URL: http://elasticsearch:9200
       ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
@@ -62,7 +58,6 @@ volumes:
     driver: local
   database_data:
     driver: local
-
-networks:
-  lexico:
-    driver: bridge
+# networks:
+#   lexico:
+#     driver: bridge

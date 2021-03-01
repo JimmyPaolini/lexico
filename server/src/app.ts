@@ -4,13 +4,14 @@ import cors from "cors"
 import express from "express"
 import "reflect-metadata"
 import { buildSchema } from "type-graphql"
-import { PORT } from "./config.json"
+import { PORT } from "../../config.json"
+import { connectDatabase } from "../../utils/database"
+import logger from "../../utils/log"
 import AuthenticationResolver from "./resolver/authentication"
 import DictionaryResolver from "./resolver/dictionary"
 import LiteratureResolver from "./resolver/literature"
 import UserResolver from "./resolver/user"
-import { connectDatabase, createDbViews } from "./utils/database"
-import logger from "./utils/log"
+import { createDbViews } from "./utils/database"
 
 const log = logger.getChildLogger()
 

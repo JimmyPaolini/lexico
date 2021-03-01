@@ -3,8 +3,8 @@ import NounInflection, {
   NounDeclension,
   nounDeclensionRegex,
   NounGender,
-} from "../../../../../server/src/entity/dictionary/word/inflection/NounInflection"
-import Uninflected from "../../../../../server/src/entity/dictionary/word/inflection/Uninflected"
+} from "../../../../../entity/dictionary/word/inflection/NounInflection"
+import Uninflected from "../../../../../entity/dictionary/word/inflection/Uninflected"
 import Ingester from "../../Ingester"
 
 export default class Noun extends Ingester {

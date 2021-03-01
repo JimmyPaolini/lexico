@@ -8,7 +8,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import { FiberManualRecord } from "@material-ui/icons"
 import React, { useState } from "react"
-import Translation from "../../../../server/src/entity/dictionary/Translation"
+import Translation from "../../../../entity/dictionary/Translation"
 import useEventListener from "../../hooks/useEventListener"
 import ExpandIcon from "../accessories/ExpandIcon"
 
