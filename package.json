@@ -3,10 +3,14 @@
     "start": "docker-compose up",
     "stop": "docker-compose down",
     "build": "docker-compose build",
-    "build-server": "docker build -f server/Dockerfile -t jimmypaolini/lexico-server .",
-    "build-web": "docker build -f web/Dockerfile -t jimmypaolini/lexico-web ."
+    "build-web": "DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile -t jimmypaolini/lexico-web .",
+    "build-server": "DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile -t jimmypaolini/lexico-server .",
+    "build-database": "docker image pull postgres",
+    "build-kibana": "docker image pull docker.elastic.co/kibana/kibana:7.11.1",
+    "build-elasticsearch": "docker image pull docker.elastic.co/elasticsearch/elasticsearch:7.11.1"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "elasticsearch": "^16.7.2",
     "tslog": "^3.1.1",
     "type-graphql": "^1.1.1",
@@ -14,6 +18,8 @@
   },
   "devDependencies": {
     "@types/elasticsearch": "^5.0.37",
+    "@types/node": "^14.14.11",
+    "class-validator": "^0.12.2",
     "eslint": "^7.21.0",
     "prettier": "^2.2.1",
     "typescript": "^4.2.2"

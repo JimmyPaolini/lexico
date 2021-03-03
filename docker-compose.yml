@@ -14,12 +14,15 @@ services:
     ports:
       - 3001:3001
     depends_on:
-      elasticsearch:
-        condition: service_healthy
       database:
+        condition: service_healthy
+      elasticsearch:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl --silent --fail server:3001/graphql"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   database:
     image: postgres
@@ -29,13 +32,13 @@ services:
     volumes:
       - ./database_volume:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME}"]
-      interval: 5s
-      timeout: 1s
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
       retries: 5
 
   kibana:
@@ -43,9 +46,6 @@ services:
     container_name: kibana
     ports:
       - 5601:5601
-    environment:
-      ELASTICSEARCH_URL: http://elasticsearch:9200
-      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
     depends_on:
       elasticsearch:
         condition: service_healthy
@@ -68,7 +68,7 @@ services:
           "curl --silent --fail elasticsearch:9200/_cluster/health || exit 1",
         ]
       interval: 10s
-      timeout: 1s
+      timeout: 5s
       retries: 5
     ulimits:
       memlock:

@@ -1,12 +1,15 @@
 **/.DS_Store
 **/.vscode
+**/.gitignore
+
 **/node_modules
 **/dist
+
 **/database_volume
 **/elasticsearch_volume
-**/ingestion
-**/server
 
-# next.js
-/.next/
-/out/
+**/ingestion
+**/web
+
+**/*Dockerfile
+**/*.dockerignore

@@ -3,7 +3,7 @@
 **/.idea
 **/node_modules
 **/dist
-**/config.json
+**/.env
 
 # next.js
 **/.next/

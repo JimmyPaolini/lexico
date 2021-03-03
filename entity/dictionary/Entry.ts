@@ -1,11 +1,5 @@
 import { Field, ID, ObjectType } from "type-graphql"
-import {
-  Column,
-  Entity,
-  ManyToMany,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm"
+import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from "typeorm"
 import User from "../user/User"
 import Translation from "./Translation"
 import Word from "./Word"
@@ -18,13 +12,9 @@ import { Pronunciation } from "./word/Pronunciation"
 @Entity()
 @ObjectType()
 export default class Entry {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn("varchar", { length: 127 })
   @Field(() => ID)
   id: string
-
-  @Column("varchar", { length: 127 })
-  @Field()
-  wikid: string
 
   @Column("varchar", { length: 127 })
   @Field()

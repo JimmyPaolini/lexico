@@ -35,8 +35,8 @@
     "../server",
     "**/node_modules",
     "**/dist",
-    "**/database_data",
-    "**/elasticsearch_data"
+    "**/database_volume",
+    "**/elasticsearch_volume"
   ],
   "include": [
     "./src/**/*.ts",

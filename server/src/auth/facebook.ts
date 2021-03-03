@@ -1,5 +1,5 @@
 import axios from "axios"
-import { FACEBOOK_ID, FACEBOOK_SECRET } from "../../../config.json"
+import { FACEBOOK_ID, FACEBOOK_SECRET } from "../../../utils/env"
 import logger from "../../../utils/log"
 
 const log = logger.getChildLogger()

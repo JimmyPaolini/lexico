@@ -1,5 +1,5 @@
 import axios from "axios"
-import { GOOGLE_ID, GOOGLE_SECRET } from "../../../config.json"
+import { GOOGLE_ID, GOOGLE_SECRET } from "../../../utils/env"
 import logger from "../../../utils/log"
 
 const log = logger.getChildLogger()

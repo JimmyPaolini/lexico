@@ -47,8 +47,8 @@ async function ingestEntry(
   const Translations = getConnection().getRepository(Translation)
 
   const entry = await Entries.save({
+    id: word + ":" + i,
     word,
-    wikid: word + ":" + i,
     partOfSpeech: Ingester.getPartOfSpeech($, elt),
   })
   try {

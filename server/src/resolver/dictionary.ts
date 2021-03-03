@@ -69,7 +69,7 @@ export default class DictionaryResolver {
       })
     log.info(
       "searchLatin res:",
-      entries.map(({ id, wikid }) => ({ id, wikid })),
+      entries.map(({ id }) => ({ id })),
     )
     if (!!word && !entries.length) throw new Error("word has no entries")
     if (!entries.length) throw new Error("not found")
@@ -87,7 +87,7 @@ export default class DictionaryResolver {
     const entries = translations.map((t) => t.entry)
     log.info(
       "searchEnglish res:",
-      entries.map(({ id, wikid }) => ({ id, wikid })),
+      entries.map(({ id }) => ({ id })),
     )
     if (!entries.length) throw new Error("not found")
     return entries

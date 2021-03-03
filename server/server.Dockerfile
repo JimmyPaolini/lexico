@@ -1,6 +1,10 @@
 # context must be one folder level up
-FROM node:14-alpine
-RUN apk add npm
+FROM node:15-alpine
+RUN apk add --update nodejs npm
+
+WORKDIR /code
+COPY package*.json ./
+RUN npm install
 
 WORKDIR /code/server
 COPY server/package*.json ./
@@ -10,4 +14,4 @@ COPY . ../
 RUN npm run tsc
 
 EXPOSE 3001
-CMD yarn start
+CMD npm run start

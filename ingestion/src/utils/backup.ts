@@ -1,5 +1,5 @@
 import { exec } from "child_process"
-import { DB_DATABASE, DB_USERNAME } from "../../../config.json"
+import { DB_DATABASE, DB_USERNAME } from "../../../utils/env"
 import logger from "../../../utils/log"
 import { timestampFormated } from "../../../utils/string"
 const log = logger.getChildLogger()
