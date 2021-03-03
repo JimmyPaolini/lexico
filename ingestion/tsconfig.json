@@ -23,6 +23,13 @@
     "resolveJsonModule": true,
     "baseUrl": "."
   },
-  "exclude": ["../server", "../web", "**/node_modules", "**/dist"],
+  "exclude": [
+    "../server",
+    "../web",
+    "**/node_modules",
+    "**/dist",
+    "**/database_data",
+    "**/elasticsearch_data"
+  ],
   "include": ["../**/*.ts", "../**/*.tsx"]
 }

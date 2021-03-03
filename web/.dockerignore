@@ -2,8 +2,10 @@
 **/.vscode
 **/node_modules
 **/dist
-yarn.lock
-*.log
+**/database_volume
+**/elasticsearch_volume
+**/ingestion
+**/server
 
 # next.js
 /.next/

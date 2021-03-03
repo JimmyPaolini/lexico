@@ -22,7 +22,6 @@ interface Props {
 export function ContextProvider({ children }: Props) {
   const [isNavOpen, setNavOpen] = useState(false)
   const { data: user } = useUser()
-  console.log("refetched user:", user)
 
   const context = { user, isNavOpen, setNavOpen } as ReactContext
   return <Context.Provider value={context}>{children}</Context.Provider>

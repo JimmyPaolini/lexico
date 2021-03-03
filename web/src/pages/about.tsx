@@ -82,7 +82,7 @@ export default function About() {
                     onClick={(e: any) => e.stopPropagation()}
                   >
                     <Image
-                      src={`/icon/${tool.name}.png`}
+                      src={`/icon/${tool.name}.svg`}
                       alt={tool.name}
                       width={128}
                       height={128}
@@ -158,6 +158,11 @@ const tools = [
   { name: "figma", url: "https://www.figma.com/" },
   { name: "vscode", url: "https://code.visualstudio.com/" },
   { name: "github", url: "https://github.com/" },
+  { name: "eslint", url: "https://eslint.org/" },
+  { name: "docker", url: "https://www.docker.com/" },
+  { name: "kubernetes", url: "https://kubernetes.io/" },
+  { name: "linode", url: "https://www.linode.com/" },
+  { name: "cloudflare", url: "https://www.cloudflare.com/" },
 ]
 
 const useStyles = makeStyles((theme: any) => ({

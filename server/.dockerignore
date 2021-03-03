@@ -1,8 +1,8 @@
 **/.DS_Store
 **/.vscode
-**/.idea
 **/node_modules
 **/dist
-*.log
-**/web
+**/database_volume
+**/elasticsearch_volume
 **/ingestion
+**/web

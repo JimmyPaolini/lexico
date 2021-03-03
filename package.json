@@ -1,5 +1,11 @@
 {
-  "scripts": {},
+  "scripts": {
+    "start": "docker-compose up",
+    "stop": "docker-compose down",
+    "build": "docker-compose build",
+    "build-server": "docker build -f server/Dockerfile -t jimmypaolini/lexico-server .",
+    "build-web": "docker build -f web/Dockerfile -t jimmypaolini/lexico-web ."
+  },
   "dependencies": {
     "elasticsearch": "^16.7.2",
     "tslog": "^3.1.1",

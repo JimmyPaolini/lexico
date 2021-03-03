@@ -27,11 +27,17 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "noEmit": true,
     "skipLibCheck": true,
     "strict": true
   },
-  "exclude": ["../ingestion", "../server", "**/node_modules", "**/dist"],
+  "exclude": [
+    "../ingestion",
+    "../server",
+    "**/node_modules",
+    "**/dist",
+    "**/database_data",
+    "**/elasticsearch_data"
+  ],
   "include": [
     "./src/**/*.ts",
     "./src/**/*.tsx",

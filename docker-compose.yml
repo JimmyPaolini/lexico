@@ -1,63 +1,82 @@
 services:
-  # server:
-  #   build: ./server
-  #   # container_name: server
+  # web:
+  #   image: jimmypaolini/lexico-web
+  #   container_name: web
   #   ports:
-  #     - 3001:3001
+  #     - 3000:3000
   #   depends_on:
-  #     - elasticsearch
-  #     - database
+  #     server:
+  #       condition: service_healthy
+
+  server:
+    image: jimmypaolini/lexico-server
+    container_name: server
+    ports:
+      - 3001:3001
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail server:3001/graphql"]
 
   database:
     image: postgres
-    # container_name: database
+    container_name: database
     ports:
       - 5432:5432
-    # networks:
-    #   - lexico
     volumes:
-      - database_data:/var/lib/postgresql/data
+      - ./database_volume:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: ${DB_DATABASE}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME}"]
+      interval: 5s
+      timeout: 1s
+      retries: 5
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.11.1
+    container_name: kibana
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.11.1
-    # container_name: elasticsearch
+    container_name: elasticsearch
     ports:
       - 9200:9200
-    # networks:
-    #   - lexico
     volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
+      - ./elasticsearch_volume:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl --silent --fail elasticsearch:9200/_cluster/health || exit 1",
+        ]
+      interval: 10s
+      timeout: 1s
+      retries: 5
     ulimits:
       memlock:
         soft: -1
         hard: -1
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.11.1
-    # container_name: kibana
-    ports:
-      - 5601:5601
-    # networks:
-    #   - lexico
-    environment:
-      ELASTICSEARCH_URL: http://elasticsearch:9200
-      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
-    depends_on:
-      - elasticsearch
-
 volumes:
-  elasticsearch_data:
+  elasticsearch_volume:
     driver: local
-  database_data:
+  database_volume:
     driver: local
-# networks:
-#   lexico:
-#     driver: bridge

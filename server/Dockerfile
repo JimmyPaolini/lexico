@@ -1,14 +1,12 @@
+# context must be one folder level up
 FROM node:14-alpine
-WORKDIR /code
-
-COPY package*.json ./
-COPY tsconfig.json ./
-
 RUN apk add npm
+
+WORKDIR /code/server
+COPY server/package*.json ./
 RUN npm install
 
-COPY ../ .
-WORKDIR /code/server
+COPY . ../
 RUN npm run tsc
 
 EXPOSE 3001

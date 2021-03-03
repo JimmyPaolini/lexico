@@ -6,5 +6,11 @@
 **/config.json
 
 # next.js
-/.next/
-/out/
+**/.next/
+**/out/
+
+**/database_volume
+**/elasticsearch_volume
+
+**/data/wiktionary
+**/data/literature_original

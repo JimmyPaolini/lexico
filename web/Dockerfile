@@ -1,15 +1,13 @@
+# context must be one folder level up
 FROM node:14-alpine
-WORKDIR /code
-
-COPY package*.json ./
-COPY tsconfig.json ./
-
 RUN apk add npm
+
+WORKDIR /code/web
+COPY web/package*.json ./
 RUN npm install
 
-COPY . .
-RUN yarn tsc
-RUN yarn build
+COPY . ../
+RUN npm run build
 
 EXPOSE 3000
 CMD yarn start

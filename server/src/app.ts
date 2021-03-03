@@ -22,7 +22,7 @@ async function main() {
   const app = express()
   const corsOptions = {
     credentials: true,
-    origin: ["http://localhost:3000", "https://lexicolatin.com"],
+    // origin: ["http://localhost:3000", "https://lexicolatin.com"],
   }
   app.use(cors(corsOptions))
   app.use(cookieParser())
@@ -35,7 +35,7 @@ async function main() {
         AuthenticationResolver,
         UserResolver,
       ],
-      emitSchemaFile: "./src/schema.gql",
+      emitSchemaFile: "./server/src/schema.gql",
     }),
     context: ({ req, res }) => ({ req, res }),
   })
