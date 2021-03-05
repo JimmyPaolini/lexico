@@ -54,6 +54,10 @@ export function unescapeCapitals(str: string): string {
   return str.replace(/([A-Z])`/, "$1")
 }
 
+export function hasSuffix(str: string, suffix: string) {
+  return str.match(new RegExp(suffix + "$", "i"))
+}
+
 export function getMacronOptionRegex(str: string) {
   return str
     .replace(/a/g, "(a|ā)")

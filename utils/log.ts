@@ -4,11 +4,13 @@ import { ELASTICSEARCH_HOST } from "./env"
 
 const { combine, timestamp, colorize, printf } = format
 
+const ES_HOST =
+  process.env.NODE_ENV === "production" ? ELASTICSEARCH_HOST : "localhost"
 const elasticsearchTransport = new ElasticsearchTransport({
   level: "info",
   index: "lexico",
   clientOpts: {
-    node: `http://${ELASTICSEARCH_HOST}:9200`,
+    node: `http://${ES_HOST}:9200`,
   },
   transformer: ({ message, level, timestamp, meta }) => ({
     message,

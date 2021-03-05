@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
             href="icon/favicon-16x16.png"
           />
         </Head>
-        <body>
+        <body id="body">
           <noscript>You need to enable JavaScript to run this app.</noscript>
           <Main />
           <NextScript />

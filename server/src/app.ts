@@ -14,6 +14,8 @@ import UserResolver from "./resolver/user"
 import { createDbViews } from "./utils/database"
 
 async function main() {
+  if (process.env.NODE_ENV === "production")
+    log.info("environment is production")
   await connectDatabase()
   await createDbViews()
 
@@ -24,9 +26,7 @@ async function main() {
   }
   app.use(cors(corsOptions))
   app.use(cookieParser())
-  app.get("/", (_, res) => {
-    res.send("ok")
-  })
+  app.get("/", (_, res) => res.send("ok"))
 
   const server = new ApolloServer({
     schema: await buildSchema({

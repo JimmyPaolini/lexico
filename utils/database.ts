@@ -20,7 +20,7 @@ import log from "./log"
 export async function connectDatabase() {
   await createConnection({
     type: "postgres",
-    host: DB_HOST,
+    host: process.env.NODE_ENV === "production" ? DB_HOST : "localhost",
     port: parseInt(DB_PORT!),
     username: DB_USERNAME,
     password: DB_PASSWORD,

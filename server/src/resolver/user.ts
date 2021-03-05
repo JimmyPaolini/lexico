@@ -36,11 +36,13 @@ export default class UserResolver {
     const user = await this.Users.findOne(id, {
       relations: ["bookmarks"],
     })
-    if (!user!.bookmarks) throw new Error("user has no bookmarks")
-    return user!.bookmarks.map((entry) => {
-      entry.bookmarked = true
-      return entry
-    })
+    // if (!user!.bookmarks) throw new Error("user has no bookmarks")
+    return (
+      user!.bookmarks?.map((entry) => {
+        entry.bookmarked = true
+        return entry
+      }) || []
+    )
   }
 
   @Mutation(() => Boolean)

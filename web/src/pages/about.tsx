@@ -1,13 +1,8 @@
 import {
-  Box,
   Card,
-  CardActionArea,
-  CardHeader as CardHeaderMui,
-  Collapse,
   Divider,
   Grid,
   Grow,
-  Link,
   List,
   ListItem,
   ListItemIcon,
@@ -16,10 +11,10 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { FiberManualRecord } from "@material-ui/icons"
-import Image from "next/image"
-import React, { useState } from "react"
+import React from "react"
+import CommentBox from "../components/about/CommentBox"
+import ToolIconGrid from "../components/about/ToolIconGrid"
 import CardHeader from "../components/accessories/CardHeader"
-import ExpandIcon from "../components/accessories/ExpandIcon"
 
 const upcomingFeatures = [
   "Collaborations with Latinists/Classics Organizations (email me through the Suggestions page!)",
@@ -33,7 +28,6 @@ const dataCollection = ["Word searches, literature views, user logins"]
 
 export default function About() {
   const classes = useStyles()
-  const [expanded, setExpanded] = useState<boolean>(false)
 
   return (
     <Grid container justify="center" alignItems="center">
@@ -48,49 +42,9 @@ export default function About() {
             so long as people use it I’ll be striving to improve it.
           </Typography>
           <Divider className={classes.divider} />
-          <CardActionArea
-            onClick={() => setExpanded((expanded) => !expanded)}
-            disableRipple
-            disableTouchRipple
-            classes={{ focusHighlight: classes.hide }}
-          >
-            <CardHeaderMui
-              title="Software libraries and tools"
-              titleTypographyProps={{ variant: "body1" }}
-              className={classes.toolsHeader}
-              action={
-                <Box style={{ paddingTop: 8, paddingRight: 8 }}>
-                  <ExpandIcon {...{ expanded }} />
-                </Box>
-              }
-            />
-          </CardActionArea>
-          <Collapse in={expanded}>
-            <Grid container spacing={2} className={classes.toolGrid}>
-              {tools.map((tool) => (
-                <Grid
-                  item
-                  key={tool.name}
-                  className={classes.tool}
-                  container
-                  justify="center"
-                >
-                  <Link
-                    href={tool.url}
-                    target="_blank"
-                    onClick={(e: any) => e.stopPropagation()}
-                  >
-                    <Image
-                      src={`/icon/${tool.name}.png`}
-                      alt={tool.name}
-                      width={128}
-                      height={128}
-                    />
-                  </Link>
-                </Grid>
-              ))}
-            </Grid>
-          </Collapse>
+          <ToolIconGrid />
+          <Divider className={classes.divider} />
+          <CommentBox />
           <Divider className={classes.divider} />
           <Typography variant="subtitle1" className={classes.body}>
             Upcoming Features:
@@ -136,35 +90,6 @@ export default function About() {
   )
 }
 
-const tools = [
-  { name: "wikipedia", url: "https://www.wiktionary.org/" },
-  { name: "postgres", url: "https://www.postgresql.org/" },
-  { name: "nodejs", url: "https://nodejs.org/" },
-  { name: "typescript", url: "https://www.typescriptlang.org/" },
-  { name: "expressjs", url: "https://expressjs.com/" },
-  { name: "typeorm", url: "https://typeorm.io/" },
-  { name: "graphql", url: "https://graphql.org/" },
-  { name: "apollo", url: "https://www.apollographql.com/" },
-  { name: "type-graphql", url: "https://typegraphql.com/" },
-  { name: "elk", url: "https://www.elastic.co/" },
-  { name: "react", url: "https://reactjs.org/" },
-  { name: "nextjs", url: "https://nextjs.org/" },
-  { name: "jwt", url: "https://jwt.io/" },
-  { name: "materialui", url: "https://material-ui.com/" },
-  { name: "react-query", url: "https://react-query.tanstack.com/" },
-  { name: "formik", url: "https://formik.org/" },
-  { name: "eslint", url: "https://eslint.org/" },
-  { name: "prettier", url: "https://prettier.io/" },
-  { name: "vscode", url: "https://code.visualstudio.com/" },
-  { name: "github", url: "https://github.com/" },
-  { name: "figma", url: "https://www.figma.com/" },
-  { name: "docker", url: "https://www.docker.com/" },
-  { name: "kubernetes", url: "https://kubernetes.io/" },
-  { name: "linode", url: "https://www.linode.com/" },
-  { name: "cloudflare", url: "https://www.cloudflare.com/" },
-  // { name: "tslog", url: "https://tslog.js.org/" },
-]
-
 const useStyles = makeStyles((theme: any) => ({
   card: {
     padding: theme.spacing(1),
@@ -182,43 +107,11 @@ const useStyles = makeStyles((theme: any) => ({
     listStyleType: "circle",
     listStylePosition: "inside",
   },
-  toolsHeader: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    padding: theme.spacing(1),
-  },
   bullet: {
     position: "relative",
     right: 20,
   },
-  rightSideUp: {
-    transition: "250ms ease",
-    transform: "rotateZ(0deg)",
-  },
-  upSideDown: {
-    transition: "250ms ease",
-    transform: "rotateZ(-180deg)",
-  },
-  disableHoverGlow: {
-    "float": "right",
-    "&:hover": {
-      backgroundColor: "transparent",
-    },
-  },
   hide: {
     display: "none",
-  },
-  toolGrid: {
-    padding: theme.spacing(1),
-  },
-  tool: {
-    flex: "20%",
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  hiddenAction: {
-    marginTop: 8,
-    marginRight: 8,
-    visibility: "hidden",
   },
 }))

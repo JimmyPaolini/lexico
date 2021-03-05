@@ -14,10 +14,8 @@ interface Props {
 
 export default function LiteratureAuthor({ author, searched = "" }: Props) {
   const classes = useStyles()
-  searched
   const books = author.books || ([] as Book[])
   const nonBookTexts = author.texts.filter((text) => !text.book)
-  console.log(nonBookTexts)
 
   return (
     <Card elevation={4} className={classes.authorCard}>

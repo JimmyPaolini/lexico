@@ -1,11 +1,10 @@
-import { Box, CardHeader, IconButton, useMediaQuery } from "@material-ui/core"
+import { Box } from "@material-ui/core"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
-import { Menu } from "@material-ui/icons"
-import React, { useContext } from "react"
+import React from "react"
 import Text from "../../../../entity/literature/Text"
 import { romanNumeralize } from "../../utils/romanNumeral"
 import { sentenceCase } from "../../utils/string"
-import { Context } from "../Context"
+import CardHeader from "../accessories/CardHeader"
 import ReaderLine from "./ReaderLine"
 
 interface Props {
@@ -15,8 +14,6 @@ interface Props {
 export default function ReaderText({ text, openModal }: Props) {
   const classes = useStyles()
   const theme = useTheme() as any
-  const { isNavOpen, setNavOpen } = useContext(Context)
-  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
 
   const title = romanNumeralize(sentenceCase(text.title))
   let subtitle = romanNumeralize(sentenceCase(text.author.name))
@@ -43,24 +40,6 @@ export default function ReaderText({ text, openModal }: Props) {
           },
         }}
         className={classes.cardHeader}
-        avatar={
-          <IconButton
-            onClick={isMobile ? () => setNavOpen(!isNavOpen) : undefined}
-            aria-label="menu"
-            className={!isMobile ? classes.hiddenAction : undefined}
-          >
-            <Menu />
-          </IconButton>
-        }
-        action={
-          <IconButton
-            onClick={() => null}
-            aria-label="empty space"
-            className={classes.hiddenAction}
-          >
-            <Menu />
-          </IconButton>
-        }
         classes={{ action: classes.shownAction }}
       />
       {text.lines.map((line) => (

@@ -14,4 +14,5 @@ COPY . ../
 RUN npm run tsc
 
 EXPOSE 3001
+HEALTHCHECK CMD curl --fail http://localhost:3001/ || exit 1
 CMD npm run start

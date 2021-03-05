@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@material-ui/core"
 import React, { useEffect, useMemo, useState } from "react"
 import Entry from "../../../entity/dictionary/Entry"
-import CardDeck from "../components/CardDeck"
+import CardDeck from "../components/accessories/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
 import Home from "../components/search/Home"
 import SearchBar from "../components/search/SearchBar"
@@ -18,13 +18,12 @@ export default function Search() {
     refetch()
   }, [searched])
 
-  const { data: entries, error, isLoading, refetch } = useSearch(
+  const { data: entries, error, isLoading, refetch, isSuccess } = useSearch(
     searched,
     isLatin,
   )
 
-  const noEntriesFound =
-    (error as any)?.response?.errors?.[0]?.message === "not found"
+  const noEntriesFound = isSuccess && Array.isArray(entries) && !entries.length
   const entriesFound = !error && Array.isArray(entries) && entries.length
   const cards = useMemo(
     () =>

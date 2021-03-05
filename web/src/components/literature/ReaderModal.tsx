@@ -5,7 +5,7 @@ import { QueryFunctionContext, useQuery } from "react-query"
 import Entry from "../../../../entity/dictionary/Entry"
 import searchLatinQuery from "../../graphql/search/searchLatin.gql"
 import { graphQLClient } from "../../pages/_app"
-import CardDeck from "../CardDeck"
+import CardDeck from "../accessories/CardDeck"
 import EntryCard from "../EntryCard/EntryCard"
 
 interface Props {

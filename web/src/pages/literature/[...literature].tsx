@@ -28,6 +28,11 @@ export default function Reader({ textId }: Props) {
 
   return (
     <Paper square elevation={0} className={classes.reader}>
+      <style jsx global>{`
+        body#body {
+          background-color: black;
+        }
+      `}</style>
       <Grid container justify="center">
         {!isLoading && !!text ? (
           <ReaderText

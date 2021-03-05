@@ -12,6 +12,7 @@ import Uninflected from "../../../../entity/dictionary/word/inflection/Uninflect
 import VerbInflection from "../../../../entity/dictionary/word/inflection/VerbInflection"
 import useBookmark from "../../hooks/bookmarks/useBookmark"
 import useUnbookmark from "../../hooks/bookmarks/useUnbookmark"
+import { unCamelCase } from "../../utils/string"
 
 interface Props {
   entry: Entry
@@ -40,7 +41,9 @@ export default function PrincipalPartsRow({ entry }: Props) {
     <CardHeader
       title={principalPartsFormatted}
       titleTypographyProps={{ variant: "subtitle1" }}
-      subheader={`${entry.partOfSpeech}, ${inflectiontoString(entry)}`}
+      subheader={`${unCamelCase(entry.partOfSpeech)}, ${inflectiontoString(
+        entry,
+      )}`}
       subheaderTypographyProps={{ variant: "subtitle2" }}
       className={classes.principalPartsRow}
       aria-label="Principal Parts, Inflection, and Bookmark"

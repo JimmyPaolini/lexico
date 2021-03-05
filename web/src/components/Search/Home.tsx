@@ -1,4 +1,4 @@
-import { Box, Typography } from "@material-ui/core"
+import { Box, Fade, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import Image from "next/image"
 import React, { useRef } from "react"
@@ -11,24 +11,26 @@ export default function Home() {
     ref.current.innerHTML = announcement
 
   return (
-    <Box position="relative">
-      <Box>
-        <Image
-          src="/lexico_logo.svg"
-          alt="lexico logo"
-          height={500}
-          width={375}
-        />
+    <Fade in={true}>
+      <Box position="relative">
+        <Box>
+          <Image
+            src="/lexico_logo.svg"
+            alt="lexico logo"
+            height={500}
+            width={375}
+          />
+        </Box>
+        {!!announcement ? (
+          <Typography
+            ref={ref}
+            variant="body1"
+            align="center"
+            className={classes.announcement}
+          />
+        ) : null}
       </Box>
-      {!!announcement ? (
-        <Typography
-          ref={ref}
-          variant="body1"
-          align="center"
-          className={classes.announcement}
-        />
-      ) : null}
-    </Box>
+    </Fade>
   )
 }
 

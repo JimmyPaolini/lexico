@@ -2,7 +2,8 @@ import { Grid } from "@material-ui/core"
 import { GetServerSideProps } from "next"
 import React, { useMemo, useState } from "react"
 import Entry from "../../../entity/dictionary/Entry"
-import CardDeck from "../components/CardDeck"
+import BookmarkInstructionsCard from "../components/accessories/BookmarkInstructionsCard"
+import CardDeck from "../components/accessories/CardDeck"
 import EntryCard from "../components/EntryCard/EntryCard"
 import SearchBar from "../components/search/SearchBar"
 import LoginCard from "../components/settings/LoginCard"
@@ -18,7 +19,9 @@ export default function Bookmarks({ isLoggedIn }: Props) {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
 
-  const { data: bookmarks, isLoading, isError } = useBookmarks(isLoggedIn)
+  const { data: bookmarks, isLoading, isError, isSuccess } = useBookmarks(
+    isLoggedIn,
+  )
 
   const cards = useMemo(() => {
     if (!isLoggedIn)
@@ -28,6 +31,14 @@ export default function Bookmarks({ isLoggedIn }: Props) {
           Card: () => <LoginCard title="sign in to use bookmarks" />,
         },
       ]
+    if (isSuccess && Array.isArray(bookmarks) && !bookmarks.length) {
+      return [
+        {
+          key: "bookmark instructions card",
+          Card: () => <BookmarkInstructionsCard />,
+        },
+      ]
+    }
     return (
       filterEntries(bookmarks, searched).map((entry: Entry) => ({
         key: entry.id,

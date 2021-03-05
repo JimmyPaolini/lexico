@@ -4,7 +4,7 @@ import Entry from "../../../entity/dictionary/Entry"
 import Translation from "../../../entity/dictionary/Translation"
 import Word from "../../../entity/dictionary/Word"
 import log from "../../../utils/log"
-import { getMacronOptionRegex } from "../../../utils/string"
+import { getMacronOptionRegex, hasSuffix } from "../../../utils/string"
 import { GetBookmarks } from "../auth/authentication"
 import { identifyWord } from "../utils/forms"
 import { ResolverContext } from "../utils/ResolverContext"
@@ -16,6 +16,7 @@ export default class DictionaryResolver {
   Words = getConnection().getRepository(Word)
   identifiablePartsOfSpeech = [
     "noun",
+    "properNoun",
     "verb",
     "adjective",
     "adverb",
@@ -30,10 +31,9 @@ export default class DictionaryResolver {
     @Arg("search") search: string,
     @Ctx() { bookmarks }: ResolverContext,
   ) {
-    log.info("searchLatin req:", { search })
+    log.info("searchLatin req", { search })
     if (!search) throw new Error("empty search")
     if (!search.match(/^-?(\w| )+$/)) throw new Error("invalid search")
-    const hasSuffix = (suffix: string) => search.match(new RegExp(suffix + "$"))
     const pushSuffix = async (suffix: string) => {
       const nonSuffixWord = await this.Words.findOne({
         word: search.replace(new RegExp(suffix + "$", "i"), ""),
@@ -48,15 +48,19 @@ export default class DictionaryResolver {
     let entries = []
     const word = await this.Words.findOne({ word: search })
     if (word) entries.push(...word.entries)
-    if (hasSuffix("que")) await pushSuffix("que")
-    else if (hasSuffix("ve")) await pushSuffix("ve")
-    else if (hasSuffix("ne")) await pushSuffix("ne")
+    if (hasSuffix(search, "que")) await pushSuffix("que")
+    else if (hasSuffix(search, "ve")) await pushSuffix("ve")
+    else if (hasSuffix(search, "ne")) await pushSuffix("ne")
 
     entries = entries
       .filter((entry) => !!entry.translations?.length)
       .map((entry) => {
         if (this.identifiablePartsOfSpeech.includes(entry.partOfSpeech)) {
-          entry.identifiers = identifyWord(search, entry.forms, [], [])
+          let word = search
+          if (hasSuffix(word, "que")) word = word.replace(/que$/i, "")
+          else if (hasSuffix(word, "ve")) word = word.replace(/ve$/i, "")
+          else if (hasSuffix(word, "ne")) word = word.replace(/ne$/i, "")
+          entry.identifiers = identifyWord(word, entry.forms, [], [])
         }
         entry.bookmarked = bookmarks?.some(
           (bookmark) => bookmark.id === entry.id,
@@ -64,25 +68,25 @@ export default class DictionaryResolver {
         return entry
       })
     log.info(
-      "searchLatin res:",
+      "searchLatin res",
       entries.map(({ id }) => ({ id })),
     )
-    if (!!word && !entries.length) throw new Error("word has no entries")
-    if (!entries.length) throw new Error("not found")
+    // if (!!word && !entries.length) throw new Error("word has no entries")
+    // if (!entries.length) throw new Error("not found")
     return entries
   }
 
   @Query(() => [Entry])
   async searchEnglish(@Arg("search") search: string) {
     if (!search) return []
-    log.info("searchEnglish req:", { search })
+    log.info("searchEnglish req", { search })
     const translations = await this.Translations.find({
       where: { translation: Like(`%${search}%`) },
       relations: ["entry"],
     })
     const entries = translations.map((t) => t.entry)
     log.info(
-      "searchEnglish res:",
+      "searchEnglish res",
       entries.map(({ id }) => ({ id })),
     )
     if (!entries.length) throw new Error("not found")

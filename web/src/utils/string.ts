@@ -36,6 +36,14 @@ export function sentenceCase(str: string) {
   )
 }
 
+export function unCamelCase(str: string) {
+  if (!str) return ""
+  return str.replace(
+    /[A-Z]/g,
+    (upperCaseLetter) => " " + upperCaseLetter.toLowerCase(),
+  )
+}
+
 export function getFirstLetter(word: string) {
   const [l1, l2] = [...word.toLowerCase()]
   if (!l1.match(/[a-z-]/) && !l1.match(/[a-z-]/)) return "*"

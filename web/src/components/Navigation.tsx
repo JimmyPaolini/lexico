@@ -16,7 +16,6 @@ import {
   AccountCircle,
   Bookmark,
   ChevronLeft,
-  Inbox,
   Menu,
   MenuBook,
   Search,
@@ -152,12 +151,6 @@ const pages = [
     name: "settings",
     icon: <AccountCircle />,
     keybind: "s",
-  },
-  {
-    Name: "Suggestions",
-    name: "suggestions",
-    icon: <Inbox />,
-    keybind: "",
   },
   {
     Name: "About",
