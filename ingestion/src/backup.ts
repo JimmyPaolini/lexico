@@ -5,9 +5,6 @@ import {
   backupFileNameExtension,
   restoreDatabase,
 } from "./utils/backup"
-import logger from "../../utils/log"
-
-const log = logger.getChildLogger()
 
 async function main() {
   const command = process.argv[2]

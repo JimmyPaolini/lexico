@@ -13,7 +13,7 @@ import Entry from "./Entry"
 export default class Translation {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
-  id: number
+  id: string
 
   @Column("varchar", { length: 2047 })
   @Field(() => String)

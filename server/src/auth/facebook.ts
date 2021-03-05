@@ -1,8 +1,6 @@
 import axios from "axios"
 import { FACEBOOK_ID, FACEBOOK_SECRET } from "../../../utils/env"
-import logger from "../../../utils/log"
-
-const log = logger.getChildLogger()
+import log from "../../../utils/log"
 
 export default async function fetchFacebookUser(code: string) {
   const {

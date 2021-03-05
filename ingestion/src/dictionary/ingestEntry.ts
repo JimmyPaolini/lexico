@@ -4,7 +4,6 @@ import { getConnection } from "typeorm"
 import Entry from "../../../entity/dictionary/Entry"
 import Translation from "../../../entity/dictionary/Translation"
 import { PartOfSpeech } from "../../../entity/dictionary/word/PartOfSpeech"
-import logger from "../../../utils/log"
 import { normalize } from "../../../utils/string"
 import Ingester from "./Ingester"
 import Adjective from "./ingester/partOfSpeech/Adjective"
@@ -15,8 +14,6 @@ import Prefix from "./ingester/partOfSpeech/Prefix"
 import Preposition from "./ingester/partOfSpeech/Preposition"
 import Pronoun from "./ingester/partOfSpeech/Pronoun"
 import Verb from "./ingester/partOfSpeech/Verb"
-
-const log = logger.getChildLogger()
 
 export default async function ingestEntryWord(entryWord: string) {
   // log.info("ingesting entry", entryWord)
@@ -102,7 +99,7 @@ async function ingestEntry(
     await Entries.createQueryBuilder()
       .update(Entry)
       .set(entry)
-      .where({ id: entry.id })
+      .where(entry.id)
       .execute()
   } catch (e) {
     log.warn(entry.word, e)

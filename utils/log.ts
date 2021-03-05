@@ -1,34 +1,61 @@
-import elasticsearch from "elasticsearch"
-import { Logger } from "tslog"
+import { createLogger, format, transports } from "winston"
+import { ElasticsearchTransport } from "winston-elasticsearch"
 import { ELASTICSEARCH_HOST } from "./env"
 
-const logger = new Logger({ displayFunctionName: false })
+const { combine, timestamp, colorize, printf } = format
 
-const es = new elasticsearch.Client({
-  host: `${ELASTICSEARCH_HOST}:9200`,
-  keepAlive: true,
-  maxRetries: 5,
-  pingTimeout: 1000,
+const elasticsearchTransport = new ElasticsearchTransport({
+  level: "info",
+  index: "lexico",
+  clientOpts: {
+    node: `http://${ELASTICSEARCH_HOST}:9200`,
+  },
+  transformer: ({ message, level, timestamp, meta }) => ({
+    message,
+    level,
+    timestamp,
+    ...meta,
+  }),
+  format: timestamp(),
 })
 
-function logToELK(logObject: any) {
-  es.index({ index: "lexico", type: "_doc", body: logObject }).catch(() => {
-    console.log("error logging to elasticsearch")
-    // logger.debug(err)
-  })
+elasticsearchTransport.on("error", (error) => {
+  console.error("Error caught", error)
+})
+
+const consoleTransport = new transports.Console({
+  format: combine(
+    timestamp(),
+    colorize(),
+    printf(({ timestamp, level, message, ...meta }) => {
+      const metaString = Object.keys(meta).length
+        ? "\n" + JSON.stringify(meta, circularReplacer(), 2)
+        : ""
+      return `${timestamp} ${level}: ${message}${metaString}`
+    }),
+  ),
+})
+
+const circularReplacer = () => {
+  const seen = new WeakSet()
+  return (_: any, value: any) => {
+    if (typeof value === "object" && value !== null) {
+      if (seen.has(value)) {
+        return
+      }
+      seen.add(value)
+    }
+    return value
+  }
 }
 
-logger.attachTransport(
-  {
-    silly: logToELK,
-    debug: logToELK,
-    trace: logToELK,
-    info: logToELK,
-    warn: logToELK,
-    error: logToELK,
-    fatal: logToELK,
-  },
-  "silly",
-)
+const log = createLogger({
+  level: "info",
+  transports: [elasticsearchTransport, consoleTransport],
+})
 
-export default logger
+log.on("error", (error) => {
+  console.error("Error caught", error)
+})
+
+export default log

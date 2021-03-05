@@ -4,7 +4,7 @@ import { PartOfSpeech } from "../../../entity/dictionary/word/PartOfSpeech"
 export async function createDbViews() {
   await getConnection().query(`
     CREATE OR REPLACE VIEW untranslated AS
-    SELECT "word", "partOfSpeech", "principalParts", "inflection", "translation", "forms", "etymology", "pronunciation"
+    SELECT entry."id", "partOfSpeech", "principalParts", "inflection", "translation", "forms", "etymology", "pronunciation"
     FROM entry
     LEFT OUTER JOIN translation
     ON (entry."id" = translation."entryId")
@@ -33,37 +33,27 @@ export async function createDbViews() {
   await createPartOfSpeechView("adjective")
   await createPartOfSpeechView("adverb")
 
-  async function createCountsView(
-    name: string,
-    selector: string,
-    table: string,
-    groupBy: string,
-  ) {
-    await getConnection().query(
-      `CREATE OR REPLACE VIEW ${name}_counts AS ` +
-        `SELECT ${selector}, ` +
-        `COUNT(DISTINCT(word)) as count, ` +
-        `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM ${table})::float * 100 as percent ` +
-        `FROM ${table} GROUP BY ${groupBy}`,
-    )
-  }
+  await getConnection().query(
+    `CREATE OR REPLACE VIEW part_of_speech_counts AS ` +
+      `SELECT "partOfSpeech", ` +
+      `COUNT(DISTINCT(id)) as count, ` +
+      `COUNT(DISTINCT(id)) / (SELECT COUNT(*) FROM entry)::float * 100 as percent ` +
+      `FROM entry GROUP BY "partOfSpeech"`,
+  )
 
-  await createCountsView(
-    "part_of_speech",
-    '"partOfSpeech"',
-    "entry",
-    '"partOfSpeech"',
+  await getConnection().query(
+    `CREATE OR REPLACE VIEW entry_letter_counts AS ` +
+      `SELECT LOWER(LEFT(id, 1)) as letter, ` +
+      `COUNT(DISTINCT(id)) as count, ` +
+      `COUNT(DISTINCT(id)) / (SELECT COUNT(*) FROM entry)::float * 100 as percent ` +
+      `FROM entry GROUP BY LOWER(LEFT(id, 1))`,
   )
-  await createCountsView(
-    "entry_letter",
-    "LOWER(LEFT(word, 1)) as letter",
-    "entry",
-    "LOWER(LEFT(word, 1))",
-  )
-  await createCountsView(
-    "word_letter",
-    "LOWER(LEFT(word, 1)) as letter",
-    "word",
-    "LOWER(LEFT(word, 1))",
+
+  await getConnection().query(
+    `CREATE OR REPLACE VIEW word_letter_counts AS ` +
+      `SELECT LOWER(LEFT(word, 1)) as letter, ` +
+      `COUNT(DISTINCT(word)) as count, ` +
+      `COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM word)::float * 100 as percent ` +
+      `FROM word GROUP BY LOWER(LEFT(word, 1))`,
   )
 }

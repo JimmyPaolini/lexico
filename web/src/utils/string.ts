@@ -1,5 +1,4 @@
-/* spellchecker: disable */
-export function normalize(str: string) {
+export function normalize(str: string): string {
   if (!str) return ""
   return str
     .normalize("NFD")
@@ -7,7 +6,17 @@ export function normalize(str: string) {
     .replace(/æ/g, "ae")
 }
 
-export function capitalizeFirstLetter(str: string) {
+export function timestampFormated(): string {
+  const now = new Date()
+  const date = now.toISOString().slice(0, 10)
+  const time = ("0" + now.toLocaleString().slice(11, 18)).slice(-8)
+  const milliseconds = (now.getMilliseconds() + "000").slice(0, 3)
+  const meridian = now.getHours() > 12 ? "PM" : "AM"
+  const offset = now.getTimezoneOffset() / 60
+  return `${date}_${time}.${milliseconds}${meridian}-GMT-${offset}`
+}
+
+export function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
@@ -34,14 +43,14 @@ export function getFirstLetter(word: string) {
   else return l1
 }
 
-export function escapeCapitals(str: string) {
+export function escapeCapitals(str: string): string {
   return str
     .split("")
     .map((c: string) => (c.match(/[A-Z]/g) ? c + "`" : c))
     .join("")
 }
 
-export function unescapeCapitals(str: string) {
+export function unescapeCapitals(str: string): string {
   return str.replace(/([A-Z])`/, "$1")
 }
 
@@ -49,7 +58,29 @@ export const translationSkipRegex = new RegExp(
   /(alternative)|(alternate)|(abbreviation)|(initialism)|(archaic)|(synonym)|(clipping)|(spelling)/gi,
 )
 
-export function unabbreviateText(text: string) {
+export function getMacronOptionRegex(str: string) {
+  return str
+    .replace(/a/g, "(a|ā)")
+    .replace(/A/g, "(A|Ā)")
+    .replace(/e/g, "(e|ē)")
+    .replace(/E/g, "(E|Ē)")
+    .replace(/i/g, "(i|ī)")
+    .replace(/I/g, "(I|Ī)")
+    .replace(/o/g, "(o|ō)")
+    .replace(/O/g, "(O|Ō)")
+    .replace(/u/g, "(u|ū)")
+    .replace(/U/g, "(U|Ū)")
+    .replace(/y/g, "(y|ȳ)")
+    .replace(/Y/g, "(Y|Ȳ)")
+}
+
+export function validateLetters(letters: string[]): void {
+  for (const letter of letters) {
+    if (!letter.match(/[a-z]/i)) throw new Error("invalid letter")
+  }
+}
+
+export function unabbreviateText(text: string): string {
   return text
     .replace(/Agr\./gi, "agrippa")
     .replace(/Ap\./gi, "appius")

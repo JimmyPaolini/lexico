@@ -38,16 +38,17 @@ export default function Suggestions() {
       await sendEmail()
     },
   })
-  const { mutateAsync: sendEmail, error: sendEmailError } = useMutation(
-    "sendEmail",
-    async () => {
-      const { sendEmail: data } = await graphQLClient.request(
-        sendEmailMutation,
-        formik.values,
-      )
-      return data
-    },
-  )
+  const {
+    mutateAsync: sendEmail,
+    error: sendEmailError,
+    isSuccess,
+  } = useMutation("sendEmail", async () => {
+    const { sendEmail: data } = await graphQLClient.request(
+      sendEmailMutation,
+      formik.values,
+    )
+    return data
+  })
   const error: string = sendEmailError
     ? (sendEmailError as any).response.errors[0].message
     : ""
@@ -76,11 +77,12 @@ export default function Suggestions() {
             ))}
           </List>
           <Typography variant="body1" align="center">
-            To add/edit an entry yourself, you can just edit it on Wiktionary!
+            To add/edit an entry yourself, just edit it on Wiktionary!
             <br />
             All words, translations, and grammatical information are parsed
-            weekly from Wiktionary
+            periodically from Wiktionary
           </Typography>
+          <Divider className={classes.divider} />
           <form onSubmit={formik.handleSubmit}>
             <Grid container>
               <TextBox
@@ -97,7 +99,8 @@ export default function Suggestions() {
                 maxRows={4}
               />
               <SubmitButton
-                name="send"
+                name={isSuccess ? "sent" : "send"}
+                disabled={isSuccess}
                 onClick={() => null}
                 className={classes.textBox}
               />
@@ -122,11 +125,10 @@ const useStyles = makeStyles((theme: any) => ({
   card: {
     padding: theme.spacing(1),
     margin: theme.spacing(2),
-    width: theme.custom.cardWidth * 2,
+    width: theme.custom.cardWidth,
   },
   textBox: {
     margin: theme.spacing(1),
-    marginTop: theme.spacing(4),
   },
   body: {
     padding: theme.spacing(1),

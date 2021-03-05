@@ -15,9 +15,7 @@ import {
   DB_USERNAME,
   LOG_SQL,
 } from "../utils/env"
-import logger from "./log"
-
-const log = logger.getChildLogger()
+import log from "./log"
 
 export async function connectDatabase() {
   await createConnection({

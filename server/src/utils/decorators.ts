@@ -1,6 +1,4 @@
-import logger from "../../../utils/log"
-
-const log = logger.getChildLogger()
+import log from "../../../utils/log"
 
 export function LogRuntime(
   _: Object,

@@ -3,7 +3,10 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": ["dom", "es2020"],
+    "lib": [
+      "dom",
+      "es2020"
+    ],
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
@@ -28,7 +31,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "noEmit": true
   },
   "exclude": [
     "../ingestion",

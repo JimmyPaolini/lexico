@@ -3,14 +3,11 @@ import { getConnection, Like } from "typeorm"
 import Entry from "../../../entity/dictionary/Entry"
 import Translation from "../../../entity/dictionary/Translation"
 import Word from "../../../entity/dictionary/Word"
-import VerbForms from "../../../entity/dictionary/word/forms/VerbForms"
+import log from "../../../utils/log"
 import { getMacronOptionRegex } from "../../../utils/string"
 import { GetBookmarks } from "../auth/authentication"
-import { camelCaseFuturePerfect, identifyWord } from "../utils/forms"
-import logger from "../../../utils/log"
+import { identifyWord } from "../utils/forms"
 import { ResolverContext } from "../utils/ResolverContext"
-
-const log = logger.getChildLogger()
 
 @Resolver(Entry)
 export default class DictionaryResolver {
@@ -39,10 +36,12 @@ export default class DictionaryResolver {
     const hasSuffix = (suffix: string) => search.match(new RegExp(suffix + "$"))
     const pushSuffix = async (suffix: string) => {
       const nonSuffixWord = await this.Words.findOne({
-        word: search.replace(new RegExp(suffix + "$"), ""),
+        word: search.replace(new RegExp(suffix + "$", "i"), ""),
       })
       if (nonSuffixWord) entries.push(...nonSuffixWord.entries)
-      const suffixEntry = await this.Entries.findOne({ word: "-" + suffix })
+      const suffixEntry = await this.Entries.findOne({
+        id: `-${suffix}:0`,
+      })
       entries.push(suffixEntry)
     }
 
@@ -58,9 +57,6 @@ export default class DictionaryResolver {
       .map((entry) => {
         if (this.identifiablePartsOfSpeech.includes(entry.partOfSpeech)) {
           entry.identifiers = identifyWord(search, entry.forms, [], [])
-        }
-        if (entry.partOfSpeech === "verb" && entry.forms) {
-          entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
         }
         entry.bookmarked = bookmarks?.some(
           (bookmark) => bookmark.id === entry.id,
@@ -101,7 +97,7 @@ export default class DictionaryResolver {
     const entries = await this.Entries.find({
       where: fieldMatch("principalParts") + " OR " + fieldMatch("forms"),
     })
-    entries.forEach((entry) => log.info(entry.word))
+    entries.forEach((entry) => log.info(entry.id))
     return entries.filter((entry) => !!entry.translations)
   }
 

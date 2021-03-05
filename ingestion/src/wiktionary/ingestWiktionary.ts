@@ -2,7 +2,6 @@ import axios from "axios"
 import cheerio from "cheerio"
 import fs from "fs"
 import fp from "path"
-import logger from "../../../utils/log"
 import { escapeCapitals } from "../../../utils/string"
 const putItemHtml = (entry: any) =>
   fs.writeFileSync(
@@ -12,8 +11,6 @@ const putItemHtml = (entry: any) =>
     ),
     JSON.stringify(entry),
   )
-
-const log = logger.getChildLogger()
 
 export const categories: { [key: string]: string } = {
   lemma: "Latin_lemmas",

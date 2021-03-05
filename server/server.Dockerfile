@@ -1,6 +1,6 @@
 # context must be one folder level up
 FROM node:15-alpine
-RUN apk add --update nodejs npm
+RUN apk add --update nodejs npm curl
 
 WORKDIR /code
 COPY package*.json ./

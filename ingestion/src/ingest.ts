@@ -30,7 +30,9 @@ async function main() {
       const word = process.argv[3]
       if (!word) throw new Error("no word")
       ingestEntryWord(escapeCapitals(word))
-      const entries = await Entries.find({ word })
+      const entries = await Entries.find({
+        where: `entry.id ~* '${escapeCapitals(word) + ":\\d"}'`,
+      })
       for (const entry of entries) await ingestEntryWords(entry)
     },
     literature: () => ingestLiterature(),

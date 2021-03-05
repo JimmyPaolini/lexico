@@ -14,11 +14,7 @@ import { Pronunciation } from "./word/Pronunciation"
 export default class Entry {
   @PrimaryColumn("varchar", { length: 127 })
   @Field(() => ID)
-  id: string
-
-  @Column("varchar", { length: 127 })
-  @Field()
-  word: string
+  id: string // = word + ":" + number
 
   @Column("varchar", { length: 32 })
   @Field(() => String)

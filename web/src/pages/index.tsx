@@ -12,6 +12,9 @@ export default function Search() {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
   useEffect(() => {
+    if (!search) setSearched("")
+  }, [search])
+  useEffect(() => {
     refetch()
   }, [searched])
 
@@ -20,14 +23,14 @@ export default function Search() {
     isLatin,
   )
 
-  const noEntriesFound = Array.isArray(entries) && !entries.length
+  const noEntriesFound =
+    (error as any)?.response?.errors?.[0]?.message === "not found"
   const entriesFound = !error && Array.isArray(entries) && entries.length
   const cards = useMemo(
     () =>
       entries?.map((entry: Entry) => ({
         key: entry.id,
-        Card: () =>
-          useMemo(() => <EntryCard {...{ entry, searched: searched }} />, []),
+        Card: () => useMemo(() => <EntryCard {...{ entry, searched }} />, []),
       })),
     [entries],
   )
@@ -39,7 +42,7 @@ export default function Search() {
           {...{
             search,
             setSearch,
-            isLoading,
+            isLoading: isLoading && !!searched,
             handleSearchExecute: () => setSearched(search),
             target: "lexico",
             isLatin,
@@ -48,10 +51,10 @@ export default function Search() {
         />
       </Grid>
       <Grid item container justify="center">
-        {!entries ? (
-          <Home />
-        ) : noEntriesFound ? (
+        {noEntriesFound ? (
           <Typography variant="h4">Not Found</Typography>
+        ) : !entries ? (
+          <Home />
         ) : entriesFound ? (
           <CardDeck cards={cards} />
         ) : null}

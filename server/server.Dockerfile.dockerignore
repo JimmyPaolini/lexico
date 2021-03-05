@@ -1,6 +1,7 @@
 **/.DS_Store
 **/.vscode
 **/.gitignore
+**/.git
 
 **/node_modules
 **/dist
@@ -10,6 +11,3 @@
 
 **/ingestion
 **/web
-
-**/*Dockerfile
-**/*.dockerignore

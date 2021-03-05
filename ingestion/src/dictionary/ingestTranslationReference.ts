@@ -12,7 +12,8 @@ export async function ingestTranslationReference(translation: Translation) {
   for (const reference of references) {
     // log.info("ingesting translation reference", reference)
     const referencedEntry = await Entries.findOne({
-      word: escapeCapitals(reference),
+      // id: Like(escapeCapitals(reference) + ":#"),
+      where: `entry.id ~* '${escapeCapitals(reference)}:\\d'`,
     })
     for (const referencedTranslation of referencedEntry?.translations || []) {
       // log.info("ingesting translation", referencedTranslation.translation)
@@ -33,6 +34,6 @@ export async function ingestTranslationReference(translation: Translation) {
   await Translations.createQueryBuilder()
     .update()
     .set({ translation: translationWithoutReferences })
-    .where({ id: translation.id })
+    .where(translation.id)
     .execute()
 }

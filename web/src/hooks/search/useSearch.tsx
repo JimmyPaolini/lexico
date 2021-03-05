@@ -6,6 +6,7 @@ import { graphQLClient } from "../../pages/_app"
 export default function useSearch(search: string, isLatin: boolean) {
   return useQuery(["search", search, isLatin], useSearchQuery, {
     enabled: false,
+    retry: false,
   })
 }
 

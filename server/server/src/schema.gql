@@ -72,7 +72,6 @@ type Entry {
   pronunciation: Pronunciation
   translations: [Translation!]
   users: [User!]
-  word: String!
   words: [Word!]!
 }
 

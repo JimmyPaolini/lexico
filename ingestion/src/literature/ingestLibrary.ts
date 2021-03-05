@@ -2,10 +2,7 @@ import axios from "axios"
 import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
 import fs from "fs"
-import logger from "../../../utils/log"
 import { authorNameToFullname } from "./literatureMaps"
-
-const log = logger.getChildLogger()
 
 const host = "https://www.thelatinlibrary.com/"
 

@@ -1,8 +1,6 @@
 import axios from "axios"
 import { GOOGLE_ID, GOOGLE_SECRET } from "../../../utils/env"
-import logger from "../../../utils/log"
-
-const log = logger.getChildLogger()
+import log from "../../../utils/log"
 
 export default async function fetchGoogleUser(code: string) {
   const {

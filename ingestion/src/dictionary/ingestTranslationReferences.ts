@@ -1,9 +1,6 @@
 import { FindManyOptions, getConnection, Like } from "typeorm"
 import Translation from "../../../entity/dictionary/Translation"
-import logger from "../../../utils/log"
 import { ingestTranslationReference } from "./ingestTranslationReference"
-
-const log = logger.getChildLogger()
 
 export default async function ingestTranslationReferences() {
   log.info("Ingesting Translation References")

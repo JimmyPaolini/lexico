@@ -9,6 +9,7 @@ import {
 } from "type-graphql"
 import { getConnection, IsNull } from "typeorm"
 import User from "../../../entity/user/User"
+import log from "../../../utils/log"
 import { validateEmail, validatePassword } from "../../../utils/string"
 import {
   Authenticate,
@@ -17,10 +18,7 @@ import {
 } from "../auth/authentication"
 import fetchFacebookUser from "../auth/facebook"
 import fetchGoogleUser from "../auth/google"
-import logger from "../../../utils/log"
 import { ResolverContext } from "../utils/ResolverContext"
-
-const log = logger.getChildLogger()
 
 @Resolver(User)
 export default class AuthenticationResolver {

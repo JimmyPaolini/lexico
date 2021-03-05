@@ -5,8 +5,8 @@ import {
   CardHeader as CardHeaderMui,
   Collapse,
   Divider,
-  Fade,
   Grid,
+  Grow,
   Link,
   List,
   ListItem,
@@ -37,7 +37,7 @@ export default function About() {
 
   return (
     <Grid container justify="center" alignItems="center">
-      <Fade in={true}>
+      <Grow in={true}>
         <Card className={classes.card}>
           <CardHeader title="About" />
           <Divider className={classes.divider} />
@@ -66,12 +66,11 @@ export default function About() {
             />
           </CardActionArea>
           <Collapse in={expanded}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className={classes.toolGrid}>
               {tools.map((tool) => (
                 <Grid
                   item
                   key={tool.name}
-                  xs={3}
                   className={classes.tool}
                   container
                   justify="center"
@@ -82,7 +81,7 @@ export default function About() {
                     onClick={(e: any) => e.stopPropagation()}
                   >
                     <Image
-                      src={`/icon/${tool.name}.svg`}
+                      src={`/icon/${tool.name}.png`}
                       alt={tool.name}
                       width={128}
                       height={128}
@@ -132,37 +131,38 @@ export default function About() {
             <Typography variant="h6">Omnia mūtantur, nihil īnterit</Typography>
           </Grid>
         </Card>
-      </Fade>
+      </Grow>
     </Grid>
   )
 }
 
 const tools = [
-  { name: "typescript", url: "https://www.typescriptlang.org/" },
-  { name: "nodejs", url: "https://nodejs.org/" },
-  { name: "expressjs", url: "https://expressjs.com/" },
+  { name: "wikipedia", url: "https://www.wiktionary.org/" },
   { name: "postgres", url: "https://www.postgresql.org/" },
-  { name: "apollo", url: "https://www.apollographql.com/" },
-  { name: "graphql", url: "https://graphql.org/" },
+  { name: "nodejs", url: "https://nodejs.org/" },
+  { name: "typescript", url: "https://www.typescriptlang.org/" },
+  { name: "expressjs", url: "https://expressjs.com/" },
   { name: "typeorm", url: "https://typeorm.io/" },
+  { name: "graphql", url: "https://graphql.org/" },
+  { name: "apollo", url: "https://www.apollographql.com/" },
   { name: "type-graphql", url: "https://typegraphql.com/" },
+  { name: "elk", url: "https://www.elastic.co/" },
+  { name: "react", url: "https://reactjs.org/" },
   { name: "nextjs", url: "https://nextjs.org/" },
   { name: "jwt", url: "https://jwt.io/" },
-  { name: "elk", url: "https://www.elastic.co/" },
-  { name: "tslog", url: "https://tslog.js.org/" },
-  { name: "react", url: "https://reactjs.org/" },
   { name: "materialui", url: "https://material-ui.com/" },
   { name: "react-query", url: "https://react-query.tanstack.com/" },
+  { name: "formik", url: "https://formik.org/" },
+  { name: "eslint", url: "https://eslint.org/" },
   { name: "prettier", url: "https://prettier.io/" },
-  { name: "wikipedia", url: "https://www.wiktionary.org/" },
-  { name: "figma", url: "https://www.figma.com/" },
   { name: "vscode", url: "https://code.visualstudio.com/" },
   { name: "github", url: "https://github.com/" },
-  { name: "eslint", url: "https://eslint.org/" },
+  { name: "figma", url: "https://www.figma.com/" },
   { name: "docker", url: "https://www.docker.com/" },
   { name: "kubernetes", url: "https://kubernetes.io/" },
   { name: "linode", url: "https://www.linode.com/" },
   { name: "cloudflare", url: "https://www.cloudflare.com/" },
+  // { name: "tslog", url: "https://tslog.js.org/" },
 ]
 
 const useStyles = makeStyles((theme: any) => ({
@@ -208,8 +208,13 @@ const useStyles = makeStyles((theme: any) => ({
   hide: {
     display: "none",
   },
+  toolGrid: {
+    padding: theme.spacing(1),
+  },
   tool: {
-    marginBottom: theme.spacing(2),
+    flex: "20%",
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   hiddenAction: {
     marginTop: 8,

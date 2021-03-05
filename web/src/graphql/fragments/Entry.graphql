@@ -5,7 +5,6 @@
 
 fragment allEntry on Entry {
   id
-  word
   partOfSpeech
   principalParts {
     ...allPrincipalParts
