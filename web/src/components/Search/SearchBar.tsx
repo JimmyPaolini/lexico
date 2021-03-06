@@ -7,9 +7,10 @@ import useMediaQuery from "@material-ui/core/useMediaQuery"
 import MenuIcon from "@material-ui/icons/Menu"
 import SearchIcon from "@material-ui/icons/Search"
 import React, { Dispatch, SetStateAction, useContext, useRef } from "react"
-import { pascalCase } from "../../utils/string"
 import useEventListener from "../../hooks/useEventListener"
+import { pascalCase } from "../../utils/string"
 import { Context } from "../Context"
+import SwitchEnLa from "./SwitchEnLa"
 
 interface Props {
   search: string
@@ -28,7 +29,7 @@ export default function SearchBar({
   isLoading = false,
   target = "",
   isLatin = false,
-  setLatin = () => null
+  setLatin = () => null,
 }: Props) {
   const classes = useStyles()
   const { isNavOpen, setNavOpen } = useContext(Context)
@@ -82,7 +83,7 @@ export default function SearchBar({
           <CircularProgress size={24} thickness={5.4} color="secondary" />
         )}
       </IconButton>
-      {/* {target === "lexico" && <SwitchEnLa {...{ isLatin, setLatin }} />} */}
+      {target === "lexico" && <SwitchEnLa {...{ isLatin, setLatin }} />}
     </Paper>
   )
 }

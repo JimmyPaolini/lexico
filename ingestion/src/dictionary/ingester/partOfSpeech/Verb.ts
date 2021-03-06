@@ -95,7 +95,7 @@ export default class Verb extends Ingester {
       identifiers.add(table[m][n].toLowerCase().trim())
       return Array.from(identifiers).map((id: any) =>
         (id as string)
-          .replace("future perfect", "futurePerfect")
+          .replace(/future\s?perfect/i, "futurePerfect")
           .replace("non-finite forms", "nonFinite")
           .replace("verbal nouns", "verbalNouns")
           .replace(/s$/, ""),

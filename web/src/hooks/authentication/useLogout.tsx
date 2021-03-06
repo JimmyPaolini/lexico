@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import logoutQuery from "../../graphql/authentication/logout.gql"
+import logoutQuery from "../../graphql/authentication/logout.graphql"
 import { graphQLClient, queryClient } from "../../pages/_app"
 
 export default function useLogout() {

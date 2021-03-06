@@ -1,12 +1,13 @@
 import { Arg, Ctx, Query, Resolver, UseMiddleware } from "type-graphql"
-import { getConnection, Like } from "typeorm"
+import { getConnection } from "typeorm"
 import Entry from "../../../entity/dictionary/Entry"
 import Translation from "../../../entity/dictionary/Translation"
 import Word from "../../../entity/dictionary/Word"
+import VerbForms from "../../../entity/dictionary/word/forms/VerbForms"
 import log from "../../../utils/log"
-import { getMacronOptionRegex, hasSuffix } from "../../../utils/string"
+import { hasSuffix } from "../../../utils/string"
 import { GetBookmarks } from "../auth/authentication"
-import { identifyWord } from "../utils/forms"
+import { camelCaseFuturePerfect, identifyWord } from "../utils/forms"
 import { ResolverContext } from "../utils/ResolverContext"
 
 @Resolver(Entry)
@@ -31,9 +32,8 @@ export default class DictionaryResolver {
     @Arg("search") search: string,
     @Ctx() { bookmarks }: ResolverContext,
   ) {
+    if (!search || !search.match(/^-?(\w| )+$/)) return []
     log.info("searchLatin req", { search })
-    if (!search) throw new Error("empty search")
-    if (!search.match(/^-?(\w| )+$/)) throw new Error("invalid search")
     const pushSuffix = async (suffix: string) => {
       const nonSuffixWord = await this.Words.findOne({
         word: search.replace(new RegExp(suffix + "$", "i"), ""),
@@ -62,6 +62,9 @@ export default class DictionaryResolver {
           else if (hasSuffix(word, "ne")) word = word.replace(/ne$/i, "")
           entry.identifiers = identifyWord(word, entry.forms, [], [])
         }
+        if (entry.partOfSpeech === "verb" && entry.forms) {
+          entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
+        }
         entry.bookmarked = bookmarks?.some(
           (bookmark) => bookmark.id === entry.id,
         )
@@ -71,47 +74,66 @@ export default class DictionaryResolver {
       "searchLatin res",
       entries.map(({ id }) => ({ id })),
     )
-    // if (!!word && !entries.length) throw new Error("word has no entries")
-    // if (!entries.length) throw new Error("not found")
     return entries
   }
 
   @Query(() => [Entry])
-  async searchEnglish(@Arg("search") search: string) {
+  @UseMiddleware(GetBookmarks)
+  async searchEnglish(
+    @Arg("search") search: string,
+    @Ctx() { bookmarks }: ResolverContext,
+  ) {
     if (!search) return []
     log.info("searchEnglish req", { search })
-    const translations = await this.Translations.find({
-      where: { translation: Like(`%${search}%`) },
-      relations: ["entry"],
-    })
-    const entries = translations.map((t) => t.entry)
+    // const translations = await this.Translations.find({
+    //   where: `"translation" ~* '(^| )${search}( |$)'`, //{ translation: Like(`%${search}%`) },
+    //   relations: ["entry"],
+    // })
+    const translations = await this.Translations.createQueryBuilder(
+      "translation",
+    )
+      .innerJoinAndSelect("translation.entry", "entry")
+      .where(`translation.translation ~* '(^| )${search}( |$)'`)
+      .innerJoinAndSelect("entry.translations", "x")
+      .getMany()
+
+    const entries = translations
+      .map((t) => t.entry)
+      .map((entry) => {
+        if (entry.partOfSpeech === "verb" && entry.forms) {
+          entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
+        }
+        entry.bookmarked = bookmarks?.some(
+          (bookmark) => bookmark.id === entry.id,
+        )
+        return entry
+      })
     log.info(
       "searchEnglish res",
       entries.map(({ id }) => ({ id })),
     )
-    if (!entries.length) throw new Error("not found")
     return entries
   }
 
-  @Query(() => [Entry])
-  async searchLatinBrute(@Arg("search") search: string) {
-    const macronSearch = getMacronOptionRegex(search)
-    const fieldMatch = (field: string): string =>
-      `"${field}" ~* '"${macronSearch}"'`
-    const entries = await this.Entries.find({
-      where: fieldMatch("principalParts") + " OR " + fieldMatch("forms"),
-    })
-    entries.forEach((entry) => log.info(entry.id))
-    return entries.filter((entry) => !!entry.translations)
-  }
+  // @Query(() => [Entry])
+  // async searchLatinBrute(@Arg("search") search: string) {
+  //   const macronSearch = getMacronOptionRegex(search)
+  //   const fieldMatch = (field: string): string =>
+  //     `"${field}" ~* '"${macronSearch}"'`
+  //   const entries = await this.Entries.find({
+  //     where: fieldMatch("principalParts") + " OR " + fieldMatch("forms"),
+  //   })
+  //   entries.forEach((entry) => log.info(entry.id))
+  //   return entries.filter((entry) => !!entry.translations)
+  // }
 
-  @Query(() => [Entry])
-  async untranslated() {
-    return await this.Entries.query(`SELECT * FROM untranslated`)
-  }
+  // @Query(() => [Entry])
+  // async untranslated() {
+  //   return await this.Entries.query(`SELECT * FROM untranslated`)
+  // }
 
-  @Query(() => Boolean)
-  async script() {
-    return true
-  }
+  // @Query(() => Boolean)
+  // async script() {
+  //   return true
+  // }
 }

@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import userQuery from "../../graphql/authentication/user.gql"
+import userQuery from "../../graphql/authentication/user.graphql"
 import { graphQLClient } from "../../pages/_app"
 
 export default function useUser() {

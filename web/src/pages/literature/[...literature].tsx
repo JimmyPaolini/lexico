@@ -6,8 +6,8 @@ import { QueryFunctionContext, useQuery } from "react-query"
 import Text from "../../../../entity/literature/Text"
 import ReaderModal from "../../components/literature/ReaderModal"
 import ReaderText from "../../components/literature/ReaderText"
-import getTextQuery from "../../graphql/literature/getText.gql"
-import getTextsQuery from "../../graphql/literature/getTexts.gql"
+import getTextQuery from "../../graphql/literature/getText.graphql"
+import getTextsQuery from "../../graphql/literature/getTexts.graphql"
 import { graphQLClient, queryClient } from "../_app"
 
 interface Props {

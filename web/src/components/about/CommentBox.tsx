@@ -8,17 +8,19 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
 import { useFormik } from "formik"
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { useMutation } from "react-query"
-import sendEmailMutation from "../../graphql/sendEmail.gql"
+import commentMutation from "../../graphql/comment.graphql"
 import { graphQLClient } from "../../pages/_app"
 import { capitalizeFirstLetter } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
 import SubmitButton from "../accessories/SubmitButton"
 import TextBox from "../accessories/TextBox"
+import { Context } from "../Context"
 
 export default function CommentBox() {
   const classes = useStyles()
+  const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(false)
   const formik = useFormik({
     initialValues: {
@@ -35,7 +37,7 @@ export default function CommentBox() {
     isSuccess,
   } = useMutation("sendEmail", async () => {
     const { sendEmail: data } = await graphQLClient.request(
-      sendEmailMutation,
+      commentMutation,
       formik.values,
     )
     return data
@@ -72,34 +74,44 @@ export default function CommentBox() {
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <Grid container>
-            <TextBox
-              formik={formik}
-              name="subject"
-              className={classes.textBox}
-            />
-            <TextBox
-              formik={formik}
-              name="body"
-              className={classes.textBox}
-              multiline
-              rows={4}
-              maxRows={4}
-            />
-            <SubmitButton
-              name={isSuccess ? "sent" : "send"}
-              disabled={isSuccess}
-              onClick={() => null}
-              className={classes.textBox}
-            />
-            <Typography
-              color="error"
-              variant="caption"
-              align="center"
-              display="block"
-              className={classes.formError}
-            >
-              {capitalizeFirstLetter(error as any)}
-            </Typography>
+            {!user ? (
+              <SubmitButton
+                name={"login to leave a comment"}
+                href="/settings"
+                className={classes.textBox}
+              />
+            ) : (
+              <>
+                <TextBox
+                  formik={formik}
+                  name="subject"
+                  className={classes.textBox}
+                />
+                <TextBox
+                  formik={formik}
+                  name="body"
+                  className={classes.textBox}
+                  multiline
+                  rows={4}
+                  maxRows={4}
+                />
+                <SubmitButton
+                  name={isSuccess ? "sent" : "send"}
+                  disabled={isSuccess}
+                  onClick={() => null}
+                  className={classes.textBox}
+                />
+                <Typography
+                  color="error"
+                  variant="caption"
+                  align="center"
+                  display="block"
+                  className={classes.formError}
+                >
+                  {capitalizeFirstLetter(error as any)}
+                </Typography>
+              </>
+            )}
           </Grid>
         </form>
       </Collapse>

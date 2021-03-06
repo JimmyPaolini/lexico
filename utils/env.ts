@@ -16,4 +16,5 @@ export const {
   GOOGLE_SECRET,
   FACEBOOK_ID,
   FACEBOOK_SECRET,
+  COMMENT_BOX_EMAIL,
 } = process.env

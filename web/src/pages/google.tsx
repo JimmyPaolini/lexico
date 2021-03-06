@@ -1,6 +1,6 @@
 import { print } from "graphql"
 import { GetServerSideProps } from "next"
-import googleQuery from "../graphql/authentication/google.gql"
+import googleQuery from "../graphql/authentication/google.graphql"
 import { graphQLClient } from "./_app"
 
 export default function google() {}

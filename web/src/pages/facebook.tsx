@@ -1,6 +1,6 @@
 import { print } from "graphql"
 import { GetServerSideProps } from "next"
-import facebookQuery from "../graphql/authentication/facebook.gql"
+import facebookQuery from "../graphql/authentication/facebook.graphql"
 import { graphQLClient } from "./_app"
 
 export default function facebook() {}

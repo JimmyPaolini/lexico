@@ -3,10 +3,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": [
-      "dom",
-      "es2020"
-    ],
+    "lib": ["dom", "es2020"],
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
@@ -48,6 +45,6 @@
     "../**/*.ts",
     "../**/*.tsx",
     "./src/**/*.graphql",
-    "./src/**/*.gql"
+    "./src/**/*.graphql"
   ]
 }

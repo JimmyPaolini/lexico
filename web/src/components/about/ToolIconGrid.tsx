@@ -90,7 +90,6 @@ const tools = [
   { name: "kubernetes", url: "https://kubernetes.io/" },
   { name: "linode", url: "https://www.linode.com/" },
   { name: "cloudflare", url: "https://www.cloudflare.com/" },
-  // { name: "tslog", url: "https://tslog.js.org/" },
 ]
 
 const useStyles = makeStyles((theme: any) => ({

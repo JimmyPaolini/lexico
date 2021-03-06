@@ -4,7 +4,7 @@ import { sentenceCase } from "../../utils/string"
 
 interface Props {
   name: string
-  onClick: () => any
+  onClick?: () => any
   [key: string]: any
 }
 export default function SubmitButton({ name, onClick, ...props }: Props) {

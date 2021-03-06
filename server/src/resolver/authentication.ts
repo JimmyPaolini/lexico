@@ -124,29 +124,4 @@ export default class AuthenticationResolver {
     await this.Users.update(user.id, { password: await hash(password) })
     return true
   }
-
-  @Mutation(() => Boolean)
-  @UseMiddleware(Authenticate)
-  async sendEmail(
-    @Arg("subject") subject: string,
-    @Arg("body") body: string,
-    @Ctx() { user }: ResolverContext,
-  ) {
-    // let act = await nodemailer.createTestAccount()
-    // const transporter = nodemailer.createTransport({
-    //   service: "smtp.ethereal.email",
-    //   auth: { user: act.user, pass: act.pass },
-    //   port: 587,
-    //   secure: false,
-    // })
-    // var params = {
-    //   from: "jimmypaolini@gmail.com",
-    //   to: SUGGESTIONS_EMAIL,
-    //   subject: subject,
-    //   text: body,
-    // }
-    // await transporter.sendMail(params)
-    log.info(`Email sent from ${user.email}: ${subject}\n${body}`)
-    return true
-  }
 }

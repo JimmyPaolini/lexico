@@ -1,31 +1,31 @@
 import { Grid } from "@material-ui/core"
 import { GetStaticProps } from "next"
-import React, { useMemo, useState } from "react"
-import { useQuery } from "react-query"
+import React, { useEffect, useMemo, useState } from "react"
 import Author from "../../../entity/literature/Author"
+import Book from "../../../entity/literature/Book"
+import Text from "../../../entity/literature/Text"
 import CardDeck from "../components/accessories/CardDeck"
 import AuthorCard from "../components/literature/LiteratureAuthor"
 import SearchBar from "../components/search/SearchBar"
-import getAuthorsQuery from "../graphql/literature/getAuthors.gql"
-import { graphQLClient, queryClient } from "./_app"
+import useGetAuthors from "../hooks/useGetAuthors"
+import { queryClient } from "./_app"
 
 export default function Literature() {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
+  useEffect(() => {
+    if (!search) setSearched("")
+  }, [search])
 
-  const { data: authors, isLoading, isError } = useQuery(
-    "getAuthors",
-    getAuthors,
-  )
+  const { data: authors, isLoading, isError } = useGetAuthors()
 
-  const cards = useMemo(
-    () =>
-      authors?.map((author) => ({
-        key: author.name,
-        Card: () => <AuthorCard {...{ author, searched }} />,
-      })) || [],
-    [searched, authors],
-  )
+  const cards = useMemo(() => {
+    const authorsCopy = JSON.parse(JSON.stringify(authors || []))
+    return filterLiterature(authorsCopy, searched).map((author) => ({
+      key: author.name,
+      Card: () => <AuthorCard {...{ author, searched }} />,
+    }))
+  }, [authors, searched])
 
   return (
     <Grid container direction="column" alignItems="center">
@@ -52,30 +52,38 @@ export default function Literature() {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  await queryClient.prefetchQuery("getText", getAuthors)
+  await queryClient.prefetchQuery("getAuthors")
   return { props: {} }
 }
 
-const getAuthors = async () => {
-  const { getAuthors: data } = await graphQLClient.request(getAuthorsQuery)
-  return data as Author[]
-}
+function filterLiterature(authors: Author[], searched: string) {
+  if (!searched) return authors
+  const re = new RegExp(searched, "i")
+  return authors
+    .map((author) => filterAuthor(author))
+    .filter((x) => x) as Author[]
 
-// const filterEntries = (entries: Entry[], search: string) => {
-//   const re = new RegExp(search, "i")
-//   return (
-//     entries?.filter((entry: Entry) => {
-//       return (
-//         entry.principalParts?.some((principalPart) =>
-//           principalPart.text.some((principalPartText) =>
-//             normalize(principalPartText).match(re),
-//           ),
-//         ) ||
-//         entry.translations?.some((translation) =>
-//           translation.translation.match(re),
-//         ) ||
-//         entry.partOfSpeech.match(re)
-//       )
-//     }) || []
-//   )
-// }
+  function filterAuthor(author: Author) {
+    if (author.name.match(re)) return author
+    if (author.books)
+      author.books = author.books
+        ?.map((book) => filterBook(book))
+        .filter((x) => x) as Book[]
+    author.texts = author.texts
+      .map((text) => filterText(text))
+      .filter((x) => x) as Text[]
+    return author?.books?.length || author.texts.length ? author : null
+  }
+
+  function filterBook(book: Book) {
+    if (book.title.match(re)) return book
+    book.texts = book.texts
+      .map((text) => filterText(text))
+      .filter((x) => x) as Text[]
+    return book.texts.length ? book : null
+  }
+
+  function filterText(text: Text) {
+    return text.title.match(re) ? text : null
+  }
+}

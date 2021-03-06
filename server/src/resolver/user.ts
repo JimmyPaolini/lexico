@@ -11,6 +11,7 @@ import Entry from "../../../entity/dictionary/Entry"
 import Line from "../../../entity/literature/Line"
 import Settings, { SettingsInput } from "../../../entity/user/Settings"
 import User from "../../../entity/user/User"
+import log from "../../../utils/log"
 import { Authenticate } from "../auth/authentication"
 import { ResolverContext } from "../utils/ResolverContext"
 
@@ -149,6 +150,22 @@ export default class UserResolver {
   ) {
     user.settings = { ...user.settings, ...settings }
     await this.Users.save(user)
+    return true
+  }
+
+  @Mutation(() => Boolean)
+  @UseMiddleware(Authenticate)
+  async comment(
+    @Arg("subject") subject: string,
+    @Arg("body") body: string,
+    @Ctx() { user }: ResolverContext,
+  ) {
+    const { id, email, googleId, facebookId } = user
+    log.warn("comment", {
+      user: { id, email, googleId, facebookId },
+      subject,
+      body,
+    })
     return true
   }
 }

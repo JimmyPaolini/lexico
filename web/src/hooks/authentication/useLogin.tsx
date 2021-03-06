@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import loginQuery from "../../graphql/authentication/login.gql"
+import loginQuery from "../../graphql/authentication/login.graphql"
 import { graphQLClient, queryClient } from "../../pages/_app"
 
 interface UserInfo {

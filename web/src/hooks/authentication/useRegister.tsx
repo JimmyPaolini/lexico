@@ -1,5 +1,5 @@
 import { useQuery } from "react-query"
-import registerMutation from "../../graphql/authentication/register.gql"
+import registerMutation from "../../graphql/authentication/register.graphql"
 import { graphQLClient, queryClient } from "../../pages/_app"
 
 interface UserInfo {

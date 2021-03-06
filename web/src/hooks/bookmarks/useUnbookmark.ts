@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react"
 import { useMutation } from "react-query"
-import unbookmarkMutation from "../../graphql/bookmarks/unbookmark.gql"
+import unbookmarkMutation from "../../graphql/bookmarks/unbookmark.graphql"
 import { graphQLClient, queryClient } from "../../pages/_app"
 
 export default function useUnbookmark(
