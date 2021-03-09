@@ -1,8 +1,4 @@
-import {
-  CardHeader as CardHeaderMui,
-  IconButton,
-  useMediaQuery,
-} from "@material-ui/core"
+import { CardHeader as CardHeaderMui, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Menu } from "@material-ui/icons"
 import React, { useContext } from "react"
@@ -15,8 +11,7 @@ interface Props {
 }
 export default function CardHeader({ title, ...props }: Props) {
   const classes = useStyles()
-  const { isNavOpen, setNavOpen } = useContext(Context)
-  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
+  const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
 
   return (
     <CardHeaderMui

@@ -7,12 +7,13 @@ import {
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React, { useState } from "react"
+import { useContext, useState } from "react"
 import { Forms } from "../../../../../entity/dictionary/word/Forms"
 import { PartOfSpeech } from "../../../../../entity/dictionary/word/PartOfSpeech"
 import useEventListener from "../../../hooks/useEventListener"
 import identifierAbbreviations from "../../../utils/identifierAbbreviations"
 import ExpandIcon from "../../accessories/ExpandIcon"
+import { Context } from "../../Context"
 import AdjectiveForms from "./PartsOfSpeech/AdjectiveForms"
 import NounForms from "./PartsOfSpeech/NounForms"
 import VerbForms from "./PartsOfSpeech/VerbForms"
@@ -31,7 +32,10 @@ export default function FormsRow({
   identifiers = [],
 }: Props) {
   const classes = useStyles()
-  const [expanded, setExpanded] = useState(false)
+  const { user } = useContext(Context)
+  const [expanded, setExpanded] = useState<boolean>(
+    user.settings.formsExpandedByDefault,
+  )
   identifiers = identifiers.map((identifier) =>
     identifier
       .split(" ")

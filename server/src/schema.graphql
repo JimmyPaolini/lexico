@@ -285,20 +285,20 @@ type Query {
 }
 
 type Settings {
-  defaultFormsRowOpen: Boolean
-  defaultTranslationsRowOpen: Boolean
+  formsExpandedByDefault: Boolean
+  translationsExpandedByDefault: Boolean
   fontSize: Float
-  macronizeDictionary: Boolean
-  macronizeLiterature: Boolean
+  dictionaryMacronized: Boolean
+  literatureMacronized: Boolean
   theme: String
 }
 
 input SettingsInput {
-  defaultFormsRowOpen: Boolean = false
-  defaultTranslationsRowOpen: Boolean = false
+  formsExpandedByDefault: Boolean = false
+  translationsExpandedByDefault: Boolean = false
   fontSize: Float = 12
-  macronizeDictionary: Boolean = true
-  macronizeLiterature: Boolean = false
+  dictionaryMacronized: Boolean = true
+  literatureMacronized: Boolean = false
   theme: String = "dark"
 }
 

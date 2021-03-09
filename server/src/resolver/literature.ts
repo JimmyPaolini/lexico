@@ -21,11 +21,26 @@ export default class LiteratureResolver {
       order: { name: "ASC" },
     })
     return authors.map((author) => {
-      author.books?.sort((a, b) => a.title.localeCompare(b.title))
-      author.books?.map((book) =>
-        book.texts.sort((a, b) => a.title.localeCompare(b.title)),
+      author.books?.sort((a, b) =>
+        a.title.localeCompare(b.title, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        }),
       )
-      author.texts.sort((a, b) => a.title.localeCompare(b.title))
+      author.books?.map((book) =>
+        book.texts.sort((a, b) =>
+          a.title.localeCompare(b.title, undefined, {
+            numeric: true,
+            sensitivity: "base",
+          }),
+        ),
+      )
+      author.texts.sort((a, b) =>
+        a.title.localeCompare(b.title, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        }),
+      )
       return author
     })
   }
@@ -37,7 +52,12 @@ export default class LiteratureResolver {
       order: { title: "ASC" },
     })
     return books.map((book) =>
-      book.texts.sort((a, b) => a.title.localeCompare(b.title)),
+      book.texts.sort((a, b) =>
+        a.title.localeCompare(b.title, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        }),
+      ),
     )
   }
 
@@ -55,18 +75,38 @@ export default class LiteratureResolver {
     const author = await this.Authors.findOneOrFail(name, {
       relations: ["books", "books.texts", "texts"],
     })
-    author.books?.sort((a, b) => a.title.localeCompare(b.title))
-    author.books?.map((book) =>
-      book.texts.sort((a, b) => a.title.localeCompare(b.title)),
+    author.books?.sort((a, b) =>
+      a.title.localeCompare(b.title, undefined, {
+        numeric: true,
+        sensitivity: "base",
+      }),
     )
-    author.texts.sort((a, b) => a.title.localeCompare(b.title))
+    author.books?.map((book) =>
+      book.texts.sort((a, b) =>
+        a.title.localeCompare(b.title, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        }),
+      ),
+    )
+    author.texts.sort((a, b) =>
+      a.title.localeCompare(b.title, undefined, {
+        numeric: true,
+        sensitivity: "base",
+      }),
+    )
     return author
   }
 
   @Query(() => Book)
   async getBook(@Arg("id") id: string) {
     const book = await this.Books.findOneOrFail(id, { relations: ["texts"] })
-    book.texts.sort((a, b) => a.title.localeCompare(b.title))
+    book.texts.sort((a, b) =>
+      a.title.localeCompare(b.title, undefined, {
+        numeric: true,
+        sensitivity: "base",
+      }),
+    )
     return book
   }
 

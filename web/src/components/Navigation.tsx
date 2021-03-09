@@ -8,7 +8,6 @@ import {
   ListItemText,
   SwipeableDrawer,
   Typography,
-  useMediaQuery,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import {
@@ -28,8 +27,7 @@ import { Context } from "./Context"
 export default function Navigation() {
   const classes = useStyles()
   const router = useRouter()
-  const { isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
-  const isMobile = useMediaQuery((theme: any) => theme?.breakpoints.down("sm"))
+  const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
   const pageName = router.pathname.split("/")[1]
   const [selected, setSelected] = useState(pageName || "search")
 
@@ -126,7 +124,7 @@ const pages = [
     Name: "Search",
     name: "",
     icon: <Search />,
-    keybind: " ",
+    keybind: "s",
   },
   {
     Name: "Bookmarks",
@@ -147,15 +145,15 @@ const pages = [
   //   keybind: "g",
   // },
   {
-    Name: "Settings",
-    name: "settings",
+    Name: "User",
+    name: "user",
     icon: <AccountCircle />,
-    keybind: "s",
+    keybind: "u",
   },
   {
     Name: "About",
     name: "about",
     icon: <AccountBalance />,
-    keybind: "",
+    keybind: "a",
   },
 ]

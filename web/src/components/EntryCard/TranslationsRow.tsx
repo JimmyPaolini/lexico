@@ -7,17 +7,21 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { FiberManualRecord } from "@material-ui/icons"
-import React, { useState } from "react"
+import { useContext, useState } from "react"
 import Translation from "../../../../entity/dictionary/Translation"
 import useEventListener from "../../hooks/useEventListener"
 import ExpandIcon from "../accessories/ExpandIcon"
+import { Context } from "../Context"
 
 interface Props {
   translations: Translation[]
 }
 export default function TranslationsRow({ translations }: Props) {
   const classes = useStyles()
-  const [expanded, setExpanded] = useState(false)
+  const { user } = useContext(Context)
+  const [expanded, setExpanded] = useState<boolean>(
+    user.settings.translationsExpandedByDefault,
+  )
   const expandable = translations?.length > 2
 
   useEventListener("keypress", (e: any) => {

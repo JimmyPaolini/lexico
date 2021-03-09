@@ -4,7 +4,7 @@ import { Context } from "../components/Context"
 import LoginCard from "../components/settings/LoginCard"
 import SettingsCard from "../components/settings/SettingsCard"
 
-export default function Settings() {
+export default function User() {
   const { user } = useContext(Context)
 
   return (

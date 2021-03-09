@@ -1,8 +1,8 @@
 fragment allSettings on Settings {
   theme
   fontSize
-  defaultFormsRowOpen
-  defaultTranslationsRowOpen
-  macronizeDictionary
-  macronizeLiterature
+  formsExpandedByDefault
+  translationsExpandedByDefault
+  dictionaryMacronized
+  literatureMacronized
 }

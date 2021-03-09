@@ -3,7 +3,6 @@ import IconButton from "@material-ui/core/IconButton"
 import InputBase from "@material-ui/core/InputBase"
 import Paper from "@material-ui/core/Paper"
 import { makeStyles } from "@material-ui/core/styles"
-import useMediaQuery from "@material-ui/core/useMediaQuery"
 import MenuIcon from "@material-ui/icons/Menu"
 import SearchIcon from "@material-ui/icons/Search"
 import React, { Dispatch, SetStateAction, useContext, useRef } from "react"
@@ -32,9 +31,8 @@ export default function SearchBar({
   setLatin = () => null,
 }: Props) {
   const classes = useStyles()
-  const { isNavOpen, setNavOpen } = useContext(Context)
+  const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
   const input = useRef<any>()
-  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
   isLatin
   setLatin
   // useEffect(() => input.current.focus(), []);

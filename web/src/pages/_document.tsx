@@ -8,10 +8,10 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <title>Lexico</title>
         <Head>
+          <link rel="icon" href="/icon/favicon.ico" />
           <meta name="lexico" content="latin translation assistant" />
-          <meta charSet="utf-8" />
           <meta name="theme-color" content="#000000" />
-          <link rel="icon" href="icon/favicon.ico" />
+          <meta charSet="utf-8" />
           <link rel="preconnect" href="http://localhost:3001/graphql" />
           <link
             rel="apple-touch-icon"

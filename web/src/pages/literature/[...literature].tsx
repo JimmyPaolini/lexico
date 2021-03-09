@@ -1,13 +1,13 @@
 import { Grid, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { GetStaticPaths, GetStaticProps } from "next"
-import React, { useState } from "react"
-import { QueryFunctionContext, useQuery } from "react-query"
+import { useContext, useState } from "react"
 import Text from "../../../../entity/literature/Text"
+import { Context } from "../../components/Context"
 import ReaderModal from "../../components/literature/ReaderModal"
 import ReaderText from "../../components/literature/ReaderText"
-import getTextQuery from "../../graphql/literature/getText.graphql"
 import getTextsQuery from "../../graphql/literature/getTexts.graphql"
+import useGetText, { getText } from "../../hooks/literature/useGetText"
 import { graphQLClient, queryClient } from "../_app"
 
 interface Props {
@@ -15,9 +15,8 @@ interface Props {
 }
 export default function Reader({ textId }: Props) {
   const classes = useStyles()
-  const { data: text, isLoading } = useQuery(["getText", textId], getText, {
-    keepPreviousData: true,
-  })
+  const { user } = useContext(Context)
+  const { data: text, isLoading } = useGetText(textId)
 
   const [searched, setSearched] = useState<string>("")
   const [open, setOpen] = useState<boolean>(false)
@@ -27,7 +26,12 @@ export default function Reader({ textId }: Props) {
   }
 
   return (
-    <Paper square elevation={0} className={classes.reader}>
+    <Paper
+      square
+      elevation={0}
+      className={classes.reader}
+      style={{ fontSize: user?.settings.fontSize }}
+    >
       <style jsx global>{`
         body#body {
           background-color: black;
@@ -68,13 +72,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     notFound: !textId,
     props: { textId },
   }
-}
-
-const getText = async ({ queryKey: [, textId] }: QueryFunctionContext<any>) => {
-  const { getText: data } = await graphQLClient.request(getTextQuery, {
-    id: textId,
-  })
-  return data as Text
 }
 
 const useLiteraturePath = (literatueQueryPath: string[]) => {

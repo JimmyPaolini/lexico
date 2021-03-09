@@ -5,9 +5,9 @@ import Author from "../../../entity/literature/Author"
 import Book from "../../../entity/literature/Book"
 import Text from "../../../entity/literature/Text"
 import CardDeck from "../components/accessories/CardDeck"
-import AuthorCard from "../components/literature/LiteratureAuthor"
+import AuthorCard from "../components/literature/LiteratureCard"
 import SearchBar from "../components/search/SearchBar"
-import useGetAuthors from "../hooks/useGetAuthors"
+import useGetAuthors from "../hooks/literature/useGetAuthors"
 import { queryClient } from "./_app"
 
 export default function Literature() {

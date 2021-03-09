@@ -274,21 +274,21 @@ type Query {
 }
 
 type Settings {
-  defaultFormsRowOpen: Boolean
-  defaultTranslationsRowOpen: Boolean
+  dictionaryMacronized: Boolean
   fontSize: Float
-  macronizeDictionary: Boolean
-  macronizeLiterature: Boolean
+  formsExpandedByDefault: Boolean
+  literatureMacronized: Boolean
   theme: String
+  translationsExpandedByDefault: Boolean
 }
 
 input SettingsInput {
-  defaultFormsRowOpen: Boolean = false
-  defaultTranslationsRowOpen: Boolean = false
+  dictionaryMacronized: Boolean = true
   fontSize: Float = 12
-  macronizeDictionary: Boolean = true
-  macronizeLiterature: Boolean = false
+  formsExpandedByDefault: Boolean = false
+  literatureMacronized: Boolean = false
   theme: String = "dark"
+  translationsExpandedByDefault: Boolean = false
 }
 
 type Subjunctive {

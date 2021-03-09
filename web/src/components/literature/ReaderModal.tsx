@@ -1,10 +1,10 @@
 import { Box, Modal, Paper, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { Dispatch, SetStateAction, useMemo, useRef } from "react"
-import { QueryFunctionContext, useQuery } from "react-query"
+import { useSwipeable } from "react-swipeable"
 import Entry from "../../../../entity/dictionary/Entry"
-import searchLatinQuery from "../../graphql/search/searchLatin.graphql"
-import { graphQLClient } from "../../pages/_app"
+import useSearchLatin from "../../hooks/search/useSearchLatin"
+import useEventListener from "../../hooks/useEventListener"
 import CardDeck from "../accessories/CardDeck"
 import EntryCard from "../EntryCard/EntryCard"
 
@@ -17,11 +17,14 @@ export default function ReaderModal({ searched, open, setOpen }: Props) {
   const classes = useStyles()
   const ref = useRef<HTMLDivElement>(null)
 
-  const { data: entries, isFetched, isSuccess, isError } = useQuery(
-    ["searchLatin", searched],
-    searchLatin,
-    { retry: false },
+  const { data: entries, isFetched, isSuccess, isError } = useSearchLatin(
+    searched,
   )
+
+  useEventListener("keydown", (e: any) => {
+    console.log("here")
+    if (e.key === "Escape") setOpen(false)
+  })
 
   const cards = useMemo(() => {
     if (!entries) return []
@@ -30,61 +33,45 @@ export default function ReaderModal({ searched, open, setOpen }: Props) {
       Card: () => useMemo(() => <EntryCard {...{ entry, searched }} />, []),
     }))
   }, [entries])
-  cards
 
   return (
-    <div className={classes.container} ref={ref}>
-      <Modal
-        disablePortal
-        disableEnforceFocus
-        disableAutoFocus
-        disableScrollLock
-        container={() => ref.current}
-        className={classes.modal}
-        open={open && isFetched}
-        onClose={() => setOpen(false)}
-      >
-        <Box overflow="scroll">
-          {isError ? (
-            <Paper className={classes.notFound}>
-              <Typography variant="h5">not found</Typography>
-            </Paper>
-          ) : isSuccess && !!entries ? (
-            <CardDeck {...{ cards }} />
-          ) : null}
-        </Box>
-      </Modal>
-    </div>
+    <Modal
+      disablePortal
+      disableEnforceFocus
+      disableAutoFocus
+      disableScrollLock
+      container={() => ref.current}
+      className={classes.modal}
+      open={open && isFetched}
+      onClose={() => setOpen(false)}
+      {...useSwipeable({
+        onSwipedLeft: () => setOpen(false),
+        onSwipedRight: () => setOpen(false),
+      })}
+    >
+      <Box className={classes.container} tabIndex={-1}>
+        {isError ? (
+          <Paper className={classes.notFound}>
+            <Typography variant="h5">not found</Typography>
+          </Paper>
+        ) : isSuccess && !!entries ? (
+          <CardDeck {...{ cards }} />
+        ) : null}
+      </Box>
+    </Modal>
   )
 }
 
-async function searchLatin({
-  queryKey: [, search],
-}: QueryFunctionContext<any>) {
-  if (!search) return undefined
-  const { searchLatin: data } = await graphQLClient.request(searchLatinQuery, {
-    search,
-  })
-  return data
-}
-
 const useStyles = makeStyles((theme: any) => ({
-  container: {
-    "height": 300,
-    "flexGrow": 1,
-    "minWidth": 300,
-    "transform": "translateZ(0)",
-    "@media all and (-ms-high-contrast: none)": {
-      display: "none",
-    },
-  },
   modal: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    overflow: "scroll",
-    position: "absolute",
+  },
+  container: {
     height: "100%",
+    overflow: "scroll",
+    padding: theme.spacing(4),
   },
   notFound: {
     padding: theme.spacing(2),

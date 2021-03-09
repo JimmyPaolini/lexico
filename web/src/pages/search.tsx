@@ -14,17 +14,27 @@ interface Props {
 }
 export default function Search({ initialSearch }: Props) {
   const router = useRouter()
-  console.log("initialSearch", initialSearch)
-  const [isLatin, setLatin] = useState<boolean>(true)
+  const { latin, english } = router.query as { [key: string]: string }
+  initialSearch = latin || english || initialSearch || ""
+  const initialIsLatin = !english
+
+  const [isLatin, setLatin] = useState<boolean>(initialIsLatin)
   const [search, setSearch] = useState<string>(initialSearch)
-  const [searched, setSearched] = useState<string>(search)
+  const [searched, setSearched] = useState<string>(initialSearch)
+
   useEffect(() => {
     if (!search) setSearched("")
   }, [search])
+
+  useEffect(() => {
+    setSearch(initialSearch)
+    setSearched(initialSearch)
+  }, [initialSearch])
+
   useEffect(() => {
     refetch()
     const hash = searched ? (isLatin ? "?latin=" : "?english=") + searched : ""
-    router.push(router.pathname + hash, undefined, { shallow: true })
+    router.push(router.pathname + hash)
   }, [searched])
 
   const { data: entries, error, isLoading, refetch, isSuccess } = useSearch(
@@ -75,5 +85,5 @@ export default function Search({ initialSearch }: Props) {
 export const getServerSideProps: GetServerSideProps = async ({
   query: { latin, english },
 }) => ({
-  props: { initialQuery: latin || english || "" },
+  props: { initialSearch: latin || english || "" },
 })

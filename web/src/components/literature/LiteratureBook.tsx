@@ -1,7 +1,7 @@
 import {
   Collapse,
   Divider,
-  List,
+  Grid,
   ListItem,
   ListItemText,
 } from "@material-ui/core"
@@ -11,23 +11,16 @@ import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
 import { sentenceCase } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
-import TextRow from "./LiteratureText"
+import LiteratureText from "./LiteratureText"
 
 interface Props {
   author: Author
   book: Book
   isLast: boolean
-  searched: string
 }
 
-export default function LiteratureBook({
-  author,
-  book,
-  isLast,
-  searched = "",
-}: Props) {
+export default function LiteratureBook({ author, book, isLast }: Props) {
   const classes = useStyles()
-  searched
   const [expanded, setExpanded] = useState<boolean>(false)
 
   return (
@@ -40,23 +33,17 @@ export default function LiteratureBook({
         <ListItemText
           primary={sentenceCase(book.title)}
           primaryTypographyProps={{ variant: "body1" }}
-          secondary={sentenceCase(author.name)}
         />
-        <ExpandIcon {...{ expanded }} />
+        <ExpandIcon {...{ expanded }} style={{ padding: 0 }} />
       </ListItem>
-      {!isLast ? <Divider className={classes.inset1} /> : null}
       <Collapse in={expanded}>
-        <List className={classes.noPadding} dense>
-          {book.texts.map((text, i) => {
-            const isTextLast = i === book.texts.length - 1 && isLast
-            return (
-              <TextRow
-                {...{ author, book, text, isLast: isTextLast, searched }}
-              />
-            )
-          })}
-        </List>
+        <Grid container justify="center" alignItems="center">
+          {book.texts.map((text) => (
+            <LiteratureText {...{ author, book, text }} />
+          ))}
+        </Grid>
       </Collapse>
+      {!isLast ? <Divider className={classes.inset1} /> : null}
     </>
   )
 }

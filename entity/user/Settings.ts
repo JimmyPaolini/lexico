@@ -9,16 +9,16 @@ export default class Settings {
   fontSize: number = 12
 
   @Field({ defaultValue: false })
-  defaultFormsRowOpen: boolean = false
+  formsExpandedByDefault: boolean = false
 
   @Field({ defaultValue: false })
-  defaultTranslationsRowOpen: boolean = false
+  translationsExpandedByDefault: boolean = false
 
   @Field({ defaultValue: true })
-  macronizeDictionary: boolean = true
+  dictionaryMacronized: boolean = true
 
   @Field({ defaultValue: false })
-  macronizeLiterature: boolean = false
+  literatureMacronized: boolean = false
 }
 
 @InputType()
@@ -30,14 +30,14 @@ export class SettingsInput implements Partial<Settings> {
   fontSize: number = 12
 
   @Field({ defaultValue: false })
-  defaultFormsRowOpen: boolean = false
+  formsExpandedByDefault: boolean = false
 
   @Field({ defaultValue: false })
-  defaultTranslationsRowOpen: boolean = false
+  translationsExpandedByDefault: boolean = false
 
   @Field({ defaultValue: true })
-  macronizeDictionary: boolean = true
+  dictionaryMacronized: boolean = true
 
   @Field({ defaultValue: false })
-  macronizeLiterature: boolean = false
+  literatureMacronized: boolean = false
 }

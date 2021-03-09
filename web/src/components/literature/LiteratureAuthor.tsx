@@ -1,61 +1,47 @@
-import { Card, CardContent, CardHeader, Divider, List } from "@material-ui/core"
+import { CardActionArea, CardHeader } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
+import { Dispatch, SetStateAction, useContext } from "react"
 import Author from "../../../../entity/literature/Author"
-import Book from "../../../../entity/literature/Book"
 import { sentenceCase } from "../../utils/string"
-import BookRow from "./LiteratureBook"
-import TextRow from "./LiteratureText"
+import ExpandIcon from "../accessories/ExpandIcon"
+import { Context } from "../Context"
 
 interface Props {
   author: Author
-  searched: string
+  expanded: boolean
+  setExpanded: Dispatch<SetStateAction<boolean>>
 }
 
-export default function LiteratureAuthor({ author, searched = "" }: Props) {
+export default function LiteratureAuthor({
+  author,
+  expanded,
+  setExpanded,
+}: Props) {
   const classes = useStyles()
-  const books = author.books || ([] as Book[])
-  const nonBookTexts = author.texts.filter((text) => !text.book)
+  const { isMobile } = useContext(Context)
 
-  return (
-    <Card elevation={4} className={classes.authorCard}>
-      <CardHeader
-        title={sentenceCase(author.name)}
-        subheader={sentenceCase(author.fullname)}
-      />
-      <Divider style={{ marginRight: 8 }} />
-      <CardContent className={classes.noPadding}>
-        <List className={classes.noPadding} dense>
-          {books.map((book, i) => {
-            const isLast = i === books.length - 1 && !nonBookTexts.length
-            return <BookRow {...{ author, book, isLast, searched }} />
-          })}
-          {nonBookTexts.map((text, i) => {
-            const isLast = i === nonBookTexts.length - 1
-            return <TextRow {...{ author, text, isLast, searched }} />
-          })}
-        </List>
-      </CardContent>
-    </Card>
+  const cardHeader = (
+    <CardHeader
+      title={sentenceCase(author.name)}
+      subheader={sentenceCase(author.fullname)}
+      action={isMobile && <ExpandIcon {...{ expanded }} />}
+      classes={{
+        action: classes.expandIcon,
+      }}
+    />
+  )
+
+  return isMobile ? (
+    <CardActionArea onClick={() => setExpanded((expanded) => !expanded)}>
+      {cardHeader}
+    </CardActionArea>
+  ) : (
+    cardHeader
   )
 }
 
-const useStyles = makeStyles((theme: any) => ({
-  authorCard: {
-    "width": theme.custom.cardWidth,
-    "display": "inline-block",
-    "paddingBottom": 0,
-    "&:last-child": {
-      paddingBottom: 0,
-    },
-  },
-  noPadding: {
-    "padding": 0,
-    "&:last-child": {
-      paddingBottom: 0,
-    },
-  },
-  inset1: {
-    marginLeft: theme.spacing(1),
+const useStyles = makeStyles(() => ({
+  expandIcon: {
+    marginTop: "auto",
   },
 }))

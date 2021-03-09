@@ -1,5 +1,6 @@
-import { Divider, ListItem, ListItemText } from "@material-ui/core"
+import { Avatar, CardActionArea, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import { Subject } from "@material-ui/icons"
 import React from "react"
 import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
@@ -11,51 +12,46 @@ interface Props {
   author: Author
   book?: Book
   text: Text
-  isLast: boolean
-  searched: string
 }
-export default function LiteratureText({
-  author,
-  book,
-  text,
-  isLast,
-  searched = "",
-}: Props) {
+export default function LiteratureText({ author, book, text }: Props) {
   const classes = useStyles()
-  searched
   let url = `literature/${author.name}`
   if (book) url += `/${book.title}/${book.id}`
   url += `/${text.title}/${text.id}`
+  const isTitleBook = text.title.match(/book \d+/i)
 
   return (
-    <>
-      <ListItem button component="a" href={url} key={text.id}>
-        <ListItemText
-          primary={romanNumeralize(sentenceCase(text.title))}
-          secondary={
-            book ? sentenceCase(book.title) : sentenceCase(author.name)
-          }
-          className={classes.inset1}
-        />
-      </ListItem>
-      {!isLast ? (
-        <Divider className={!!book ? classes.inset2 : classes.inset1} />
-      ) : null}
-    </>
+    <Grid item className={classes.textContainer} container justify="center">
+      <CardActionArea href={url}>
+        <Avatar className={classes.textAvatar}>
+          {!isTitleBook ? (
+            <Subject />
+          ) : (
+            romanNumeralize(text.title.match(/\d+/)?.[0])
+          )}
+        </Avatar>
+        {!book ? (
+          <Typography align="center" gutterBottom>
+            {romanNumeralize(sentenceCase(text.title))}
+          </Typography>
+        ) : null}
+      </CardActionArea>
+    </Grid>
   )
 }
 
 const useStyles = makeStyles((theme: any) => ({
-  noPadding: {
-    "padding": 0,
-    "&:last-child": {
-      paddingBottom: 0,
-    },
+  textContainer: {
+    flex: "20%",
+  },
+  textAvatar: {
+    padding: theme.spacing(1),
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   inset1: {
     marginLeft: theme.spacing(1),
-  },
-  inset2: {
-    marginLeft: theme.spacing(2),
   },
 }))

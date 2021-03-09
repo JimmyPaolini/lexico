@@ -17,10 +17,10 @@ import ToolIconGrid from "../components/about/ToolIconGrid"
 import CardHeader from "../components/accessories/CardHeader"
 
 const upcomingFeatures = [
-  "Collaborations with Latinists/Classics Organizations (email me through the Suggestions page!)",
-  "More Literature (suggest some through the Suggestions page!)",
+  "More relevant search based on word frequency in literature",
+  "More Literature (suggest some through the Comment Box!)",
+  "Collaborations with Latinists/Classics Organizations (contact me through the Comment Box!)",
   "Voice translation, so that you can speak commansd to Lexico and it will speak its response!",
-  // "English-to-Latin translation",
   // "Ελληνικά (Greek) translation and literature!",
 ]
 

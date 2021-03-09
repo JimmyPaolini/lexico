@@ -1,0 +1,3 @@
+mutation SetSettings($settings: SettingsInput!) {
+  setSettings(settings: $settings)
+}

@@ -1,17 +1,10 @@
-import {
-  Card,
-  CardContent,
-  Divider,
-  FormControlLabel,
-  Grid,
-  Grow,
-  Switch,
-} from "@material-ui/core"
+import { Card, CardContent, Divider, Grid, Grow } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import useLogout from "../../hooks/authentication/useLogout"
 import CardHeader from "../accessories/CardHeader"
 import SubmitButton from "../accessories/SubmitButton"
+import SettingsForm from "./SettingsForm"
 
 export default function SettingsCard() {
   const classes = useStyles()
@@ -25,17 +18,7 @@ export default function SettingsCard() {
         <CardContent>
           <Grid container direction="column" spacing={2}>
             <Grid item>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={true}
-                    onChange={() => null}
-                    name="checkedB"
-                    color="primary"
-                  />
-                }
-                label="Primary"
-              />
+              <SettingsForm />
             </Grid>
             <Grid item>
               <SubmitButton name="Sign out" onClick={() => logout()} />

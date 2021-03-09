@@ -4,11 +4,12 @@ import { ExpandMore } from "@material-ui/icons"
 
 interface Props {
   expanded: boolean
+  [key: string]: any
 }
-export default function ExpandIcon({ expanded }: Props) {
+export default function ExpandIcon({ expanded, ...props }: Props) {
   const classes = useStyles()
   return (
-    <Box className={classes.container}>
+    <Box className={classes.container} {...props}>
       <ExpandMore
         className={expanded ? classes.upSideDown : classes.rightSideUp}
       />

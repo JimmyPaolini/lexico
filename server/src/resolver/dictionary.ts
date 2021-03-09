@@ -55,6 +55,10 @@ export default class DictionaryResolver {
     entries = entries
       .filter((entry) => !!entry.translations?.length)
       .map((entry) => {
+        // entry.translations = entry.translations?.map((translation) => ({
+        //   ...translation,
+        //   translation: translation.translation.replace(/^(.*)\s/, ""),
+        // }))
         if (this.identifiablePartsOfSpeech.includes(entry.partOfSpeech)) {
           let word = search
           if (hasSuffix(word, "que")) word = word.replace(/que$/i, "")
@@ -72,7 +76,7 @@ export default class DictionaryResolver {
       })
     log.info(
       "searchLatin res",
-      entries.map(({ id }) => ({ id })),
+      entries.map(({ id }) => id),
     )
     return entries
   }
@@ -85,10 +89,6 @@ export default class DictionaryResolver {
   ) {
     if (!search) return []
     log.info("searchEnglish req", { search })
-    // const translations = await this.Translations.find({
-    //   where: `"translation" ~* '(^| )${search}( |$)'`, //{ translation: Like(`%${search}%`) },
-    //   relations: ["entry"],
-    // })
     const translations = await this.Translations.createQueryBuilder(
       "translation",
     )
@@ -99,7 +99,12 @@ export default class DictionaryResolver {
 
     const entries = translations
       .map((t) => t.entry)
+      .filter((entry) => entry.partOfSpeech !== "properNoun")
       .map((entry) => {
+        // entry.translations = entry.translations?.map((translation) => ({
+        //   ...translation,
+        //   translation: translation.translation.replace(/^([^)]*)\s/, ""),
+        // }))
         if (entry.partOfSpeech === "verb" && entry.forms) {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
         }
@@ -110,7 +115,7 @@ export default class DictionaryResolver {
       })
     log.info(
       "searchEnglish res",
-      entries.map(({ id }) => ({ id })),
+      entries.map(({ id }) => id),
     )
     return entries
   }
@@ -125,11 +130,6 @@ export default class DictionaryResolver {
   //   })
   //   entries.forEach((entry) => log.info(entry.id))
   //   return entries.filter((entry) => !!entry.translations)
-  // }
-
-  // @Query(() => [Entry])
-  // async untranslated() {
-  //   return await this.Entries.query(`SELECT * FROM untranslated`)
   // }
 
   // @Query(() => Boolean)
