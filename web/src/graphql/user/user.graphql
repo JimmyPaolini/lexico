@@ -5,6 +5,7 @@ query User {
     id
     email
     googleId
+    facebookId
     settings {
       ...allSettings
     }

@@ -22,7 +22,6 @@ export default function ReaderModal({ searched, open, setOpen }: Props) {
   )
 
   useEventListener("keydown", (e: any) => {
-    console.log("here")
     if (e.key === "Escape") setOpen(false)
   })
 
@@ -69,7 +68,7 @@ const useStyles = makeStyles((theme: any) => ({
     justifyContent: "center",
   },
   container: {
-    height: "100%",
+    maxHeight: "100%",
     overflow: "scroll",
     padding: theme.spacing(4),
   },

@@ -84,7 +84,7 @@ const tools = [
   { name: "eslint", url: "https://eslint.org/" },
   { name: "prettier", url: "https://prettier.io/" },
   { name: "vscode", url: "https://code.visualstudio.com/" },
-  { name: "github", url: "https://github.com/" },
+  { name: "github", url: "https://github.com/JimmyPaolini/Lexico" },
   { name: "figma", url: "https://www.figma.com/" },
   { name: "docker", url: "https://www.docker.com/" },
   { name: "kubernetes", url: "https://kubernetes.io/" },

@@ -84,7 +84,7 @@ export default function SettingsCard() {
         label: "Forms expanded by default",
       })}
       <Typography style={{ marginTop: 10, marginBottom: 4 }}>
-        Literature Reader Font Size:
+        Literature Reader font size:
       </Typography>
       <Slider
         id="fontSize"

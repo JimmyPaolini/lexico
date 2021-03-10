@@ -8,6 +8,6 @@
 
 **/database_volume
 **/elasticsearch_volume
-
+**/ci
 **/ingestion
 **/web

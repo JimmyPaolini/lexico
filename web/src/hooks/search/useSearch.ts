@@ -1,27 +1,36 @@
 import { QueryFunctionContext, useQuery } from "react-query"
-import searchEnglish from "../../graphql/search/searchEnglish.graphql"
-import searchLatin from "../../graphql/search/searchLatin.graphql"
+import searchEnglishQuery from "../../graphql/search/searchEnglish.graphql"
+import searchLatinQuery from "../../graphql/search/searchLatin.graphql"
 import { graphQLClient } from "../../pages/_app"
 
-export default function useSearch(search: string, isLatin: boolean) {
-  return useQuery(["search", search, isLatin], useSearchQuery, {
+export default function useSearch(searched: string, isLatin: boolean) {
+  const options = {
     enabled: false,
     retry: false,
-  })
+    staleTime: 1000 * 60 * 5,
+  }
+  return isLatin
+    ? useQuery(["searchLatin", searched], useSearchLatinQuery, options)
+    : useQuery(["searchEnglish", searched], useSearchEnglishQuery, options)
 }
 
-async function useSearchQuery({
-  queryKey: [, search, isLatin],
+async function useSearchLatinQuery({
+  queryKey: [, search],
 }: QueryFunctionContext<any>) {
-  if (isLatin) {
-    const { searchLatin: data } = await graphQLClient.request(searchLatin, {
+  const { searchLatin: data } = await graphQLClient.request(searchLatinQuery, {
+    search,
+  })
+  return data
+}
+
+async function useSearchEnglishQuery({
+  queryKey: [, search],
+}: QueryFunctionContext<any>) {
+  const { searchEnglish: data } = await graphQLClient.request(
+    searchEnglishQuery,
+    {
       search,
-    })
-    return data
-  } else {
-    const { searchEnglish: data } = await graphQLClient.request(searchEnglish, {
-      search,
-    })
-    return data
-  }
+    },
+  )
+  return data
 }

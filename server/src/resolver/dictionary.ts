@@ -74,10 +74,10 @@ export default class DictionaryResolver {
         )
         return entry
       })
-    log.info(
-      "searchLatin res",
-      entries.map(({ id }) => id),
-    )
+    log.info("searchLatin res", {
+      search,
+      entries: entries.map(({ id }) => id),
+    })
     return entries
   }
 
@@ -113,10 +113,10 @@ export default class DictionaryResolver {
         )
         return entry
       })
-    log.info(
-      "searchEnglish res",
-      entries.map(({ id }) => id),
-    )
+    log.info("searchEnglish res", {
+      search,
+      entries: entries.map(({ id }) => id),
+    })
     return entries
   }
 

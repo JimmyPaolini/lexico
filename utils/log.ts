@@ -41,12 +41,9 @@ const consoleTransport = new transports.Console({
 const circularReplacer = () => {
   const seen = new WeakSet()
   return (_: any, value: any) => {
-    if (typeof value === "object" && value !== null) {
-      if (seen.has(value)) {
-        return
-      }
-      seen.add(value)
-    }
+    if (typeof value === "object" && value !== null)
+      if (seen.has(value)) return
+      else seen.add(value)
     return value
   }
 }

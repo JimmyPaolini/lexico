@@ -11,12 +11,10 @@ import useSearch from "../hooks/search/useSearch"
 
 interface Props {
   initialSearch: string
+  initialIsLatin: boolean
 }
-export default function Search({ initialSearch }: Props) {
+export default function Search({ initialSearch, initialIsLatin }: Props) {
   const router = useRouter()
-  const { latin, english } = router.query as { [key: string]: string }
-  initialSearch = latin || english || initialSearch || ""
-  const initialIsLatin = !english
 
   const [isLatin, setLatin] = useState<boolean>(initialIsLatin)
   const [search, setSearch] = useState<string>(initialSearch)
@@ -34,17 +32,14 @@ export default function Search({ initialSearch }: Props) {
   useEffect(() => {
     refetch()
     const hash = searched ? (isLatin ? "?latin=" : "?english=") + searched : ""
-    router.push(router.pathname + hash)
+    if (!!searched) router.push(router.pathname + hash)
   }, [searched])
 
-  const { data: entries, error, isLoading, refetch, isSuccess } = useSearch(
-    searched,
-    isLatin,
-  )
+  const useSearchResult = useSearch(searched, isLatin)
+  const { data: entries, refetch, isLoading, isSuccess } = useSearchResult
 
-  const noEntriesFound =
-    searched && isSuccess && Array.isArray(entries) && !entries.length
-  const entriesFound = !error && Array.isArray(entries) && entries.length
+  const noEntriesFound = searched && isSuccess && !entries.length
+  const entriesFound = searched && isSuccess && entries.length
   const cards = useMemo(
     () =>
       entries?.map((entry: Entry) => ({
@@ -84,6 +79,10 @@ export default function Search({ initialSearch }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async ({
   query: { latin, english },
-}) => ({
-  props: { initialSearch: latin || english || "" },
-})
+}) => {
+  let initialIsLatin = !english
+  const initialSearch = latin || english || ""
+  return {
+    props: { initialSearch, initialIsLatin },
+  }
+}

@@ -6,9 +6,11 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import { Hydrate } from "react-query/hydration"
 import { ContextProvider } from "../components/Context"
 import Layout from "../components/Layout"
-import theme from "../theme"
+import theme from "../theme/theme"
 
-export const endpoint = "http://localhost:3001/graphql"
+// const SERVER_HOST =
+//   process.env.NODE_ENV === "production" ? "server" : "localhost"
+export const endpoint = `http://localhost:3001/graphql`
 export const graphQLClient = new GraphQLClient(endpoint, {
   credentials: "include",
   mode: "cors",

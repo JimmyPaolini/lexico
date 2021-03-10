@@ -9,8 +9,8 @@ import buildAPI from "./utils/api"
 import { createDbViews } from "./utils/database"
 
 async function main() {
-  const isProd = process.env.NODE_ENV === "production"
-  if (isProd) log.info("environment is production")
+  if (process.env.NODE_ENV === "production")
+    log.info("environment is production")
 
   await connectDatabase()
   await createDbViews()
