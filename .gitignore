@@ -15,5 +15,5 @@
 **/data/wiktionary
 **/data/literature_original
 
-**/*kubeconfig.yml
-**/kubernetes/*
+**/*-kubeconfig.yaml
+**/kubernetes/**

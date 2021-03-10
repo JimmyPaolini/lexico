@@ -1,5 +1,14 @@
 version: "3"
 services:
+  # nginx:
+  #   image: nginx:latest
+  #   volumes:
+  #     - ./ci/nginx.conf:/etc/nginx/nginx.conf:ro
+  #   depends_on:
+  #     - web
+  #   ports:
+  #     - "4000:4000"
+
   web:
     image: jimmypaolini/lexico-web
     build:
@@ -9,6 +18,8 @@ services:
     env_file: .env
     ports:
       - 3000:3000
+    labels:
+      kompose.service.type: LoadBalancer
     depends_on:
       - server
 

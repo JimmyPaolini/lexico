@@ -9,7 +9,7 @@
     "build-elasticsearch": "docker image pull docker.elastic.co/elasticsearch/elasticsearch:7.11.1",
     "build-database": "docker image pull postgres",
     "kubeconfig": "export KUBECONFIG=./ci/lexico-kubeconfig.yaml",
-    "kompose": "kompose convert && mv ./*.yaml ./ci/kubernetes",
+    "kompose": "kompose convert --volumes hostPath && mv ./*.yaml ./ci/kubernetes",
     "deploy": "kubectl apply -f ./ci/kubernetes",
     "deploy-web": "kubectl apply $(ls ./ci/kubernetes/elasticsearch*.yaml | awk ' { print \" -f \" $1 } ')",
     "deploy-server": "kubectl apply $(ls ./ci/kubernetes/server*.yaml | awk ' { print \" -f \" $1 } ')",
