@@ -12,7 +12,6 @@ export default class MyDocument extends Document {
           <meta name="lexico" content="latin translation assistant" />
           <meta name="theme-color" content="#000000" />
           <meta charSet="utf-8" />
-          <link rel="preconnect" href="http://localhost:3001/graphql" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"

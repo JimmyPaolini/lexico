@@ -13,7 +13,7 @@ export default function User() {
         {!!user ? (
           <SettingsCard />
         ) : (
-          <LoginCard title="login to access settings" />
+          <LoginCard title="sign in to access settings" />
         )}
       </Grid>
     </Grid>

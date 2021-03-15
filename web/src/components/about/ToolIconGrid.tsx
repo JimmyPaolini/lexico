@@ -50,10 +50,11 @@ export default function ToolIconGrid() {
                 onClick={(e: any) => e.stopPropagation()}
               >
                 <Image
-                  src={`/icon/${tool.name}.png`}
+                  src={`/icon/tool/${tool.name}.png`}
                   alt={tool.name}
                   width={128}
                   height={128}
+                  priority
                 />
               </Link>
             </Grid>

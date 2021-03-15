@@ -4,6 +4,7 @@ import Author from "../../../entity/literature/Author"
 import Book from "../../../entity/literature/Book"
 import Line from "../../../entity/literature/Line"
 import Text from "../../../entity/literature/Text"
+import log from "../../../utils/log"
 
 @Resolver(Text)
 export default class LiteratureResolver {
@@ -114,6 +115,7 @@ export default class LiteratureResolver {
   async getText(@Arg("id") id: string) {
     const text = await this.Texts.findOneOrFail(id, { relations: ["lines"] })
     text.lines.sort((a, b) => a.lineNumber - b.lineNumber)
+    log.info("getText", { id: text.id, title: text.title })
     return text
   }
 

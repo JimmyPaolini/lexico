@@ -1,5 +1,6 @@
 import { FindManyOptions, getConnection } from "typeorm"
 import Entry from "../../../entity/dictionary/Entry"
+import log from "../../../utils/log"
 import { ingestEntryWords } from "./ingestEntryWords"
 
 export default async function ingestWords() {

@@ -14,5 +14,5 @@ COPY . ../
 RUN npm run build
 
 EXPOSE 3000
-HEALTHCHECK CMD curl --fail http://localhost:3000/ || exit 1
-CMD npm run start
+HEALTHCHECK CMD curl --fail http://web:3000/ || exit 1
+CMD NODE_ENV=production npm run start

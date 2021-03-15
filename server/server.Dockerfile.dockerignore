@@ -5,9 +5,10 @@
 
 **/node_modules
 **/dist
+**/*Dockerfile*
 
 **/database_volume
 **/elasticsearch_volume
-**/ci
+**/infra
 **/ingestion
 **/web

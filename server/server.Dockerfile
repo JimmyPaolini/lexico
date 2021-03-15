@@ -14,5 +14,5 @@ COPY . ../
 RUN npm run tsc
 
 EXPOSE 3001
-HEALTHCHECK CMD curl --fail http://localhost:3001/health || exit 1
-CMD npm run start
+HEALTHCHECK CMD curl --fail http://server:3001/health || exit 1
+CMD NODE_ENV=production npm run start

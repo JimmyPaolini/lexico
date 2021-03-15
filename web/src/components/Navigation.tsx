@@ -26,8 +26,8 @@ import { Context } from "./Context"
 
 export default function Navigation() {
   const classes = useStyles()
-  const router = useRouter()
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
+  const router = useRouter()
   const pageName = router.pathname.split("/")[1]
   const [selected, setSelected] = useState(pageName || "search")
 
@@ -122,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
 const pages = [
   {
     Name: "Search",
-    name: "",
+    name: "search",
     icon: <Search />,
     keybind: "s",
   },

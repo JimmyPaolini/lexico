@@ -8,23 +8,22 @@ import Line from "../entity/literature/Line"
 import Text from "../entity/literature/Text"
 import User from "../entity/user/User"
 import {
-  DB_DATABASE,
-  DB_HOST,
-  DB_PASSWORD,
-  DB_PORT,
-  DB_USERNAME,
+  DATABASE_HOST,
   LOG_SQL,
+  POSTGRES_DB,
+  POSTGRES_PASSWORD,
+  POSTGRES_USER,
 } from "../utils/env"
 import log from "./log"
 
 export async function connectDatabase() {
   await createConnection({
     type: "postgres",
-    host: process.env.NODE_ENV === "production" ? DB_HOST : "localhost",
-    port: parseInt(DB_PORT!),
-    username: DB_USERNAME,
-    password: DB_PASSWORD,
-    database: DB_DATABASE,
+    host: DATABASE_HOST,
+    port: 5432,
+    username: POSTGRES_USER,
+    password: POSTGRES_PASSWORD,
+    database: POSTGRES_DB,
     entities: [Entry, Translation, Word, Author, Book, Text, Line, User],
     logging: LOG_SQL === "true" || [
       "log",
@@ -35,7 +34,7 @@ export async function connectDatabase() {
       "error",
     ],
     maxQueryExecutionTime: 1000,
-    synchronize: true,
+    synchronize: process.env.NODE_ENV !== "production",
   })
   log.info("connected to database")
 }

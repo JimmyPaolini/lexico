@@ -46,5 +46,5 @@
     "../**/*.tsx",
     "./src/**/*.graphql",
     "./src/**/*.graphql"
-  ]
+, "next.config.js"  ]
 }

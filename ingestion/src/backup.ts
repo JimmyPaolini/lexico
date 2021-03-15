@@ -1,16 +1,19 @@
 import { readdirSync } from "fs"
 import { connectDatabase } from "../../utils/database"
+import log from "../../utils/log"
 import {
   backupDatabase,
   backupFileNameExtension,
   restoreDatabase,
 } from "./utils/backup"
+import { createDbViews } from "./utils/database"
 
 async function main() {
   const command = process.argv[2]
   if (!command) throw new Error("no command")
 
   await connectDatabase()
+  await createDbViews()
 
   const commandMap = {
     database: () => backupDatabase("manual"),

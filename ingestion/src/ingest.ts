@@ -8,6 +8,7 @@ import { ingestEntryWords } from "./dictionary/ingestEntryWords"
 import ingestTranslationReferences from "./dictionary/ingestTranslationReferences"
 import ingestWords from "./dictionary/ingestWords"
 import ingestLiterature from "./literature/ingestLiterature"
+import { createDbViews } from "./utils/database"
 import ingestWiktionary from "./wiktionary/ingestWiktionary"
 
 async function main() {
@@ -15,6 +16,7 @@ async function main() {
   if (!command) throw new Error("no command")
 
   await connectDatabase()
+  await createDbViews()
 
   const commandMap = {
     wiktionary: () => ingestWiktionary(),
@@ -36,6 +38,7 @@ async function main() {
       for (const entry of entries) await ingestEntryWords(entry)
     },
     literature: () => ingestLiterature(),
+    views: () => null,
   } as { [key: string]: () => any }
 
   if (!(command in commandMap)) throw new Error("unknown command")

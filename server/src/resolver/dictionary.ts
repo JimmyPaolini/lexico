@@ -33,7 +33,7 @@ export default class DictionaryResolver {
     @Ctx() { bookmarks }: ResolverContext,
   ) {
     if (!search || !search.match(/^-?(\w| )+$/)) return []
-    log.info("searchLatin req", { search })
+    log.info("searchLatin request", { search })
     const pushSuffix = async (suffix: string) => {
       const nonSuffixWord = await this.Words.findOne({
         word: search.replace(new RegExp(suffix + "$", "i"), ""),
@@ -74,7 +74,7 @@ export default class DictionaryResolver {
         )
         return entry
       })
-    log.info("searchLatin res", {
+    log.info("searchLatin response", {
       search,
       entries: entries.map(({ id }) => id),
     })
@@ -88,7 +88,7 @@ export default class DictionaryResolver {
     @Ctx() { bookmarks }: ResolverContext,
   ) {
     if (!search) return []
-    log.info("searchEnglish req", { search })
+    log.info("searchEnglish request", { search })
     const translations = await this.Translations.createQueryBuilder(
       "translation",
     )
@@ -113,7 +113,7 @@ export default class DictionaryResolver {
         )
         return entry
       })
-    log.info("searchEnglish res", {
+    log.info("searchEnglish response", {
       search,
       entries: entries.map(({ id }) => id),
     })

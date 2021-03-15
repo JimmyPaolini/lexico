@@ -8,12 +8,14 @@ import Line from "../../entity/literature/Line"
 import Text from "../../entity/literature/Text"
 import User from "../../entity/user/User"
 import { connectDatabase } from "../../utils/database"
+import { createDbViews } from "./utils/database"
 
 async function main() {
   const command = process.argv[2]
   if (!command) throw new Error("no command")
 
   await connectDatabase()
+  await createDbViews()
 
   const Entries = getConnection().getRepository(Entry)
   const Translations = getConnection().getRepository(Translation)
