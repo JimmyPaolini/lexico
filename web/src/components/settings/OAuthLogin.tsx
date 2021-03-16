@@ -21,6 +21,7 @@ export default function OAuthLogin({ provider }: Props) {
           alt={`${provider} logo`}
           height={24}
           width={24}
+          priority
         />
       }
     >

@@ -67,7 +67,7 @@ interface TranslationBulletProps {
 function TranslationBullet({ translation }: TranslationBulletProps) {
   const classes = useStyles()
   return (
-    <Grid container item spacing={1} wrap="nowrap" key={translation.id}>
+    <Grid container item spacing={1} wrap="nowrap">
       <Grid item>
         <FiberManualRecord className={classes.bullet} />
       </Grid>

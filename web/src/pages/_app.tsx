@@ -8,7 +8,10 @@ import { ContextProvider } from "../components/Context"
 import Layout from "../components/Layout"
 import theme from "../theme/theme"
 
-export const endpoint = `http://${process.env.NEXT_PUBLIC_WEB_HOST}:3000/api`
+const endpoint =
+  (typeof window === "undefined"
+    ? "http://localhost:3000"
+    : window.location.origin) + `/api`
 export const graphQLClient = new GraphQLClient(endpoint, {
   credentials: "include",
   mode: "cors",

@@ -73,8 +73,10 @@ export default function FormsRow({
           <Grid container direction="row" justify="space-evenly">
             <Grid container item direction="column" justify="center" xs={true}>
               <Typography variant="body1">{searched}</Typography>
-              {identifiers.map((identifier) => (
-                <Typography variant="button">{identifier}</Typography>
+              {identifiers.map((identifier, i) => (
+                <Typography variant="button" key={identifier + i}>
+                  {identifier}
+                </Typography>
               ))}
             </Grid>
             {FormsCard && (
