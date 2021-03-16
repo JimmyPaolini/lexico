@@ -1,18 +1,18 @@
 import { CssBaseline, ThemeProvider } from "@material-ui/core"
 import { GraphQLClient } from "graphql-request"
 import type { AppProps } from "next/app"
-import React from "react"
+import React, { useEffect } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { Hydrate } from "react-query/hydration"
 import { ContextProvider } from "../components/Context"
 import Layout from "../components/Layout"
 import theme from "../theme/theme"
 
-const endpoint =
-  (typeof window === "undefined"
-    ? "http://localhost:3000"
-    : window.location.origin) + `/api`
-export const graphQLClient = new GraphQLClient(endpoint, {
+const clientAPIEndpoint =
+  typeof window === "undefined"
+    ? `http://localhost:3001/graphql`
+    : window.location.origin + "/api"
+export const graphQLClient = new GraphQLClient(clientAPIEndpoint, {
   credentials: "include",
   mode: "cors",
   keepalive: true,
@@ -21,6 +21,11 @@ export const graphQLClient = new GraphQLClient(endpoint, {
 export const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    const jssStyles = document.querySelector("#jss-server-side")
+    if (jssStyles) jssStyles.parentElement!.removeChild(jssStyles)
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>

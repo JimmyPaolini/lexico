@@ -16,11 +16,7 @@ export default async function ingestTranslationReferences() {
   let translations = await Translations.find({ ...params, skip })
   while (translations.length) {
     log.info(
-      "selected",
-      translations.length,
-      "from translation",
-      skip,
-      translations[0].translation,
+      `selected ${translations.length} from translation ${skip} ${translations[0].translation}`,
     )
     for (const translation of translations) {
       await ingestTranslationReference(translation)

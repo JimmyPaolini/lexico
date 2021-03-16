@@ -68,6 +68,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { textId } = useLiteraturePath(context.params?.literature as string[])
   await queryClient.prefetchQuery(["getText", textId], getText)
+  await queryClient.prefetchQuery("user")
   return {
     notFound: !textId,
     props: { textId },

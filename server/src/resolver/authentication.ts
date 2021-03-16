@@ -44,7 +44,7 @@ export default class AuthenticationResolver {
       email: email.toLowerCase(),
       password: await hash(password),
     })
-    log.info("registered basic user:", user.id, email)
+    log.info("registered basic user", { id: user.id, email })
     return await this.login(email, password, ctx)
   }
 
@@ -52,7 +52,7 @@ export default class AuthenticationResolver {
   @UseMiddleware(Authenticate)
   async unregister(@Ctx() { user }: ResolverContext) {
     await this.Users.delete(user.id)
-    log.info("unregistered user:", user.id, user.email)
+    log.info("unregistered user", { id: user.id, email: user.email })
     return true
   }
 
@@ -72,7 +72,7 @@ export default class AuthenticationResolver {
     if (!user) throw new Error("email not found")
     if (!(await verify(user.password!, password)))
       throw new Error("incorrect password")
-    log.info("login basic user:", user.id, email)
+    log.info("login basic user", { id: user.id, email })
     res.cookie("accessToken", createAccessToken(user), { httpOnly: true })
     return user
   }
@@ -87,7 +87,7 @@ export default class AuthenticationResolver {
         email: profile.email,
       })
     }
-    log.info("login google user:", user.id, user.email)
+    log.info("login google user", { id: user.id, email: user.email })
     res.cookie("accessToken", createAccessToken(user), { httpOnly: true })
     return user
   }
@@ -102,7 +102,7 @@ export default class AuthenticationResolver {
         email: profile.email,
       })
     }
-    log.info("login facebook user:", user.id, user.email)
+    log.info("login facebook user", { id: user.id, email: user.email })
     res.cookie("accessToken", createAccessToken(user), { httpOnly: true })
     return user
   }
@@ -110,7 +110,7 @@ export default class AuthenticationResolver {
   @Query(() => Boolean)
   @UseMiddleware(IsAuthenticated)
   logout(@Ctx() { res }: ResolverContext) {
-    res.cookie("accessToken", "", { maxAge: 0 })
+    res.clearCookie("accessToken")
     return true
   }
 

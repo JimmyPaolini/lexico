@@ -23,6 +23,9 @@ export default function useBookmark(
         await queryClient.cancelMutations()
         setBookmarked(false)
       },
+      onSuccess: async () => {
+        await queryClient.invalidateQueries("bookmarks")
+      }
     },
   )
 }

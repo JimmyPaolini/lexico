@@ -13,7 +13,7 @@ export default async function ingestWords() {
   let skip = 0
   let entries = await Entries.find({ ...params, skip })
   while (entries.length) {
-    log.info("selected", entries.length, "from entry", skip, entries[0].id)
+    log.info(`selected ${entries.length} from entry ${skip} ${entries[0].id}`)
     for (const entry of entries) {
       await ingestEntryWords(entry)
     }

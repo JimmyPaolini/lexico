@@ -6,6 +6,8 @@ import { graphQLClient } from "../../pages/_app"
 export default function useGetText(textId: string) {
   return useQuery(["getText", textId], getText, {
     keepPreviousData: true,
+    cacheTime: 1000 * 60 * 5,
+    retryDelay: 0,
   })
 }
 

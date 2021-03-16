@@ -18,13 +18,13 @@ async function main() {
   const commandMap = {
     database: () => backupDatabase("manual"),
     list: () => {
-      log.info(
-        readdirSync(`data/backup`)
+      log.info({
+        backups: readdirSync(`data/backup`)
           .filter((fileName) => !fileName.match(/\.DS_Store/))
           .map((fileName) => fileName.replace(backupFileNameExtension, ""))
           .sort()
           .reverse(),
-      )
+      })
     },
     restore: async () => {
       const backupFileName = process.argv[3]

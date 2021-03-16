@@ -19,6 +19,7 @@ export default function Home() {
             alt="lexico logo"
             height={500}
             width={375}
+            priority
           />
         </Box>
         {!!announcement ? (

@@ -88,7 +88,7 @@ export default function FormsRow({
         </CardActionArea>
       </CardContent>
       {FormsCard && (
-        <Collapse in={expanded && FormsCard}>
+        <Collapse in={expanded && !!FormsCard}>
           <Divider variant="inset" />
           <FormsCard forms={forms} />
         </Collapse>

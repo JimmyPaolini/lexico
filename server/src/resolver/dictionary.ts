@@ -119,21 +119,4 @@ export default class DictionaryResolver {
     })
     return entries
   }
-
-  // @Query(() => [Entry])
-  // async searchLatinBrute(@Arg("search") search: string) {
-  //   const macronSearch = getMacronOptionRegex(search)
-  //   const fieldMatch = (field: string): string =>
-  //     `"${field}" ~* '"${macronSearch}"'`
-  //   const entries = await this.Entries.find({
-  //     where: fieldMatch("principalParts") + " OR " + fieldMatch("forms"),
-  //   })
-  //   entries.forEach((entry) => log.info(entry.id))
-  //   return entries.filter((entry) => !!entry.translations)
-  // }
-
-  // @Query(() => Boolean)
-  // async script() {
-  //   return true
-  // }
 }

@@ -9,6 +9,6 @@ export default function useBookmarks(enabled: boolean) {
       const { bookmarks: data } = await graphQLClient.request(bookmarksQuery)
       return data
     },
-    { cacheTime: 0, enabled },
+    { enabled, retryDelay: 0, cacheTime: 1000 * 60 * 5 },
   )
 }

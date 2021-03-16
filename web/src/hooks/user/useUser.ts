@@ -13,6 +13,6 @@ export default function useUser() {
         return null
       }
     },
-    { retryDelay: 0 },
+    { retryDelay: 0, cacheTime: 1000 * 60 * 5 },
   )
 }
