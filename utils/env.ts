@@ -1,6 +1,8 @@
 import dotenv from "dotenv"
+import expand from "dotenv-expand"
 
-dotenv.config({ path: "../.env" })
+const env = dotenv.config({ path: "../.env" })
+expand(env)
 
 export const {
   LOG_SQL,
@@ -8,6 +10,7 @@ export const {
   POSTGRES_PASSWORD,
   POSTGRES_DB,
   DATABASE_HOST,
+
   SERVER_HOST,
   WEB_HOST,
   ELASTICSEARCH_HOST,

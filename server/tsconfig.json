@@ -31,5 +31,5 @@
     "**/database_volume",
     "**/elasticsearch_volume"
   ],
-  "include": ["../**/*.ts", "../**/*.tsx"]
+  "include": ["../**/*.ts", "../**/*.tsx", "../web/server.js", "../web/server.js", "../web/server.js"]
 }

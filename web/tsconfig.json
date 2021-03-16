@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
+    "module": "commonjs",
     "lib": ["dom", "es2020"],
     "sourceMap": true,
     "outDir": "./dist",
@@ -29,7 +29,7 @@
     "jsx": "preserve",
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true
+    "noEmit": false
   },
   "exclude": [
     "../ingestion",
@@ -42,9 +42,11 @@
   "include": [
     "./src/**/*.ts",
     "./src/**/*.tsx",
+    "./src/**/*.graphql",
+    "./src/**/*.graphql",
     "../**/*.ts",
     "../**/*.tsx",
-    "./src/**/*.graphql",
-    "./src/**/*.graphql"
-, "next.config.js"  ]
+    "server.js",
+    "../**/.env"
+  ]
 }

@@ -12,18 +12,18 @@ services:
   #   depends_on:
   #     - server
 
-  # server:
-  #   image: jimmypaolini/lexico-server
-  #   build:
-  #     context: .
-  #     dockerfile: ./server/server.Dockerfile
-  #   container_name: server
-  #   ports:
-  #     - 3001:3001
-  #   env_file: .env
-  #   depends_on:
-  #     - database
-  #     - elasticsearch
+  server:
+    image: jimmypaolini/lexico-server
+    build:
+      context: .
+      dockerfile: ./server/server.Dockerfile
+    container_name: server
+    ports:
+      - 3001:3001
+    env_file: .env
+    depends_on:
+      - database
+      - elasticsearch
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.11.1

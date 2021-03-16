@@ -8,19 +8,12 @@ import log from "../../utils/log"
 import buildAPI from "./utils/api"
 
 async function main() {
-  if (process.env.NODE_ENV === "production")
-    log.info("environment is production")
-
   await connectDatabase()
 
   const app = express()
   const corsOptions = {
     credentials: true,
-    origin: [
-      `http://localhost:3000/`,
-      `http://${WEB_HOST}:3000/`,
-      "https://lexicolatin.com/",
-    ],
+    origin: [`http://${WEB_HOST}:3000/`, "https://lexicolatin.com/"],
   }
   app.use(cors(corsOptions))
   app.use(cookieParser())
