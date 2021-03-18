@@ -1,0 +1,25 @@
+# https://github.com/elastic/helm-charts/blob/master/elasticsearch/values.yaml
+
+clusterName: elasticsearch
+nameOverride: elasticsearch
+fullnameOverride: elasticsearch
+
+antiAffinity: soft
+
+esJavaOpts: "-Xmx128m -Xms128m"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 100m
+    memory: 256Mi
+
+volumeClaimTemplate:
+  storageClassName: linode-block-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

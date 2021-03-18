@@ -70,7 +70,6 @@ export default function SearchBar({
         }}
       />
       <IconButton
-        type="submit"
         onClick={() => handleSearchExecute()}
         className={classes.iconButton}
         aria-label="search"
@@ -78,7 +77,11 @@ export default function SearchBar({
         {!isLoading ? (
           <SearchIcon />
         ) : (
-          <CircularProgress size={24} thickness={5.4} color="secondary" />
+          <CircularProgress
+            size={24}
+            thickness={5.4}
+            color={isLatin ? "secondary" : "primary"}
+          />
         )}
       </IconButton>
       {target === "lexico" && <SwitchEnLa {...{ isLatin, setLatin }} />}

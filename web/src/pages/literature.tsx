@@ -7,7 +7,7 @@ import Text from "../../../entity/literature/Text"
 import CardDeck from "../components/accessories/CardDeck"
 import AuthorCard from "../components/literature/LiteratureCard"
 import SearchBar from "../components/search/SearchBar"
-import useGetAuthors from "../hooks/literature/useGetAuthors"
+import useGetAuthors, { getAuthors } from "../hooks/literature/useGetAuthors"
 import { queryClient } from "./_app"
 
 export default function Literature() {
@@ -52,7 +52,7 @@ export default function Literature() {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  await queryClient.prefetchQuery("getAuthors")
+  await queryClient.prefetchQuery("getAuthors", getAuthors)
   return { props: {} }
 }
 

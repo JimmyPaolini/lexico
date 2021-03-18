@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: jimmypaolini/lexico-web
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: env
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 3000
+  selector:
+    app: web

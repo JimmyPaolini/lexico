@@ -3,7 +3,7 @@
 **/.idea
 **/node_modules
 **/dist
-**/.env
+**/*.env*
 
 # next.js
 **/.next/
@@ -16,4 +16,3 @@
 **/data/literature_original
 
 **/*kubeconfig.yaml
-**/infra/**

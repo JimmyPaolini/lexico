@@ -8,15 +8,17 @@
     "build-kibana": "docker image pull docker.elastic.co/kibana/kibana:7.11.1",
     "build-elasticsearch": "docker image pull docker.elastic.co/elasticsearch/elasticsearch:7.11.1",
     "build-database": "docker image pull postgres:13",
-    "kompose": "kompose convert && mv ./*.yaml ./infra/kubernetes",
     "deploy": "kubectl apply -f ./infra/kubernetes",
     "deploy-web": "kubectl apply -f ./infra/kubernetes/web.yaml",
     "deploy-server": "kubectl apply -f ./infra/kubernetes/server.yaml",
     "deploy-database": "kubectl apply -f ./infra/kubernetes/database.yaml",
     "deploy-elasticsearch": "kubectl apply -f ./infra/kubernetes/elasticsearch.yaml",
     "deploy-kibana": "kubectl apply -f ./infra/kubernetes/kibana.yaml",
-    "deployment": "kubectl get all",
-    "undeploy": "kubectl delete all --all"
+    "undeploy": "kubectl delete all --all",
+    "deploy-k8s-dashboard": "kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml",
+    "start-k8s-dashboard": "kubectl proxy",
+    "deploy-weave-scope": "kubectl apply -f \"https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')\"",
+    "start-weave-scope": "kubectl port-forward -n weave \"$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')\" 4040"
   },
   "dependencies": {
     "dotenv": "^8.2.0",

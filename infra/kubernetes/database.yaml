@@ -1,0 +1,60 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: database
+  labels:
+    app: database
+spec:
+  selector:
+    matchLabels:
+      app: database
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+        - name: database
+          image: postgres:13
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: env
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: database-volume
+      volumes:
+        - name: database-volume
+          persistentVolumeClaim:
+            claimName: database-persistent-volume-claim
+      nodeSelector:
+        kubernetes.io/hostname: lke21445-27044-604b99c7c7cf
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: database
+  labels:
+    app: database
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+  selector:
+    app: database
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: database-persistent-volume-claim
+  labels:
+    app: database
+spec:
+  storageClassName: linode-block-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  # tls:
+  #   - hosts:
+  #       - lexicolatin.com
+  #       - "*.lexicolatin.com"
+  #     secretName: tls
+  defaultBackend:
+    service:
+      name: web
+      port:
+        number: 3000

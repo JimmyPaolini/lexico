@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  selector:
+    matchLabels:
+      app: server
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: jimmypaolini/lexico-server
+          ports:
+            - containerPort: 3001
+          envFrom:
+            - configMapRef:
+                name: env
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3001
+  selector:
+    app: server

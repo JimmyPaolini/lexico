@@ -22,6 +22,7 @@ export default function OAuthLogin({ provider }: Props) {
           height={24}
           width={24}
           priority
+          loading="eager"
         />
       }
     >
