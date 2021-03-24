@@ -1,0 +1,17 @@
+# https://github.com/elastic/helm-charts/blob/master/kibana/values.yaml
+
+fullnameOverride: kibana
+
+elasticsearchHosts: http://elasticsearch:9200
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 100m
+    memory: 256Mi
+
+extraEnvs:
+  - name: SERVER_PORT
+    value: "5601"

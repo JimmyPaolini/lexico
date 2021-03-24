@@ -32,6 +32,6 @@ export default createMuiTheme({
     },
   },
   custom: {
-    cardWidth: 382,
+    cardWidth: 378,
   },
 } as ThemeOptions)

@@ -2,7 +2,10 @@ import axios from "axios"
 import { GOOGLE_ID, GOOGLE_SECRET } from "../../../utils/env"
 import log from "../../../utils/log"
 
-export default async function fetchGoogleUser(code: string) {
+export default async function fetchGoogleUser(
+  code: string,
+  redirect_uri: string,
+) {
   const {
     data: { access_token },
   } = await axios
@@ -11,7 +14,7 @@ export default async function fetchGoogleUser(code: string) {
         code,
         client_id: GOOGLE_ID,
         client_secret: GOOGLE_SECRET,
-        redirect_uri: "http://localhost:3000/google",
+        redirect_uri,
         grant_type: "authorization_code",
       },
     })

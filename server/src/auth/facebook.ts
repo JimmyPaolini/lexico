@@ -2,7 +2,10 @@ import axios from "axios"
 import { FACEBOOK_ID, FACEBOOK_SECRET } from "../../../utils/env"
 import log from "../../../utils/log"
 
-export default async function fetchFacebookUser(code: string) {
+export default async function fetchFacebookUser(
+  code: string,
+  redirect_uri: string,
+) {
   const {
     data: { access_token },
   } = await axios
@@ -11,7 +14,7 @@ export default async function fetchFacebookUser(code: string) {
         code: code,
         client_id: FACEBOOK_ID,
         client_secret: FACEBOOK_SECRET,
-        redirect_uri: "http://localhost:3000/facebook",
+        redirect_uri,
       },
     })
     .catch(() => {

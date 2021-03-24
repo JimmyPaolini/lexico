@@ -77,7 +77,7 @@ export default function CommentBox() {
             {!user ? (
               <SubmitButton
                 name={"login to leave a comment"}
-                href="/settings"
+                href="/user"
                 className={classes.textBox}
               />
             ) : (

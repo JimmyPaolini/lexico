@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme: any) => ({
     maxHeight: "100%",
     overflow: "scroll",
     padding: theme.spacing(4),
+    userSelect: "none",
   },
   notFound: {
     padding: theme.spacing(2),

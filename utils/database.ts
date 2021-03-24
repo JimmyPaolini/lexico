@@ -34,7 +34,7 @@ export async function connectDatabase() {
       "error",
     ],
     maxQueryExecutionTime: 1000,
-    synchronize: process.env.NODE_ENV !== "production",
+    synchronize: true,
   })
   log.info("connected to database")
 }

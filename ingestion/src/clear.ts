@@ -54,6 +54,6 @@ async function main() {
 
   if (!(command in commandMap)) throw new Error("unknown command")
   await commandMap[command]()
-  return
+  process.exit()
 }
 main()

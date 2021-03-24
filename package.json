@@ -12,13 +12,11 @@
     "deploy-web": "kubectl apply -f ./infra/kubernetes/web.yaml",
     "deploy-server": "kubectl apply -f ./infra/kubernetes/server.yaml",
     "deploy-database": "kubectl apply -f ./infra/kubernetes/database.yaml",
-    "deploy-elasticsearch": "kubectl apply -f ./infra/kubernetes/elasticsearch.yaml",
-    "deploy-kibana": "kubectl apply -f ./infra/kubernetes/kibana.yaml",
-    "undeploy": "kubectl delete all --all",
+    "deploy-nginx": "helm install nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
+    "deploy-elasticsearch": "helm install elasticsearch elastic/elasticsearch -f ./infra/helm/elasticsearch.yaml",
+    "deploy-kibana": "helm install kibana elastic/kibana -f ./infra/helm/kibana.yaml",
     "deploy-k8s-dashboard": "kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml",
-    "start-k8s-dashboard": "kubectl proxy",
-    "deploy-weave-scope": "kubectl apply -f \"https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')\"",
-    "start-weave-scope": "kubectl port-forward -n weave \"$(kubectl get -n weave pod --selector=weave-scope-component=app -o jsonpath='{.items..metadata.name}')\" 4040"
+    "start-k8s-dashboard": "kubectl proxy"
   },
   "dependencies": {
     "dotenv": "^8.2.0",

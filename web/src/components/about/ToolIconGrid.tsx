@@ -89,6 +89,8 @@ const tools = [
   { name: "figma", url: "https://www.figma.com/" },
   { name: "docker", url: "https://www.docker.com/" },
   { name: "kubernetes", url: "https://kubernetes.io/" },
+  { name: "helm", url: "https://helm.sh/" },
+  { name: "nginx", url: "https://www.nginx.com/" },
   { name: "linode", url: "https://www.linode.com/" },
   { name: "cloudflare", url: "https://www.cloudflare.com/" },
 ]

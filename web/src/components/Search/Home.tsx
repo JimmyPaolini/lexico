@@ -20,6 +20,7 @@ export default function Home() {
             height={500}
             width={375}
             priority
+            loading="eager"
           />
         </Box>
         {!!announcement ? (

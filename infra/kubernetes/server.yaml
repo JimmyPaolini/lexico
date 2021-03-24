@@ -17,11 +17,22 @@ spec:
       containers:
         - name: server
           image: jimmypaolini/lexico-server
+          imagePullPolicy: Always
           ports:
             - containerPort: 3001
           envFrom:
             - configMapRef:
                 name: env
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - server
+              topologyKey: kubernetes.io/hostname
 ---
 kind: Service
 apiVersion: v1

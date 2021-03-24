@@ -6,8 +6,8 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <title>Lexico</title>
         <Head>
+          <title>Lexico</title>
           <link rel="icon" href="/icon/favicon.ico" />
           <meta name="lexico" content="latin translation assistant" />
           <meta name="theme-color" content="#000000" />

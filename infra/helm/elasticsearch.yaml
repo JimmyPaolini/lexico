@@ -1,0 +1,24 @@
+# https://github.com/elastic/helm-charts/blob/master/elasticsearch/values.yaml
+
+fullnameOverride: elasticsearch
+# podManagementPolicy: OrderedReady
+
+esJavaOpts: -Xmx128m -Xms128m
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: 200m
+    memory: 512Mi
+
+volumeClaimTemplate:
+  storageClassName: linode-block-storage-retain
+  resources:
+    requests:
+      storage: 10Gi
+
+persistence:
+  enabled: true
+  labels:
+    app: elasticsearch

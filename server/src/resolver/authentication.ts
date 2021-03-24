@@ -78,8 +78,11 @@ export default class AuthenticationResolver {
   }
 
   @Query(() => User)
-  async google(@Arg("code") code: string, @Ctx() { res }: ResolverContext) {
-    const profile: any = await fetchGoogleUser(code)
+  async google(
+    @Arg("code") code: string,
+    @Ctx() { req, res }: ResolverContext,
+  ) {
+    const profile: any = await fetchGoogleUser(code, req.baseUrl)
     let user = await this.Users.findOne({ googleId: profile.id })
     if (!user) {
       user = await this.Users.save({
@@ -93,8 +96,11 @@ export default class AuthenticationResolver {
   }
 
   @Query(() => User)
-  async facebook(@Arg("code") code: string, @Ctx() { res }: ResolverContext) {
-    const profile: any = await fetchFacebookUser(code)
+  async facebook(
+    @Arg("code") code: string,
+    @Ctx() { req, res }: ResolverContext,
+  ) {
+    const profile: any = await fetchFacebookUser(code, req.baseUrl)
     let user = await this.Users.findOne({ facebookId: profile.id })
     if (!user) {
       user = await this.Users.save({

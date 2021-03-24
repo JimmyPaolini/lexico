@@ -1,6 +1,7 @@
 import { Card, CardContent, Divider, Grid, Grow } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
+import { sentenceCase } from "../../utils/string"
 import CardHeader from "../accessories/CardHeader"
 import LoginLocal from "./BasicLogin"
 import OAuthLogin from "./OAuthLogin"
@@ -14,7 +15,7 @@ export default function LoginCard({ title }: Props) {
   return (
     <Grow in={true}>
       <Card className={classes.card}>
-        <CardHeader {...{ title }} />
+        <CardHeader title={sentenceCase(title)} />
         <Divider variant="middle" />
         <CardContent>
           <Grid container direction="column" alignItems="center">
