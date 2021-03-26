@@ -1,10 +1,11 @@
 import { Box, Fade, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Image from "next/image"
 import React, { useRef } from "react"
 
 export default function Home() {
   const classes = useStyles()
+  const theme = useTheme() as any
   const ref = useRef<any>()
   const announcement = `Announcement, not always present, this day in latin history, roman holiday, link to <a href="https://www.wikipedia.org/">wikipedia</a>, medieval scientific research, featured content, contains emojis🐋😤💯👀`
   if (ref && ref.current && ref.current.innerHTML)
@@ -13,12 +14,13 @@ export default function Home() {
   return (
     <Fade in={true}>
       <Box position="relative">
-        <Box>
+        <Box className={classes.container}>
           <Image
             src="/lexico_logo.svg"
             alt="lexico logo"
-            height={500}
-            width={375}
+            className={classes.logo}
+            width={theme.custom.cardWidth}
+            height={(theme.custom.cardWidth * 4) / 3}
             priority
             loading="eager"
           />
@@ -36,11 +38,18 @@ export default function Home() {
   )
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: any) => ({
   announcement: {
     width: 236,
     position: "absolute",
     right: 32,
     top: 64,
+  },
+  container: {
+    padding: theme.spacing(2),
+  },
+  logo: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
 }))

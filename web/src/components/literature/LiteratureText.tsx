@@ -1,6 +1,7 @@
 import { Avatar, CardActionArea, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Subject } from "@material-ui/icons"
+import { useRouter } from "next/router"
 import React from "react"
 import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
@@ -15,6 +16,8 @@ interface Props {
 }
 export default function LiteratureText({ author, book, text }: Props) {
   const classes = useStyles()
+  const router = useRouter()
+
   let url = `literature/${author.name}`
   if (book) url += `/${book.title}/${book.id}`
   url += `/${text.title}/${text.id}`
@@ -22,7 +25,7 @@ export default function LiteratureText({ author, book, text }: Props) {
 
   return (
     <Grid item className={classes.textContainer} container justify="center">
-      <CardActionArea href={url}>
+      <CardActionArea onClick={() => router.push(url)}>
         <Avatar className={classes.textAvatar}>
           {!isTitleBook ? (
             <Subject />

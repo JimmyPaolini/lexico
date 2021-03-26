@@ -2,47 +2,38 @@ import { readdirSync } from "fs"
 import { connectDatabase } from "../../utils/database"
 import log from "../../utils/log"
 import {
-  backupDatabase,
+  backupAll,
+  backupDictionary,
   backupFileNameExtension,
-  restoreDatabase,
+  backupLiterature,
+  backupUsers,
 } from "./utils/backup"
 import { createDbViews } from "./utils/database"
 
 async function main() {
-  const command = process.argv[2]
+  const [, , command] = process.argv
   if (!command) throw new Error("no command")
 
   await connectDatabase()
   await createDbViews()
 
-  const commandMap = {
-    database: () => backupDatabase("manual"),
-    list: () => {
-      log.info({
-        backups: readdirSync(`data/backup`)
-          .filter((fileName) => !fileName.match(/\.DS_Store/))
-          .map((fileName) => fileName.replace(backupFileNameExtension, ""))
-          .sort()
-          .reverse(),
-      })
-    },
-    restore: async () => {
-      const backupFileName = process.argv[3]
-      if (!backupFileName) throw new Error("no backupFilename")
-      await restoreDatabase(backupFileName)
-    },
-    restoreLatest: async () => {
-      const latestBackup = readdirSync(`data/backup`)
-        .filter((fileName) => !fileName.match(/\.DS_Store/))
-        .map((fileName) => fileName.replace(backupFileNameExtension, ""))
-        .sort()
-        .reverse()[0]
-      await restoreDatabase(latestBackup)
-    },
+  const instructions = {
+    dictionary: () => backupDictionary(),
+    literature: () => backupLiterature(),
+    users: () => backupUsers(),
+    all: () => backupAll(),
+    list: () => log.info({ backups: backups() }),
   } as { [key: string]: () => any }
 
-  if (!(command in commandMap)) throw new Error("unknown command")
-  await commandMap[command]()
+  await instructions[command]()
   process.exit()
 }
 main()
+
+const backups = (filter?: RegExp) =>
+  readdirSync(`data/backup`)
+    .filter((fileName) => !fileName.match(/\.DS_Store/))
+    .filter((fileName) => fileName.match(filter || /[\s\S]*/))
+    .map((fileName) => fileName.replace(backupFileNameExtension, ""))
+    .sort()
+    .reverse()

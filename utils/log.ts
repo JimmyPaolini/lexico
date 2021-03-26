@@ -1,15 +1,15 @@
+import { Client } from "@elastic/elasticsearch"
 import { createLogger, format, transports } from "winston"
 import { ElasticsearchTransport } from "winston-elasticsearch"
 import { ELASTICSEARCH_HOST } from "./env"
 
 const { combine, timestamp, colorize, printf } = format
 
+const client = new Client({ node: `http://${ELASTICSEARCH_HOST}:9200` })
 const elasticsearchTransport = new ElasticsearchTransport({
   level: "info",
   index: "lexico",
-  clientOpts: {
-    node: `http://${ELASTICSEARCH_HOST}:9200`,
-  },
+  client,
   transformer: ({ message, level, timestamp, meta }) => ({
     message,
     level,
@@ -17,10 +17,6 @@ const elasticsearchTransport = new ElasticsearchTransport({
     ...meta,
   }),
   format: timestamp(),
-})
-
-elasticsearchTransport.on("error", (error) => {
-  console.error("Elasticsearch error caught", error)
 })
 
 const consoleTransport = new transports.Console({
@@ -52,7 +48,9 @@ const log = createLogger({
 })
 
 log.on("error", (error) => {
-  console.error("Error caught", error)
+  if (error.message.match(/elasticsearch/i))
+    console.error("Error caught", error.name, error.message)
+  else console.error("Error caught", error)
 })
 
 export default log

@@ -35,11 +35,13 @@ export default function LiteratureCard({ author }: Props) {
           <List className={classes.noPadding} dense>
             {books.map((book, i) => {
               const isLast = i === books.length - 1 && !nonBookTexts.length
-              return <LiteratureBook {...{ author, book, isLast }} />
+              return (
+                <LiteratureBook {...{ author, book, isLast }} key={book.id} />
+              )
             })}
             <Grid container justify="center" alignItems="stretch">
               {nonBookTexts.map((text) => (
-                <LiteratureText {...{ author, text }} />
+                <LiteratureText {...{ author, text }} key={text.id} />
               ))}
             </Grid>
           </List>

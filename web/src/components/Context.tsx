@@ -14,6 +14,7 @@ export const Context = createContext({} as { [key: string]: any })
 export interface ReactContext {
   isNavOpen: boolean
   setNavOpen: Dispatch<SetStateAction<boolean>>
+  isMobile: boolean
   user: User
 }
 
@@ -21,10 +22,22 @@ interface Props {
   children?: ReactNode
 }
 export function ContextProvider({ children }: Props) {
-  const { data: user } = useUser()
+  const { data: user, error } = useUser()
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
   const [isNavOpen, setNavOpen] = useState(false)
 
-  const context = { user, isMobile, isNavOpen, setNavOpen } as ReactContext
-  return <Context.Provider value={context}>{children}</Context.Provider>
+  return (
+    <Context.Provider
+      value={
+        {
+          user: !error ? user : null,
+          isMobile,
+          isNavOpen,
+          setNavOpen,
+        } as ReactContext
+      }
+    >
+      {children}
+    </Context.Provider>
+  )
 }

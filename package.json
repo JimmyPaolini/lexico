@@ -1,7 +1,9 @@
 {
   "scripts": {
-    "start": "docker-compose up",
-    "stop": "docker-compose down",
+    "dev": "docker-compose -f docker-compose.services.yml up",
+    "undev": "docker-compose -f docker-compose.services.yml down",
+    "start": "docker-compose -f docker-compose.services.yml -f docker-compose.yml up",
+    "stop": "docker-compose -f docker-compose.services.yml -f docker-compose.yml down",
     "build": "docker-compose pull && docker-compose build",
     "build-web": "DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile -t jimmypaolini/lexico-web . --network host",
     "build-server": "DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile -t jimmypaolini/lexico-server .",
@@ -19,9 +21,9 @@
     "start-k8s-dashboard": "kubectl proxy"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^7.12.0",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
-    "elasticsearch": "^16.7.2",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.31",
     "winston": "^3.3.3",

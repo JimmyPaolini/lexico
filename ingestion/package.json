@@ -2,22 +2,20 @@
   "scripts": {
     "ingest": "node dist/ingestion/src/ingest.js",
     "clear": "node dist/ingestion/src/clear.js",
-    "backup": "node dist/ingestion/src/backup.js"
+    "backup": "node dist/ingestion/src/backup.js",
+    "restore": "node dist/ingestion/src/restore.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.5",
     "cheerio-tableparser": "^1.0.1",
-    "elasticsearch": "^16.7.2",
     "fs-extra": "^9.1.0",
     "pg": "^8.5.1",
-    "tslog": "^3.1.1",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.31"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.24",
-    "@types/elasticsearch": "^5.0.37",
     "@types/node": "^14.14.31",
     "@types/prettier": "^2.2.1",
     "eslint": "^7.20.0",

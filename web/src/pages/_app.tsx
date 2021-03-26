@@ -1,6 +1,7 @@
 import { CssBaseline, ThemeProvider } from "@material-ui/core"
 import { GraphQLClient } from "graphql-request"
 import type { AppProps } from "next/app"
+import Head from "next/head"
 import React, { useEffect } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { Hydrate } from "react-query/hydration"
@@ -27,10 +28,13 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} >
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ContextProvider>
+            <Head>
+              <title>Lexico</title>
+            </Head>
             <CssBaseline />
             <Layout>
               <Component {...pageProps} />

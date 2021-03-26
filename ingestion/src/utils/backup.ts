@@ -1,45 +1,95 @@
 import { exec } from "child_process"
 import {
-  POSTGRES_DB,
   DATABASE_HOST,
+  POSTGRES_DB,
   POSTGRES_PASSWORD,
   POSTGRES_USER,
 } from "../../../utils/env"
 import log from "../../../utils/log"
 import { timestampFormated } from "../../../utils/string"
+import { clearAll, clearDictionary, clearLiterature, clearUsers } from "./clear"
 
 export const backupFileNameExtension = ".zip"
 
-export async function backupDatabase(name: string) {
-  log.info("backing up database")
-  const fileKey = `data/backup/${timestampFormated()}_${name}`
-  const command =
-    `PGPASSWORD=${POSTGRES_PASSWORD} ` +
-    `pg_dump ` +
-    `--dbname ${POSTGRES_DB} ` +
-    `--username ${POSTGRES_USER} ` +
-    `--host ${DATABASE_HOST} ` +
-    `--port 5432 ` +
-    `--format c --compress 9 ` +
-    `> "${fileKey}${backupFileNameExtension}"`
+const dictionaryTables = ["entry", "word", "translation", "word_entries_entry"]
+
+const literatureTables = ["author", "book", "text", "line"]
+
+const userTables = ["user", "user_bookmarks_entry", "user_readings_line"]
+
+const createCommand = (isBackup: boolean, fileKey: string, tables: string[]) =>
+  `PGPASSWORD=${POSTGRES_PASSWORD} ` +
+  `${isBackup ? "pg_dump --compress 9" : "pg_restore"} ` +
+  `--dbname ${POSTGRES_DB} ` +
+  tables.map((table) => `-t ${table} `).join("") +
+  `--username ${POSTGRES_USER} ` +
+  `--host ${DATABASE_HOST} ` +
+  `--port 5432 ` +
+  `--format c --data-only ` +
+  `${isBackup ? ">" : "<"} "${fileKey}${backupFileNameExtension}"`
+
+export async function backupDatabase(type: string, tables: string[]) {
+  log.info(`backing up ${type}`)
+  const fileKey = `data/backup/${timestampFormated()}_${type}`
+  const command = createCommand(true, fileKey, tables)
   await execute(command)
-  log.info("backed up database")
+  log.info(`backed up ${type}`)
 }
 
-export async function restoreDatabase(backupName: string) {
-  log.info("restoring database")
+export async function backupDictionary() {
+  await backupDatabase("dictionary", dictionaryTables)
+}
+
+export async function backupLiterature() {
+  await backupDatabase("literature", literatureTables)
+}
+
+export async function backupUsers() {
+  await backupDatabase("users", userTables)
+}
+
+export async function backupAll() {
+  await backupDatabase("all", [
+    ...dictionaryTables,
+    ...literatureTables,
+    ...userTables,
+  ])
+}
+
+export async function restoreDatabase(
+  backupName: string,
+  type: string,
+  tables: string[],
+) {
+  log.info(`restoring ${type}`)
   const fileKey = `data/backup/${backupName}`
-  const command =
-    `PGPASSWORD=${POSTGRES_PASSWORD} ` +
-    `pg_restore ` +
-    `--dbname ${POSTGRES_DB} ` +
-    `--username ${POSTGRES_USER} ` +
-    `--host ${DATABASE_HOST} ` +
-    `--port 5432 ` +
-    `--format c --clean ` +
-    `< "${fileKey}${backupFileNameExtension}"`
+  const command = createCommand(false, fileKey, tables)
   await execute(command)
-  log.info("restored database")
+  log.info(`restored ${type}`)
+}
+
+export async function restoreDictionary(backupName: string) {
+  await clearDictionary()
+  await restoreDatabase(backupName, "dictionary", dictionaryTables)
+}
+
+export async function restoreLiterature(backupName: string) {
+  await clearLiterature()
+  await restoreDatabase(backupName, "literature", literatureTables)
+}
+
+export async function restoreUsers(backupName: string) {
+  await clearUsers()
+  await restoreDatabase(backupName, "users", userTables)
+}
+
+export async function restoreAll(backupName: string) {
+  await clearAll()
+  await restoreDatabase(backupName, "all", [
+    ...dictionaryTables,
+    ...literatureTables,
+    ...userTables,
+  ])
 }
 
 async function execute(command: string) {

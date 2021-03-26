@@ -1,23 +1,25 @@
-import { Grid } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import { GetStaticProps } from "next"
 import React, { useEffect, useMemo, useState } from "react"
 import Author from "../../../entity/literature/Author"
 import Book from "../../../entity/literature/Book"
 import Text from "../../../entity/literature/Text"
 import CardDeck from "../components/accessories/CardDeck"
+import SearchBarLayout from "../components/accessories/SearchBarLayout"
 import AuthorCard from "../components/literature/LiteratureCard"
-import SearchBar from "../components/search/SearchBar"
 import useGetAuthors, { getAuthors } from "../hooks/literature/useGetAuthors"
-import { queryClient } from "./_app"
 
-export default function Literature() {
+interface Props {
+  initialAuthors: Author[]
+}
+export default function Literature({ initialAuthors }: Props) {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
   useEffect(() => {
     if (!search) setSearched("")
   }, [search])
 
-  const { data: authors, isLoading, isError } = useGetAuthors()
+  const { data: authors, isLoading, isError } = useGetAuthors(initialAuthors)
 
   const cards = useMemo(() => {
     const authorsCopy = JSON.parse(JSON.stringify(authors || []))
@@ -28,32 +30,27 @@ export default function Literature() {
   }, [authors, searched])
 
   return (
-    <Grid container direction="column" alignItems="center">
-      <Grid item>
-        <SearchBar
-          {...{
-            search,
-            setSearch,
-            isLoading,
-            handleSearchExecute: () => setSearched(search),
-            target: "literature",
-          }}
-        />
-      </Grid>
-      <Grid item container justify="center">
-        {isLoading ? null : isError ? (
-          <div>no literature</div>
-        ) : (
-          <CardDeck cards={cards} />
-        )}
-      </Grid>
-    </Grid>
+    <SearchBarLayout
+      searchBarProps={{
+        search,
+        setSearch,
+        isLoading,
+        handleSearchExecute: () => setSearched(search),
+        target: "literature",
+      }}
+    >
+      {isLoading ? null : isError ? (
+        <Typography variant="h4">No Results</Typography>
+      ) : (
+        <CardDeck cards={cards} />
+      )}
+    </SearchBarLayout>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  await queryClient.prefetchQuery("getAuthors", getAuthors)
-  return { props: {} }
+  const initialAuthors = await getAuthors()
+  return { props: { initialAuthors } }
 }
 
 function filterLiterature(authors: Author[], searched: string) {

@@ -18,7 +18,7 @@ async function main() {
   await connectDatabase()
   await createDbViews()
 
-  const commandMap = {
+  const instructions = {
     wiktionary: () => ingestWiktionary(),
     entries: () => ingestEntries(),
     words: () => ingestWords(),
@@ -41,8 +41,8 @@ async function main() {
     views: () => null,
   } as { [key: string]: () => any }
 
-  if (!(command in commandMap)) throw new Error("unknown command")
-  await commandMap[command]()
+  if (!(command in instructions)) throw new Error("unknown command")
+  await instructions[command]()
   process.exit()
 }
 main()

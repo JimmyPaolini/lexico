@@ -30,7 +30,12 @@ export default function About() {
   const classes = useStyles()
 
   return (
-    <Grid container justify="center" alignItems="center">
+    <Grid
+      container
+      justify="center"
+      alignItems="center"
+      style={{ overflowX: "hidden" }}
+    >
       <Grow in={true}>
         <Card className={classes.card}>
           <CardHeader title="About" />
@@ -94,6 +99,7 @@ const useStyles = makeStyles((theme: any) => ({
   card: {
     padding: theme.spacing(1),
     margin: theme.spacing(2),
+    marginTop: theme.spacing(4),
     maxWidth: theme.custom.cardWidth * 2,
   },
   body: {

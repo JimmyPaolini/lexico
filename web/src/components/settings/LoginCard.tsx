@@ -1,4 +1,11 @@
-import { Card, CardContent, Divider, Grid, Grow } from "@material-ui/core"
+import {
+  Card,
+  CardContent,
+  CardHeader as CardHeaderMui,
+  Divider,
+  Grid,
+  Grow,
+} from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import { sentenceCase } from "../../utils/string"
@@ -15,7 +22,15 @@ export default function LoginCard({ title }: Props) {
   return (
     <Grow in={true}>
       <Card className={classes.card}>
-        <CardHeader title={sentenceCase(title)} />
+        {title === "sign in to use bookmarks" ? (
+          <CardHeaderMui
+            title={sentenceCase(title)}
+            titleTypographyProps={{ variant: "h4", align: "center" }}
+          />
+        ) : (
+          <CardHeader title={sentenceCase(title)} />
+        )}
+        {/* <CardHeader title={sentenceCase(title)} /> */}
         <Divider variant="middle" />
         <CardContent>
           <Grid container direction="column" alignItems="center">
@@ -36,15 +51,11 @@ export default function LoginCard({ title }: Props) {
 
 const useStyles = makeStyles((theme: any) => ({
   card: {
-    margin: theme.spacing(2),
-    width: theme.custom.cardWidth,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    maxWidth: theme.custom.cardWidth,
   },
   columnItem: {
     marginBottom: theme.spacing(2),
-  },
-  hiddenAction: {
-    marginTop: 8,
-    marginRight: 8,
-    visibility: "hidden",
   },
 }))

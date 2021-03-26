@@ -3,10 +3,12 @@ import Author from "../../../../entity/literature/Author"
 import getAuthorsQuery from "../../graphql/literature/getAuthors.graphql"
 import { graphQLClient } from "../../pages/_app"
 
-export default function useGetAuthors() {
+export default function useGetAuthors(initialData: Author[]) {
   return useQuery("getAuthors", getAuthors, {
-    retryDelay: 0,
+    keepPreviousData: true,
     cacheTime: 1000 * 60 * 5,
+    retryDelay: 0,
+    initialData,
   })
 }
 

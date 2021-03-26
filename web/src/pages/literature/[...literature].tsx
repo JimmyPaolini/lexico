@@ -8,15 +8,15 @@ import ReaderModal from "../../components/literature/ReaderModal"
 import ReaderText from "../../components/literature/ReaderText"
 import getTextsQuery from "../../graphql/literature/getTexts.graphql"
 import useGetText, { getText } from "../../hooks/literature/useGetText"
-import { graphQLClient, queryClient } from "../_app"
+import { graphQLClient } from "../_app"
 
 interface Props {
-  textId: string
+  initialText: Text
 }
-export default function Reader({ textId }: Props) {
+export default function Reader({ initialText }: Props) {
   const classes = useStyles()
   const { user } = useContext(Context)
-  const { data: text, isLoading } = useGetText(textId)
+  const { data: text, isLoading } = useGetText(initialText?.id, initialText)
 
   const [searched, setSearched] = useState<string>("")
   const [open, setOpen] = useState<boolean>(false)
@@ -38,7 +38,7 @@ export default function Reader({ textId }: Props) {
         }
       `}</style>
       <Grid container justify="center">
-        {!isLoading && !!text ? (
+        {!isLoading && !!text && user !== undefined ? (
           <ReaderText
             {...{
               text,
@@ -67,12 +67,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { textId } = useLiteraturePath(context.params?.literature as string[])
-  await queryClient.prefetchQuery(["getText", textId], getText)
-  await queryClient.prefetchQuery("user")
-  return {
-    notFound: !textId,
-    props: { textId },
-  }
+  if (!textId) console.log("HERE")
+  if (!textId) return { notFound: true }
+  const initialText = await getText({ queryKey: [null, textId] })
+  if (!initialText) return { notFound: true }
+  else return { props: { initialText } }
 }
 
 const useLiteraturePath = (literatueQueryPath: string[]) => {

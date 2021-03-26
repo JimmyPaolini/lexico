@@ -54,15 +54,8 @@ export default function SettingsCard() {
 
 const useStyles = makeStyles((theme: any) => ({
   card: {
-    margin: theme.spacing(2),
-    width: theme.custom.cardWidth,
-  },
-  columnItem: {
-    marginBottom: theme.spacing(2),
-  },
-  hiddenAction: {
-    marginTop: 8,
-    marginRight: 8,
-    visibility: "hidden",
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    maxWidth: theme.custom.cardWidth,
   },
 }))

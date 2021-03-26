@@ -1,95 +1,79 @@
-import { Grid } from "@material-ui/core"
+import { Grid, Typography } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
 import { GetServerSideProps } from "next"
-import React, { useMemo, useState } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 import Entry from "../../../entity/dictionary/Entry"
 import BookmarkInstructionsCard from "../components/accessories/BookmarkInstructionsCard"
 import CardDeck from "../components/accessories/CardDeck"
+import SearchBarLayout from "../components/accessories/SearchBarLayout"
+import { Context } from "../components/Context"
 import EntryCard from "../components/EntryCard/EntryCard"
-import SearchBar from "../components/search/SearchBar"
 import LoginCard from "../components/settings/LoginCard"
-import bookmarksQuery from "../graphql/bookmarks/bookmarks.graphql"
-import useBookmarks from "../hooks/bookmarks/useBookmarks"
+import useBookmarks, { bookmarks } from "../hooks/bookmarks/useBookmarks"
 import { normalize } from "../utils/string"
-import { graphQLClient, queryClient } from "./_app"
+import { queryClient } from "./_app"
 
-interface Props {
-  isLoggedIn: boolean
-}
-export default function Bookmarks({ isLoggedIn }: Props) {
+export default function Bookmarks() {
+  const classes = useStyles()
+  const { user } = useContext(Context)
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
 
-  const { data: bookmarks, isLoading, isError, isSuccess } = useBookmarks(
-    isLoggedIn,
-  )
+  useEffect(() => {
+    if (!search) setSearched("")
+  }, [search])
+
+  const { data: bookmarks, isLoading, isSuccess } = useBookmarks(user !== null)
 
   const cards = useMemo(() => {
-    if (!isLoggedIn)
-      return [
-        {
-          key: "bookmarks login card",
-          Card: () => <LoginCard title="sign in to use bookmarks" />,
-        },
-      ]
-    if (isSuccess && Array.isArray(bookmarks) && !bookmarks.length) {
-      return [
-        {
-          key: "bookmark instructions card",
-          Card: () => <BookmarkInstructionsCard />,
-        },
-      ]
-    }
+    const filteredEntries = filterEntries(bookmarks, searched) || []
+    return filteredEntries.length
+      ? filteredEntries.map((entry: Entry) => ({
+          key: entry.id,
+          Card: () => <EntryCard {...{ entry, searched }} />,
+        }))
+      : [
+          {
+            key: "no results",
+            Card: () => <Typography variant="h4">Not Found</Typography>,
+          },
+        ]
+  }, [user, bookmarks, searched])
+
+  if (user === null) {
     return (
-      filterEntries(bookmarks, searched).map((entry: Entry) => ({
-        key: entry.id,
-        Card: () => <EntryCard {...{ entry, searched }} />,
-      })) || []
+      <Grid container justify="center" alignItems="center">
+        <Grid item className={classes.loginCard}>
+          <LoginCard title="sign in to use bookmarks" />
+        </Grid>
+      </Grid>
     )
-  }, [isLoggedIn, bookmarks, searched])
+  }
 
   return (
-    <Grid container direction="column" alignItems="center">
-      <Grid item>
-        <SearchBar
-          {...{
-            search,
-            setSearch,
-            isLoading,
-            handleSearchExecute: () => setSearched(search),
-            target: "bookmarks",
-          }}
-        />
-      </Grid>
-      <Grid item container justify="center">
-        {isLoading ? null : isError ? (
-          <div>no bookmarks</div>
-        ) : (
-          <CardDeck cards={cards} />
-        )}
-      </Grid>
-    </Grid>
+    <SearchBarLayout
+      searchBarProps={{
+        search,
+        setSearch,
+        isLoading,
+        handleSearchExecute: () => setSearched(search),
+        target: "bookmarks",
+      }}
+    >
+      {isLoading ? null : isSuccess &&
+        Array.isArray(bookmarks) &&
+        !bookmarks.length ? (
+        <BookmarkInstructionsCard />
+      ) : (
+        <CardDeck cards={cards} />
+      )}
+    </SearchBarLayout>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  req: { rawHeaders },
-}) => {
-  if (rawHeaders.indexOf("Cookie") < 0)
-    return {
-      props: { isLoggedIn: false },
-    }
-  const Cookie = rawHeaders[rawHeaders.indexOf("Cookie") + 1]
-  await queryClient.prefetchQuery("bookmarks", async () => {
-    const { bookmarks: data } = await graphQLClient.request(
-      bookmarksQuery,
-      {},
-      { Cookie },
-    )
-    return data
-  })
-  return {
-    props: { isLoggedIn: true },
-  }
+export const getServerSideProps: GetServerSideProps = async () => {
+  await queryClient.prefetchQuery("bookmarks", bookmarks)
+  return { props: {} }
 }
 
 const filterEntries = (entries: Entry[], search: string) => {
@@ -110,3 +94,9 @@ const filterEntries = (entries: Entry[], search: string) => {
     }) || []
   )
 }
+
+const useStyles = makeStyles((theme: any) => ({
+  loginCard: {
+    marginTop: theme.spacing(4),
+  },
+}))

@@ -3,11 +3,12 @@ import Text from "../../../../entity/literature/Text"
 import getTextQuery from "../../graphql/literature/getText.graphql"
 import { graphQLClient } from "../../pages/_app"
 
-export default function useGetText(textId: string) {
+export default function useGetText(textId: string, initialData: Text) {
   return useQuery(["getText", textId], getText, {
     keepPreviousData: true,
     cacheTime: 1000 * 60 * 5,
     retryDelay: 0,
+    initialData,
   })
 }
 

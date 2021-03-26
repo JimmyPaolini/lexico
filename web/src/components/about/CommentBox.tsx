@@ -93,7 +93,6 @@ export default function CommentBox() {
                   className={classes.textBox}
                   multiline
                   rows={4}
-                  maxRows={4}
                 />
                 <SubmitButton
                   name={isSuccess ? "sent" : "send"}

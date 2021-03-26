@@ -52,11 +52,11 @@ export default function CardDeck({ cards }: Props) {
               const timeout = 400 * Math.pow(col + row, 1 / 2)
               return (
                 <Grid item key={card.key}>
-                  <LazyLoad offset={100} throttle={50} height={28}>
-                    <Grow in {...(row || col ? { timeout } : {})}>
+                  <Grow in appear exit {...(row || col ? { timeout } : {})}>
+                    <LazyLoad offset={100} throttle={50} height={28}>
                       <card.Card />
-                    </Grow>
-                  </LazyLoad>
+                    </LazyLoad>
+                  </Grow>
                 </Grid>
               )
             })}

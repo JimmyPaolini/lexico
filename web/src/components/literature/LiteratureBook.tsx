@@ -3,7 +3,7 @@ import {
   Divider,
   Grid,
   ListItem,
-  ListItemText,
+  ListItemText
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { useState } from "react"
@@ -39,7 +39,7 @@ export default function LiteratureBook({ author, book, isLast }: Props) {
       <Collapse in={expanded}>
         <Grid container justify="center" alignItems="center">
           {book.texts.map((text) => (
-            <LiteratureText {...{ author, book, text }} />
+            <LiteratureText {...{ author, book, text }} key={text.id} />
           ))}
         </Grid>
       </Collapse>

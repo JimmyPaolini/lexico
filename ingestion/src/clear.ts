@@ -8,6 +8,12 @@ import Line from "../../entity/literature/Line"
 import Text from "../../entity/literature/Text"
 import User from "../../entity/user/User"
 import { connectDatabase } from "../../utils/database"
+import {
+  clearAll,
+  clearDictionary,
+  clearEntity,
+  clearLiterature,
+} from "./utils/clear"
 import { createDbViews } from "./utils/database"
 
 async function main() {
@@ -17,43 +23,27 @@ async function main() {
   await connectDatabase()
   await createDbViews()
 
-  const Entries = getConnection().getRepository(Entry)
-  const Translations = getConnection().getRepository(Translation)
-  const Words = getConnection().getRepository(Word)
-  const Authors = getConnection().getRepository(Author)
-  const Books = getConnection().getRepository(Book)
-  const Texts = getConnection().getRepository(Text)
-  const Lines = getConnection().getRepository(Line)
-  const Users = getConnection().getRepository(User)
+  const instructions = {
+    entries: async () => await clearEntity(Entry),
+    translations: async () => await clearEntity(Translation),
+    words: async () => await clearEntity(Word),
+    dictionary: clearDictionary,
 
-  const commandMap = {
-    entries: () => Entries.createQueryBuilder().delete().execute(),
-    translations: () => Translations.createQueryBuilder().delete().execute(),
-    words: () => Words.createQueryBuilder().delete().execute(),
-    dictionary: async () => {
-      await Entries.createQueryBuilder().delete().execute()
-      await Translations.createQueryBuilder().delete().execute()
-      await Words.createQueryBuilder().delete().execute()
-    },
+    authors: async () => await clearEntity(Author),
+    books: async () => await clearEntity(Book),
+    texts: async () => await clearEntity(Text),
+    lines: async () => await clearEntity(Line),
+    literature: clearLiterature,
 
-    authors: () => Authors.createQueryBuilder().delete().execute(),
-    books: () => Books.createQueryBuilder().delete().execute(),
-    texts: () => Texts.createQueryBuilder().delete().execute(),
-    lines: () => Lines.createQueryBuilder().delete().execute(),
-    literature: async () => {
-      await Authors.createQueryBuilder().delete().execute()
-      await Books.createQueryBuilder().delete().execute()
-      await Texts.createQueryBuilder().delete().execute()
-      await Lines.createQueryBuilder().delete().execute()
-    },
+    users: async () => await clearEntity(User),
+    bookmarks: async () =>
+      await getConnection().query(`DELETE FROM "user_bookmarks_entry"`),
 
-    users: () => Users.createQueryBuilder().delete().execute(),
-    bookmarks: () =>
-      getConnection().query(`DELETE FROM "user_bookmarks_entry"`),
+    all: clearAll,
   } as { [key: string]: () => any }
 
-  if (!(command in commandMap)) throw new Error("unknown command")
-  await commandMap[command]()
+  if (!(command in instructions)) throw new Error("unknown command")
+  await instructions[command]()
   process.exit()
 }
 main()

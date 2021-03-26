@@ -35,10 +35,16 @@ export default function ToolIconGrid() {
         />
       </CardActionArea>
       <Collapse in={expanded}>
-        <Grid container spacing={2} className={classes.toolGrid}>
+        <Grid
+          container
+          spacing={2}
+          justify="center"
+          className={classes.toolGrid}
+        >
           {tools.map((tool) => (
             <Grid
               item
+              xs={2}
               key={tool.name}
               className={classes.tool}
               container
@@ -66,33 +72,34 @@ export default function ToolIconGrid() {
 }
 
 const tools = [
-  { name: "wikipedia", url: "https://www.wiktionary.org/" },
-  { name: "postgres", url: "https://www.postgresql.org/" },
-  { name: "nodejs", url: "https://nodejs.org/" },
   { name: "typescript", url: "https://www.typescriptlang.org/" },
+  { name: "nodejs", url: "https://nodejs.org/" },
+  { name: "postgres", url: "https://www.postgresql.org/" },
   { name: "expressjs", url: "https://expressjs.com/" },
   { name: "typeorm", url: "https://typeorm.io/" },
   { name: "graphql", url: "https://graphql.org/" },
   { name: "apollo", url: "https://www.apollographql.com/" },
   { name: "type-graphql", url: "https://typegraphql.com/" },
   { name: "elk", url: "https://www.elastic.co/" },
-  { name: "react", url: "https://reactjs.org/" },
-  { name: "nextjs", url: "https://nextjs.org/" },
   { name: "jwt", url: "https://jwt.io/" },
+  { name: "nextjs", url: "https://nextjs.org/" },
+  { name: "react", url: "https://reactjs.org/" },
   { name: "materialui", url: "https://material-ui.com/" },
   { name: "react-query", url: "https://react-query.tanstack.com/" },
   { name: "formik", url: "https://formik.org/" },
   { name: "eslint", url: "https://eslint.org/" },
   { name: "prettier", url: "https://prettier.io/" },
-  { name: "vscode", url: "https://code.visualstudio.com/" },
-  { name: "github", url: "https://github.com/JimmyPaolini/Lexico" },
-  { name: "figma", url: "https://www.figma.com/" },
+  { name: "github-actions", url: "https://github.com/features/actions" },
   { name: "docker", url: "https://www.docker.com/" },
   { name: "kubernetes", url: "https://kubernetes.io/" },
   { name: "helm", url: "https://helm.sh/" },
   { name: "nginx", url: "https://www.nginx.com/" },
   { name: "linode", url: "https://www.linode.com/" },
   { name: "cloudflare", url: "https://www.cloudflare.com/" },
+  { name: "figma", url: "https://www.figma.com/" },
+  { name: "vscode", url: "https://code.visualstudio.com/" },
+  { name: "wikipedia", url: "https://www.wiktionary.org/" },
+  { name: "github", url: "https://github.com/JimmyPaolini/Lexico" },
 ]
 
 const useStyles = makeStyles((theme: any) => ({
@@ -105,7 +112,6 @@ const useStyles = makeStyles((theme: any) => ({
     padding: theme.spacing(1),
   },
   tool: {
-    flex: "20%",
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
