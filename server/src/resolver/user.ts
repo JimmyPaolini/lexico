@@ -1,3 +1,4 @@
+import axios from "axios"
 import {
   Arg,
   Ctx,
@@ -11,7 +12,7 @@ import Entry from "../../../entity/dictionary/Entry"
 import Line from "../../../entity/literature/Line"
 import Settings, { SettingsInput } from "../../../entity/user/Settings"
 import User from "../../../entity/user/User"
-import log from "../../../utils/log"
+import { SLACK_WEBHOOK } from "../../../utils/env"
 import { Authenticate } from "../auth/authentication"
 import { ResolverContext } from "../utils/ResolverContext"
 
@@ -156,15 +157,24 @@ export default class UserResolver {
   @Mutation(() => Boolean)
   @UseMiddleware(Authenticate)
   async comment(
-    @Arg("subject") subject: string,
-    @Arg("body") body: string,
+    @Arg("comment") comment: string,
     @Ctx() { user }: ResolverContext,
   ) {
     const { id, email, googleId, facebookId } = user
-    log.warn("comment", {
-      user: { id, email, googleId, facebookId },
-      subject,
-      body,
+    const header = `From: ${email}${
+      googleId ? " (Google)" : facebookId ? " (Facebook)" : ""
+    } [${id}]`
+    await axios.post(SLACK_WEBHOOK!, {
+      blocks: [
+        {
+          type: "header",
+          text: { type: "plain_text", text: header },
+        },
+        {
+          type: "section",
+          text: { type: "plain_text", text: comment },
+        },
+      ],
     })
     return true
   }

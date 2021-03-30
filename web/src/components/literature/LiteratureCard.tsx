@@ -54,6 +54,8 @@ export default function LiteratureCard({ author }: Props) {
 const useStyles = makeStyles((theme: any) => ({
   authorCard: {
     "width": theme.custom.cardWidth,
+    "marginLeft": theme.spacing(1),
+    "marginRight": theme.spacing(1),
     "display": "inline-block",
     "paddingBottom": 0,
     "&:last-child": {

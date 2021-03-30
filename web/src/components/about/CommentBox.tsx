@@ -24,26 +24,24 @@ export default function CommentBox() {
   const [expanded, setExpanded] = useState<boolean>(false)
   const formik = useFormik({
     initialValues: {
-      subject: "",
-      body: "",
+      comment: "",
     },
     onSubmit: async () => {
-      await sendEmail()
+      await comment()
     },
   })
-  const {
-    mutateAsync: sendEmail,
-    error: sendEmailError,
-    isSuccess,
-  } = useMutation("sendEmail", async () => {
-    const { sendEmail: data } = await graphQLClient.request(
-      commentMutation,
-      formik.values,
-    )
-    return data
-  })
-  const error: string = sendEmailError
-    ? (sendEmailError as any).response.errors[0].message
+  const { mutateAsync: comment, error: commentError, isSuccess } = useMutation(
+    "comment",
+    async () => {
+      const { comment: data } = await graphQLClient.request(
+        commentMutation,
+        formik.values,
+      )
+      return data
+    },
+  )
+  const error: string = commentError
+    ? (commentError as any).response.errors[0].message
     : ""
 
   return (
@@ -84,12 +82,7 @@ export default function CommentBox() {
               <>
                 <TextBox
                   formik={formik}
-                  name="subject"
-                  className={classes.textBox}
-                />
-                <TextBox
-                  formik={formik}
-                  name="body"
+                  name="comment"
                   className={classes.textBox}
                   multiline
                   rows={4}
@@ -119,17 +112,8 @@ export default function CommentBox() {
 }
 
 const useStyles = makeStyles((theme: any) => ({
-  card: {
-    padding: theme.spacing(1),
-    margin: theme.spacing(2),
-    width: theme.custom.cardWidth,
-  },
   textBox: {
     margin: theme.spacing(1),
-  },
-  body: {
-    padding: theme.spacing(1),
-    marginBottom: theme.spacing(1),
   },
   divider: {
     margin: theme.spacing(1),
@@ -137,15 +121,6 @@ const useStyles = makeStyles((theme: any) => ({
   formError: {
     width: "100%",
     marginTop: theme.spacing(1),
-  },
-  list: {
-    padding: theme.spacing(1),
-    listStyleType: "circle",
-    listStylePosition: "inside",
-  },
-  bullet: {
-    position: "relative",
-    right: 20,
   },
   dropdown: {
     paddingTop: 0,

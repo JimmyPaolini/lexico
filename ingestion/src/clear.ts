@@ -14,14 +14,12 @@ import {
   clearEntity,
   clearLiterature,
 } from "./utils/clear"
-import { createDbViews } from "./utils/database"
 
 async function main() {
   const command = process.argv[2]
   if (!command) throw new Error("no command")
 
   await connectDatabase()
-  await createDbViews()
 
   const instructions = {
     entries: async () => await clearEntity(Entry),

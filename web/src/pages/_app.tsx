@@ -9,11 +9,13 @@ import { ContextProvider } from "../components/Context"
 import Layout from "../components/Layout"
 import theme from "../theme/theme"
 
-const clientAPIEndpoint =
-  typeof window === "undefined"
+const clientEndpoint =
+  process.env.NEXT_ENV === "build"
+    ? "https://lexicolatin.com/api"
+    : typeof window === "undefined"
     ? `http://localhost:3001/graphql`
     : window.location.origin + "/api"
-export const graphQLClient = new GraphQLClient(clientAPIEndpoint, {
+export const graphQLClient = new GraphQLClient(clientEndpoint, {
   credentials: "include",
   mode: "cors",
   keepalive: true,
@@ -28,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <ThemeProvider theme={theme} >
+    <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ContextProvider>

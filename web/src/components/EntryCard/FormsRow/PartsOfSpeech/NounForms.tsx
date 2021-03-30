@@ -92,7 +92,7 @@ const formsTemplate: any = [
 
 const useStyles = makeStyles((theme: any) => ({
   paper: {
-    width: theme.custom.cardWidth,
+    maxWidth: theme.custom.cardWidth,
     borderRadius: 0,
   },
 }))

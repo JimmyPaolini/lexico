@@ -1,6 +1,6 @@
-# Lexico <a href="https://www.lexicolatin.com"><img align="right" width="32" height="32" src="web/public/icon/android-chrome-512x512.png"></a>
+# Lexico <a href="https://www.lexicolatin.com"><img align="right" width="40" height="40" src="web/public/icon/android-chrome-512x512.png"></a>
 
-## Frameworks, Libraries, and Tools:
+### Frameworks, Libraries, and Tools:
 
 <!-- Generate icon link list from the tools variable in ToolIconGrid.tsx
 tools.map((tool) => `<a href="${tool.url}"><img width="64" height="64" alt="${tool.name}" src="web/public/icon/tool/${tool.name}.png"></a>`, "").join("\n") -->
@@ -31,5 +31,6 @@ tools.map((tool) => `<a href="${tool.url}"><img width="64" height="64" alt="${to
 <a href="https://www.cloudflare.com/"><img width="64" height="64" alt="cloudflare" src="web/public/icon/tool/cloudflare.png"></a>
 <a href="https://www.figma.com/"><img width="64" height="64" alt="figma" src="web/public/icon/tool/figma.png"></a>
 <a href="https://code.visualstudio.com/"><img width="64" height="64" alt="vscode" src="web/public/icon/tool/vscode.png"></a>
+<a href="https://lexico-group.slack.com/archives/C01SN2QN2BF"><img width="64" height="64" alt="slack" src="web/public/icon/tool/slack.png"></a>
 <a href="https://www.wiktionary.org/"><img width="64" height="64" alt="wikipedia" src="web/public/icon/tool/wikipedia.png"></a>
 <a href="https://github.com/JimmyPaolini/Lexico"><img width="64" height="64" alt="github" src="web/public/icon/tool/github.png"></a>

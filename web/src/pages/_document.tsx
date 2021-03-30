@@ -28,6 +28,11 @@ export default class MyDocument extends Document {
             sizes="16x16"
             href="icon/favicon-16x16.png"
           />
+          {/* <style>{`
+            html {
+              height: 100% !important;
+            }
+          `}</style> */}
         </Head>
         <body id="body">
           <noscript>You need to enable JavaScript to run this app.</noscript>

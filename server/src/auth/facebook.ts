@@ -4,8 +4,11 @@ import log from "../../../utils/log"
 
 export default async function fetchFacebookUser(
   code: string,
-  redirect_uri: string,
+  hostname: string,
 ) {
+  const redirect_uri = hostname.match(/localhost/i)
+    ? "http://localhost:3000/facebook"
+    : "https://www.lexicolatin.com/facebook"
   const {
     data: { access_token },
   } = await axios

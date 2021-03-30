@@ -21,4 +21,5 @@ export const {
   GOOGLE_SECRET,
   FACEBOOK_ID,
   FACEBOOK_SECRET,
+  SLACK_WEBHOOK,
 } = process.env

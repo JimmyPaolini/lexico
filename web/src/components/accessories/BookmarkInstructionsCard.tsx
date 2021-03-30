@@ -45,7 +45,9 @@ export default function BookmarkInstructionsCard() {
 
 const useStyles = makeStyles((theme: any) => ({
   card: {
-    width: theme.custom.cardWidth,
+    maxWidth: theme.custom.cardWidth,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
   noPadding: {
     padding: 0,

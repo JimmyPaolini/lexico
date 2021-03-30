@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme: any) => ({
     width: "100%",
     height: "100%",
     backgroundColor: "black",
-    padding: theme.spacing(8),
+    // paddingTop: theme.spacing(8),
     fontFamily: theme.typography.literature.fontFamily,
     fontWeight: theme.typography.literature.fontWeight,
     fontSize: theme.typography.literature.fontSize,

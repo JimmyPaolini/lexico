@@ -19,6 +19,7 @@ export default function Home() {
             src="/lexico_logo.svg"
             alt="lexico logo"
             className={classes.logo}
+            // layout="fill"
             width={theme.custom.cardWidth}
             height={(theme.custom.cardWidth * 4) / 3}
             priority

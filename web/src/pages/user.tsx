@@ -24,6 +24,7 @@ export default function User() {
 
 const useStyles = makeStyles((theme: any) => ({
   card: {
+    maxWidth: theme.custom.cardWidth,
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(4),
   },

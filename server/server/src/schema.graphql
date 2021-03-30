@@ -164,7 +164,7 @@ type Line {
 
 type Mutation {
   bookmark(entryId: String!): Boolean!
-  comment(body: String!, subject: String!): Boolean!
+  comment(comment: String!): Boolean!
   register(email: String!, password: String!): User!
   saveReading(lineId: String!): Boolean!
   setPassword(password: String!): Boolean!
@@ -284,7 +284,7 @@ type Settings {
 
 input SettingsInput {
   dictionaryMacronized: Boolean = true
-  fontSize: Float = 12
+  fontSize: Float = 24
   formsExpandedByDefault: Boolean = false
   literatureMacronized: Boolean = false
   theme: String = "dark"

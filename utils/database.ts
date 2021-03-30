@@ -18,6 +18,7 @@ import log from "./log"
 
 export async function connectDatabase() {
   await createConnection({
+    name: "default",
     type: "postgres",
     host: DATABASE_HOST,
     port: 5432,

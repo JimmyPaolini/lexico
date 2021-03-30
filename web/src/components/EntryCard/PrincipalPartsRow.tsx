@@ -60,18 +60,6 @@ export default function PrincipalPartsRow({ entry }: Props) {
   )
 }
 
-const useStyles = makeStyles((theme) => ({
-  principalPartsRow: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  bookmark: {
-    display: "inline-block",
-    position: "relative",
-    top: 8,
-  },
-}))
-
 function inflectiontoString(entry: Entry) {
   if (["noun", "properNoun"].includes(entry.partOfSpeech)) {
     const declension = (entry?.inflection as NounInflection)?.declension
@@ -107,3 +95,15 @@ function inflectiontoString(entry: Entry) {
   }
   return ""
 }
+
+const useStyles = makeStyles((theme) => ({
+  principalPartsRow: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+  },
+  bookmark: {
+    display: "inline-block",
+    position: "relative",
+    top: 8,
+  },
+}))

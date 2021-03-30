@@ -1,4 +1,9 @@
-import { CardActionArea, CardHeader } from "@material-ui/core"
+import {
+  CardActionArea,
+  CardHeader as CardHeaderMui,
+  Collapse,
+  Typography,
+} from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Dispatch, SetStateAction, useContext } from "react"
 import Author from "../../../../entity/literature/Author"
@@ -19,15 +24,31 @@ export default function LiteratureAuthor({
 }: Props) {
   const classes = useStyles()
   const { isMobile } = useContext(Context)
+  const summary = [
+    ...(author.books || []),
+    ...author.texts.filter((text) => !text.book),
+  ]
+    .map((item) => sentenceCase(item.title))
+    .join(" • ")
 
   const cardHeader = (
-    <CardHeader
+    <CardHeaderMui
       title={sentenceCase(author.name)}
-      subheader={sentenceCase(author.fullname)}
+      subheader={
+        <>
+          <Typography variant="body1" color="textSecondary">
+            {sentenceCase(author.fullname)}
+          </Typography>
+          {isMobile ? (
+            <Collapse in={!expanded}>
+              <Typography variant="caption" className={classes.summary}>
+                {summary}
+              </Typography>
+            </Collapse>
+          ) : null}
+        </>
+      }
       action={isMobile && <ExpandIcon {...{ expanded }} />}
-      classes={{
-        action: classes.expandIcon,
-      }}
     />
   )
 
@@ -41,7 +62,9 @@ export default function LiteratureAuthor({
 }
 
 const useStyles = makeStyles(() => ({
-  expandIcon: {
-    marginTop: "auto",
+  summary: {
+    display: "block",
+    lineHeight: 1.3,
+    marginTop: 4,
   },
 }))

@@ -1,5 +1,4 @@
 import { Grid, Slider, Switch, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/styles"
 import { useFormik } from "formik"
 import React, { useContext } from "react"
 import { useMutation } from "react-query"
@@ -9,9 +8,8 @@ import { graphQLClient } from "../../pages/_app"
 import { Context } from "../Context"
 
 export default function SettingsCard() {
-  const classes = useStyles()
   const { user } = useContext(Context)
-  classes
+
   const formik = useFormik({
     initialValues:
       user.settings ||
@@ -27,6 +25,7 @@ export default function SettingsCard() {
       await setSettings()
     },
   })
+
   const { mutateAsync: setSettings } = useMutation(
     "setSettings",
     async () => {
@@ -66,11 +65,9 @@ export default function SettingsCard() {
     .map((_, i) => ({ value: i * 2 + min, label: "" + (i * 2 + min) }))
 
   const handleSliderChange = (event: any, newValue: any) => {
-    console.log(event, newValue)
     event.target.name = "fontSize"
     event.target.value = newValue
     formik.handleChange(event)
-    formik.handleSubmit()
   }
 
   return (
@@ -90,7 +87,8 @@ export default function SettingsCard() {
         id="fontSize"
         name="fontSize"
         value={formik.values.fontSize}
-        onChangeCommitted={handleSliderChange}
+        onChange={handleSliderChange}
+        onChangeCommitted={() => formik.handleSubmit()}
         valueLabelDisplay="off"
         min={min}
         max={max}
@@ -100,18 +98,3 @@ export default function SettingsCard() {
     </form>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  card: {
-    margin: theme.spacing(2),
-    width: theme.custom.cardWidth,
-  },
-  columnItem: {
-    marginBottom: theme.spacing(2),
-  },
-  hiddenAction: {
-    marginTop: 8,
-    marginRight: 8,
-    visibility: "hidden",
-  },
-}))

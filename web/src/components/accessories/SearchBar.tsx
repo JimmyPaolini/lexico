@@ -28,7 +28,7 @@ export default function SearchBar({
   handleSearchExecute,
   isLoading = false,
   target = "",
-  isLatin = false,
+  isLatin = true,
   setLatin = () => null,
 }: SearchBarProps) {
   const classes = useStyles()
@@ -105,11 +105,9 @@ export default function SearchBar({
 const useStyles = makeStyles((theme: any) => ({
   searchBar: {
     width: theme.custom.cardWidth,
-    padding: "2px 4px",
+    padding: "4px 4px",
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    // marginTop: theme.spacing(4),
-    // marginBottom: theme.spacing(8),
   },
   input: {
     marginLeft: theme.spacing(1),

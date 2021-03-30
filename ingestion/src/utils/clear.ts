@@ -15,18 +15,18 @@ export async function clearEntity(Entity: EntityTarget<unknown>) {
 
 export async function clearDictionary() {
   log.info(`clearing dictionary`)
-  await clearEntity(Entry)
   await clearEntity(Word)
   await clearEntity(Translation)
+  await clearEntity(Entry)
   log.info(`cleared dictionary`)
 }
 
 export async function clearLiterature() {
   log.info(`clearing literature`)
-  await clearEntity(Author)
-  await clearEntity(Book)
-  await clearEntity(Text)
   await clearEntity(Line)
+  await clearEntity(Text)
+  await clearEntity(Book)
+  await clearEntity(Author)
   log.info(`cleared literature`)
 }
 

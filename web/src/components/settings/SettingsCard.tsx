@@ -27,7 +27,7 @@ export default function SettingsCard() {
         <CardContent>
           <Grid container direction="column" spacing={2}>
             <Grid item>
-              <Typography gutterBottom>
+              <Typography gutterBottom align="center">
                 Signed in
                 {user.googleId
                   ? " with Google "
@@ -54,8 +54,8 @@ export default function SettingsCard() {
 
 const useStyles = makeStyles((theme: any) => ({
   card: {
+    maxWidth: theme.custom.cardWidth,
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    maxWidth: theme.custom.cardWidth,
   },
 }))

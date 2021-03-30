@@ -128,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
   formCell: {
     position: "relative",
     height: 48,
-    width: 191,
+    maxWidth: 191,
     background: theme.palette.background.paper,
   },
   tooltip: {

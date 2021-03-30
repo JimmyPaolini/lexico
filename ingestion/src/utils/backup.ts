@@ -1,4 +1,5 @@
 import { exec } from "child_process"
+import { readdirSync } from "fs"
 import {
   DATABASE_HOST,
   POSTGRES_DB,
@@ -10,6 +11,14 @@ import { timestampFormated } from "../../../utils/string"
 import { clearAll, clearDictionary, clearLiterature, clearUsers } from "./clear"
 
 export const backupFileNameExtension = ".zip"
+
+export const backups = (filter?: RegExp) =>
+  readdirSync(`data/backup`)
+    .filter((fileName) => !fileName.match(/\.DS_Store/))
+    .filter((fileName) => fileName.match(filter || /[\s\S]*/))
+    .map((fileName) => fileName.replace(backupFileNameExtension, ""))
+    .sort()
+    .reverse()
 
 const dictionaryTables = ["entry", "word", "translation", "word_entries_entry"]
 

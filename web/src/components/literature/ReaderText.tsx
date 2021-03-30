@@ -1,5 +1,5 @@
 import { Box } from "@material-ui/core"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import Text from "../../../../entity/literature/Text"
 import { romanNumeralize } from "../../utils/romanNumeral"
@@ -13,7 +13,6 @@ interface Props {
 }
 export default function ReaderText({ text, openModal }: Props) {
   const classes = useStyles()
-  const theme = useTheme() as any
 
   const title = romanNumeralize(sentenceCase(text.title))
   let subtitle = romanNumeralize(sentenceCase(text.author.name))
@@ -25,19 +24,11 @@ export default function ReaderText({ text, openModal }: Props) {
       <CardHeader
         title={title}
         titleTypographyProps={{
-          align: "center",
-          style: {
-            ...theme.typography.literature,
-            ...theme.typography.literature.title,
-          },
+          className: classes.title,
         }}
         subheader={subtitle}
         subheaderTypographyProps={{
-          align: "center",
-          style: {
-            ...theme.typography.literature,
-            ...theme.typography.literature.subtitle,
-          },
+          className: classes.subtitle,
         }}
         className={classes.cardHeader}
         classes={{ action: classes.shownAction }}
@@ -49,10 +40,30 @@ export default function ReaderText({ text, openModal }: Props) {
   )
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: any) => ({
   readerText: {
     marginLeft: "auto",
     marginRight: "auto",
+  },
+  title: {
+    textAlign: "center",
+    ...theme.typography.literature,
+    fontSize: "1.7rem",
+    lineHeight: 1.3,
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "2.5rem",
+      lineHeight: 1.2,
+    },
+  },
+  subtitle: {
+    textAlign: "center",
+    ...theme.typography.literature,
+    fontSize: "1.3rem",
+    lineHeight: 1.0,
+    [theme.breakpoints.up("sm")]: {
+      fontSize: "2.0rem",
+      lineHeight: 1.0,
+    },
   },
   cardHeader: {
     width: "100%",

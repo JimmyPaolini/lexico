@@ -2,10 +2,10 @@ import axios from "axios"
 import { GOOGLE_ID, GOOGLE_SECRET } from "../../../utils/env"
 import log from "../../../utils/log"
 
-export default async function fetchGoogleUser(
-  code: string,
-  redirect_uri: string,
-) {
+export default async function fetchGoogleUser(code: string, hostname: string) {
+  const redirect_uri = hostname.match(/localhost/i)
+    ? "http://localhost:3000/google"
+    : "https://www.lexicolatin.com/google"
   const {
     data: { access_token },
   } = await axios

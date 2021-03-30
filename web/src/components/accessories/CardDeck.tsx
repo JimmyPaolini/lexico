@@ -82,6 +82,6 @@ function reorganizeCards(
 
 const useStyles = makeStyles((theme: any) => ({
   column: {
-    width: theme.custom.cardWidth + 2 * theme.spacing(4),
+    maxWidth: theme.custom.cardWidth + 2 * theme.spacing(4),
   },
 }))

@@ -115,7 +115,12 @@ export default class LiteratureResolver {
   async getText(@Arg("id") id: string) {
     const text = await this.Texts.findOneOrFail(id, { relations: ["lines"] })
     text.lines.sort((a, b) => a.lineNumber - b.lineNumber)
-    log.info("getText", { id: text.id, title: text.title })
+    log.info("getText", {
+      id: text.id,
+      author: text.author.name,
+      book: text.book?.title,
+      title: text.title,
+    })
     return text
   }
 

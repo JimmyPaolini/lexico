@@ -98,6 +98,7 @@ const tools = [
   { name: "cloudflare", url: "https://www.cloudflare.com/" },
   { name: "figma", url: "https://www.figma.com/" },
   { name: "vscode", url: "https://code.visualstudio.com/" },
+  { name: "slack", url: "https://lexico-group.slack.com/archives/C01SN2QN2BF" },
   { name: "wikipedia", url: "https://www.wiktionary.org/" },
   { name: "github", url: "https://github.com/JimmyPaolini/Lexico" },
 ]
