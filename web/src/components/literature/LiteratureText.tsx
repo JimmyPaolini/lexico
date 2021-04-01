@@ -27,11 +27,7 @@ export default function LiteratureText({ author, book, text }: Props) {
     <Grid item className={classes.textContainer} container justify="center">
       <CardActionArea onClick={() => router.push(url)}>
         <Avatar className={classes.textAvatar}>
-          {!isTitleBook ? (
-            <Subject />
-          ) : (
-            romanNumeralize(text.title.match(/\d+/)?.[0])
-          )}
+          {!isTitleBook ? <Subject /> : text.title.match(/\d+/)?.[0]}
         </Avatar>
         {!book ? (
           <Typography align="center" gutterBottom>
@@ -48,7 +44,6 @@ const useStyles = makeStyles((theme: any) => ({
     flex: "20%",
   },
   textAvatar: {
-    padding: theme.spacing(1),
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: theme.spacing(1),

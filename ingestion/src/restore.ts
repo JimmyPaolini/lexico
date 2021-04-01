@@ -3,6 +3,7 @@ import {
   backups,
   restoreAll,
   restoreDictionary,
+  restoreIngested,
   restoreLiterature,
   restoreUsers,
 } from "./utils/backup"
@@ -16,6 +17,7 @@ async function main() {
   const instructions = {
     dictionary: () => restoreDictionary(process.argv[3]),
     literature: () => restoreLiterature(process.argv[3]),
+    ingested: () => restoreIngested(process.argv[3]),
     users: () => restoreUsers(process.argv[3]),
     all: () => restoreAll(process.argv[3]),
     latestDictionary: async () => {
@@ -25,6 +27,10 @@ async function main() {
     latestLiterature: async () => {
       const latestLiteratureBackup = backups(/literature/i)[0]
       await restoreLiterature(latestLiteratureBackup)
+    },
+    latestIngested: async () => {
+      const latestIngestedBackup = backups(/all/i)[0]
+      await restoreIngested(latestIngestedBackup)
     },
     latestUsers: async () => {
       const latestUsersBackup = backups(/users/i)[0]

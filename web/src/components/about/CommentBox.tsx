@@ -4,6 +4,7 @@ import {
   CardHeader as CardHeaderMui,
   Collapse,
   Grid,
+  Link,
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
@@ -53,7 +54,7 @@ export default function CommentBox() {
         classes={{ focusHighlight: classes.hide }}
       >
         <CardHeaderMui
-          title="Comment Box"
+          title="Questions and Feedback"
           titleTypographyProps={{ variant: "body1" }}
           className={classes.dropdown}
           action={
@@ -65,16 +66,22 @@ export default function CommentBox() {
       </CardActionArea>
       <Collapse in={expanded}>
         <Typography variant="body1" align="center" gutterBottom={true}>
-          To add/edit an entry yourself, just edit it on Wiktionary!
+          Join the Lexico{" "}
+          <Link
+            href="https://lexico-group.slack.com/archives/C01SN2QN2BF"
+            color="secondary"
+          >
+            Slack channel
+          </Link>{" "}
+          to chat and stay up to date with improvements!
           <br />
-          All words, translations, and grammatical information are parsed
-          periodically from Wiktionary
+          Or login (so I have someone to respond to!) and send a message below
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <Grid container>
             {!user ? (
               <SubmitButton
-                name={"login to leave a comment"}
+                name={"login to send a message"}
                 href="/user"
                 className={classes.textBox}
               />
@@ -83,6 +90,7 @@ export default function CommentBox() {
                 <TextBox
                   formik={formik}
                   name="comment"
+                  label="Message"
                   className={classes.textBox}
                   multiline
                   rows={4}

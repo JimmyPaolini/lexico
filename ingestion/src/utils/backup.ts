@@ -57,6 +57,10 @@ export async function backupUsers() {
   await backupDatabase("users", userTables)
 }
 
+export async function backupIngested() {
+  await backupDatabase("ingested", [...dictionaryTables, ...literatureTables])
+}
+
 export async function backupAll() {
   await backupDatabase("all", [
     ...dictionaryTables,
@@ -90,6 +94,14 @@ export async function restoreLiterature(backupName: string) {
 export async function restoreUsers(backupName: string) {
   await clearUsers()
   await restoreDatabase(backupName, "users", userTables)
+}
+
+export async function restoreIngested(backupName: string) {
+  await clearAll()
+  await restoreDatabase(backupName, "ingested", [
+    ...dictionaryTables,
+    ...literatureTables,
+  ])
 }
 
 export async function restoreAll(backupName: string) {

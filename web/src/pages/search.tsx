@@ -35,8 +35,10 @@ export default function Search({ initialSearch, initialIsLatin }: Props) {
     if (!!searched) router.push(router.pathname + hash)
   }, [searched])
 
-  const useSearchResult = useSearch(searched, isLatin)
-  const { data: entries, refetch, isLoading, isSuccess } = useSearchResult
+  const { data: entries, refetch, isLoading, isSuccess } = useSearch(
+    searched,
+    isLatin,
+  )
 
   const noEntriesFound = searched && isSuccess && !entries.length
   const entriesFound = searched && isSuccess && entries.length

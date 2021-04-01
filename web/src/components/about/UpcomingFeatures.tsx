@@ -21,7 +21,7 @@ export default function ToolIconGrid() {
         target="_blank"
       >
         <CardHeaderMui
-          title={`Upcoming Features (current v${version})`}
+          title={`Upcoming Releases (current v${version})`}
           titleTypographyProps={{ variant: "body1" }}
           className={classes.dropdown}
           action={

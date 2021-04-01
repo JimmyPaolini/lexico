@@ -24,7 +24,7 @@ export default function ToolIconGrid() {
         classes={{ focusHighlight: classes.hide }}
       >
         <CardHeaderMui
-          title="Software libraries and tools"
+          title="Frameworks, Libraries, and Tools"
           titleTypographyProps={{ variant: "body1" }}
           className={classes.dropdown}
           action={
@@ -37,7 +37,7 @@ export default function ToolIconGrid() {
       <Collapse in={expanded}>
         <Grid
           container
-          spacing={2}
+          spacing={1}
           justify="center"
           className={classes.toolGrid}
         >

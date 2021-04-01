@@ -97,6 +97,8 @@ const filterEntries = (entries: Entry[], search: string) => {
 
 const useStyles = makeStyles((theme: any) => ({
   loginCard: {
+    width: theme.custom.cardWidth,
     marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
   },
 }))

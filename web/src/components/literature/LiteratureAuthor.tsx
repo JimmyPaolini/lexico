@@ -41,7 +41,11 @@ export default function LiteratureAuthor({
           </Typography>
           {isMobile ? (
             <Collapse in={!expanded}>
-              <Typography variant="caption" className={classes.summary}>
+              <Typography
+                variant="caption"
+                color="textPrimary"
+                className={classes.summary}
+              >
                 {summary}
               </Typography>
             </Collapse>

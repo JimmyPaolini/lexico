@@ -30,10 +30,10 @@ export function pascalCase(str: string) {
 
 export function sentenceCase(str: string) {
   if (!str) return ""
-  return str.replace(
-    /(\w)(\w*)/g,
-    (_, g1, g2) => g1.toUpperCase() + g2.toLowerCase() + " ",
-  )
+  return str
+    .split(" ")
+    .map((s) => pascalCase(s))
+    .join(" ")
 }
 
 export function unCamelCase(str: string) {

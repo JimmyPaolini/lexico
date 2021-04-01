@@ -54,7 +54,7 @@ export default function SettingsCard() {
 
 const useStyles = makeStyles((theme: any) => ({
   card: {
-    maxWidth: theme.custom.cardWidth,
+    // maxWidth: theme.custom.cardWidth,
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },

@@ -30,7 +30,7 @@ export function decimalToRoman(decimal: number) {
   const hundreds = Math.floor(decimal / 100)
   convertDigit(hundreds, "C", "D", "M")
 
-  const tens = Math.floor(decimal / 10)
+  const tens = Math.floor((decimal % 100) / 10)
   convertDigit(tens, "X", "L", "C")
 
   const ones = decimal % 10

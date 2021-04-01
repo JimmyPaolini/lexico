@@ -3,6 +3,7 @@ import log from "../../utils/log"
 import {
   backupAll,
   backupDictionary,
+  backupIngested,
   backupLiterature,
   backups,
   backupUsers,
@@ -17,6 +18,7 @@ async function main() {
   const instructions = {
     dictionary: () => backupDictionary(),
     literature: () => backupLiterature(),
+    ingested: () => backupIngested(),
     users: () => backupUsers(),
     all: () => backupAll(),
     list: () => log.info({ backups: backups() }),

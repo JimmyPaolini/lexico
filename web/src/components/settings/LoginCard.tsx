@@ -36,7 +36,6 @@ export default function LoginCard({ title }: Props) {
 
 const useStyles = makeStyles((theme: any) => ({
   card: {
-    maxWidth: theme.custom.cardWidth,
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
