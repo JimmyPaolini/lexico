@@ -5,7 +5,7 @@
     "start": "docker-compose -f docker-compose.services.yml -f docker-compose.yml up",
     "stop": "docker-compose -f docker-compose.services.yml -f docker-compose.yml down",
     "build": "docker-compose pull && docker-compose build",
-    "build-web": "DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile -t jimmypaolini/lexico-web . --network host",
+    "build-web": "DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile -t jimmypaolini/lexico-web .",
     "build-server": "DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile -t jimmypaolini/lexico-server .",
     "build-kibana": "docker image pull docker.elastic.co/kibana/kibana:7.11.1",
     "build-elasticsearch": "docker image pull docker.elastic.co/elasticsearch/elasticsearch:7.11.1",
