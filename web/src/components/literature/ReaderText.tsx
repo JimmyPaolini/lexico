@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme: any) => ({
   readerText: {
     marginLeft: "auto",
     marginRight: "auto",
+    marginBottom: theme.spacing(2),
   },
   title: {
     textAlign: "center",

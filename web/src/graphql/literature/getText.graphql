@@ -6,6 +6,7 @@ query GetText($id: String!) {
       id
       line
       lineNumber
+      lineLabel
     }
     book {
       id

@@ -6,7 +6,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import { Launch } from "@material-ui/icons"
 import React from "react"
-import { version } from "../../../package.json"
+import { version } from "../../../../package.json"
 
 export default function ToolIconGrid() {
   const classes = useStyles()

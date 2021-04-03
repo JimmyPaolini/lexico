@@ -2,9 +2,8 @@ import Grid from "@material-ui/core/Grid"
 import Grow from "@material-ui/core/Grow"
 import { makeStyles, Theme } from "@material-ui/core/styles"
 import useMediaQuery from "@material-ui/core/useMediaQuery"
-import React, { Dispatch, useEffect, useRef, useState } from "react"
+import React, { Dispatch, useEffect, useState } from "react"
 import LazyLoad from "react-lazyload"
-import useEventListener from "../../hooks/useEventListener"
 
 type Card = {
   key: string | number
@@ -29,9 +28,6 @@ export default function CardDeck({ cards }: Props) {
     reorganizeCards(cards, numCols, setColumns)
   }, [cards, numCols])
 
-  const ref = useRef<any>(null)
-  useEventListener("focus", () => ref.current.blur())
-
   if (!cards.every((card) => card.key && card.Card)) {
     console.error("Invalid card structure passed into CardDeck")
     return null
@@ -51,7 +47,6 @@ export default function CardDeck({ cards }: Props) {
             spacing={4}
             className={classes.column}
             key={key}
-            ref={ref}
           >
             {column.map((card, row) => {
               const timeout = 400 * Math.pow(col + row, 1 / 2)
@@ -88,5 +83,6 @@ function reorganizeCards(
 const useStyles = makeStyles((theme: any) => ({
   column: {
     maxWidth: theme.custom.cardWidth + 2 * theme.spacing(4),
+    outline: "none",
   },
 }))

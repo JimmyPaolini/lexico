@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles"
 import MenuIcon from "@material-ui/icons/Menu"
 import SearchIcon from "@material-ui/icons/Search"
 import React, { Dispatch, SetStateAction, useContext, useRef } from "react"
-import useEventListener from "../../hooks/useEventListener"
 import { pascalCase } from "../../utils/string"
 import { Context } from "../Context"
 import SwitchEnLa from "../search/SwitchEnLa"
@@ -34,19 +33,16 @@ export default function SearchBar({
   const classes = useStyles()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
   const input = useRef<any>()
-  isLatin
-  setLatin
-  // useEffect(() => input.current.focus(), []);
 
-  useEventListener("keypress", (e: any) => {
-    if (e.key === "Escape") return input.current.blur()
-    if (e.key !== "Enter") return
-    if (input.current === document.activeElement) input.current.blur()
-    else {
-      input.current.focus()
-      input.current.select()
-    }
-  })
+  // useEventListener("keypress", (e: any) => {
+  //   if (e.key === "Escape") return input.current.blur()
+  //   if (e.key !== "Enter") return
+  //   if (input.current === document.activeElement) input.current.blur()
+  //   else {
+  //     input.current.focus()
+  //     input.current.select()
+  //   }
+  // })
 
   return (
     <Paper className={classes.searchBar}>

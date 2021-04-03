@@ -49,9 +49,9 @@ export default function ReaderModal({ searched, open, setOpen }: Props) {
       })}
     >
       <Box className={classes.container} tabIndex={-1}>
-        {isError ? (
+        {isError || !entries?.length ? (
           <Paper className={classes.notFound}>
-            <Typography variant="h5">not found</Typography>
+            <Typography variant="h5">No Results</Typography>
           </Paper>
         ) : isSuccess && !!entries ? (
           <CardDeck {...{ cards }} />

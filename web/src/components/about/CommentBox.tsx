@@ -75,7 +75,7 @@ export default function CommentBox() {
           </Link>{" "}
           to chat and stay up to date with improvements!
           <br />
-          Or login (so I have someone to respond to!) and send a message below
+          Or login (so I have a reply email) to send a message below
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <Grid container>

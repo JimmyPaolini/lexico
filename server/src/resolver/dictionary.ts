@@ -34,6 +34,8 @@ export default class DictionaryResolver {
   ) {
     if (!search || !search.match(/^-?(\w| )+$/)) return []
     log.info("searchLatin request", { search })
+
+    search = search.toLowerCase()
     const pushSuffix = async (suffix: string) => {
       const nonSuffixWord = await this.Words.findOne({
         word: search.replace(new RegExp(suffix + "$", "i"), ""),

@@ -1,14 +1,18 @@
 import { exec } from "child_process"
 import { readdirSync } from "fs"
 import {
-  DATABASE_HOST,
   POSTGRES_DB,
   POSTGRES_PASSWORD,
   POSTGRES_USER,
 } from "../../../utils/env"
 import log from "../../../utils/log"
-import { timestampFormated } from "../../../utils/string"
-import { clearAll, clearDictionary, clearLiterature, clearUsers } from "./clear"
+import {
+  clearAll,
+  clearDictionary,
+  clearIngested,
+  clearLiterature,
+  clearUsers,
+} from "./clear"
 
 export const backupFileNameExtension = ".zip"
 
@@ -32,14 +36,16 @@ const createCommand = (isBackup: boolean, fileKey: string, tables: string[]) =>
   `--dbname ${POSTGRES_DB} ` +
   tables.map((table) => `-t ${table} `).join("") +
   `--username ${POSTGRES_USER} ` +
-  `--host ${DATABASE_HOST} ` +
+  `--host ${
+    process.env.NODE_ENV === "production" ? "database" : "localhost"
+  } ` +
   `--port 5432 ` +
   `--format c --data-only ` +
   `${isBackup ? ">" : "<"} "${fileKey}${backupFileNameExtension}"`
 
 export async function backupDatabase(type: string, tables: string[]) {
   log.info(`backing up ${type}`)
-  const fileKey = `data/backup/${timestampFormated()}_${type}`
+  const fileKey = `data/backup/${new Date().toISOString()}_${type}`
   const command = createCommand(true, fileKey, tables)
   await execute(command)
   log.info(`backed up ${type}`)
@@ -97,7 +103,7 @@ export async function restoreUsers(backupName: string) {
 }
 
 export async function restoreIngested(backupName: string) {
-  await clearAll()
+  await clearIngested()
   await restoreDatabase(backupName, "ingested", [
     ...dictionaryTables,
     ...literatureTables,

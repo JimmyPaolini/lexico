@@ -23,7 +23,7 @@ export default function ReaderLine({ line, openModal }: Props) {
         component="span"
         variant="inherit"
       >
-        {line.lineNumber}
+        {line.lineLabel}
       </Typography>
       <Divider orientation="vertical" flexItem className={classes.divider} />
       <LazyLoad

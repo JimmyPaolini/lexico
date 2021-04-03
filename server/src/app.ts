@@ -3,7 +3,6 @@ import cors from "cors"
 import express from "express"
 import "reflect-metadata"
 import { connectDatabase } from "../../utils/database"
-import { SERVER_HOST, WEB_HOST } from "../../utils/env"
 import log from "../../utils/log"
 import buildAPI from "./utils/api"
 
@@ -13,7 +12,12 @@ async function main() {
   const app = express()
   const corsOptions = {
     credentials: true,
-    origin: [`http://${WEB_HOST}:3000/`, "https://lexicolatin.com/"],
+    origin: [
+      `http://${
+        process.env.NODE_ENV === "production" ? "web" : "localhost"
+      }:3000/`,
+      "https://lexicolatin.com/",
+    ],
   }
   app.use(cors(corsOptions))
   app.use(cookieParser())
@@ -21,6 +25,12 @@ async function main() {
 
   await buildAPI(app, corsOptions)
 
-  app.listen("3001", () => log.info(`listening at http://${SERVER_HOST}:3001/`))
+  app.listen("3001", () =>
+    log.info(
+      `listening at http://${
+        process.env.NODE_ENV === "production" ? "server" : "localhost"
+      }:3001/`,
+    ),
+  )
 }
 main()

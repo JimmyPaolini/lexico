@@ -1,4 +1,5 @@
 import { connectDatabase } from "../../utils/database"
+import log from "../../utils/log"
 import {
   backups,
   restoreAll,
@@ -15,30 +16,30 @@ async function main() {
   await connectDatabase()
 
   const instructions = {
-    dictionary: () => restoreDictionary(process.argv[3]),
-    literature: () => restoreLiterature(process.argv[3]),
-    ingested: () => restoreIngested(process.argv[3]),
-    users: () => restoreUsers(process.argv[3]),
-    all: () => restoreAll(process.argv[3]),
-    latestDictionary: async () => {
-      const latestDictionaryBackup = backups(/dictionary/i)[0]
-      await restoreDictionary(latestDictionaryBackup)
+    dictionary: async () => {
+      const dictionaryBackup = process.argv?.[3] || backups(/dictionary/i)[0]
+      log.info(`restoring ${dictionaryBackup}`)
+      await restoreDictionary(dictionaryBackup)
     },
-    latestLiterature: async () => {
-      const latestLiteratureBackup = backups(/literature/i)[0]
-      await restoreLiterature(latestLiteratureBackup)
+    literature: async () => {
+      const literatureBackup = process.argv?.[3] || backups(/literature/i)[0]
+      log.info(`restoring ${literatureBackup}`)
+      await restoreLiterature(literatureBackup)
     },
-    latestIngested: async () => {
-      const latestIngestedBackup = backups(/all/i)[0]
-      await restoreIngested(latestIngestedBackup)
+    ingested: async () => {
+      const ingestedBackup = process.argv?.[3] || backups(/ingested/i)[0]
+      log.info(`restoring ${ingestedBackup}`)
+      await restoreIngested(ingestedBackup)
     },
-    latestUsers: async () => {
-      const latestUsersBackup = backups(/users/i)[0]
-      await restoreUsers(latestUsersBackup)
+    users: async () => {
+      const usersBackup = process.argv?.[3] || backups(/users/i)[0]
+      log.info(`restoring ${usersBackup}`)
+      await restoreUsers(usersBackup)
     },
-    latestAll: async () => {
-      const latestAllBackup = backups(/all/i)[0]
-      await restoreAll(latestAllBackup)
+    all: async () => {
+      const allBackup = process.argv?.[3] || backups(/all/i)[0]
+      log.info(`restoring ${allBackup}`)
+      await restoreAll(allBackup)
     },
   } as { [key: string]: () => any }
 

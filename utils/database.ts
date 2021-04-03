@@ -8,7 +8,6 @@ import Line from "../entity/literature/Line"
 import Text from "../entity/literature/Text"
 import User from "../entity/user/User"
 import {
-  DATABASE_HOST,
   LOG_SQL,
   POSTGRES_DB,
   POSTGRES_PASSWORD,
@@ -20,7 +19,7 @@ export async function connectDatabase() {
   await createConnection({
     name: "default",
     type: "postgres",
-    host: DATABASE_HOST,
+    host: process.env.NODE_ENV === "production" ? "database" : "localhost",
     port: 5432,
     username: POSTGRES_USER,
     password: POSTGRES_PASSWORD,

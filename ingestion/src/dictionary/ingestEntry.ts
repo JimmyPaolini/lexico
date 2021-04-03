@@ -46,7 +46,6 @@ async function ingestEntry(
 
   const entry = await Entries.save({
     id: word + ":" + i,
-    word,
     partOfSpeech: Ingester.getPartOfSpeech($, elt),
   })
   try {
@@ -77,7 +76,7 @@ async function ingestEntry(
     const IngesterConstructor = ingestersMap[entry.partOfSpeech]
     if (!IngesterConstructor) {
       if ((entry.partOfSpeech as any) === "")
-        log.info("No partOfSpeech:", entry.word)
+        log.info("No partOfSpeech:", entry.id)
       else if ((entry.partOfSpeech as any) !== "letter")
         log.info("skipping entry", entry)
       await Entries.delete(entry.id)
@@ -103,7 +102,7 @@ async function ingestEntry(
       .where(entry.id)
       .execute()
   } catch (e) {
-    log.warn(entry.word, e)
+    log.warn(entry.id, e)
     await Entries.delete(entry.id)
   }
 }

@@ -5,6 +5,7 @@ import { escapeCapitals } from "../../utils/string"
 import ingestEntries from "./dictionary/ingestEntries"
 import ingestEntryWord from "./dictionary/ingestEntry"
 import { ingestEntryWords } from "./dictionary/ingestEntryWords"
+import ingestManual from "./dictionary/ingestManual"
 import ingestTranslationReferences from "./dictionary/ingestTranslationReferences"
 import ingestWords from "./dictionary/ingestWords"
 import ingestLiterature from "./literature/ingestLiterature"
@@ -38,6 +39,7 @@ async function main() {
       for (const entry of entries) await ingestEntryWords(entry)
     },
     literature: () => ingestLiterature(),
+    manual: () => ingestManual(),
     views: () => null,
   } as { [key: string]: () => any }
 

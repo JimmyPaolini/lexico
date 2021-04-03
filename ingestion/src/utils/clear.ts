@@ -36,6 +36,13 @@ export async function clearUsers() {
   log.info(`cleared users`)
 }
 
+export async function clearIngested() {
+  log.info(`clearing ingested`)
+  await clearDictionary()
+  await clearLiterature()
+  log.info(`cleared ingested`)
+}
+
 export async function clearAll() {
   log.info(`clearing all`)
   await clearDictionary()

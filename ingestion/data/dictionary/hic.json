@@ -1,0 +1,99 @@
+{
+  "id": "hic:100",
+  "partOfSpeech": "pronoun",
+  "principalParts": [
+    {
+      "name": "masculine",
+      "text": ["hic"]
+    },
+    {
+      "name": "feminine",
+      "text": ["haec"]
+    },
+    {
+      "name": "neuter",
+      "text": ["hoc"]
+    }
+  ],
+  "inflection": {
+    "declension": "first/second",
+    "degree": "",
+    "other": "first/second"
+  },
+  "translations": [
+    {
+      "translation": "he, she, it; "
+    },
+    {
+      "translation": "this (thing); these (things)"
+    }
+  ],
+  "forms": {
+    "masculine": {
+      "nominative": {
+        "singular": ["hic"],
+        "plural": ["hī"]
+      },
+      "genitive": {
+        "singular": ["huius", "hujus"],
+        "plural": ["hōrum"]
+      },
+      "dative": {
+        "singular": ["huic"],
+        "plural": ["hīs"]
+      },
+      "accusative": {
+        "singular": ["hunc"],
+        "plural": ["hōs"]
+      },
+      "ablative": {
+        "singular": ["hōc"],
+        "plural": ["hīs"]
+      }
+    },
+    "feminine": {
+      "nominative": {
+        "singular": ["haec"],
+        "plural": ["hae"]
+      },
+      "genitive": {
+        "singular": ["huius", "hujus"],
+        "plural": ["hārum"]
+      },
+      "dative": {
+        "singular": ["huic"],
+        "plural": ["hīs"]
+      },
+      "accusative": {
+        "singular": ["hanc"],
+        "plural": ["hās"]
+      },
+      "ablative": {
+        "singular": ["hāc"],
+        "plural": ["hīs"]
+      }
+    },
+    "neuter": {
+      "nominative": {
+        "singular": ["hoc"],
+        "plural": ["haec"]
+      },
+      "genitive": {
+        "singular": ["huius", "hujus"],
+        "plural": ["hōrum"]
+      },
+      "dative": {
+        "singular": ["huic"],
+        "plural": ["hīs"]
+      },
+      "accusative": {
+        "singular": ["hoc"],
+        "plural": ["haec"]
+      },
+      "ablative": {
+        "singular": ["hōc"],
+        "plural": ["hīs"]
+      }
+    }
+  }
+}

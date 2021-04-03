@@ -32,6 +32,7 @@ export default class Entry {
     nullable: true,
     eager: true,
     cascade: true,
+    onDelete: "CASCADE",
   })
   @Field(() => [Translation], { nullable: true })
   translations?: Translation[] | null

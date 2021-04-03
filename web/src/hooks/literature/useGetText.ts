@@ -7,6 +7,7 @@ export default function useGetText(textId: string, initialData: Text) {
   return useQuery(["getText", textId], getText, {
     keepPreviousData: true,
     cacheTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 5,
     retryDelay: 0,
     initialData,
   })

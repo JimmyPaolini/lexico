@@ -12,6 +12,7 @@ import {
   clearAll,
   clearDictionary,
   clearEntity,
+  clearIngested,
   clearLiterature,
 } from "./utils/clear"
 
@@ -32,6 +33,8 @@ async function main() {
     texts: async () => await clearEntity(Text),
     lines: async () => await clearEntity(Line),
     literature: clearLiterature,
+
+    ingested: clearIngested,
 
     users: async () => await clearEntity(User),
     bookmarks: async () =>

@@ -6,16 +6,6 @@ export function normalize(str: string): string {
     .replace(/æ/g, "ae")
 }
 
-export function timestampFormated(): string {
-  const now = new Date()
-  const date = now.toISOString().slice(0, 10)
-  const time = ("0" + now.toLocaleString().slice(11, 18)).slice(-8)
-  const milliseconds = (now.getMilliseconds() + "000").slice(0, 3)
-  const meridian = now.getHours() > 12 ? "PM" : "AM"
-  const offset = now.getTimezoneOffset() / 60
-  return `${date}_${time}.${milliseconds}${meridian}-GMT-${offset}`
-}
-
 export function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }

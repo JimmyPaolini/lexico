@@ -16,6 +16,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-lazyload": "^3.2.0",
+    "react-lines-ellipsis": "^0.14.1",
     "react-query": "^3.5.11",
     "react-swipeable": "^6.1.0"
   },
@@ -32,6 +33,5 @@
   "author": "Jimmy Paolini",
   "description": "lexico-web",
   "repository": "https://github.com/JimmyPaolini/Lexico",
-  "version": "0.9.0",
   "license": "MIT"
 }

@@ -6,7 +6,7 @@ import Book from "../../../entity/literature/Book"
 import Text from "../../../entity/literature/Text"
 import CardDeck from "../components/accessories/CardDeck"
 import SearchBarLayout from "../components/accessories/SearchBarLayout"
-import AuthorCard from "../components/literature/LiteratureCard"
+import LiteratureCard from "../components/literature/LiteratureCard"
 import useGetAuthors, { getAuthors } from "../hooks/literature/useGetAuthors"
 
 interface Props {
@@ -25,7 +25,7 @@ export default function Literature({ initialAuthors }: Props) {
     const authorsCopy = JSON.parse(JSON.stringify(authors || []))
     return filterLiterature(authorsCopy, searched).map((author) => ({
       key: author.name,
-      Card: () => <AuthorCard {...{ author, searched }} />,
+      Card: () => <LiteratureCard {...{ author, searched }} />,
     }))
   }, [authors, searched])
 

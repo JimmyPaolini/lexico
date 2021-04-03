@@ -157,6 +157,7 @@ union Inflection = AdjectiveInflection | AdverbInflection | NounInflection | Pre
 type Line {
   id: ID!
   line: String!
+  lineLabel: String!
   lineNumber: Float!
   text: Text!
   users: [User!]

@@ -1,11 +1,14 @@
 import { Client } from "@elastic/elasticsearch"
 import { createLogger, format, transports } from "winston"
 import { ElasticsearchTransport } from "winston-elasticsearch"
-import { ELASTICSEARCH_HOST } from "./env"
 
 const { combine, timestamp, colorize, printf } = format
 
-const client = new Client({ node: `http://${ELASTICSEARCH_HOST}:9200` })
+const client = new Client({
+  node: `http://${
+    process.env.NODE_ENV === "production" ? "elasticsearch" : "localhost"
+  }:9200`,
+})
 const elasticsearchTransport = new ElasticsearchTransport({
   level: "info",
   index: "lexico",

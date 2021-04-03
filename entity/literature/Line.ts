@@ -16,13 +16,17 @@ export default class Line {
   @Field(() => ID)
   id!: string
 
-  @Column("varchar", { length: 4095 })
+  @Column("varchar")
   @Field()
   line!: string
 
   @Column()
   @Field()
   lineNumber!: number
+
+  @Column("varchar", { length: 16 })
+  @Field()
+  lineLabel!: string
 
   @ManyToOne(() => Text, (text) => text.lines, { eager: true })
   @Field(() => Text)
