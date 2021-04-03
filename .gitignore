@@ -1,0 +1,18 @@
+**/.DS_Store
+.DS_Store
+**/.vscode
+**/.idea
+**/node_modules
+**/dist
+**/*.env*
+
+# next.js
+**/.next/
+**/out/
+
+**/database_volume
+**/elasticsearch_volume
+
+**/data/wiktionary
+
+**/*kubeconfig.yaml

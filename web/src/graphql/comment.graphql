@@ -1,0 +1,3 @@
+mutation comment($comment: String!) {
+  comment(comment: $comment)
+}

@@ -1,0 +1,37 @@
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "axios": "^0.21.1",
+    "formik": "^2.2.6",
+    "graphql": "^15.4.0",
+    "graphql-request": "^3.4.0",
+    "graphql-tag": "^2.11.0",
+    "next": "latest",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-lazyload": "^3.2.0",
+    "react-lines-ellipsis": "^0.14.1",
+    "react-query": "^3.5.11",
+    "react-swipeable": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/material-ui": "^0.21.8",
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.14.4",
+    "@types/react-dom": "^16.9.11",
+    "@types/react-lazyload": "^3.1.0",
+    "@types/react-query": "^1.1.2",
+    "typescript": "4.0"
+  },
+  "name": "lexico-web",
+  "author": "Jimmy Paolini",
+  "description": "lexico-web",
+  "repository": "https://github.com/JimmyPaolini/Lexico",
+  "license": "MIT"
+}

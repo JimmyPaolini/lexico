@@ -1,0 +1,7 @@
+query Google($code: String!) {
+  google(code: $code) {
+    id
+    email
+    googleId
+  }
+}

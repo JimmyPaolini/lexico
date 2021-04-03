@@ -1,0 +1,21 @@
+query GetAuthors {
+  getAuthors {
+    name
+    fullname
+    books {
+      id
+      title
+      texts {
+        id
+        title
+      }
+    }
+    texts {
+      id
+      title
+      book {
+        id
+      }
+    }
+  }
+}

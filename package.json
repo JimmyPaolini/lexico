@@ -1,11 +1,49 @@
 {
-  "name": "Oratrix",
-  "version": "1.0.0",
+  "scripts": {
+    "dev": "docker-compose -f docker-compose.services.yml up",
+    "undev": "docker-compose -f docker-compose.services.yml down",
+    "start": "docker-compose -f docker-compose.services.yml -f docker-compose.yml up",
+    "stop": "docker-compose -f docker-compose.services.yml -f docker-compose.yml down",
+    "build": "docker-compose pull && docker-compose build",
+    "build-web": "DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile -t jimmypaolini/lexico-web . --network host",
+    "build-server": "DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile -t jimmypaolini/lexico-server .",
+    "build-kibana": "docker image pull docker.elastic.co/kibana/kibana:7.11.1",
+    "build-elasticsearch": "docker image pull docker.elastic.co/elasticsearch/elasticsearch:7.11.1",
+    "build-database": "docker image pull postgres:13",
+    "deploy": "kubectl apply -f ./infra/kubernetes",
+    "deploy-web": "kubectl apply -f ./infra/kubernetes/web.yaml",
+    "deploy-server": "kubectl apply -f ./infra/kubernetes/server.yaml",
+    "deploy-database": "kubectl apply -f ./infra/kubernetes/database.yaml",
+    "deploy-nginx": "helm install nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
+    "deploy-elasticsearch": "helm install elasticsearch elastic/elasticsearch -f ./infra/helm/elasticsearch.yaml",
+    "deploy-kibana": "helm install kibana elastic/kibana -f ./infra/helm/kibana.yaml",
+    "deploy-k8s-dashboard": "kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml",
+    "start-k8s-dashboard": "kubectl proxy",
+    "update-server": "kubectl rollout restart deployment server",
+    "update-web": "kubectl rollout restart deployment web"
+  },
   "dependencies": {
-    "aws-sdk": "^2.642.0",
-    "cheerio": "latest",
-    "cheerio-tableparser": "latest",
-    "request": "^2.88.2",
-    "request-promise-native": "latest"
-  }
+    "@elastic/elasticsearch": "^7.12.0",
+    "dotenv": "^8.2.0",
+    "dotenv-expand": "^5.1.0",
+    "type-graphql": "^1.1.1",
+    "typeorm": "^0.2.31",
+    "winston": "^3.3.3",
+    "winston-elasticsearch": "^0.15.2"
+  },
+  "devDependencies": {
+    "@types/elasticsearch": "^5.0.37",
+    "@types/node": "^14.14.11",
+    "class-validator": "^0.12.2",
+    "eslint": "^7.21.0",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.2"
+  },
+  "name": "lexico",
+  "author": "Jimmy Paolini",
+  "description": "lexico",
+  "repository": "https://github.com/JimmyPaolini/Lexico",
+  "version": "1.0.0",
+  "license": "ISC"
 }

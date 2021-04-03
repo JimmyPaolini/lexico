@@ -1,0 +1,33 @@
+{
+  "scripts": {
+    "ingest": "tsc; node dist/ingestion/src/ingest.js",
+    "clear": "tsc; node dist/ingestion/src/clear.js",
+    "backup": "tsc; node dist/ingestion/src/backup.js",
+    "restore": "tsc; node dist/ingestion/src/restore.js",
+    "script": "node dist/ingestion/src/script.js",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.5",
+    "cheerio-tableparser": "^1.0.1",
+    "fs-extra": "^9.1.0",
+    "pg": "^8.5.1",
+    "ts-node": "^9.1.1",
+    "type-graphql": "^1.1.1",
+    "typeorm": "^0.2.31"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.24",
+    "@types/node": "^14.14.31",
+    "@types/prettier": "^2.2.1",
+    "eslint": "^7.20.0",
+    "prettier": "^2.2.1",
+    "typescript": "^4.2.2"
+  },
+  "name": "lexico-ingestion",
+  "author": "Jimmy Paolini",
+  "description": "lexico-ingestion",
+  "repository": "https://github.com/JimmyPaolini/Lexico",
+  "license": "ISC"
+}

@@ -1,0 +1,13 @@
+#import "../fragments/Settings.graphql"
+
+query User {
+  user {
+    id
+    email
+    googleId
+    facebookId
+    settings {
+      ...allSettings
+    }
+  }
+}

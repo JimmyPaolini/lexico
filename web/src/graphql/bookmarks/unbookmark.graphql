@@ -1,0 +1,3 @@
+mutation Unbookmark($entryId: String!) {
+  unbookmark(entryId: $entryId)
+}
