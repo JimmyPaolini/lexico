@@ -3,6 +3,16 @@ on:
   workflow_dispatch:
 
 jobs:
+  kubernetes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Kubernetes
+        run: sudo apt-get update && sudo apt-get install kubectl
+      - name: Login Kubernetes
+        run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
+      - name: Check Kubernetes
+        run: kubectl get node,deployment,sts,pod,ingress,service,pvc,pv,secret
+
   database:
     runs-on: ubuntu-latest
     steps:
@@ -17,11 +27,9 @@ jobs:
       - name: Install Kubernetes
         run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
-        run: >-
-          echo "${{secrets.KUBE_CONFIG}}" > kubeconfig.yaml &&
-          export KUBECONFIG=$(pwd)/kubeconfig.yaml
+        run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
       - name: Database Port Forward
-        run: kubectl port-forward statefulset.apps/database 5432 &
+        run: kubectl port-forward statefulset.apps/database 5432
       - name: Deploy Database
         run: cd ingestion && yarn restore ingested
 
@@ -53,9 +61,7 @@ jobs:
       - name: Install Kubernetes
         run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
-        run: >-
-          echo "${{secrets.KUBE_CONFIG}}" > kubeconfig.yaml &&
-          export KUBECONFIG=$(pwd)/kubeconfig.yaml
+        run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
       - name: Deploy Server
         run: kubectl rollout restart deployment server
 
@@ -88,9 +94,7 @@ jobs:
       - name: Install Kubernetes
         run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
-        run: >-
-          echo "${{secrets.KUBE_CONFIG}}" > kubeconfig.yaml &&
-          export KUBECONFIG=$(pwd)/kubeconfig.yaml
+        run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
       - name: Deploy Web
         run: kubectl rollout restart deployment web
 
