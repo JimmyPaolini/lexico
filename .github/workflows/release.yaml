@@ -25,9 +25,6 @@ jobs:
 
   server:
     runs-on: ubuntu-latest
-    env:
-      IMAGE_TAG: ${{steps.package-version.outputs.current-version}}
-      IMAGE_NAME: jimmypaolini/lexico-server
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -42,6 +39,9 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Server Image
+        env:
+          IMAGE_TAG: ${{steps.package-version.outputs.current-version}}
+          IMAGE_NAME: jimmypaolini/lexico-server
         run: >-
           DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile
           -t jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}} .
@@ -59,9 +59,6 @@ jobs:
   web:
     runs-on: ubuntu-latest
     needs: database
-    env:
-      IMAGE_TAG: ${{steps.package-version.outputs.current-version}}
-      IMAGE_NAME: jimmypaolini/lexico-web
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -78,6 +75,9 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Web Image
+        env:
+          IMAGE_TAG: ${{steps.package-version.outputs.current-version}}
+          IMAGE_NAME: jimmypaolini/lexico-web
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
           -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}} .
