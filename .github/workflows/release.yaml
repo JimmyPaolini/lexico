@@ -17,7 +17,7 @@ jobs:
       - name: Login Kubernetes
         run: |
           sudo apt-get update && sudo apt-get install kubectl &&
-          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+          mkdir ~/.kube && echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
       - name: Database Port Forward
         run: kubectl port-forward statefulset.apps/database 5432 &
       - name: Deploy Database
@@ -42,16 +42,16 @@ jobs:
         if: success()
         run: >-
           DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile
-          -t jimmypaolini/lexico-server:${{ steps.package-version.outputs.current-version}} .
+          -t jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}} .
       - name: Push Server Image
         if: success()
         uses: actions-hub/docker@master
         with:
-          args: push jimmypaolini/lexico-server:${{ steps.package-version.outputs.current-version}}
+          args: push jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}}
       - name: Login Kubernetes
         run: |
           sudo apt-get update && sudo apt-get install kubectl &&
-          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+          mkdir ~/.kube && echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
       - name: Deploy Server
         run: kubectl rollout restart deployment server
 
@@ -75,15 +75,38 @@ jobs:
         if: success()
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
-          -t jimmypaolini/lexico-web:${{ steps.package-version.outputs.current-version}} .
+          -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}} .
       - name: Push Web Image
         if: success()
         uses: actions-hub/docker@master
         with:
-          args: push jimmypaolini/lexico-web:${{ steps.package-version.outputs.current-version}}
+          args: push jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}}
       - name: Login Kubernetes
         run: |
           sudo apt-get update && sudo apt-get install kubectl &&
-          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+          mkdir ~/.kube && echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
       - name: Deploy Web
         run: kubectl rollout restart deployment web
+
+  # release:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get Version
+  #       id: package-version
+  #       uses: martinbeentjes/npm-get-version-action@master
+  #     - name: Create Release
+  #       id: create_release
+  #       uses: actions/create-release@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  #       with:
+  #         tag_name: ${{steps.package-version.outputs.current-version}}
+  #         release_name: ${{steps.package-version.outputs.current-version}}
+  #         draft: true
+  #         prerelease: false
+  #     - name: Publish Release
+  #       uses: eregon/publish-release@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         release_id: ${{steps.create_release.outputs.id}}
