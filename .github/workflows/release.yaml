@@ -59,6 +59,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
       - name: Get Version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
