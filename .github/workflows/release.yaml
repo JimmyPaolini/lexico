@@ -14,8 +14,38 @@ jobs:
   #         GITHUB_CONTEXT: ${{ toJson(github) }}
   #       run: echo "$GITHUB_CONTEXT"
 
-  setup:
+  # setup:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v2
+  #     - name: Setup Node
+  #       uses: actions/setup-node@v1
+  #     - name: Download Postgres
+  #       run: sudo apt-get update && sudo apt-get install postgresql
+  #     - name: Get Version
+  #       id: version
+  #       uses: martinbeentjes/npm-get-version-action@master
+
+  # login:
+  #   runs-on: ubuntu-latest
+  #   needs: setup
+  #   steps:
+  #     - name: Login Docker
+  #       uses: actions-hub/docker/login@master
+  #       env:
+  #         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  #         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  #     - name: Login Kubernetes
+  #       uses: actions-hub/kubectl@master
+  #       env:
+  #         KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+  #     - name: Check Kubernetes
+  #       run: kubectl get node,deployment,sts,pod,ingress,service,pvc,pv,secret
+
+  database:
     runs-on: ubuntu-latest
+    # needs: setup
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -23,14 +53,22 @@ jobs:
         uses: actions/setup-node@v1
       - name: Download Postgres
         run: sudo apt-get update && sudo apt-get install postgresql
-      - name: get-npm-version
+      - name: Npm Install
+        run: npm install && cd ingestion && npm install
+      - name: Update database
+        run: cd ingestion && yarn restore ingested
+
+  server:
+    runs-on: ubuntu-latest
+    # needs: login
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+      - name: Get Version
         id: version
         uses: martinbeentjes/npm-get-version-action@master
-
-  login:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
       - name: Login Docker
         uses: actions-hub/docker/login@master
         env:
@@ -42,22 +80,6 @@ jobs:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
       - name: Check Kubernetes
         run: kubectl get node,deployment,sts,pod,ingress,service,pvc,pv,secret
-
-  database:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Install Lexico
-        run: npm install
-      - name: Install Ingestion
-        run: cd ingestion && npm install
-      - name: Update database
-        run: cd ingestion && yarn restore ingested
-
-  server:
-    runs-on: ubuntu-latest
-    needs: login
-    steps:
       - name: Build Server Image
         run: DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile \
           -t jimmypaolini/lexico-server:${{ steps.package-version.outputs.version}} .
@@ -68,8 +90,26 @@ jobs:
 
   web:
     runs-on: ubuntu-latest
-    needs: [login, database]
+    needs: database
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+      - name: Get Version
+        id: version
+        uses: martinbeentjes/npm-get-version-action@master
+      - name: Login Docker
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Login Kubernetes
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      - name: Check Kubernetes
+        run: kubectl get node,deployment,sts,pod,ingress,service,pvc,pv,secret
       - name: Build Web Image
         run: DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile \
           -t jimmypaolini/lexico-web:${{ steps.package-version.outputs.version}} .
