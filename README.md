@@ -1,4 +1,6 @@
-# Lexico <a href="https://www.lexicolatin.com"><img align="right" width="40" height="40" src="web/public/icon/android-chrome-512x512.png"></a>
+# Lexico
+
+<p align="center"><a href="https://www.lexicolatin.com"><img width="128" height="128" src="web/public/icon/android-chrome-512x512.png"></a></p>
 
 ### Frameworks, Libraries, and Tools:
 

@@ -17,7 +17,6 @@ import log from "./log"
 
 export async function connectDatabase() {
   await createConnection({
-    name: "default",
     type: "postgres",
     host: process.env.NODE_ENV === "production" ? "database" : "localhost",
     port: 5432,

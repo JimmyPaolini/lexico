@@ -9,19 +9,19 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
       - name: Download Postgres
         run: sudo apt-get update && sudo apt-get install postgresql
       - name: Npm Install
         run: npm install && cd ingestion && npm install
-      - name: Login Kubectl
+      - name: Login Kubernetes
         run: |
           sudo apt-get update && sudo apt-get install kubectl;
           echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml;
           export KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml
       - name: Database Port Forward
-        run: kubectl port-forward statefulset.apps/database 5432 &
-      - name: Update database
+        run: kubectl port-forward statefulset.apps/database 5432 &; sleep 10
+      - name: Deploy Database
         run: cd ingestion && yarn restore ingested
 
   server:
@@ -30,7 +30,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
       - name: Get Version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
@@ -40,17 +40,21 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Server Image
+        if: success()
         run: >-
           DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile
           -t jimmypaolini/lexico-server:${{ steps.package-version.outputs.current-version}} .
       - name: Push Server Image
-        run: docker push jimmypaolini/lexico-server:${{ steps.package-version.outputs.current-version}}
-      - name: Login Kubectl
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push jimmypaolini/lexico-server:${{ steps.package-version.outputs.current-version}}
+      - name: Login Kubernetes
         run: |
           sudo apt-get update && sudo apt-get install kubectl;
           echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml;
           export KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml
-      - name: Deploy Server Image
+      - name: Deploy Server
         run: kubectl rollout restart deployment server
 
   web:
@@ -60,7 +64,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
       - name: Get Version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
@@ -70,15 +74,19 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Web Image
+        if: success()
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
           -t jimmypaolini/lexico-web:${{ steps.package-version.outputs.current-version}} .
       - name: Push Web Image
-        run: docker push jimmypaolini/lexico-web:${{ steps.package-version.outputs.current-version}}
-      - name: Login Kubectl
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push jimmypaolini/lexico-web:${{ steps.package-version.outputs.current-version}}
+      - name: Login Kubernetes
         run: |
           sudo apt-get update && sudo apt-get install kubectl;
           echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml;
           export KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml
-      - name: Deploy Web Image
+      - name: Deploy Web
         run: kubectl rollout restart deployment web
