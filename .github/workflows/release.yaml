@@ -3,16 +3,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  kubernetes:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Kubernetes
-        run: sudo apt-get update && sudo apt-get install kubectl
-      - name: Login Kubernetes
-        run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
-      - name: Check Kubernetes
-        run: kubectl get node,deployment,sts,pod,ingress,service,pvc,pv,secret
-
   database:
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +19,7 @@ jobs:
       - name: Login Kubernetes
         run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
       - name: Database Port Forward
-        run: kubectl port-forward statefulset.apps/database 5432
+        run: kubectl port-forward statefulset.apps/database 5432 &
       - name: Deploy Database
         run: cd ingestion && yarn restore ingested
 
