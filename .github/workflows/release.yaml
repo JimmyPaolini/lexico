@@ -16,13 +16,13 @@ jobs:
         run: npm install && cd ingestion && npm install
       - name: Login Kubernetes
         run: |
-          sudo apt-get update && sudo apt-get install kubectl;
-          echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml;
+          sudo apt-get update && sudo apt-get install kubectl &&
+          echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml &&
           export KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml
       - name: Database Port Forward
-        run: kubectl port-forward statefulset.apps/database 5432 &; sleep 10
+        run: kubectl port-forward statefulset.apps/database 5432 &
       - name: Deploy Database
-        run: cd ingestion && yarn restore ingested
+        run: sleep 10 && cd ingestion && yarn restore ingested
 
   server:
     runs-on: ubuntu-latest
@@ -51,8 +51,8 @@ jobs:
           args: push jimmypaolini/lexico-server:${{ steps.package-version.outputs.current-version}}
       - name: Login Kubernetes
         run: |
-          sudo apt-get update && sudo apt-get install kubectl;
-          echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml;
+          sudo apt-get update && sudo apt-get install kubectl &&
+          echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml &&
           export KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml
       - name: Deploy Server
         run: kubectl rollout restart deployment server
@@ -85,8 +85,8 @@ jobs:
           args: push jimmypaolini/lexico-web:${{ steps.package-version.outputs.current-version}}
       - name: Login Kubernetes
         run: |
-          sudo apt-get update && sudo apt-get install kubectl;
-          echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml;
+          sudo apt-get update && sudo apt-get install kubectl &&
+          echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml &&
           export KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml
       - name: Deploy Web
         run: kubectl rollout restart deployment web
