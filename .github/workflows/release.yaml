@@ -74,19 +74,17 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Login Kubernetes
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-      - name: Check Kubernetes
-        run: kubectl get node,deployment,sts,pod,ingress,service,pvc,pv,secret
       - name: Build Server Image
         run: DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile \
           -t jimmypaolini/lexico-server:${{ steps.package-version.outputs.version}} .
       - name: Push Server Image
         run: docker push jimmypaolini/lexico-server:${{ steps.package-version.outputs.version}}
       - name: Deploy Server Image
-        run: kubectl rollout restart deployment server
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: rollout restart deployment server
 
   web:
     runs-on: ubuntu-latest
@@ -104,16 +102,14 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Login Kubernetes
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-      - name: Check Kubernetes
-        run: kubectl get node,deployment,sts,pod,ingress,service,pvc,pv,secret
       - name: Build Web Image
         run: DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile \
           -t jimmypaolini/lexico-web:${{ steps.package-version.outputs.version}} .
       - name: Push Web Image
         run: docker push jimmypaolini/lexico-web:${{ steps.package-version.outputs.version}}
       - name: Deploy Web Image
-        run: kubectl rollout restart deployment web
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: rollout restart deployment web
