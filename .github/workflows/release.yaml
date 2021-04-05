@@ -21,7 +21,7 @@ jobs:
       - name: Database Port Forward
         run: kubectl port-forward statefulset.apps/database 5432 &
       - name: Deploy Database
-        run: cd ingestion && yarn restore ingested
+        run: cd ingestion && tsc && node dist/ingestion/src/restore.js ingested
 
   server:
     runs-on: ubuntu-latest
