@@ -14,12 +14,14 @@ jobs:
         run: sudo apt-get update && sudo apt-get install postgresql
       - name: Npm Install
         run: npm install && cd ingestion && npm install
+      - name: Install Kubernetes
+        run: sudo apt-get update && sudo apt-get install kubectl
+      - name: Login Kubernetes
+        run: >-
+          echo "${{secrets.KUBE_CONFIG}}" > kubeconfig.yaml &&
+          export KUBECONFIG=$(pwd)/kubeconfig.yaml
       - name: Database Port Forward
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        with:
-          args: port-forward statefulset.apps/database 5432 &
+        run: kubectl port-forward statefulset.apps/database 5432 &
       - name: Deploy Database
         run: cd ingestion && yarn restore ingested
 
@@ -48,12 +50,14 @@ jobs:
         uses: actions-hub/docker@master
         with:
           args: push jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}}
+      - name: Install Kubernetes
+        run: sudo apt-get update && sudo apt-get install kubectl
+      - name: Login Kubernetes
+        run: >-
+          echo "${{secrets.KUBE_CONFIG}}" > kubeconfig.yaml &&
+          export KUBECONFIG=$(pwd)/kubeconfig.yaml
       - name: Deploy Server
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        with:
-          args: rollout restart deployment server
+        run: kubectl rollout restart deployment server
 
   web:
     runs-on: ubuntu-latest
@@ -81,12 +85,14 @@ jobs:
         uses: actions-hub/docker@master
         with:
           args: push jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}}
+      - name: Install Kubernetes
+        run: sudo apt-get update && sudo apt-get install kubectl
+      - name: Login Kubernetes
+        run: >-
+          echo "${{secrets.KUBE_CONFIG}}" > kubeconfig.yaml &&
+          export KUBECONFIG=$(pwd)/kubeconfig.yaml
       - name: Deploy Web
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        with:
-          args: rollout restart deployment web
+        run: kubectl rollout restart deployment web
 
   release:
     runs-on: ubuntu-latest
