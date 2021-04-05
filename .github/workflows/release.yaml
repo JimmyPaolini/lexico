@@ -14,10 +14,10 @@ jobs:
         run: sudo apt-get update && sudo apt-get install postgresql
       - name: Npm Install
         run: npm install && cd ingestion && npm install
+      - name: Install Kubernetes
+        run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
-        run: |
-          sudo apt-get update && sudo apt-get install kubectl &&
-          mkdir ~/.kube && echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+        run: echo "${{secrets.KUBE_CONFIG}}" > ${{github.workspace}}/kubeconfig.yaml && export KUBECONFIG=${{github.workspace}}/kubeconfig.yaml
       - name: Database Port Forward
         run: kubectl port-forward statefulset.apps/database 5432 &
       - name: Deploy Database
@@ -48,10 +48,10 @@ jobs:
         uses: actions-hub/docker@master
         with:
           args: push jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}}
+      - name: Install Kubernetes
+        run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
-        run: |
-          sudo apt-get update && sudo apt-get install kubectl &&
-          mkdir ~/.kube && echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+        run: echo "${{secrets.KUBE_CONFIG}}" > ${{github.workspace}}/kubeconfig.yaml && export KUBECONFIG=${{github.workspace}}/kubeconfig.yaml
       - name: Deploy Server
         run: kubectl rollout restart deployment server
 
@@ -81,32 +81,32 @@ jobs:
         uses: actions-hub/docker@master
         with:
           args: push jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}}
+      - name: Install Kubernetes
+        run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
-        run: |
-          sudo apt-get update && sudo apt-get install kubectl &&
-          mkdir ~/.kube && echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+        run: echo "${{secrets.KUBE_CONFIG}}" > ${{github.workspace}}/kubeconfig.yaml && export KUBECONFIG=${{github.workspace}}/kubeconfig.yaml
       - name: Deploy Web
         run: kubectl rollout restart deployment web
 
-  # release:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Get Version
-  #       id: package-version
-  #       uses: martinbeentjes/npm-get-version-action@master
-  #     - name: Create Release
-  #       id: create_release
-  #       uses: actions/create-release@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-  #       with:
-  #         tag_name: ${{steps.package-version.outputs.current-version}}
-  #         release_name: ${{steps.package-version.outputs.current-version}}
-  #         draft: true
-  #         prerelease: false
-  #     - name: Publish Release
-  #       uses: eregon/publish-release@v1
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         release_id: ${{steps.create_release.outputs.id}}
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          tag_name: ${{steps.package-version.outputs.current-version}}
+          release_name: ${{steps.package-version.outputs.current-version}}
+          draft: true
+          prerelease: false
+      - name: Publish Release
+        uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{steps.create_release.outputs.id}}
