@@ -36,6 +36,7 @@
     "../server",
     "**/node_modules",
     "**/dist",
+    "**/.github",
     "**/database_volume",
     "**/elasticsearch_volume"
   ],
@@ -43,10 +44,9 @@
     "./src/**/*.ts",
     "./src/**/*.tsx",
     "./src/**/*.graphql",
-    "./src/**/*.graphql",
     "../**/*.ts",
     "../**/*.tsx",
-    "server.js",
-    "../**/.env"
+    "../**/.env",
+    "./next.config.js"
   ]
 }

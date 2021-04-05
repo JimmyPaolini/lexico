@@ -20,7 +20,6 @@ export interface SearchBarProps {
   isLatin?: boolean
   setLatin?: Dispatch<SetStateAction<boolean>>
 }
-
 export default function SearchBar({
   search,
   setSearch,

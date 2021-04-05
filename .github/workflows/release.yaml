@@ -39,9 +39,6 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Server Image
-        env:
-          IMAGE_TAG: ${{steps.package-version.outputs.current-version}}
-          IMAGE_NAME: jimmypaolini/lexico-server
         run: >-
           DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile
           -t jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}} .
@@ -62,10 +59,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@v2
-      - name: Npm Install
-        run: npm install && cd web && npm install
       - name: Get Version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
@@ -74,10 +67,9 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Debug Build Web Image
+        run: ls -R
       - name: Build Web Image
-        env:
-          IMAGE_TAG: ${{steps.package-version.outputs.current-version}}
-          IMAGE_NAME: jimmypaolini/lexico-web
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
           -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}} .
