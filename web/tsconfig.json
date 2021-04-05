@@ -41,9 +41,7 @@
     "**/elasticsearch_volume"
   ],
   "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./src/**/*.graphql",
+    "./src",
     "../**/*.ts",
     "../**/*.tsx",
     "../**/.env",
