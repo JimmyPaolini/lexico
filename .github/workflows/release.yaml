@@ -17,12 +17,11 @@ jobs:
       - name: Login Kubernetes
         run: |
           sudo apt-get update && sudo apt-get install kubectl &&
-          echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml &&
-          export KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml
+          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
       - name: Database Port Forward
         run: kubectl port-forward statefulset.apps/database 5432 &
       - name: Deploy Database
-        run: sleep 10 && cd ingestion && yarn restore ingested
+        run: cd ingestion && yarn restore ingested
 
   server:
     runs-on: ubuntu-latest
@@ -52,8 +51,7 @@ jobs:
       - name: Login Kubernetes
         run: |
           sudo apt-get update && sudo apt-get install kubectl &&
-          echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml &&
-          export KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml
+          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
       - name: Deploy Server
         run: kubectl rollout restart deployment server
 
@@ -86,7 +84,6 @@ jobs:
       - name: Login Kubernetes
         run: |
           sudo apt-get update && sudo apt-get install kubectl &&
-          echo "${{ secrets.KUBE_CONFIG }}" > ${{ github.workspace }}/kubeconfig.yaml &&
-          export KUBECONFIG=${{ github.workspace }}/kubeconfig.yaml
+          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
       - name: Deploy Web
         run: kubectl rollout restart deployment web
