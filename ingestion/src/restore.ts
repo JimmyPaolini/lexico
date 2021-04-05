@@ -44,5 +44,6 @@ async function main() {
   } as { [key: string]: () => any }
 
   await instructions[command]()
+  process.exit()
 }
-main().finally(() => process.exit())
+main()

@@ -45,5 +45,6 @@ async function main() {
 
   if (!(command in instructions)) throw new Error("unknown command")
   await instructions[command]()
+  process.exit()
 }
-main().finally(() => process.exit())
+main()
