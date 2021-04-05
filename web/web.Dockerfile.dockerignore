@@ -12,6 +12,7 @@
 **/infra
 **/ingestion
 **/server
+**/.github
 
 /.next/
 /out/
