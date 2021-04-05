@@ -67,7 +67,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
       - name: Get Version
-        id: version
+        id: package-version
         uses: martinbeentjes/npm-get-version-action@master
       - name: Login Docker
         uses: actions-hub/docker/login@master
@@ -76,9 +76,9 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Server Image
         run: DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile \
-          -t jimmypaolini/lexico-server:${{ steps.package-version.outputs.version}} .
+          -t jimmypaolini/lexico-server:${{ steps.package-version.outputs.current-version}} .
       - name: Push Server Image
-        run: docker push jimmypaolini/lexico-server:${{ steps.package-version.outputs.version}}
+        run: docker push jimmypaolini/lexico-server:${{ steps.package-version.outputs.current-version}}
       - name: Deploy Server Image
         uses: actions-hub/kubectl@master
         env:
@@ -95,7 +95,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
       - name: Get Version
-        id: version
+        id: package-version
         uses: martinbeentjes/npm-get-version-action@master
       - name: Login Docker
         uses: actions-hub/docker/login@master
@@ -104,9 +104,9 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Web Image
         run: DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile \
-          -t jimmypaolini/lexico-web:${{ steps.package-version.outputs.version}} .
+          -t jimmypaolini/lexico-web:${{ steps.package-version.outputs.current-version}} .
       - name: Push Web Image
-        run: docker push jimmypaolini/lexico-web:${{ steps.package-version.outputs.version}}
+        run: docker push jimmypaolini/lexico-web:${{ steps.package-version.outputs.current-version}}
       - name: Deploy Web Image
         uses: actions-hub/kubectl@master
         env:
