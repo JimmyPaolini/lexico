@@ -39,12 +39,13 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Server Image
-        if: success()
+        env:
+          IMAGE_TAG: ${{steps.package-version.outputs.current-version}}
+          IMAGE_NAME: jimmypaolini/lexico-server
         run: >-
           DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile
           -t jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}} .
       - name: Push Server Image
-        if: success()
         uses: actions-hub/docker@master
         with:
           args: push jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}}
@@ -72,12 +73,13 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Web Image
-        if: success()
+        env:
+          IMAGE_TAG: ${{steps.package-version.outputs.current-version}}
+          IMAGE_NAME: jimmypaolini/lexico-web
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
           -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}} .
       - name: Push Web Image
-        if: success()
         uses: actions-hub/docker@master
         with:
           args: push jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}}
