@@ -12,4 +12,7 @@ module.exports = {
     }
     return config
   },
+  typescript: {
+    ignoreBuildErrors: true, // Dangerous; make sure to typecheck before build/run/deploy
+  },
 }

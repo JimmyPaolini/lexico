@@ -36,3 +36,7 @@ tools.map((tool) => `<a href="${tool.url}"><img width="64" height="64" alt="${to
 <a href="https://lexico-group.slack.com/archives/C01SN2QN2BF"><img width="64" height="64" alt="slack" src="web/public/icon/tool/slack.png"></a>
 <a href="https://www.wiktionary.org/"><img width="64" height="64" alt="wikipedia" src="web/public/icon/tool/wikipedia.png"></a>
 <a href="https://github.com/JimmyPaolini/Lexico"><img width="64" height="64" alt="github" src="web/public/icon/tool/github.png"></a>
+
+### Database Schema
+
+<p align="center"><a href="https://drawsql.app/lexico/diagrams/lexico"><img src="web/public/database_schema.png"></a></p>
