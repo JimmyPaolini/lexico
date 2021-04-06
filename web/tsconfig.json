@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "esnext",
-    "module": "es2020",
+    "module": "esnext",
     "lib": ["dom", "es2020", "esnext.asynciterable"],
     "sourceMap": true,
     "outDir": "./dist",
@@ -29,7 +29,7 @@
     "jsx": "preserve",
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": false
+    "noEmit": true
   },
   "exclude": [
     "../ingestion",
