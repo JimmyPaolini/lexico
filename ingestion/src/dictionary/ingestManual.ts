@@ -13,6 +13,7 @@ export default async function ingestManual() {
 
   await deleteManual("qui:0")
   await deleteManual("quis:0")
+  await deleteManual("latinitas:0")
 
   await createManual(hic as Entry)
 

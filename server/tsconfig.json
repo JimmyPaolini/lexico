@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "lib": ["dom", "es6", "es2020", "esnext.asynciterable"],
+    "lib": ["dom", "es2020"],
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
@@ -31,5 +31,11 @@
     "**/database_volume",
     "**/elasticsearch_volume"
   ],
-  "include": ["../**/*.ts", "../**/*.tsx", "../web/server.js", "../web/server.js", "../web/server.js"]
+  "include": [
+    "../**/*.ts",
+    "../**/*.tsx",
+    "../web/server.js",
+    "../web/server.js",
+    "../web/server.js"
+  ]
 }
