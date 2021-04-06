@@ -88,7 +88,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: [database, server, web]
+    needs: [server, web]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
