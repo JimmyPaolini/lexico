@@ -54,15 +54,13 @@ jobs:
   #       run: kubectl rollout restart deployment server
 
   web:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     # needs: database
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Setup Node
         uses: actions/setup-node@v2
-        with:
-          node-version: "12"
       - name: Type Check
         run: npm install && cd web && npm install && yarn tsc
       - name: Get Version
