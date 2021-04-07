@@ -66,7 +66,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
       - name: Type Check
-        run: npm install && cd web && npm install && pwd && yarn tsc
+        run: npm install && cd web && npm install && pwd && cat src/components/accessories/SearchBar.tsx && yarn tsc
       - name: Get Version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
