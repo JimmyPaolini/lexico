@@ -61,11 +61,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup Node
         uses: actions/setup-node@v2
-      - name: Type Check
-        run: npm install && cd web && npm install && yarn tsc
       - name: Get Version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@master
+        id: get-version
+        run: >-
+          cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'
       - name: Login Docker
         uses: actions-hub/docker/login@master
         env:
@@ -74,11 +73,13 @@ jobs:
       - name: Build Web Image
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
-          -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}} .
+          -t jimmypaolini/lexico-web:${{steps.get-version.outputs.*}} .
+      - name: Type Check
+        run: npm install && cd web && npm install && yarn tsc
       - name: Push Web Image
         uses: actions-hub/docker@master
         with:
-          args: push jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}}
+          args: push jimmypaolini/lexico-web:${{steps.get-version.outputs.*}}
       - name: Install Kubernetes
         run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
