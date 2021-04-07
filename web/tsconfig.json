@@ -6,7 +6,7 @@
     "lib": ["dom", "es2020", "esnext.asynciterable"],
     "sourceMap": true,
     "outDir": "./dist",
-    "moduleResolution": "node",
+    "moduleResolution": "classic",
     "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
