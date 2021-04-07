@@ -54,7 +54,7 @@ jobs:
   #       run: kubectl rollout restart deployment server
 
   web:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     # needs: database
     steps:
       - name: Checkout Code
