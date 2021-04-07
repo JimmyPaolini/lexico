@@ -10,6 +10,12 @@ module.exports = {
         fs: "empty",
       }
     }
+    // config.module.rules.push({
+    //   test: /\.tsx?$/,
+    //   use: "ts-loader",
+    //   exclude: /node_modules/,
+    // })
+    config.resolve.extensions.push(".ts", ".tsx", ".js", ".jsx")
     return config
   },
   typescript: {
