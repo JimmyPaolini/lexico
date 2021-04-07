@@ -42,10 +42,14 @@ jobs:
   #       run: >-
   #         DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile
   #         -t jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}} .
-  #     - name: Push Server Image
+  #     - name: Push Server Image Version
   #       uses: actions-hub/docker@master
   #       with:
   #         args: push jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}}
+  #     - name: Push Server Image Latest
+  #       uses: actions-hub/docker@master
+  #       with:
+  #         args: push jimmypaolini/lexico-server:latest
   #     - name: Install Kubernetes
   #       run: sudo apt-get update && sudo apt-get install kubectl
   #     - name: Login Kubernetes
@@ -59,8 +63,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-        with:
-          path: /home/runner/work/Lexico
       - name: Setup Node
         uses: actions/setup-node@v2
       - name: Type Check
@@ -77,10 +79,14 @@ jobs:
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
           -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}} .
-      - name: Push Web Image
+      - name: Push Web Image Version
         uses: actions-hub/docker@master
         with:
           args: push jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}}
+      - name: Push Web Image Latest
+        uses: actions-hub/docker@master
+        with:
+          args: push jimmypaolini/lexico-web:latest
       - name: Install Kubernetes
         run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
