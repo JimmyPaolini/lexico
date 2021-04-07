@@ -24,7 +24,7 @@
     "baseUrl": ".",
     "strictPropertyInitialization": false,
     "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": false,
     "isolatedModules": true,
     "jsx": "preserve",
     "skipLibCheck": true,
