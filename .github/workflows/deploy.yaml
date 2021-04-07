@@ -59,6 +59,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+        with:
+          path: /home/runner/work/Lexico
       - name: Setup Node
         uses: actions/setup-node@v2
       - name: Type Check
