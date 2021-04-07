@@ -2,11 +2,11 @@ import { Typography } from "@material-ui/core"
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/router"
 import React, { useEffect, useMemo, useState } from "react"
-import Home from "src/components/search/Home"
 import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
 import SearchBarLayout from "../components/accessories/SearchBarLayout"
 import EntryCard from "../components/EntryCard/EntryCard"
+import Home from "../components/search/Home"
 import useSearch from "../hooks/search/useSearch"
 
 interface Props {

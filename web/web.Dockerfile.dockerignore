@@ -13,6 +13,7 @@
 **/ingestion
 **/server
 **/.github
+**/*.env*
 
 /.next/
 /out/

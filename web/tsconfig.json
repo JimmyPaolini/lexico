@@ -31,20 +31,14 @@
     "strict": true,
     "noEmit": true
   },
+  "include": ["../**/*"],
   "exclude": [
     "../ingestion",
     "../server",
     "**/node_modules",
     "**/dist",
     "**/.github",
-    "**/database_volume",
-    "**/elasticsearch_volume"
-  ],
-  "include": [
-    "./src",
-    "../**/*.ts",
-    "../**/*.tsx",
-    "../**/.env",
-    "./next.config.js"
+    "../database_volume",
+    "../elasticsearch_volume"
   ]
 }

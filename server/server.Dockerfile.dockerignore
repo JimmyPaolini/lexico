@@ -13,3 +13,4 @@
 **/ingestion
 **/web
 **/.github
+**/*.env*
