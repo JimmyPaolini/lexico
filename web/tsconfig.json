@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": ["dom", "es2020", "esnext.asynciterable"],
+    "lib": ["dom", "es2020"],
     "sourceMap": true,
     "outDir": "./dist",
     "moduleResolution": "node",
@@ -21,7 +21,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "baseUrl": ".",
     "strictPropertyInitialization": false,
     "allowJs": true,
     "forceConsistentCasingInFileNames": false,
