@@ -76,17 +76,17 @@ jobs:
         run: >-
           cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'
       - name: Install Docker
-        run: brew install --cask docker
+        run: brew cask install docker
       - name: Build Web Image
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
           -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          -t jimmypaolini/lexico-web:${{steps.get-version.outputs.*}} .
+          -t jimmypaolini/lexico-web:${{steps.get-version.outputs[0]}} .
       - name: Push Web Image Version
         run: >-
           DOCKER_BUILDKIT=1 docker push
           -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          -t jimmypaolini/lexico-web:${{steps.get-version.outputs.*}}
+          -t jimmypaolini/lexico-web:${{steps.get-version.outputs[0]}}
       - name: Push Web Image Version
         run: >-
           DOCKER_BUILDKIT=1 docker push
