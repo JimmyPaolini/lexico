@@ -1,16 +1,16 @@
 const path = require("path")
 module.exports = {
-  webpack: (config, { isServer, dir, defaultLoaders }) => {
+  webpack: (config) => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
       loader: "graphql-tag/loader",
     })
-    if (!isServer) {
-      config.node = {
-        fs: "empty",
-      }
-    }
+    // if (!isServer) {
+    //   config.node = {
+    //     fs: "empty",
+    //   }
+    // }
     // config.module.rules.push({
     //   test: /\\.+(ts|tsx)$/,
     //   include: [dir],

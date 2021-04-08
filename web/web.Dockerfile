@@ -2,11 +2,11 @@
 FROM node:15-alpine
 RUN apk add --update nodejs npm curl
 
-WORKDIR /code
+WORKDIR /Lexico
 COPY package*.json ./
 RUN npm install
 
-WORKDIR /code/web
+WORKDIR /Lexico/web
 COPY web/package*.json ./
 RUN npm install
 
