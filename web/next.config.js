@@ -22,7 +22,7 @@ module.exports = {
     // config.resolve.extensions.push(".ts", ".tsx", ".js", ".jsx")
     return config
   },
-  typescript: {
-    ignoreBuildErrors: true, // Dangerous; manually typecheck before run/build
-  },
+  // typescript: {
+  //   ignoreBuildErrors: true, // Dangerous; manually typecheck before run/build
+  // },
 }

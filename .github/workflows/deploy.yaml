@@ -68,15 +68,15 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup Node
         uses: actions/setup-node@v2
-      - name: Type Check
-        continue-on-error: true
-        run: npm install && cd web && npm install && yarn tsc
+      # - name: Type Check
+      #   continue-on-error: true
+      #   run: npm install && cd web && npm install && yarn tsc
       - name: Get Version
         id: get-version
         run: >-
           cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'
       - name: Install Docker
-        run: brew install docker
+        run: brew install --cask docker
       - name: Build Web Image
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
