@@ -24,6 +24,7 @@ module.exports = {
     config.resolve.modules.push(path.resolve("./"))
     return config
   },
+  future: { webpack5: true },
   // typescript: {
   //   ignoreBuildErrors: true, // Dangerous; manually typecheck before run/build
   // },
