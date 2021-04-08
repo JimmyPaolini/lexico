@@ -77,8 +77,9 @@ jobs:
           cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'
       - name: Install Docker
         run: >-
-          curl -fsSL https://download.docker.com/mac/static/stable/x86_64/docker-18.06.3-ce.tgz &&
-          tar xzvf docker-18.06.3-ce.tar.gz && sudo cp docker/docker /usr/local/bin/
+          brew install docker && open --hide --background -a Docker &
+          # curl -fsSL https://download.docker.com/mac/static/stable/x86_64/docker-18.06.3-ce.tgz &&
+          # tar xzvf docker-18.06.3-ce.tar.gz && pwd && sudo cp docker/docker /usr/local/bin/
       - name: Build Web Image
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
