@@ -76,10 +76,10 @@ jobs:
         run: >-
           echo "::set-output name=version::$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')"
       - name: Install Docker
-        # run: brew install --cask docker && open /Applications/Docker.app
-        run: >-
-          curl -fsSL https://download.docker.com/mac/static/stable/x86_64/docker-18.06.3-ce.tgz -o docker.tgz &&
-          tar -xzf docker.tgz && sudo cp docker/docker /usr/local/bin/ && sudo dockerd &
+        run: brew install --cask docker && open /Applications/Docker.app & sleep 30
+        # run: >-
+        #   curl -fsSL https://download.docker.com/mac/static/stable/x86_64/docker-18.06.3-ce.tgz -o docker.tgz &&
+        #   tar -xzf docker.tgz && sudo cp docker/docker /usr/local/bin/ && sudo dockerd & sleep 20
       - name: Build Web Image
         run: >-
           sudo DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
