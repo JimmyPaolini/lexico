@@ -75,14 +75,10 @@ jobs:
         env:
           DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      - uses: actions/cache@v2
-        id: cache
-        with:
-          key: ${{ runner.os }}-v1-${{ hashFiles('**/lockfiles') }}
       - name: Build Web Image
         if: steps.cache.outputs.cache-hit != 'true'
         run: >-
-          docker build -f web/web.Dockerfile
+          docker build --no-cache -f web/web.Dockerfile
           -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}} .
       - name: Push Web Image Version
         uses: actions-hub/docker@master
