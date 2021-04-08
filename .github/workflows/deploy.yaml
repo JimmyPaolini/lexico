@@ -61,7 +61,7 @@ jobs:
   #       run: kubectl rollout restart deployment server
 
   web:
-    runs-on: macos-latest
+    runs-on: macos-latest # I don't like having to switch to macos here but I kept getting typescript(TS2307)/webpack errors on ubuntu
     # needs: database
     steps:
       - name: Checkout Code
@@ -76,7 +76,7 @@ jobs:
         run: >-
           cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'
       - name: Install Docker
-        run: sudo apt-get update && sudo apt-get install docker-ce-cli
+        run: brew install docker
       - name: Build Web Image
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
@@ -93,7 +93,7 @@ jobs:
           -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           -t jimmypaolini/lexico-web:latest
       - name: Install Kubernetes
-        run: sudo apt-get update && sudo apt-get install kubectl
+        run: brew install kubectl
       - name: Login Kubernetes
         run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
       - name: Deploy Web
