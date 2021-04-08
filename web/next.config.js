@@ -1,11 +1,12 @@
-const path = require("path")
 module.exports = {
+  future: { webpack5: true },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
       loader: "graphql-tag/loader",
     })
+    config.resolve.preferRelative = true
     // if (!isServer) {
     //   config.node = {
     //     fs: "empty",
@@ -21,10 +22,9 @@ module.exports = {
     //   ],
     // })
     // config.resolve.extensions.push(".ts", ".tsx", ".js", ".jsx")
-    config.resolve.modules.push(path.resolve("./"))
+    // config.resolve.modules.push(path.resolve("./"))
     return config
   },
-  future: { webpack5: true },
   // typescript: {
   //   ignoreBuildErrors: true, // Dangerous; manually typecheck before run/build
   // },
