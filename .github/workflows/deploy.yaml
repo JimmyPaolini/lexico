@@ -79,11 +79,11 @@ jobs:
         # run: brew install --cask docker && open /Applications/Docker.app
         run: >-
           curl -fsSL https://download.docker.com/mac/static/stable/x86_64/docker-18.06.3-ce.tgz -o docker.tgz &&
-          tar -xzf docker.tgz && sudo cp docker/docker /usr/local/bin/ && dockerd &
+          tar -xzf docker.tgz && sudo cp docker/docker /usr/local/bin/ && sudo dockerd &
       - name: Build Web Image
         run: >-
           sudo docker -H localhost run hello-world &&
-          DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
+          sudo DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
           -t jimmypaolini/lexico-web:${{steps.get-version.outputs.version}} .
       - name: Push Web Image Version
         run: >-
