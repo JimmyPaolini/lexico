@@ -1,3 +1,4 @@
+const path = require("path")
 module.exports = {
   webpack: (config, { isServer, dir, defaultLoaders }) => {
     config.module.rules.push({
@@ -20,9 +21,10 @@ module.exports = {
     //   ],
     // })
     // config.resolve.extensions.push(".ts", ".tsx", ".js", ".jsx")
+    config.resolve.modules.push(path.resolve("./"))
     return config
   },
-  typescript: {
-    ignoreBuildErrors: true, // Dangerous; manually typecheck before run/build
-  },
+  // typescript: {
+  //   ignoreBuildErrors: true, // Dangerous; manually typecheck before run/build
+  // },
 }

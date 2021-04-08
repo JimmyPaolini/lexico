@@ -39,8 +39,8 @@ jobs:
   #     - name: Login Docker
   #       uses: actions-hub/docker/login@master
   #       env:
-  #         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  #         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  #         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+  #         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
   #     - name: Build Server Image
   #       run: >-
   #         DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile
@@ -61,42 +61,34 @@ jobs:
   #       run: kubectl rollout restart deployment server
 
   web:
-    runs-on: macos-latest # I don't know why I get typescript(TS2307)/webpack errors on ubuntu but not macOS
-    # needs: database
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Setup Node
         uses: actions/setup-node@v2
-      # - name: Type Check
-      #   continue-on-error: true
-      #   run: npm install && cd web && npm install && yarn tsc
       - name: Get Version
-        id: get-version
-        run: >-
-          echo "::set-output name=version::$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')"
-      - name: Install Docker
-        uses: docker-practice/actions-setup-docker@master
-        # run: >-
-        #   brew install docker &&
-        #   curl -fsSL https://download.docker.com/mac/static/stable/x86_64/docker-18.06.3-ce.tgz -o docker.tgz &&
-        #   tar -xzf docker.tgz && sudo cp docker/docker /usr/local/bin/ && dockerd
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
       - name: Login Docker
-        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       - name: Build Web Image
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
-          -t jimmypaolini/lexico-web:${{steps.get-version.outputs.version}} .
+          -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}} .
       - name: Push Web Image Version
-        run: >-
-          docker push -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-          -t jimmypaolini/lexico-web:${{steps.get-version.outputs.version}}
-      - name: Push Web Image latest
-        run: >-
-          docker push -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-          -t jimmypaolini/lexico-web:latest
+        uses: actions-hub/docker@master
+        with:
+          args: push jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}}
+      - name: Push Web Image Latest
+        uses: actions-hub/docker@master
+        with:
+          args: push jimmypaolini/lexico-web:latest
       - name: Install Kubernetes
-        run: brew install kubectl
+        run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
         run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
       - name: Deploy Web
