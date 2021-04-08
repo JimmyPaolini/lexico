@@ -7,6 +7,7 @@
     "lib": ["DOM", "ESNEXT"],
     "sourceMap": true,
     "outDir": "./dist",
+    "baseUrl": "./",
     "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
