@@ -81,17 +81,19 @@ jobs:
         #   brew install docker &&
         #   curl -fsSL https://download.docker.com/mac/static/stable/x86_64/docker-18.06.3-ce.tgz -o docker.tgz &&
         #   tar -xzf docker.tgz && sudo cp docker/docker /usr/local/bin/ && dockerd
+      - name: Login Docker
+        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build Web Image
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
           -t jimmypaolini/lexico-web:${{steps.get-version.outputs.version}} .
       - name: Push Web Image Version
         run: >-
-          docker push -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
           -t jimmypaolini/lexico-web:${{steps.get-version.outputs.version}}
       - name: Push Web Image latest
         run: >-
-          docker push -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
           -t jimmypaolini/lexico-web:latest
       - name: Install Kubernetes
         run: brew install kubectl
