@@ -74,7 +74,7 @@ jobs:
       - name: Get Version
         id: get-version
         run: >-
-          cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'
+          echo "::set-output name=version::$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')"
       - name: Install Docker
         run: >-
           curl -fsSL https://download.docker.com/mac/static/stable/x86_64/docker-18.06.3-ce.tgz -o docker.tgz &&
@@ -82,11 +82,11 @@ jobs:
       - name: Build Web Image
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
-          -t jimmypaolini/lexico-web:${{steps.get-version.outputs[0]}} .
+          -t jimmypaolini/lexico-web:${{steps.get-version.outputs.version}} .
       - name: Push Web Image Version
         run: >-
           docker push -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          -t jimmypaolini/lexico-web:${{steps.get-version.outputs[0]}}
+          -t jimmypaolini/lexico-web:${{steps.get-version.outputs.version}}
       - name: Push Web Image Version
         run: >-
           docker push -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
