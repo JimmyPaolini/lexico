@@ -31,4 +31,7 @@ module.exports = {
   // typescript: {
   //   ignoreBuildErrors: true, // Dangerous; manually typecheck before run/build
   // },
+  typescript: {
+    transpileOnly: true,
+  },
 }
