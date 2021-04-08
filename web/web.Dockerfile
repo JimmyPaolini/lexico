@@ -11,6 +11,7 @@ COPY web/package*.json ./
 RUN npm install
 
 COPY . ../
+RUN ls -R
 RUN NEXT_ENV=build npm run build
 
 EXPOSE 3000

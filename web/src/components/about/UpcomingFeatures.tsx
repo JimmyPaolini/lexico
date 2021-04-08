@@ -1,7 +1,7 @@
 import {
   Box,
   CardActionArea,
-  CardHeader as CardHeaderMui,
+  CardHeader as CardHeaderMui
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Launch } from "@material-ui/icons"

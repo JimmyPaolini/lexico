@@ -2,9 +2,9 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "ESNEXT",
-    "module": "commonjs",
+    "module": "ESNEXT",
     "moduleResolution": "node",
-    "lib": ["DOM", "ESNEXT"],
+    "lib": ["DOM"],
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": ".",
