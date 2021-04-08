@@ -82,7 +82,6 @@ jobs:
           tar -xzf docker.tgz && sudo cp docker/docker /usr/local/bin/ && sudo dockerd &
       - name: Build Web Image
         run: >-
-          sudo docker -H localhost run hello-world &&
           sudo DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
           -t jimmypaolini/lexico-web:${{steps.get-version.outputs.version}} .
       - name: Push Web Image Version
