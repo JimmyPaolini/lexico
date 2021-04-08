@@ -75,8 +75,8 @@ jobs:
         id: get-version
         run: >-
           cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'
-      # - name: Install Docker
-      #   run: sudo apt-get update && sudo apt-get install docker
+      - name: Install Docker
+        run: sudo apt-get update && sudo apt-get install docker-ce-cli
       - name: Build Web Image
         run: >-
           DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
