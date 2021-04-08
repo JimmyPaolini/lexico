@@ -28,10 +28,8 @@ module.exports = {
 
     return config
   },
-  // typescript: {
-  //   ignoreBuildErrors: true, // Dangerous; manually typecheck before run/build
+  // typescript: { // Dangerous; manually typecheck before run/build
+  //   ignoreBuildErrors: true,
+  //   transpileOnly: true,
   // },
-  typescript: {
-    transpileOnly: true,
-  },
 }

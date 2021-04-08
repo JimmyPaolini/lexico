@@ -78,7 +78,7 @@ jobs:
       - name: Build Web Image
         if: steps.cache.outputs.cache-hit != 'true'
         run: >-
-          docker build --no-cache -f web/web.Dockerfile
+          DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile
           -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}} .
       - name: Push Web Image Version
         uses: actions-hub/docker@master

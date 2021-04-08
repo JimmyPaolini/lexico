@@ -24,7 +24,7 @@
     "resolveJsonModule": true,
     "strictPropertyInitialization": false,
     "allowJs": true,
-    "forceConsistentCasingInFileNames": false,
+    "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "skipLibCheck": true,
