@@ -6,7 +6,7 @@ import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
 import SearchBarLayout from "../components/accessories/SearchBarLayout"
 import EntryCard from "../components/EntryCard/EntryCard"
-import Home from "../components/search/Home"
+// import Home from "../components/search/Home"
 import useSearch from "../hooks/search/useSearch"
 
 interface Props {
@@ -63,9 +63,7 @@ export default function Search({ initialSearch, initialIsLatin }: Props) {
         setLatin,
       }}
     >
-      {!searched ? (
-        <Home />
-      ) : noEntriesFound ? (
+      {!searched ? null : noEntriesFound ? ( // <Home />
         <Typography variant="h4">No Results</Typography>
       ) : entriesFound ? (
         <CardDeck cards={cards} />
