@@ -9,6 +9,7 @@ import SearchIcon from "@material-ui/icons/Search"
 import React, { Dispatch, SetStateAction, useContext, useRef } from "react"
 import { pascalCase } from "../../utils/string"
 import { Context } from "../Context"
+import SwitchEnglishLatin from "../Search/SwitchEnglishLatin"
 
 export interface SearchBarProps {
   search: string
@@ -31,7 +32,6 @@ export default function SearchBar({
   const classes = useStyles()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
   const input = useRef<any>()
-  setLatin
 
   // useEventListener("keypress", (e: any) => {
   //   if (e.key === "Escape") return input.current.blur()
@@ -89,7 +89,7 @@ export default function SearchBar({
         </Grid>
         {target === "lexico" && (
           <Grid item>
-            {/* <SwitchEnglishLatin {...{ isLatin, setLatin }} /> */}
+            <SwitchEnglishLatin {...{ isLatin, setLatin }} />
           </Grid>
         )}
       </Grid>
