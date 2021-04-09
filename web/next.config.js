@@ -12,11 +12,11 @@ module.exports = {
     //   }
     // }
 
-    config.resolve.modules.push(path.resolve("./"))
+    config.resolve.modules.push(require("path").resolve("./"))
 
     config.context = require("path").resolve(__dirname)
 
-    // console.log(JSON.stringify(config))
+    console.log(JSON.stringify(config))
     return config
   },
   typescript: {
