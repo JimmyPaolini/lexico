@@ -30,6 +30,7 @@ module.exports = {
   },
   typescript: {
     // Dangerous; manually typecheck before run/build
+    // this also causes the error I see to be a webpack ModuleNotFoundError instead of a typescript TypeError
     ignoreBuildErrors: true,
     //   transpileOnly: true,
   },

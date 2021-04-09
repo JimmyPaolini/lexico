@@ -6,7 +6,7 @@ import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
 import SearchBarLayout from "../components/accessories/SearchBarLayout"
 import EntryCard from "../components/EntryCard/EntryCard"
-import Home from "../components/search/Home"
+import Home from "../components/search/Home.js"
 import useSearch from "../hooks/search/useSearch"
 
 interface Props {
