@@ -9,7 +9,7 @@ import SearchIcon from "@material-ui/icons/Search"
 import React, { Dispatch, SetStateAction, useContext, useRef } from "react"
 import { pascalCase } from "../../utils/string"
 import { Context } from "../Context"
-import SwitchEnglishLatin from "../Search/SwitchEnglishLatin"
+import SwitchEnglishLatin from "../search/SwitchEnglishLatin"
 
 export interface SearchBarProps {
   search: string
