@@ -1,4 +1,3 @@
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 module.exports = {
   // future: { webpack5: true },
   webpack: (config) => {
