@@ -1,5 +1,5 @@
 module.exports = {
-  future: { webpack5: true },
+  // future: { webpack5: true },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
@@ -9,7 +9,7 @@ module.exports = {
 
     // config.resolve.modules.push(require("path").resolve("./"))
 
-    config.context = require("path").resolve(__dirname)
+    // config.context = require("path").resolve(__dirname)
 
     // console.log(JSON.stringify(config))
     return config
