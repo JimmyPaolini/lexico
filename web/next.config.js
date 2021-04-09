@@ -24,8 +24,9 @@ module.exports = {
 
     // config.resolve.modules.push(path.resolve("./"))
 
-    // config.context = require("path").resolve(__dirname + "/../")
+    config.context = require("path").resolve(__dirname + "/../")
 
+    // console.log(JSON.stringify(config))
     return config
   },
   typescript: {
