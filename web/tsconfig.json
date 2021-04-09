@@ -31,7 +31,7 @@
     "strict": true,
     "noEmit": true
   },
-  "include": ["./src/theme/theme.ts"],
+  "include": ["../**/*"],
   "exclude": [
     "../ingestion",
     "../server",
