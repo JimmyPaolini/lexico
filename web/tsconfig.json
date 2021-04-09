@@ -8,9 +8,6 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": ".",
-    "paths": {
-      "components/*": ["src/components/*"]
-    },
     "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
