@@ -3,7 +3,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Image from "next/image"
 import React, { useRef } from "react"
 
-export default function Home() {
+export default function Logo() {
   const classes = useStyles()
   const theme = useTheme() as any
   const ref = useRef<any>()

@@ -4,9 +4,9 @@ import { useRouter } from "next/router"
 import React, { useEffect, useMemo, useState } from "react"
 import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
-import SearchBarLayout from "../components/accessories/SearchBarLayout"
+import Logo from "../components/accessories/Logo"
 import EntryCard from "../components/EntryCard/EntryCard"
-import Home from "../components/search/Home"
+import SearchBarLayout from "../components/SearchBar/SearchBarLayout"
 import useSearch from "../hooks/search/useSearch"
 
 interface Props {
@@ -64,7 +64,7 @@ export default function Search({ initialSearch, initialIsLatin }: Props) {
       }}
     >
       {!searched ? (
-        <Home />
+        <Logo />
       ) : noEntriesFound ? (
         <Typography variant="h4">No Results</Typography>
       ) : entriesFound ? (
