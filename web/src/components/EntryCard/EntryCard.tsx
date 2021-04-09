@@ -11,7 +11,6 @@ interface Props {
   entry: Entry
   searched: string
 }
-
 export default function EntryCard({ entry, searched = "" }: Props) {
   const classes = useStyles()
   return (
