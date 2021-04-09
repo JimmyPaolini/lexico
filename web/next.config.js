@@ -12,17 +12,7 @@ module.exports = {
     //   }
     // }
 
-    // config.module.rules.push({
-    //   test: /\\.+(ts|tsx)$/,
-    //   include: [dir],
-    //   exclude: /node_modules/,
-    //   use: [
-    //     defaultLoaders.babel,
-    //     { loader: "ts-loader", options: { transpileOnly: true } },
-    //   ],
-    // })
-
-    // config.resolve.modules.push(path.resolve("./"))
+    config.resolve.modules.push(path.resolve("./"))
 
     config.context = require("path").resolve(__dirname)
 
@@ -31,8 +21,7 @@ module.exports = {
   },
   typescript: {
     // Dangerous; manually typecheck before run/build
-    // this also causes the error I see to be a webpack ModuleNotFoundError instead of a typescript TypeError
+    // this also causes webpack ModuleNotFoundError instead of a typescript TypeError
     ignoreBuildErrors: true,
-    //   transpileOnly: true,
   },
 }
