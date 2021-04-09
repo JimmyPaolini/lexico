@@ -50,7 +50,7 @@ jobs:
       - name: Push Server Image
         uses: actions-hub/docker@master
         with:
-          args: push jimmypaolini/lexico-server --all-tags
+          args: push jimmypaolini/lexico-server
       - name: Install Kubernetes
         run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
@@ -83,7 +83,7 @@ jobs:
       - name: Push Web Image
         uses: actions-hub/docker@master
         with:
-          args: push jimmypaolini/lexico-web --all-tags
+          args: push jimmypaolini/lexico-web
       - name: Install Kubernetes
         run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
