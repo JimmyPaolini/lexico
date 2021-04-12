@@ -115,19 +115,6 @@ const useStyles = makeStyles((theme: any) => ({
     paddingBottom: theme.spacing(1),
     paddingRight: theme.spacing(1),
   },
-  rightSideUp: {
-    transition: "250ms ease",
-    transform: "rotateZ(0deg)",
-  },
-  upSideDown: {
-    transition: "250ms ease",
-    transform: "rotateZ(-180deg)",
-  },
-  disableHoverGlow: {
-    "&:hover": {
-      backgroundColor: "transparent",
-    },
-  },
   hide: {
     display: "none",
   },

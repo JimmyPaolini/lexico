@@ -17,7 +17,7 @@ import {
 export const backupFileNameExtension = ".zip"
 
 export const backups = (filter?: RegExp) =>
-  readdirSync(`data/backup`)
+  readdirSync(`../data/backup`)
     .filter((fileName) => !fileName.match(/\.DS_Store/))
     .filter((fileName) => fileName.match(filter || /[\s\S]*/))
     .map((fileName) => fileName.replace(backupFileNameExtension, ""))
@@ -45,7 +45,7 @@ const createCommand = (isBackup: boolean, fileKey: string, tables: string[]) =>
 
 export async function backupDatabase(type: string, tables: string[]) {
   log.info(`backing up ${type}`)
-  const fileKey = `data/backup/${new Date().toISOString()}_${type}`
+  const fileKey = `../data/backup/${new Date().toISOString()}_${type}`
   const command = createCommand(true, fileKey, tables)
   await execute(command)
   log.info(`backed up ${type}`)
@@ -81,7 +81,7 @@ export async function restoreDatabase(
   tables: string[],
 ) {
   log.info(`restoring ${type}`)
-  const fileKey = `data/backup/${backupName}`
+  const fileKey = `../data/backup/${backupName}`
   const command = createCommand(false, fileKey, tables)
   await execute(command)
   log.info(`restored ${type}`)

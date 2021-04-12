@@ -24,20 +24,21 @@ export default function LiteratureAuthor({
 }: Props) {
   const classes = useStyles()
   const { isMobile } = useContext(Context)
-  const summary = [
+  let summary = [
     ...(author.books || []),
     ...author.texts.filter((text) => !text.book),
   ]
     .map((item) => sentenceCase(item.title))
     .join(" • ")
+  if (author.id === "catullus") summary = "Carmina 1-116"
 
   const cardHeader = (
     <CardHeaderMui
-      title={sentenceCase(author.name)}
+      title={sentenceCase(author.id)}
       subheader={
         <>
           <Typography variant="body1" color="textSecondary">
-            {sentenceCase(author.fullname)}
+            {sentenceCase(author.name)}
           </Typography>
           {isMobile ? (
             <Collapse in={!expanded}>
@@ -57,7 +58,12 @@ export default function LiteratureAuthor({
   )
 
   return isMobile ? (
-    <CardActionArea onClick={() => setExpanded((expanded) => !expanded)}>
+    <CardActionArea
+      onClick={() => setExpanded((expanded) => !expanded)}
+      classes={{ focusHighlight: classes.none }}
+      disableRipple
+      disableTouchRipple
+    >
       {cardHeader}
     </CardActionArea>
   ) : (
@@ -70,5 +76,8 @@ const useStyles = makeStyles(() => ({
     display: "block",
     lineHeight: 1.3,
     marginTop: 4,
+  },
+  none: {
+    display: "none",
   },
 }))

@@ -1,0 +1,24 @@
+name: database
+on:
+  workflow_dispatch:
+
+jobs:
+  database:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+      - name: Download Postgres
+        run: sudo apt-get update && sudo apt-get install postgresql
+      - name: Install Dependencies
+        run: npm install && cd ingestion && npm install
+      - name: Install Kubernetes
+        run: sudo apt-get update && sudo apt-get install kubectl
+      - name: Login Kubernetes
+        run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
+      - name: Database Port Forward
+        run: kubectl port-forward statefulset.apps/database 5432 &
+      - name: Deploy Database
+        run: cd ingestion && tsc && node dist/ingestion/src/restore.js ingested

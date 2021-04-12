@@ -13,8 +13,8 @@ query GetText($id: String!) {
       title
     }
     author {
+      id
       name
-      fullname
     }
   }
 }

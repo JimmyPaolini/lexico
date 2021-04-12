@@ -24,6 +24,9 @@ export default function SwitchEnglishLatin({ isLatin, setLatin }: Props) {
           track: isLatin ? classes.primary : classes.secondary,
           thumb: isLatin ? classes.primary : classes.secondary,
         }}
+        disableRipple
+        disableTouchRipple
+        disableFocusRipple
       />
       <Typography className={classes.en}>EN</Typography>
       <Typography className={classes.la}>LA</Typography>

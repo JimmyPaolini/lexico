@@ -3,29 +3,22 @@ import { makeStyles } from "@material-ui/core/styles"
 import { useRouter } from "next/router"
 import React from "react"
 import LinesEllipsis from "react-lines-ellipsis"
-import Author from "../../../../entity/literature/Author"
-import Book from "../../../../entity/literature/Book"
 import Text from "../../../../entity/literature/Text"
 import { romanNumeralize } from "../../utils/romanNumeral"
 import { sentenceCase } from "../../utils/string"
 
 interface Props {
-  author: Author
-  book?: Book
   text: Text
 }
-export default function LiteratureText({ author, book, text }: Props) {
+export default function LiteratureText({ text }: Props) {
   const classes = useStyles()
   const router = useRouter()
 
-  let url = `literature/${author.name}`
-  if (book) url += `/${book.title}/${book.id}`
-  url += `/${text.title}/${text.id}`
   const isTitleBook = text.title.match(/book \d+/i)
 
   return (
     <Grid item xs={isTitleBook ? 2 : 4} container justify="center">
-      <CardActionArea onClick={() => router.push(url)}>
+      <CardActionArea onClick={() => router.push(`literature/${text.id}`)}>
         {isTitleBook ? (
           <Avatar className={classes.bookText}>
             {text.title.match(/\d+/)?.[0]}

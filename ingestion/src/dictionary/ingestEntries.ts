@@ -11,7 +11,7 @@ export default async function ingestEntries() {
 }
 
 function getHtmlFiles(): string[] {
-  const files = fs.readdirSync(path.join(process.cwd(), `./data/wiktionary`))
+  const files = fs.readdirSync(path.join(process.cwd(), `../data/wiktionary`))
   files.sort((a, b) => getFirstLetter(a).localeCompare(getFirstLetter(b)))
   return files
 }

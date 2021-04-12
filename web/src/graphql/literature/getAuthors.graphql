@@ -1,7 +1,7 @@
 query GetAuthors {
   getAuthors {
+    id
     name
-    fullname
     books {
       id
       title

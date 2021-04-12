@@ -1,7 +1,7 @@
 import dotenv from "dotenv"
 import expand from "dotenv-expand"
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV !== "production") {
   const env = dotenv.config({ path: "../.env" })
   expand(env)
 }

@@ -30,11 +30,11 @@ export default function EntryCard({ entry, searched = "" }: Props) {
 
 const useStyles = makeStyles((theme: any) => ({
   entryCard: {
+    display: "flex",
+    flexDirection: "column",
     maxWidth: theme.custom.cardWidth,
-    minWidth: theme.custom.cardWidth - 32,
-    display: "inline-block",
-    paddingBottom: theme.spacing(0),
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
+    minWidth: theme.custom.cardWidth - theme.spacing(4),
+    paddingBottom: 0,
+    margin: theme.spacing(1),
   },
 }))

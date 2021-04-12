@@ -2,7 +2,6 @@ import { Box } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import Text from "../../../../entity/literature/Text"
-import { romanNumeralize } from "../../utils/romanNumeral"
 import { sentenceCase } from "../../utils/string"
 import CardHeader from "../accessories/CardHeader"
 import ReaderLine from "./ReaderLine"
@@ -14,10 +13,9 @@ interface Props {
 export default function ReaderText({ text, openModal }: Props) {
   const classes = useStyles()
 
-  const title = romanNumeralize(sentenceCase(text.title))
-  let subtitle = romanNumeralize(sentenceCase(text.author.name))
-  if (text.book)
-    subtitle += " - " + romanNumeralize(sentenceCase(text.book.title))
+  const title = sentenceCase(text.title)
+  let subtitle = sentenceCase(text.author.id)
+  if (text.book) subtitle += " - " + sentenceCase(text.book.title)
 
   return (
     <Box className={classes.readerText}>

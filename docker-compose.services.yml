@@ -17,7 +17,7 @@ services:
     ports:
       - 9200:9200
     volumes:
-      - ./elasticsearch_volume:/usr/share/elasticsearch/data
+      - ./data/elasticsearch_volume:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
@@ -40,7 +40,7 @@ services:
       - 5432:5432
     env_file: .env
     volumes:
-      - ./database_volume:/var/lib/postgresql/data
+      - ./data/database_volume:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
 

@@ -43,7 +43,7 @@ type AdverbInflection {
 
 type Author {
   books: [Book!]
-  fullname: String!
+  id: String!
   name: String!
   texts: [Text!]!
 }
@@ -252,6 +252,7 @@ type PronunciationParts {
 type Query {
   bookmarks: [Entry!]!
   facebook(code: String!): User!
+  findText(author: String!, book: String, title: String!): Text!
   getAuthor(name: String!): Author!
   getAuthors: [Author!]!
   getBook(id: String!): Book!

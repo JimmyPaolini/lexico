@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
   bullet: {
     position: "relative",
-    top: 4,
+    top: 7,
     fontSize: 12,
     color: theme.palette.text.primary,
   },

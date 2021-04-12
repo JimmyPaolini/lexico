@@ -15,7 +15,7 @@ Pro Ligario	Pro Deiotaro	Philippics`
   .split(/\t|\n/)
 
 for (const name of oratoria)
-  fs.ensureFileSync(`data/literature/cicero/oratoria/${name}.txt`)
+  fs.ensureFileSync(`../data/literature/cicero/oratoria/${name}.txt`)
 
 const philosophia = `de Inventione	de Optimo Genere Oratorum	Topica
   de Oratore	de Fato	Paradoxa Stoicorum
@@ -28,11 +28,11 @@ const philosophia = `de Inventione	de Optimo Genere Oratorum	Topica
   .split(/\t|\n/)
 
 for (const name of philosophia)
-  fs.ensureFileSync(`data/literature/cicero/philosophia/${name.trim()}.txt`)
+  fs.ensureFileSync(`../data/literature/cicero/philosophia/${name.trim()}.txt`)
 
 const epistulae = `ad Atticum	ad Familiares	ad Quintum	ad Brutum`
   .toLowerCase()
   .split(/\t|\n/)
 
 for (const name of epistulae)
-  fs.ensureFileSync(`data/literature/cicero/epistulae/${name.trim()}.txt`)
+  fs.ensureFileSync(`../data/literature/cicero/epistulae/${name.trim()}.txt`)

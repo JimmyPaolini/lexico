@@ -18,7 +18,7 @@ export default function ReaderLine({ line, openModal }: Props) {
   return (
     <Grid container wrap="nowrap">
       <Typography
-        className={classes.lineNumber}
+        className={classes.lineLabel}
         align="right"
         component="span"
         variant="inherit"
@@ -46,13 +46,13 @@ export default function ReaderLine({ line, openModal }: Props) {
 }
 
 const useStyles = makeStyles((theme: any) => ({
-  lineNumber: {
+  lineLabel: {
     userSelect: "none",
     pointerEvents: "none",
     display: "inline-block",
     height: "100%",
-    minWidth: theme.spacing(4),
     marginRight: theme.spacing(1) - 2,
+    marginLeft: theme.spacing(1) - 2,
   },
   divider: {
     display: "inline",

@@ -13,7 +13,6 @@ type Card = {
 interface Props {
   cards: Card[]
 }
-
 export default function CardDeck({ cards }: Props) {
   const classes = useStyles()
 
@@ -37,22 +36,20 @@ export default function CardDeck({ cards }: Props) {
     <>
       {columns.map((column, col) => {
         if (!column.length) return null
-        const key = column.map((card) => card.key).join("")
         return (
           <Grid
             item
             container
             direction="column"
-            alignItems="center"
-            spacing={4}
+            alignItems="stretch"
             className={classes.column}
-            key={key}
+            key={column.map((card) => card.key).join()}
           >
             {column.map((card, row) => {
-              const timeout = 400 * Math.pow(col + row, 1 / 2)
+              const timeout = Math.min(400 * Math.pow(col + row, 1 / 2), 1000)
               return (
                 <Grid item key={card.key}>
-                  <Grow in appear exit {...(row || col ? { timeout } : {})}>
+                  <Grow in appear exit timeout={timeout}>
                     <LazyLoad offset={100} throttle={50} height={28}>
                       <card.Card />
                     </LazyLoad>
@@ -82,7 +79,8 @@ function reorganizeCards(
 
 const useStyles = makeStyles((theme: any) => ({
   column: {
-    maxWidth: theme.custom.cardWidth + 2 * theme.spacing(4),
+    maxWidth: theme.custom.cardWidth + theme.spacing(2),
+    minWidth: theme.custom.cardWidth - theme.spacing(2),
     outline: "none",
   },
 }))

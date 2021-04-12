@@ -42,7 +42,7 @@ const adjectiveFormsRestructure = (forms: any) => {
     struc[GEN][8].center = forms?.[gender]?.ablative?.singular?.join?.(",\n")
     struc[GEN][9].center = forms?.[gender]?.ablative?.plural?.join?.(",\n")
 
-    if (forms.vocative) {
+    if (forms?.[gender]?.vocative) {
       struc[GEN].splice(
         struc[GEN].length,
         0,
@@ -56,7 +56,7 @@ const adjectiveFormsRestructure = (forms: any) => {
       )
     }
 
-    if (forms.locative) {
+    if (forms?.[gender]?.locative) {
       struc[GEN].splice(
         struc[GEN].length,
         0,
@@ -75,6 +75,11 @@ const adjectiveFormsRestructure = (forms: any) => {
   structureGender(structure, "FEM", "feminine")
   structureGender(structure, "NEU", "neuter")
 
+  for (const gen of Object.keys(structure)) {
+    if (structure[gen].every((cell: any) => !cell.center)) delete structure[gen]
+  }
+
+  console.log("structure", structure)
   return structure
 }
 

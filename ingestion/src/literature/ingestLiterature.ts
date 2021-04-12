@@ -4,7 +4,7 @@ import ingestAuthor from "./ingestAuthor"
 
 export default async function ingestLiterature() {
   await clearLiterature()
-  const authors = fs.readdirSync("data/literature")
+  const authors = fs.readdirSync("../data/literature")
   for (const nickname of authors) {
     await ingestAuthor(nickname)
   }

@@ -66,29 +66,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const { textId } = useLiteraturePath(context.params?.literature as string[])
-  if (!textId) console.log("HERE")
+  const textId = context.params?.literature[0]!
   if (!textId) return { notFound: true }
   const initialText = await getText({ queryKey: [null, textId] })
   if (!initialText) return { notFound: true }
   else return { props: { initialText } }
-}
-
-const useLiteraturePath = (literatueQueryPath: string[]) => {
-  if (!literatueQueryPath) return {}
-  if (literatueQueryPath.length === 3) {
-    const [authorName, textTitle, textId] = literatueQueryPath
-    return { authorName, textTitle, textId }
-  } else {
-    const [
-      authorName,
-      bookTitle,
-      bookId,
-      textTitle,
-      textId,
-    ] = literatueQueryPath
-    return { authorName, bookTitle, bookId, textTitle, textId }
-  }
 }
 
 const useStyles = makeStyles((theme: any) => ({
@@ -96,7 +78,6 @@ const useStyles = makeStyles((theme: any) => ({
     width: "100%",
     height: "100%",
     backgroundColor: "black",
-    // paddingTop: theme.spacing(8),
     fontFamily: theme.typography.literature.fontFamily,
     fontWeight: theme.typography.literature.fontWeight,
     fontSize: theme.typography.literature.fontSize,

@@ -39,7 +39,7 @@ export default function LiteratureBook({ author, book, isLast }: Props) {
       <Collapse in={expanded}>
         <Grid container justify="center" alignItems="stretch">
           {book.texts.map((text) => (
-            <LiteratureText {...{ author, book, text }} key={text.id} />
+            <LiteratureText {...{ text }} key={text.id} />
           ))}
         </Grid>
       </Collapse>

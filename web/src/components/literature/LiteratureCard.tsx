@@ -27,7 +27,7 @@ export default function LiteratureCard({ author }: Props) {
   const nonBookTexts = author.texts.filter((text) => !text.book)
 
   return (
-    <Card elevation={4} className={classes.authorCard}>
+    <Card elevation={4} className={classes.literatureCard}>
       <LiteratureAuthor {...{ author, expanded, setExpanded }} />
       <Collapse in={!isMobile || expanded}>
         <Divider style={{ marginRight: 8 }} />
@@ -41,7 +41,7 @@ export default function LiteratureCard({ author }: Props) {
             })}
             <Grid container justify="center" alignItems="stretch">
               {nonBookTexts.map((text) => (
-                <LiteratureText {...{ author, text }} key={text.id} />
+                <LiteratureText {...{ text }} key={text.id} />
               ))}
             </Grid>
           </List>
@@ -52,15 +52,13 @@ export default function LiteratureCard({ author }: Props) {
 }
 
 const useStyles = makeStyles((theme: any) => ({
-  authorCard: {
-    "width": theme.custom.cardWidth,
-    "marginLeft": theme.spacing(1),
-    "marginRight": theme.spacing(1),
-    "display": "inline-block",
-    "paddingBottom": 0,
-    "&:last-child": {
-      paddingBottom: 0,
-    },
+  literatureCard: {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: theme.custom.cardWidth,
+    minWidth: theme.custom.cardWidth - theme.spacing(4),
+    paddingBottom: 0,
+    margin: theme.spacing(1),
   },
   noPadding: {
     "padding": 0,

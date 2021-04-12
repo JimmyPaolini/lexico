@@ -1,8 +1,8 @@
 import { getConnection } from "typeorm"
+import hic from "../../../data/dictionary/hic.json"
 import Entry from "../../../entity/dictionary/Entry"
 import Translation from "../../../entity/dictionary/Translation"
 import log from "../../../utils/log"
-import hic from "../../data/dictionary/hic.json"
 import { ingestEntryWords } from "./ingestEntryWords"
 
 export default async function ingestManual() {

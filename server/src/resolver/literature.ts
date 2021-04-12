@@ -19,7 +19,7 @@ export default class LiteratureResolver {
   async getAuthors() {
     const authors = await this.Authors.find({
       relations: ["books", "books.texts", "texts"],
-      order: { name: "ASC" },
+      order: { id: "ASC" },
     })
     return authors.map((author) => {
       author.books?.sort((a, b) =>
@@ -117,41 +117,59 @@ export default class LiteratureResolver {
     text.lines.sort((a, b) => a.lineNumber - b.lineNumber)
     log.info("getText", {
       id: text.id,
-      author: text.author.name,
+      author: text.author.id,
       book: text.book?.title,
       title: text.title,
     })
     return text
   }
 
-  // @Query(() => Text)
-  // async getText(
-  //   @Arg("author") author: string,
-  //   @Arg("title") title: string,
-  //   @Arg("book", { nullable: true }) book?: string,
-  // ) {
-  //   const where = {
-  //     title,
-  //     author: { name: author },
-  //     book: book ? { title: book } : undefined,
-  //   } as FindConditions<Text>
-  //   console.log(where)
-  //   const text = await this.Texts.findOne({
-  //     where,
-  //     relations: ["lines"],
-  //   })
-  //   text?.lines.sort((l1, l2) => l1.lineNumber - l2.lineNumber)
-  //   return text
-  // }
+  // FIND
+
+  @Query(() => Text)
+  async findText(
+    @Arg("author") author: string,
+    @Arg("title") title: string,
+    @Arg("book", { nullable: true }) book?: string,
+  ) {
+    let query = this.Texts.createQueryBuilder("text").innerJoinAndSelect(
+      "text.author",
+      "author",
+      "author.name = :author",
+      {
+        author,
+      },
+    )
+    if (book)
+      query = query.innerJoinAndSelect(
+        "text.book",
+        "book",
+        "book.title = :book",
+        { book },
+      )
+    query = query
+      .where("text.title = :title", { title })
+      .innerJoinAndSelect("text.lines", "lines")
+
+    const text = await query.getOneOrFail()
+    text.lines.sort((l1, l2) => l1.lineNumber - l2.lineNumber)
+    log.info("findText", {
+      id: text.id,
+      author: text.author.id,
+      book: text.book?.title,
+      title: text.title,
+    })
+    return text
+  }
 
   // SEARCH
 
   @Query(() => [Author])
   async searchAuthors(@Arg("search") search: string) {
     return await this.Authors.find({
-      where: [{ name: Like(`%${search}%`) }, { fullname: Like(`%${search}%`) }],
+      where: [{ id: Like(`%${search}%`) }, { name: Like(`%${search}%`) }],
       relations: ["texts"],
-      order: { name: "ASC" },
+      order: { id: "ASC" },
     })
   }
 
