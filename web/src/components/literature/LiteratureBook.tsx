@@ -29,6 +29,7 @@ export default function LiteratureBook({ book, isLast }: Props) {
         button
         onClick={() => setExpanded((expanded) => !expanded)}
         key={book.id}
+        classes={{ button: classes.hideHoverHighlight }}
         disableRipple
         disableTouchRipple
       >
@@ -55,6 +56,11 @@ const useStyles = makeStyles((theme: any) => ({
     "padding": 0,
     "&:last-child": {
       paddingBottom: 0,
+    },
+  },
+  hideHoverHighlight: {
+    "&:hover": {
+      backgroundColor: "inherit",
     },
   },
   inset1: {
