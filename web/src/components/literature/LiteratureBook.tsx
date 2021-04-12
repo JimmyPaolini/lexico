@@ -19,7 +19,7 @@ interface Props {
   isLast: boolean
 }
 
-export default function LiteratureBook({ author, book, isLast }: Props) {
+export default function LiteratureBook({ book, isLast }: Props) {
   const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(false)
 
