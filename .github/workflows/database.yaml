@@ -14,6 +14,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install postgresql
       - name: Install Dependencies
         run: npm install && cd ingestion && npm install
+      - name: Setup Environment
+        run: echo "${{secrets.ENV_FILE}}" > .env
       - name: Install Kubernetes
         run: sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
