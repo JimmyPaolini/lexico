@@ -45,5 +45,5 @@
   "author": "Jimmy Paolini",
   "description": "lexico-server",
   "repository": "https://github.com/JimmyPaolini/Lexico",
-  "license": "ISC"
+  "license": "MIT"
 }

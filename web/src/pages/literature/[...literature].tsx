@@ -63,7 +63,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const textId = context.params?.literature[0]!
   if (!textId) return { notFound: true }
-  const initialText = await getText({ queryKey: [null, textId] })
+  let initialText: Text
+  try {
+    initialText = await getText({ queryKey: [null, textId] })
+  } catch {
+    return { notFound: true }
+  }
   if (!initialText) return { notFound: true }
   else return { props: { initialText } }
 }
