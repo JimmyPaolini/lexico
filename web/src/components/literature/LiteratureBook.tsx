@@ -29,6 +29,8 @@ export default function LiteratureBook({ book, isLast }: Props) {
         button
         onClick={() => setExpanded((expanded) => !expanded)}
         key={book.id}
+        disableRipple
+        disableTouchRipple
       >
         <ListItemText
           primary={sentenceCase(book.title)}

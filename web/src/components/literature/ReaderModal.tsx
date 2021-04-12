@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: any) => ({
   container: {
     maxHeight: "100%",
     overflow: "scroll",
-    padding: theme.spacing(4),
+    // padding: theme.spacing(4),
     outline: "none",
   },
   notFound: {
