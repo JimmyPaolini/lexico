@@ -56,12 +56,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { getTexts: texts } = await graphQLClient.request(getTextsQuery)
   return {
     fallback: true,
-    paths: texts.map((text: Text) => {
-      const literature = [text.author.name]
-      if (text.book) literature.push(text.book.title, text.book.id)
-      literature.push(text.title, text.id)
-      return { params: { literature } }
-    }),
+    paths: texts.map((text: Text) => ({ params: { literature: [text.id] } })),
   }
 }
 

@@ -10,7 +10,7 @@
 **/database_volume
 **/elasticsearch_volume
 **/infra
-**/ingestion
-**/web
 **/.github
 **/*.env*
+**/ingestion
+**/web

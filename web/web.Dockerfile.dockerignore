@@ -10,10 +10,10 @@
 **/database_volume
 **/elasticsearch_volume
 **/infra
-**/ingestion
-**/server
 **/.github
 **/*.env*
+**/ingestion
+**/server
 
 /.next/
 /out/
