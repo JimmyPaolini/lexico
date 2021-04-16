@@ -7,19 +7,17 @@ import Text from "../../../entity/literature/Text"
 import CardDeck from "../components/accessories/CardDeck"
 import LiteratureCard from "../components/literature/LiteratureCard"
 import SearchBarLayout from "../components/SearchBar/SearchBarLayout"
-import useGetAuthors, { getAuthors } from "../hooks/literature/useGetAuthors"
+import { getAuthors } from "../hooks/literature/useGetAuthors"
 
 interface Props {
-  initialAuthors: Author[]
+  authors: Author[]
 }
-export default function Literature({ initialAuthors }: Props) {
+export default function Literature({ authors }: Props) {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
   useEffect(() => {
     if (!search) setSearched("")
   }, [search])
-
-  const { data: authors, isLoading, isError } = useGetAuthors(initialAuthors)
 
   const cards = useMemo(() => {
     const authorsCopy = JSON.parse(JSON.stringify(authors || []))
@@ -34,12 +32,12 @@ export default function Literature({ initialAuthors }: Props) {
       searchBarProps={{
         search,
         setSearch,
-        isLoading,
+        isLoading: false,
         handleSearchExecute: () => setSearched(search),
         target: "literature",
       }}
     >
-      {isLoading ? null : isError ? (
+      {!cards.length ? (
         <Typography variant="h4">No Results</Typography>
       ) : (
         <CardDeck cards={cards} />
@@ -49,8 +47,8 @@ export default function Literature({ initialAuthors }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const initialAuthors = await getAuthors()
-  return { props: { initialAuthors } }
+  const authors = await getAuthors()
+  return { props: { authors } }
 }
 
 function filterLiterature(authors: Author[], searched: string) {

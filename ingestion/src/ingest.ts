@@ -8,6 +8,7 @@ import { ingestEntryWords } from "./dictionary/ingestEntryWords"
 import ingestManual from "./dictionary/ingestManual"
 import ingestTranslationReferences from "./dictionary/ingestTranslationReferences"
 import ingestWords from "./dictionary/ingestWords"
+import ingestBible from "./literature/ingestBible"
 import ingestLiterature from "./literature/ingestLiterature"
 import { createDbViews } from "./utils/database"
 import ingestWiktionary from "./wiktionary/ingestWiktionary"
@@ -40,6 +41,14 @@ async function main() {
     },
     literature: () => ingestLiterature(),
     manual: () => ingestManual(),
+    bible: () =>
+      Promise.all([
+        ingestBible("https://vulgate.org/", "https://vulgate.org/"),
+        ingestBible(
+          "https://vulgate.org/nt/gospel/",
+          "https://vulgate.org/nt/gospel/matthew_1.htm",
+        ),
+      ]),
     views: () => null,
   } as { [key: string]: () => any }
 

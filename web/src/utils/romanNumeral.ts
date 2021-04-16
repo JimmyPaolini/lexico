@@ -1,4 +1,5 @@
 export function romanToDecimal(roman: string) {
+  roman = roman.toUpperCase()
   let decimal = 0
   const value = (c: string): number =>
     (({
@@ -49,4 +50,12 @@ export function decimalToRoman(decimal: number) {
 export function romanNumeralize(str: string | undefined) {
   if (!str) return ""
   return str.replace(/\d+/g, (d) => decimalToRoman(parseInt(d)))
+}
+
+export function decimalize(str: string | undefined) {
+  if (!str) return ""
+  return str.replace(
+    /(^| )([IVXLCDM]+)( |$)/gi,
+    (_, s, r, e) => s + romanToDecimal(r) + e,
+  )
 }

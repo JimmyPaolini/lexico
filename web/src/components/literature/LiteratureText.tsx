@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme: any) => ({
     alignItems: "center",
     height: "100%",
     margin: "auto",
-    lineHeight: 1.2,
+    lineHeight: 1.1,
     textAlign: "center",
   },
 }))

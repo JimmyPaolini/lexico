@@ -5,11 +5,10 @@ import {
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Dispatch, SetStateAction, useContext } from "react"
+import { Dispatch, SetStateAction } from "react"
 import Author from "../../../../entity/literature/Author"
 import { sentenceCase } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
-import { Context } from "../Context"
 
 interface Props {
   author: Author
@@ -23,24 +22,34 @@ export default function LiteratureAuthor({
   setExpanded,
 }: Props) {
   const classes = useStyles()
-  const { isMobile } = useContext(Context)
   let summary = [
     ...(author.books || []),
-    ...author.texts.filter((text) => !text.book),
+    ...author.texts.filter(
+      (text) =>
+        !(author.books || []).some((book) =>
+          book.texts.some((bookText) => bookText.id === text.id),
+        ),
+    ),
   ]
-    .map((item) => sentenceCase(item.title))
+    .sort()
+    .map((item) => sentenceCase(item.title).replace(/^\d+ /, ""))
     .join(" • ")
   if (author.id === "catullus") summary = "Carmina 1-116"
 
-  const cardHeader = (
-    <CardHeaderMui
-      title={sentenceCase(author.id)}
-      subheader={
-        <>
-          <Typography variant="body1" color="textSecondary">
-            {sentenceCase(author.name)}
-          </Typography>
-          {isMobile ? (
+  return (
+    <CardActionArea
+      onClick={() => setExpanded((expanded) => !expanded)}
+      classes={{ focusHighlight: classes.none }}
+      disableRipple
+      disableTouchRipple
+    >
+      <CardHeaderMui
+        title={sentenceCase(author.id)}
+        subheader={
+          <>
+            <Typography variant="body1" color="textSecondary">
+              {sentenceCase(author.name)}
+            </Typography>
             <Collapse in={!expanded}>
               <Typography
                 variant="caption"
@@ -50,24 +59,11 @@ export default function LiteratureAuthor({
                 {summary}
               </Typography>
             </Collapse>
-          ) : null}
-        </>
-      }
-      action={isMobile && <ExpandIcon {...{ expanded }} />}
-    />
-  )
-
-  return isMobile ? (
-    <CardActionArea
-      onClick={() => setExpanded((expanded) => !expanded)}
-      classes={{ focusHighlight: classes.none }}
-      disableRipple
-      disableTouchRipple
-    >
-      {cardHeader}
+          </>
+        }
+        action={<ExpandIcon {...{ expanded }} />}
+      />
     </CardActionArea>
-  ) : (
-    cardHeader
   )
 }
 

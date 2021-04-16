@@ -16,8 +16,8 @@ export default function SettingsCard() {
       ({
         theme: "dark",
         fontSize: 24,
-        formsExpandedByDefault: false,
-        translationsExpandedByDefault: false,
+        formsExpandedDefault: false,
+        translationsExpandedDefault: false,
         dictionaryMacronized: false,
         literatureMacronized: false,
       } as SettingsInput),

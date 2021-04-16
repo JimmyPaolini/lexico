@@ -13,9 +13,6 @@ query GetAuthors {
     texts {
       id
       title
-      book {
-        id
-      }
     }
   }
 }

@@ -7,10 +7,9 @@ import {
   List,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
-import { Context } from "../Context"
 import LiteratureAuthor from "./LiteratureAuthor"
 import LiteratureBook from "./LiteratureBook"
 import LiteratureText from "./LiteratureText"
@@ -21,15 +20,19 @@ interface Props {
 
 export default function LiteratureCard({ author }: Props) {
   const classes = useStyles()
-  const { isMobile } = useContext(Context)
-  const [expanded, setExpanded] = useState<boolean>(false)
   const books = author.books || ([] as Book[])
-  const nonBookTexts = author.texts.filter((text) => !text.book)
+  const nonBookTexts = author.texts.filter(
+    (text) =>
+      !books.some((book) =>
+        book.texts.some((bookText) => bookText.id === text.id),
+      ),
+  )
+  const [expanded, setExpanded] = useState<boolean>(false)
 
   return (
     <Card elevation={4} className={classes.literatureCard}>
       <LiteratureAuthor {...{ author, expanded, setExpanded }} />
-      <Collapse in={!isMobile || expanded}>
+      <Collapse in={expanded}>
         <Divider style={{ marginRight: 8 }} />
         <CardContent className={classes.noPadding}>
           <List className={classes.noPadding} dense>

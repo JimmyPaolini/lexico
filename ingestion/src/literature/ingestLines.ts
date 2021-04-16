@@ -14,6 +14,9 @@ export default async function ingestLines(text: Text) {
     .readFileSync(`../data/literature/${author}/${book}${text.title}.txt`)
     .toString() as string
   if (!lines.includes("\n")) log.info("NO LINES")
+
+  // Line labels must start with a #hashtag
+  // and they can't contain white space, this is a design decision
   const areLinesLabelled = lines.split("\n").some((line) => line.match(/^#\S+/))
   await Lines.save(
     lines.split("\n").map((line, lineNumber) => {
@@ -24,7 +27,8 @@ export default async function ingestLines(text: Text) {
           lineLabel = "" + romanToDecimal(lineLabel)
         line = line.replace(/^#\S+ ?/, "")
       }
-      return { line, lineNumber, lineLabel, text } as Line
+      const id = text.id + "_" + lineNumber
+      return { id, line, lineNumber, lineLabel, text } as Line
     }),
   )
 }

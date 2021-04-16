@@ -278,19 +278,19 @@ type Query {
 type Settings {
   dictionaryMacronized: Boolean
   fontSize: Float
-  formsExpandedByDefault: Boolean
+  formsExpandedDefault: Boolean
   literatureMacronized: Boolean
   theme: String
-  translationsExpandedByDefault: Boolean
+  translationsExpandedDefault: Boolean
 }
 
 input SettingsInput {
   dictionaryMacronized: Boolean = true
   fontSize: Float = 24
-  formsExpandedByDefault: Boolean = false
+  formsExpandedDefault: Boolean = false
   literatureMacronized: Boolean = false
   theme: String = "dark"
-  translationsExpandedByDefault: Boolean = false
+  translationsExpandedDefault: Boolean = false
 }
 
 type Subjunctive {

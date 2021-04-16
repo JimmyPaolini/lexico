@@ -34,7 +34,7 @@ export default function LiteratureBook({ book, isLast }: Props) {
         disableTouchRipple
       >
         <ListItemText
-          primary={sentenceCase(book.title)}
+          primary={sentenceCase(book.title).replace(/^\d+ /, "")}
           primaryTypographyProps={{ variant: "body1" }}
         />
         <ExpandIcon {...{ expanded }} style={{ padding: 0 }} />

@@ -2,10 +2,9 @@
 
 <p align="center"><a href="https://www.lexicolatin.com"><img width="128" height="128" src="web/public/icon/android-chrome-512x512.png"></a></p>
 
-### Frameworks, Libraries, and Tools:
+### Frameworks, Libraries, and Tools
 
-<!-- Generate icon link list from the tools variable in ToolIconGrid.tsx
-tools.map((tool) => `<a href="${tool.url}"><img width="64" height="64" alt="${tool.name}" src="web/public/icon/tool/${tool.name}.png"></a>`, "").join("\n") -->
+<!-- Generate icon link list from the tools variable in ToolIconGrid.tsx: tools.map((tool) => `<a href="${tool.url}"><img width="64" height="64" alt="${tool.name}" src="web/public/icon/tool/${tool.name}.png"></a>`, "").join("\n") -->
 
 <a href="https://www.typescriptlang.org/"><img width="64" height="64" alt="typescript" src="web/public/icon/tool/typescript.png"></a>
 <a href="https://nodejs.org/"><img width="64" height="64" alt="nodejs" src="web/public/icon/tool/nodejs.png"></a>

@@ -9,10 +9,10 @@ export default class Settings {
   fontSize: number = 24
 
   @Field({ defaultValue: false })
-  formsExpandedByDefault: boolean = false
+  formsExpandedDefault: boolean = false
 
   @Field({ defaultValue: false })
-  translationsExpandedByDefault: boolean = false
+  translationsExpandedDefault: boolean = false
 
   @Field({ defaultValue: true })
   dictionaryMacronized: boolean = true
@@ -30,10 +30,10 @@ export class SettingsInput implements Partial<Settings> {
   fontSize: number = 24
 
   @Field({ defaultValue: false })
-  formsExpandedByDefault: boolean = false
+  formsExpandedDefault: boolean = false
 
   @Field({ defaultValue: false })
-  translationsExpandedByDefault: boolean = false
+  translationsExpandedDefault: boolean = false
 
   @Field({ defaultValue: true })
   dictionaryMacronized: boolean = true

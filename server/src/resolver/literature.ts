@@ -6,6 +6,12 @@ import Line from "../../../entity/literature/Line"
 import Text from "../../../entity/literature/Text"
 import log from "../../../utils/log"
 
+const compareField = (a: any, b: any, field: string) =>
+  a[field].localeCompare(b[field], undefined, {
+    numeric: true,
+    sensitivity: "base",
+  })
+
 @Resolver(Text)
 export default class LiteratureResolver {
   Authors = getConnection().getRepository(Author)
@@ -17,33 +23,22 @@ export default class LiteratureResolver {
 
   @Query(() => [Author])
   async getAuthors() {
-    const authors = await this.Authors.find({
-      relations: ["books", "books.texts", "texts"],
-      order: { id: "ASC" },
-    })
-    return authors.map((author) => {
-      author.books?.sort((a, b) =>
-        a.title.localeCompare(b.title, undefined, {
-          numeric: true,
-          sensitivity: "base",
-        }),
-      )
-      author.books?.map((book) =>
-        book.texts.sort((a, b) =>
-          a.title.localeCompare(b.title, undefined, {
-            numeric: true,
-            sensitivity: "base",
-          }),
-        ),
-      )
-      author.texts.sort((a, b) =>
-        a.title.localeCompare(b.title, undefined, {
-          numeric: true,
-          sensitivity: "base",
-        }),
-      )
-      return author
-    })
+    const authors = await this.Authors.createQueryBuilder("author")
+      .leftJoinAndSelect("author.books", "book")
+      .leftJoinAndSelect("book.texts", "bookTexts")
+      .leftJoinAndSelect("author.texts", "text")
+      .orderBy("author.id", "ASC")
+      .getMany()
+    return authors
+      .sort((a, b) => compareField(a, b, "id"))
+      .map((author) => {
+        author.books?.sort((a, b) => compareField(a, b, "id"))
+        author.books?.map((book) =>
+          book.texts.sort((a, b) => compareField(a, b, "id")),
+        )
+        author.texts.sort((a, b) => compareField(a, b, "id"))
+        return author
+      })
   }
 
   @Query(() => [Book])
@@ -53,12 +48,7 @@ export default class LiteratureResolver {
       order: { title: "ASC" },
     })
     return books.map((book) =>
-      book.texts.sort((a, b) =>
-        a.title.localeCompare(b.title, undefined, {
-          numeric: true,
-          sensitivity: "base",
-        }),
-      ),
+      book.texts.sort((a, b) => compareField(a, b, "id")),
     )
   }
 
@@ -76,38 +66,18 @@ export default class LiteratureResolver {
     const author = await this.Authors.findOneOrFail(name, {
       relations: ["books", "books.texts", "texts"],
     })
-    author.books?.sort((a, b) =>
-      a.title.localeCompare(b.title, undefined, {
-        numeric: true,
-        sensitivity: "base",
-      }),
-    )
+    author.books?.sort((a, b) => compareField(a, b, "id"))
     author.books?.map((book) =>
-      book.texts.sort((a, b) =>
-        a.title.localeCompare(b.title, undefined, {
-          numeric: true,
-          sensitivity: "base",
-        }),
-      ),
+      book.texts.sort((a, b) => compareField(a, b, "id")),
     )
-    author.texts.sort((a, b) =>
-      a.title.localeCompare(b.title, undefined, {
-        numeric: true,
-        sensitivity: "base",
-      }),
-    )
+    author.texts.sort((a, b) => compareField(a, b, "id"))
     return author
   }
 
   @Query(() => Book)
   async getBook(@Arg("id") id: string) {
     const book = await this.Books.findOneOrFail(id, { relations: ["texts"] })
-    book.texts.sort((a, b) =>
-      a.title.localeCompare(b.title, undefined, {
-        numeric: true,
-        sensitivity: "base",
-      }),
-    )
+    book.texts.sort((a, b) => compareField(a, b, "id"))
     return book
   }
 
@@ -152,13 +122,8 @@ export default class LiteratureResolver {
       .innerJoinAndSelect("text.lines", "lines")
 
     const text = await query.getOneOrFail()
-    text.lines.sort((l1, l2) => l1.lineNumber - l2.lineNumber)
-    log.info("findText", {
-      id: text.id,
-      author: text.author.id,
-      book: text.book?.title,
-      title: text.title,
-    })
+    text.lines.sort((l1, l2) => compareField(l1, l2, "id"))
+    log.info("findText", { id: text.id })
     return text
   }
 

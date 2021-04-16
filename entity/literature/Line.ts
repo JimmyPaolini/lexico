@@ -1,18 +1,12 @@
 import { Field, ID, ObjectType } from "type-graphql"
-import {
-  Column,
-  Entity,
-  ManyToMany,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm"
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from "typeorm"
 import User from "../user/User"
 import Text from "./Text"
 
 @Entity()
 @ObjectType()
 export default class Line {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   @Field(() => ID)
   id!: string
 

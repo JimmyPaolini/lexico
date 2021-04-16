@@ -1,26 +1,24 @@
-import { Client } from "@elastic/elasticsearch"
 import { createLogger, format, transports } from "winston"
-import { ElasticsearchTransport } from "winston-elasticsearch"
 
 const { combine, timestamp, colorize, printf } = format
 
-const client = new Client({
-  node: `http://${
-    process.env.NODE_ENV === "production" ? "elasticsearch" : "localhost"
-  }:9200`,
-})
-const elasticsearchTransport = new ElasticsearchTransport({
-  level: "info",
-  index: "lexico",
-  client,
-  transformer: ({ message, level, timestamp, meta }) => ({
-    message,
-    level,
-    timestamp,
-    ...meta,
-  }),
-  format: timestamp(),
-})
+// const client = new Client({
+//   node: `http://${
+//     process.env.NODE_ENV === "production" ? "elasticsearch" : "localhost"
+//   }:9200`,
+// })
+// const elasticsearchTransport = new ElasticsearchTransport({
+//   level: "info",
+//   index: "lexico",
+//   client,
+//   transformer: ({ message, level, timestamp, meta }) => ({
+//     message,
+//     level,
+//     timestamp,
+//     ...meta,
+//   }),
+//   format: timestamp(),
+// })
 
 const consoleTransport = new transports.Console({
   format: combine(
@@ -47,7 +45,10 @@ const circularReplacer = () => {
 
 const log = createLogger({
   level: "info",
-  transports: [elasticsearchTransport, consoleTransport],
+  transports: [
+    consoleTransport,
+    // elasticsearchTransport,
+  ],
 })
 
 log.on("error", (error) => {

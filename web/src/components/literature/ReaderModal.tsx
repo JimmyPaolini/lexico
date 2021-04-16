@@ -66,11 +66,11 @@ const useStyles = makeStyles((theme: any) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: theme.spacing(12),
   },
   container: {
     maxHeight: "100%",
     overflow: "scroll",
-    // padding: theme.spacing(4),
     outline: "none",
   },
   notFound: {

@@ -4,6 +4,7 @@
     "clear": "tsc && node dist/ingestion/src/clear.js",
     "backup": "tsc && node dist/ingestion/src/backup.js",
     "restore": "tsc && node dist/ingestion/src/restore.js",
+    "rewrite": "node dist/ingestion/src/rewrite.js",
     "script": "node dist/ingestion/src/script.js",
     "tsc": "tsc"
   },
