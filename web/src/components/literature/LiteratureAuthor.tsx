@@ -35,6 +35,8 @@ export default function LiteratureAuthor({
     .map((item) => sentenceCase(item.title).replace(/^\d+ /, ""))
     .join(" • ")
   if (author.id === "catullus") summary = "Carmina 1-116"
+  if (author.id === "vulgate bible")
+    summary = "Testamentum Vetum • Testamentum Novum"
 
   return (
     <CardActionArea

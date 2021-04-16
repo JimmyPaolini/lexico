@@ -1,5 +1,5 @@
-kind: StatefulSet
 apiVersion: apps/v1
+kind: StatefulSet
 metadata:
   name: database
   labels:
@@ -27,16 +27,16 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: database-pvc
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - database
-              topologyKey: kubernetes.io/hostname
+      # affinity:
+      #   podAntiAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       - labelSelector:
+      #           matchExpressions:
+      #             - key: app
+      #               operator: In
+      #               values:
+      #                 - database
+      #         topologyKey: kubernetes.io/hostname
   volumeClaimTemplates:
     - metadata:
         name: database-pvc

@@ -42,22 +42,9 @@ async function ingestChapter(chapter: Chapter) {
   if (bookTitle === "james -") bookTitle = "james"
   const bookNumber = chapters.indexOf(bookTitle) + 1
   bookTitle = bookNumber + " " + bookTitle
-  
   const chapterNumber = chapter.name.match(/\d+/)![0]
-  const authorId =
-    bookNumber <= 15
-      ? "vulgate bible 1-15"
-      : bookNumber <= 30
-      ? "vulgate bible 16-30"
-      : bookNumber <= 45
-      ? "vulgate bible 31-45"
-      : bookNumber <= 60
-      ? "vulgate bible 46-60"
-      : bookNumber <= 72
-      ? "vulgate bible 61-72"
-      : ""
 
-  const fileName = `../data/literature/${authorId}/${bookTitle}/book ${chapterNumber}.txt`
+  const fileName = `../data/literature/vulgate bible/${bookTitle}/book ${chapterNumber}.txt`
   fs.ensureFileSync(fileName)
   fs.writeFileSync(fileName, text)
 }

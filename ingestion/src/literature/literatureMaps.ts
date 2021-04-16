@@ -3,13 +3,6 @@ export const authorIdToName: { [key: string]: string } = {
   "apuleius": "lucius apuleius madaurensis",
   "augustus": "caesar divi filius augustus",
   "aurelius victor": "sextus aurelius victor",
-  "bible (old testament)": "biblia sacra vulgata vetum testamentum",
-  "bible (new testament)": "biblia sacra vulgata novum testamentum",
-  "vulgate bible 1-15": "biblia sacra vulgata testamentum vetum",
-  "vulgate bible 16-30": "biblia sacra vulgata testamentum vetum",
-  "vulgate bible 31-45": "biblia sacra vulgata testamentum vetum",
-  "vulgate bible 46-60": "biblia sacra vulgata testamentum novum",
-  "vulgate bible 61-72": "biblia sacra vulgata testamentum novum",
   "caesar": "gaius iulius caesar",
   "cato": "marcus porcius cato censor",
   "catullus": "gaius valerius catullus",
@@ -23,6 +16,7 @@ export const authorIdToName: { [key: string]: string } = {
   "gellius": "aulus gellius",
   "historia augusta": "scriptores historiae augustae",
   "horace": "quintus horacius flaccus",
+  "roman law": "ius romanum",
   "justin": "marcus iunianus iustinus",
   "juvenal": "decimus iunius iuvenalis",
   "livy": "titus livius",
@@ -55,7 +49,7 @@ export const authorIdToName: { [key: string]: string } = {
   "vellius": "gaius velleius patereculus",
   "virgil": "publius vergilius maro",
   "vitruvius": "marcus vitruvius pollio",
-  "ius romanum": "ius romanum",
+  "vulgate bible": "biblia sacra vulgata",
 }
 
 export const bookNameMap: { [key: string]: string } = {

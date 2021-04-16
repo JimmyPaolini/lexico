@@ -1,6 +1,7 @@
 # https://github.com/elastic/helm-charts/blob/master/kibana/values.yaml
 
 fullnameOverride: kibana
+imageTag: "7.12.0"
 
 elasticsearchHosts: http://elasticsearch:9200
 
@@ -13,5 +14,5 @@ resources:
     memory: 256Mi
 
 extraEnvs:
-  - name: SERVER_PORT
+  - name: SERVER_PORT # This env variable must have its default overridden
     value: "5601"
