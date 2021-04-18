@@ -1,4 +1,5 @@
 import axios from "axios"
+import { verify } from "jsonwebtoken"
 import {
   Arg,
   Ctx,
@@ -12,7 +13,7 @@ import Entry from "../../../entity/dictionary/Entry"
 import Line from "../../../entity/literature/Line"
 import Settings, { SettingsInput } from "../../../entity/user/Settings"
 import User from "../../../entity/user/User"
-import { SLACK_WEBHOOK } from "../../../utils/env"
+import { JWT_SECRET, SLACK_WEBHOOK } from "../../../utils/env"
 import { Authenticate } from "../auth/authentication"
 import { ResolverContext } from "../utils/ResolverContext"
 
@@ -23,8 +24,11 @@ export default class UserResolver {
 
   @Query(() => User)
   @UseMiddleware(Authenticate)
-  user(@Ctx() { user }: ResolverContext) {
-    return user
+  async user(@Ctx() context: ResolverContext) {
+    if (!context.req.cookies.accessToken) return null
+    const claims = verify(context.req.cookies.accessToken, JWT_SECRET!) as any
+    if (!claims) return null
+    return (await this.Users.findOne(claims.sub)) || null
   }
 
   @Query(() => [User])

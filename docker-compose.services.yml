@@ -16,6 +16,8 @@ services:
     container_name: fluentbit
     ports:
       - 24224:24224
+    depends_on:
+      - elasticsearch
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.12.0

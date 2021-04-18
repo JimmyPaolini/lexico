@@ -15,7 +15,8 @@ export default function ReaderText({ text, openModal }: Props) {
 
   const title = sentenceCase(text.title)
   let subtitle = sentenceCase(text.author.id)
-  if (text.book) subtitle += " - " + sentenceCase(text.book.title)
+  if (text.book)
+    subtitle += " - " + sentenceCase(text.book.title).replace(/^\d+ /, "")
 
   return (
     <Box className={classes.readerText}>
