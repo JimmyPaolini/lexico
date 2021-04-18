@@ -11,6 +11,12 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
 
+  fluentbit:
+    image: jimmypaolini/fluentbit
+    container_name: fluentbit
+    ports:
+      - 24224:24224
+
   kibana:
     image: docker.elastic.co/kibana/kibana:7.12.0
     container_name: kibana
