@@ -24,9 +24,9 @@ export default class LiteratureResolver {
   @Query(() => [Author])
   async getAuthors() {
     const authors = await this.Authors.createQueryBuilder("author")
-      .leftJoinAndSelect("author.books", "book")
-      .leftJoinAndSelect("book.texts", "bookTexts")
-      .leftJoinAndSelect("author.texts", "text")
+      .innerJoinAndSelect("author.books", "book")
+      .innerJoinAndSelect("book.texts", "bookText")
+      .innerJoinAndSelect("author.texts", "text")
       .orderBy("author.id", "ASC")
       .getMany()
     return authors
@@ -62,8 +62,8 @@ export default class LiteratureResolver {
   // GET
 
   @Query(() => Author)
-  async getAuthor(@Arg("name") name: string) {
-    const author = await this.Authors.findOneOrFail(name, {
+  async getAuthor(@Arg("id") id: string) {
+    const author = await this.Authors.findOneOrFail(id, {
       relations: ["books", "books.texts", "texts"],
     })
     author.books?.sort((a, b) => compareField(a, b, "id"))
@@ -85,12 +85,12 @@ export default class LiteratureResolver {
   async getText(@Arg("id") id: string) {
     const text = await this.Texts.findOneOrFail(id, { relations: ["lines"] })
     text.lines.sort((a, b) => a.lineNumber - b.lineNumber)
-    log.info("getText", {
-      id: text.id,
-      author: text.author.id,
-      book: text.book?.title,
-      title: text.title,
-    })
+    // log.info("getText", {
+    //   id: text.id,
+    //   author: text.author.id,
+    //   book: text.book?.title,
+    //   title: text.title,
+    // })
     return text
   }
 
@@ -128,6 +128,36 @@ export default class LiteratureResolver {
   }
 
   // SEARCH
+
+  @Query(() => [Author])
+  async searchLiterature(@Arg("search") search: string) {
+    const authors = await this.Authors.createQueryBuilder("author")
+      .innerJoinAndSelect("author.books", "book", "book.title = :search", {
+        search,
+      })
+      .innerJoinAndSelect(
+        "book.texts",
+        "bookText",
+        "bookText.title = :search",
+        { search },
+      )
+      .innerJoinAndSelect("author.texts", "text", "text.title = :search", {
+        search,
+      })
+      .orderBy("author.id", "ASC")
+      .getMany()
+    return authors
+      .filter((author) => !!author.texts || !!author.books)
+      .sort((a, b) => compareField(a, b, "id"))
+      .map((author) => {
+        author.books?.sort((a, b) => compareField(a, b, "id"))
+        author.books?.map((book) =>
+          book.texts.sort((a, b) => compareField(a, b, "id")),
+        )
+        author.texts.sort((a, b) => compareField(a, b, "id"))
+        return author
+      })
+  }
 
   @Query(() => [Author])
   async searchAuthors(@Arg("search") search: string) {

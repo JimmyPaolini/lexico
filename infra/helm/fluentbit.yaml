@@ -1,0 +1,20 @@
+# https://github.com/fluent/helm-charts/blob/main/charts/fluent-bit/values.yaml
+
+fullnameOverride: fluentbit
+
+config:
+  outputs: |
+    [OUTPUT]
+        Name es
+        Match kube.*
+        Host elasticsearch
+        Logstash_Format On
+        Logstash_Prefix lexico
+        Retry_Limit False
+    [OUTPUT]
+        Name es
+        Match host.*
+        Host elasticsearch
+        Logstash_Format On
+        Logstash_Prefix node
+        Retry_Limit False

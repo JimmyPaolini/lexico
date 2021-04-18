@@ -1,0 +1,36 @@
+name: web
+on:
+  workflow_dispatch:
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+      - name: Get Version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+      - name: Login Docker
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      - name: Build Web Image
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: >-
+          DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile .
+          -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}}
+          -t jimmypaolini/lexico-web:latest
+      - name: Push Web Image
+        uses: actions-hub/docker@master
+        with:
+          args: push jimmypaolini/lexico-web
+      - name: Install Kubernetes
+        run: sudo apt-get update && sudo apt-get install kubectl
+      - name: Login Kubernetes
+        run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
+      - name: Deploy Web
+        run: kubectl rollout restart deployment web

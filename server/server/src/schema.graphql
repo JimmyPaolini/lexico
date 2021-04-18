@@ -253,7 +253,7 @@ type Query {
   bookmarks: [Entry!]!
   facebook(code: String!): User!
   findText(author: String!, book: String, title: String!): Text!
-  getAuthor(name: String!): Author!
+  getAuthor(id: String!): Author!
   getAuthors: [Author!]!
   getBook(id: String!): Book!
   getBooks: [Book!]!
@@ -269,6 +269,7 @@ type Query {
   searchEnglish(search: String!): [Entry!]!
   searchLatin(search: String!): [Entry!]!
   searchLines(search: String!): [Line!]!
+  searchLiterature(search: String!): [Author!]!
   searchTexts(search: String!): [Text!]!
   settings: Settings!
   user: User!

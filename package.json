@@ -17,6 +17,7 @@
     "deploy:nginx": "helm install nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
     "deploy:elasticsearch": "helm install elasticsearch elastic/elasticsearch -f ./infra/helm/elasticsearch.yaml",
     "deploy:kibana": "helm install kibana elastic/kibana -f ./infra/helm/kibana.yaml",
+    "deploy:fluentbit": "helm install fluentbit fluent/fluent-bit -f ./infra/helm/fluentbit.yaml",
     "deploy:k8s-dashboard": "kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml",
     "start:k8s-dashboard": "kubectl proxy",
     "update:server": "kubectl rollout restart deployment server",

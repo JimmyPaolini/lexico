@@ -49,7 +49,8 @@ export const authorIdToName: { [key: string]: string } = {
   "vellius": "gaius velleius patereculus",
   "virgil": "publius vergilius maro",
   "vitruvius": "marcus vitruvius pollio",
-  "vulgate bible": "biblia sacra vulgata",
+  "vulgate bible old testament": "biblia sacra vulgata testamentum vetum",
+  "vulgate bible new testament": "biblia sacra vulgata testamentum novum",
 }
 
 export const bookNameMap: { [key: string]: string } = {
