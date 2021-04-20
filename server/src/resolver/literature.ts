@@ -83,14 +83,13 @@ export default class LiteratureResolver {
 
   @Query(() => Text)
   async getText(@Arg("id") id: string) {
-    const text = await this.Texts.findOneOrFail(id, { relations: ["lines"] })
-    text.lines.sort((a, b) => a.lineNumber - b.lineNumber)
-    // log.info("getText", {
-    //   id: text.id,
-    //   author: text.author.id,
-    //   book: text.book?.title,
-    //   title: text.title,
-    // })
+    const text = await this.Texts.createQueryBuilder("text")
+      .where({ id })
+      .innerJoinAndSelect("text.author", "author")
+      .innerJoinAndSelect("text.book", "book")
+      .innerJoinAndSelect("text.lines", "lines")
+      .getOne()
+    text?.lines.sort((a, b) => a.lineNumber - b.lineNumber)
     return text
   }
 
