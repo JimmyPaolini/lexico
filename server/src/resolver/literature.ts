@@ -23,21 +23,22 @@ export default class LiteratureResolver {
 
   @Query(() => [Author])
   async getAuthors() {
-    const authors = await this.Authors.createQueryBuilder("author")
-      .innerJoinAndSelect("author.books", "book")
-      .innerJoinAndSelect("book.texts", "bookText")
-      .innerJoinAndSelect("author.texts", "text")
-      .getMany()
-    return authors
-      .sort((a, b) => compareField(a, b, "id"))
-      .map((author) => {
-        author.books?.sort((a, b) => compareField(a, b, "id"))
-        author.books?.map((book) =>
-          book.texts.sort((a, b) => compareField(a, b, "id")),
-        )
-        author.texts.sort((a, b) => compareField(a, b, "id"))
+    const authors = await this.Authors.find({ order: { id: "ASC" } })
+    await Promise.all(
+      authors.map(async (author) => {
+        author.books = await this.Books.find({
+          where: { author },
+          relations: ["texts"],
+          order: { id: "ASC" },
+        })
+        author.texts = await this.Texts.find({
+          where: { author },
+          order: { id: "ASC" },
+        })
         return author
-      })
+      }),
+    )
+    return authors
   }
 
   @Query(() => [Book])

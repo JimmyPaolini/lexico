@@ -1,5 +1,6 @@
 import { Logger } from "typeorm"
 import { createLogger, format, transports } from "winston"
+import { LOG_SQL } from "./env"
 const { combine, timestamp, colorize, printf } = format
 
 const circularReplacer = () => {
@@ -37,7 +38,8 @@ export class DatabaseLogger implements Logger {
    * Logs query and parameters used in it.
    */
   logQuery(query: string, parameters?: any[]) {
-    log.info(`database query: ${query} ${JSON.stringify(parameters)}`)
+    if (LOG_SQL === "true")
+      log.info(`database query: ${query} ${JSON.stringify(parameters || "")}`)
   }
 
   /**
@@ -46,7 +48,9 @@ export class DatabaseLogger implements Logger {
   logQueryError(error: string | Error, query: string, parameters?: any[]) {
     error = typeof error === "string" ? error : error.message
     log.error(
-      `database query error: ${error}: ${query} ${JSON.stringify(parameters)}`,
+      `database query error: ${error}: ${query} ${JSON.stringify(
+        parameters || "",
+      )}`,
     )
   }
 
@@ -55,7 +59,9 @@ export class DatabaseLogger implements Logger {
    */
   logQuerySlow(time: number, query: string, parameters?: any[]) {
     log.warn(
-      `database query slow ${time}ms: ${query} ${JSON.stringify(parameters)}`,
+      `database query slow ${time}ms: ${query} ${JSON.stringify(
+        parameters || "",
+      )}`,
     )
   }
 

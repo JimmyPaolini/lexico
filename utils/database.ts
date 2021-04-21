@@ -7,12 +7,7 @@ import Book from "../entity/literature/Book"
 import Line from "../entity/literature/Line"
 import Text from "../entity/literature/Text"
 import User from "../entity/user/User"
-import {
-  LOG_SQL,
-  POSTGRES_DB,
-  POSTGRES_PASSWORD,
-  POSTGRES_USER,
-} from "../utils/env"
+import { POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } from "../utils/env"
 import log, { DatabaseLogger } from "./log"
 
 export async function connectDatabase() {
@@ -25,14 +20,6 @@ export async function connectDatabase() {
     database: POSTGRES_DB,
     entities: [Entry, Translation, Word, Author, Book, Text, Line, User],
     logger: new DatabaseLogger(),
-    logging: LOG_SQL === "true" || [
-      "log",
-      "info",
-      "schema",
-      "migration",
-      "warn",
-      "error",
-    ],
     maxQueryExecutionTime: 1000,
     synchronize: true,
   })
