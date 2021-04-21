@@ -10,11 +10,13 @@ config:
         Host elasticsearch
         Logstash_Format On
         Logstash_Prefix lexico
-        Retry_Limit False
+        Retry_Limit 16
+        Replace_Dots On
     [OUTPUT]
         Name es
         Match host.*
         Host elasticsearch
         Logstash_Format On
         Logstash_Prefix node
-        Retry_Limit False
+        Retry_Limit 16
+        Replace_Dots On

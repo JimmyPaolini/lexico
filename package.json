@@ -12,7 +12,7 @@
     "build:elasticsearch": "docker image pull docker.elastic.co/elasticsearch/elasticsearch:7.11.1",
     "deploy:web": "kubectl apply -f ./infra/kubernetes/web.yaml",
     "deploy:server": "kubectl apply -f ./infra/kubernetes/server.yaml",
-    "deploy:database": "kubectl apply -f ./infra/kubernetes/database.yaml",
+    "deploy:database": "helm install database bitnami/postgresql -f ./infra/helm/database.yaml",
     "deploy:nginx": "helm install nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
     "deploy:fluentbit": "helm install fluentbit fluent/fluent-bit -f ./infra/helm/fluentbit.yaml",
     "deploy:kibana": "helm install kibana elastic/kibana -f ./infra/helm/kibana.yaml",

@@ -1,0 +1,16 @@
+# https://github.com/bitnami/charts/tree/master/bitnami/postgresql/values.yaml
+
+fullnameOverride: database
+
+extraEnvVarsCM: env
+
+postgresqlUsername: postgres
+postgresqlDatabase: lexico
+# postgresqlPassword: xxx
+
+replication:
+  applicationName: database
+  user: postgres
+  # password: xxx
+  enabled: true
+  readReplicas: 2

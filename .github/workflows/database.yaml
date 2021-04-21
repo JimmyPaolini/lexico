@@ -21,6 +21,6 @@ jobs:
       - name: Login Kubernetes
         run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
       - name: Database Port Forward
-        run: kubectl port-forward statefulset.apps/database 5432 &
+        run: kubectl port-forward service/database 5432 &
       - name: Deploy Database
         run: cd ingestion && tsc && node --unhandled-rejections=strict dist/ingestion/src/restore.js ingested

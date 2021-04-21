@@ -27,7 +27,6 @@ export default class LiteratureResolver {
       .innerJoinAndSelect("author.books", "book")
       .innerJoinAndSelect("book.texts", "bookText")
       .innerJoinAndSelect("author.texts", "text")
-      .orderBy("author.id", "ASC")
       .getMany()
     return authors
       .sort((a, b) => compareField(a, b, "id"))

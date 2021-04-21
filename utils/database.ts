@@ -13,7 +13,7 @@ import {
   POSTGRES_PASSWORD,
   POSTGRES_USER,
 } from "../utils/env"
-import log from "./log"
+import log, { DatabaseLogger } from "./log"
 
 export async function connectDatabase() {
   await createConnection({
@@ -24,6 +24,7 @@ export async function connectDatabase() {
     password: POSTGRES_PASSWORD,
     database: POSTGRES_DB,
     entities: [Entry, Translation, Word, Author, Book, Text, Line, User],
+    logger: new DatabaseLogger(),
     logging: LOG_SQL === "true" || [
       "log",
       "info",
