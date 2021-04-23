@@ -26,23 +26,23 @@ export default class LiteratureResolver {
     const authors = await this.Authors.find()
     await Promise.all(
       authors.map(async (author) => {
+        author.texts = await this.Texts.find({ author })
         author.books = await this.Books.find({ author })
         await Promise.all(
           author.books.map(async (book) => {
             book.texts = await this.Texts.find({ author, book })
           }),
         )
-        author.texts = await this.Texts.find({ author })
       }),
     )
     return authors
       .sort((a, b) => compareField(a, b, "id"))
       .map((author) => {
+        author.texts.sort((a, b) => compareField(a, b, "id"))
         author.books?.sort((a, b) => compareField(a, b, "id"))
         author.books?.map((book) =>
           book.texts.sort((a, b) => compareField(a, b, "id")),
         )
-        author.texts.sort((a, b) => compareField(a, b, "id"))
         return author
       })
   }

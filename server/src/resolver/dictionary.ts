@@ -41,9 +41,7 @@ export default class DictionaryResolver {
         word: search.replace(new RegExp(suffix + "$", "i"), ""),
       })
       if (nonSuffixWord) entries.push(...nonSuffixWord.entries)
-      const suffixEntry = await this.Entries.findOne({
-        id: `-${suffix}:0`,
-      })
+      const suffixEntry = await this.Entries.findOne(`-${suffix}:0`)
       entries.push(suffixEntry)
     }
 

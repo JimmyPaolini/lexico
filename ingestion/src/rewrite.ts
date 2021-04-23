@@ -16,6 +16,7 @@ class Writing {
       .replace(/^\n/gim, "")
       .replace(/^\s+/gim, "")
       .replace(/\. \. \. ?/gim, "... ")
+      .replace(/\[?M\.\]? (CICERO|TULLIUS)/gm, "CICERO")
       .replace(/Cicero The Latin Library The Classics Page/, "")
     return this
   }
@@ -125,10 +126,12 @@ class Writing {
   }
 
   romanLineStartersToLineLabels() {
-    this.text = this.text.replace(
-      /^([IVXLCDM]+)\.?\W/gim,
-      (_: any, roman: string) => `#${romanToDecimal(roman)} `,
-    )
+    this.text = this.text
+      .replace(
+        /^([IVXLCDM]+)\.?\W/gim,
+        (_: any, roman: string) => `\n#${romanToDecimal(roman)} `,
+      )
+      .trim()
     return this
   }
 
@@ -168,22 +171,22 @@ class Writing {
 }
 
 const author = "cicero"
-const book = "ad quintum"
-const text = "book 3"
+const book = "ad familiares"
+const text = "book 16"
 new Writing(`../data/literature/${author}/${book}/${text}.txt`)
   .clean()
   .removeTagsOnWords()
-  .removeRomanLineStarters()
+  // .removeRomanLineStarters()
   // .removeDecimalStarters()
   // .removeBracketedDecimals()
-  .splitLinesOnDecimalDots()
+  // .splitLinesOnDecimalDots()
   // .splitLinesOnBracketedDecimals()
   // .splitLinesOnBracketedRomans()
   // .splitLinesOnParenthesizedDecimals()
   // .splitLinesOnNakedDecimals()
   // .splitLinesOnCustom()
   // .lineLabelBracketsToHashtags()
-  // .romanLineStartersToLineLabels()
+  .romanLineStartersToLineLabels()
   // .lineLabelRomanToDecimal()
   // .lineStarterDecimalsToLineLabels()
   .logLabels()
