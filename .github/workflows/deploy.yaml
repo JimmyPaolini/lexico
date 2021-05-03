@@ -21,7 +21,7 @@ jobs:
       - name: Build Server Image
         if: steps.cache.outputs.cache-hit != 'true'
         run: >-
-          DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile .
+          DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile .
           -t jimmypaolini/lexico-server:${{steps.package-version.outputs.current-version}}
           -t jimmypaolini/lexico-server:latest
       - name: Push Server Image
@@ -77,7 +77,7 @@ jobs:
       - name: Build Web Image
         if: steps.cache.outputs.cache-hit != 'true'
         run: >-
-          DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile .
+          DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile .
           -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}}
           -t jimmypaolini/lexico-web:latest
       - name: Push Web Image

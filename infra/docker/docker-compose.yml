@@ -4,9 +4,9 @@ services:
     image: jimmypaolini/lexico-web
     build:
       context: .
-      dockerfile: ./web/web.Dockerfile
+      dockerfile: ./web.Dockerfile
     container_name: web
-    env_file: .env
+    env_file: ../../.env
     ports:
       - 3000:3000
     depends_on:
@@ -16,11 +16,11 @@ services:
     image: jimmypaolini/lexico-server
     build:
       context: .
-      dockerfile: ./server/server.Dockerfile
+      dockerfile: ./server.Dockerfile
     container_name: server
     ports:
       - 3001:3001
-    env_file: .env
+    env_file: ../../.env
     depends_on:
       - database
       - elasticsearch

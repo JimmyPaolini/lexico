@@ -6,6 +6,7 @@
     "restore": "tsc && node dist/ingestion/src/restore.js",
     "rewrite": "node dist/ingestion/src/rewrite.js",
     "script": "node dist/ingestion/src/script.js",
+    "tsw": "tsc -w",
     "tsc": "tsc"
   },
   "dependencies": {

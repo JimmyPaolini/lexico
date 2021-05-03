@@ -1,44 +1,14 @@
 {
   "compileOnSave": true,
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "ESNEXT",
-    "module": "ESNEXT",
-    "moduleResolution": "node",
-    "lib": ["DOM"],
-    "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "dist",
     "baseUrl": ".",
-    "removeComments": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "strictPropertyInitialization": false,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
+    "checkJs": false,
+    "noEmit": true,
     "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true
+    "isolatedModules": true
   },
-  "include": ["../**/*"],
-  "exclude": [
-    "../ingestion",
-    "../server",
-    "**/node_modules",
-    "**/dist",
-    "**/.github",
-    "../database_volume",
-    "../elasticsearch_volume"
-  ]
+  "exclude": ["../data", "../ingestion", "../server"],
+  "include": ["**/*.ts", "**/*.tsx"]
 }

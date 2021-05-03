@@ -1,11 +1,11 @@
 {
   "scripts": {
-    "dev": "docker compose -f docker-compose.services.yml up",
-    "undev": "docker compose -f docker-compose.services.yml down --remove-orphans",
-    "start": "docker compose -f docker-compose.services.yml -f docker-compose.yml up",
-    "stop": "docker compose -f docker-compose.services.yml -f docker-compose.yml down --remove-orphans",
-    "build:web": "docker build -f web/web.Dockerfile -t jimmypaolini/lexico-web .",
-    "build:server": "DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile -t jimmypaolini/lexico-server .",
+    "dev": "docker compose -f infra/docker/docker-compose.services.yml up",
+    "undev": "docker compose -f infra/docker/docker-compose.services.yml down --remove-orphans",
+    "start": "docker compose -f infra/docker/docker-compose.services.yml -f infra/docker/docker-compose.yml up",
+    "stop": "docker compose -f infra/docker/docker-compose.services.yml -f infra/docker/docker-compose.yml down --remove-orphans",
+    "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
+    "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server .",
     "build:database": "docker image pull postgres:13",
     "build:fluentbit": "docker build infra/docker -f infra/docker/fluentbit.Dockerfile -t jimmypaolini/fluentbit",
     "build:kibana": "docker image pull docker.elastic.co/kibana/kibana:7.12.0",
@@ -23,17 +23,14 @@
     "update:web": "kubectl rollout restart deployment web"
   },
   "dependencies": {
-    "@elastic/elasticsearch": "^7.12.0",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "graphql": "^15.5.0",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.31",
-    "winston": "^3.3.3",
-    "winston-elasticsearch": "^0.15.2"
+    "winston": "^3.3.3"
   },
   "devDependencies": {
-    "@types/elasticsearch": "^5.0.37",
     "@types/node": "^14.14.11",
     "class-validator": "^0.12.2",
     "eslint": "^7.23.0",
@@ -48,7 +45,7 @@
   "homepage": "https://www.lexicolatin.com",
   "name": "lexico",
   "author": "Jimmy Paolini",
-  "description": "lexico",
+  "description": "Latin Language Interface",
   "repository": "https://github.com/JimmyPaolini/Lexico",
   "version": "1.0.0",
   "license": "MIT"

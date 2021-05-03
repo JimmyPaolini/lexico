@@ -23,7 +23,7 @@ export default function About() {
           <Divider className={classes.divider} />
           <Typography variant="body1" className={classes.body}>
             I love reading and writing Latin, so I built Lexico to help others
-            enjoy Latin through a user-friendly dictioinary and literature
+            enjoy Latin through a user-friendly dictionary and literature
             interface. As with all things it is a work ever in progress, so as
             long as folks use it I’ll be striving to improve it. Contact me
             below if you'd like to get involved!

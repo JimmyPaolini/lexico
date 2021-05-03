@@ -21,7 +21,7 @@ jobs:
       - name: Build Web Image
         if: steps.cache.outputs.cache-hit != 'true'
         run: >-
-          DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile .
+          DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile .
           -t jimmypaolini/lexico-web:${{steps.package-version.outputs.current-version}}
           -t jimmypaolini/lexico-web:latest
       - name: Push Web Image

@@ -61,6 +61,7 @@ export default function ToolIconGrid() {
                   width={128}
                   height={128}
                   priority
+                  loading="eager"
                 />
               </Link>
             </Grid>
@@ -99,7 +100,7 @@ const tools = [
   { name: "cloudflare", url: "https://www.cloudflare.com/" },
   { name: "figma", url: "https://www.figma.com/" },
   { name: "vscode", url: "https://code.visualstudio.com/" },
-  { name: "patreon", url: "https://www.patreon.com/" },
+  { name: "patreon", url: "https://www.patreon.com/lexico" },
   { name: "slack", url: "https://lexico-group.slack.com/archives/C01SN2QN2BF" },
   { name: "wikipedia", url: "https://www.wiktionary.org/" },
   { name: "github", url: "https://github.com/JimmyPaolini/Lexico" },

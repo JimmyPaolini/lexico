@@ -33,7 +33,7 @@
 <a href="https://www.cloudflare.com/"><img width="64" height="64" alt="cloudflare" src="web/public/icon/tool/cloudflare.png"></a>
 <a href="https://www.figma.com/"><img width="64" height="64" alt="figma" src="web/public/icon/tool/figma.png"></a>
 <a href="https://code.visualstudio.com/"><img width="64" height="64" alt="vscode" src="web/public/icon/tool/vscode.png"></a>
-<a href="https://www.patreon.com/"><img width="64" height="64" alt="patreon" src="web/public/icon/tool/patreon.png"></a>
+<a href="https://www.patreon.com/lexico"><img width="64" height="64" alt="patreon" src="web/public/icon/tool/patreon.png"></a>
 <a href="https://lexico-group.slack.com/archives/C01SN2QN2BF"><img width="64" height="64" alt="slack" src="web/public/icon/tool/slack.png"></a>
 <a href="https://www.wiktionary.org/"><img width="64" height="64" alt="wikipedia" src="web/public/icon/tool/wikipedia.png"></a>
 <a href="https://github.com/JimmyPaolini/Lexico"><img width="64" height="64" alt="github" src="web/public/icon/tool/github.png"></a>
