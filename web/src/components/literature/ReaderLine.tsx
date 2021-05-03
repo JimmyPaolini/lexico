@@ -53,6 +53,10 @@ const useStyles = makeStyles((theme: any) => ({
     height: "100%",
     marginRight: theme.spacing(1) - 2,
     marginLeft: theme.spacing(1) - 2,
+    marginTop: "auto",
+    marginBottom: "auto",
+    fontFamily: "monospace, sans-serif",
+    fontSize: "1.3rem",
   },
   divider: {
     display: "inline",
