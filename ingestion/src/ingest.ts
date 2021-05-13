@@ -10,7 +10,6 @@ import ingestTranslationReferences from "./dictionary/ingestTranslationReference
 import ingestWords from "./dictionary/ingestWords"
 import ingestBible from "./literature/ingestBible"
 import ingestLiterature from "./literature/ingestLiterature"
-import { createDbViews } from "./utils/database"
 import ingestWiktionary from "./wiktionary/ingestWiktionary"
 
 async function main() {
@@ -18,7 +17,6 @@ async function main() {
   if (!command) throw new Error("no command")
 
   await connectDatabase()
-  await createDbViews()
 
   const instructions = {
     wiktionary: () => ingestWiktionary(),

@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import { sentenceCase } from "../../utils/string"
 import CardHeader from "../accessories/CardHeader"
-import LoginLocal from "./BasicLogin"
+import BasicLogin from "./BasicLogin"
 import OAuthLogin from "./OAuthLogin"
 
 interface Props {
@@ -27,7 +27,7 @@ export default function LoginCard({ title }: Props) {
             </Grid>
           </Grid>
           <Divider className={classes.columnItem} />
-          <LoginLocal />
+          <BasicLogin />
         </CardContent>
       </Card>
     </Grow>

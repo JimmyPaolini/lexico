@@ -26,12 +26,14 @@
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "graphql": "^15.5.0",
+    "number-to-words": "^1.2.4",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.31",
     "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/node": "^14.14.11",
+    "@types/number-to-words": "^1.2.0",
     "class-validator": "^0.12.2",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",

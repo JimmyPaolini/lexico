@@ -20,10 +20,12 @@ export function pascalCase(str: string) {
 
 export function sentenceCase(str: string) {
   if (!str) return ""
-  return str.replace(
-    /(\w)(\w*)/g,
-    (_, g1, g2) => g1.toUpperCase() + g2.toLowerCase() + " ",
-  )
+  return str
+    .replace(
+      /(\w)(\w*)/g,
+      (_, g1, g2) => g1.toUpperCase() + g2.toLowerCase() + " ",
+    )
+    .slice(0, -1)
 }
 
 export function getFirstLetter(word: string) {

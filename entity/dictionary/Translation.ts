@@ -11,7 +11,7 @@ import Entry from "./Entry"
 @Entity()
 @ObjectType()
 export default class Translation {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   @Field(() => ID)
   id: string
 

@@ -6,8 +6,12 @@ export default function useUser() {
   return useQuery(
     "user",
     async () => {
-      const { user: data } = await graphQLClient.request(userQuery)
-      return data
+      try {
+        const { user: data } = await graphQLClient.request(userQuery)
+        return data
+      } catch {
+        return null
+      }
     },
     {
       keepPreviousData: true,

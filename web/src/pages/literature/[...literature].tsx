@@ -1,13 +1,15 @@
 import { Grid, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { GetStaticPaths, GetStaticProps } from "next"
-import { useContext, useState } from "react"
+import { useSnackbar } from "notistack"
+import { useContext, useEffect, useState } from "react"
 import Text from "../../../../entity/literature/Text"
 import { Context } from "../../components/Context"
 import ReaderModal from "../../components/literature/ReaderModal"
 import ReaderText from "../../components/literature/ReaderText"
 import getTextsQuery from "../../graphql/literature/getTexts.graphql"
 import { getText } from "../../hooks/literature/useGetText"
+import { showReaderInstructions } from "../../utils/readerInstructions"
 import { graphQLClient } from "../_app"
 
 interface Props {
@@ -23,6 +25,14 @@ export default function Reader({ text }: Props) {
     setSearched(word)
     setOpen(true)
   }
+
+  const { enqueueSnackbar } = useSnackbar()
+  useEffect(() => {
+    if (showReaderInstructions()) {
+      const readerInstructions = `Click a word to see its dictionary entry, then click elsewhere or swipe it away to keep reading`
+      enqueueSnackbar(readerInstructions, { variant: "info" })
+    }
+  }, [])
 
   return (
     <Paper

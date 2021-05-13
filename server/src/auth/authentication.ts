@@ -6,8 +6,16 @@ import { JWT_SECRET } from "../../../utils/env"
 import { ResolverContext } from "../utils/ResolverContext"
 
 export function createAccessToken(user: User) {
-  return sign({ sub: user.id, iss: "https://lexicolatin.com" }, JWT_SECRET!, {
-    expiresIn: "7d",
+  return sign(
+    { sub: user.id, iss: "https://www.lexicolatin.com" },
+    JWT_SECRET!,
+    { expiresIn: "7d" },
+  )
+}
+
+export function createPasswordResetToken(email: string) {
+  return sign({ sub: email, iss: "https://www.lexicolatin.com" }, JWT_SECRET!, {
+    expiresIn: "1d",
   })
 }
 

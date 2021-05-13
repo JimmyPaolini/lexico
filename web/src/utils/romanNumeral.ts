@@ -22,29 +22,28 @@ export function romanToDecimal(roman: string) {
 
 export function decimalToRoman(decimal: number) {
   let roman = ""
-
-  const thousands = Math.floor(decimal / 1000)
-  if (thousands >= 4)
+  if (decimal > 3999)
     throw new Error("Decimal number too large (>3999) for roman numerals")
-  roman += new Array(thousands).fill("M").join("")
-
-  const hundreds = Math.floor(decimal / 100)
-  convertDigit(hundreds, "C", "D", "M")
-
-  const tens = Math.floor((decimal % 100) / 10)
-  convertDigit(tens, "X", "L", "C")
-
-  const ones = decimal % 10
-  convertDigit(ones, "I", "V", "X")
-
-  return roman
-
   function convertDigit(digit: number, low: string, mid: string, top: string) {
     if (digit < 4) roman += new Array(digit).fill(low).join("")
     else if (digit === 4) roman += low + mid
     else if (digit < 9) roman += mid + new Array(digit - 5).fill(low).join("")
     else if (digit === 9) roman += low + top
   }
+
+  const thousands = Math.floor((decimal % 10000) / 1000)
+  convertDigit(thousands, "M", "", "")
+
+  const hundreds = Math.floor((decimal % 1000) / 100)
+  convertDigit(hundreds, "C", "D", "M")
+
+  const tens = Math.floor((decimal % 100) / 10)
+  convertDigit(tens, "X", "L", "C")
+
+  const ones = Math.floor((decimal % 10) / 1)
+  convertDigit(ones, "I", "V", "X")
+
+  return roman
 }
 
 export function romanNumeralize(str: string | undefined) {

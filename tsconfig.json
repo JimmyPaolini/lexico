@@ -21,7 +21,6 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "checkJs": true,
     "jsx": "preserve"
   },
   "exclude": [

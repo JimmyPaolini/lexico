@@ -9,8 +9,6 @@ import {
 import User from "../../../entity/user/User"
 import useUser from "../hooks/user/useUser"
 
-export const Context = createContext({} as { [key: string]: any })
-
 export interface ReactContext {
   isNavOpen: boolean
   setNavOpen: Dispatch<SetStateAction<boolean>>
@@ -18,11 +16,13 @@ export interface ReactContext {
   user: User
 }
 
+export const Context = createContext({} as ReactContext)
+
 interface Props {
   children?: ReactNode
 }
 export function ContextProvider({ children }: Props) {
-  const { data: user, error } = useUser()
+  const { data: user } = useUser()
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
   const [isNavOpen, setNavOpen] = useState(false)
 
@@ -30,7 +30,7 @@ export function ContextProvider({ children }: Props) {
     <Context.Provider
       value={
         {
-          user: !error ? user : null,
+          user,
           isMobile,
           isNavOpen,
           setNavOpen,

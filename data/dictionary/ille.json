@@ -1,0 +1,99 @@
+{
+  "id": "ille:100",
+  "partOfSpeech": "pronoun",
+  "principalParts": [
+    {
+      "name": "masculine",
+      "text": ["ille"]
+    },
+    {
+      "name": "feminine",
+      "text": ["illa"]
+    },
+    {
+      "name": "neuter",
+      "text": ["illud"]
+    }
+  ],
+  "inflection": {
+    "declension": "first/second",
+    "degree": "",
+    "other": "first/second"
+  },
+  "translations": [
+    {
+      "translation": "that (thing); those (things)"
+    },
+    {
+      "translation": "(Vulgar Latin) he, she, it (third-person personal pronoun)"
+    }
+  ],
+  "forms": {
+    "masculine": {
+      "nominative": {
+        "singular": ["ille"],
+        "plural": ["illī"]
+      },
+      "genitive": {
+        "singular": ["illīus"],
+        "plural": ["illōrum"]
+      },
+      "dative": {
+        "singular": ["illī"],
+        "plural": ["illīs"]
+      },
+      "accusative": {
+        "singular": ["illum"],
+        "plural": ["illōs"]
+      },
+      "ablative": {
+        "singular": ["illō"],
+        "plural": ["illīs"]
+      }
+    },
+    "feminine": {
+      "nominative": {
+        "singular": ["illa"],
+        "plural": ["illae"]
+      },
+      "genitive": {
+        "singular": ["illīus"],
+        "plural": ["illārum"]
+      },
+      "dative": {
+        "singular": ["illī"],
+        "plural": ["illīs"]
+      },
+      "accusative": {
+        "singular": ["illam"],
+        "plural": ["illās"]
+      },
+      "ablative": {
+        "singular": ["illā"],
+        "plural": ["illīs"]
+      }
+    },
+    "neuter": {
+      "nominative": {
+        "singular": ["illud"],
+        "plural": ["illa"]
+      },
+      "genitive": {
+        "singular": ["illīus"],
+        "plural": ["illōrum"]
+      },
+      "dative": {
+        "singular": ["illī"],
+        "plural": ["illīs"]
+      },
+      "accusative": {
+        "singular": ["illud"],
+        "plural": ["illa"]
+      },
+      "ablative": {
+        "singular": ["illōc"],
+        "plural": ["illīs"]
+      }
+    }
+  }
+}

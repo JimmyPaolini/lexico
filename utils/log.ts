@@ -18,10 +18,14 @@ const consoleTransport = new transports.Console({
     timestamp(),
     colorize(),
     printf(({ timestamp, level, message, ...meta }) => {
+      if (typeof message !== "string") {
+        meta = message
+        message = ""
+      }
       const metaString = Object.keys(meta).length
-        ? " " + JSON.stringify(meta, circularReplacer(), 2)
+        ? JSON.stringify(meta, circularReplacer(), 2)
         : ""
-      return `${timestamp} ${level}: ${message}${metaString}`
+      return `${timestamp} ${level}: ${message} ${metaString}`.trim()
     }),
   ),
 })
@@ -83,9 +87,9 @@ export class DatabaseLogger implements Logger {
    * Perform logging using given logger, or by default to the console.
    * Log has its own level and message.
    */
-  log(level: "log" | "info" | "warn", message: any) {
-    if (log.level === "warn") log.warn(`database log: ${level} ${message}`)
-    log.info(`database log: ${level} ${message}`)
+  log(_: "log" | "info" | "warn", message: any) {
+    if (log.level === "warn") log.warn(`database log: ${message}`)
+    log.info(`database log: ${message}`)
   }
 }
 

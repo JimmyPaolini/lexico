@@ -9,11 +9,13 @@ import {
 } from "type-graphql"
 import { getConnection, IsNull } from "typeorm"
 import User from "../../../entity/user/User"
+import { JWT_SECRET } from "../../../utils/env"
 import log from "../../../utils/log"
 import { validateEmail, validatePassword } from "../../../utils/string"
 import {
   Authenticate,
   createAccessToken,
+  createPasswordResetToken,
   IsAuthenticated,
 } from "../auth/authentication"
 import fetchFacebookUser from "../auth/facebook"
@@ -120,9 +122,30 @@ export default class AuthenticationResolver {
     return true
   }
 
+  @Query(() => Boolean)
+  async recoverPassword(@Arg("email") email: string) {
+    if (!validateEmail(email)) throw new Error("invalid email")
+    const user = await this.Users.findOne({ email: email.toLowerCase() })
+    if (!user) throw new Error("email not found")
+
+    const passwordResetToken = createPasswordResetToken(email)
+    await this.Users.update(user.id, { passwordResetToken })
+    // send email
+    return true
+  }
+
+  @Query(() => Boolean)
+  async validatePasswordResetToken(
+    @Arg("passwordResetToken") passwordResetToken: string,
+  ) {
+    const claims = verify(passwordResetToken, JWT_SECRET!) as any
+    if (!claims) throw new Error("invalid password reset token")
+    return true
+  }
+
   @Mutation(() => Boolean)
   @UseMiddleware(Authenticate)
-  async setPassword(
+  async resetPassword(
     @Arg("password") password: string,
     @Ctx() { user }: ResolverContext,
   ) {

@@ -16,9 +16,9 @@ import Settings from "./Settings"
 @Entity()
 @ObjectType()
 export default class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   @Field(() => ID)
-  id: number
+  id: string
 
   @Column()
   @CreateDateColumn()
@@ -59,4 +59,7 @@ export default class User {
   @Column("json", { default: new Settings() })
   @Field(() => Settings, { defaultValue: new Settings() })
   settings: Settings = new Settings()
+
+  @Column({ nullable: true })
+  passwordResetToken: string
 }

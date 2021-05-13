@@ -12,6 +12,10 @@ export default function useBookmarks(enabled: boolean) {
 }
 
 export async function bookmarks() {
-  const { bookmarks: data } = await graphQLClient.request(bookmarksQuery)
-  return data
+  try {
+    const { bookmarks: data } = await graphQLClient.request(bookmarksQuery)
+    return data
+  } catch {
+    return null
+  }
 }

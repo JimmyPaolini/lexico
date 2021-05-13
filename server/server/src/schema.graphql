@@ -167,8 +167,8 @@ type Mutation {
   bookmark(entryId: String!): Boolean!
   comment(comment: String!): Boolean!
   register(email: String!, password: String!): User!
+  resetPassword(password: String!): Boolean!
   saveReading(lineId: String!): Boolean!
-  setPassword(password: String!): Boolean!
   setSettings(settings: SettingsInput!): Boolean!
   unbookmark(entryId: String!): Boolean!
   unregister: Boolean!
@@ -264,6 +264,7 @@ type Query {
   logout: Boolean!
   readingSavePoint(textId: String!): Line!
   readings: [Line!]!
+  recoverPassword(email: String!): Boolean!
   searchAuthors(search: String!): [Author!]!
   searchBooks(search: String!): [Book!]!
   searchEnglish(search: String!): [Entry!]!
@@ -274,6 +275,7 @@ type Query {
   settings: Settings!
   user: User!
   users: [User!]!
+  validatePasswordResetToken(passwordResetToken: String!): Boolean!
 }
 
 type Settings {

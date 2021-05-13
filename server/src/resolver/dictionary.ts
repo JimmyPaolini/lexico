@@ -32,7 +32,7 @@ export default class DictionaryResolver {
     @Arg("search") search: string,
     @Ctx() { bookmarks }: ResolverContext,
   ) {
-    if (!search || !search.match(/^-?(\w| )+$/)) return []
+    if (!search || !search.match(/^-?(\w| )+\.?$/)) return []
     log.info("searchLatin request", { search })
 
     search = search.toLowerCase()
@@ -46,7 +46,7 @@ export default class DictionaryResolver {
     }
 
     let entries = []
-    const word = await this.Words.findOne({ word: search })
+    const word = await this.Words.findOne(search)
     if (word) entries.push(...word.entries)
     if (hasSuffix(search, "que")) await pushSuffix("que")
     else if (hasSuffix(search, "ve")) await pushSuffix("ve")

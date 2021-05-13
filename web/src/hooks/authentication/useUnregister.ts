@@ -1,12 +1,14 @@
 import { useMutation } from "react-query"
-import logoutMutation from "../../graphql/authentication/logout.graphql"
+import unregisterMutation from "../../graphql/authentication/unregister.graphql"
 import { graphQLClient, queryClient } from "../../pages/_app"
 
-export default function useLogout() {
+export default function useUnregister() {
   return useMutation(
-    "logout",
+    "unregister",
     async () => {
-      const { logout: data } = await graphQLClient.request(logoutMutation)
+      const { unregister: data } = await graphQLClient.request(
+        unregisterMutation,
+      )
       return data
     },
     {

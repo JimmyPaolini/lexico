@@ -1,7 +1,8 @@
-import { CardHeader, IconButton } from "@material-ui/core"
+import { Button, CardHeader, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Bookmark, BookmarkBorder } from "@material-ui/icons"
 import { useRouter } from "next/router"
+import { useSnackbar } from "notistack"
 import React, { useState } from "react"
 import Entry from "../../../../entity/dictionary/Entry"
 import AdjectiveInflection from "../../../../entity/dictionary/word/inflection/AdjectiveInflection"
@@ -19,17 +20,27 @@ interface Props {
 }
 export default function PrincipalPartsRow({ entry }: Props) {
   const classes = useStyles()
-  const router = useRouter()
 
   const [bookmarked, setBookmarked] = useState<boolean>(!!entry.bookmarked)
   const { mutateAsync: bookmark } = useBookmark(setBookmarked)
   const { mutateAsync: unbookmark } = useUnbookmark(setBookmarked)
+
+  const router = useRouter()
+  const { enqueueSnackbar } = useSnackbar()
   const toggleBookmark = async () => {
     try {
       if (!bookmarked) await bookmark(entry.id)
       else await unbookmark(entry.id)
     } catch (e) {
-      router.push("/bookmarks")
+      const readerInstructions = `Sign in to save bookmarks`
+      enqueueSnackbar(readerInstructions, {
+        variant: "info",
+        action: (
+          <Button onClick={() => router.push("/bookmarks")} color="primary">
+            Sign in
+          </Button>
+        ),
+      })
     }
   }
 
@@ -41,9 +52,9 @@ export default function PrincipalPartsRow({ entry }: Props) {
     <CardHeader
       title={principalPartsFormatted}
       titleTypographyProps={{ variant: "subtitle1" }}
-      subheader={`${unCamelCase(entry.partOfSpeech)}, ${inflectiontoString(
+      subheader={`${unCamelCase(entry.partOfSpeech)}, ${inflectionToString(
         entry,
-      )}`}
+      )}`.replace(/, ?$/, "")}
       subheaderTypographyProps={{ variant: "subtitle2" }}
       className={classes.principalPartsRow}
       aria-label="Principal Parts, Inflection, and Bookmark"
@@ -60,8 +71,12 @@ export default function PrincipalPartsRow({ entry }: Props) {
   )
 }
 
-function inflectiontoString(entry: Entry) {
-  if (["noun", "properNoun"].includes(entry.partOfSpeech)) {
+function inflectionToString(entry: Entry) {
+  const isNoun = ["noun", "properNoun"].includes(entry.partOfSpeech)
+  const isAdjective = ["adjective", "participle", "numeral", "suffix"].includes(
+    entry.partOfSpeech,
+  )
+  if (isNoun) {
     const declension = (entry?.inflection as NounInflection)?.declension
     const gender = (entry?.inflection as NounInflection)?.gender
     if (declension && gender) return declension + " declension, " + gender
@@ -70,11 +85,7 @@ function inflectiontoString(entry: Entry) {
   } else if (entry.partOfSpeech === "verb") {
     const conjugation = (entry?.inflection as VerbInflection)?.conjugation
     if (conjugation) return conjugation + " conjugation"
-  } else if (
-    ["adjective", "participle", "numeral", "suffix"].includes(
-      entry.partOfSpeech,
-    )
-  ) {
+  } else if (isAdjective) {
     const declension = (entry?.inflection as AdjectiveInflection)?.declension
     const degree = (entry?.inflection as AdjectiveInflection)?.degree
     if (declension && degree) return declension + " declension, " + degree

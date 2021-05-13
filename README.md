@@ -1,6 +1,8 @@
 # Lexico
 
-<p align="center"><a href="https://www.lexicolatin.com"><img width="128" height="128" src="web/public/icon/android-chrome-512x512.png"></a></p>
+<!-- <p align="right"><a href="https://www.lexicolatin.com"><img width="32" height="32" src="web/public/icon/android-chrome-512x512.png"></a></p> -->
+
+<a href="https://www.lexicolatin.com"><a href="https://www.lexicolatin.com"><img alt="nodejs" src="assets/patreon-cover.png"></a>
 
 ### Frameworks, Libraries, and Tools
 
@@ -40,4 +42,4 @@
 
 ### Database Schema
 
-<p align="center"><a href="https://drawsql.app/lexico/diagrams/lexico"><img src="web/public/database_schema.png"></a></p>
+<p align="center"><a href="https://drawsql.app/lexico/diagrams/lexico"><img src="assets/database_schema.png"></a></p>
