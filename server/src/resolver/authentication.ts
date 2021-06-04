@@ -151,7 +151,7 @@ export default class AuthenticationResolver {
         `<h1>Salvē from Lexico! </h1>` +
         `<h2>Click this link to reset your password: ` +
         `<a href="${origin}/user/resetPassword/${passwordResetToken}">Reset Password </a></h2>` +
-        `<p>This link expires in 1 day. Please do not respond to this email</p>` +
+        `<p>This link expires in 1 day. Please do not respond to this email.</p>` +
         `<p>If you did not request to recover your password, please ignore this email ` +
         `or contact Lexico through <a href="https://join.slack.com/t/lexico-group/shared_invite/zt-qmkx0bwn-SfkHxk4v6QHe7pkDXQaNpQ">Slack</a>.</p>`,
     })

@@ -6,7 +6,7 @@ import Book from "../../../../entity/literature/Book"
 import Text from "../../../../entity/literature/Text"
 import CardDeck from "../../components/accessories/CardDeck"
 import LiteratureCard from "../../components/literature/LiteratureCard"
-import SearchBarLayout from "../../components/SearchBar/SearchBarLayout"
+import SearchBarLayout from "../../components/layout/SearchBarLayout"
 import { getAuthors } from "../../hooks/literature/useGetAuthors"
 
 interface Props {

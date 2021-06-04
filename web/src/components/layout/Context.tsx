@@ -6,8 +6,8 @@ import {
   SetStateAction,
   useState,
 } from "react"
-import User from "../../../entity/user/User"
-import useUser from "../hooks/user/useUser"
+import User from "../../../../entity/user/User"
+import useUser from "../../hooks/user/useUser"
 
 export interface ReactContext {
   isNavOpen: boolean

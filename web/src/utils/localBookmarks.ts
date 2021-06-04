@@ -5,7 +5,7 @@ export function getBookmarksLocal() {
   return JSON.parse(window.localStorage.bookmarks || "[]") as Bookmarks
 }
 
-export function setBookmarksLocal(bookmarks: Bookmarks) {
+function setBookmarksLocal(bookmarks: Bookmarks) {
   if (typeof window === "undefined") return
   window.localStorage.bookmarks = JSON.stringify(bookmarks)
 }
@@ -17,6 +17,7 @@ export function isBookmarkedLocal(id: string) {
 
 export function bookmarkLocal(id: string) {
   const bookmarks = getBookmarksLocal()
+  if (bookmarks.length > 999) return
   setBookmarksLocal([...bookmarks, id])
 }
 

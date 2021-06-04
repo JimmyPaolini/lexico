@@ -11,7 +11,7 @@ import { useContext, useState } from "react"
 import Translation from "../../../../entity/dictionary/Translation"
 import useEventListener from "../../hooks/useEventListener"
 import ExpandIcon from "../accessories/ExpandIcon"
-import { Context } from "../Context"
+import { Context } from "../layout/Context"
 
 interface Props {
   translations: Translation[]

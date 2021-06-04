@@ -1,14 +1,20 @@
-import { Grid, IconButton, InputAdornment, Typography } from "@material-ui/core"
+import {
+  Button,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Typography,
+} from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Visibility, VisibilityOff } from "@material-ui/icons"
 import { useFormik } from "formik"
 import Link from "next/link"
 import React, { useRef, useState } from "react"
-import useLogin from "../../hooks/authentication/useLogin"
-import useRegister from "../../hooks/authentication/useRegister"
-import { capitalizeFirstLetter, validateEmail } from "../../utils/string"
-import SubmitButton from "../accessories/SubmitButton"
-import TextBox from "../accessories/TextBox"
+import useLogin from "../../../hooks/authentication/useLogin"
+import useRegister from "../../../hooks/authentication/useRegister"
+import { capitalizeFirstLetter, validateEmail } from "../../../utils/string"
+import SubmitButton from "../../accessories/SubmitButton"
+import TextBox from "../../accessories/TextBox"
 
 export default function BasicLogin() {
   const classes = useStyles()
@@ -58,18 +64,13 @@ export default function BasicLogin() {
             ),
           }}
         />
-        <Link href="/user/recoverPassword">
-          <Typography color="secondary" className={classes.recoverPasswordLink}>
-            Recover Password
-          </Typography>
-        </Link>
       </Grid>
       <Grid
         container
         direction="row-reverse"
         item
         justify="space-between"
-        spacing={2}
+        spacing={1}
       >
         <Grid item xs>
           <SubmitButton name="sign in" onClick={() => setSubmit("sign in")} />
@@ -88,6 +89,19 @@ export default function BasicLogin() {
         >
           {capitalizeFirstLetter(error)}
         </Typography>
+      </Grid>
+      <Grid item>
+        <Link href="/user/recoverPassword">
+          <Button
+            color="secondary"
+            variant="contained"
+            size="small"
+            disableElevation
+            fullWidth
+          >
+            Recover Password
+          </Button>
+        </Link>
       </Grid>
     </form>
   )
@@ -116,8 +130,6 @@ const useStyles = makeStyles((theme: any) => ({
   formError: {
     width: "100%",
     marginTop: theme.spacing(1),
-  },
-  recoverPasswordLink: {
-    cursor: "pointer",
+    marginBottom: theme.spacing(1),
   },
 }))

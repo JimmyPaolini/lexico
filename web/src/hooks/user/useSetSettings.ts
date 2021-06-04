@@ -1,12 +1,12 @@
 import { useMutation } from "react-query"
-import { SettingsInput } from "../../../../entity/user/Settings"
+import Settings from "../../../../entity/user/Settings"
 import setSettingsMutation from "../../graphql/user/setSettings.graphql"
 import { graphQLClient } from "../../pages/_app"
 
-export default function useSetSettings() {
+export default function useSetSettings(settings: Settings) {
   return useMutation(
     "setSettings",
-    async (settings: SettingsInput) => {
+    async () => {
       const { setSettings: data } = await graphQLClient.request(
         setSettingsMutation,
         settings,

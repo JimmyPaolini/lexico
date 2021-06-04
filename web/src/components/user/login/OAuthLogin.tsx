@@ -1,7 +1,7 @@
 import { Button } from "@material-ui/core"
 import Image from "next/image"
 import React from "react"
-import { sentenceCase } from "../../utils/string"
+import { sentenceCase } from "../../../utils/string"
 
 interface Props {
   provider: string

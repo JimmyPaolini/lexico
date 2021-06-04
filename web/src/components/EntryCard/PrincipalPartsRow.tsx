@@ -1,8 +1,7 @@
 import { Button, CardHeader, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Bookmark, BookmarkBorder, Close } from "@material-ui/icons"
+import { Bookmark, BookmarkBorder } from "@material-ui/icons"
 import { useRouter } from "next/router"
-import { useSnackbar } from "notistack"
 import React, { useContext, useState } from "react"
 import Entry from "../../../../entity/dictionary/Entry"
 import AdjectiveInflection from "../../../../entity/dictionary/word/inflection/AdjectiveInflection"
@@ -13,6 +12,7 @@ import Uninflected from "../../../../entity/dictionary/word/inflection/Uninflect
 import VerbInflection from "../../../../entity/dictionary/word/inflection/VerbInflection"
 import useBookmark from "../../hooks/bookmarks/useBookmark"
 import useUnbookmark from "../../hooks/bookmarks/useUnbookmark"
+import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
 import {
   bookmarkLocal,
   isBookmarkedLocal,
@@ -20,7 +20,7 @@ import {
   unbookmarkLocal,
 } from "../../utils/localBookmarks"
 import { unCamelCase } from "../../utils/string"
-import { Context } from "../Context"
+import { Context } from "../layout/Context"
 
 interface Props {
   entry: Entry
@@ -36,7 +36,7 @@ export default function PrincipalPartsRow({ entry }: Props) {
   const { mutateAsync: unbookmark } = useUnbookmark(setBookmarked)
 
   const router = useRouter()
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+  const { enqueueSnackbar, closeSnackbar } = useSnackbarEnhanced()
   const toggleBookmark = async () => {
     if (!!user) {
       if (!bookmarked) await bookmark(entry.id)
@@ -53,23 +53,16 @@ export default function PrincipalPartsRow({ entry }: Props) {
         enqueueSnackbar(
           `Your bookmarks are saved locally, sign in to save them across devices/browsers`,
           {
-            variant: "info",
-            autoHideDuration: 8000,
             action: (key: any) => (
-              <>
-                <Button
-                  onClick={() => {
-                    closeSnackbar(key)
-                    router.push("/user")
-                  }}
-                  color="secondary"
-                >
-                  Sign in
-                </Button>
-                <IconButton onClick={() => closeSnackbar(key)} size="small">
-                  <Close />
-                </IconButton>
-              </>
+              <Button
+                onClick={() => {
+                  closeSnackbar(key)
+                  router.push("/user")
+                }}
+                color="secondary"
+              >
+                Sign in
+              </Button>
             ),
           },
         )

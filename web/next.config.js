@@ -29,4 +29,7 @@ module.exports = {
   //   // this also causes webpack ModuleNotFoundError instead of a typescript TypeError
   //   ignoreBuildErrors: true,
   // },
+  images: {
+    imageSizes: [512],
+  },
 }

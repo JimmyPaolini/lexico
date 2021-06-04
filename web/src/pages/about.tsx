@@ -8,8 +8,7 @@ import CardHeader from "../components/accessories/CardHeader"
 
 export default function About() {
   const classes = useStyles()
-  const upcomingFeaturesHref = "https://github.com/JimmyPaolini/Lexico/issues"
-  upcomingFeaturesHref
+
   return (
     <Grid
       container

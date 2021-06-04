@@ -17,7 +17,7 @@ import { capitalizeFirstLetter } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
 import SubmitButton from "../accessories/SubmitButton"
 import TextBox from "../accessories/TextBox"
-import { Context } from "../Context"
+import { Context } from "../layout/Context"
 
 export default function CommentBox() {
   const classes = useStyles()

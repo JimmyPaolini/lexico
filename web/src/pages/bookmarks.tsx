@@ -1,17 +1,16 @@
-import { Button, IconButton, Typography } from "@material-ui/core"
-import { Close } from "@material-ui/icons"
+import { Button, Typography } from "@material-ui/core"
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/router"
-import { useSnackbar } from "notistack"
 import { useContext, useEffect, useMemo, useState } from "react"
 import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
 import BookmarkInstructionsCard from "../components/bookmarks/BookmarkInstructionsCard"
-import { Context } from "../components/Context"
+import { Context } from "../components/layout/Context"
 import EntryCard from "../components/EntryCard/EntryCard"
-import SearchBarLayout from "../components/SearchBar/SearchBarLayout"
+import SearchBarLayout from "../components/layout/SearchBarLayout"
 import useBookmarks, { bookmarks } from "../hooks/bookmarks/useBookmarks"
 import useEntries from "../hooks/bookmarks/useEntries"
+import useSnackbarEnhanced from "../hooks/useSnackbarEnhanced"
 import identifyEntryWord from "../utils/identifiers"
 import { getBookmarksLocal } from "../utils/localBookmarks"
 import { normalize } from "../utils/string"
@@ -62,15 +61,14 @@ export default function Bookmarks() {
   }, [user, bookmarks, searched])
 
   const router = useRouter()
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+  const { enqueueSnackbar, closeSnackbar } = useSnackbarEnhanced()
   useEffect(() => {
     if (!user) {
-      const readerInstructions = `Your bookmarks are saved locally, sign in to save them across devices/browsers`
-      enqueueSnackbar(readerInstructions, {
-        variant: "info",
-        autoHideDuration: 10000,
-        action: (key: any) => (
-          <>
+      enqueueSnackbar(
+        `Your bookmarks are saved locally, sign in to save them across devices/browsers`,
+        {
+          autoHideDuration: 10000,
+          action: (key: any) => (
             <Button
               onClick={() => {
                 closeSnackbar(key)
@@ -80,12 +78,9 @@ export default function Bookmarks() {
             >
               Sign in
             </Button>
-            <IconButton onClick={() => closeSnackbar(key)} size="small">
-              <Close />
-            </IconButton>
-          </>
-        ),
-      })
+          ),
+        },
+      )
     }
   }, [])
 

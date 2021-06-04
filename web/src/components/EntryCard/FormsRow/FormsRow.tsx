@@ -13,7 +13,7 @@ import { PartOfSpeech } from "../../../../../entity/dictionary/word/PartOfSpeech
 import useEventListener from "../../../hooks/useEventListener"
 import identifierAbbreviations from "../../../utils/identifierAbbreviations"
 import ExpandIcon from "../../accessories/ExpandIcon"
-import { Context } from "../../Context"
+import { Context } from "../../layout/Context"
 import AdjectiveForms from "./PartsOfSpeech/AdjectiveForms"
 import NounForms from "./PartsOfSpeech/NounForms"
 import VerbForms from "./PartsOfSpeech/VerbForms"

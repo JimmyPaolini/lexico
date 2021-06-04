@@ -5,8 +5,8 @@ import Head from "next/head"
 import React, { useEffect } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { Hydrate } from "react-query/hydration"
-import { ContextProvider } from "../components/Context"
-import Layout from "../components/Layout"
+import { ContextProvider } from "../components/layout/Context"
+import Layout from "../components/layout/Layout"
 import theme from "../theme/theme"
 
 const clientEndpoint =
