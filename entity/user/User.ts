@@ -61,5 +61,5 @@ export default class User {
   settings: Settings = new Settings()
 
   @Column({ nullable: true })
-  passwordResetToken: string
+  passwordResetToken?: string
 }

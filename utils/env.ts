@@ -19,4 +19,5 @@ export const {
   FACEBOOK_ID,
   FACEBOOK_SECRET,
   SLACK_WEBHOOK,
+  SENDGRID_API_KEY
 } = process.env

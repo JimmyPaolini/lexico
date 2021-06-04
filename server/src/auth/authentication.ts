@@ -14,9 +14,13 @@ export function createAccessToken(user: User) {
 }
 
 export function createPasswordResetToken(email: string) {
-  return sign({ sub: email, iss: "https://www.lexicolatin.com" }, JWT_SECRET!, {
-    expiresIn: "1d",
-  })
+  return sign(
+    { sub: email.toLowerCase(), iss: "https://www.lexicolatin.com" },
+    JWT_SECRET!,
+    {
+      expiresIn: "1d",
+    },
+  )
 }
 
 export const Authenticate: MiddlewareFn<ResolverContext> = async (
@@ -47,11 +51,17 @@ export const GetBookmarks: MiddlewareFn<ResolverContext> = async (
   next,
 ) => {
   if (!context.req.cookies.accessToken) return next()
-  const claims = verify(context.req.cookies.accessToken, JWT_SECRET!) as any
-  if (!claims) return next()
+  let userId
+  try {
+    const claims = verify(context.req.cookies.accessToken, JWT_SECRET!) as any
+    if (!claims) return next()
+    userId = claims.sub
+  } catch {
+    return next()
+  }
   const user = await getConnection()
     .getRepository(User)
-    .findOne(claims.sub, { relations: ["bookmarks"] })
+    .findOne(userId, { relations: ["bookmarks"] })
   if (!user) return next()
   context.bookmarks = user.bookmarks
   return next()

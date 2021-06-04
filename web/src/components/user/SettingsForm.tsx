@@ -11,16 +11,14 @@ export default function SettingsCard() {
   const { user } = useContext(Context)
 
   const formik = useFormik({
-    initialValues:
-      user.settings ||
-      ({
-        theme: "dark",
-        fontSize: 24,
-        formsExpandedDefault: false,
-        translationsExpandedDefault: false,
-        dictionaryMacronized: false,
-        literatureMacronized: false,
-      } as SettingsInput),
+    initialValues: (user.settings || {
+      theme: "dark",
+      fontSize: 24,
+      formsExpandedDefault: false,
+      translationsExpandedDefault: false,
+      dictionaryMacronized: false,
+      literatureMacronized: false,
+    }) as SettingsInput & { [index: string]: any },
     onSubmit: async () => {
       await setSettings()
     },
@@ -41,7 +39,7 @@ export default function SettingsCard() {
   )
 
   interface BoolProps {
-    field: string
+    field: any
     label: string
   }
   const Bool = ({ field, label }: BoolProps) => (
@@ -73,11 +71,11 @@ export default function SettingsCard() {
   return (
     <form onChange={formik.handleSubmit}>
       {Bool({
-        field: "translationsExpandedByDefault",
+        field: "translationsExpandedDefault",
         label: "Translations expanded by default",
       })}
       {Bool({
-        field: "formsExpandedByDefault",
+        field: "formsExpandedDefault",
         label: "Forms expanded by default",
       })}
       <Typography style={{ marginTop: 10, marginBottom: 4 }}>

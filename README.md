@@ -17,8 +17,10 @@
 <a href="https://www.apollographql.com/"><img width="64" height="64" alt="apollo" src="web/public/icon/tool/apollo.png"></a>
 <a href="https://typegraphql.com/"><img width="64" height="64" alt="type-graphql" src="web/public/icon/tool/type-graphql.png"></a>
 <a href="https://www.elastic.co/"><img width="64" height="64" alt="elk" src="web/public/icon/tool/elk.png"></a>
+<a href="https://sendgrid.com"><img width="64" height="64" alt="sendgrid" src="web/public/icon/tool/sendgrid.png"></a>
 <a href="https://fluentbit.io/"><img width="64" height="64" alt="fluentbit" src="web/public/icon/tool/fluentbit.png"></a>
 <a href="https://jwt.io/"><img width="64" height="64" alt="jwt" src="web/public/icon/tool/jwt.png"></a>
+<a href="https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression"><img width="64" height="64" alt="stackoverflow" src="web/public/icon/tool/stackoverflow.png"></a>
 <a href="https://nextjs.org/"><img width="64" height="64" alt="nextjs" src="web/public/icon/tool/nextjs.png"></a>
 <a href="https://reactjs.org/"><img width="64" height="64" alt="react" src="web/public/icon/tool/react.png"></a>
 <a href="https://material-ui.com/"><img width="64" height="64" alt="materialui" src="web/public/icon/tool/materialui.png"></a>

@@ -2,6 +2,7 @@ import { Grid, IconButton, InputAdornment, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Visibility, VisibilityOff } from "@material-ui/icons"
 import { useFormik } from "formik"
+import Link from "next/link"
 import React, { useRef, useState } from "react"
 import useLogin from "../../hooks/authentication/useLogin"
 import useRegister from "../../hooks/authentication/useRegister"
@@ -57,6 +58,11 @@ export default function BasicLogin() {
             ),
           }}
         />
+        <Link href="/user/recoverPassword">
+          <Typography color="secondary" className={classes.recoverPasswordLink}>
+            Recover Password
+          </Typography>
+        </Link>
       </Grid>
       <Grid
         container
@@ -91,7 +97,7 @@ interface UserInfo {
   email: string
   password: string
 }
-function validate({ email, password }: UserInfo) {
+export function validate({ email, password }: UserInfo) {
   const errors = {} as any
   if (!validateEmail(email)) errors.email = "Invalid email"
   if (password.length < 8)
@@ -110,5 +116,8 @@ const useStyles = makeStyles((theme: any) => ({
   formError: {
     width: "100%",
     marginTop: theme.spacing(1),
+  },
+  recoverPasswordLink: {
+    cursor: "pointer",
   },
 }))

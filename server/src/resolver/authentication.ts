@@ -1,4 +1,6 @@
+import sgMail from "@sendgrid/mail"
 import { hash, verify } from "argon2"
+import { verify as verifyJWT } from "jsonwebtoken"
 import {
   Arg,
   Ctx,
@@ -9,7 +11,7 @@ import {
 } from "type-graphql"
 import { getConnection, IsNull } from "typeorm"
 import User from "../../../entity/user/User"
-import { JWT_SECRET } from "../../../utils/env"
+import { JWT_SECRET, SENDGRID_API_KEY } from "../../../utils/env"
 import log from "../../../utils/log"
 import { validateEmail, validatePassword } from "../../../utils/string"
 import {
@@ -122,15 +124,37 @@ export default class AuthenticationResolver {
     return true
   }
 
-  @Query(() => Boolean)
+  @Mutation(() => Boolean)
   async recoverPassword(@Arg("email") email: string) {
+    log.info(`recoverPassword: ${email}`)
     if (!validateEmail(email)) throw new Error("invalid email")
-    const user = await this.Users.findOne({ email: email.toLowerCase() })
+    const user = await this.Users.findOne({
+      email: email.toLowerCase(),
+      googleId: IsNull(),
+      facebookId: IsNull(),
+    })
     if (!user) throw new Error("email not found")
 
     const passwordResetToken = createPasswordResetToken(email)
     await this.Users.update(user.id, { passwordResetToken })
-    // send email
+
+    sgMail.setApiKey(SENDGRID_API_KEY!)
+    const origin =
+      process.env.NODE_ENV === "production"
+        ? "https://www.lexicolatin.com"
+        : "http://localhost:3000"
+    await sgMail.send({
+      to: email,
+      from: "Lexico <passwordrecovery@lexicolatin.com>",
+      subject: "Lexico Password Recovery",
+      html:
+        `<h1>Salvē from Lexico! </h1>` +
+        `<h2>Click this link to reset your password: ` +
+        `<a href="${origin}/user/resetPassword/${passwordResetToken}">Reset Password </a></h2>` +
+        `<p>This link expires in 1 day. Please do not respond to this email</p>` +
+        `<p>If you did not request to recover your password, please ignore this email ` +
+        `or contact Lexico through <a href="https://join.slack.com/t/lexico-group/shared_invite/zt-qmkx0bwn-SfkHxk4v6QHe7pkDXQaNpQ">Slack</a>.</p>`,
+    })
     return true
   }
 
@@ -138,19 +162,36 @@ export default class AuthenticationResolver {
   async validatePasswordResetToken(
     @Arg("passwordResetToken") passwordResetToken: string,
   ) {
-    const claims = verify(passwordResetToken, JWT_SECRET!) as any
+    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as any
     if (!claims) throw new Error("invalid password reset token")
+    const user = await this.Users.findOneOrFail({
+      email: claims.sub.toLowerCase(),
+      googleId: IsNull(),
+      facebookId: IsNull(),
+    })
+    if (user.passwordResetToken !== passwordResetToken)
+      throw new Error("invalid password reset token")
     return true
   }
 
   @Mutation(() => Boolean)
-  @UseMiddleware(Authenticate)
   async resetPassword(
+    @Arg("passwordResetToken") passwordResetToken: string,
     @Arg("password") password: string,
-    @Ctx() { user }: ResolverContext,
+    @Ctx() ctx: ResolverContext,
   ) {
+    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as any
+    if (!claims) throw new Error("invalid password reset token")
     if (!validatePassword(password)) throw new Error("invalid password")
-    await this.Users.update(user.id, { password: await hash(password) })
+    await this.Users.update(
+      {
+        email: claims.sub.toLowerCase(),
+        googleId: IsNull(),
+        facebookId: IsNull(),
+      },
+      { password: await hash(password), passwordResetToken: undefined },
+    )
+    await this.login(claims.sub, password, ctx)
     return true
   }
 }

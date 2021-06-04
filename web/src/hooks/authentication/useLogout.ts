@@ -10,7 +10,6 @@ export default function useLogout() {
       return data
     },
     {
-      retry: false,
       onSuccess: async () => {
         await queryClient.invalidateQueries("user")
       },

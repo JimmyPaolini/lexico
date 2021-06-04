@@ -82,8 +82,14 @@ const tools = [
   { name: "apollo", url: "https://www.apollographql.com/" },
   { name: "type-graphql", url: "https://typegraphql.com/" },
   { name: "elk", url: "https://www.elastic.co/" },
+  { name: "sendgrid", url: "https://sendgrid.com" },
   { name: "fluentbit", url: "https://fluentbit.io/" },
   { name: "jwt", url: "https://jwt.io/" },
+  {
+    name: "stackoverflow",
+    url:
+      "https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression",
+  },
   { name: "nextjs", url: "https://nextjs.org/" },
   { name: "react", url: "https://reactjs.org/" },
   { name: "materialui", url: "https://material-ui.com/" },

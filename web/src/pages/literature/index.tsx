@@ -1,13 +1,13 @@
 import { Typography } from "@material-ui/core"
 import { GetStaticProps } from "next"
 import React, { useEffect, useMemo, useState } from "react"
-import Author from "../../../entity/literature/Author"
-import Book from "../../../entity/literature/Book"
-import Text from "../../../entity/literature/Text"
-import CardDeck from "../components/accessories/CardDeck"
-import LiteratureCard from "../components/literature/LiteratureCard"
-import SearchBarLayout from "../components/SearchBar/SearchBarLayout"
-import { getAuthors } from "../hooks/literature/useGetAuthors"
+import Author from "../../../../entity/literature/Author"
+import Book from "../../../../entity/literature/Book"
+import Text from "../../../../entity/literature/Text"
+import CardDeck from "../../components/accessories/CardDeck"
+import LiteratureCard from "../../components/literature/LiteratureCard"
+import SearchBarLayout from "../../components/SearchBar/SearchBarLayout"
+import { getAuthors } from "../../hooks/literature/useGetAuthors"
 
 interface Props {
   authors: Author[]

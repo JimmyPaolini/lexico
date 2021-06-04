@@ -1,9 +1,9 @@
 import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { useContext } from "react"
-import { Context } from "../components/Context"
-import LoginCard from "../components/settings/LoginCard"
-import SettingsCard from "../components/settings/SettingsCard"
+import { Context } from "../../components/Context"
+import LoginCard from "../../components/user/LoginCard"
+import SettingsCard from "../../components/user/SettingsCard"
 
 export default function User() {
   const classes = useStyles()

@@ -15,6 +15,7 @@ export default function OAuthLogin({ provider }: Props) {
       disableElevation
       size="large"
       href={href}
+      target="_top"
       startIcon={
         <Image
           src={`/icon/${provider}.png`}

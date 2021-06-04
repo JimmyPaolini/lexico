@@ -4,7 +4,7 @@ class ShowReaderInstructions {
 }
 
 export function showReaderInstructions() {
-  if (!window) return false
+  if (typeof window === "undefined") return false
   const showReaderInstructions = JSON.parse(
     window.localStorage.showReaderInstructions || "null",
   ) as ShowReaderInstructions
@@ -33,13 +33,13 @@ function updateShowReaderInstructions(
     const immediately = new Date()
     showReaderInstructions.showAfter = immediately
   } else if (showReaderInstructions.seenCount < 5) {
-    const tomorrow = new Date(Date.now() + 1 * 24 * 3600 * 1000)
+    const tomorrow = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
     showReaderInstructions.showAfter = tomorrow
   } else if (showReaderInstructions.seenCount < 8) {
-    const nextWeek = new Date(Date.now() + 7 * 24 * 3600 * 1000)
+    const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
     showReaderInstructions.showAfter = nextWeek
   } else {
-    const nextMonth = new Date(Date.now() + 28 * 24 * 3600 * 1000)
+    const nextMonth = new Date(Date.now() + 28 * 24 * 60 * 60 * 1000)
     showReaderInstructions.showAfter = nextMonth
   }
   showReaderInstructions.seenCount++

@@ -1,5 +1,4 @@
 import VerbForms from "../../../entity/dictionary/word/forms/VerbForms"
-import { normalize } from "../../../utils/string"
 
 export function camelCaseFuturePerfect(forms: VerbForms) {
   const futp =
@@ -16,31 +15,4 @@ export function camelCaseFuturePerfect(forms: VerbForms) {
       ?.passive as any)?.[futp]
   }
   return forms
-}
-
-export function identifyWord(
-  word: string,
-  forms: any,
-  current: string[],
-  identifiers: string[],
-) {
-  if (Array.isArray(forms)) {
-    if (
-      forms.some((form) =>
-        normalize(form).match(new RegExp("^" + word + "$", "i")),
-      )
-    ) {
-      return [...identifiers, current.join(" ")]
-    }
-  } else {
-    for (const key in forms) {
-      identifiers = identifyWord(
-        word,
-        forms[key],
-        [...current, key],
-        identifiers,
-      )
-    }
-  }
-  return identifiers
 }

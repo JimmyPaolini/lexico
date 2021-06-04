@@ -23,6 +23,7 @@
     "allowJs": true,
     "jsx": "preserve"
   },
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": [
     "**/node_modules",
     "**/dist",

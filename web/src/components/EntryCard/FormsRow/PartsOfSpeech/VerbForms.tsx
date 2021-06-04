@@ -233,22 +233,22 @@ const verbFormsRestructure = (conjugations: any) => {
   )
   structure.INF["INFINITIVE"][
     "-"
-  ][2].center = conjugations?.nonFinite?.infinitive?.passive?.present?.join?.(
+  ][1].center = conjugations?.nonFinite?.infinitive?.passive?.present?.join?.(
     ",\n",
   )
   structure.INF["INFINITIVE"][
     "-"
-  ][4].center = conjugations?.nonFinite?.infinitive?.active?.perfect?.join?.(
+  ][2].center = conjugations?.nonFinite?.infinitive?.active?.perfect?.join?.(
     ",\n",
   )
   structure.INF["INFINITIVE"][
     "-"
-  ][1].center = conjugations?.nonFinite?.infinitive?.passive?.perfect?.join?.(
+  ][3].center = conjugations?.nonFinite?.infinitive?.passive?.perfect?.join?.(
     ",\n",
   )
   structure.INF["INFINITIVE"][
     "-"
-  ][3].center = conjugations?.nonFinite?.infinitive?.active?.future?.join?.(
+  ][4].center = conjugations?.nonFinite?.infinitive?.active?.future?.join?.(
     ",\n",
   )
   structure.INF["INFINITIVE"][

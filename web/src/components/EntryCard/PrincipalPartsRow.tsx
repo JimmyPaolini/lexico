@@ -1,9 +1,9 @@
 import { Button, CardHeader, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Bookmark, BookmarkBorder } from "@material-ui/icons"
+import { Bookmark, BookmarkBorder, Close } from "@material-ui/icons"
 import { useRouter } from "next/router"
 import { useSnackbar } from "notistack"
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import Entry from "../../../../entity/dictionary/Entry"
 import AdjectiveInflection from "../../../../entity/dictionary/word/inflection/AdjectiveInflection"
 import AdverbInflection from "../../../../entity/dictionary/word/inflection/AdverbInflection"
@@ -13,34 +13,67 @@ import Uninflected from "../../../../entity/dictionary/word/inflection/Uninflect
 import VerbInflection from "../../../../entity/dictionary/word/inflection/VerbInflection"
 import useBookmark from "../../hooks/bookmarks/useBookmark"
 import useUnbookmark from "../../hooks/bookmarks/useUnbookmark"
+import {
+  bookmarkLocal,
+  isBookmarkedLocal,
+  showBookmarkInstructions,
+  unbookmarkLocal,
+} from "../../utils/localBookmarks"
 import { unCamelCase } from "../../utils/string"
+import { Context } from "../Context"
 
 interface Props {
   entry: Entry
 }
 export default function PrincipalPartsRow({ entry }: Props) {
   const classes = useStyles()
+  const { user } = useContext(Context)
 
-  const [bookmarked, setBookmarked] = useState<boolean>(!!entry.bookmarked)
+  const [bookmarked, setBookmarked] = useState<boolean>(
+    !!user ? !!entry.bookmarked : isBookmarkedLocal(entry.id),
+  )
   const { mutateAsync: bookmark } = useBookmark(setBookmarked)
   const { mutateAsync: unbookmark } = useUnbookmark(setBookmarked)
 
   const router = useRouter()
-  const { enqueueSnackbar } = useSnackbar()
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
   const toggleBookmark = async () => {
-    try {
+    if (!!user) {
       if (!bookmarked) await bookmark(entry.id)
       else await unbookmark(entry.id)
-    } catch (e) {
-      const readerInstructions = `Sign in to save bookmarks`
-      enqueueSnackbar(readerInstructions, {
-        variant: "info",
-        action: (
-          <Button onClick={() => router.push("/bookmarks")} color="primary">
-            Sign in
-          </Button>
-        ),
-      })
+    } else {
+      if (!bookmarked) {
+        bookmarkLocal(entry.id)
+        setBookmarked(true)
+      } else {
+        unbookmarkLocal(entry.id)
+        setBookmarked(false)
+      }
+      if (showBookmarkInstructions()) {
+        enqueueSnackbar(
+          `Your bookmarks are saved locally, sign in to save them across devices/browsers`,
+          {
+            variant: "info",
+            autoHideDuration: 8000,
+            action: (key: any) => (
+              <>
+                <Button
+                  onClick={() => {
+                    closeSnackbar(key)
+                    router.push("/user")
+                  }}
+                  color="secondary"
+                >
+                  Sign in
+                </Button>
+                <IconButton onClick={() => closeSnackbar(key)} size="small">
+                  <Close />
+                </IconButton>
+              </>
+            ),
+          },
+        )
+      }
     }
   }
 

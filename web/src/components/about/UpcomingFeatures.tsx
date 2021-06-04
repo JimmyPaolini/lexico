@@ -1,12 +1,14 @@
 import {
   Box,
   CardActionArea,
-  CardHeader as CardHeaderMui
+  CardHeader as CardHeaderMui,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Launch } from "@material-ui/icons"
 import React from "react"
-import { version } from "../../../../package.json"
+import packageJson from "../../../../package.json"
+
+const { version } = packageJson
 
 export default function ToolIconGrid() {
   const classes = useStyles()

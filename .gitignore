@@ -1,5 +1,4 @@
 **/.DS_Store
-**/.DS_Store
 **/.vscode
 **/.idea
 **/node_modules
@@ -16,3 +15,4 @@
 **/data/wiktionary
 
 **/*kubeconfig.yaml
+.DS_Store

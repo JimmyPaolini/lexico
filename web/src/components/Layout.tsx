@@ -13,11 +13,12 @@ export default function Layout({ children }: Props) {
 
   return (
     <SnackbarProvider
+      classes={{ variantInfo: classes.snackbarInfo }}
       anchorOrigin={{
         vertical: "bottom",
         horizontal: "right",
       }}
-      classes={{ variantInfo: classes.snackbarInfo }}
+      hideIconVariant
     >
       <Grid container>
         <Grid item>

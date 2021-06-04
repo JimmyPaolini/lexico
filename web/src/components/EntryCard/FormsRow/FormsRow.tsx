@@ -34,7 +34,7 @@ export default function FormsRow({
   const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(
-    user?.settings.formsExpandedByDefault,
+    user?.settings.formsExpandedDefault,
   )
   identifiers = identifiers.map((identifier) =>
     identifier

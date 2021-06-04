@@ -1,6 +1,8 @@
-import { Grid, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { Button, IconButton, Typography } from "@material-ui/core"
+import { Close } from "@material-ui/icons"
 import { GetServerSideProps } from "next"
+import { useRouter } from "next/router"
+import { useSnackbar } from "notistack"
 import { useContext, useEffect, useMemo, useState } from "react"
 import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
@@ -8,13 +10,14 @@ import BookmarkInstructionsCard from "../components/bookmarks/BookmarkInstructio
 import { Context } from "../components/Context"
 import EntryCard from "../components/EntryCard/EntryCard"
 import SearchBarLayout from "../components/SearchBar/SearchBarLayout"
-import LoginCard from "../components/settings/LoginCard"
 import useBookmarks, { bookmarks } from "../hooks/bookmarks/useBookmarks"
+import useEntries from "../hooks/bookmarks/useEntries"
+import identifyEntryWord from "../utils/identifiers"
+import { getBookmarksLocal } from "../utils/localBookmarks"
 import { normalize } from "../utils/string"
 import { queryClient } from "./_app"
 
 export default function Bookmarks() {
-  const classes = useStyles()
   const { user } = useContext(Context)
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
@@ -23,32 +26,68 @@ export default function Bookmarks() {
     if (!search) setSearched("")
   }, [search])
 
-  const { data: bookmarks, isLoading, isSuccess } = useBookmarks(user !== null)
+  let bookmarks: Entry[], isLoading: boolean, isSuccess: boolean
+  if (!!user) {
+    const response = useBookmarks()
+    bookmarks = response.data
+    isLoading = response.isLoading
+    isSuccess = response.isSuccess
+  } else {
+    const response = useEntries(getBookmarksLocal())
+    bookmarks = response.data
+    isLoading = response.isLoading
+    isSuccess = response.isSuccess
+  }
 
   const cards = useMemo(() => {
     const filteredEntries = filterEntries(bookmarks, searched) || []
     return filteredEntries.length
-      ? filteredEntries.map((entry: Entry) => ({
-          key: entry.id,
-          Card: () => <EntryCard {...{ entry, searched }} />,
-        }))
+      ? filteredEntries.map((entry: Entry) => {
+          entry = identifyEntryWord(searched, entry)
+          return {
+            key: entry.id,
+            Card: () => <EntryCard {...{ entry, searched }} />,
+          }
+        })
       : [
           {
             key: "no results",
-            Card: () => <Typography variant="h4">Not Found</Typography>,
+            Card: () => (
+              <Typography variant="h4" align="center">
+                Not Found
+              </Typography>
+            ),
           },
         ]
   }, [user, bookmarks, searched])
 
-  if (user === null) {
-    return (
-      <Grid container justify="center" alignItems="center">
-        <Grid item className={classes.loginCard}>
-          <LoginCard title="sign in to use bookmarks" />
-        </Grid>
-      </Grid>
-    )
-  }
+  const router = useRouter()
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
+  useEffect(() => {
+    if (!user) {
+      const readerInstructions = `Your bookmarks are saved locally, sign in to save them across devices/browsers`
+      enqueueSnackbar(readerInstructions, {
+        variant: "info",
+        autoHideDuration: 10000,
+        action: (key: any) => (
+          <>
+            <Button
+              onClick={() => {
+                closeSnackbar(key)
+                router.push("/user")
+              }}
+              color="secondary"
+            >
+              Sign in
+            </Button>
+            <IconButton onClick={() => closeSnackbar(key)} size="small">
+              <Close />
+            </IconButton>
+          </>
+        ),
+      })
+    }
+  }, [])
 
   return (
     <SearchBarLayout
@@ -89,16 +128,9 @@ const filterEntries = (entries: Entry[], search: string) => {
         entry.translations?.some((translation) =>
           translation.translation.match(re),
         ) ||
-        entry.partOfSpeech.match(re)
+        entry.partOfSpeech.match(re) ||
+        normalize(JSON.stringify(entry?.forms || "false")).match(re)
       )
     }) || []
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  loginCard: {
-    width: theme.custom.cardWidth,
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-  },
-}))

@@ -4,10 +4,11 @@ import Entry from "../../../entity/dictionary/Entry"
 import Translation from "../../../entity/dictionary/Translation"
 import Word from "../../../entity/dictionary/Word"
 import VerbForms from "../../../entity/dictionary/word/forms/VerbForms"
+import identifyEntryWord from "../../../utils/identifiers"
 import log from "../../../utils/log"
 import { hasSuffix } from "../../../utils/string"
 import { GetBookmarks } from "../auth/authentication"
-import { camelCaseFuturePerfect, identifyWord } from "../utils/forms"
+import { camelCaseFuturePerfect } from "../utils/forms"
 import { ResolverContext } from "../utils/ResolverContext"
 
 @Resolver(Entry)
@@ -15,16 +16,6 @@ export default class DictionaryResolver {
   Entries = getConnection().getRepository(Entry)
   Translations = getConnection().getRepository(Translation)
   Words = getConnection().getRepository(Word)
-  identifiablePartsOfSpeech = [
-    "noun",
-    "properNoun",
-    "verb",
-    "adjective",
-    "adverb",
-    "participle",
-    "numeral",
-    "suffix",
-  ]
 
   @Query(() => [Entry])
   @UseMiddleware(GetBookmarks)
@@ -59,13 +50,7 @@ export default class DictionaryResolver {
         //   ...translation,
         //   translation: translation.translation.replace(/^(.*)\s/, ""),
         // }))
-        if (this.identifiablePartsOfSpeech.includes(entry.partOfSpeech)) {
-          let word = search
-          if (hasSuffix(word, "que")) word = word.replace(/que$/i, "")
-          else if (hasSuffix(word, "ve")) word = word.replace(/ve$/i, "")
-          else if (hasSuffix(word, "ne")) word = word.replace(/ne$/i, "")
-          entry.identifiers = identifyWord(word, entry.forms, [], [])
-        }
+        entry = identifyEntryWord(search, entry)
         if (entry.partOfSpeech === "verb" && entry.forms) {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
         }
@@ -118,5 +103,15 @@ export default class DictionaryResolver {
       entries: entries.map(({ id }) => id),
     })
     return entries
+  }
+
+  @Query(() => Entry)
+  async entry(@Arg("id") id: string) {
+    return await this.Entries.findOneOrFail(id)
+  }
+
+  @Query(() => [Entry])
+  async entries(@Arg("ids", () => [String]) ids: string[]) {
+    return await this.Entries.findByIds(ids)
   }
 }

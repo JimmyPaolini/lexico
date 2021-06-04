@@ -9,5 +9,4 @@
     "isolatedModules": true
   },
   "exclude": ["../data", "../ingestion", "../server"],
-  "include": ["**/*.ts", "**/*.tsx"]
 }
