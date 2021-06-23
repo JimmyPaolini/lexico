@@ -7,7 +7,7 @@ import VerbForms from "../../../entity/dictionary/word/forms/VerbForms"
 import identifyEntryWord from "../../../utils/identifiers"
 import log from "../../../utils/log"
 import { hasSuffix } from "../../../utils/string"
-import { GetBookmarks } from "../auth/authentication"
+import { GetBookmarks } from "../auth/token"
 import { camelCaseFuturePerfect } from "../utils/forms"
 import { ResolverContext } from "../utils/ResolverContext"
 

@@ -1,4 +1,4 @@
-import { CardContent, Divider, Grid } from "@material-ui/core"
+import { Card, CardContent, Divider, Grid } from "@material-ui/core"
 import { useFormik } from "formik"
 import { useRouter } from "next/router"
 import React from "react"
@@ -20,11 +20,17 @@ export default function RecoverPassword() {
     },
     validate,
     onSubmit: async () => {
-      await recoverPassword()
-      router.push("/user")
-      enqueueSnackbar(
-        `A password recovery email has been sent to: ${formik.values.email}`,
-      )
+      try {
+        await recoverPassword()
+        router.push("/user")
+        enqueueSnackbar(
+          `A password recovery email has been sent to: ${formik.values.email}`,
+        )
+      } catch {
+        enqueueSnackbar(
+          `An unknown error occurred, if it persists please contact Lexico!`,
+        )
+      }
     },
   })
   const { mutateAsync: recoverPassword } = useRecoverPassword(
@@ -33,20 +39,22 @@ export default function RecoverPassword() {
 
   return (
     <SingleCardLayout>
-      <CardHeader title="Recover Password" />
-      <Divider variant="middle" />
-      <CardContent>
-        <form onSubmit={formik.handleSubmit}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item>
-              <TextBox name="email" formik={formik} />
+      <Card>
+        <CardHeader title="Recover Password" />
+        <Divider variant="middle" />
+        <CardContent>
+          <form onSubmit={formik.handleSubmit}>
+            <Grid container direction="column" spacing={2}>
+              <Grid item>
+                <TextBox name="email" formik={formik} />
+              </Grid>
+              <Grid item>
+                <SubmitButton name="Recover Password" />
+              </Grid>
             </Grid>
-            <Grid item>
-              <SubmitButton name="Recover Password" />
-            </Grid>
-          </Grid>
-        </form>
-      </CardContent>
+          </form>
+        </CardContent>
+      </Card>
     </SingleCardLayout>
   )
 }

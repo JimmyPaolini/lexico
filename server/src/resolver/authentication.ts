@@ -14,14 +14,14 @@ import User from "../../../entity/user/User"
 import { JWT_SECRET, SENDGRID_API_KEY } from "../../../utils/env"
 import log from "../../../utils/log"
 import { validateEmail, validatePassword } from "../../../utils/string"
+import fetchFacebookUser from "../auth/facebook"
+import fetchGoogleUser from "../auth/google"
 import {
   Authenticate,
   createAccessToken,
   createPasswordResetToken,
   IsAuthenticated,
-} from "../auth/authentication"
-import fetchFacebookUser from "../auth/facebook"
-import fetchGoogleUser from "../auth/google"
+} from "../auth/token"
 import { ResolverContext } from "../utils/ResolverContext"
 
 @Resolver(User)

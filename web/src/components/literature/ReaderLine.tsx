@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: any) => ({
     marginLeft: theme.spacing(1) - 2,
     marginTop: "auto",
     marginBottom: "auto",
-    fontFamily: "monospace, sans-serif",
+    fontFamily: "courier, monospace",
     fontSize: "1.3rem",
   },
   divider: {

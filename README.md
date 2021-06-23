@@ -31,6 +31,7 @@
 <a href="https://github.com/features/actions"><img width="64" height="64" alt="github-actions" src="web/public/icon/tool/github-actions.png"></a>
 <a href="https://www.docker.com/"><img width="64" height="64" alt="docker" src="web/public/icon/tool/docker.png"></a>
 <a href="https://kubernetes.io/"><img width="64" height="64" alt="kubernetes" src="web/public/icon/tool/kubernetes.png"></a>
+<a href="https://bitnami.com/stacks/helm"><img width="64" height="64" alt="bitnami" src="web/public/icon/tool/bitnami.png"></a>
 <a href="https://helm.sh/"><img width="64" height="64" alt="helm" src="web/public/icon/tool/helm.png"></a>
 <a href="https://www.nginx.com/"><img width="64" height="64" alt="nginx" src="web/public/icon/tool/nginx.png"></a>
 <a href="https://www.linode.com/"><img width="64" height="64" alt="linode" src="web/public/icon/tool/linode.png"></a>
