@@ -26,10 +26,17 @@ export default function RecoverPassword() {
         enqueueSnackbar(
           `A password recovery email has been sent to: ${formik.values.email}`,
         )
-      } catch {
-        enqueueSnackbar(
-          `An unknown error occurred, if it persists please contact Lexico!`,
-        )
+      } catch (e) {
+        console.log(JSON.stringify(e))
+        if (e.response.errors[0].message === "email not found") {
+          enqueueSnackbar(
+            `No user with the following email exists: ${formik.values.email}. Try signing in through a provider if this email is correct`,
+          )
+        } else {
+          enqueueSnackbar(
+            `An unknown error occurred, if it persists please contact Lexico!`,
+          )
+        }
       }
     },
   })

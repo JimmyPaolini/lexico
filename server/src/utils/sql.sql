@@ -1,5 +1,5 @@
 -- @block scratch
-ALTER TABLE public."user" DROP COLUMN "passwordResetToken"
+SELECT * FROM translation
 
 -- @block find entry
 SELECT id, "partOfSpeech", inflection, forms FROM entry
@@ -37,12 +37,21 @@ LEFT OUTER JOIN translation
 ON (entry."id" = translation."entryId")
 WHERE translation."entryId" IS NULL;
 
+
 -- @block users
 SELECT * FROM public.user
 
+-- @block bookmarks
+SELECT * FROM user_bookmarks_entry
 
--- @block show_tables
+-- @block show tables
 SELECT * FROM pg_catalog.pg_tables
+
+-- @block describe table
+SELECT * FROM information_schema.columns WHERE table_name = 'user_bookmarks_entry'
+
+-- @block describe constraints
+SELECT * FROM pg_catalog.pg_constraint
 
 -- @block resync translation primary key
 SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"translation"', 'id')), (SELECT (MAX("id") + 1) FROM "translation"), FALSE);

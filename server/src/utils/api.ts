@@ -16,7 +16,7 @@ export default async function buildAPI(app: Express, cors: any) {
         AuthenticationResolver,
         UserResolver,
       ],
-      emitSchemaFile: path.join(process.cwd(), "./server/src/schema.graphql"),
+      emitSchemaFile: path.join(process.cwd(), "./src/utils/schema.graphql"),
     }),
     context: ({ req, res }) => ({ req, res }),
     introspection: true,

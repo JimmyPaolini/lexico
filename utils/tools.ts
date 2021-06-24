@@ -11,10 +11,6 @@ export default [
   { name: "sendgrid", url: "https://sendgrid.com" },
   { name: "fluentbit", url: "https://fluentbit.io/" },
   { name: "jwt", url: "https://jwt.io/" },
-  {
-    name: "stackoverflow",
-    url: "https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression",
-  },
   { name: "nextjs", url: "https://nextjs.org/" },
   { name: "react", url: "https://reactjs.org/" },
   { name: "materialui", url: "https://material-ui.com/" },
@@ -30,6 +26,10 @@ export default [
   { name: "nginx", url: "https://www.nginx.com/" },
   { name: "linode", url: "https://www.linode.com/" },
   { name: "cloudflare", url: "https://www.cloudflare.com/" },
+  {
+    name: "stackoverflow",
+    url: "https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression",
+  },
   { name: "figma", url: "https://www.figma.com/" },
   { name: "vscode", url: "https://code.visualstudio.com/" },
   { name: "patreon", url: "https://www.patreon.com/lexico" },

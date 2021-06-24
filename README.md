@@ -20,7 +20,6 @@
 <a href="https://sendgrid.com"><img width="64" height="64" alt="sendgrid" src="web/public/icon/tool/sendgrid.png"></a>
 <a href="https://fluentbit.io/"><img width="64" height="64" alt="fluentbit" src="web/public/icon/tool/fluentbit.png"></a>
 <a href="https://jwt.io/"><img width="64" height="64" alt="jwt" src="web/public/icon/tool/jwt.png"></a>
-<a href="https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression"><img width="64" height="64" alt="stackoverflow" src="web/public/icon/tool/stackoverflow.png"></a>
 <a href="https://nextjs.org/"><img width="64" height="64" alt="nextjs" src="web/public/icon/tool/nextjs.png"></a>
 <a href="https://reactjs.org/"><img width="64" height="64" alt="react" src="web/public/icon/tool/react.png"></a>
 <a href="https://material-ui.com/"><img width="64" height="64" alt="materialui" src="web/public/icon/tool/materialui.png"></a>
@@ -36,6 +35,7 @@
 <a href="https://www.nginx.com/"><img width="64" height="64" alt="nginx" src="web/public/icon/tool/nginx.png"></a>
 <a href="https://www.linode.com/"><img width="64" height="64" alt="linode" src="web/public/icon/tool/linode.png"></a>
 <a href="https://www.cloudflare.com/"><img width="64" height="64" alt="cloudflare" src="web/public/icon/tool/cloudflare.png"></a>
+<a href="https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression"><img width="64" height="64" alt="stackoverflow" src="web/public/icon/tool/stackoverflow.png"></a>
 <a href="https://www.figma.com/"><img width="64" height="64" alt="figma" src="web/public/icon/tool/figma.png"></a>
 <a href="https://code.visualstudio.com/"><img width="64" height="64" alt="vscode" src="web/public/icon/tool/vscode.png"></a>
 <a href="https://www.patreon.com/lexico"><img width="64" height="64" alt="patreon" src="web/public/icon/tool/patreon.png"></a>

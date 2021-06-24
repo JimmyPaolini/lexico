@@ -4,7 +4,7 @@
     "dev": "nodemon -e ts --exec \"tsc && node dist/server/src/app.js\"",
     "start": "node dist/server/src/app.js",
     "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js -f ../utils/ormconfig.ts",
-    "migrate": "yarn tsc && yarn typeorm migration:generate -n"
+    "migrate": "yarn typeorm migration:generate -n"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.4",
