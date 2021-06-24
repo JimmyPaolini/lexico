@@ -261,6 +261,7 @@ type Query {
   getBook(id: String!): Book!
   getBooks: [Book!]!
   getText(id: String!): Text!
+  getTextIds: [Text!]!
   getTexts: [Text!]!
   google(code: String!): User!
   login(email: String!, password: String!): User!

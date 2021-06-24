@@ -26,11 +26,17 @@ export default class LiteratureResolver {
     const authors = await this.Authors.find()
     await Promise.all(
       authors.map(async (author) => {
-        author.texts = await this.Texts.find({ author })
+        author.texts = await this.Texts.createQueryBuilder()
+          .select()
+          .where({ author })
+          .getMany()
         author.books = await this.Books.find({ author })
         await Promise.all(
           author.books.map(async (book) => {
-            book.texts = await this.Texts.find({ author, book })
+            book.texts = await this.Texts.createQueryBuilder()
+              .select()
+              .where({ author, book })
+              .getMany()
           }),
         )
       }),
@@ -65,6 +71,11 @@ export default class LiteratureResolver {
     })
   }
 
+  @Query(() => [Text])
+  async getTextIds() {
+    return await this.Texts.createQueryBuilder().getMany()
+  }
+
   // GET
 
   @Query(() => Author)
@@ -89,12 +100,7 @@ export default class LiteratureResolver {
 
   @Query(() => Text)
   async getText(@Arg("id") id: string) {
-    const text = await this.Texts.createQueryBuilder("text")
-      .where({ id })
-      .innerJoinAndSelect("text.author", "author")
-      .innerJoinAndSelect("text.book", "book")
-      .innerJoinAndSelect("text.lines", "lines")
-      .getOne()
+    const text = await this.Texts.findOneOrFail(id, { relations: ["lines"] })
     text?.lines.sort((a, b) => a.lineNumber - b.lineNumber)
     return text
   }

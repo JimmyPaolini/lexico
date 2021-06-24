@@ -1,5 +1,5 @@
 -- @block scratch
-SELECT * FROM translation
+SELECT * FROM text WHERE "bookId" = 'virgil_aeneid'
 
 -- @block find entry
 SELECT id, "partOfSpeech", inflection, forms FROM entry
