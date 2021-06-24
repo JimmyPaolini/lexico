@@ -1,9 +1,11 @@
 import { Divider, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
+import React, { useContext } from "react"
 import LazyLoad from "react-lazyload"
 import Line from "../../../../entity/literature/Line"
+import { getSettingsLocal } from "../../utils/localSettings"
 import { normalize } from "../../utils/string"
+import { Context } from "../layout/Context"
 import ReaderWord from "./ReaderWord"
 
 interface Props {
@@ -13,6 +15,7 @@ interface Props {
 
 export default function ReaderLine({ line, openModal }: Props) {
   const classes = useStyles()
+  const { user } = useContext(Context)
   const words = normalize(line.line).match(/\w+|\W+/gi)
 
   return (
@@ -22,6 +25,10 @@ export default function ReaderLine({ line, openModal }: Props) {
         align="right"
         component="span"
         variant="inherit"
+        style={{
+          fontSize:
+            (user?.settings.fontSize || getSettingsLocal().fontSize) - 3,
+        }}
       >
         {line.lineLabel}
       </Typography>
@@ -56,7 +63,7 @@ const useStyles = makeStyles((theme: any) => ({
     marginTop: "auto",
     marginBottom: "auto",
     fontFamily: "courier, monospace",
-    fontSize: "1.3rem",
+    // fontSize: "1.3rem",
   },
   divider: {
     display: "inline",

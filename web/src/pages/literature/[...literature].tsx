@@ -6,9 +6,10 @@ import Text from "../../../../entity/literature/Text"
 import { Context } from "../../components/layout/Context"
 import ReaderModal from "../../components/literature/ReaderModal"
 import ReaderText from "../../components/literature/ReaderText"
-import getTextsQuery from "../../graphql/literature/getTexts.graphql"
+import getTextIdsQuery from "../../graphql/literature/getTextIds.graphql"
 import { getText } from "../../hooks/literature/useGetText"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
+import { getSettingsLocal } from "../../utils/localSettings"
 import { showReaderInstructions } from "../../utils/readerInstructions"
 import { graphQLClient } from "../_app"
 
@@ -41,7 +42,9 @@ export default function Reader({ text }: Props) {
       square
       elevation={0}
       className={classes.reader}
-      style={{ fontSize: user?.settings.fontSize }}
+      style={{
+        fontSize: user?.settings.fontSize || getSettingsLocal().fontSize,
+      }}
     >
       <style jsx global>{`
         body#body {
@@ -64,7 +67,7 @@ export default function Reader({ text }: Props) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { getTexts: texts } = await graphQLClient.request(getTextsQuery)
+  const { getTextIds: texts } = await graphQLClient.request(getTextIdsQuery)
   return {
     fallback: true,
     paths: texts.map((text: Text) => ({ params: { literature: [text.id] } })),
@@ -73,15 +76,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const textId = context.params?.literature[0]!
+  console.log(textId)
   if (!textId) return { notFound: true }
   let text: Text
   try {
     text = await getText({ queryKey: [null, textId] })
+    if (!text) return { notFound: true }
   } catch {
     return { notFound: true }
   }
-  if (!text) return { notFound: true }
-  else return { props: { text } }
+  return { props: { text } }
 }
 
 const useStyles = makeStyles((theme: any) => ({

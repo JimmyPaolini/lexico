@@ -4,7 +4,7 @@ import {
   Collapse,
   Divider,
   Grid,
-  Typography,
+  Typography
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useContext, useState } from "react"
@@ -12,6 +12,7 @@ import { Forms } from "../../../../../entity/dictionary/word/Forms"
 import { PartOfSpeech } from "../../../../../entity/dictionary/word/PartOfSpeech"
 import useEventListener from "../../../hooks/useEventListener"
 import identifierAbbreviations from "../../../utils/identifierAbbreviations"
+import { getSettingsLocal } from "../../../utils/localSettings"
 import ExpandIcon from "../../accessories/ExpandIcon"
 import { Context } from "../../layout/Context"
 import AdjectiveForms from "./PartsOfSpeech/AdjectiveForms"
@@ -34,7 +35,8 @@ export default function FormsRow({
   const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(
-    user?.settings.formsExpandedDefault,
+    user?.settings.formsExpandedDefault ||
+      getSettingsLocal().formsExpandedDefault,
   )
   identifiers = identifiers.map((identifier) =>
     identifier

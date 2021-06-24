@@ -10,6 +10,7 @@ import { FiberManualRecord } from "@material-ui/icons"
 import { useContext, useState } from "react"
 import Translation from "../../../../entity/dictionary/Translation"
 import useEventListener from "../../hooks/useEventListener"
+import { getSettingsLocal } from "../../utils/localSettings"
 import ExpandIcon from "../accessories/ExpandIcon"
 import { Context } from "../layout/Context"
 
@@ -20,7 +21,8 @@ export default function TranslationsRow({ translations }: Props) {
   const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(
-    user?.settings.translationsExpandedDefault,
+    user?.settings.translationsExpandedDefault ||
+      getSettingsLocal().translationsExpandedDefault,
   )
   const expandable = translations?.length > 2
 
