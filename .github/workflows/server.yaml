@@ -28,8 +28,9 @@ jobs:
         uses: actions-hub/docker@master
         with:
           args: push jimmypaolini/lexico-server
-      - name: Install Kubernetes
-        run: sudo apt-get update && sudo apt-get install kubectl
+      # - name: Install Kubernetes
+      #   run: >-
+      #     sudo apt-get update && sudo apt-get install kubectl
       - name: Login Kubernetes
         run: mkdir ~/.kube && echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
       - name: Deploy Server
