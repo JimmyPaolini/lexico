@@ -167,7 +167,7 @@ export default class AuthenticationResolver {
     }
     if (!claims) throw new Error("invalid password reset token")
     const user = await this.Users.findOneOrFail({
-      email: claims.sub.toLowerCase(),
+      email: claims.sub!.toLowerCase(),
       googleId: IsNull(),
       facebookId: IsNull(),
     })
@@ -189,13 +189,13 @@ export default class AuthenticationResolver {
     if (!validatePassword(password)) throw new Error("invalid password")
     await this.Users.update(
       {
-        email: claims.sub.toLowerCase(),
+        email: claims.sub!.toLowerCase(),
         googleId: IsNull(),
         facebookId: IsNull(),
       },
       { password: await hash(password), passwordResetToken: undefined },
     )
-    await this.login(claims.sub, password, ctx)
+    await this.login(claims.sub!, password, ctx)
     return true
   }
 }

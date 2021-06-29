@@ -12,8 +12,12 @@
 **/elasticsearch_volume
 
 **/data/wiktionary
+<<<<<<< HEAD
 **/assets
 
 **/package.json
 
 server/**/schema.graphql
+=======
+**/assets
+>>>>>>> aa3bf910bc (linting and formatting implementation)

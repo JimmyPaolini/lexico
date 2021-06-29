@@ -45,10 +45,10 @@ export default function Bookmarks(): JSX.Element {
 
   const cards = useMemo(() => {
     const filteredEntries = filterEntries(bookmarks, searched) || []
-
     return filteredEntries.length
       ? filteredEntries.map((entry: Entry) => {
           entry = identifyEntryWord(searched, entry)
+          const entryCard = () => <EntryCard {...{ entry, searched }} />
           return {
             key: entry.id,
             Card: <EntryCard {...{ entry, searched }} />,

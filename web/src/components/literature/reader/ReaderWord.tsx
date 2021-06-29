@@ -6,10 +6,14 @@ interface ReaderWordProps {
   word: string
   openModal: (word: string) => void
 }
+<<<<<<< HEAD:web/src/components/literature/reader/ReaderWord.tsx
 export default memo(function ReaderWord({
   word,
   openModal,
 }: ReaderWordProps): JSX.Element {
+=======
+export default function ReaderWord({ word, openModal }: Props): JSX.Element {
+>>>>>>> aa3bf910bc (linting and formatting implementation):web/src/components/literature/ReaderWord.tsx
   const classes = useStyles()
   const isWord = word.match(/\w+/i)
 
