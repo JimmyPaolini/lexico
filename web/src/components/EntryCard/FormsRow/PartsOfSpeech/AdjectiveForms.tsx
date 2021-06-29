@@ -10,7 +10,7 @@ interface Props {
   forms: Forms | null | undefined
 }
 
-export default function AdjectiveForms({ forms }: Props) {
+export default function AdjectiveForms({ forms }: Props): JSX.Element {
   const classes = useStyles()
   const [tab, setTab] = useState(0)
   const structure = adjectiveFormsRestructure(forms)

@@ -1,5 +1,5 @@
 import { Card, CardContent, Divider, Grid } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme } from "@material-ui/core/styles"
 import React, { useContext } from "react"
 import useLogout from "../../../hooks/authentication/useLogout"
 import useUnregister from "../../../hooks/authentication/useUnregister"
@@ -9,7 +9,7 @@ import { Context } from "../../layout/Context"
 import { Identity } from "./Identity"
 import SettingsForm from "./SettingsForm"
 
-export default function SettingsCard() {
+export default function SettingsCard(): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
 
@@ -34,7 +34,7 @@ export default function SettingsCard() {
           <Grid item>
             <SettingsForm />
           </Grid>
-          {!!user ? (
+          {user ? (
             <>
               <Grid item>
                 <SubmitButton name="Sign Out" onClick={() => logout()} />
@@ -54,14 +54,14 @@ export default function SettingsCard() {
   )
 }
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   card: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
   unregister: {
-    "backgroundColor": theme.palette.error.main,
+    backgroundColor: theme.palette.error.main,
     "&:hover": {
       backgroundColor: theme.palette.error.dark,
     },

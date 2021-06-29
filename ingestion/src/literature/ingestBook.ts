@@ -4,7 +4,10 @@ import Author from "../../../entity/literature/Author"
 import Book from "../../../entity/literature/Book"
 import ingestText from "./ingestText"
 
-export default async function ingestBook(author: Author, title: string) {
+export default async function ingestBook(
+  author: Author,
+  title: string,
+): Promise<void> {
   const Books = getConnection().getRepository(Book)
   const book = await Books.save({
     id: `${author.id}_${title}`,

@@ -16,7 +16,7 @@ export default function parseEtymology(
     !$(etymologyHeader).next().text().trim().length
   )
     return ""
-  let etymology: string = $(etymologyHeader).next().text().trim()
+  const etymology: string = $(etymologyHeader).next().text().trim()
 
   const participleMatch = etymology.match(
     /((present)|(perfect)|(future)) ((active)|(passive) )?participle (\(gerundive\) )?of [A-Za-z\u00C0-\u017F]+/i,

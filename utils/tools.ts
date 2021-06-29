@@ -21,6 +21,7 @@ export default [
   { name: "github-actions", url: "https://github.com/features/actions" },
   { name: "docker", url: "https://www.docker.com/" },
   { name: "kubernetes", url: "https://kubernetes.io/" },
+  { name: "lens", url: "https://k8slens.dev" },
   { name: "bitnami", url: "https://bitnami.com/stacks/helm" },
   { name: "helm", url: "https://helm.sh/" },
   { name: "nginx", url: "https://www.nginx.com/" },

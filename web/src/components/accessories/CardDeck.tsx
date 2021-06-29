@@ -13,7 +13,7 @@ type Card = {
 interface Props {
   cards: Card[]
 }
-export default function CardDeck({ cards }: Props) {
+export default function CardDeck({ cards }: Props): JSX.Element {
   const classes = useStyles()
 
   let numCols = 1
@@ -29,9 +29,9 @@ export default function CardDeck({ cards }: Props) {
 
   if (!cards.every((card) => card.key && card.Card)) {
     console.error("Invalid card structure passed into CardDeck")
-    return null
+    return <></>
   }
-  if (!columns.length || !columns[0].length) return null
+  if (!columns.length || !columns[0].length) return <></>
   return (
     <>
       {columns.map((column, col) => {
@@ -43,8 +43,7 @@ export default function CardDeck({ cards }: Props) {
             direction="column"
             alignItems="stretch"
             className={classes.column}
-            key={column.map((card) => card.key).join()}
-          >
+            key={column.map((card) => card.key).join()}>
             {column.map((card, row) => {
               const timeout = Math.min(400 * Math.pow(col + row, 1 / 2), 1000)
               return (

@@ -9,6 +9,7 @@ import ReaderText from "../../components/literature/ReaderText"
 import getTextIdsQuery from "../../graphql/literature/getTextIds.graphql"
 import { getText } from "../../hooks/literature/useGetText"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
+import { MyTheme } from "../../theme/theme"
 import { getSettingsLocal } from "../../utils/localSettings"
 import { showReaderInstructions } from "../../utils/readerInstructions"
 import { graphQLClient } from "../_app"
@@ -16,8 +17,8 @@ import { graphQLClient } from "../_app"
 interface Props {
   text: Text
 }
-export default function Reader({ text }: Props) {
-  const classes = useStyles()
+export default function Reader({ text }: Props): JSX.Element {
+  const classes = useStyles({})
   const { user } = useContext(Context)
 
   const [searched, setSearched] = useState<string>("")
@@ -44,8 +45,7 @@ export default function Reader({ text }: Props) {
       className={classes.reader}
       style={{
         fontSize: user?.settings.fontSize || getSettingsLocal().fontSize,
-      }}
-    >
+      }}>
       <style jsx global>{`
         body#body {
           background-color: black;
@@ -75,12 +75,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const textId = context.params?.literature[0]!
+  if (!context.params) return { notFound: true }
+  const textId = context.params.literature[0]
   console.log(textId)
   if (!textId) return { notFound: true }
   let text: Text
   try {
-    text = await getText({ queryKey: [null, textId] })
+    text = await getText({ queryKey: ["getText", textId] })
     if (!text) return { notFound: true }
   } catch {
     return { notFound: true }
@@ -88,16 +89,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return { props: { text } }
 }
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles((theme: MyTheme) => ({
   reader: {
     width: "100%",
     height: "100%",
     backgroundColor: "black",
-    fontFamily: theme.typography.literature.fontFamily,
-    fontWeight: theme.typography.literature.fontWeight,
-    fontSize: theme.typography.literature.fontSize,
-    fontHeight: theme.typography.literature.fontHeight,
-    letterSpacing: theme.typography.literature.letterSpacing,
+    ...theme.typography.literature,
   },
   modal: {
     display: "flex",

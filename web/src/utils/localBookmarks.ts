@@ -1,38 +1,38 @@
 type Bookmarks = string[]
 
-export function getBookmarksLocal() {
+export function getBookmarksLocal(): Bookmarks {
   if (typeof window === "undefined") return []
   return JSON.parse(window.localStorage.bookmarks || "[]") as Bookmarks
 }
 
-function setBookmarksLocal(bookmarks: Bookmarks) {
+function setBookmarksLocal(bookmarks: Bookmarks): void {
   if (typeof window === "undefined") return
   window.localStorage.bookmarks = JSON.stringify(bookmarks)
 }
 
-export function isBookmarkedLocal(id: string) {
+export function isBookmarkedLocal(id: string): boolean {
   const bookmarks = getBookmarksLocal()
   return bookmarks.includes(id)
 }
 
-export function bookmarkLocal(id: string) {
+export function bookmarkLocal(id: string): void {
   const bookmarks = getBookmarksLocal()
   if (bookmarks.length > 999) return
   setBookmarksLocal([...bookmarks, id])
 }
 
-export function unbookmarkLocal(id: string) {
+export function unbookmarkLocal(id: string): void {
   const bookmarks = getBookmarksLocal()
   setBookmarksLocal(bookmarks.filter((bookmark) => bookmark !== id))
 }
 
 class ShowBookmarkInstructions {
   showAfter: Date = new Date()
-  seenCount: number = 0
+  seenCount = 0
 }
 
 // only called when the user is not signed in
-export function showBookmarkInstructions() {
+export function showBookmarkInstructions(): boolean {
   if (typeof window === "undefined") return false
   const showBookmarkInstructions = JSON.parse(
     window.localStorage.showBookmarkInstructions || "null",

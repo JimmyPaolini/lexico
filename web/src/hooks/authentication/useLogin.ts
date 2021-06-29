@@ -6,7 +6,9 @@ interface UserInfo {
   email: string
   password: string
 }
-export default function useLogin(userInfo: UserInfo) {
+export default function useLogin(
+  userInfo: UserInfo,
+): ReturnType<typeof useQuery> {
   return useQuery(
     "login",
     async () => {

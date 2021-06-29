@@ -20,7 +20,7 @@ export default function LiteratureAuthor({
   author,
   expanded,
   setExpanded,
-}: Props) {
+}: Props): JSX.Element {
   const classes = useStyles()
   let summary = [
     ...(author.books || []),
@@ -41,8 +41,7 @@ export default function LiteratureAuthor({
       onClick={() => setExpanded((expanded) => !expanded)}
       classes={{ focusHighlight: classes.none }}
       disableRipple
-      disableTouchRipple
-    >
+      disableTouchRipple>
       <CardHeaderMui
         title={sentenceCase(author.id)}
         subheader={
@@ -54,8 +53,7 @@ export default function LiteratureAuthor({
               <Typography
                 variant="caption"
                 color="textPrimary"
-                className={classes.summary}
-              >
+                className={classes.summary}>
                 {summary}
               </Typography>
             </Collapse>

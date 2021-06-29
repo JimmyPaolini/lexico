@@ -41,7 +41,7 @@ export class DatabaseLogger implements Logger {
   /**
    * Logs query and parameters used in it.
    */
-  logQuery(query: string, parameters?: any[]) {
+  logQuery(query: string, parameters?: any[]): void {
     if (LOG_SQL === "true")
       log.info(`database query: ${query} ${JSON.stringify(parameters || "")}`)
   }
@@ -49,7 +49,11 @@ export class DatabaseLogger implements Logger {
   /**
    * Logs query that is failed.
    */
-  logQueryError(error: string | Error, query: string, parameters?: any[]) {
+  logQueryError(
+    error: string | Error,
+    query: string,
+    parameters?: any[],
+  ): void {
     error = typeof error === "string" ? error : error.message
     log.error(
       `database query error: ${error}: ${query} ${JSON.stringify(
@@ -61,7 +65,7 @@ export class DatabaseLogger implements Logger {
   /**
    * Logs query that is slow.
    */
-  logQuerySlow(time: number, query: string, parameters?: any[]) {
+  logQuerySlow(time: number, query: string, parameters?: any[]): void {
     log.warn(
       `database query slow ${time}ms: ${query} ${JSON.stringify(
         parameters || "",
@@ -72,14 +76,14 @@ export class DatabaseLogger implements Logger {
   /**
    * Logs events from the schema build process.
    */
-  logSchemaBuild(message: string) {
+  logSchemaBuild(message: string): void {
     log.info(`database build schema: ${message}`)
   }
 
   /**
    * Logs events from the migrations run process.
    */
-  logMigration(message: string) {
+  logMigration(message: string): void {
     log.warn(`database migration: ${message}`)
   }
 
@@ -87,7 +91,7 @@ export class DatabaseLogger implements Logger {
    * Perform logging using given logger, or by default to the console.
    * Log has its own level and message.
    */
-  log(_: "log" | "info" | "warn", message: any) {
+  log(_: "log" | "info" | "warn", message: unknown): void {
     if (log.level === "warn") log.warn(`database log: ${message}`)
     log.info(`database log: ${message}`)
   }

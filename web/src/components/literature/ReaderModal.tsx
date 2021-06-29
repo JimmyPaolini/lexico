@@ -13,13 +13,20 @@ interface Props {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
-export default function ReaderModal({ searched, open, setOpen }: Props) {
+export default function ReaderModal({
+  searched,
+  open,
+  setOpen,
+}: Props): JSX.Element {
   const classes = useStyles()
   const ref = useRef<HTMLDivElement>(null)
 
-  const { data: entries, isFetched, isSuccess, isError } = useSearchLatin(
-    searched,
-  )
+  const {
+    data: entries,
+    isFetched,
+    isSuccess,
+    isError,
+  } = useSearchLatin(searched)
 
   useEventListener("keydown", (e: any) => {
     if (e.key === "Escape") setOpen(false)
@@ -46,8 +53,7 @@ export default function ReaderModal({ searched, open, setOpen }: Props) {
       {...useSwipeable({
         onSwipedLeft: () => setOpen(false),
         onSwipedRight: () => setOpen(false),
-      })}
-    >
+      })}>
       <Box className={classes.container} tabIndex={-1}>
         {isError || !entries?.length ? (
           <Paper className={classes.notFound}>

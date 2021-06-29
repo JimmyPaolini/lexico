@@ -1,11 +1,11 @@
-import { useMutation } from "react-query"
+import { useMutation, UseMutationResult } from "react-query"
 import resetPasswordMutation from "../../graphql/authentication/resetPassword.graphql"
 import { graphQLClient, queryClient } from "../../pages/_app"
 
 export default function useResetPassword(
   passwordResetToken: string,
   password: string,
-) {
+): UseMutationResult<any, unknown, void, unknown> {
   return useMutation(
     ["resetPassword", passwordResetToken],
     async () => {

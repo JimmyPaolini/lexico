@@ -16,11 +16,11 @@ import { capitalizeFirstLetter, validateEmail } from "../../../utils/string"
 import SubmitButton from "../../accessories/SubmitButton"
 import TextBox from "../../accessories/TextBox"
 
-export default function BasicLogin() {
+export default function BasicLogin(): JSX.Element {
   const classes = useStyles()
   const [submit, setSubmit] = useState<"sign up" | "sign in">("sign in")
   const [showPassword, setShowPassword] = useState<boolean>(false)
-  const passwordTextBoxRef = useRef<any>(null)
+  const passwordTextBoxRef = useRef<HTMLDivElement>(null)
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -56,8 +56,7 @@ export default function BasicLogin() {
                   aria-label="toggle password visibility"
                   onClick={() =>
                     setShowPassword((showPassword) => !showPassword)
-                  }
-                >
+                  }>
                   {showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
@@ -70,8 +69,7 @@ export default function BasicLogin() {
         direction="row-reverse"
         item
         justify="space-between"
-        spacing={1}
-      >
+        spacing={1}>
         <Grid item xs>
           <SubmitButton name="sign in" onClick={() => setSubmit("sign in")} />
         </Grid>
@@ -85,8 +83,7 @@ export default function BasicLogin() {
           variant="caption"
           align="center"
           display="block"
-          className={classes.formError}
-        >
+          className={classes.formError}>
           {capitalizeFirstLetter(error)}
         </Typography>
       </Grid>
@@ -97,8 +94,7 @@ export default function BasicLogin() {
             variant="contained"
             size="small"
             disableElevation
-            fullWidth
-          >
+            fullWidth>
             Recover Password
           </Button>
         </Link>
@@ -111,8 +107,8 @@ interface UserInfo {
   email: string
   password: string
 }
-export function validate({ email, password }: UserInfo) {
-  const errors = {} as any
+export function validate({ email, password }: UserInfo): UserInfo {
+  const errors = {} as UserInfo
   if (!validateEmail(email)) errors.email = "Invalid email"
   if (password.length < 8)
     errors.password = "Password must be at least 8 characters"

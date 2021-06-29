@@ -1,5 +1,5 @@
 import { Grid } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme } from "@material-ui/core/styles"
 import { useContext, useEffect } from "react"
 import CardDeck from "../../components/accessories/CardDeck"
 import { Context } from "../../components/layout/Context"
@@ -9,7 +9,7 @@ import SettingsCard from "../../components/user/settings/SettingsCard"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
 import { showSettingsInstructions } from "../../utils/localSettings"
 
-export default function User() {
+export default function User(): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
 
@@ -31,11 +31,11 @@ export default function User() {
         cards={[
           {
             key: "LoginCard",
-            Card: () => <LoginCard />,
+            Card: LoginCard,
           },
           {
             key: "SettingsCard",
-            Card: () => <SettingsCard />,
+            Card: SettingsCard,
           },
         ]}
       />
@@ -47,7 +47,7 @@ export default function User() {
   )
 }
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   noUser: {
     marginTop: theme.spacing(4),
   },

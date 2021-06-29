@@ -11,13 +11,16 @@ interface Props {
   entry: Entry
   searched: string
 }
-export default function EntryCard({ entry, searched = "" }: Props) {
+export default function EntryCard({
+  entry,
+  searched = "",
+}: Props): JSX.Element {
   const classes = useStyles()
   return (
     <Card elevation={4} className={classes.entryCard}>
       <PrincipalPartsRow entry={entry} />
       <Divider variant="inset" />
-      <TranslationsRow translations={entry.translations!} />
+      <TranslationsRow translations={entry.translations} />
       <FormsRow
         partOfSpeech={entry.partOfSpeech}
         forms={entry.forms}

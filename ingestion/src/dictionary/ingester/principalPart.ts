@@ -7,7 +7,7 @@ export default async function parsePrincipalParts(
   elt: any,
   firstPrincipalPartName: string,
 ): Promise<PrincipalPart[]> {
-  let principalParts: PrincipalPart[] = []
+  const principalParts: PrincipalPart[] = []
 
   principalParts.push({
     name: firstPrincipalPartName,

@@ -5,7 +5,7 @@ import Text from "../../../entity/literature/Text"
 import log from "../../../utils/log"
 import { romanToDecimal } from "../../../web/src/utils/romanNumeral"
 
-export default async function ingestLines(text: Text) {
+export default async function ingestLines(text: Text): Promise<void> {
   const Lines = getConnection().getRepository(Line)
   const author = text.author.id
   const book = text.book ? text.book.title + "/" : ""
@@ -21,8 +21,9 @@ export default async function ingestLines(text: Text) {
   await Lines.save(
     lines.split("\n").map((line, lineNumber) => {
       let lineLabel = areLinesLabelled ? "•" : "" + (lineNumber + 1)
-      if (line.match(/^#\S+/)) {
-        lineLabel = line.match(/^#\S+/)![0]!.slice(1)
+      const lineLabelHashtag = line.match(/^#\S+/)
+      if (lineLabelHashtag) {
+        lineLabel = lineLabelHashtag[0].slice(1)
         if (lineLabel.match(/[IVXLCDM]+/))
           lineLabel = "" + romanToDecimal(lineLabel)
         line = line.replace(/^#\S+ ?/, "")

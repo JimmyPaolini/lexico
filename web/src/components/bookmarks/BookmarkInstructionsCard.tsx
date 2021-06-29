@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Bookmark, BookmarkBorder } from "@material-ui/icons"
 import React from "react"
 
-export default function BookmarkInstructionsCard() {
+export default function BookmarkInstructionsCard(): JSX.Element {
   const classes = useStyles()
 
   return (

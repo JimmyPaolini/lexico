@@ -5,20 +5,20 @@ export default class Settings {
   @Field({ defaultValue: "dark" })
   theme: "dark" | "light" = "dark"
 
-  @Field({ defaultValue: 24 })
-  fontSize: number = 24
+  @Field(() => Number, { defaultValue: 24 })
+  fontSize = 24
 
-  @Field({ defaultValue: false })
-  formsExpandedDefault: boolean = false
+  @Field(() => Boolean, { defaultValue: false })
+  formsExpandedDefault = false
 
-  @Field({ defaultValue: false })
-  translationsExpandedDefault: boolean = false
+  @Field(() => Boolean, { defaultValue: false })
+  translationsExpandedDefault = false
 
-  @Field({ defaultValue: true })
-  dictionaryMacronized: boolean = true
+  @Field(() => Boolean, { defaultValue: true })
+  dictionaryMacronized = true
 
-  @Field({ defaultValue: false })
-  literatureMacronized: boolean = false
+  @Field(() => Boolean, { defaultValue: false })
+  literatureMacronized = false
 }
 
 @InputType()
@@ -26,18 +26,18 @@ export class SettingsInput implements Partial<Settings> {
   @Field({ defaultValue: "dark" })
   theme: "dark" | "light" = "dark"
 
-  @Field({ defaultValue: 24 })
-  fontSize: number = 24
+  @Field(() => Number, { defaultValue: 24 })
+  fontSize = 24
 
-  @Field({ defaultValue: false })
-  formsExpandedDefault: boolean = false
+  @Field(() => Boolean, { defaultValue: false })
+  formsExpandedDefault = false
 
-  @Field({ defaultValue: false })
-  translationsExpandedDefault: boolean = false
+  @Field(() => Boolean, { defaultValue: false })
+  translationsExpandedDefault = false
 
-  @Field({ defaultValue: true })
-  dictionaryMacronized: boolean = true
+  @Field(() => Boolean, { defaultValue: true })
+  dictionaryMacronized = true
 
-  @Field({ defaultValue: false })
-  literatureMacronized: boolean = false
+  @Field(() => Boolean, { defaultValue: false })
+  literatureMacronized = false
 }

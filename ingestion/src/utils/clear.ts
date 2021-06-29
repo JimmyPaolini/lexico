@@ -9,11 +9,13 @@ import Text from "../../../entity/literature/Text"
 import User from "../../../entity/user/User"
 import log from "../../../utils/log"
 
-export async function clearEntity(Entity: EntityTarget<unknown>) {
+export async function clearEntity(
+  Entity: EntityTarget<unknown>,
+): Promise<void> {
   await getConnection().getRepository(Entity).delete({})
 }
 
-export async function clearDictionary() {
+export async function clearDictionary(): Promise<void> {
   log.info(`clearing dictionary`)
   await clearEntity(Word)
   await clearEntity(Translation)
@@ -21,7 +23,7 @@ export async function clearDictionary() {
   log.info(`cleared dictionary`)
 }
 
-export async function clearLiterature() {
+export async function clearLiterature(): Promise<void> {
   log.info(`clearing literature`)
   await clearEntity(Line)
   await clearEntity(Text)
@@ -30,20 +32,20 @@ export async function clearLiterature() {
   log.info(`cleared literature`)
 }
 
-export async function clearUsers() {
+export async function clearUsers(): Promise<void> {
   log.info(`clearing users`)
   await clearEntity(User)
   log.info(`cleared users`)
 }
 
-export async function clearIngested() {
+export async function clearIngested(): Promise<void> {
   log.info(`clearing ingested`)
   await clearDictionary()
   await clearLiterature()
   log.info(`cleared ingested`)
 }
 
-export async function clearAll() {
+export async function clearAll(): Promise<void> {
   log.info(`clearing all`)
   await clearDictionary()
   await clearLiterature()

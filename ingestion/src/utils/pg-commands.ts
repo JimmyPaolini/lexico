@@ -16,7 +16,7 @@ import {
 
 export const backupFileNameExtension = ".zip"
 
-export const backups = (filter?: RegExp) =>
+export const backups = (filter?: RegExp): string[] =>
   readdirSync(`../data/backup`)
     .filter((fileName) => !fileName.match(/\.DS_Store/))
     .filter((fileName) => fileName.match(filter || /[\s\S]*/))
@@ -43,7 +43,10 @@ const createCommand = (isBackup: boolean, fileKey: string, tables: string[]) =>
   `--format c --data-only ` +
   `${isBackup ? ">" : "<"} "${fileKey}${backupFileNameExtension}"`
 
-export async function backupDatabase(type: string, tables: string[]) {
+export async function backupDatabase(
+  type: string,
+  tables: string[],
+): Promise<void> {
   log.info(`backing up ${type}`)
   const fileKey = `../data/backup/${new Date().toISOString()}_${type}`
   const command = createCommand(true, fileKey, tables)
@@ -51,23 +54,23 @@ export async function backupDatabase(type: string, tables: string[]) {
   log.info(`backed up ${type}`)
 }
 
-export async function backupDictionary() {
+export async function backupDictionary(): Promise<void> {
   await backupDatabase("dictionary", dictionaryTables)
 }
 
-export async function backupLiterature() {
+export async function backupLiterature(): Promise<void> {
   await backupDatabase("literature", literatureTables)
 }
 
-export async function backupUsers() {
+export async function backupUsers(): Promise<void> {
   await backupDatabase("users", userTables)
 }
 
-export async function backupIngested() {
+export async function backupIngested(): Promise<void> {
   await backupDatabase("ingested", [...dictionaryTables, ...literatureTables])
 }
 
-export async function backupAll() {
+export async function backupAll(): Promise<void> {
   await backupDatabase("all", [
     ...dictionaryTables,
     ...literatureTables,
@@ -79,7 +82,7 @@ export async function restoreDatabase(
   backupName: string,
   type: string,
   tables: string[],
-) {
+): Promise<void> {
   log.info(`restoring ${type}`)
   const fileKey = `../data/backup/${backupName}`
   const command = createCommand(false, fileKey, tables)
@@ -87,22 +90,22 @@ export async function restoreDatabase(
   log.info(`restored ${type}`)
 }
 
-export async function restoreDictionary(backupName: string) {
+export async function restoreDictionary(backupName: string): Promise<void> {
   await clearDictionary()
   await restoreDatabase(backupName, "dictionary", dictionaryTables)
 }
 
-export async function restoreLiterature(backupName: string) {
+export async function restoreLiterature(backupName: string): Promise<void> {
   await clearLiterature()
   await restoreDatabase(backupName, "literature", literatureTables)
 }
 
-export async function restoreUsers(backupName: string) {
+export async function restoreUsers(backupName: string): Promise<void> {
   await clearUsers()
   await restoreDatabase(backupName, "users", userTables)
 }
 
-export async function restoreIngested(backupName: string) {
+export async function restoreIngested(backupName: string): Promise<void> {
   await clearIngested()
   await restoreDatabase(backupName, "ingested", [
     ...dictionaryTables,
@@ -110,7 +113,7 @@ export async function restoreIngested(backupName: string) {
   ])
 }
 
-export async function restoreAll(backupName: string) {
+export async function restoreAll(backupName: string): Promise<void> {
   await clearAll()
   await restoreDatabase(backupName, "all", [
     ...dictionaryTables,

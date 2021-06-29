@@ -8,7 +8,7 @@ interface Props {
   children?: ReactNode
 }
 
-export default function Layout({ children }: Props) {
+export default function Layout({ children }: Props): JSX.Element {
   const classes = useStyles()
 
   return (
@@ -18,8 +18,7 @@ export default function Layout({ children }: Props) {
         vertical: "bottom",
         horizontal: "right",
       }}
-      hideIconVariant
-    >
+      hideIconVariant>
       <Grid container>
         <Grid item>
           <Navigation />

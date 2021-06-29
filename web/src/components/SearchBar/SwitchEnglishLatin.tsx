@@ -8,7 +8,10 @@ interface Props {
   isLatin: boolean
   setLatin: Dispatch<SetStateAction<boolean>>
 }
-export default function SwitchEnglishLatin({ isLatin, setLatin }: Props) {
+export default function SwitchEnglishLatin({
+  isLatin,
+  setLatin,
+}: Props): JSX.Element {
   const classes = useStyles()
 
   return (
@@ -36,7 +39,7 @@ export default function SwitchEnglishLatin({ isLatin, setLatin }: Props) {
 
 const Switch = withStyles(() => ({
   switchBase: {
-    "padding": 8,
+    padding: 8,
     "&$checked": {
       transform: "translateX(24px)",
     },

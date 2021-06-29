@@ -41,7 +41,7 @@ async function main() {
       await getConnection().query(`DELETE FROM "user_bookmarks_entry"`),
 
     all: clearAll,
-  } as { [key: string]: () => any }
+  } as { [key: string]: () => unknown }
 
   if (!(command in instructions)) throw new Error("unknown command")
   await instructions[command]()

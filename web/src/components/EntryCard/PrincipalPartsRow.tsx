@@ -2,6 +2,7 @@ import { Button, CardHeader, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Bookmark, BookmarkBorder } from "@material-ui/icons"
 import { useRouter } from "next/router"
+import { SnackbarKey } from "notistack"
 import React, { useContext, useState } from "react"
 import Entry from "../../../../entity/dictionary/Entry"
 import AdjectiveInflection from "../../../../entity/dictionary/word/inflection/AdjectiveInflection"
@@ -25,12 +26,12 @@ import { Context } from "../layout/Context"
 interface Props {
   entry: Entry
 }
-export default function PrincipalPartsRow({ entry }: Props) {
+export default function PrincipalPartsRow({ entry }: Props): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
 
   const [bookmarked, setBookmarked] = useState<boolean>(
-    !!user ? !!entry.bookmarked : isBookmarkedLocal(entry.id),
+    user ? !!entry.bookmarked : isBookmarkedLocal(entry.id),
   )
   const { mutateAsync: bookmark } = useBookmark(setBookmarked)
   const { mutateAsync: unbookmark } = useUnbookmark(setBookmarked)
@@ -38,7 +39,7 @@ export default function PrincipalPartsRow({ entry }: Props) {
   const router = useRouter()
   const { enqueueSnackbar, closeSnackbar } = useSnackbarEnhanced()
   const toggleBookmark = async () => {
-    if (!!user) {
+    if (user) {
       if (!bookmarked) await bookmark(entry.id)
       else await unbookmark(entry.id)
     } else {
@@ -50,21 +51,19 @@ export default function PrincipalPartsRow({ entry }: Props) {
         setBookmarked(false)
       }
       if (showBookmarkInstructions()) {
+        const action = (key: SnackbarKey) => (
+          <Button
+            onClick={() => {
+              closeSnackbar(key)
+              router.push("/user")
+            }}
+            color="secondary">
+            Sign in
+          </Button>
+        )
         enqueueSnackbar(
           `Your bookmarks are saved locally, sign in to save them across devices/browsers`,
-          {
-            action: (key: any) => (
-              <Button
-                onClick={() => {
-                  closeSnackbar(key)
-                  router.push("/user")
-                }}
-                color="secondary"
-              >
-                Sign in
-              </Button>
-            ),
-          },
+          { action },
         )
       }
     }
@@ -88,8 +87,7 @@ export default function PrincipalPartsRow({ entry }: Props) {
         <IconButton
           onClick={toggleBookmark}
           className={classes.bookmark}
-          aria-label="Bookmark"
-        >
+          aria-label="Bookmark">
           {bookmarked ? <Bookmark /> : <BookmarkBorder />}
         </IconButton>
       }

@@ -1,22 +1,26 @@
 import { Button, Typography } from "@material-ui/core"
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/router"
+import { SnackbarKey } from "notistack"
 import { useContext, useEffect, useMemo, useState } from "react"
 import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
 import BookmarkInstructionsCard from "../components/bookmarks/BookmarkInstructionsCard"
-import { Context } from "../components/layout/Context"
 import EntryCard from "../components/EntryCard/EntryCard"
+import { Context } from "../components/layout/Context"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
 import useBookmarks, { bookmarks } from "../hooks/bookmarks/useBookmarks"
 import useEntries from "../hooks/bookmarks/useEntries"
 import useSnackbarEnhanced from "../hooks/useSnackbarEnhanced"
 import identifyEntryWord from "../utils/identifiers"
-import { getBookmarksLocal } from "../utils/localBookmarks"
+import {
+  getBookmarksLocal,
+  showBookmarkInstructions,
+} from "../utils/localBookmarks"
 import { normalize } from "../utils/string"
 import { queryClient } from "./_app"
 
-export default function Bookmarks() {
+export default function Bookmarks(): JSX.Element {
   const { user } = useContext(Context)
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
@@ -26,36 +30,38 @@ export default function Bookmarks() {
   }, [search])
 
   let bookmarks: Entry[], isLoading: boolean, isSuccess: boolean
-  if (!!user) {
+  if (user) {
     const response = useBookmarks()
-    bookmarks = response.data
+    bookmarks = response.data as Entry[]
     isLoading = response.isLoading
     isSuccess = response.isSuccess
   } else {
     const response = useEntries(getBookmarksLocal())
-    bookmarks = response.data
+    bookmarks = response.data as Entry[]
     isLoading = response.isLoading
     isSuccess = response.isSuccess
   }
 
   const cards = useMemo(() => {
     const filteredEntries = filterEntries(bookmarks, searched) || []
+    const notFoundCard = () => (
+      <Typography variant="h4" align="center">
+        Not Found
+      </Typography>
+    )
     return filteredEntries.length
       ? filteredEntries.map((entry: Entry) => {
           entry = identifyEntryWord(searched, entry)
+          const entryCard = () => <EntryCard {...{ entry, searched }} />
           return {
             key: entry.id,
-            Card: () => <EntryCard {...{ entry, searched }} />,
+            Card: entryCard,
           }
         })
       : [
           {
             key: "no results",
-            Card: () => (
-              <Typography variant="h4" align="center">
-                Not Found
-              </Typography>
-            ),
+            Card: notFoundCard,
           },
         ]
   }, [user, bookmarks, searched])
@@ -63,22 +69,22 @@ export default function Bookmarks() {
   const router = useRouter()
   const { enqueueSnackbar, closeSnackbar } = useSnackbarEnhanced()
   useEffect(() => {
-    if (!user) {
+    if (!user && showBookmarkInstructions()) {
+      const action = (key: SnackbarKey) => (
+        <Button
+          onClick={() => {
+            closeSnackbar(key)
+            router.push("/user")
+          }}
+          color="secondary">
+          Sign in
+        </Button>
+      )
       enqueueSnackbar(
         `Your bookmarks are saved locally, sign in to save them across devices/browsers`,
         {
           autoHideDuration: 10000,
-          action: (key: any) => (
-            <Button
-              onClick={() => {
-                closeSnackbar(key)
-                router.push("/user")
-              }}
-              color="secondary"
-            >
-              Sign in
-            </Button>
-          ),
+          action,
         },
       )
     }
@@ -92,8 +98,7 @@ export default function Bookmarks() {
         isLoading,
         handleSearchExecute: () => setSearched(search),
         target: "bookmarks",
-      }}
-    >
+      }}>
       {isLoading ? null : isSuccess &&
         Array.isArray(bookmarks) &&
         !bookmarks.length ? (

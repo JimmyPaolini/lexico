@@ -1,6 +1,6 @@
 import sgMail from "@sendgrid/mail"
 import { hash, verify } from "argon2"
-import { verify as verifyJWT } from "jsonwebtoken"
+import { JwtPayload, verify as verifyJWT } from "jsonwebtoken"
 import {
   Arg,
   Ctx,
@@ -14,8 +14,8 @@ import User from "../../../entity/user/User"
 import { JWT_SECRET, SENDGRID_API_KEY } from "../../../utils/env"
 import log from "../../../utils/log"
 import { validateEmail, validatePassword } from "../../../utils/string"
-import fetchFacebookUser from "../auth/facebook"
-import fetchGoogleUser from "../auth/google"
+import fetchFacebookUser, { FacebookProfile } from "../auth/facebook"
+import fetchGoogleUser, { GoogleProfile } from "../auth/google"
 import {
   Authenticate,
   createAccessToken,
@@ -33,7 +33,7 @@ export default class AuthenticationResolver {
     @Arg("email") email: string,
     @Arg("password") password: string,
     @Ctx() ctx: ResolverContext,
-  ) {
+  ): Promise<User> {
     if (!validateEmail(email)) throw new Error("invalid email")
     if (!validatePassword(password)) throw new Error("invalid password")
     if (
@@ -54,7 +54,7 @@ export default class AuthenticationResolver {
 
   @Mutation(() => Boolean)
   @UseMiddleware(Authenticate)
-  async unregister(@Ctx() { user }: ResolverContext) {
+  async unregister(@Ctx() { user }: ResolverContext): Promise<boolean> {
     await this.Users.delete(user.id)
     log.info("unregistered user", { id: user.id, email: user.email })
     return true
@@ -65,7 +65,7 @@ export default class AuthenticationResolver {
     @Arg("email") email: string,
     @Arg("password") password: string,
     @Ctx() { res }: ResolverContext,
-  ) {
+  ): Promise<User> {
     if (!validateEmail(email)) throw new Error("invalid email")
     if (!validatePassword(password)) throw new Error("invalid password")
     const user = await this.Users.findOne({
@@ -85,8 +85,8 @@ export default class AuthenticationResolver {
   async google(
     @Arg("code") code: string,
     @Ctx() { req, res }: ResolverContext,
-  ) {
-    const profile: any = await fetchGoogleUser(code, req.hostname)
+  ): Promise<User> {
+    const profile: GoogleProfile = await fetchGoogleUser(code, req.hostname)
     let user = await this.Users.findOne({ googleId: profile.id })
     if (!user) {
       user = await this.Users.save({
@@ -103,8 +103,8 @@ export default class AuthenticationResolver {
   async facebook(
     @Arg("code") code: string,
     @Ctx() { req, res }: ResolverContext,
-  ) {
-    const profile: any = await fetchFacebookUser(code, req.hostname)
+  ): Promise<User> {
+    const profile: FacebookProfile = await fetchFacebookUser(code, req.hostname)
     let user = await this.Users.findOne({ facebookId: profile.id })
     if (!user) {
       user = await this.Users.save({
@@ -119,13 +119,13 @@ export default class AuthenticationResolver {
 
   @Query(() => Boolean)
   @UseMiddleware(IsAuthenticated)
-  logout(@Ctx() { res }: ResolverContext) {
+  logout(@Ctx() { res }: ResolverContext): boolean {
     res.clearCookie("accessToken")
     return true
   }
 
   @Mutation(() => Boolean)
-  async recoverPassword(@Arg("email") email: string) {
+  async recoverPassword(@Arg("email") email: string): Promise<boolean> {
     log.info(`recoverPassword: ${email}`)
     if (!validateEmail(email)) throw new Error("invalid email")
     const user = await this.Users.findOne({
@@ -161,11 +161,11 @@ export default class AuthenticationResolver {
   @Query(() => Boolean)
   async validatePasswordResetToken(
     @Arg("passwordResetToken") passwordResetToken: string,
-  ) {
-    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as any
+  ): Promise<boolean> {
+    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as JwtPayload
     if (!claims) throw new Error("invalid password reset token")
     const user = await this.Users.findOneOrFail({
-      email: claims.sub.toLowerCase(),
+      email: claims.sub!.toLowerCase(),
       googleId: IsNull(),
       facebookId: IsNull(),
     })
@@ -179,19 +179,19 @@ export default class AuthenticationResolver {
     @Arg("passwordResetToken") passwordResetToken: string,
     @Arg("password") password: string,
     @Ctx() ctx: ResolverContext,
-  ) {
-    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as any
+  ): Promise<boolean> {
+    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as JwtPayload
     if (!claims) throw new Error("invalid password reset token")
     if (!validatePassword(password)) throw new Error("invalid password")
     await this.Users.update(
       {
-        email: claims.sub.toLowerCase(),
+        email: claims.sub!.toLowerCase(),
         googleId: IsNull(),
         facebookId: IsNull(),
       },
       { password: await hash(password), passwordResetToken: undefined },
     )
-    await this.login(claims.sub, password, ctx)
+    await this.login(claims.sub!, password, ctx)
     return true
   }
 }

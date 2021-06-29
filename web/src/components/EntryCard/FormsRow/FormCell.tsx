@@ -5,7 +5,7 @@ import Tooltip from "@material-ui/core/Tooltip"
 import Typography from "@material-ui/core/Typography"
 import React, { useEffect, useRef, useState } from "react"
 
-interface Props {
+export interface FormCellProps {
   center: string
   position: string
   topLeft: string
@@ -21,7 +21,7 @@ export default function FormCell({
   topRight,
   bottomLeft,
   bottomRight,
-}: Props) {
+}: FormCellProps): JSX.Element {
   const classes = useStyles()
   const fontSize = Math.max(Math.min(18 - center.length / 4, 18), 14)
   const centerRef = useRef<any>()
@@ -73,22 +73,19 @@ export default function FormCell({
       interactive
       arrow
       classes={{ tooltip: classes.tooltip }}
-      aria-label={center}
-    >
+      aria-label={center}>
       <Grid
         container
         justify="space-between"
         className={classes.formCell}
-        wrap="nowrap"
-      >
+        wrap="nowrap">
         <Grid
           container
           item
           direction="column"
           justify="space-between"
           alignItems="flex-start"
-          className={classes.left}
-        >
+          className={classes.left}>
           <CornerCaptionText text={topLeft} />
           <CornerCaptionText text={bottomLeft} />
         </Grid>
@@ -97,13 +94,11 @@ export default function FormCell({
           item
           style={{ flexGrow: 1 }}
           justify="center"
-          alignItems="center"
-        >
+          alignItems="center">
           <Typography
             style={{ fontSize }}
             className={classes.center}
-            ref={centerRef}
-          >
+            ref={centerRef}>
             {center || "-"}
           </Typography>
         </Grid>
@@ -113,8 +108,7 @@ export default function FormCell({
           direction="column"
           justify="space-between"
           alignItems="flex-end"
-          className={classes.right}
-        >
+          className={classes.right}>
           <CornerCaptionText text={topRight} />
           <CornerCaptionText text={bottomRight} />
         </Grid>

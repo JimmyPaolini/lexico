@@ -4,8 +4,9 @@ import { GetServerSideProps } from "next"
 import facebookQuery from "../graphql/authentication/facebook.graphql"
 import { serverEndpoint } from "./api"
 
-export default function facebook() {}
-
+export default function facebook(): JSX.Element {
+  return <></>
+}
 export const getServerSideProps: GetServerSideProps = async ({
   query: { code },
   res,
@@ -17,7 +18,8 @@ export const getServerSideProps: GetServerSideProps = async ({
       code,
     },
   )
-  if (!errors) res.setHeader("set-cookie", headers.get("set-cookie")!)
+  const cookieHeader = headers.get("set-cookie")
+  if (!errors && cookieHeader) res.setHeader("set-cookie", cookieHeader)
 
   res.writeHead(302, { Location: "/user" })
   res.end()

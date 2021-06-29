@@ -10,7 +10,7 @@ export function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export function pascalCase(str: string) {
+export function pascalCase(str: string): string {
   if (!str) return ""
   return str.replace(
     /(\w)(\w*)/g,
@@ -18,7 +18,7 @@ export function pascalCase(str: string) {
   )
 }
 
-export function sentenceCase(str: string) {
+export function sentenceCase(str: string): string {
   if (!str) return ""
   return str
     .replace(
@@ -28,7 +28,7 @@ export function sentenceCase(str: string) {
     .slice(0, -1)
 }
 
-export function getFirstLetter(word: string) {
+export function getFirstLetter(word: string): string {
   const [l1, l2] = [...word.toLowerCase()]
   if (!l1.match(/[a-z-]/) && !l1.match(/[a-z-]/)) return "*"
   if (l1 === "-") return l2
@@ -46,11 +46,14 @@ export function unescapeCapitals(str: string): string {
   return str.replace(/([A-Z])`/, "$1")
 }
 
-export function hasSuffix(str: string, suffix: string) {
+export function hasSuffix(
+  str: string,
+  suffix: string,
+): RegExpMatchArray | null {
   return str.match(new RegExp(suffix + "$", "i"))
 }
 
-export function getMacronOptionRegex(str: string) {
+export function getMacronOptionRegex(str: string): string {
   return str
     .replace(/a/g, "(a|ā)")
     .replace(/A/g, "(A|Ā)")
@@ -103,12 +106,12 @@ export function unabbreviateText(text: string): string {
     .replace(/Vop\./gi, "vopiscus")
 }
 
-export function validateEmail(email: string) {
+export function validateEmail(email: string): RegExpMatchArray | null {
   return email.match(
     /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
   )
 }
 
-export function validatePassword(password: string) {
+export function validatePassword(password: string): RegExpMatchArray | null {
   return password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
 }

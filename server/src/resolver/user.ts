@@ -1,5 +1,5 @@
 import axios from "axios"
-import { verify } from "jsonwebtoken"
+import { JwtPayload, verify } from "jsonwebtoken"
 import {
   Arg,
   Ctx,
@@ -24,15 +24,18 @@ export default class UserResolver {
 
   @Query(() => User)
   @UseMiddleware(Authenticate)
-  async user(@Ctx() context: ResolverContext) {
+  async user(@Ctx() context: ResolverContext): Promise<User | null> {
     if (!context.req.cookies.accessToken) return null
-    const claims = verify(context.req.cookies.accessToken, JWT_SECRET!) as any
+    const claims = verify(
+      context.req.cookies.accessToken,
+      JWT_SECRET!,
+    ) as JwtPayload
     if (!claims) return null
     return (await this.Users.findOne(claims.sub)) || null
   }
 
   @Query(() => [User])
-  async users() {
+  async users(): Promise<User[]> {
     return await this.Users.find()
   }
 
@@ -56,7 +59,7 @@ export default class UserResolver {
   async bookmark(
     @Arg("entryId") entryId: string,
     @Ctx() { user }: ResolverContext,
-  ) {
+  ): Promise<boolean> {
     const bookmarks = await this.bookmarks({ user } as ResolverContext)
     if (bookmarks.some((entry) => entry.id == entryId))
       throw new Error("user already has entry bookmarked")
@@ -74,7 +77,7 @@ export default class UserResolver {
   async unbookmark(
     @Arg("entryId") entryId: string,
     @Ctx() { user }: ResolverContext,
-  ) {
+  ): Promise<boolean> {
     const bookmarks = await this.bookmarks({ user } as ResolverContext)
     if (!bookmarks.some((entry) => entry.id == entryId))
       throw new Error("user does not have entry bookmarked")
@@ -87,7 +90,7 @@ export default class UserResolver {
 
   @Query(() => [Line])
   @UseMiddleware(Authenticate)
-  async readings(@Ctx() { user }: ResolverContext) {
+  async readings(@Ctx() { user }: ResolverContext): Promise<Line[]> {
     return await this.Users.createQueryBuilder()
       .relation(User, "reaings")
       .of(user)
@@ -99,7 +102,7 @@ export default class UserResolver {
   async saveReading(
     @Arg("lineId") lineId: string,
     @Ctx() { user }: ResolverContext,
-  ) {
+  ): Promise<boolean> {
     if (user.readings && user.readings.some((line) => line.id === lineId))
       throw new Error("user already has reading saved")
     await this.Users.createQueryBuilder()
@@ -114,7 +117,7 @@ export default class UserResolver {
   async unsaveReading(
     @Arg("lineId") lineId: string,
     @Ctx() { user }: ResolverContext,
-  ) {
+  ): Promise<boolean> {
     user = (await this.Users.findOne(user.id, {
       relations: ["readings"],
     })) as User
@@ -132,7 +135,7 @@ export default class UserResolver {
   async readingSavePoint(
     @Arg("textId") textId: string,
     @Ctx() { user }: ResolverContext,
-  ) {
+  ): Promise<Line> {
     user = (await this.Users.findOne(user.id, {
       relations: ["readings"],
     })) as User
@@ -143,7 +146,7 @@ export default class UserResolver {
 
   @Query(() => Settings)
   @UseMiddleware(Authenticate)
-  settings(@Ctx() { user }: ResolverContext) {
+  settings(@Ctx() { user }: ResolverContext): Settings {
     return user.settings
   }
 
@@ -152,7 +155,7 @@ export default class UserResolver {
   async setSettings(
     @Arg("settings") settings: SettingsInput,
     @Ctx() { user }: ResolverContext,
-  ) {
+  ): Promise<boolean> {
     user.settings = { ...user.settings, ...settings }
     await this.Users.save(user)
     return true
@@ -163,7 +166,7 @@ export default class UserResolver {
   async comment(
     @Arg("comment") comment: string,
     @Ctx() { user }: ResolverContext,
-  ) {
+  ): Promise<boolean> {
     const { id, email, googleId, facebookId } = user
     const header = `From: ${email}${
       googleId ? " (Google)" : facebookId ? " (Facebook)" : ""

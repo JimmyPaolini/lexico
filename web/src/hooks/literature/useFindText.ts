@@ -8,7 +8,7 @@ export default function useFindText(
   author: string,
   title: string,
   book?: string,
-) {
+): ReturnType<typeof useQuery> {
   return useQuery(["findText", author, title, book], findText, {
     keepPreviousData: true,
     cacheTime: 1000 * 60 * 5,
@@ -18,9 +18,11 @@ export default function useFindText(
   })
 }
 
-export const findText = async ({
+export async function findText({
   queryKey: [, author, title, book],
-}: QueryFunctionContext<any>) => {
+}: QueryFunctionContext<
+  [string, string, string, string | undefined]
+>): Promise<Text> {
   const { findText: data } = await graphQLClient.request(findTextQuery, {
     author,
     title,

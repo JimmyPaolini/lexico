@@ -10,7 +10,7 @@ import useRecoverPassword from "../../hooks/authentication/useRecoverPassword"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
 import { validateEmail } from "../../utils/string"
 
-export default function RecoverPassword() {
+export default function RecoverPassword(): JSX.Element {
   const router = useRouter()
   const { enqueueSnackbar } = useSnackbarEnhanced()
 
@@ -69,8 +69,8 @@ export default function RecoverPassword() {
 interface RecoverPasswordInfo {
   email: string
 }
-export function validate({ email }: RecoverPasswordInfo) {
-  const errors = {} as any
+export function validate({ email }: RecoverPasswordInfo): { email: string } {
+  const errors = {} as { email: string }
   if (!validateEmail(email)) errors.email = "Invalid email"
   return errors
 }

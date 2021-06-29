@@ -4,7 +4,6 @@
 
 **/node_modules
 **/dist
-**/*.env*
 
 **/.next/
 **/out/
@@ -13,5 +12,4 @@
 **/elasticsearch_volume
 
 **/data/wiktionary
-
-.DS_Store
+**/assets

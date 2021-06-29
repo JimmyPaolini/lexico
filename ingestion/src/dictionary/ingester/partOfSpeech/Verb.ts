@@ -1,5 +1,6 @@
 import cheerio from "cheerio"
 import { Forms } from "../../../../../entity/dictionary/word/Forms"
+import { Inflection } from "../../../../../entity/dictionary/word/Inflection"
 import Uninflected from "../../../../../entity/dictionary/word/inflection/Uninflected"
 import VerbInflection, {
   VerbConjugation,
@@ -11,17 +12,17 @@ import { parseFormTable, sortIdentifiers } from "../form"
 export default class Verb extends Ingester {
   firstPrincipalPartName = "present active"
 
-  async ingestInflection() {
+  async ingestInflection(): Promise<Inflection> {
     const $ = this.$
     const elt = this.elt
     if (!$(elt).text().includes(";")) return new Uninflected()
     let conjugation = $(elt).text().trim().split("; ")[1]
     conjugation = conjugation
-      .replace(/(conjugation)|[\d\[\]]/gi, "")
+      .replace(/(conjugation)|[\d[\]]/gi, "")
       .replace(" ,", ",")
       .replace(/\s+/g, " ")
       .trim()
-    let other = conjugation
+    const other = conjugation
     if (conjugation.match(/third.*io-variant/)) conjugation = "third-io"
     else conjugation = conjugation.match(verbConjugationRegex)?.[0] || ""
 
@@ -102,8 +103,8 @@ export default class Verb extends Ingester {
       )
     }
 
-    let forms = {}
-    let disorganizedForms = table.reduce(
+    const forms = {}
+    const disorganizedForms = table.reduce(
       (disorganizedForms: any[], row: any[], i: number) => {
         return row.reduce((_, cell, j) => {
           if (cell.includes("<span ") || cell.includes(" + ")) {
@@ -133,9 +134,9 @@ export default class Verb extends Ingester {
 }
 
 const sum_esse_fui: { [key: string]: any } = {
-  "indicative": {
+  indicative: {
     active: {
-      "present": {
+      present: {
         singular: {
           first: ["sum"],
           second: ["es"],
@@ -147,7 +148,7 @@ const sum_esse_fui: { [key: string]: any } = {
           third: ["sunt"],
         },
       },
-      "imperfect": {
+      imperfect: {
         singular: {
           first: ["eram"],
           second: ["erās"],
@@ -159,7 +160,7 @@ const sum_esse_fui: { [key: string]: any } = {
           third: ["erant"],
         },
       },
-      "future": {
+      future: {
         singular: {
           first: ["erō"],
           second: ["eris"],
@@ -171,7 +172,7 @@ const sum_esse_fui: { [key: string]: any } = {
           third: ["erunt"],
         },
       },
-      "perfect": {
+      perfect: {
         singular: {
           first: ["fuī"],
           second: ["fuistī"],
@@ -183,7 +184,7 @@ const sum_esse_fui: { [key: string]: any } = {
           third: ["fuērunt", "fuēre"],
         },
       },
-      "pluperfect": {
+      pluperfect: {
         singular: {
           first: ["fueram"],
           second: ["fuerās"],
@@ -209,7 +210,7 @@ const sum_esse_fui: { [key: string]: any } = {
       },
     },
   },
-  "subjunctive": {
+  subjunctive: {
     active: {
       present: {
         singular: {
@@ -261,7 +262,7 @@ const sum_esse_fui: { [key: string]: any } = {
       },
     },
   },
-  "imperative": {
+  imperative: {
     active: {
       present: {
         singular: {

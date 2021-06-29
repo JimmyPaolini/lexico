@@ -1,12 +1,12 @@
 import { Card, Divider, Grid, Grow, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme } from "@material-ui/core/styles"
 import React from "react"
 import CommentBox from "../components/about/CommentBox"
 import ToolIconGrid from "../components/about/ToolIconGrid"
 import UpcommingFeatures from "../components/about/UpcomingFeatures"
 import CardHeader from "../components/accessories/CardHeader"
 
-export default function About() {
+export default function About(): JSX.Element {
   const classes = useStyles()
 
   return (
@@ -14,8 +14,7 @@ export default function About() {
       container
       justify="center"
       alignItems="center"
-      style={{ overflowX: "hidden" }}
-    >
+      style={{ overflowX: "hidden" }}>
       <Grow in={true}>
         <Card className={classes.card}>
           <CardHeader title="About" />
@@ -25,7 +24,7 @@ export default function About() {
             enjoy Latin through a user-friendly dictionary and literature
             interface. As with all things it is a work ever in progress, so as
             long as folks use it I’ll be striving to improve it. Contact me
-            below if you'd like to get involved!
+            below if you&apos;d like to get involved!
           </Typography>
           <Divider className={classes.divider} />
           <ToolIconGrid />
@@ -43,7 +42,7 @@ export default function About() {
   )
 }
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   card: {
     padding: theme.spacing(1),
     margin: theme.spacing(2),

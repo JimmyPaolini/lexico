@@ -2,6 +2,7 @@ import { Box } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import Text from "../../../../entity/literature/Text"
+import { MyTheme } from "../../theme/theme"
 import { sentenceCase } from "../../utils/string"
 import CardHeader from "../accessories/CardHeader"
 import ReaderLine from "./ReaderLine"
@@ -10,7 +11,7 @@ interface Props {
   text: Text
   openModal: (word: string) => void
 }
-export default function ReaderText({ text, openModal }: Props) {
+export default function ReaderText({ text, openModal }: Props): JSX.Element {
   const classes = useStyles()
 
   const title = sentenceCase(text.title)
@@ -39,7 +40,7 @@ export default function ReaderText({ text, openModal }: Props) {
   )
 }
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles((theme: MyTheme) => ({
   readerText: {
     marginLeft: "auto",
     marginRight: "auto",

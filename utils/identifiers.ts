@@ -12,7 +12,7 @@ const identifiablePartsOfSpeech = [
   "suffix",
 ]
 
-export default function identifyEntryWord(word: string, entry: Entry) {
+export default function identifyEntryWord(word: string, entry: Entry): Entry {
   if (!identifiablePartsOfSpeech.includes(entry.partOfSpeech)) return entry
   if (hasSuffix(word, "que")) word = word.replace(/que$/i, "")
   else if (hasSuffix(word, "ve")) word = word.replace(/ve$/i, "")

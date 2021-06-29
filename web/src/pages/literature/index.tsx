@@ -12,7 +12,7 @@ import { getAuthors } from "../../hooks/literature/useGetAuthors"
 interface Props {
   authors: Author[]
 }
-export default function Literature({ authors }: Props) {
+export default function Literature({ authors }: Props): JSX.Element {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Literature({ authors }: Props) {
     const authorsCopy = JSON.parse(JSON.stringify(authors || []))
     return filterLiterature(authorsCopy, searched).map((author) => ({
       key: author.name,
-      Card: () => <LiteratureCard {...{ author, searched }} />,
+      Card: LiteratureCard({ author }),
     }))
   }, [authors, searched])
 
@@ -35,8 +35,7 @@ export default function Literature({ authors }: Props) {
         isLoading: false,
         handleSearchExecute: () => setSearched(search),
         target: "literature",
-      }}
-    >
+      }}>
       {!cards.length ? (
         <Typography variant="h4">No Results</Typography>
       ) : (

@@ -13,7 +13,10 @@ interface Props {
   initialSearch: string
   initialIsLatin: boolean
 }
-export default function Search({ initialSearch, initialIsLatin }: Props) {
+export default function Search({
+  initialSearch,
+  initialIsLatin,
+}: Props): JSX.Element {
   const router = useRouter()
 
   const [isLatin, setLatin] = useState<boolean>(initialIsLatin)
@@ -32,13 +35,16 @@ export default function Search({ initialSearch, initialIsLatin }: Props) {
   useEffect(() => {
     refetch()
     const hash = searched ? (isLatin ? "?latin=" : "?english=") + searched : ""
-    if (!!searched) router.push(router.pathname + hash)
+    if (searched) router.push(router.pathname + hash)
   }, [searched])
 
-  const { data: entries, refetch, isLoading, isSuccess, isError } = useSearch(
-    searched,
-    isLatin,
-  )
+  const {
+    data: entries,
+    refetch,
+    isLoading,
+    isSuccess,
+    isError,
+  } = useSearch(searched, isLatin)
 
   const noEntriesFound = (searched && isSuccess && !entries.length) || isError
   const entriesFound = searched && isSuccess && entries.length
@@ -61,8 +67,7 @@ export default function Search({ initialSearch, initialIsLatin }: Props) {
         target: "lexico",
         isLatin,
         setLatin,
-      }}
-    >
+      }}>
       {!searched ? (
         <Logo />
       ) : noEntriesFound ? (
@@ -77,7 +82,7 @@ export default function Search({ initialSearch, initialIsLatin }: Props) {
 export const getServerSideProps: GetServerSideProps = async ({
   query: { latin, english },
 }) => {
-  let initialIsLatin = !english
+  const initialIsLatin = !english
   const initialSearch = latin || english || ""
   return {
     props: { initialSearch, initialIsLatin },

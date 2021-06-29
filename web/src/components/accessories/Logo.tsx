@@ -3,7 +3,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Image from "next/image"
 import React, { useRef } from "react"
 
-export default function Logo() {
+export default function Logo(): JSX.Element {
   const classes = useStyles()
   const theme = useTheme() as any
   const ref = useRef<any>()
@@ -26,7 +26,7 @@ export default function Logo() {
             loading="eager"
           />
         </Box>
-        {!!announcement ? (
+        {announcement ? (
           <Typography
             ref={ref}
             variant="body1"

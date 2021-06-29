@@ -2,10 +2,15 @@ import axios from "axios"
 import { FACEBOOK_ID, FACEBOOK_SECRET } from "../../../utils/env"
 import log from "../../../utils/log"
 
+export type FacebookProfile = {
+  id: string
+  email: string
+}
+
 export default async function fetchFacebookUser(
   code: string,
   hostname: string,
-) {
+): Promise<FacebookProfile> {
   const redirect_uri = hostname.match(/localhost/i)
     ? "http://localhost:3000/facebook"
     : "https://www.lexicolatin.com/facebook"

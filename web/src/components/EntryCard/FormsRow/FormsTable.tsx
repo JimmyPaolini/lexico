@@ -1,17 +1,17 @@
 import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import FormCell from "./FormCell"
+import FormCell, { FormCellProps } from "./FormCell"
 
 interface Props {
-  forms: any[]
+  forms: FormCellProps[]
 }
 
-export default function FormsTable({ forms }: Props) {
+export default function FormsTable({ forms }: Props): JSX.Element {
   const classes = useStyles()
   return (
     <Grid container className={classes.formsTable}>
-      {forms.map((form: any, i) => {
+      {forms.map((form: FormCellProps, i) => {
         const horizontal =
           i < 2 ? "top" : i >= forms.length - 2 ? "bottom" : "mid"
         const vertical = i % 2 ? "Right" : "Left"

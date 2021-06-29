@@ -23,10 +23,10 @@ export const graphQLClient = new GraphQLClient(clientEndpoint, {
 
 export const queryClient = new QueryClient()
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps): JSX.Element {
   useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side")
-    if (jssStyles) jssStyles.parentElement!.removeChild(jssStyles)
+    if (jssStyles) jssStyles.parentElement?.removeChild(jssStyles)
   }, [])
 
   return (

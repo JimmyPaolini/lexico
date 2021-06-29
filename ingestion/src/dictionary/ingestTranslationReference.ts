@@ -4,7 +4,9 @@ import Translation from "../../../entity/dictionary/Translation"
 import log from "../../../utils/log"
 import { escapeCapitals } from "../../../utils/string"
 
-export async function ingestTranslationReference(translation: Translation) {
+export async function ingestTranslationReference(
+  translation: Translation,
+): Promise<void> {
   const Translations = getConnection().getRepository(Translation)
   const Entries = getConnection().getRepository(Entry)
 

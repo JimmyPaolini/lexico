@@ -9,7 +9,7 @@ interface Props {
   forms: Forms | null | undefined
 }
 
-export default function NounForms({ forms }: Props) {
+export default function NounForms({ forms }: Props): JSX.Element {
   const classes = useStyles()
   const formsStructure = nounFormsRestructure(forms)
   return (

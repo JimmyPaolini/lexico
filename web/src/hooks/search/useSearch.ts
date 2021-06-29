@@ -3,7 +3,10 @@ import searchEnglishQuery from "../../graphql/search/searchEnglish.graphql"
 import searchLatinQuery from "../../graphql/search/searchLatin.graphql"
 import { graphQLClient } from "../../pages/_app"
 
-export default function useSearch(searched: string, isLatin: boolean) {
+export default function useSearch(
+  searched: string,
+  isLatin: boolean,
+): ReturnType<typeof useQuery> {
   const options = {
     enabled: false,
     retry: false,
@@ -16,7 +19,7 @@ export default function useSearch(searched: string, isLatin: boolean) {
 
 async function useSearchLatinQuery({
   queryKey: [, search],
-}: QueryFunctionContext<any>) {
+}: QueryFunctionContext<[string, string]>) {
   const { searchLatin: data } = await graphQLClient.request(searchLatinQuery, {
     search,
   })
@@ -25,7 +28,7 @@ async function useSearchLatinQuery({
 
 async function useSearchEnglishQuery({
   queryKey: [, search],
-}: QueryFunctionContext<any>) {
+}: QueryFunctionContext<[string, string]>) {
   const { searchEnglish: data } = await graphQLClient.request(
     searchEnglishQuery,
     {

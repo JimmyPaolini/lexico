@@ -1,5 +1,9 @@
 {
   "scripts": {
+    "lint": "eslint --no-error-on-unmatched-pattern *",
+    "lintwatch": "nodemon -e ts --exec \"clear; yarn lint\"",
+    "format": "prettier --check .",
+    "formatwatch": "nodemon -e ts --exec \"clear; yarn format\"",
     "dev": "docker compose -f infra/docker/docker-compose.services.yml up",
     "undev": "docker compose -f infra/docker/docker-compose.services.yml down --remove-orphans",
     "start": "docker compose -f infra/docker/docker-compose.services.yml -f infra/docker/docker-compose.yml up",
@@ -34,8 +38,11 @@
   "devDependencies": {
     "@types/node": "^14.14.11",
     "@types/number-to-words": "^1.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
     "class-validator": "^0.12.2",
     "eslint": "^7.23.0",
+    "eslint-plugin-react": "^7.24.0",
     "eslint-config-prettier": "^8.1.0",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",

@@ -19,7 +19,7 @@ interface Props {
   isLast: boolean
 }
 
-export default function LiteratureBook({ book, isLast }: Props) {
+export default function LiteratureBook({ book, isLast }: Props): JSX.Element {
   const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(false)
 
@@ -31,8 +31,7 @@ export default function LiteratureBook({ book, isLast }: Props) {
         key={book.id}
         classes={{ button: classes.hideHoverHighlight }}
         disableRipple
-        disableTouchRipple
-      >
+        disableTouchRipple>
         <ListItemText
           primary={sentenceCase(book.title).replace(/^\d+ /, "")}
           primaryTypographyProps={{ variant: "body1" }}
@@ -53,7 +52,7 @@ export default function LiteratureBook({ book, isLast }: Props) {
 
 const useStyles = makeStyles((theme: any) => ({
   noPadding: {
-    "padding": 0,
+    padding: 0,
     "&:last-child": {
       paddingBottom: 0,
     },

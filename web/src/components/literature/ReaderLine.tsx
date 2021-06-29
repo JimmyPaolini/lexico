@@ -13,7 +13,7 @@ interface Props {
   openModal: (word: string) => void
 }
 
-export default function ReaderLine({ line, openModal }: Props) {
+export default function ReaderLine({ line, openModal }: Props): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
   const words = normalize(line.line).match(/\w+|\W+/gi)
@@ -28,8 +28,7 @@ export default function ReaderLine({ line, openModal }: Props) {
         style={{
           fontSize:
             (user?.settings.fontSize || getSettingsLocal().fontSize) - 3,
-        }}
-      >
+        }}>
         {line.lineLabel}
       </Typography>
       <Divider orientation="vertical" flexItem className={classes.divider} />
@@ -42,8 +41,7 @@ export default function ReaderLine({ line, openModal }: Props) {
           <Typography component="span" variant="inherit">
             ...
           </Typography>
-        }
-      >
+        }>
         {words?.map((word, i) => (
           <ReaderWord {...{ word, openModal }} key={line.id + i} />
         ))}

@@ -16,7 +16,9 @@ import Preposition from "./ingester/partOfSpeech/Preposition"
 import Pronoun from "./ingester/partOfSpeech/Pronoun"
 import Verb from "./ingester/partOfSpeech/Verb"
 
-export default async function ingestEntryWord(entryWord: string) {
+export default async function ingestEntryWord(
+  entryWord: string,
+): Promise<void> {
   // log.info("ingesting entry", entryWord)
   const data = require(path.join(
     process.cwd(),
@@ -75,9 +77,9 @@ async function ingestEntry(
     }
     const IngesterConstructor = ingestersMap[entry.partOfSpeech]
     if (!IngesterConstructor) {
-      if ((entry.partOfSpeech as any) === "")
+      if ((entry.partOfSpeech as PartOfSpeech | "") === "")
         log.info("No partOfSpeech:", entry.id)
-      else if ((entry.partOfSpeech as any) !== "letter")
+      else if ((entry.partOfSpeech as PartOfSpeech | "letter") !== "letter")
         log.info("skipping entry", entry)
       await Entries.delete(entry.id)
       return

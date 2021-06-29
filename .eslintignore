@@ -4,7 +4,6 @@
 
 **/node_modules
 **/dist
-**/*.env*
 
 **/.next/
 **/out/
@@ -13,5 +12,9 @@
 **/elasticsearch_volume
 
 **/data/wiktionary
+**/assets
 
-.DS_Store
+ingestion/src/dictionary
+
+README.md
+LICENSE.md

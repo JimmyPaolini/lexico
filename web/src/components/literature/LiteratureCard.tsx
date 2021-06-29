@@ -18,7 +18,7 @@ interface Props {
   author: Author
 }
 
-export default function LiteratureCard({ author }: Props) {
+export default function LiteratureCard({ author }: Props): JSX.Element {
   const classes = useStyles()
   const books = author.books || ([] as Book[])
   const nonBookTexts = author.texts.filter(
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: any) => ({
     margin: theme.spacing(1),
   },
   noPadding: {
-    "padding": 0,
+    padding: 0,
     "&:last-child": {
       paddingBottom: 0,
     },

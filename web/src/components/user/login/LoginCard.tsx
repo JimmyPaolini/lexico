@@ -5,7 +5,7 @@ import CardHeader from "../../accessories/CardHeader"
 import BasicLogin from "./BasicLoginForm"
 import OAuthLogin from "./OAuthLogin"
 
-export default function LoginCard() {
+export default function LoginCard(): JSX.Element {
   const classes = useStyles()
 
   return (

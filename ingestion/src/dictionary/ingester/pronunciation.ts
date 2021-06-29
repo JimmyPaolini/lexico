@@ -17,11 +17,10 @@ export default function parsePronunciation(
     return ingester.ingestPronunciation()
   }
 
-  let pronunciation = new Pronunciation()
+  const pronunciation = new Pronunciation()
   pronunciation.classical.phonemes = getClassicalPhonemes(macronizedWord)
-  pronunciation.ecclesiastical.phonemes = getEcclesiasticalPronunciations(
-    macronizedWord,
-  )[0]
+  pronunciation.ecclesiastical.phonemes =
+    getEcclesiasticalPronunciations(macronizedWord)[0]
 
   const pronunciationHeader = $(elt)
     .prevAll(':header:contains("Pronunciation")')

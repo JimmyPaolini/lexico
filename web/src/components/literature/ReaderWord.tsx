@@ -6,7 +6,7 @@ interface Props {
   word: string
   openModal: (word: string) => void
 }
-export default function ReaderWord({ word, openModal }: Props) {
+export default function ReaderWord({ word, openModal }: Props): JSX.Element {
   const classes = useStyles()
   const isWord = word.match(/\w+/i)
 
@@ -14,8 +14,7 @@ export default function ReaderWord({ word, openModal }: Props) {
     <CardActionArea
       className={classes.readerWord}
       component="span"
-      onClick={() => openModal(word.toLowerCase())}
-    >
+      onClick={() => openModal(word.toLowerCase())}>
       {word}
     </CardActionArea>
   ) : (

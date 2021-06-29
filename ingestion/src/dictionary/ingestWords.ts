@@ -3,7 +3,7 @@ import Entry from "../../../entity/dictionary/Entry"
 import log from "../../../utils/log"
 import { ingestEntryWords } from "./ingestEntryWords"
 
-export default async function ingestWords() {
+export default async function ingestWords(): Promise<void> {
   log.info("Ingesting Words")
   const Entries = getConnection().getRepository(Entry)
   const params = {
@@ -21,5 +21,4 @@ export default async function ingestWords() {
     entries = await Entries.find({ ...params, skip })
   }
   log.info("Ingested Words")
-  return true
 }

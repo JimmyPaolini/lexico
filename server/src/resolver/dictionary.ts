@@ -22,7 +22,7 @@ export default class DictionaryResolver {
   async searchLatin(
     @Arg("search") search: string,
     @Ctx() { bookmarks }: ResolverContext,
-  ) {
+  ): Promise<Entry[]> {
     if (!search || !search.match(/^-?(\w| )+\.?$/)) return []
     log.info("searchLatin request", { search })
 
@@ -71,7 +71,7 @@ export default class DictionaryResolver {
   async searchEnglish(
     @Arg("search") search: string,
     @Ctx() { bookmarks }: ResolverContext,
-  ) {
+  ): Promise<Entry[]> {
     if (!search) return []
     log.info("searchEnglish request", { search })
     const translations = await this.Translations.createQueryBuilder(
@@ -106,12 +106,12 @@ export default class DictionaryResolver {
   }
 
   @Query(() => Entry)
-  async entry(@Arg("id") id: string) {
+  async entry(@Arg("id") id: string): Promise<Entry> {
     return await this.Entries.findOneOrFail(id)
   }
 
   @Query(() => [Entry])
-  async entries(@Arg("ids", () => [String]) ids: string[]) {
+  async entries(@Arg("ids", () => [String]) ids: string[]): Promise<Entry[]> {
     return await this.Entries.findByIds(ids)
   }
 }

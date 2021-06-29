@@ -1,6 +1,27 @@
-import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles"
+import { createMuiTheme, Theme, ThemeOptions } from "@material-ui/core/styles"
+import {
+  Typography,
+  TypographyOptions,
+} from "@material-ui/core/styles/createTypography"
 
-export default createMuiTheme({
+export interface MyTheme extends Theme {
+  typography: MyTypography
+  custom: Record<string, unknown>
+}
+interface MyTypography extends Typography {
+  literature: Record<string, unknown>
+}
+
+interface MyThemeOptions extends ThemeOptions {
+  typography?: MyTypographyOptions
+  custom?: Record<string, unknown>
+}
+
+interface MyTypographyOptions extends TypographyOptions {
+  literature?: Record<string, unknown>
+}
+
+const myThemeOptions = {
   palette: {
     type: "dark",
     primary: {
@@ -26,4 +47,7 @@ export default createMuiTheme({
   custom: {
     cardWidth: 382,
   },
-} as ThemeOptions)
+} as unknown
+const theme = createMuiTheme(myThemeOptions as MyThemeOptions)
+
+export default theme

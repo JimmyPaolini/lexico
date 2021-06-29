@@ -17,7 +17,7 @@ import { Context } from "../layout/Context"
 interface Props {
   translations: Translation[]
 }
-export default function TranslationsRow({ translations }: Props) {
+export default function TranslationsRow({ translations }: Props): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(
@@ -39,8 +39,7 @@ export default function TranslationsRow({ translations }: Props) {
         disabled={!expandable}
         disableRipple
         disableTouchRipple
-        classes={{ focusHighlight: classes.hide }}
-      >
+        classes={{ focusHighlight: classes.hide }}>
         <Grid container direction="row" justify="space-evenly">
           <Grid container item direction="column" xs={expandable}>
             {translations.slice(0, 2).map((translation) => (

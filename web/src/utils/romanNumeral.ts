@@ -1,26 +1,28 @@
-export function romanToDecimal(roman: string) {
+export function romanToDecimal(roman: string): number {
   roman = roman.toUpperCase()
   let decimal = 0
   const value = (c: string): number =>
-    (({
-      I: 1,
-      V: 5,
-      X: 10,
-      L: 50,
-      C: 100,
-      D: 500,
-      M: 1000,
-    } as { [key: string]: number })[c])
+    ((
+      {
+        I: 1,
+        V: 5,
+        X: 10,
+        L: 50,
+        C: 100,
+        D: 500,
+        M: 1000,
+      } as { [key: string]: number }
+    )[c])
 
   for (let i = 0; i < roman.length; i++) {
-    let v1 = value(roman[i])
+    const v1 = value(roman[i])
     if (i + 1 < roman.length && v1 < value(roman[i + 1])) decimal -= v1
     else decimal += v1
   }
   return decimal
 }
 
-export function decimalToRoman(decimal: number) {
+export function decimalToRoman(decimal: number): string {
   let roman = ""
   if (decimal > 3999)
     throw new Error("Decimal number too large (>3999) for roman numerals")
@@ -46,12 +48,12 @@ export function decimalToRoman(decimal: number) {
   return roman
 }
 
-export function romanNumeralize(str: string | undefined) {
+export function romanNumeralize(str: string | undefined): string {
   if (!str) return ""
   return str.replace(/\d+/g, (d) => decimalToRoman(parseInt(d)))
 }
 
-export function decimalize(str: string | undefined) {
+export function decimalize(str: string | undefined): string {
   if (!str) return ""
   return str.replace(
     /(^| )([IVXLCDM]+)( |$)/gi,
