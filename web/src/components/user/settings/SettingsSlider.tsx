@@ -1,9 +1,8 @@
 import { Slider } from "@material-ui/core"
-import { useFormik } from "formik"
 import React from "react"
 
 interface Props {
-  formik: ReturnType<typeof useFormik>
+  formik: any
 }
 export default function SettingsSlider({ formik }: Props): JSX.Element {
   const min = 16

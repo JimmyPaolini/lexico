@@ -20,7 +20,7 @@ export default function SettingsForm(): JSX.Element {
     initialValues: user ? user.settings : getSettingsLocal(),
     onSubmit: async () => {
       if (user) {
-        await setSettings()
+        await setSettings(formik.values)
       } else {
         setSettingsLocal(formik.values)
         if (showSettingsInstructions()) {

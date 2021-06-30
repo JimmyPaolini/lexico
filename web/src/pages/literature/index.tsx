@@ -1,6 +1,6 @@
 import { Typography } from "@material-ui/core"
 import { GetStaticProps } from "next"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useState } from "react"
 import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
 import Text from "../../../../entity/literature/Text"
@@ -19,13 +19,13 @@ export default function Literature({ authors }: Props): JSX.Element {
     if (!search) setSearched("")
   }, [search])
 
-  const cards = useMemo(() => {
-    const authorsCopy = JSON.parse(JSON.stringify(authors || []))
-    return filterLiterature(authorsCopy, searched).map((author) => ({
-      key: author.name,
-      Card: LiteratureCard({ author }),
-    }))
-  }, [authors, searched])
+  const handleSearchExecute = () => setSearched(search)
+
+  const authorsCopy = JSON.parse(JSON.stringify(authors))
+  const cards = filterLiterature(authorsCopy, searched).map((author) => {
+    const Card = () => <LiteratureCard {...{ author }} />
+    return { key: author.name, Card }
+  })
 
   return (
     <SearchBarLayout
@@ -33,7 +33,7 @@ export default function Literature({ authors }: Props): JSX.Element {
         search,
         setSearch,
         isLoading: false,
-        handleSearchExecute: () => setSearched(search),
+        handleSearchExecute,
         target: "literature",
       }}>
       {!cards.length ? (

@@ -1,19 +1,22 @@
 {
   "scripts": {
     "lint": "eslint --no-error-on-unmatched-pattern *",
-    "lintwatch": "nodemon -e ts --exec \"clear; yarn lint\"",
     "format": "prettier --check .",
+    "lintwatch": "nodemon -e ts --exec \"clear; yarn lint\"",
     "formatwatch": "nodemon -e ts --exec \"clear; yarn format\"",
+
     "dev": "docker compose -f infra/docker/docker-compose.services.yml up",
     "undev": "docker compose -f infra/docker/docker-compose.services.yml down --remove-orphans",
     "start": "docker compose -f infra/docker/docker-compose.services.yml -f infra/docker/docker-compose.yml up",
     "stop": "docker compose -f infra/docker/docker-compose.services.yml -f infra/docker/docker-compose.yml down --remove-orphans",
+
     "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
     "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server .",
     "build:database": "docker image pull postgres:13",
     "build:fluentbit": "docker build infra/docker -f infra/docker/fluentbit.Dockerfile -t jimmypaolini/fluentbit",
     "build:kibana": "docker image pull docker.elastic.co/kibana/kibana:7.12.0",
     "build:elasticsearch": "docker image pull docker.elastic.co/elasticsearch/elasticsearch:7.12.0",
+
     "deploy:web": "kubectl apply -f ./infra/kubernetes/web.yaml",
     "deploy:server": "kubectl apply -f ./infra/kubernetes/server.yaml",
     "deploy:database": "helm install database bitnami/postgresql -f ./infra/helm/database.yaml",
@@ -22,6 +25,7 @@
     "deploy:kibana": "helm install kibana elastic/kibana -f ./infra/helm/kibana.yaml",
     "deploy:elasticsearch": "helm install elasticsearch elastic/elasticsearch -f ./infra/helm/elasticsearch.yaml",
     "deploy:k8s-dashboard": "kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml",
+
     "start:k8s-dashboard": "kubectl proxy",
     "update:server": "kubectl rollout restart deployment server",
     "update:web": "kubectl rollout restart deployment web"

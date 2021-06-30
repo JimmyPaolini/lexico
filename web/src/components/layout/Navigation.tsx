@@ -15,6 +15,7 @@ import {
   AccountCircle,
   Bookmark,
   ChevronLeft,
+  Edit,
   Menu,
   MenuBook,
   Search,
@@ -135,12 +136,12 @@ const pages = [
     icon: <MenuBook />,
     keybind: "l",
   },
-  // {
-  //   Name: "Grammar",
-  //   name: "grammar",
-  //   icon: <Create />,
-  //   keybind: "g",
-  // },
+  {
+    Name: "Grammar",
+    name: "grammar",
+    icon: <Edit />,
+    keybind: "g",
+  },
   {
     Name: "User",
     name: "user",

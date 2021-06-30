@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import Entry from "../../../../entity/dictionary/Entry"
 import FormsRow from "./FormsRow/FormsRow"
-import PrincipalPartsRow from "./PrincipalPartsRow"
+import PrincipalPartsRow from "./PrincipalPartsRow/PrincipalPartsRow"
 import TranslationsRow from "./TranslationsRow"
 
 interface Props {
@@ -16,16 +16,29 @@ export default function EntryCard({
   searched = "",
 }: Props): JSX.Element {
   const classes = useStyles()
+  const {
+    id,
+    partOfSpeech,
+    principalParts,
+    inflection,
+    bookmarked,
+    translations,
+    forms,
+    identifiers,
+  } = entry
+
   return (
     <Card elevation={4} className={classes.entryCard}>
-      <PrincipalPartsRow entry={entry} />
+      <PrincipalPartsRow
+        {...{ id, partOfSpeech, principalParts, inflection, bookmarked }}
+      />
       <Divider variant="inset" />
-      <TranslationsRow translations={entry.translations} />
+      <TranslationsRow translations={translations || []} />
       <FormsRow
-        partOfSpeech={entry.partOfSpeech}
-        forms={entry.forms}
+        partOfSpeech={partOfSpeech}
+        forms={forms}
         searched={searched}
-        identifiers={entry.identifiers || []}
+        identifiers={identifiers || []}
       />
     </Card>
   )

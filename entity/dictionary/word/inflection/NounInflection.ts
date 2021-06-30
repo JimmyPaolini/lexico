@@ -32,5 +32,5 @@ export type NounDeclension =
 export const nounDeclensionRegex = new RegExp(
   /(first)|(second)|(third)|(fourth)|(fifth)/,
 )
-export type NounGender = "masculine" | "feminine" | "neuter" | ""
+export type NounGender = "masculine" | "feminine" | "masc/fem" | "neuter" | ""
 export const genderRegex = new RegExp(/(masculine)|(feminine)|(neuter)/)

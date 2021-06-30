@@ -1,7 +1,8 @@
 import { Typography } from "@material-ui/core"
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/router"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useState } from "react"
+import { UseQueryResult } from "react-query"
 import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
 import Logo from "../components/accessories/Logo"
@@ -21,60 +22,46 @@ export default function Search({
 
   const [isLatin, setLatin] = useState<boolean>(initialIsLatin)
   const [search, setSearch] = useState<string>(initialSearch)
-  const [searched, setSearched] = useState<string>(initialSearch)
-
-  useEffect(() => {
-    if (!search) setSearched("")
-  }, [search])
-
-  useEffect(() => {
-    setSearch(initialSearch)
-    setSearched(initialSearch)
-  }, [initialSearch])
-
-  useEffect(() => {
-    refetch()
-    const hash = searched ? (isLatin ? "?latin=" : "?english=") + searched : ""
-    if (searched) router.push(router.pathname + hash)
-  }, [searched])
 
   const {
     data: entries,
-    refetch,
+    refetch: fetch,
     isLoading,
-    isSuccess,
-    isError,
-  } = useSearch(searched, isLatin)
+  } = useSearch(search, isLatin) as UseQueryResult<Entry[], unknown>
 
-  const noEntriesFound = (searched && isSuccess && !entries.length) || isError
-  const entriesFound = searched && isSuccess && entries.length
-  const cards = useMemo(
-    () =>
-      entries?.map((entry: Entry) => ({
-        key: entry.id,
-        Card: () => useMemo(() => <EntryCard {...{ entry, searched }} />, []),
-      })),
-    [entries],
-  )
+  const executeSearch = () => {
+    if (!search) return
+    fetch()
+    const hash = (isLatin ? "?latin=" : "?english=") + search
+    router.push(router.pathname + hash)
+  }
+
+  useEffect(() => executeSearch(), [isLatin])
+
+  const cards =
+    entries?.map((entry: Entry) => {
+      const Card = () => <EntryCard {...{ entry, searched: search }} />
+      return { key: entry.id, Card }
+    }) || []
 
   return (
     <SearchBarLayout
       searchBarProps={{
         search,
         setSearch,
-        isLoading: isLoading && !!searched,
-        handleSearchExecute: () => setSearched(search),
+        isLoading: isLoading && !!search,
+        handleSearchExecute: executeSearch,
         target: "lexico",
         isLatin,
         setLatin,
       }}>
-      {!searched ? (
+      {!search ? (
         <Logo />
-      ) : noEntriesFound ? (
+      ) : !entries?.length ? (
         <Typography variant="h4">No Results</Typography>
-      ) : entriesFound ? (
+      ) : (
         <CardDeck cards={cards} />
-      ) : null}
+      )}
     </SearchBarLayout>
   )
 }

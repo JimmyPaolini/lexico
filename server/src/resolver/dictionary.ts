@@ -24,7 +24,7 @@ export default class DictionaryResolver {
     @Ctx() { bookmarks }: ResolverContext,
   ): Promise<Entry[]> {
     if (!search || !search.match(/^-?(\w| )+\.?$/)) return []
-    log.info("searchLatin request", { search })
+    // log.info("searchLatin request", { search })
 
     search = search.toLowerCase()
     const pushSuffix = async (suffix: string) => {
@@ -73,7 +73,7 @@ export default class DictionaryResolver {
     @Ctx() { bookmarks }: ResolverContext,
   ): Promise<Entry[]> {
     if (!search) return []
-    log.info("searchEnglish request", { search })
+    // log.info("searchEnglish request", { search })
     const translations = await this.Translations.createQueryBuilder(
       "translation",
     )

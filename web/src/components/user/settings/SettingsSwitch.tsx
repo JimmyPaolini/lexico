@@ -1,11 +1,10 @@
 import { Grid, Switch, Typography } from "@material-ui/core"
-import { useFormik } from "formik"
 import React from "react"
 
 interface Props {
   field: string
   label: string
-  formik: ReturnType<typeof useFormik>
+  formik: any
 }
 export default function SettingsSwitch({
   field,

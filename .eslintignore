@@ -14,7 +14,6 @@
 **/data/wiktionary
 **/assets
 
-ingestion/src/dictionary
-
-README.md
-LICENSE.md
+**/ingestion/src/dictionary
+**/README.md
+**/LICENSE.md

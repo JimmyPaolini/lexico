@@ -9,7 +9,6 @@ export default function useSearch(
 ): ReturnType<typeof useQuery> {
   const options = {
     enabled: false,
-    retry: false,
     staleTime: 1000 * 60 * 5,
   }
   return isLatin

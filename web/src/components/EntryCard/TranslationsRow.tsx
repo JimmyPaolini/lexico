@@ -24,7 +24,7 @@ export default function TranslationsRow({ translations }: Props): JSX.Element {
     user?.settings.translationsExpandedDefault ||
       getSettingsLocal().translationsExpandedDefault,
   )
-  const expandable = translations?.length > 2
+  const expandable = translations.length > 2
 
   useEventListener("keypress", (e: any) => {
     if (window.location.pathname.match(/^\/bookmarks/)) return

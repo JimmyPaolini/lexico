@@ -79,7 +79,6 @@ const adjectiveFormsRestructure = (forms: any) => {
     if (structure[gen].every((cell: any) => !cell.center)) delete structure[gen]
   }
 
-  console.log("structure", structure)
   return structure
 }
 

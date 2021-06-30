@@ -1,10 +1,11 @@
 import { Card, Divider, Grid, Grow, Typography } from "@material-ui/core"
-import { makeStyles, Theme } from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import CommentBox from "../components/about/CommentBox"
 import ToolIconGrid from "../components/about/ToolIconGrid"
 import UpcommingFeatures from "../components/about/UpcomingFeatures"
 import CardHeader from "../components/accessories/CardHeader"
+import { MyTheme } from "../theme/theme"
 
 export default function About(): JSX.Element {
   const classes = useStyles()
@@ -42,7 +43,7 @@ export default function About(): JSX.Element {
   )
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme: MyTheme) => ({
   card: {
     padding: theme.spacing(1),
     margin: theme.spacing(2),

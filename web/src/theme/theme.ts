@@ -6,7 +6,9 @@ import {
 
 export interface MyTheme extends Theme {
   typography: MyTypography
-  custom: Record<string, unknown>
+  custom: {
+    cardWidth: number
+  }
 }
 interface MyTypography extends Typography {
   literature: Record<string, unknown>
@@ -14,7 +16,9 @@ interface MyTypography extends Typography {
 
 interface MyThemeOptions extends ThemeOptions {
   typography?: MyTypographyOptions
-  custom?: Record<string, unknown>
+  custom?: {
+    cardWidth?: number
+  }
 }
 
 interface MyTypographyOptions extends TypographyOptions {
