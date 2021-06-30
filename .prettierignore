@@ -21,3 +21,8 @@ server/**/schema.graphql
 =======
 **/assets
 >>>>>>> aa3bf910bc (linting and formatting implementation)
+=======
+**/assets
+
+**/package.json
+>>>>>>> a451f0dae6 (Bugs from linting/formatting fixed, grammar page begun)
