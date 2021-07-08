@@ -9,10 +9,10 @@ import SearchBarLayout from "../../components/layout/SearchBarLayout"
 import LiteratureCard from "../../components/literature/LiteratureCard"
 import { getAuthors } from "../../hooks/literature/useGetAuthors"
 
-interface Props {
+interface LiteratureProps {
   authors: Author[]
 }
-export default function Literature({ authors }: Props): JSX.Element {
+export default function Literature({ authors }: LiteratureProps): JSX.Element {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Literature({ authors }: Props): JSX.Element {
 
   const authorsCopy = JSON.parse(JSON.stringify(authors))
   const cards = filterLiterature(authorsCopy, searched).map((author) => {
-    const Card = () => <LiteratureCard {...{ author }} />
+    const Card = <LiteratureCard {...{ author }} />
     return { key: author.name, Card }
   })
 

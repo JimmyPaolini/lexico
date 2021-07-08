@@ -10,14 +10,14 @@ import EntryCard from "../components/EntryCard/EntryCard"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
 import useSearch from "../hooks/search/useSearch"
 
-interface Props {
+interface SearchProps {
   initialSearch: string
   initialIsLatin: boolean
 }
 export default function Search({
   initialSearch,
   initialIsLatin,
-}: Props): JSX.Element {
+}: SearchProps): JSX.Element {
   const router = useRouter()
 
   const [isLatin, setLatin] = useState<boolean>(initialIsLatin)
@@ -40,7 +40,7 @@ export default function Search({
 
   const cards =
     entries?.map((entry: Entry) => {
-      const Card = () => <EntryCard {...{ entry, searched: search }} />
+      const Card = <EntryCard {...{ entry, searched: search }} />
       return { key: entry.id, Card }
     }) || []
 

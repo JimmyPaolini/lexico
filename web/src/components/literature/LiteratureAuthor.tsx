@@ -10,17 +10,16 @@ import Author from "../../../../entity/literature/Author"
 import { sentenceCase } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
 
-interface Props {
+interface LiteratureAuthorProps {
   author: Author
   expanded: boolean
   setExpanded: Dispatch<SetStateAction<boolean>>
 }
-
 export default function LiteratureAuthor({
   author,
   expanded,
   setExpanded,
-}: Props): JSX.Element {
+}: LiteratureAuthorProps): JSX.Element {
   const classes = useStyles()
   let summary = [
     ...(author.books || []),

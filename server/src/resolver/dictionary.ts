@@ -1,3 +1,4 @@
+import { performance } from "perf_hooks"
 import { Arg, Ctx, Query, Resolver, UseMiddleware } from "type-graphql"
 import { getConnection } from "typeorm"
 import Entry from "../../../entity/dictionary/Entry"
@@ -23,6 +24,7 @@ export default class DictionaryResolver {
     @Arg("search") search: string,
     @Ctx() { bookmarks }: ResolverContext,
   ): Promise<Entry[]> {
+    const t0 = performance.now()
     if (!search || !search.match(/^-?(\w| )+\.?$/)) return []
     // log.info("searchLatin request", { search })
 
@@ -61,6 +63,7 @@ export default class DictionaryResolver {
       })
     log.info("searchLatin response", {
       search,
+      responseTime: performance.now() - t0,
       entries: entries.map(({ id }) => id),
     })
     return entries
@@ -72,6 +75,7 @@ export default class DictionaryResolver {
     @Arg("search") search: string,
     @Ctx() { bookmarks }: ResolverContext,
   ): Promise<Entry[]> {
+    const t0 = performance.now()
     if (!search) return []
     // log.info("searchEnglish request", { search })
     const translations = await this.Translations.createQueryBuilder(
@@ -100,6 +104,7 @@ export default class DictionaryResolver {
       })
     log.info("searchEnglish response", {
       search,
+      responseTime: performance.now() - t0,
       entries: entries.map(({ id }) => id),
     })
     return entries

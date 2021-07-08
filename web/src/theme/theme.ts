@@ -44,7 +44,6 @@ const myThemeOptions = {
       fontFamily: "Serif",
       fontWeight: 400,
       fontSize: "1.5rem",
-      lineHeight: 2.5,
       letterSpacing: "0.00938em",
     },
   },

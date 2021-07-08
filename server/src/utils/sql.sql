@@ -1,5 +1,7 @@
 -- @block scratch
-SELECT * FROM text WHERE "bookId" = 'virgil_aeneid'
+SELECT * FROM entry
+WHERE "partOfSpeech" = 'verb'
+AND inflection ->> 'conjugation' = 'first'
 
 -- @block find entry
 SELECT id, "partOfSpeech", inflection, forms FROM entry

@@ -31,11 +31,11 @@ export default function User(): JSX.Element {
         cards={[
           {
             key: "LoginCard",
-            Card: LoginCard,
+            Card: <LoginCard />,
           },
           {
             key: "SettingsCard",
-            Card: SettingsCard,
+            Card: <SettingsCard />,
           },
         ]}
       />

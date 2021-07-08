@@ -44,24 +44,23 @@ export default function Bookmarks(): JSX.Element {
 
   const cards = useMemo(() => {
     const filteredEntries = filterEntries(bookmarks, searched) || []
-    const notFoundCard = () => (
-      <Typography variant="h4" align="center">
-        Not Found
-      </Typography>
-    )
+
     return filteredEntries.length
       ? filteredEntries.map((entry: Entry) => {
           entry = identifyEntryWord(searched, entry)
-          const entryCard = () => <EntryCard {...{ entry, searched }} />
           return {
             key: entry.id,
-            Card: entryCard,
+            Card: <EntryCard {...{ entry, searched }} />,
           }
         })
       : [
           {
             key: "no results",
-            Card: notFoundCard,
+            Card: (
+              <Typography variant="h4" align="center">
+                Not Found
+              </Typography>
+            ),
           },
         ]
   }, [user, bookmarks, searched])

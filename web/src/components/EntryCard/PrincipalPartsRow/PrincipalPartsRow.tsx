@@ -5,15 +5,17 @@ import { Inflection } from "../../../../../entity/dictionary/word/Inflection"
 import { PartOfSpeech } from "../../../../../entity/dictionary/word/PartOfSpeech"
 import PrincipalPart from "../../../../../entity/dictionary/word/PrincipalPart"
 import { unCamelCase } from "../../../utils/string"
+import ExpandIcon from "../../accessories/ExpandIcon"
 import BookmarkButton from "./BookmarkButton"
 import inflectionToString from "./inflectionToString"
 
-interface Props {
+interface PrincipalPartsRowProps {
   id: string
   partOfSpeech: PartOfSpeech
   principalParts: PrincipalPart[] | null
   inflection: Inflection | null | undefined
   bookmarked?: boolean
+  expanded?: boolean
 }
 export default function PrincipalPartsRow({
   id,
@@ -21,7 +23,8 @@ export default function PrincipalPartsRow({
   principalParts,
   inflection,
   bookmarked,
-}: Props): JSX.Element {
+  expanded,
+}: PrincipalPartsRowProps): JSX.Element {
   const classes = useStyles()
 
   const principalPartsFormatted = principalParts
@@ -31,7 +34,7 @@ export default function PrincipalPartsRow({
   const subheader = `${unCamelCase(partOfSpeech)}, ${inflectionToString(
     inflection,
     partOfSpeech,
-  )}`.replace(/, ?$/, "")
+  )}`.replace(/, ?$|^, ?/, "")
 
   return (
     <CardHeader
@@ -40,7 +43,13 @@ export default function PrincipalPartsRow({
       subheader={subheader}
       subheaderTypographyProps={{ variant: "subtitle2" }}
       className={classes.principalPartsRow}
-      action={<BookmarkButton {...{ id, bookmarked }} />}
+      action={
+        expanded === undefined ? (
+          <BookmarkButton {...{ id, bookmarked }} />
+        ) : (
+          <ExpandIcon {...{ expanded }} style={{ marginTop: 8 }} />
+        )
+      }
       aria-label="Principal Parts, Inflection, and Bookmark toggle"
     />
   )

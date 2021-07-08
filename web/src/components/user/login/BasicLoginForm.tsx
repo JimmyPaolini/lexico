@@ -53,6 +53,7 @@ export default function BasicLogin(): JSX.Element {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
+                  style={{ left: 8 }}
                   aria-label="toggle password visibility"
                   onClick={() =>
                     setShowPassword((showPassword) => !showPassword)

@@ -10,7 +10,7 @@ export default function LoginCard(): JSX.Element {
 
   return (
     <Card className={classes.card}>
-      <CardHeader title="Sign In to Save Bookmarks & Settings" />
+      <CardHeader title="Sign In" />
       <Divider variant="middle" />
       <CardContent>
         <Grid container direction="column" alignItems="center">

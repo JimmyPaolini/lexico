@@ -7,13 +7,13 @@ import LazyLoad from "react-lazyload"
 
 type Card = {
   key: string | number
-  Card: () => JSX.Element
+  Card: JSX.Element
 }
 
-interface Props {
+interface CardDeckProps {
   cards: Card[]
 }
-export default function CardDeck({ cards }: Props): JSX.Element {
+export default function CardDeck({ cards }: CardDeckProps): JSX.Element {
   const classes = useStyles()
 
   let numCols = 1
@@ -50,7 +50,7 @@ export default function CardDeck({ cards }: Props): JSX.Element {
                 <Grid item key={card.key}>
                   <Grow in appear exit timeout={timeout}>
                     <LazyLoad offset={100} throttle={50} height={28}>
-                      <card.Card />
+                      {card.Card}
                     </LazyLoad>
                   </Grow>
                 </Grid>

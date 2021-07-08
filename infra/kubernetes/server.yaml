@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: server
   replicas: 3
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: 2
   template:
     metadata:
       labels:

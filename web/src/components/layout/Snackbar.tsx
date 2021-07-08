@@ -16,7 +16,8 @@ export default function Snackbar({ children }: Props): JSX.Element {
         vertical: "bottom",
         horizontal: "right",
       }}
-      hideIconVariant>
+      hideIconVariant
+      preventDuplicate>
       {children}
     </SnackbarProvider>
   )
