@@ -14,7 +14,7 @@ const circularReplacer = () => {
 
 const consoleTransport = new transports.Console({
   format:
-    process.env.NODE_ENV !== "production"
+    process.env.NODE_ENV === "production"
       ? format.combine(
           format.timestamp(),
           format((info) => {

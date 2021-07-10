@@ -8,7 +8,6 @@ export default function useSearch(
   isLatin: boolean,
 ): ReturnType<typeof useQuery> {
   const options = {
-    enabled: false,
     staleTime: 1000 * 60 * 5,
   }
   return isLatin

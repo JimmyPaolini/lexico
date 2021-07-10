@@ -2,7 +2,7 @@ import Grid from "@material-ui/core/Grid"
 import Grow from "@material-ui/core/Grow"
 import { makeStyles, Theme } from "@material-ui/core/styles"
 import useMediaQuery from "@material-ui/core/useMediaQuery"
-import React, { Dispatch, useEffect, useState } from "react"
+import React, { Dispatch, memo, useEffect, useState } from "react"
 import LazyLoad from "react-lazyload"
 
 type Card = {
@@ -13,7 +13,7 @@ type Card = {
 interface CardDeckProps {
   cards: Card[]
 }
-export default function CardDeck({ cards }: CardDeckProps): JSX.Element {
+export default memo(function CardDeck({ cards }: CardDeckProps): JSX.Element {
   const classes = useStyles()
 
   let numCols = 1
@@ -61,7 +61,7 @@ export default function CardDeck({ cards }: CardDeckProps): JSX.Element {
       })}
     </>
   )
-}
+})
 
 function reorganizeCards(
   cards: Card[],

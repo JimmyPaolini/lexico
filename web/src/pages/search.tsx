@@ -9,6 +9,7 @@ import Logo from "../components/accessories/Logo"
 import EntryCard from "../components/EntryCard/EntryCard"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
 import useSearch from "../hooks/search/useSearch"
+import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 
 interface SearchProps {
   initialSearch: string
@@ -22,25 +23,31 @@ export default function Search({
 
   const [isLatin, setLatin] = useState<boolean>(initialIsLatin)
   const [search, setSearch] = useState<string>(initialSearch)
+  const [searched, setSearched] = useState<string>(initialSearch)
 
-  const {
-    data: entries,
-    refetch: fetch,
-    isLoading,
-  } = useSearch(search, isLatin) as UseQueryResult<Entry[], unknown>
+  const { data: entries, isLoading } = useSearch(
+    searched,
+    isLatin,
+  ) as UseQueryResult<Entry[], unknown>
 
-  const executeSearch = () => {
-    if (!search) return
-    fetch()
-    const hash = (isLatin ? "?latin=" : "?english=") + search
+  useEffect(() => setSearched(search), [isLatin])
+  useEffect(() => {
+    if (!search) setSearched("")
+  }, [search])
+  useEffect(() => {
+    if (!searched) return
+    const hash = (isLatin ? "?latin=" : "?english=") + searched
     router.push(router.pathname + hash)
-  }
-
-  useEffect(() => executeSearch(), [isLatin])
+    googleAnalyticsEvent("search", {
+      category: "search",
+      label: isLatin ? "latin" : "english",
+      value: searched,
+    })
+  }, [searched])
 
   const cards =
     entries?.map((entry: Entry) => {
-      const Card = <EntryCard {...{ entry, searched: search }} />
+      const Card = <EntryCard {...{ entry, searched }} />
       return { key: entry.id, Card }
     }) || []
 
@@ -50,14 +57,14 @@ export default function Search({
         search,
         setSearch,
         isLoading: isLoading && !!search,
-        handleSearchExecute: executeSearch,
+        handleSearchExecute: () => setSearched(search),
         target: "lexico",
         isLatin,
         setLatin,
       }}>
-      {!search ? (
+      {!searched ? (
         <Logo />
-      ) : !entries?.length ? (
+      ) : !entries?.length && !isLoading ? (
         <Typography variant="h4">No Results</Typography>
       ) : (
         <CardDeck cards={cards} />

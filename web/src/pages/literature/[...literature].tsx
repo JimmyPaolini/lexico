@@ -4,12 +4,13 @@ import { GetStaticPaths, GetStaticProps } from "next"
 import { useContext, useEffect, useState } from "react"
 import Text from "../../../../entity/literature/Text"
 import { Context } from "../../components/layout/Context"
-import ReaderModal from "../../components/literature/ReaderModal"
-import ReaderText from "../../components/literature/ReaderText"
+import ReaderModal from "../../components/literature/reader/ReaderModal"
+import ReaderText from "../../components/literature/reader/ReaderText"
 import getTextIdsQuery from "../../graphql/literature/getTextIds.graphql"
 import { getText } from "../../hooks/literature/useGetText"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
 import { MyTheme } from "../../theme/theme"
+import { googleAnalyticsEvent } from "../../utils/googleAnalytics"
 import { getSettingsLocal } from "../../utils/localSettings"
 import { showReaderInstructions } from "../../utils/readerInstructions"
 import { graphQLClient } from "../_app"
@@ -26,6 +27,11 @@ export default function Reader({ text }: Props): JSX.Element {
   const openModal = (word: string) => {
     setSearched(word)
     setOpen(true)
+    googleAnalyticsEvent("search", {
+      category: "literature",
+      label: text.title,
+      value: word,
+    })
   }
 
   const { enqueueSnackbar } = useSnackbarEnhanced()
@@ -36,6 +42,14 @@ export default function Reader({ text }: Props): JSX.Element {
         { variant: "info" },
       )
     }
+  }, [])
+
+  useEffect(() => {
+    googleAnalyticsEvent("reader", {
+      category: "literature",
+      label: "open",
+      value: text.title,
+    })
   }, [])
 
   return (
@@ -53,12 +67,7 @@ export default function Reader({ text }: Props): JSX.Element {
       `}</style>
       <Grid container justify="center">
         {!!text && user !== undefined ? (
-          <ReaderText
-            {...{
-              text,
-              openModal,
-            }}
-          />
+          <ReaderText {...{ text, openModal }} />
         ) : null}
       </Grid>
       <ReaderModal {...{ searched, open, setOpen }} />

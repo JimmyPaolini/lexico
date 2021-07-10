@@ -1,17 +1,17 @@
 import Card from "@material-ui/core/Card"
 import Divider from "@material-ui/core/Divider"
 import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
+import React, { memo } from "react"
 import Entry from "../../../../entity/dictionary/Entry"
 import FormsRow from "./FormsRow/FormsRow"
 import PrincipalPartsRow from "./PrincipalPartsRow/PrincipalPartsRow"
-import TranslationsRow from "./TranslationsRow"
+import TranslationsRow from "./TranslationsRow/TranslationsRow"
 
 interface Props {
   entry: Entry
   searched: string
 }
-export default function EntryCard({
+export default memo(function EntryCard({
   entry,
   searched = "",
 }: Props): JSX.Element {
@@ -42,7 +42,7 @@ export default function EntryCard({
       />
     </Card>
   )
-}
+})
 
 const useStyles = makeStyles((theme: any) => ({
   entryCard: {

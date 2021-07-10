@@ -13,9 +13,6 @@
     "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
     "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server .",
     "build:database": "docker image pull postgres:13",
-    "build:elasticsearch": "docker image pull docker.elastic.co/elasticsearch/elasticsearch:7.12.0",
-    "build:fluentbit": "docker build infra/docker -f infra/docker/fluentbit.Dockerfile -t jimmypaolini/fluentbit",
-    "build:kibana": "docker image pull docker.elastic.co/kibana/kibana:7.12.0",
 
     "deploy:web": "kubectl apply -f ./infra/kubernetes/web.yaml",
     "deploy:server": "kubectl apply -f ./infra/kubernetes/server.yaml",
@@ -24,7 +21,7 @@
     "deploy:elasticsearch": "helm install elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
     "deploy:fluentbit": "helm install fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
     "deploy:kibana": "helm install kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml",
-    "deploy:monitoring": "helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring",
+    "deploy:monitoring": "helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring -f ./infra/helm/monitoring.yaml",
 
     "update:web": "kubectl rollout restart deployment web",
     "update:server": "kubectl rollout restart deployment server",
@@ -32,7 +29,8 @@
     "update:nginx": "helm upgrade nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
     "update:elasticsearch": "helm upgrade elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
     "update:fluentbit": "helm upgrade fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
-    "update:kibana": "helm upgrade kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml"
+    "update:kibana": "helm upgrade kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml",
+    "update:monitoring": "helm upgrade monitoring prometheus-community/kube-prometheus-stack -n monitoring -f ./infra/helm/monitoring.yaml"
   },
   "dependencies": {
     "dotenv": "^8.2.0",

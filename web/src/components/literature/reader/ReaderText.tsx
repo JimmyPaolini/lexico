@@ -1,17 +1,20 @@
 import { Box } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import Text from "../../../../entity/literature/Text"
-import { MyTheme } from "../../theme/theme"
-import { sentenceCase } from "../../utils/string"
-import CardHeader from "../accessories/CardHeader"
+import Text from "../../../../../entity/literature/Text"
+import { MyTheme } from "../../../theme/theme"
+import { sentenceCase } from "../../../utils/string"
+import CardHeader from "../../accessories/CardHeader"
 import ReaderLine from "./ReaderLine"
 
-interface Props {
+interface ReaderTextProps {
   text: Text
   openModal: (word: string) => void
 }
-export default function ReaderText({ text, openModal }: Props): JSX.Element {
+export default function ReaderText({
+  text,
+  openModal,
+}: ReaderTextProps): JSX.Element {
   const classes = useStyles()
 
   const title = sentenceCase(text.title)

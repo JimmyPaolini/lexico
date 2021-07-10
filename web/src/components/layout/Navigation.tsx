@@ -10,20 +10,12 @@ import {
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import {
-  AccountBalance,
-  AccountCircle,
-  Bookmark,
-  ChevronLeft,
-  Edit,
-  Menu,
-  MenuBook,
-  Search,
-} from "@material-ui/icons"
+import { ChevronLeft, Menu } from "@material-ui/icons"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React, { useContext, useEffect, useState } from "react"
 import { Context } from "./Context"
+import pages from "./pages"
 
 export default function Navigation(): JSX.Element {
   const classes = useStyles()
@@ -116,42 +108,3 @@ const useStyles = makeStyles((theme) => ({
     left: 12,
   },
 }))
-
-const pages = [
-  {
-    Name: "Search",
-    name: "search",
-    icon: <Search />,
-    keybind: "s",
-  },
-  {
-    Name: "Bookmarks",
-    name: "bookmarks",
-    icon: <Bookmark />,
-    keybind: "b",
-  },
-  {
-    Name: "Literature",
-    name: "literature",
-    icon: <MenuBook />,
-    keybind: "l",
-  },
-  {
-    Name: "Grammar",
-    name: "grammar",
-    icon: <Edit />,
-    keybind: "g",
-  },
-  {
-    Name: "User",
-    name: "user",
-    icon: <AccountCircle />,
-    keybind: "u",
-  },
-  {
-    Name: "About",
-    name: "about",
-    icon: <AccountBalance />,
-    keybind: "a",
-  },
-]

@@ -10,7 +10,6 @@ import { makeStyles, Theme } from "@material-ui/core/styles"
 import { useContext, useState } from "react"
 import { Forms } from "../../../../../entity/dictionary/word/Forms"
 import { PartOfSpeech } from "../../../../../entity/dictionary/word/PartOfSpeech"
-import useEventListener from "../../../hooks/useEventListener"
 import identifierAbbreviations from "../../../utils/identifierAbbreviations"
 import { getSettingsLocal } from "../../../utils/localSettings"
 import ExpandIcon from "../../accessories/ExpandIcon"
@@ -52,12 +51,6 @@ export default function FormsRow({
   const FormsCard = !forms ? null : partOfSpeechToFormsCard[partOfSpeech]
 
   const expandable = !!FormsCard
-
-  useEventListener("keypress", (e: any) => {
-    if (window.location.pathname.match(/^\/bookmarks/)) return
-    if (e.key === "f" && document?.activeElement?.tagName !== "INPUT")
-      setExpanded(!expanded)
-  })
 
   if (searched.match(/Table/i) && !expandable) return <></>
 

@@ -68,13 +68,13 @@ export default class AuthenticationResolver {
   ): Promise<User> {
     if (!validateEmail(email)) throw new Error("invalid email")
     if (!validatePassword(password)) throw new Error("invalid password")
-    const user = await this.Users.findOne({
+    const user = (await this.Users.findOne({
       email: email.toLowerCase(),
       googleId: IsNull(),
       facebookId: IsNull(),
-    })
+    })) as (User & { password: string }) | undefined
     if (!user) throw new Error("email not found")
-    if (!(await verify(user.password!, password)))
+    if (!(await verify(user.password, password)))
       throw new Error("incorrect password")
     log.info("login basic user", { id: user.id, email })
     res.cookie("accessToken", createAccessToken(user), { httpOnly: true })
@@ -162,10 +162,12 @@ export default class AuthenticationResolver {
   async validatePasswordResetToken(
     @Arg("passwordResetToken") passwordResetToken: string,
   ): Promise<boolean> {
-    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as JwtPayload
+    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as JwtPayload & {
+      sub: string
+    }
     if (!claims) throw new Error("invalid password reset token")
     const user = await this.Users.findOneOrFail({
-      email: claims.sub!.toLowerCase(),
+      email: claims.sub.toLowerCase(),
       googleId: IsNull(),
       facebookId: IsNull(),
     })
@@ -180,18 +182,20 @@ export default class AuthenticationResolver {
     @Arg("password") password: string,
     @Ctx() ctx: ResolverContext,
   ): Promise<boolean> {
-    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as JwtPayload
+    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as JwtPayload & {
+      sub: string
+    }
     if (!claims) throw new Error("invalid password reset token")
     if (!validatePassword(password)) throw new Error("invalid password")
     await this.Users.update(
       {
-        email: claims.sub!.toLowerCase(),
+        email: claims.sub.toLowerCase(),
         googleId: IsNull(),
         facebookId: IsNull(),
       },
       { password: await hash(password), passwordResetToken: undefined },
     )
-    await this.login(claims.sub!, password, ctx)
+    await this.login(claims.sub, password, ctx)
     return true
   }
 }

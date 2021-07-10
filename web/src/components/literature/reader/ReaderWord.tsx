@@ -1,12 +1,14 @@
 import { CardActionArea } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
 
-interface Props {
+interface ReaderWordProps {
   word: string
   openModal: (word: string) => void
 }
-export default function ReaderWord({ word, openModal }: Props): JSX.Element {
+export default function ReaderWord({
+  word,
+  openModal,
+}: ReaderWordProps): JSX.Element {
   const classes = useStyles()
   const isWord = word.match(/\w+/i)
 

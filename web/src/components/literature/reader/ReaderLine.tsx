@@ -2,18 +2,21 @@ import { Divider, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { useContext } from "react"
 import LazyLoad from "react-lazyload"
-import Line from "../../../../entity/literature/Line"
-import { getSettingsLocal } from "../../utils/localSettings"
-import { normalize } from "../../utils/string"
-import { Context } from "../layout/Context"
+import Line from "../../../../../entity/literature/Line"
+import { getSettingsLocal } from "../../../utils/localSettings"
+import { normalize } from "../../../utils/string"
+import { Context } from "../../layout/Context"
 import ReaderWord from "./ReaderWord"
 
-interface Props {
+interface ReaderLineProps {
   line: Line
   openModal: (word: string) => void
 }
 
-export default function ReaderLine({ line, openModal }: Props): JSX.Element {
+export default function ReaderLine({
+  line,
+  openModal,
+}: ReaderLineProps): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
   const words = normalize(line.line).match(/\w+|\W+/gi)

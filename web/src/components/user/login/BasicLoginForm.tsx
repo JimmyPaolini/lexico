@@ -15,6 +15,7 @@ import useRegister from "../../../hooks/authentication/useRegister"
 import { capitalizeFirstLetter, validateEmail } from "../../../utils/string"
 import SubmitButton from "../../accessories/SubmitButton"
 import TextBox from "../../accessories/TextBox"
+import {googleAnalyticsEvent} from '../../../utils/googleAnalytics';
 
 export default function BasicLogin(): JSX.Element {
   const classes = useStyles()
@@ -28,8 +29,21 @@ export default function BasicLogin(): JSX.Element {
     },
     validate,
     onSubmit: async () => {
-      if (submit === "sign in") await login()
-      else await register()
+      if (submit === "sign in") {
+        await login()
+        googleAnalyticsEvent("login", {
+          category: "user",
+          label: "basic",
+          value: formik.values.email,
+        })
+      } else {
+        await register()
+        googleAnalyticsEvent("register", {
+          category: "user",
+          label: "email",
+          value: formik.values.email,
+        })
+      }
     },
   })
   const { refetch: login, error: loginError } = useLogin(formik.values)

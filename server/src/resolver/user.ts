@@ -42,12 +42,12 @@ export default class UserResolver {
   @Query(() => [Entry])
   @UseMiddleware(Authenticate)
   async bookmarks(@Ctx() { user: { id } }: ResolverContext): Promise<Entry[]> {
-    const user = await this.Users.findOne(id, {
+    const user = await this.Users.findOneOrFail(id, {
       relations: ["bookmarks"],
     })
     // if (!user!.bookmarks) throw new Error("user has no bookmarks")
     return (
-      user!.bookmarks?.map((entry) => {
+      user.bookmarks?.map((entry) => {
         entry.bookmarked = true
         return entry
       }) || []

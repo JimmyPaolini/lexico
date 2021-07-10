@@ -2,6 +2,7 @@ import { print } from "graphql"
 import { rawRequest } from "graphql-request"
 import { GetServerSideProps } from "next"
 import facebookQuery from "../graphql/authentication/facebook.graphql"
+import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 import { serverEndpoint } from "./api"
 
 export default function facebook(): JSX.Element {
@@ -20,6 +21,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   )
   const cookieHeader = headers.get("set-cookie")
   if (!errors && cookieHeader) res.setHeader("set-cookie", cookieHeader)
+
+  googleAnalyticsEvent("login", {
+    category: "user",
+    label: "oauth",
+    value: "facebook",
+  })
 
   res.writeHead(302, { Location: "/user" })
   res.end()

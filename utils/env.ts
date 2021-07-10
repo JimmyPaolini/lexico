@@ -21,4 +21,5 @@ export const {
 
   SLACK_WEBHOOK,
   SENDGRID_API_KEY,
+  GOOGLE_ANALYTICS_ID,
 } = process.env

@@ -1,13 +1,15 @@
 import { CssBaseline, ThemeProvider } from "@material-ui/core"
 import { GraphQLClient } from "graphql-request"
-import type { AppProps } from "next/app"
+import type { AppProps, NextWebVitalsMetric } from "next/app"
 import Head from "next/head"
 import React, { useEffect } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { Hydrate } from "react-query/hydration"
 import { ContextProvider } from "../components/layout/Context"
 import Layout from "../components/layout/Layout"
+import useGoogleAnalytics from "../hooks/useGoogleAnalytics"
 import theme from "../theme/theme"
+import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 
 const clientEndpoint =
   process.env.NEXT_ENV === "build"
@@ -29,6 +31,8 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     if (jssStyles) jssStyles.parentElement?.removeChild(jssStyles)
   }, [])
 
+  useGoogleAnalytics()
+
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
@@ -46,6 +50,17 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
       </QueryClientProvider>
     </ThemeProvider>
   )
+}
+
+export function reportWebVitals(metric: NextWebVitalsMetric): void {
+  console.log(metric)
+  const { id, name, label, value } = metric
+  googleAnalyticsEvent(name, {
+    category: label === "web-vital" ? "Web Vitals" : "Next.js custom metric",
+    label: id,
+    value: Math.round(name === "CLS" ? value * 1000 : value),
+    non_interaction: true,
+  })
 }
 
 // Only uncomment this method if you have blocking data requirements for

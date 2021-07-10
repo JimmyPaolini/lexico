@@ -3,13 +3,13 @@ import { makeStyles } from "@material-ui/core/styles"
 import React, { Dispatch, SetStateAction, useRef } from "react"
 import { UseQueryResult } from "react-query"
 import { useSwipeable } from "react-swipeable"
-import Entry from "../../../../entity/dictionary/Entry"
-import useSearchLatin from "../../hooks/search/useSearchLatin"
-import useEventListener from "../../hooks/useEventListener"
-import CardDeck from "../accessories/CardDeck"
-import EntryCard from "../EntryCard/EntryCard"
+import Entry from "../../../../../entity/dictionary/Entry"
+import useSearchLatin from "../../../hooks/search/useSearchLatin"
+import useEventListener from "../../../hooks/useEventListener"
+import CardDeck from "../../accessories/CardDeck"
+import EntryCard from "../../EntryCard/EntryCard"
 
-interface Props {
+interface ReaderModalProps {
   searched: string
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
@@ -18,7 +18,7 @@ export default function ReaderModal({
   searched,
   open,
   setOpen,
-}: Props): JSX.Element {
+}: ReaderModalProps): JSX.Element {
   const classes = useStyles()
   const ref = useRef<HTMLDivElement>(null)
 
@@ -35,7 +35,7 @@ export default function ReaderModal({
 
   const cards =
     entries?.map((entry: Entry) => {
-      const Card = () => <EntryCard {...{ entry, searched }} />
+      const Card = <EntryCard {...{ entry, searched }} />
       return { key: entry.id, Card }
     }) || []
 
