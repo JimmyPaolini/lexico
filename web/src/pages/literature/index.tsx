@@ -1,5 +1,6 @@
 import { Typography } from "@material-ui/core"
 import { GetStaticProps } from "next"
+import Head from "next/head"
 import React, { useEffect, useMemo, useState } from "react"
 import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
@@ -33,20 +34,35 @@ export default function Literature({ authors }: LiteratureProps): JSX.Element {
   // cards.unshift({ key: "custom", Card: <LiteratureCustomCard /> })
 
   return (
-    <SearchBarLayout
-      searchBarProps={{
-        search,
-        setSearch,
-        isLoading: false,
-        handleSearchExecute,
-        target: "literature",
-      }}>
-      {!cards.length ? (
-        <Typography variant="h4">No Results</Typography>
-      ) : (
-        <CardDeck cards={cards} />
-      )}
-    </SearchBarLayout>
+    <>
+      <Head>
+        <title>Lexico - Literature</title>
+        <meta
+          name="description"
+          content="Read and translate Latin literature from authors like Caesar and Virgil, or input your own Latin text"
+        />
+        <meta
+          name="keywords"
+          content={`Latin, Literature, Read, English, Translation, ${authors
+            .map((author) => author.name)
+            .join(", ")}`}
+        />
+      </Head>
+      <SearchBarLayout
+        searchBarProps={{
+          search,
+          setSearch,
+          isLoading: false,
+          handleSearchExecute,
+          target: "literature",
+        }}>
+        {!cards.length ? (
+          <Typography variant="h4">No Results</Typography>
+        ) : (
+          <CardDeck cards={cards} />
+        )}
+      </SearchBarLayout>
+    </>
   )
 }
 

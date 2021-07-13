@@ -1,3 +1,4 @@
+import Head from "next/head"
 import React, { useEffect, useRef, useState } from "react"
 import CardDeck from "../components/accessories/CardDeck"
 import AdjectiveDeclensionCard from "../components/grammar/AdjectiveDeclensionCard"
@@ -54,15 +55,20 @@ export default function Grammar(): JSX.Element {
   }
 
   return (
-    <SearchBarLayout
-      searchBarProps={{
-        search,
-        setSearch,
-        isLoading: false,
-        handleSearchExecute,
-        target: "grammar",
-      }}>
-      <CardDeck cards={cards} />
-    </SearchBarLayout>
+    <>
+      <Head>
+        <title>Lexico - Grammar</title>
+      </Head>
+      <SearchBarLayout
+        searchBarProps={{
+          search,
+          setSearch,
+          isLoading: false,
+          handleSearchExecute,
+          target: "grammar",
+        }}>
+        <CardDeck cards={cards} />
+      </SearchBarLayout>
+    </>
   )
 }

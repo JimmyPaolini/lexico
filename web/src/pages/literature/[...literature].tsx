@@ -1,6 +1,7 @@
 import { Grid, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { GetStaticPaths, GetStaticProps } from "next"
+import Head from "next/head"
 import { useContext, useEffect, useState } from "react"
 import Text from "../../../../entity/literature/Text"
 import { Context } from "../../components/layout/Context"
@@ -13,6 +14,7 @@ import { MyTheme } from "../../theme/theme"
 import { googleAnalyticsEvent } from "../../utils/googleAnalytics"
 import { getSettingsLocal } from "../../utils/localSettings"
 import { showReaderInstructions } from "../../utils/readerInstructions"
+import { sentenceCase } from "../../utils/string"
 import { graphQLClient } from "../_app"
 
 interface Props {
@@ -52,26 +54,43 @@ export default function Reader({ text }: Props): JSX.Element {
     })
   }, [])
 
+  let title = "Lexico - Literature: " + sentenceCase(text.author.id)
+  if (text.book)
+    title += " " + sentenceCase(text.book.title).replace(/^\d+ /, "")
+  title += " " + sentenceCase(text.title)
+
   return (
-    <Paper
-      square
-      elevation={0}
-      className={classes.reader}
-      style={{
-        fontSize: user?.settings.fontSize || getSettingsLocal().fontSize,
-      }}>
-      <style jsx global>{`
-        body#body {
-          background-color: black;
-        }
-      `}</style>
-      <Grid container justify="center">
-        {!!text && user !== undefined ? (
-          <ReaderText {...{ text, openModal }} />
-        ) : null}
-      </Grid>
-      <ReaderModal {...{ searched, open, setOpen }} />
-    </Paper>
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={`Read and translate ${title}`} />
+        <meta
+          name="keywords"
+          content={`Latin ${text.author.name}${
+            text.book ? ", " + text.book.title : ""
+          }, ${text.title}, Literature, Read, English, Translation,`}
+        />
+      </Head>
+      <Paper
+        square
+        elevation={0}
+        className={classes.reader}
+        style={{
+          fontSize: user?.settings.fontSize || getSettingsLocal().fontSize,
+        }}>
+        <style jsx global>{`
+          body#body {
+            background-color: black;
+          }
+        `}</style>
+        <Grid container justify="center">
+          {!!text && user !== undefined ? (
+            <ReaderText {...{ text, openModal }} />
+          ) : null}
+        </Grid>
+        <ReaderModal {...{ searched, open, setOpen }} />
+      </Paper>
+    </>
   )
 }
 

@@ -1,5 +1,6 @@
 import { Typography } from "@material-ui/core"
 import { GetServerSideProps } from "next"
+import Head from "next/head"
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { UseQueryResult } from "react-query"
@@ -43,7 +44,7 @@ export default function Search({
       label: isLatin ? "latin" : "english",
       value: searched,
     })
-  }, [searched])
+  }, [searched, isLatin])
 
   const cards =
     entries?.map((entry: Entry) => {
@@ -51,26 +52,59 @@ export default function Search({
       return { key: entry.id, Card }
     }) || []
 
+  const { title, description, keywords } = getPageMetadata(searched, isLatin)
+
   return (
-    <SearchBarLayout
-      searchBarProps={{
-        search,
-        setSearch,
-        isLoading: isLoading && !!search,
-        handleSearchExecute: () => setSearched(search),
-        target: "lexico",
-        isLatin,
-        setLatin,
-      }}>
-      {!searched ? (
-        <Logo />
-      ) : !entries?.length && !isLoading ? (
-        <Typography variant="h4">No Results</Typography>
-      ) : (
-        <CardDeck cards={cards} />
-      )}
-    </SearchBarLayout>
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+      </Head>
+      <SearchBarLayout
+        searchBarProps={{
+          search,
+          setSearch,
+          isLoading: isLoading && !!search,
+          handleSearchExecute: () => setSearched(search),
+          target: "lexico",
+          isLatin,
+          setLatin,
+        }}>
+        {!searched ? (
+          <Logo />
+        ) : !entries?.length && !isLoading ? (
+          <Typography variant="h4">No Results</Typography>
+        ) : (
+          <CardDeck cards={cards} />
+        )}
+      </SearchBarLayout>
+    </>
   )
+}
+
+function getPageMetadata(searched: string, isLatin: boolean) {
+  let title = `Lexico - Search`
+  if (searched) {
+    if (isLatin) title += ` Latin: ${searched}`
+    else title += ` English: ${searched}`
+  }
+
+  let description = "Search for Latin and English"
+  if (searched) {
+    description = `Search ${isLatin ? "Latin" : "English"} for ${searched}`
+  }
+  description +=
+    " translations, principle parts, part of speech, and other grammatical information"
+
+  let keywords = "Latin, English"
+  if (searched) {
+    if (isLatin) keywords += ", Latin " + searched
+    else keywords += ", English " + searched
+  }
+  keywords += ", translation, grammar, principle parts, part of speech"
+
+  return { title, description, keywords }
 }
 
 export const getServerSideProps: GetServerSideProps = async ({

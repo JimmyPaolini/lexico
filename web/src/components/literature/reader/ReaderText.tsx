@@ -28,10 +28,12 @@ export default function ReaderText({
         title={title}
         titleTypographyProps={{
           className: classes.title,
+          component: "h1",
         }}
         subheader={subtitle}
         subheaderTypographyProps={{
           className: classes.subtitle,
+          component: "h2",
         }}
         className={classes.cardHeader}
         classes={{ action: classes.shownAction }}

@@ -1,5 +1,6 @@
 import { Button, Typography } from "@material-ui/core"
 import { GetServerSideProps } from "next"
+import Head from "next/head"
 import { useRouter } from "next/router"
 import { SnackbarKey } from "notistack"
 import { useContext, useEffect, useMemo, useState } from "react"
@@ -90,22 +91,27 @@ export default function Bookmarks(): JSX.Element {
   }, [])
 
   return (
-    <SearchBarLayout
-      searchBarProps={{
-        search,
-        setSearch,
-        isLoading,
-        handleSearchExecute: () => setSearched(search),
-        target: "bookmarks",
-      }}>
-      {isLoading ? null : isSuccess &&
-        Array.isArray(bookmarks) &&
-        !bookmarks.length ? (
-        <BookmarkInstructionsCard />
-      ) : (
-        <CardDeck cards={cards} />
-      )}
-    </SearchBarLayout>
+    <>
+      <Head>
+        <title>Lexico - Bookmarks</title>
+      </Head>
+      <SearchBarLayout
+        searchBarProps={{
+          search,
+          setSearch,
+          isLoading,
+          handleSearchExecute: () => setSearched(search),
+          target: "bookmarks",
+        }}>
+        {isLoading ? null : isSuccess &&
+          Array.isArray(bookmarks) &&
+          !bookmarks.length ? (
+          <BookmarkInstructionsCard />
+        ) : (
+          <CardDeck cards={cards} />
+        )}
+      </SearchBarLayout>
+    </>
   )
 }
 
