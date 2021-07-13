@@ -21,6 +21,11 @@ JOIN translation
 ON entry.id = translation."entryId"
 WHERE entry.id LIKE 'iii:%'
 
+-- @block find translation
+SELECT *
+FROM translation
+WHERE translation.translation ~* 'fuck'
+
 -- @block find word
 SELECT word, "entryId" FROM word
 JOIN word_entries_entry
