@@ -32,6 +32,7 @@
 <a href="https://www.docker.com"><img width="64" height="64" alt="docker" src="web/public/icon/tool/docker.png"></a>
 <a href="https://kubernetes.io"><img width="64" height="64" alt="kubernetes" src="web/public/icon/tool/kubernetes.png"></a>
 <a href="https://helm.sh"><img width="64" height="64" alt="helm" src="web/public/icon/tool/helm.png"></a>
+<a href="https://bitnami.com/stacks/helm"><img width="64" height="64" alt="bitnami" src="web/public/icon/tool/bitnami.png"></a>
 <a href="https://prometheus.io"><img width="64" height="64" alt="prometheus" src="web/public/icon/tool/prometheus.png"></a>
 <a href="https://grafana.com"><img width="64" height="64" alt="grafana" src="web/public/icon/tool/grafana.png"></a>
 <a href="https://k8slens.dev"><img width="64" height="64" alt="lens" src="web/public/icon/tool/lens.png"></a>

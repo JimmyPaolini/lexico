@@ -62,7 +62,6 @@ export default function SearchBar({
             className={classes.input}
             placeholder={"Search " + pascalCase(target)}
             inputProps={{ "aria-label": "search", ref: input }}
-            tabIndex={1}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => {

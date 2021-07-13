@@ -1,14 +1,14 @@
 {
   "scripts": {
-    "lint": "eslint --no-error-on-unmatched-pattern *",
-    "format": "prettier --check .",
-    "lintwatch": "nodemon -e ts --exec \"clear; yarn lint\"",
-    "formatwatch": "nodemon -e ts --exec \"clear; yarn format\"",
+    "lint": "eslint --no-error-on-unmatched-pattern * && prettier --check .",
+    "lint:watch": "nodemon -e ts --exec \"clear; yarn lint\"",
+    "format": "prettier .",
 
-    "dev": "docker compose -f infra/docker/docker-compose.services.yml up",
-    "undev": "docker compose -f infra/docker/docker-compose.services.yml down --remove-orphans",
-    "start": "docker compose -f infra/docker/docker-compose.services.yml -f infra/docker/docker-compose.yml up",
-    "stop": "docker compose -f infra/docker/docker-compose.services.yml -f infra/docker/docker-compose.yml down --remove-orphans",
+    "dev": "docker compose -f infra/docker/docker-compose.database.yml up",
+    "undev": "docker compose -f infra/docker/docker-compose.database.yml down --remove-orphans",
+    "build": "yarn build:database & yarn build:server & yarn build:web &",
+    "start": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml up",
+    "stop": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml down --remove-orphans",
 
     "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
     "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server .",
@@ -16,6 +16,8 @@
 
     "deploy:web": "kubectl apply -f ./infra/kubernetes/web.yaml",
     "deploy:server": "kubectl apply -f ./infra/kubernetes/server.yaml",
+    "deploy:env": "kubectl apply -f ./infra/kubernetes/.env.yaml",
+    "deploy:ingress": "kubectl apply -f ./infra/kubernetes/ingress.yaml",
     "deploy:database": "helm install database bitnami/postgresql -f ./infra/helm/database.yaml",
     "deploy:nginx": "helm install nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
     "deploy:elasticsearch": "helm install elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",

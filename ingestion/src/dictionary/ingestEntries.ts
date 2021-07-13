@@ -3,7 +3,7 @@ import path from "path"
 import { getFirstLetter } from "../../../utils/string"
 import ingestEntryWord from "./ingestEntry"
 
-export default async function ingestEntries(): void {
+export default async function ingestEntries(): Promise<void> {
   const files = getHtmlFiles()
   for (const fileName of files) {
     await ingestEntryWord(fileName.replace(/\.json$/, ""))

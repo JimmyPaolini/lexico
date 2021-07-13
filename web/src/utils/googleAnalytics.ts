@@ -1,6 +1,6 @@
 export function googleAnalyticsPageView(url: URL): void {
   const gtag = (window as any)?.gtag
-  gtag("config", process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
+  gtag("config", process.env.GOOGLE_ANALYTICS_ID, {
     page_path: url,
   })
 }

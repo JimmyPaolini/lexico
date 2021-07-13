@@ -20,7 +20,7 @@ export const categories: { [key: string]: string } = {
   superlative: "Latin_superlative_adjectives",
 }
 
-export default async function ingestWiktionary(): void {
+export default async function ingestWiktionary(): Promise<void> {
   for (const category of Object.keys(categories)) {
     await ingestCategory(category)
   }

@@ -1,0 +1,71 @@
+[
+  {
+    "QUERY PLAN": "Nested Loop Left Join  (cost=11275.84..31694.42 rows=1 width=1263) (actual time=1733.207..3803.446 rows=2 loops=1)"
+  },
+  {
+    "QUERY PLAN": "  Join Filter: ((\"Word_Word_entries\".\"wordWord\")::text = (\"Word\".word)::text)"
+  },
+  {
+    "QUERY PLAN": "  ->  Gather  (cost=1000.00..16942.02 rows=1 width=12) (actual time=499.375..499.537 rows=1 loops=1)"
+  },
+  {
+    "QUERY PLAN": "        Workers Planned: 2"
+  },
+  {
+    "QUERY PLAN": "        Workers Launched: 2"
+  },
+  {
+    "QUERY PLAN": "        ->  Parallel Seq Scan on word \"Word\"  (cost=0.00..15941.92 rows=1 width=12) (actual time=408.519..477.964 rows=0 loops=3)"
+  },
+  {
+    "QUERY PLAN": "              Filter: ((word)::text = 'amoenus'::text)"
+  },
+  {
+    "QUERY PLAN": "              Rows Removed by Filter: 339314"
+  },
+  {
+    "QUERY PLAN": "  ->  Hash Right Join  (cost=10275.84..14752.39 rows=1 width=1263) (actual time=1233.809..3303.831 rows=2 loops=1)"
+  },
+  {
+    "QUERY PLAN": "        Hash Cond: ((\"Word_entries_translations\".\"entryId\")::text = (\"Word_entries\".id)::text)"
+  },
+  {
+    "QUERY PLAN": "        ->  Seq Scan on translation \"Word_entries_translations\"  (cost=0.00..4022.85 rows=120985 width=65) (actual time=1.187..1118.033 rows=120985 loops=1)"
+  },
+  {
+    "QUERY PLAN": "        ->  Hash  (cost=10275.83..10275.83 rows=1 width=1198) (actual time=1107.465..1107.526 rows=1 loops=1)"
+  },
+  {
+    "QUERY PLAN": "              Buckets: 1024  Batches: 1  Memory Usage: 10kB"
+  },
+  {
+    "QUERY PLAN": "              ->  Hash Right Join  (cost=8.46..10275.83 rows=1 width=1198) (actual time=208.162..1107.436 rows=1 loops=1)"
+  },
+  {
+    "QUERY PLAN": "                    Hash Cond: ((\"Word_entries\".id)::text = (\"Word_Word_entries\".\"entryId\")::text)"
+  },
+  {
+    "QUERY PLAN": "                    ->  Seq Scan on entry \"Word_entries\"  (cost=0.00..9970.58 rows=113058 width=1186) (actual time=2.078..582.896 rows=62043 loops=1)"
+  },
+  {
+    "QUERY PLAN": "                    ->  Hash  (cost=8.45..8.45 rows=1 width=23) (actual time=0.219..0.240 rows=1 loops=1)"
+  },
+  {
+    "QUERY PLAN": "                          Buckets: 1024  Batches: 1  Memory Usage: 9kB"
+  },
+  {
+    "QUERY PLAN": "                          ->  Index Only Scan using \"PK_a3f448825f627a6594e3771edca\" on word_entries_entry \"Word_Word_entries\"  (cost=0.43..8.45 rows=1 width=23) (actual time=0.172..0.187 rows=1 loops=1)"
+  },
+  {
+    "QUERY PLAN": "                                Index Cond: (\"wordWord\" = 'amoenus'::text)"
+  },
+  {
+    "QUERY PLAN": "                                Heap Fetches: 0"
+  },
+  {
+    "QUERY PLAN": "Planning Time: 9.992 ms"
+  },
+  {
+    "QUERY PLAN": "Execution Time: 3803.647 ms"
+  }
+]

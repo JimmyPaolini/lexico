@@ -11,7 +11,7 @@ export async function ingestEntryWords(entry: Entry): Promise<void> {
 }
 
 export function getEntryWords(entry: Entry): string[] {
-  const forms = flattenForms(entry.forms)
+  const forms = flattenForms(entry.forms as any)
   entry.principalParts?.forEach((pp) => forms.push(...pp.text))
   return forms
 }

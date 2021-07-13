@@ -28,18 +28,26 @@ export default class DictionaryResolver {
     if (!search || !search.match(/^-?(\w| )+\.?$/)) return []
     // log.info("searchLatin request", { search })
 
+    const getWord = async (search: string) =>
+      await this.Words.createQueryBuilder("word")
+        .leftJoinAndSelect("word.entries", "entries")
+        .leftJoinAndSelect("entries.translations", "translations")
+        .where("word.word = :search", { search })
+        .limit(1)
+        .getOne()
+
     search = search.toLowerCase()
     const pushSuffix = async (suffix: string) => {
-      const nonSuffixWord = await this.Words.findOne({
-        word: search.replace(new RegExp(suffix + "$", "i"), ""),
-      })
+      const [nonSuffixWord, suffixEntry] = await Promise.all([
+        getWord(search.replace(new RegExp(suffix + "$", "i"), "")),
+        this.Entries.findOne(`-${suffix}:0`),
+      ])
       if (nonSuffixWord) entries.push(...nonSuffixWord.entries)
-      const suffixEntry = await this.Entries.findOne(`-${suffix}:0`)
       entries.push(suffixEntry)
     }
 
     let entries = []
-    const word = await this.Words.findOne(search)
+    const word = await getWord(search)
     if (word) entries.push(...word.entries)
     if (hasSuffix(search, "que")) await pushSuffix("que")
     else if (hasSuffix(search, "ve")) await pushSuffix("ve")
@@ -48,10 +56,6 @@ export default class DictionaryResolver {
     entries = entries
       .filter((entry) => !!entry.translations?.length)
       .map((entry) => {
-        // entry.translations = entry.translations?.map((translation) => ({
-        //   ...translation,
-        //   translation: translation.translation.replace(/^(.*)\s/, ""),
-        // }))
         entry = identifyEntryWord(search, entry)
         if (entry.partOfSpeech === "verb" && entry.forms) {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
@@ -81,19 +85,15 @@ export default class DictionaryResolver {
     const translations = await this.Translations.createQueryBuilder(
       "translation",
     )
-      .innerJoinAndSelect("translation.entry", "entry")
       .where(`translation.translation ~* '(^| )${search}( |$)'`)
-      .innerJoinAndSelect("entry.translations", "x")
+      .leftJoinAndSelect("translation.entry", "entry")
+      .leftJoinAndSelect("entry.translations", "entryTranslations")
       .getMany()
 
     const entries = translations
       .map((t) => t.entry)
       .filter((entry) => entry.partOfSpeech !== "properNoun")
       .map((entry) => {
-        // entry.translations = entry.translations?.map((translation) => ({
-        //   ...translation,
-        //   translation: translation.translation.replace(/^([^)]*)\s/, ""),
-        // }))
         if (entry.partOfSpeech === "verb" && entry.forms) {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
         }

@@ -15,3 +15,5 @@
 **/assets
 
 **/package.json
+
+server/**/schema.graphql

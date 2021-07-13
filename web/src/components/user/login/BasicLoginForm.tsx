@@ -12,10 +12,10 @@ import Link from "next/link"
 import React, { useRef, useState } from "react"
 import useLogin from "../../../hooks/authentication/useLogin"
 import useRegister from "../../../hooks/authentication/useRegister"
+import { googleAnalyticsEvent } from "../../../utils/googleAnalytics"
 import { capitalizeFirstLetter, validateEmail } from "../../../utils/string"
 import SubmitButton from "../../accessories/SubmitButton"
 import TextBox from "../../accessories/TextBox"
-import {googleAnalyticsEvent} from '../../../utils/googleAnalytics';
 
 export default function BasicLogin(): JSX.Element {
   const classes = useStyles()

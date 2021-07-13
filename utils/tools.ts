@@ -23,7 +23,7 @@ export default [
   { name: "docker", url: "https://www.docker.com" },
   { name: "kubernetes", url: "https://kubernetes.io" },
   { name: "helm", url: "https://helm.sh" },
-  // { name: "bitnami", url: "https://bitnami.com/stacks/helm" },
+  { name: "bitnami", url: "https://bitnami.com/stacks/helm" },
   { name: "prometheus", url: "https://prometheus.io" },
   { name: "grafana", url: "https://grafana.com" },
   { name: "lens", url: "https://k8slens.dev" },
