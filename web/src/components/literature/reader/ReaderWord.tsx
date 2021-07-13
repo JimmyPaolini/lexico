@@ -6,21 +6,10 @@ interface ReaderWordProps {
   word: string
   openModal: (word: string) => void
 }
-<<<<<<< HEAD:web/src/components/literature/reader/ReaderWord.tsx
-<<<<<<< HEAD:web/src/components/literature/reader/ReaderWord.tsx
 export default memo(function ReaderWord({
   word,
   openModal,
 }: ReaderWordProps): JSX.Element {
-=======
-export default function ReaderWord({ word, openModal }: Props): JSX.Element {
->>>>>>> aa3bf910bc (linting and formatting implementation):web/src/components/literature/ReaderWord.tsx
-=======
-export default function ReaderWord({
-  word,
-  openModal,
-}: ReaderWordProps): JSX.Element {
->>>>>>> 4593c4ab65 (Bug fixing, adding Google analytics, beginning on custom literature implementation):web/src/components/literature/ReaderWord.tsx
   const classes = useStyles()
   const isWord = word.match(/\w+/i)
 
