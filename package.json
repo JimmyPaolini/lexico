@@ -6,7 +6,7 @@
 
     "dev": "docker compose -f infra/docker/docker-compose.database.yml up",
     "undev": "docker compose -f infra/docker/docker-compose.database.yml down --remove-orphans",
-    "build": "yarn build:database & yarn build:server & yarn build:web &",
+    "build": "yarn build:database & yarn build:server & yarn build:web & wait; echo \"Lexico built!\"",
     "start": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml up",
     "stop": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml down --remove-orphans",
 

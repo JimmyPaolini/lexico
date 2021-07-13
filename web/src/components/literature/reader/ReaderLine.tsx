@@ -1,6 +1,6 @@
 import { Divider, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React, { useContext } from "react"
+import React, { memo, useContext } from "react"
 import LazyLoad from "react-lazyload"
 import Line from "../../../../../entity/literature/Line"
 import { getSettingsLocal } from "../../../utils/localSettings"
@@ -13,7 +13,7 @@ interface ReaderLineProps {
   openModal: (word: string) => void
 }
 
-export default function ReaderLine({
+export default memo(function ReaderLine({
   line,
   openModal,
 }: ReaderLineProps): JSX.Element {
@@ -51,7 +51,7 @@ export default function ReaderLine({
       </LazyLoad>
     </Grid>
   )
-}
+})
 
 const useStyles = makeStyles((theme: any) => ({
   lineLabel: {

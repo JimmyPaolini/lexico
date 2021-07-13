@@ -53,7 +53,6 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 }
 
 export function reportWebVitals(metric: NextWebVitalsMetric): void {
-  console.log(metric)
   const { id, name, label, value } = metric
   googleAnalyticsEvent(name, {
     category: label === "web-vital" ? "Web Vitals" : "Next.js custom metric",

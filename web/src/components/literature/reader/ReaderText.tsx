@@ -1,6 +1,6 @@
 import { Box } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
+import React, { memo } from "react"
 import Text from "../../../../../entity/literature/Text"
 import { MyTheme } from "../../../theme/theme"
 import { sentenceCase } from "../../../utils/string"
@@ -11,7 +11,7 @@ interface ReaderTextProps {
   text: Text
   openModal: (word: string) => void
 }
-export default function ReaderText({
+export default memo(function ReaderText({
   text,
   openModal,
 }: ReaderTextProps): JSX.Element {
@@ -43,7 +43,7 @@ export default function ReaderText({
       ))}
     </Box>
   )
-}
+})
 
 const useStyles = makeStyles((theme: MyTheme) => ({
   readerText: {

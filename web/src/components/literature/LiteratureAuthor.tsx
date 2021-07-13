@@ -5,7 +5,7 @@ import {
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, memo, SetStateAction } from "react"
 import Author from "../../../../entity/literature/Author"
 import { sentenceCase } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
@@ -15,7 +15,7 @@ interface LiteratureAuthorProps {
   expanded: boolean
   setExpanded: Dispatch<SetStateAction<boolean>>
 }
-export default function LiteratureAuthor({
+export default memo(function LiteratureAuthor({
   author,
   expanded,
   setExpanded,
@@ -62,7 +62,7 @@ export default function LiteratureAuthor({
       />
     </CardActionArea>
   )
-}
+})
 
 const useStyles = makeStyles(() => ({
   summary: {

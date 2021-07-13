@@ -1,6 +1,6 @@
 import { Box, Modal, Paper, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React, { Dispatch, SetStateAction, useRef } from "react"
+import React, { Dispatch, memo, SetStateAction, useRef } from "react"
 import { UseQueryResult } from "react-query"
 import { useSwipeable } from "react-swipeable"
 import Entry from "../../../../../entity/dictionary/Entry"
@@ -14,7 +14,7 @@ interface ReaderModalProps {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
-export default function ReaderModal({
+export default memo(function ReaderModal({
   searched,
   open,
   setOpen,
@@ -64,7 +64,7 @@ export default function ReaderModal({
       </Box>
     </Modal>
   )
-}
+})
 
 const useStyles = makeStyles((theme: any) => ({
   modal: {

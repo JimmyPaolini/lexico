@@ -1,7 +1,8 @@
 import { CardHeader as CardHeaderMui, Divider } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import { memo } from "react"
 
-export default function LiteratureLiteratureRows(): JSX.Element {
+export default memo(function LiteratureLiteratureRows(): JSX.Element {
   const classes = useStyles()
   classes
 
@@ -11,7 +12,7 @@ export default function LiteratureLiteratureRows(): JSX.Element {
       <CardHeaderMui />
     </>
   )
-}
+})
 
 const useStyles = makeStyles(() => ({
   summary: {

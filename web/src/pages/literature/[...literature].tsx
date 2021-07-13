@@ -2,9 +2,11 @@ import { Grid, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Head from "next/head"
-import { useContext, useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { memo, useContext, useEffect, useState } from "react"
 import Text from "../../../../entity/literature/Text"
 import { Context } from "../../components/layout/Context"
+import LiteratureFallback from "../../components/literature/LiteratureFallback"
 import ReaderModal from "../../components/literature/reader/ReaderModal"
 import ReaderText from "../../components/literature/reader/ReaderText"
 import getTextIdsQuery from "../../graphql/literature/getTextIds.graphql"
@@ -20,7 +22,9 @@ import { graphQLClient } from "../_app"
 interface Props {
   text: Text
 }
-export default function Reader({ text }: Props): JSX.Element {
+export default memo(function Reader({ text }: Props): JSX.Element {
+  const router = useRouter()
+  if (router.isFallback) return <LiteratureFallback />
   const classes = useStyles({})
   const { user } = useContext(Context)
 
@@ -92,7 +96,7 @@ export default function Reader({ text }: Props): JSX.Element {
       </Paper>
     </>
   )
-}
+})
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { getTextIds: texts } = await graphQLClient.request(getTextIdsQuery)
@@ -102,19 +106,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  if (!context.params) return { notFound: true }
-  const textId = context.params.literature[0]
-  console.log(textId)
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const textId = params?.literature?.[0]
   if (!textId) return { notFound: true }
-  let text: Text
   try {
-    text = await getText({ queryKey: ["getText", textId] })
+    const text = await getText({ queryKey: ["getText", textId] })
     if (!text) return { notFound: true }
+    return { props: { text } }
   } catch {
     return { notFound: true }
   }
-  return { props: { text } }
 }
 
 const useStyles = makeStyles((theme: MyTheme) => ({

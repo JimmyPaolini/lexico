@@ -2,7 +2,17 @@ type Bookmarks = string[]
 
 export function getBookmarksLocal(): Bookmarks {
   if (typeof window === "undefined") return []
-  return JSON.parse(window.localStorage.bookmarks || "[]") as Bookmarks
+  if (!window.localStorage.bookmarks) {
+    window.localStorage.bookmarks = JSON.stringify([])
+  }
+  const bookmarks = JSON.parse(window.localStorage.bookmarks) as Bookmarks
+  if (
+    !Array.isArray(bookmarks) ||
+    (bookmarks.length && typeof bookmarks[0] !== "string")
+  ) {
+    window.localStorage.bookmarks = JSON.stringify([])
+  }
+  return JSON.parse(window.localStorage.bookmarks) as Bookmarks
 }
 
 function setBookmarksLocal(bookmarks: Bookmarks): void {
@@ -12,6 +22,7 @@ function setBookmarksLocal(bookmarks: Bookmarks): void {
 
 export function isBookmarkedLocal(id: string): boolean {
   const bookmarks = getBookmarksLocal()
+  console.log(bookmarks)
   return bookmarks.includes(id)
 }
 

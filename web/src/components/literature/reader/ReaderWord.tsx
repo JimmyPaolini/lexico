@@ -1,11 +1,12 @@
 import { CardActionArea } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import { memo } from "react"
 
 interface ReaderWordProps {
   word: string
   openModal: (word: string) => void
 }
-export default function ReaderWord({
+export default memo(function ReaderWord({
   word,
   openModal,
 }: ReaderWordProps): JSX.Element {
@@ -22,7 +23,7 @@ export default function ReaderWord({
   ) : (
     <>{word}</>
   )
-}
+})
 
 const useStyles = makeStyles(() => ({
   readerWord: {
