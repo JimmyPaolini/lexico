@@ -28,18 +28,10 @@ export default class DictionaryResolver {
     if (!search || !search.match(/^-?(\w| )+\.?$/)) return []
     // log.info("searchLatin request", { search })
 
-    const getWord = async (search: string) =>
-      await this.Words.createQueryBuilder("word")
-        .leftJoinAndSelect("word.entries", "entries")
-        .leftJoinAndSelect("entries.translations", "translations")
-        .where("word.word = :search", { search })
-        .limit(1)
-        .getOne()
-
     search = search.toLowerCase()
     const pushSuffix = async (suffix: string) => {
       const [nonSuffixWord, suffixEntry] = await Promise.all([
-        getWord(search.replace(new RegExp(suffix + "$", "i"), "")),
+        this.Words.findOne(search.replace(new RegExp(suffix + "$", "i"), "")),
         this.Entries.findOne(`-${suffix}:0`),
       ])
       if (nonSuffixWord) entries.push(...nonSuffixWord.entries)
@@ -47,7 +39,7 @@ export default class DictionaryResolver {
     }
 
     let entries = []
-    const word = await getWord(search)
+    const word = await this.Words.findOne(search)
     if (word) entries.push(...word.entries)
     if (hasSuffix(search, "que")) await pushSuffix("que")
     else if (hasSuffix(search, "ve")) await pushSuffix("ve")

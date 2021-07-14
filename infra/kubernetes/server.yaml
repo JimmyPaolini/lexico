@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: server
   replicas: 3
-  revisionHistoryLimit: 2
+  # revisionHistoryLimit: 2
   template:
     metadata:
       labels:
@@ -24,6 +24,26 @@ spec:
           envFrom:
             - configMapRef:
                 name: env
+      # affinity:
+      #   podAntiAffinity:
+      #     preferredDuringSchedulingIgnoredDuringExecution:
+      #       - weight: 1
+      #         podAffinityTerm:
+      #           labelSelector:
+      #             matchExpressions:
+      #               - key: app
+      #                 operator: In
+      #                 values:
+      #                   - server
+      #           topologyKey: kubernetes.io/hostname
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       - labelSelector:
+      #           matchExpressions:
+      #             - key: app
+      #               operator: In
+      #               values:
+      #                 - server
+      #         topologyKey: kubernetes.io/hostname
 ---
 kind: Service
 apiVersion: v1
