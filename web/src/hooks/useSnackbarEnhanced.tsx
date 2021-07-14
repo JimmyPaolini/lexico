@@ -32,6 +32,7 @@ export default function useSnackbarEnhanced(): ProviderContext {
       variant: "info",
       autoHideDuration: 8000,
       action: SnackbarAction,
+      persist: true,
     })
   }
 
