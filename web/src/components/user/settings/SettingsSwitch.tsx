@@ -6,7 +6,11 @@ interface Props {
   label: string
   formik: any
 }
-export default function SettingsSwitch({ field, label, formik }: Props) {
+export default function SettingsSwitch({
+  field,
+  label,
+  formik,
+}: Props): JSX.Element {
   return (
     <Grid container justify="space-between" alignItems="center">
       <Typography>{label}:</Typography>

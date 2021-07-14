@@ -10,21 +10,14 @@ import {
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import {
-  AccountBalance,
-  AccountCircle,
-  Bookmark,
-  ChevronLeft,
-  Menu,
-  MenuBook,
-  Search,
-} from "@material-ui/icons"
+import { ChevronLeft, Menu } from "@material-ui/icons"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React, { useContext, useEffect, useState } from "react"
 import { Context } from "./Context"
+import pages from "./pages"
 
-export default function Navigation() {
+export default function Navigation(): JSX.Element {
   const classes = useStyles()
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
   const router = useRouter()
@@ -49,8 +42,7 @@ export default function Navigation() {
       classes={{
         paper: open ? classes.drawerOpen : classes.drawerClosed,
       }}
-      className={open ? classes.drawerOpen : classes.drawerClosed}
-    >
+      className={open ? classes.drawerOpen : classes.drawerClosed}>
       <Grid item>
         <List>
           <ListItem className={classes.header}>
@@ -60,8 +52,7 @@ export default function Navigation() {
             <IconButton
               onClick={() => setOpen(!open)}
               className={classes.expander}
-              aria-label="toggle navigation drawer"
-            >
+              aria-label="toggle navigation drawer">
               {open ? <ChevronLeft /> : <Menu />}
             </IconButton>
           </ListItem>
@@ -71,8 +62,7 @@ export default function Navigation() {
               <ListItem
                 button
                 selected={selected === page.name}
-                onClick={() => handleSelection(page.name)}
-              >
+                onClick={() => handleSelection(page.name)}>
                 <ListItemIcon>{page.icon}</ListItemIcon>
                 <ListItemText primary={page.Name} />
               </ListItem>
@@ -118,42 +108,3 @@ const useStyles = makeStyles((theme) => ({
     left: 12,
   },
 }))
-
-const pages = [
-  {
-    Name: "Search",
-    name: "search",
-    icon: <Search />,
-    keybind: "s",
-  },
-  {
-    Name: "Bookmarks",
-    name: "bookmarks",
-    icon: <Bookmark />,
-    keybind: "b",
-  },
-  {
-    Name: "Literature",
-    name: "literature",
-    icon: <MenuBook />,
-    keybind: "l",
-  },
-  // {
-  //   Name: "Grammar",
-  //   name: "grammar",
-  //   icon: <Create />,
-  //   keybind: "g",
-  // },
-  {
-    Name: "User",
-    name: "user",
-    icon: <AccountCircle />,
-    keybind: "u",
-  },
-  {
-    Name: "About",
-    name: "about",
-    icon: <AccountBalance />,
-    keybind: "a",
-  },
-]

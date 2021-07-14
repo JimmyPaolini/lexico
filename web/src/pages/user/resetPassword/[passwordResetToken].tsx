@@ -22,9 +22,11 @@ import { graphQLClient } from "../../_app"
 interface Props {
   passwordResetToken: string
 }
-export default function ResetPassword({ passwordResetToken }: Props) {
+export default function ResetPassword({
+  passwordResetToken,
+}: Props): JSX.Element {
   const [showPassword, setShowPassword] = useState<boolean>(false)
-  const passwordTextBoxRef = useRef<any>(null)
+  const passwordTextBoxRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const { enqueueSnackbar } = useSnackbarEnhanced()
 
@@ -64,8 +66,7 @@ export default function ResetPassword({ passwordResetToken }: Props) {
                         aria-label="toggle password visibility"
                         onClick={() =>
                           setShowPassword((showPassword) => !showPassword)
-                        }
-                      >
+                        }>
                         {showPassword ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
@@ -86,8 +87,10 @@ export default function ResetPassword({ passwordResetToken }: Props) {
 interface ResetPasswordInfo {
   password: string
 }
-export function validate({ password }: ResetPasswordInfo) {
-  const errors = {} as any
+export function validate({ password }: ResetPasswordInfo): {
+  password: string
+} {
+  const errors = {} as { password: string }
   if (password.length < 8)
     errors.password = "Password must be at least 8 characters"
   else if (!password.match(/[A-Z]/g))

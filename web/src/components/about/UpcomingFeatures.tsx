@@ -10,7 +10,7 @@ import packageJson from "../../../../package.json"
 
 const { version } = packageJson
 
-export default function ToolIconGrid() {
+export default function ToolIconGrid(): JSX.Element {
   const classes = useStyles()
 
   return (
@@ -20,8 +20,7 @@ export default function ToolIconGrid() {
         disableTouchRipple
         classes={{ focusHighlight: classes.hide }}
         href="https://github.com/JimmyPaolini/Lexico/issues"
-        target="_blank"
-      >
+        target="_blank">
         <CardHeaderMui
           title={`Upcoming Releases (current v${version})`}
           titleTypographyProps={{ variant: "body1" }}

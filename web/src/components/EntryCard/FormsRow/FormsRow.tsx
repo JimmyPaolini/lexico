@@ -4,13 +4,12 @@ import {
   Collapse,
   Divider,
   Grid,
-  Typography
+  Typography,
 } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme } from "@material-ui/core/styles"
 import { useContext, useState } from "react"
 import { Forms } from "../../../../../entity/dictionary/word/Forms"
 import { PartOfSpeech } from "../../../../../entity/dictionary/word/PartOfSpeech"
-import useEventListener from "../../../hooks/useEventListener"
 import identifierAbbreviations from "../../../utils/identifierAbbreviations"
 import { getSettingsLocal } from "../../../utils/localSettings"
 import ExpandIcon from "../../accessories/ExpandIcon"
@@ -31,7 +30,7 @@ export default function FormsRow({
   forms,
   partOfSpeech,
   identifiers = [],
-}: Props) {
+}: Props): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(
@@ -53,13 +52,7 @@ export default function FormsRow({
 
   const expandable = !!FormsCard
 
-  useEventListener("keypress", (e: any) => {
-    if (window.location.pathname.match(/^\/bookmarks/)) return
-    if (e.key === "f" && document?.activeElement?.tagName !== "INPUT")
-      setExpanded(!expanded)
-  })
-
-  if (searched.match(/Table/i) && !expandable) return null
+  if (searched.match(/Table/i) && !expandable) return <></>
 
   return (
     <>
@@ -70,8 +63,7 @@ export default function FormsRow({
           disabled={!expandable}
           disableRipple
           disableTouchRipple
-          classes={{ focusHighlight: classes.hide }}
-        >
+          classes={{ focusHighlight: classes.hide }}>
           <Grid container direction="row" justify="space-evenly">
             <Grid container item direction="column" justify="center" xs={true}>
               <Typography variant="body1">{searched}</Typography>
@@ -109,9 +101,11 @@ const partOfSpeechToFormsCard = {
   numeral: AdjectiveForms,
   pronoun: AdjectiveForms,
   determiner: AdjectiveForms,
-} as { [key: string]: any }
+} as {
+  [key: string]: typeof VerbForms | typeof NounForms | typeof AdjectiveForms
+}
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   formsRow: {
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),

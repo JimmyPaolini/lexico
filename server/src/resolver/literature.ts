@@ -6,8 +6,8 @@ import Line from "../../../entity/literature/Line"
 import Text from "../../../entity/literature/Text"
 import log from "../../../utils/log"
 
-const compareField = (a: any, b: any, field: string) =>
-  a[field].localeCompare(b[field], undefined, {
+const compareIds = (a: { id: string }, b: { id: string }) =>
+  a.id.localeCompare(b.id, undefined, {
     numeric: true,
     sensitivity: "base",
   })
@@ -22,7 +22,7 @@ export default class LiteratureResolver {
   // LIST
 
   @Query(() => [Author])
-  async getAuthors() {
+  async getAuthors(): Promise<Author[]> {
     const authors = await this.Authors.find()
     await Promise.all(
       authors.map(async (author) => {
@@ -42,64 +42,61 @@ export default class LiteratureResolver {
       }),
     )
     return authors
-      .sort((a, b) => compareField(a, b, "id"))
+      .sort((a, b) => compareIds(a, b))
       .map((author) => {
-        author.texts.sort((a, b) => compareField(a, b, "id"))
-        author.books?.sort((a, b) => compareField(a, b, "id"))
-        author.books?.map((book) =>
-          book.texts.sort((a, b) => compareField(a, b, "id")),
-        )
+        author.texts.sort((a, b) => compareIds(a, b))
+        author.books?.sort((a, b) => compareIds(a, b))
+        author.books?.map((book) => book.texts.sort((a, b) => compareIds(a, b)))
         return author
       })
   }
 
   @Query(() => [Book])
-  async getBooks() {
+  async getBooks(): Promise<Book[]> {
     const books = await this.Books.find({
       relations: ["texts"],
       order: { title: "ASC" },
     })
-    return books.map((book) =>
-      book.texts.sort((a, b) => compareField(a, b, "id")),
-    )
+    return books.map((book) => {
+      book.texts.sort((a, b) => compareIds(a, b))
+      return book
+    })
   }
 
   @Query(() => [Text])
-  async getTexts() {
+  async getTexts(): Promise<Text[]> {
     return await this.Texts.find({
       order: { title: "ASC" },
     })
   }
 
   @Query(() => [Text])
-  async getTextIds() {
+  async getTextIds(): Promise<Text[]> {
     return await this.Texts.createQueryBuilder().getMany()
   }
 
   // GET
 
   @Query(() => Author)
-  async getAuthor(@Arg("id") id: string) {
+  async getAuthor(@Arg("id") id: string): Promise<Author> {
     const author = await this.Authors.findOneOrFail(id, {
       relations: ["books", "books.texts", "texts"],
     })
-    author.books?.sort((a, b) => compareField(a, b, "id"))
-    author.books?.map((book) =>
-      book.texts.sort((a, b) => compareField(a, b, "id")),
-    )
-    author.texts.sort((a, b) => compareField(a, b, "id"))
+    author.books?.sort((a, b) => compareIds(a, b))
+    author.books?.map((book) => book.texts.sort((a, b) => compareIds(a, b)))
+    author.texts.sort((a, b) => compareIds(a, b))
     return author
   }
 
   @Query(() => Book)
-  async getBook(@Arg("id") id: string) {
+  async getBook(@Arg("id") id: string): Promise<Book> {
     const book = await this.Books.findOneOrFail(id, { relations: ["texts"] })
-    book.texts.sort((a, b) => compareField(a, b, "id"))
+    book.texts.sort((a, b) => compareIds(a, b))
     return book
   }
 
   @Query(() => Text)
-  async getText(@Arg("id") id: string) {
+  async getText(@Arg("id") id: string): Promise<Text> {
     const text = await this.Texts.findOneOrFail(id, { relations: ["lines"] })
     text?.lines.sort((a, b) => a.lineNumber - b.lineNumber)
     return text
@@ -112,7 +109,7 @@ export default class LiteratureResolver {
     @Arg("author") author: string,
     @Arg("title") title: string,
     @Arg("book", { nullable: true }) book?: string,
-  ) {
+  ): Promise<Text> {
     let query = this.Texts.createQueryBuilder("text").innerJoinAndSelect(
       "text.author",
       "author",
@@ -133,7 +130,7 @@ export default class LiteratureResolver {
       .innerJoinAndSelect("text.lines", "lines")
 
     const text = await query.getOneOrFail()
-    text.lines.sort((l1, l2) => compareField(l1, l2, "id"))
+    text.lines.sort((l1, l2) => compareIds(l1, l2))
     log.info("findText", { id: text.id })
     return text
   }
@@ -141,7 +138,7 @@ export default class LiteratureResolver {
   // SEARCH
 
   @Query(() => [Author])
-  async searchLiterature(@Arg("search") search: string) {
+  async searchLiterature(@Arg("search") search: string): Promise<Author[]> {
     const authors = await this.Authors.createQueryBuilder("author")
       .innerJoinAndSelect("author.books", "book", "book.title = :search", {
         search,
@@ -159,19 +156,17 @@ export default class LiteratureResolver {
       .getMany()
     return authors
       .filter((author) => !!author.texts || !!author.books)
-      .sort((a, b) => compareField(a, b, "id"))
+      .sort((a, b) => compareIds(a, b))
       .map((author) => {
-        author.books?.sort((a, b) => compareField(a, b, "id"))
-        author.books?.map((book) =>
-          book.texts.sort((a, b) => compareField(a, b, "id")),
-        )
-        author.texts.sort((a, b) => compareField(a, b, "id"))
+        author.books?.sort((a, b) => compareIds(a, b))
+        author.books?.map((book) => book.texts.sort((a, b) => compareIds(a, b)))
+        author.texts.sort((a, b) => compareIds(a, b))
         return author
       })
   }
 
   @Query(() => [Author])
-  async searchAuthors(@Arg("search") search: string) {
+  async searchAuthors(@Arg("search") search: string): Promise<Author[]> {
     return await this.Authors.find({
       where: [{ id: Like(`%${search}%`) }, { name: Like(`%${search}%`) }],
       relations: ["texts"],
@@ -180,7 +175,7 @@ export default class LiteratureResolver {
   }
 
   @Query(() => [Book])
-  async searchBooks(@Arg("search") search: string) {
+  async searchBooks(@Arg("search") search: string): Promise<Book[]> {
     return await this.Books.find({
       where: { title: Like(`%${search}%`) },
       relations: ["texts"],
@@ -189,7 +184,7 @@ export default class LiteratureResolver {
   }
 
   @Query(() => [Text])
-  async searchTexts(@Arg("search") search: string) {
+  async searchTexts(@Arg("search") search: string): Promise<Text[]> {
     return await this.Texts.find({
       where: { title: Like(`%${search}%`) },
       relations: ["lines"],
@@ -198,7 +193,7 @@ export default class LiteratureResolver {
   }
 
   @Query(() => [Line])
-  async searchLines(@Arg("search") search: string) {
+  async searchLines(@Arg("search") search: string): Promise<Line[]> {
     return await this.Lines.find({
       where: [{ line: Like(`%${search}%`) }],
       order: { lineNumber: "ASC" },

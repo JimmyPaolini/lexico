@@ -1,5 +1,6 @@
 import { Typography } from "@material-ui/core"
 import { GetStaticProps } from "next"
+import Head from "next/head"
 import React, { useEffect, useMemo, useState } from "react"
 import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
@@ -9,40 +10,59 @@ import SearchBarLayout from "../../components/layout/SearchBarLayout"
 import LiteratureCard from "../../components/literature/LiteratureCard"
 import { getAuthors } from "../../hooks/literature/useGetAuthors"
 
-interface Props {
+interface LiteratureProps {
   authors: Author[]
 }
-export default function Literature({ authors }: Props) {
+export default function Literature({ authors }: LiteratureProps): JSX.Element {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
   useEffect(() => {
     if (!search) setSearched("")
   }, [search])
 
-  const cards = useMemo(() => {
-    const authorsCopy = JSON.parse(JSON.stringify(authors || []))
-    return filterLiterature(authorsCopy, searched).map((author) => ({
-      key: author.name,
-      Card: () => <LiteratureCard {...{ author, searched }} />,
-    }))
-  }, [authors, searched])
+  const handleSearchExecute = () => setSearched(search)
+
+  const authorsCopy = JSON.parse(JSON.stringify(authors))
+  const cards = useMemo(
+    () =>
+      filterLiterature(authorsCopy, searched).map((author) => {
+        const Card = <LiteratureCard {...{ author }} />
+        return { key: author.name, Card }
+      }),
+    [searched],
+  )
+  // cards.unshift({ key: "custom", Card: <LiteratureCustomCard /> })
 
   return (
-    <SearchBarLayout
-      searchBarProps={{
-        search,
-        setSearch,
-        isLoading: false,
-        handleSearchExecute: () => setSearched(search),
-        target: "literature",
-      }}
-    >
-      {!cards.length ? (
-        <Typography variant="h4">No Results</Typography>
-      ) : (
-        <CardDeck cards={cards} />
-      )}
-    </SearchBarLayout>
+    <>
+      <Head>
+        <title>Lexico - Literature</title>
+        <meta
+          name="description"
+          content="Read and translate Latin literature from authors like Caesar and Virgil, or input your own Latin text"
+        />
+        <meta
+          name="keywords"
+          content={`Latin, Literature, Read, English, Translation, ${authors
+            .map((author) => author.name)
+            .join(", ")}`}
+        />
+      </Head>
+      <SearchBarLayout
+        searchBarProps={{
+          search,
+          setSearch,
+          isLoading: false,
+          handleSearchExecute,
+          target: "literature",
+        }}>
+        {!cards.length ? (
+          <Typography variant="h4">No Results</Typography>
+        ) : (
+          <CardDeck cards={cards} />
+        )}
+      </SearchBarLayout>
+    </>
   )
 }
 

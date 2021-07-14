@@ -21,7 +21,7 @@ export default class AdverbForms {
     if (superlative) this.superlative = superlative
   }
 
-  get __typename() {
+  get __typename(): string {
     return "AdverbForms"
   }
 }

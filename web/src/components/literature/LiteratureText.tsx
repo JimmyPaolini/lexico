@@ -1,7 +1,7 @@
 import { Avatar, CardActionArea, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useRouter } from "next/router"
-import React from "react"
+import React, { memo } from "react"
 import LinesEllipsis from "react-lines-ellipsis"
 import Text from "../../../../entity/literature/Text"
 import { romanNumeralize } from "../../utils/romanNumeral"
@@ -10,7 +10,7 @@ import { sentenceCase } from "../../utils/string"
 interface Props {
   text: Text
 }
-export default function LiteratureText({ text }: Props) {
+export default memo(function LiteratureText({ text }: Props): JSX.Element {
   const classes = useStyles()
   const router = useRouter()
 
@@ -39,7 +39,7 @@ export default function LiteratureText({ text }: Props) {
       </CardActionArea>
     </Grid>
   )
-}
+})
 
 const useStyles = makeStyles((theme: any) => ({
   textContainer: {

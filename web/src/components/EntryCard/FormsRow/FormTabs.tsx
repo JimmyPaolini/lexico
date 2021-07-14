@@ -14,7 +14,7 @@ export default function FormTabs({
   tabs,
   setActiveTab,
   children,
-}: Props) {
+}: Props): JSX.Element {
   const classes = useStyles()
   const minWidth = `${100 / tabs.length}%`
 
@@ -31,8 +31,7 @@ export default function FormTabs({
         className={classes.tabs}
         textColor="secondary"
         indicatorColor="secondary"
-        aria-label="conjugation tabs"
-      >
+        aria-label="conjugation tabs">
         {tabs.map((tab, i) => (
           <Tab
             label={tab}

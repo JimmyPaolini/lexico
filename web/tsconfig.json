@@ -8,5 +8,5 @@
     "skipLibCheck": true,
     "isolatedModules": true
   },
-  "exclude": ["../data", "../ingestion", "../server"],
+  "exclude": ["../data", "../ingestion", "../server"]
 }

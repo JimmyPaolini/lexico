@@ -21,7 +21,7 @@ export const Context = createContext({} as ReactContext)
 interface Props {
   children?: ReactNode
 }
-export function ContextProvider({ children }: Props) {
+export function ContextProvider({ children }: Props): JSX.Element {
   const { data: user } = useUser()
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
   const [isNavOpen, setNavOpen] = useState(false)
@@ -35,8 +35,7 @@ export function ContextProvider({ children }: Props) {
           isNavOpen,
           setNavOpen,
         } as ReactContext
-      }
-    >
+      }>
       {children}
     </Context.Provider>
   )

@@ -1,11 +1,11 @@
-import { sign, verify } from "jsonwebtoken"
+import { JwtPayload, sign, verify } from "jsonwebtoken"
 import { MiddlewareFn } from "type-graphql"
 import { getConnection } from "typeorm"
 import User from "../../../entity/user/User"
 import { JWT_SECRET } from "../../../utils/env"
 import { ResolverContext } from "../utils/ResolverContext"
 
-export function createAccessToken(user: User) {
+export function createAccessToken(user: User): string {
   return sign(
     { sub: user.id, iss: "https://www.lexicolatin.com" },
     JWT_SECRET!,
@@ -13,7 +13,7 @@ export function createAccessToken(user: User) {
   )
 }
 
-export function createPasswordResetToken(email: string) {
+export function createPasswordResetToken(email: string): string {
   return sign(
     { sub: email.toLowerCase(), iss: "https://www.lexicolatin.com" },
     JWT_SECRET!,
@@ -28,7 +28,10 @@ export const Authenticate: MiddlewareFn<ResolverContext> = async (
   next,
 ) => {
   if (!context.req.cookies.accessToken) throw new Error("no user signed in")
-  const claims = verify(context.req.cookies.accessToken, JWT_SECRET!) as any
+  const claims = verify(
+    context.req.cookies.accessToken,
+    JWT_SECRET!,
+  ) as JwtPayload
   if (!claims) throw new Error("invalid access token")
   const user = await getConnection().getRepository(User).findOne(claims.sub)
   if (!user) throw new Error("user does not exist")
@@ -41,7 +44,10 @@ export const IsAuthenticated: MiddlewareFn<ResolverContext> = (
   next,
 ) => {
   if (!context.req.cookies.accessToken) throw new Error("no user signed in")
-  const claims = verify(context.req.cookies.accessToken, JWT_SECRET!) as any
+  const claims = verify(
+    context.req.cookies.accessToken,
+    JWT_SECRET!,
+  ) as JwtPayload
   if (!claims) throw new Error("invalid access token")
   return next()
 }
@@ -53,7 +59,10 @@ export const GetBookmarks: MiddlewareFn<ResolverContext> = async (
   if (!context.req.cookies.accessToken) return next()
   let userId
   try {
-    const claims = verify(context.req.cookies.accessToken, JWT_SECRET!) as any
+    const claims = verify(
+      context.req.cookies.accessToken,
+      JWT_SECRET!,
+    ) as JwtPayload
     if (!claims) return next()
     userId = claims.sub
   } catch {

@@ -1,5 +1,10 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef } from "react"
-export default function useEventListener(eventName: string, handler: any) {
+export default function useEventListener(
+  eventName: string,
+  handler: any,
+): void {
   // Create a ref that stores handler
   const savedHandler = useRef()
 

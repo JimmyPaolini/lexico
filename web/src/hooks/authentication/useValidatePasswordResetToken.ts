@@ -4,7 +4,7 @@ import { graphQLClient } from "../../pages/_app"
 
 export default function useValidatePasswordResetToken(
   passwordResetToken: string,
-) {
+): ReturnType<typeof useQuery> {
   return useQuery(
     ["validatePasswordResetToken", passwordResetToken],
     async () => {

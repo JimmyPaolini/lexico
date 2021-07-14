@@ -16,7 +16,11 @@ async function main() {
       `http://${
         process.env.NODE_ENV === "production" ? "web" : "localhost"
       }:3000/`,
+      ...(process.env.NODE_ENV === "production"
+        ? []
+        : ["http://localhost:6006"]),
       "https://lexicolatin.com/",
+      "https://www.lexicolatin.com/",
     ],
   } as CorsOptions
   app.use(cors(corsOptions))

@@ -2,7 +2,15 @@ import axios from "axios"
 import { GOOGLE_ID, GOOGLE_SECRET } from "../../../utils/env"
 import log from "../../../utils/log"
 
-export default async function fetchGoogleUser(code: string, hostname: string) {
+export type GoogleProfile = {
+  id: string
+  email: string
+}
+
+export default async function fetchGoogleUser(
+  code: string,
+  hostname: string,
+): Promise<GoogleProfile> {
   const redirect_uri = hostname.match(/localhost/i)
     ? "http://localhost:3000/google"
     : "https://www.lexicolatin.com/google"

@@ -7,7 +7,10 @@ interface Props {
   searchBarProps: SearchBarProps
   children?: ReactNode
 }
-export default function SearchBarLayout({ searchBarProps, children }: Props) {
+export default function SearchBarLayout({
+  searchBarProps,
+  children,
+}: Props): JSX.Element {
   const classes = useStyles()
 
   return (

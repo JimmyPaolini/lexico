@@ -8,7 +8,7 @@ export default async function ingestText(
   author: Author,
   book: Book | undefined,
   title: string,
-) {
+): Promise<void> {
   const Texts = getConnection().getRepository(Text)
   title = title.replace(/\.txt$/, "")
   let id = author.id

@@ -3,11 +3,14 @@ import cheerio from "cheerio"
 import fs from "fs-extra"
 import { romanToDecimal } from "../../../web/src/utils/romanNumeral"
 
-export default async function ingestBible(origin: string, request: string) {
+export default async function ingestBible(
+  origin: string,
+  request: string,
+): Promise<void> {
   const response = await axios.get(request)
   const $ = cheerio.load(response.data)
 
-  let chapters = $("#masterdiv a")
+  const chapters = $("#masterdiv a")
     .get()
     .map((link: any) => ({
       name: $(link).text().replace(/\s+/, " "),
@@ -42,7 +45,7 @@ async function ingestChapter(chapter: Chapter) {
   if (bookTitle === "james -") bookTitle = "james"
   const bookNumber = chapters.indexOf(bookTitle) + 1
   bookTitle = bookNumber + " " + bookTitle
-  const chapterNumber = chapter.name.match(/\d+/)![0]
+  const chapterNumber = chapter.name.match(/\d+/)?.[0]
 
   const fileName = `../data/literature/vulgate bible/${bookTitle}/book ${chapterNumber}.txt`
   fs.ensureFileSync(fileName)

@@ -3,7 +3,10 @@ import Text from "../../../../entity/literature/Text"
 import getTextQuery from "../../graphql/literature/getText.graphql"
 import { graphQLClient } from "../../pages/_app"
 
-export default function useGetText(textId: string, initialData: Text) {
+export default function useGetText(
+  textId: string,
+  initialData: Text,
+): ReturnType<typeof useQuery> {
   return useQuery(["getText", textId], getText, {
     keepPreviousData: true,
     cacheTime: 1000 * 60 * 5,
@@ -13,9 +16,9 @@ export default function useGetText(textId: string, initialData: Text) {
   })
 }
 
-export const getText = async ({
+export async function getText({
   queryKey: [, textId],
-}: QueryFunctionContext<any>) => {
+}: QueryFunctionContext<[string, string]>): Promise<Text> {
   const { getText: data } = await graphQLClient.request(getTextQuery, {
     id: textId,
   })

@@ -1,4 +1,4 @@
-import { SettingsInput } from "../../../entity/user/Settings"
+import Settings, { SettingsInput } from "../../../entity/user/Settings"
 
 const settingsInput = () =>
   ({
@@ -8,27 +8,27 @@ const settingsInput = () =>
     translationsExpandedDefault: false,
     dictionaryMacronized: false,
     literatureMacronized: false,
-  } as SettingsInput & { [index: string]: any })
+  } as SettingsInput)
 
-export function getSettingsLocal() {
+export function getSettingsLocal(): Settings {
   if (typeof window === "undefined") return settingsInput()
   return window.localStorage?.settings
     ? (JSON.parse(window.localStorage.settings) as SettingsInput)
     : settingsInput()
 }
 
-export function setSettingsLocal(settings: SettingsInput) {
+export function setSettingsLocal(settings: SettingsInput): Settings | void {
   if (typeof window === "undefined") return
   window.localStorage.settings = JSON.stringify(settings)
 }
 
 class ShowSettingsInstructions {
   showAfter: Date = new Date()
-  seenCount: number = 0
+  seenCount = 0
 }
 
 // only called when the user is not signed in
-export function showSettingsInstructions() {
+export function showSettingsInstructions(): boolean {
   if (typeof window === "undefined") return false
   const showSettingsInstructions = JSON.parse(
     window.localStorage.showSettingsInstructions || "null",

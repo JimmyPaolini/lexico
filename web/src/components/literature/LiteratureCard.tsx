@@ -7,18 +7,19 @@ import {
   List,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { useState } from "react"
+import { memo, useState } from "react"
 import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
 import LiteratureAuthor from "./LiteratureAuthor"
 import LiteratureBook from "./LiteratureBook"
 import LiteratureText from "./LiteratureText"
 
-interface Props {
+interface LiteratureCardProps {
   author: Author
 }
-
-export default function LiteratureCard({ author }: Props) {
+export default memo(function LiteratureCard({
+  author,
+}: LiteratureCardProps): JSX.Element {
   const classes = useStyles()
   const books = author.books || ([] as Book[])
   const nonBookTexts = author.texts.filter(
@@ -52,7 +53,7 @@ export default function LiteratureCard({ author }: Props) {
       </Collapse>
     </Card>
   )
-}
+})
 
 const useStyles = makeStyles((theme: any) => ({
   literatureCard: {
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme: any) => ({
     margin: theme.spacing(1),
   },
   noPadding: {
-    "padding": 0,
+    padding: 0,
     "&:last-child": {
       paddingBottom: 0,
     },

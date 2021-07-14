@@ -41,6 +41,7 @@ export default class Text {
 
   @Field(() => [Line])
   linesSlice(
+    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
     @Arg("start", { defaultValue: 0 }) start: number = 0,
     @Arg("end", { defaultValue: Number.MAX_VALUE })
     end: number = Number.MAX_VALUE,

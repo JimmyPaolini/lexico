@@ -1,5 +1,6 @@
 import { Grid } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme } from "@material-ui/core/styles"
+import Head from "next/head"
 import { useContext, useEffect } from "react"
 import CardDeck from "../../components/accessories/CardDeck"
 import { Context } from "../../components/layout/Context"
@@ -9,7 +10,7 @@ import SettingsCard from "../../components/user/settings/SettingsCard"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
 import { showSettingsInstructions } from "../../utils/localSettings"
 
-export default function User() {
+export default function User(): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
 
@@ -26,28 +27,38 @@ export default function User() {
   }, [])
 
   return !user ? (
-    <Grid container justify="center" className={classes.noUser}>
-      <CardDeck
-        cards={[
-          {
-            key: "LoginCard",
-            Card: () => <LoginCard />,
-          },
-          {
-            key: "SettingsCard",
-            Card: () => <SettingsCard />,
-          },
-        ]}
-      />
-    </Grid>
+    <>
+      <Head>
+        <title>Lexico - User</title>
+      </Head>
+      <Grid container justify="center" className={classes.noUser}>
+        <CardDeck
+          cards={[
+            {
+              key: "LoginCard",
+              Card: <LoginCard />,
+            },
+            {
+              key: "SettingsCard",
+              Card: <SettingsCard />,
+            },
+          ]}
+        />
+      </Grid>
+    </>
   ) : (
-    <SingleCardLayout>
-      <SettingsCard />
-    </SingleCardLayout>
+    <>
+      <Head>
+        <title>Lexico - User</title>
+      </Head>
+      <SingleCardLayout>
+        <SettingsCard />
+      </SingleCardLayout>
+    </>
   )
 }
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   noUser: {
     marginTop: theme.spacing(4),
   },

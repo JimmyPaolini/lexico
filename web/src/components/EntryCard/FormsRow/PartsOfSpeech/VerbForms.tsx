@@ -10,14 +10,14 @@ interface Props {
   forms: Forms | null | undefined
 }
 
-export default function VerbForms({ forms }: Props) {
+export default function VerbForms({ forms }: Props): JSX.Element {
   const classes = useStyles()
   const [topTab, setTopTabState] = useState(0)
   const [midTab, setMidTabState] = useState(0)
   const [bottomTab, setBottomTab] = useState(0)
 
   const structure = verbFormsRestructure(forms)
-  let topTabs = Object.keys(structure)
+  const topTabs = Object.keys(structure)
   let midTabs = Object.keys(structure?.[topTabs[topTab]] || { "-": "" })
   let bottomTabs = Object.keys(
     structure?.[topTabs[topTab]]?.[midTabs[midTab]] || { "-": "" },
@@ -71,8 +71,7 @@ export default function VerbForms({ forms }: Props) {
           <FormTabs
             tabs={bottomTabs}
             activeTab={bottomTab}
-            setActiveTab={setBottomTab}
-          >
+            setActiveTab={setBottomTab}>
             <Box style={{ height: "8px" }} />
             <FormsTable forms={formsStructure} />
           </FormTabs>
@@ -169,132 +168,63 @@ const verbFormsRestructure = (conjugations: any) => {
     structure.SUB.PLUP.PAS,
   )
 
-  structure.IMP[
-    "IMPERATIVE"
-  ].ACT[0].center = conjugations?.imperative?.active?.present?.singular?.second?.join?.(
-    ",\n",
-  )
-  structure.IMP[
-    "IMPERATIVE"
-  ].ACT[2].center = conjugations?.imperative?.active?.future?.singular?.second?.join?.(
-    ",\n",
-  )
-  structure.IMP[
-    "IMPERATIVE"
-  ].ACT[4].center = conjugations?.imperative?.active?.future?.singular?.third?.join?.(
-    ",\n",
-  )
-  structure.IMP[
-    "IMPERATIVE"
-  ].ACT[1].center = conjugations?.imperative?.active?.present?.plural?.second?.join?.(
-    ",\n",
-  )
-  structure.IMP[
-    "IMPERATIVE"
-  ].ACT[3].center = conjugations?.imperative?.active?.future?.plural?.second?.join?.(
-    ",\n",
-  )
-  structure.IMP[
-    "IMPERATIVE"
-  ].ACT[5].center = conjugations?.imperative?.active?.future?.plural?.third?.join?.(
-    ",\n",
-  )
-  structure.IMP[
-    "IMPERATIVE"
-  ].PAS[0].center = conjugations?.imperative?.passive?.present?.singular?.second?.join?.(
-    ",\n",
-  )
-  structure.IMP[
-    "IMPERATIVE"
-  ].PAS[2].center = conjugations?.imperative?.passive?.future?.singular?.second?.join?.(
-    ",\n",
-  )
-  structure.IMP[
-    "IMPERATIVE"
-  ].PAS[4].center = conjugations?.imperative?.passive?.future?.singular?.third?.join?.(
-    ",\n",
-  )
-  structure.IMP[
-    "IMPERATIVE"
-  ].PAS[1].center = conjugations?.imperative?.passive?.present?.plural?.second?.join?.(
-    ",\n",
-  )
+  structure.IMP["IMPERATIVE"].ACT[0].center =
+    conjugations?.imperative?.active?.present?.singular?.second?.join?.(",\n")
+  structure.IMP["IMPERATIVE"].ACT[2].center =
+    conjugations?.imperative?.active?.future?.singular?.second?.join?.(",\n")
+  structure.IMP["IMPERATIVE"].ACT[4].center =
+    conjugations?.imperative?.active?.future?.singular?.third?.join?.(",\n")
+  structure.IMP["IMPERATIVE"].ACT[1].center =
+    conjugations?.imperative?.active?.present?.plural?.second?.join?.(",\n")
+  structure.IMP["IMPERATIVE"].ACT[3].center =
+    conjugations?.imperative?.active?.future?.plural?.second?.join?.(",\n")
+  structure.IMP["IMPERATIVE"].ACT[5].center =
+    conjugations?.imperative?.active?.future?.plural?.third?.join?.(",\n")
+  structure.IMP["IMPERATIVE"].PAS[0].center =
+    conjugations?.imperative?.passive?.present?.singular?.second?.join?.(",\n")
+  structure.IMP["IMPERATIVE"].PAS[2].center =
+    conjugations?.imperative?.passive?.future?.singular?.second?.join?.(",\n")
+  structure.IMP["IMPERATIVE"].PAS[4].center =
+    conjugations?.imperative?.passive?.future?.singular?.third?.join?.(",\n")
+  structure.IMP["IMPERATIVE"].PAS[1].center =
+    conjugations?.imperative?.passive?.present?.plural?.second?.join?.(",\n")
   // structure.IMP["IMPERATIVE"].PAS[3].center = conjugations?.imperative?.passive?.future?.plural?.second?.join?.(",\n");
-  structure.IMP[
-    "IMPERATIVE"
-  ].PAS[5].center = conjugations?.imperative?.passive?.future?.plural?.third?.join?.(
-    ",\n",
-  )
+  structure.IMP["IMPERATIVE"].PAS[5].center =
+    conjugations?.imperative?.passive?.future?.plural?.third?.join?.(",\n")
 
-  structure.INF["INFINITIVE"][
-    "-"
-  ][0].center = conjugations?.nonFinite?.infinitive?.active?.present?.join?.(
-    ",\n",
-  )
-  structure.INF["INFINITIVE"][
-    "-"
-  ][1].center = conjugations?.nonFinite?.infinitive?.passive?.present?.join?.(
-    ",\n",
-  )
-  structure.INF["INFINITIVE"][
-    "-"
-  ][2].center = conjugations?.nonFinite?.infinitive?.active?.perfect?.join?.(
-    ",\n",
-  )
-  structure.INF["INFINITIVE"][
-    "-"
-  ][3].center = conjugations?.nonFinite?.infinitive?.passive?.perfect?.join?.(
-    ",\n",
-  )
-  structure.INF["INFINITIVE"][
-    "-"
-  ][4].center = conjugations?.nonFinite?.infinitive?.active?.future?.join?.(
-    ",\n",
-  )
-  structure.INF["INFINITIVE"][
-    "-"
-  ][5].center = conjugations?.nonFinite?.infinitive?.passive?.future?.join?.(
-    ",\n",
-  )
+  structure.INF["INFINITIVE"]["-"][0].center =
+    conjugations?.nonFinite?.infinitive?.active?.present?.join?.(",\n")
+  structure.INF["INFINITIVE"]["-"][1].center =
+    conjugations?.nonFinite?.infinitive?.passive?.present?.join?.(",\n")
+  structure.INF["INFINITIVE"]["-"][2].center =
+    conjugations?.nonFinite?.infinitive?.active?.perfect?.join?.(",\n")
+  structure.INF["INFINITIVE"]["-"][3].center =
+    conjugations?.nonFinite?.infinitive?.passive?.perfect?.join?.(",\n")
+  structure.INF["INFINITIVE"]["-"][4].center =
+    conjugations?.nonFinite?.infinitive?.active?.future?.join?.(",\n")
+  structure.INF["INFINITIVE"]["-"][5].center =
+    conjugations?.nonFinite?.infinitive?.passive?.future?.join?.(",\n")
 
-  structure.NONF[
-    "NON FINITE"
-  ].PARTICIPLE[0].center = conjugations?.nonFinite?.participle?.active?.present?.join?.(
-    ",\n",
-  )
-  structure.NONF[
-    "NON FINITE"
-  ].PARTICIPLE[1].center = conjugations?.nonFinite?.participle?.passive?.perfect?.join?.(
-    ",\n",
-  )
-  structure.NONF[
-    "NON FINITE"
-  ].PARTICIPLE[2].center = conjugations?.nonFinite?.participle?.active?.future?.join?.(
-    ",\n",
-  )
-  structure.NONF[
-    "NON FINITE"
-  ].PARTICIPLE[3].center = conjugations?.nonFinite?.participle?.passive?.future?.join?.(
-    ",\n",
-  )
-  structure.NONF["NON FINITE"][
-    "GERUND/SUPINE"
-  ][0].center = conjugations?.verbalNoun?.gerund?.genitive?.join?.(",\n")
-  structure.NONF["NON FINITE"][
-    "GERUND/SUPINE"
-  ][1].center = conjugations?.verbalNoun?.gerund?.dative?.join?.(",\n")
-  structure.NONF["NON FINITE"][
-    "GERUND/SUPINE"
-  ][2].center = conjugations?.verbalNoun?.gerund?.accusative?.join?.(",\n")
-  structure.NONF["NON FINITE"][
-    "GERUND/SUPINE"
-  ][3].center = conjugations?.verbalNoun?.gerund?.ablative?.join?.(",\n")
-  structure.NONF["NON FINITE"][
-    "GERUND/SUPINE"
-  ][4].center = conjugations?.verbalNoun?.supine?.accusative?.join?.(",\n")
-  structure.NONF["NON FINITE"][
-    "GERUND/SUPINE"
-  ][5].center = conjugations?.verbalNoun?.supine?.ablative?.join?.(",\n")
+  structure.NONF["NON FINITE"].PARTICIPLE[0].center =
+    conjugations?.nonFinite?.participle?.active?.present?.join?.(",\n")
+  structure.NONF["NON FINITE"].PARTICIPLE[1].center =
+    conjugations?.nonFinite?.participle?.passive?.perfect?.join?.(",\n")
+  structure.NONF["NON FINITE"].PARTICIPLE[2].center =
+    conjugations?.nonFinite?.participle?.active?.future?.join?.(",\n")
+  structure.NONF["NON FINITE"].PARTICIPLE[3].center =
+    conjugations?.nonFinite?.participle?.passive?.future?.join?.(",\n")
+  structure.NONF["NON FINITE"]["GERUND/SUPINE"][0].center =
+    conjugations?.verbalNoun?.gerund?.genitive?.join?.(",\n")
+  structure.NONF["NON FINITE"]["GERUND/SUPINE"][1].center =
+    conjugations?.verbalNoun?.gerund?.dative?.join?.(",\n")
+  structure.NONF["NON FINITE"]["GERUND/SUPINE"][2].center =
+    conjugations?.verbalNoun?.gerund?.accusative?.join?.(",\n")
+  structure.NONF["NON FINITE"]["GERUND/SUPINE"][3].center =
+    conjugations?.verbalNoun?.gerund?.ablative?.join?.(",\n")
+  structure.NONF["NON FINITE"]["GERUND/SUPINE"][4].center =
+    conjugations?.verbalNoun?.supine?.accusative?.join?.(",\n")
+  structure.NONF["NON FINITE"]["GERUND/SUPINE"][5].center =
+    conjugations?.verbalNoun?.supine?.ablative?.join?.(",\n")
 
   return structure
 }
@@ -446,7 +376,7 @@ const structureTemplate: any = {
   },
   NONF: {
     "NON FINITE": {
-      "PARTICIPLE": [
+      PARTICIPLE: [
         {
           topLeft: "ACT",
           topRight: "PRES",

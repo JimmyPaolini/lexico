@@ -1,24 +1,32 @@
 # https://github.com/elastic/helm-charts/blob/master/elasticsearch/values.yaml
 
 fullnameOverride: elasticsearch
-imageTag: "7.12.0"
 
-esJavaOpts: -Xmx128m -Xms128m
+esJavaOpts: -Xmx256m -Xms256m
 resources:
   requests:
-    cpu: 200m
+    cpu: 500m
     memory: 512Mi
   limits:
-    cpu: 200m
-    memory: 512Mi
+    cpu: 500m
+    memory: 1024Mi
+
+replicas: 1
+extraEnvs:
+  - name: discovery.type
+    value: single-node
+  - name: cluster.initial_master_nodes
+    value: null
+
+clusterHealthCheckParams: wait_for_status=yellow&timeout=10s
+readinessProbe:
+  failureThreshold: 10
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  successThreshold: 3
+  timeoutSeconds: 10
 
 volumeClaimTemplate:
-  storageClassName: linode-block-storage-retain
   resources:
     requests:
       storage: 10Gi
-
-persistence:
-  enabled: true
-  labels:
-    app: elasticsearch

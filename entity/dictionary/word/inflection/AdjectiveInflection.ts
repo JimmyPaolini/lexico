@@ -14,7 +14,7 @@ export default class AdjectiveInflection {
   constructor(
     declension: AdjectiveDeclension = "",
     degree: AdjectiveDegree = "positive",
-    other: string = "",
+    other = "",
   ) {
     this.declension = declension
     this.degree = degree

@@ -5,7 +5,10 @@ export const serverEndpoint = `http://${
   process.env.NODE_ENV === "production" ? "server" : "localhost"
 }:3001/graphql`
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+): Promise<void> => {
   const request = {
     method: "POST",
     url: serverEndpoint,

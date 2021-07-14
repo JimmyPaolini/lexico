@@ -20,13 +20,13 @@ export const categories: { [key: string]: string } = {
   superlative: "Latin_superlative_adjectives",
 }
 
-export default async function ingestWiktionary() {
+export default async function ingestWiktionary(): Promise<void> {
   for (const category of Object.keys(categories)) {
     await ingestCategory(category)
   }
 }
 
-async function ingestCategory(category = "lemma"): Promise<any> {
+async function ingestCategory(category = "lemma"): Promise<void> {
   log.info(`START - ${category}`)
   const host = `https://en.wiktionary.org`
   let path = categories[category]
@@ -35,7 +35,7 @@ async function ingestCategory(category = "lemma"): Promise<any> {
   try {
     while (path) {
       log.info(host + path)
-      let $ = cheerio.load((await axios.get(host + path)).data)
+      const $ = cheerio.load((await axios.get(host + path)).data)
       for (const a of $(
         "#mw-pages div.mw-category > div.mw-category-group > ul > li a",
       ).get()) {

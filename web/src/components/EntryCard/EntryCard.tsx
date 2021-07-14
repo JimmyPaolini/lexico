@@ -1,32 +1,48 @@
 import Card from "@material-ui/core/Card"
 import Divider from "@material-ui/core/Divider"
 import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
+import React, { memo } from "react"
 import Entry from "../../../../entity/dictionary/Entry"
 import FormsRow from "./FormsRow/FormsRow"
-import PrincipalPartsRow from "./PrincipalPartsRow"
-import TranslationsRow from "./TranslationsRow"
+import PrincipalPartsRow from "./PrincipalPartsRow/PrincipalPartsRow"
+import TranslationsRow from "./TranslationsRow/TranslationsRow"
 
 interface Props {
   entry: Entry
   searched: string
 }
-export default function EntryCard({ entry, searched = "" }: Props) {
+export default memo(function EntryCard({
+  entry,
+  searched = "",
+}: Props): JSX.Element {
   const classes = useStyles()
+  const {
+    id,
+    partOfSpeech,
+    principalParts,
+    inflection,
+    bookmarked,
+    translations,
+    forms,
+    identifiers,
+  } = entry
+
   return (
     <Card elevation={4} className={classes.entryCard}>
-      <PrincipalPartsRow entry={entry} />
+      <PrincipalPartsRow
+        {...{ id, partOfSpeech, principalParts, inflection, bookmarked }}
+      />
       <Divider variant="inset" />
-      <TranslationsRow translations={entry.translations!} />
+      <TranslationsRow translations={translations || []} />
       <FormsRow
-        partOfSpeech={entry.partOfSpeech}
-        forms={entry.forms}
+        partOfSpeech={partOfSpeech}
+        forms={forms}
         searched={searched}
-        identifiers={entry.identifiers || []}
+        identifiers={identifiers || []}
       />
     </Card>
   )
-}
+})
 
 const useStyles = makeStyles((theme: any) => ({
   entryCard: {

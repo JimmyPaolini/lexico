@@ -1,7 +1,7 @@
 export default function getClassicalPhonemes(wordString: string): string {
   for (const [i, j] of Object.entries(substitutions))
     wordString = wordString.replace(new RegExp(i), j)
-  let word = wordString.toLowerCase().split("")
+  const word = wordString.toLowerCase().split("")
   const isVowel = (i: number) =>
     i >= 0 && i < word.length && "aeiouāēīōūȳ".split("").includes(word[i])
 
@@ -42,43 +42,43 @@ export default function getClassicalPhonemes(wordString: string): string {
 
 const classicalPhonemes: { [key: string]: string } = {
   // first array lists possibilities, nested array lists sequence of phonemes
-  "b": "B",
-  "c": "K",
-  "d": "D",
-  "f": "F",
-  "g": "G",
-  "j": "J",
-  "k": "K",
-  "l": "L",
-  "m": "M",
-  "n": "N",
-  "p": "P",
-  "q": "KW",
-  "r": "R",
-  "s": "S",
-  "t": "T",
-  "v": "W",
-  "w": "W",
-  "x": "KS",
-  "z": "Z",
+  b: "B",
+  c: "K",
+  d: "D",
+  f: "F",
+  g: "G",
+  j: "J",
+  k: "K",
+  l: "L",
+  m: "M",
+  n: "N",
+  p: "P",
+  q: "KW",
+  r: "R",
+  s: "S",
+  t: "T",
+  v: "W",
+  w: "W",
+  x: "KS",
+  z: "Z",
   // vowels
-  "a": "A",
-  "ā": "AA",
-  "e": "E",
-  "ē": "EE",
-  "i": "I",
-  "ī": "II",
-  "o": "O",
-  "ō": "OO",
-  "u": "U",
-  "ū": "UU",
-  "y": "Y",
-  "ȳ": "YY",
+  a: "A",
+  ā: "AA",
+  e: "E",
+  ē: "EE",
+  i: "I",
+  ī: "II",
+  o: "O",
+  ō: "OO",
+  u: "U",
+  ū: "UU",
+  y: "Y",
+  ȳ: "YY",
   // diphthongs
-  "ae": "AE",
-  "oe": "OE",
-  "au": "AU",
-  "eu": "EU", // ui: ['ui', ['u', 'i']],
+  ae: "AE",
+  oe: "OE",
+  au: "AU",
+  eu: "EU", // ui: ['ui', ['u', 'i']],
   " ": "_",
   ".": "_", // space (also for abbreviations)
   "-": "", // dash for tackons

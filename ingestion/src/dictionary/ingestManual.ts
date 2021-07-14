@@ -7,7 +7,7 @@ import { ingestEntryWords } from "./ingestEntryWords"
 import ingestPraenomenAbbreviations from "./ingestPraenomenAbbreviations.ts"
 import ingestRomanNumerals from "./ingestRomanNumerals"
 
-export default async function ingestManual() {
+export default async function ingestManual(): Promise<void> {
   log.info("ingesting manuals")
 
   await deleteManual("qui:0")
@@ -25,7 +25,7 @@ export default async function ingestManual() {
   log.info("ingested manuals")
 }
 
-export async function createManual(manual: Entry) {
+export async function createManual(manual: Entry): Promise<void> {
   const Entries = getConnection().getRepository(Entry)
   await deleteManual(manual.id)
   log.info(`creating ${manual.id}`)
@@ -35,7 +35,7 @@ export async function createManual(manual: Entry) {
   log.info(`created ${manual.id}`)
 }
 
-export async function deleteManual(id: string) {
+export async function deleteManual(id: string): Promise<void> {
   const Entries = getConnection().getRepository(Entry)
   log.info(`deleting ${id}`)
   await Entries.delete(id)

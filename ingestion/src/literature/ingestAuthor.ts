@@ -5,7 +5,7 @@ import ingestBook from "./ingestBook"
 import ingestText from "./ingestText"
 import { authorIdToName } from "./literatureMaps"
 
-export default async function ingestAuthor(id: string) {
+export default async function ingestAuthor(id: string): Promise<void> {
   const Authors = getConnection().getRepository(Author)
   const author = await Authors.save({
     id,

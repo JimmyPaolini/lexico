@@ -5,11 +5,11 @@ import React from "react"
 import { Forms } from "../../../../../../entity/dictionary/word/Forms"
 import FormsTable from "../FormsTable"
 
-interface Props {
+interface NounFormsProps {
   forms: Forms | null | undefined
 }
 
-export default function NounForms({ forms }: Props) {
+export default function NounForms({ forms }: NounFormsProps): JSX.Element {
   const classes = useStyles()
   const formsStructure = nounFormsRestructure(forms)
   return (

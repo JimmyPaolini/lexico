@@ -6,7 +6,7 @@ import { sentenceCase } from "../../../utils/string"
 interface Props {
   provider: string
 }
-export default function OAuthLogin({ provider }: Props) {
+export default function OAuthLogin({ provider }: Props): JSX.Element {
   const href = provider === "google" ? useGoogleUrl() : useFacebookUrl()
   return (
     <Button
@@ -25,8 +25,7 @@ export default function OAuthLogin({ provider }: Props) {
           priority
           loading="eager"
         />
-      }
-    >
+      }>
       {`Sign in with ${sentenceCase(provider)}`}
     </Button>
   )

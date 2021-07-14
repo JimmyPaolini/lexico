@@ -7,10 +7,10 @@ import { authorIdToName } from "./literatureMaps"
 
 const host = "https://www.thelatinlibrary.com/"
 
-export default async function ingestLibrary() {
+export default async function ingestLibrary(): Promise<void> {
   const tableHtml = cheerio.load((await axios.get(host)).data)
   cheerioTableParser(tableHtml)
-  let authors = (tableHtml("p>table").first() as any)
+  const authors = (tableHtml("p>table").first() as any)
     .parsetable(true, true, false)
     .reduce((table: any, row: any) => [...table, ...row], [])
     .map((elt: any) => {

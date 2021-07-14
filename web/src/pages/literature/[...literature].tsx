@@ -1,23 +1,31 @@
 import { Grid, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { GetStaticPaths, GetStaticProps } from "next"
-import { useContext, useEffect, useState } from "react"
+import Head from "next/head"
+import { useRouter } from "next/router"
+import { memo, useContext, useEffect, useState } from "react"
 import Text from "../../../../entity/literature/Text"
 import { Context } from "../../components/layout/Context"
-import ReaderModal from "../../components/literature/ReaderModal"
-import ReaderText from "../../components/literature/ReaderText"
+import LiteratureFallback from "../../components/literature/LiteratureFallback"
+import ReaderModal from "../../components/literature/reader/ReaderModal"
+import ReaderText from "../../components/literature/reader/ReaderText"
 import getTextIdsQuery from "../../graphql/literature/getTextIds.graphql"
 import { getText } from "../../hooks/literature/useGetText"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
+import { MyTheme } from "../../theme/theme"
+import { googleAnalyticsEvent } from "../../utils/googleAnalytics"
 import { getSettingsLocal } from "../../utils/localSettings"
 import { showReaderInstructions } from "../../utils/readerInstructions"
+import { sentenceCase } from "../../utils/string"
 import { graphQLClient } from "../_app"
 
 interface Props {
   text: Text
 }
-export default function Reader({ text }: Props) {
-  const classes = useStyles()
+export default memo(function Reader({ text }: Props): JSX.Element {
+  const router = useRouter()
+  if (router.isFallback) return <LiteratureFallback />
+  const classes = useStyles({})
   const { user } = useContext(Context)
 
   const [searched, setSearched] = useState<string>("")
@@ -25,6 +33,11 @@ export default function Reader({ text }: Props) {
   const openModal = (word: string) => {
     setSearched(word)
     setOpen(true)
+    googleAnalyticsEvent("search", {
+      category: "literature",
+      label: text.title,
+      value: word,
+    })
   }
 
   const { enqueueSnackbar } = useSnackbarEnhanced()
@@ -37,34 +50,53 @@ export default function Reader({ text }: Props) {
     }
   }, [])
 
+  useEffect(() => {
+    googleAnalyticsEvent("reader", {
+      category: "literature",
+      label: "open",
+      value: text.title,
+    })
+  }, [])
+
+  let title = "Lexico - Literature: " + sentenceCase(text.author.id)
+  if (text.book)
+    title += " " + sentenceCase(text.book.title).replace(/^\d+ /, "")
+  title += " " + sentenceCase(text.title)
+
   return (
-    <Paper
-      square
-      elevation={0}
-      className={classes.reader}
-      style={{
-        fontSize: user?.settings.fontSize || getSettingsLocal().fontSize,
-      }}
-    >
-      <style jsx global>{`
-        body#body {
-          background-color: black;
-        }
-      `}</style>
-      <Grid container justify="center">
-        {!!text && user !== undefined ? (
-          <ReaderText
-            {...{
-              text,
-              openModal,
-            }}
-          />
-        ) : null}
-      </Grid>
-      <ReaderModal {...{ searched, open, setOpen }} />
-    </Paper>
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={`Read and translate ${title}`} />
+        <meta
+          name="keywords"
+          content={`Latin ${text.author.name}${
+            text.book ? ", " + text.book.title : ""
+          }, ${text.title}, Literature, Read, English, Translation,`}
+        />
+      </Head>
+      <Paper
+        square
+        elevation={0}
+        className={classes.reader}
+        style={{
+          fontSize: user?.settings.fontSize || getSettingsLocal().fontSize,
+        }}>
+        <style jsx global>{`
+          body#body {
+            background-color: black;
+          }
+        `}</style>
+        <Grid container justify="center">
+          {!!text && user !== undefined ? (
+            <ReaderText {...{ text, openModal }} />
+          ) : null}
+        </Grid>
+        <ReaderModal {...{ searched, open, setOpen }} />
+      </Paper>
+    </>
   )
-}
+})
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { getTextIds: texts } = await graphQLClient.request(getTextIdsQuery)
@@ -74,30 +106,24 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const textId = context.params?.literature[0]!
-  console.log(textId)
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const textId = params?.literature?.[0]
   if (!textId) return { notFound: true }
-  let text: Text
   try {
-    text = await getText({ queryKey: [null, textId] })
+    const text = await getText({ queryKey: ["getText", textId] })
     if (!text) return { notFound: true }
+    return { props: { text } }
   } catch {
     return { notFound: true }
   }
-  return { props: { text } }
 }
 
-const useStyles = makeStyles((theme: any) => ({
+const useStyles = makeStyles((theme: MyTheme) => ({
   reader: {
     width: "100%",
     height: "100%",
     backgroundColor: "black",
-    fontFamily: theme.typography.literature.fontFamily,
-    fontWeight: theme.typography.literature.fontWeight,
-    fontSize: theme.typography.literature.fontSize,
-    fontHeight: theme.typography.literature.fontHeight,
-    letterSpacing: theme.typography.literature.letterSpacing,
+    ...theme.typography.literature,
   },
   modal: {
     display: "flex",

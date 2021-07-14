@@ -1,26 +1,38 @@
 {
   "scripts": {
-    "dev": "docker compose -f infra/docker/docker-compose.services.yml up",
-    "undev": "docker compose -f infra/docker/docker-compose.services.yml down --remove-orphans",
-    "start": "docker compose -f infra/docker/docker-compose.services.yml -f infra/docker/docker-compose.yml up",
-    "stop": "docker compose -f infra/docker/docker-compose.services.yml -f infra/docker/docker-compose.yml down --remove-orphans",
+    "lint": "eslint --no-error-on-unmatched-pattern * && prettier --check .",
+    "lint:watch": "nodemon -e ts --exec \"clear; yarn lint\"",
+    "format": "prettier .",
+
+    "dev": "docker compose -f infra/docker/docker-compose.database.yml up",
+    "undev": "docker compose -f infra/docker/docker-compose.database.yml down --remove-orphans",
+    "build": "yarn build:database & yarn build:server & yarn build:web & wait; echo \"Lexico built!\"",
+    "start": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml up",
+    "stop": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml down --remove-orphans",
+
     "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
     "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server .",
     "build:database": "docker image pull postgres:13",
-    "build:fluentbit": "docker build infra/docker -f infra/docker/fluentbit.Dockerfile -t jimmypaolini/fluentbit",
-    "build:kibana": "docker image pull docker.elastic.co/kibana/kibana:7.12.0",
-    "build:elasticsearch": "docker image pull docker.elastic.co/elasticsearch/elasticsearch:7.12.0",
+
     "deploy:web": "kubectl apply -f ./infra/kubernetes/web.yaml",
     "deploy:server": "kubectl apply -f ./infra/kubernetes/server.yaml",
+    "deploy:env": "kubectl apply -f ./infra/kubernetes/.env.yaml",
+    "deploy:ingress": "kubectl apply -f ./infra/kubernetes/ingress.yaml",
     "deploy:database": "helm install database bitnami/postgresql -f ./infra/helm/database.yaml",
     "deploy:nginx": "helm install nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
-    "deploy:fluentbit": "helm install fluentbit fluent/fluent-bit -f ./infra/helm/fluentbit.yaml",
-    "deploy:kibana": "helm install kibana elastic/kibana -f ./infra/helm/kibana.yaml",
-    "deploy:elasticsearch": "helm install elasticsearch elastic/elasticsearch -f ./infra/helm/elasticsearch.yaml",
-    "deploy:k8s-dashboard": "kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml",
-    "start:k8s-dashboard": "kubectl proxy",
+    "deploy:elasticsearch": "helm install elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
+    "deploy:fluentbit": "helm install fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
+    "deploy:kibana": "helm install kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml",
+    "deploy:monitoring": "helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring -f ./infra/helm/monitoring.yaml",
+
+    "update:web": "kubectl rollout restart deployment web",
     "update:server": "kubectl rollout restart deployment server",
-    "update:web": "kubectl rollout restart deployment web"
+    "update:database": "helm upgrade database bitnami/postgresql -f ./infra/helm/database.yaml",
+    "update:nginx": "helm upgrade nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
+    "update:elasticsearch": "helm upgrade elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
+    "update:fluentbit": "helm upgrade fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
+    "update:kibana": "helm upgrade kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml",
+    "update:monitoring": "helm upgrade monitoring prometheus-community/kube-prometheus-stack -n monitoring -f ./infra/helm/monitoring.yaml"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -34,8 +46,11 @@
   "devDependencies": {
     "@types/node": "^14.14.11",
     "@types/number-to-words": "^1.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
     "class-validator": "^0.12.2",
     "eslint": "^7.23.0",
+    "eslint-plugin-react": "^7.24.0",
     "eslint-config-prettier": "^8.1.0",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
@@ -49,6 +64,6 @@
   "author": "Jimmy Paolini",
   "description": "Latin Language Interface",
   "repository": "https://github.com/JimmyPaolini/Lexico",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "license": "MIT"
 }

@@ -2,18 +2,18 @@ import Grid from "@material-ui/core/Grid"
 import Grow from "@material-ui/core/Grow"
 import { makeStyles, Theme } from "@material-ui/core/styles"
 import useMediaQuery from "@material-ui/core/useMediaQuery"
-import React, { Dispatch, useEffect, useState } from "react"
+import React, { Dispatch, memo, useEffect, useState } from "react"
 import LazyLoad from "react-lazyload"
 
 type Card = {
   key: string | number
-  Card: () => JSX.Element
+  Card: JSX.Element
 }
 
-interface Props {
+interface CardDeckProps {
   cards: Card[]
 }
-export default function CardDeck({ cards }: Props) {
+export default memo(function CardDeck({ cards }: CardDeckProps): JSX.Element {
   const classes = useStyles()
 
   let numCols = 1
@@ -29,9 +29,9 @@ export default function CardDeck({ cards }: Props) {
 
   if (!cards.every((card) => card.key && card.Card)) {
     console.error("Invalid card structure passed into CardDeck")
-    return null
+    return <></>
   }
-  if (!columns.length || !columns[0].length) return null
+  if (!columns.length || !columns[0].length) return <></>
   return (
     <>
       {columns.map((column, col) => {
@@ -43,15 +43,14 @@ export default function CardDeck({ cards }: Props) {
             direction="column"
             alignItems="stretch"
             className={classes.column}
-            key={column.map((card) => card.key).join()}
-          >
+            key={column.map((card) => card.key).join()}>
             {column.map((card, row) => {
               const timeout = Math.min(400 * Math.pow(col + row, 1 / 2), 1000)
               return (
                 <Grid item key={card.key}>
                   <Grow in appear exit timeout={timeout}>
                     <LazyLoad offset={100} throttle={50} height={28}>
-                      <card.Card />
+                      {card.Card}
                     </LazyLoad>
                   </Grow>
                 </Grid>
@@ -62,7 +61,7 @@ export default function CardDeck({ cards }: Props) {
       })}
     </>
   )
-}
+})
 
 function reorganizeCards(
   cards: Card[],

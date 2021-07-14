@@ -5,12 +5,12 @@ import CardHeader from "../../accessories/CardHeader"
 import BasicLogin from "./BasicLoginForm"
 import OAuthLogin from "./OAuthLogin"
 
-export default function LoginCard() {
+export default function LoginCard(): JSX.Element {
   const classes = useStyles()
 
   return (
     <Card className={classes.card}>
-      <CardHeader title="Sign In to Save Bookmarks & Settings" />
+      <CardHeader title="Sign In" />
       <Divider variant="middle" />
       <CardContent>
         <Grid container direction="column" alignItems="center">

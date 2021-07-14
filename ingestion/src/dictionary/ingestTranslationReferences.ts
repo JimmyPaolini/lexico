@@ -3,7 +3,7 @@ import Translation from "../../../entity/dictionary/Translation"
 import log from "../../../utils/log"
 import { ingestTranslationReference } from "./ingestTranslationReference"
 
-export default async function ingestTranslationReferences() {
+export default async function ingestTranslationReferences(): Promise<void> {
   log.info("Ingesting Translation References")
 
   const Translations = getConnection().getRepository(Translation)
@@ -28,5 +28,4 @@ export default async function ingestTranslationReferences() {
   }
 
   log.info("Ingested Translation References")
-  return true
 }

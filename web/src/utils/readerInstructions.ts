@@ -1,9 +1,9 @@
 class ShowReaderInstructions {
   showAfter: Date = new Date()
-  seenCount: number = 0
+  seenCount = 0
 }
 
-export function showReaderInstructions() {
+export function showReaderInstructions(): boolean {
   if (typeof window === "undefined") return false
   const showReaderInstructions = JSON.parse(
     window.localStorage.showReaderInstructions || "null",

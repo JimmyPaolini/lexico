@@ -2,10 +2,10 @@ import { Typography } from "@material-ui/core"
 import { useContext } from "react"
 import { Context } from "../../layout/Context"
 
-export function Identity() {
+export function Identity(): JSX.Element {
   const { user } = useContext(Context)
 
-  return !!user ? (
+  return user ? (
     <Typography gutterBottom align="center">
       Signed in
       {user.googleId

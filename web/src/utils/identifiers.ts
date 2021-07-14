@@ -1,4 +1,5 @@
 import Entry from "../../../entity/dictionary/Entry"
+import { Forms } from "../../../entity/dictionary/word/Forms"
 import { hasSuffix, normalize } from "./string"
 
 const identifiablePartsOfSpeech = [
@@ -12,7 +13,7 @@ const identifiablePartsOfSpeech = [
   "suffix",
 ]
 
-export default function identifyEntryWord(word: string, entry: Entry) {
+export default function identifyEntryWord(word: string, entry: Entry): Entry {
   if (!identifiablePartsOfSpeech.includes(entry.partOfSpeech)) return entry
   if (hasSuffix(word, "que")) word = word.replace(/que$/i, "")
   else if (hasSuffix(word, "ve")) word = word.replace(/ve$/i, "")
@@ -23,7 +24,7 @@ export default function identifyEntryWord(word: string, entry: Entry) {
 
 function identifyWordRecursive(
   word: string,
-  forms: any,
+  forms: Forms | null | undefined,
   current: string[],
   identifiers: string[],
 ) {
@@ -39,7 +40,7 @@ function identifyWordRecursive(
     for (const key in forms) {
       identifiers = identifyWordRecursive(
         word,
-        forms[key],
+        forms[key as keyof Forms],
         [...current, key],
         identifiers,
       )

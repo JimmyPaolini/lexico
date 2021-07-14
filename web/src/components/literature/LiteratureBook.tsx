@@ -6,7 +6,7 @@ import {
   ListItemText,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React, { useState } from "react"
+import React, { memo, useState } from "react"
 import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
 import { sentenceCase } from "../../utils/string"
@@ -19,7 +19,10 @@ interface Props {
   isLast: boolean
 }
 
-export default function LiteratureBook({ book, isLast }: Props) {
+export default memo(function LiteratureBook({
+  book,
+  isLast,
+}: Props): JSX.Element {
   const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(false)
 
@@ -31,8 +34,7 @@ export default function LiteratureBook({ book, isLast }: Props) {
         key={book.id}
         classes={{ button: classes.hideHoverHighlight }}
         disableRipple
-        disableTouchRipple
-      >
+        disableTouchRipple>
         <ListItemText
           primary={sentenceCase(book.title).replace(/^\d+ /, "")}
           primaryTypographyProps={{ variant: "body1" }}
@@ -49,11 +51,11 @@ export default function LiteratureBook({ book, isLast }: Props) {
       {!isLast ? <Divider className={classes.inset1} /> : null}
     </>
   )
-}
+})
 
 const useStyles = makeStyles((theme: any) => ({
   noPadding: {
-    "padding": 0,
+    padding: 0,
     "&:last-child": {
       paddingBottom: 0,
     },

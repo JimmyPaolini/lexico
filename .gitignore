@@ -1,11 +1,11 @@
 **/.DS_Store
 **/.vscode
 **/.idea
+
 **/node_modules
 **/dist
 **/*.env*
 
-# next.js
 **/.next/
 **/out/
 
@@ -14,5 +14,4 @@
 
 **/data/wiktionary
 
-**/*kubeconfig.yaml
 .DS_Store

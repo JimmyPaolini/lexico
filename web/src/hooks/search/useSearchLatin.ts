@@ -2,7 +2,9 @@ import { QueryFunctionContext, useQuery } from "react-query"
 import searchLatinQuery from "../../graphql/search/searchLatin.graphql"
 import { graphQLClient } from "../../pages/_app"
 
-export default function useSearchLatin(searched: string) {
+export default function useSearchLatin(
+  searched: string,
+): ReturnType<typeof useQuery> {
   return useQuery(["searchLatin", searched], searchLatin, {
     retry: false,
     staleTime: 1000 * 60 * 5,
@@ -11,7 +13,7 @@ export default function useSearchLatin(searched: string) {
 
 async function searchLatin({
   queryKey: [, search],
-}: QueryFunctionContext<any>) {
+}: QueryFunctionContext<[string, string]>) {
   if (!search) return undefined
   const { searchLatin: data } = await graphQLClient.request(searchLatinQuery, {
     search,

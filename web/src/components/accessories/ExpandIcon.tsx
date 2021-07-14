@@ -6,7 +6,7 @@ interface Props {
   expanded: boolean
   [key: string]: any
 }
-export default function ExpandIcon({ expanded, ...props }: Props) {
+export default function ExpandIcon({ expanded, ...props }: Props): JSX.Element {
   const classes = useStyles()
   return (
     <Box className={classes.container} {...props}>
