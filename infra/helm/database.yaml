@@ -6,11 +6,20 @@ extraEnvVarsCM: env
 
 postgresqlUsername: postgres
 postgresqlDatabase: lexico
-# postgresqlPassword: xxx
+postgresqlPassword: xxx
 
 replication:
   enabled: true
   readReplicas: 3
   applicationName: database
   user: postgres
-  # password: xxx
+  password: xxx
+readReplicas:
+  podAntiAffinityPreset: hard
+primary:
+  podAntiAffinityPreset: hard
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi

@@ -102,12 +102,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { getTextIds: texts } = await graphQLClient.request(getTextIdsQuery)
   return {
     fallback: true,
-    paths: texts.map((text: Text) => ({ params: { literature: [text.id] } })),
+    paths: texts.map((text: Text) => ({ params: { id: [text.id] } })),
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const textId = params?.literature?.[0]
+  const textId = params?.id?.[0]
   if (!textId) return { notFound: true }
   try {
     const text = await getText({ queryKey: ["getText", textId] })

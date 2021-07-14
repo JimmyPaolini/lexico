@@ -3,7 +3,7 @@ SELECT * FROM entry LIMIT 10
 
 -- @block find entry
 SELECT id, "partOfSpeech", inflection, forms FROM entry
-WHERE entry.id LIKE 'amo:%'
+WHERE entry.id LIKE 'cano:%'
 
 -- @block find entry words
 SELECT id, "partOfSpeech", inflection, forms, "wordWord" as word

@@ -7,9 +7,6 @@ resources:
   requests:
     cpu: 250m
     memory: 512Mi
-  limits:
-    cpu: 500m
-    memory: 1024Mi
 
 extraEnvs:
   - name: SERVER_PORT # This env variable must have its default overridden
@@ -21,3 +18,18 @@ readinessProbe:
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 10
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app
+              operator: In
+              values:
+                - elasticsearch
+            - key: statefulset.kubernetes.io/pod-name
+              operator: In
+              values:
+                - database-primary-0
+        topologyKey: kubernetes.io/hostname
