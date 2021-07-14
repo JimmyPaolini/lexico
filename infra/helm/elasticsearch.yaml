@@ -5,11 +5,8 @@ fullnameOverride: elasticsearch
 esJavaOpts: -Xmx256m -Xms256m
 resources:
   requests:
-    cpu: 500m
+    cpu: 250m
     memory: 512Mi
-  limits:
-    cpu: 500m
-    memory: 1024Mi
 
 replicas: 1
 extraEnvs:

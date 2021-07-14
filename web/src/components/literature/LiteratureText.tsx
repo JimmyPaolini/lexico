@@ -18,7 +18,7 @@ export default memo(function LiteratureText({ text }: Props): JSX.Element {
 
   return (
     <Grid item xs={isTitleBook ? 2 : 4} container justify="center">
-      <CardActionArea onClick={() => router.push(`literature/${text.id}`)}>
+      <CardActionArea onClick={() => router.push(`reader/${text.id}`)}>
         {isTitleBook ? (
           <Avatar className={classes.bookText}>
             {text.title.match(/\d+/)?.[0]}
