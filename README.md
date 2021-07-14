@@ -28,24 +28,6 @@
 <a href="https://formik.org"><img width="64" height="64" alt="formik" src="web/public/icon/tool/formik.png"></a>
 <a href="https://eslint.org"><img width="64" height="64" alt="eslint" src="web/public/icon/tool/eslint.png"></a>
 <a href="https://prettier.io"><img width="64" height="64" alt="prettier" src="web/public/icon/tool/prettier.png"></a>
-<a href="https://sendgrid.com"><img width="64" height="64" alt="sendgrid" src="web/public/icon/tool/sendgrid.png"></a>
-<a href="https://jwt.io"><img width="64" height="64" alt="jwt" src="web/public/icon/tool/jwt.png"></a>
-<a href="https://nextjs.org"><img width="64" height="64" alt="nextjs" src="web/public/icon/tool/nextjs.png"></a>
-<a href="https://reactjs.org"><img width="64" height="64" alt="react" src="web/public/icon/tool/react.png"></a>
-<a href="https://material-ui.com"><img width="64" height="64" alt="materialui" src="web/public/icon/tool/materialui.png"></a>
-<a href="https://storybook.js.org"><img width="64" height="64" alt="storybook" src="web/public/icon/tool/storybook.png"></a>
-<<<<<<< HEAD
-<a href="https://react-query.tanstack.com/"><img width="64" height="64" alt="react-query" src="web/public/icon/tool/react-query.png"></a>
-<a href="https://formik.org/"><img width="64" height="64" alt="formik" src="web/public/icon/tool/formik.png"></a>
-<a href="https://eslint.org/"><img width="64" height="64" alt="eslint" src="web/public/icon/tool/eslint.png"></a>
-<a href="https://prettier.io/"><img width="64" height="64" alt="prettier" src="web/public/icon/tool/prettier.png"></a>
->>>>>>> a451f0dae6 (Bugs from linting/formatting fixed, grammar page begun)
-=======
-<a href="https://react-query.tanstack.com"><img width="64" height="64" alt="react-query" src="web/public/icon/tool/react-query.png"></a>
-<a href="https://formik.org"><img width="64" height="64" alt="formik" src="web/public/icon/tool/formik.png"></a>
-<a href="https://eslint.org"><img width="64" height="64" alt="eslint" src="web/public/icon/tool/eslint.png"></a>
-<a href="https://prettier.io"><img width="64" height="64" alt="prettier" src="web/public/icon/tool/prettier.png"></a>
->>>>>>> 45c0730c14 (grammar cards, fixed logging, EFK stack working, monitoring)
 <a href="https://github.com/features/actions"><img width="64" height="64" alt="github-actions" src="web/public/icon/tool/github-actions.png"></a>
 <a href="https://www.docker.com"><img width="64" height="64" alt="docker" src="web/public/icon/tool/docker.png"></a>
 <a href="https://kubernetes.io"><img width="64" height="64" alt="kubernetes" src="web/public/icon/tool/kubernetes.png"></a>
