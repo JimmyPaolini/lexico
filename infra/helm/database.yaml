@@ -9,8 +9,8 @@ postgresqlDatabase: lexico
 # postgresqlPassword: xxx
 
 replication:
+  enabled: true
+  readReplicas: 3
   applicationName: database
   user: postgres
   # password: xxx
-  enabled: true
-  readReplicas: 2
