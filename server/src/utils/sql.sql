@@ -1,11 +1,9 @@
 -- @block scratch
-SELECT * FROM entry
-WHERE "partOfSpeech" = 'verb'
-AND inflection ->> 'conjugation' = 'first'
+SELECT * FROM entry LIMIT 10
 
 -- @block find entry
 SELECT id, "partOfSpeech", inflection, forms FROM entry
-WHERE entry.id LIKE 'iii:%'
+WHERE entry.id LIKE 'amo:%'
 
 -- @block find entry words
 SELECT id, "partOfSpeech", inflection, forms, "wordWord" as word
