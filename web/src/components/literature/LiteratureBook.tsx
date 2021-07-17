@@ -41,7 +41,7 @@ export default memo(function LiteratureBook({
         />
         <ExpandIcon {...{ expanded }} style={{ padding: 0 }} />
       </ListItem>
-      <Collapse in={expanded}>
+      <Collapse in={expanded} mountOnEnter>
         <Grid container justify="center" alignItems="stretch">
           {book.texts.map((text) => (
             <LiteratureText {...{ text }} key={text.id} />

@@ -32,7 +32,7 @@ export default forwardRef(function AdjectiveDeclensionCard(
         disableTouchRipple>
         <PrincipalPartsRow {...{ ...declension, expanded }} />
       </CardActionArea>
-      <Collapse in={expanded}>
+      <Collapse in={expanded} mountOnEnter>
         <CardContent className={classes.cardContent}>
           <Divider variant="middle" />
           <Typography align="center" className={classes.info}>

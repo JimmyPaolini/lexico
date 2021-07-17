@@ -32,7 +32,7 @@ export default function TranslationsRow({ translations }: Props): JSX.Element {
             {translations.slice(0, 2).map((translation) => (
               <TranslationBullet {...{ translation }} key={translation.id} />
             ))}
-            <Collapse in={expanded || !expandable} timeout={250}>
+            <Collapse in={expanded || !expandable} timeout={250} mountOnEnter>
               <Grid item>
                 {translations.slice(2).map((translation) => (
                   <TranslationBullet

@@ -31,7 +31,7 @@ export default forwardRef(function VerbConjugationCard(
         disableTouchRipple>
         <PrincipalPartsRow {...{ ...conjugation, expanded }} />
       </CardActionArea>
-      <Collapse in={expanded}>
+      <Collapse in={expanded} mountOnEnter>
         <CardContent className={classes.cardContent}>
           <Divider variant="middle" />
           <VerbForms {...conjugation} />

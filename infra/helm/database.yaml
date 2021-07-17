@@ -2,7 +2,12 @@
 
 fullnameOverride: database
 
-extraEnvVarsCM: env
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+# extraEnvVarsCM: env
 
 postgresqlUsername: postgres
 postgresqlDatabase: lexico
@@ -19,7 +24,44 @@ readReplicas:
 primary:
   podAntiAffinityPreset: hard
 
-resources:
-  requests:
-    cpu: 250m
-    memory: 256Mi
+extraEnv:
+  - name: POSTGRES_USER
+    valueFrom:
+      secretKeyRef:
+        name: env
+        key: POSTGRES_USER
+  - name: POSTGRES_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: env
+        key: POSTGRES_PASSWORD
+  - name: POSTGRES_DB
+    valueFrom:
+      secretKeyRef:
+        name: env
+        key: POSTGRES_DB
+  - name: POSTGRESQL_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: env
+        key: POSTGRES_USER
+  - name: POSTGRESQL_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: env
+        key: POSTGRES_PASSWORD
+  - name: POSTGRESQL_DATABASE
+    valueFrom:
+      secretKeyRef:
+        name: env
+        key: POSTGRES_DB
+  - name: PGDATA
+    valueFrom:
+      secretKeyRef:
+        name: env
+        key: PGDATA
+  - name: POSTGRES_HOST_AUTH_METHOD
+    valueFrom:
+      secretKeyRef:
+        name: env
+        key: POSTGRES_HOST_AUTH_METHOD

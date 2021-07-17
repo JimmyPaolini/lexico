@@ -1,5 +1,7 @@
-import { Box } from "@material-ui/core"
+import { Box, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import { Edit, Menu } from "@material-ui/icons"
+import { useRouter } from "next/router"
 import React, { memo } from "react"
 import Text from "../../../../../entity/literature/Text"
 import { MyTheme } from "../../../theme/theme"
@@ -16,6 +18,7 @@ export default memo(function ReaderText({
   openModal,
 }: ReaderTextProps): JSX.Element {
   const classes = useStyles()
+  const router = useRouter()
 
   const title = sentenceCase(text.title)
   let subtitle = sentenceCase(text.author.id)
@@ -37,6 +40,30 @@ export default memo(function ReaderText({
         }}
         className={classes.cardHeader}
         classes={{ action: classes.shownAction }}
+        {...(router.pathname.match(/\/reader\/custom/)
+          ? {
+              action: (
+                <IconButton
+                  onClick={() =>
+                    router.push(
+                      window?.location.pathname.replace("custom", "save") ||
+                        "/literature",
+                    )
+                  }
+                  aria-label="edit">
+                  <Edit />
+                </IconButton>
+              ),
+              avatar: (
+                <IconButton
+                  onClick={() => null}
+                  aria-label="empty space"
+                  className={classes.hiddenAction}>
+                  <Menu />
+                </IconButton>
+              ),
+            }
+          : {})}
       />
       {text.lines.map((line) => (
         <ReaderLine {...{ line, openModal }} key={line.id} />
@@ -77,11 +104,11 @@ const useStyles = makeStyles((theme: MyTheme) => ({
   shownAction: {
     marginTop: "auto",
     marginBottom: "auto",
-    marginRight: 12,
+    marginLeft: theme.spacing(2),
   },
   hiddenAction: {
     marginTop: 8,
-    marginRight: 8,
+    marginLeft: -8,
     visibility: "hidden",
   },
 }))

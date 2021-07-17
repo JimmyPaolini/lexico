@@ -57,7 +57,7 @@ export default class DictionaryResolver {
         )
         return entry
       })
-    log.info("searchLatin response", {
+    log.info("searchLatin", {
       search,
       responseTime: performance.now() - t0,
       entries: entries.map(({ id }) => id),
@@ -94,7 +94,7 @@ export default class DictionaryResolver {
         )
         return entry
       })
-    log.info("searchEnglish response", {
+    log.info("searchEnglish", {
       search,
       responseTime: performance.now() - t0,
       entries: entries.map(({ id }) => id),

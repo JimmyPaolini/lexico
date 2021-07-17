@@ -1,26 +1,49 @@
-import { CardHeader as CardHeaderMui, Divider } from "@material-ui/core"
+import { Divider, ListItem, ListItemText } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { memo } from "react"
+import { useRouter } from "next/router"
+import { memo, useRef } from "react"
+import { MyTheme } from "../../../theme/theme"
+import { CustomText } from "../../../utils/localLiterature"
+import { sentenceCase } from "../../../utils/string"
+import CustomLiteratureOptions from "./CustomLiteratureOptions"
 
-export default memo(function LiteratureLiteratureRow(): JSX.Element {
+interface CustomLiteratureRowProps {
+  text: CustomText
+  refreshLiteratureLocal: () => void
+}
+export default memo(function CustomLiteratureRow({
+  text,
+  refreshLiteratureLocal,
+}: CustomLiteratureRowProps): JSX.Element {
   const classes = useStyles()
-  classes
+  const router = useRouter()
+  const listItemRef = useRef<HTMLDivElement>(null)
 
   return (
     <>
-      <Divider style={{ marginRight: 8 }} />
-      <CardHeaderMui />
+      <Divider className={classes.divider} />
+      <ListItem
+        button
+        ref={listItemRef}
+        onClick={() => router.push(`/reader/custom/` + text.id)}>
+        <ListItemText
+          primary={sentenceCase(text.title)}
+          primaryTypographyProps={{ variant: "body1" }}
+        />
+        <CustomLiteratureOptions
+          {...{ text, listItemRef, refreshLiteratureLocal }}
+        />
+      </ListItem>
     </>
   )
 })
 
-const useStyles = makeStyles(() => ({
-  summary: {
-    display: "block",
-    lineHeight: 1.3,
-    marginTop: 4,
+const useStyles = makeStyles((theme: MyTheme) => ({
+  divider: {
+    marginRight: theme.spacing(1),
   },
-  none: {
-    display: "none",
+  options: {
+    padding: 4,
+    marginRight: -4,
   },
 }))

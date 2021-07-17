@@ -18,7 +18,7 @@
     "deploy:server": "kubectl apply -f ./infra/kubernetes/server.yaml",
     "deploy:env": "kubectl apply -f ./infra/kubernetes/.env.yaml",
     "deploy:ingress": "kubectl apply -f ./infra/kubernetes/ingress.yaml",
-    "deploy:database": "helm install database bitnami/postgresql -f ./infra/helm/database.yaml",
+    "deploy:database": "helm install database bitnami/postgresql -f ./infra/helm/database.yaml --set postgresqlPassword=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\") --set replication.password=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\")",
     "deploy:nginx": "helm install nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
     "deploy:elasticsearch": "helm install elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
     "deploy:fluentbit": "helm install fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
@@ -27,7 +27,7 @@
 
     "update:web": "kubectl rollout restart deployment web",
     "update:server": "kubectl rollout restart deployment server",
-    "update:database": "helm upgrade database bitnami/postgresql -f ./infra/helm/database.yaml",
+    "update:database": "helm upgrade database bitnami/postgresql -f ./infra/helm/database.yaml --set postgresqlPassword=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\") --set replication.password=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\")",
     "update:nginx": "helm upgrade nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
     "update:elasticsearch": "helm upgrade elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
     "update:fluentbit": "helm upgrade fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",

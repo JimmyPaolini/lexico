@@ -72,9 +72,14 @@ export default memo(function Reader({ text }: Props): JSX.Element {
           name="keywords"
           content={`Latin ${text.author.name}${
             text.book ? ", " + text.book.title : ""
-          }, ${text.title}, Literature, Read, English, Translation,`}
+          }, ${text.title}, Literature, Read, English, Translation`}
         />
       </Head>
+      <style jsx global>{`
+        body#body {
+          background-color: black;
+        }
+      `}</style>
       <Paper
         square
         elevation={0}
@@ -82,11 +87,6 @@ export default memo(function Reader({ text }: Props): JSX.Element {
         style={{
           fontSize: user?.settings.fontSize || getSettingsLocal().fontSize,
         }}>
-        <style jsx global>{`
-          body#body {
-            background-color: black;
-          }
-        `}</style>
         <Grid container justify="center">
           {!!text && user !== undefined ? (
             <ReaderText {...{ text, openModal }} />
@@ -107,7 +107,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const textId = params?.id?.[0]
+  const textId = params?.id as string
   if (!textId) return { notFound: true }
   try {
     const text = await getText({ queryKey: ["getText", textId] })

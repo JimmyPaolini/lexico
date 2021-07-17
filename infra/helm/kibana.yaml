@@ -8,16 +8,16 @@ resources:
     cpu: 250m
     memory: 512Mi
 
-extraEnvs:
-  - name: SERVER_PORT # This env variable must have its default overridden
-    value: "5601"
-
 readinessProbe:
   failureThreshold: 10
   initialDelaySeconds: 60
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 10
+
+extraEnvs:
+  - name: SERVER_PORT # This env variable must have its default overridden
+    value: "5601"
 
 affinity:
   podAntiAffinity:
