@@ -1,4 +1,4 @@
-import { Card, CardContent, Divider, Grid } from "@material-ui/core"
+import { Card, CardContent, Divider, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import CardHeader from "../../accessories/CardHeader"
@@ -10,7 +10,17 @@ export default function LoginCard(): JSX.Element {
 
   return (
     <Card className={classes.card}>
-      <CardHeader title="Sign In" />
+      <CardHeader title="Sign In" className={classes.cardHeader} />
+      <Typography align="center" variant="body2" color="textSecondary">
+        Save your Literature, Bookmarks,
+      </Typography>
+      <Typography
+        align="center"
+        variant="body2"
+        color="textSecondary"
+        gutterBottom>
+        and Settings across devices
+      </Typography>
       <Divider variant="middle" />
       <CardContent>
         <Grid container direction="column" alignItems="center">
@@ -33,6 +43,10 @@ const useStyles = makeStyles((theme: any) => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     marginBottom: theme.spacing(1),
+  },
+  cardHeader: {
+    paddingBottom: 0,
+    minHeight: 64,
   },
   columnItem: {
     marginBottom: theme.spacing(2),
