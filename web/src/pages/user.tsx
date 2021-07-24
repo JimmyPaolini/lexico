@@ -8,7 +8,7 @@ import SingleCardLayout from "../components/layout/SingleCardLayout"
 import LoginCard from "../components/user/login/LoginCard"
 import SettingsCard from "../components/user/settings/SettingsCard"
 import useSnackbarEnhanced from "../hooks/useSnackbarEnhanced"
-import { showSettingsInstructions } from "../utils/localSettings"
+import { showSettingsInstructions } from "../utils/settingsLocal"
 
 export default function User(): JSX.Element {
   const classes = useStyles()

@@ -7,15 +7,15 @@ import { memo, useContext, useEffect, useState } from "react"
 import Text from "../../../../entity/literature/Text"
 import { Context } from "../../components/layout/Context"
 import LiteratureFallback from "../../components/literature/LiteratureFallback"
-import ReaderModal from "../../components/literature/reader/ReaderModal"
-import ReaderText from "../../components/literature/reader/ReaderText"
+import ReaderModal from "../../components/reader/ReaderModal"
+import ReaderText from "../../components/reader/ReaderText"
 import getTextIdsQuery from "../../graphql/literature/getTextIds.graphql"
 import { getText } from "../../hooks/literature/useGetText"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
 import { MyTheme } from "../../theme/theme"
 import { googleAnalyticsEvent } from "../../utils/googleAnalytics"
-import { getSettingsLocal } from "../../utils/localSettings"
 import { showReaderInstructions } from "../../utils/readerInstructions"
+import { getSettingsLocal } from "../../utils/settingsLocal"
 import { sentenceCase } from "../../utils/string"
 import { graphQLClient } from "../_app"
 
@@ -102,12 +102,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { getTextIds: texts } = await graphQLClient.request(getTextIdsQuery)
   return {
     fallback: true,
-    paths: texts.map((text: Text) => ({ params: { id: [text.id] } })),
+    paths: texts.map((text: Text) => ({ params: { textId: text.id } })),
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const textId = params?.id as string
+  const textId = params?.textId as string
   if (!textId) return { notFound: true }
   try {
     const text = await getText({ queryKey: ["getText", textId] })

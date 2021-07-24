@@ -2,10 +2,10 @@ import { Divider, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { memo, useContext } from "react"
 import LazyLoad from "react-lazyload"
-import Line from "../../../../../entity/literature/Line"
-import { getSettingsLocal } from "../../../utils/localSettings"
-import { normalize } from "../../../utils/string"
-import { Context } from "../../layout/Context"
+import Line from "../../../../entity/literature/Line"
+import { getSettingsLocal } from "../../utils/settingsLocal"
+import { normalize } from "../../utils/string"
+import { Context } from "../layout/Context"
 import ReaderWord from "./ReaderWord"
 
 interface ReaderLineProps {
@@ -61,10 +61,7 @@ const useStyles = makeStyles((theme: any) => ({
     height: "100%",
     marginRight: theme.spacing(1) - 2,
     marginLeft: theme.spacing(1) - 2,
-    marginTop: "auto",
-    marginBottom: "auto",
     fontFamily: "courier, monospace",
-    // fontSize: "1.3rem",
   },
   divider: {
     display: "inline",

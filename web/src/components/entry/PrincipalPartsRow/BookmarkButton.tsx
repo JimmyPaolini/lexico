@@ -12,7 +12,7 @@ import {
   isBookmarkedLocal,
   showBookmarkInstructions,
   unbookmarkLocal,
-} from "../../../utils/localBookmarks"
+} from "../../../utils/bookmarksLocal"
 import { Context } from "../../layout/Context"
 
 interface Props {

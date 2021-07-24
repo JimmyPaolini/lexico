@@ -1,12 +1,12 @@
 import { Box, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Edit, Menu } from "@material-ui/icons"
+import { Edit } from "@material-ui/icons"
 import { useRouter } from "next/router"
 import React, { memo } from "react"
-import Text from "../../../../../entity/literature/Text"
-import { MyTheme } from "../../../theme/theme"
-import { sentenceCase } from "../../../utils/string"
-import CardHeader from "../../accessories/CardHeader"
+import Text from "../../../../entity/literature/Text"
+import { MyTheme } from "../../theme/theme"
+import { sentenceCase } from "../../utils/string"
+import CardHeader from "../accessories/CardHeader"
 import ReaderLine from "./ReaderLine"
 
 interface ReaderTextProps {
@@ -28,7 +28,7 @@ export default memo(function ReaderText({
   return (
     <Box className={classes.readerText}>
       <CardHeader
-        title={title}
+        title={router.pathname.match(/\/reader\/custom/) ? text.title : title}
         titleTypographyProps={{
           className: classes.title,
           component: "h1",
@@ -46,20 +46,14 @@ export default memo(function ReaderText({
                 <IconButton
                   onClick={() =>
                     router.push(
-                      window?.location.pathname.replace("custom", "save") ||
-                        "/literature",
+                      window?.location.pathname.replace(
+                        "reader",
+                        "literature",
+                      ) || "/literature",
                     )
                   }
                   aria-label="edit">
                   <Edit />
-                </IconButton>
-              ),
-              avatar: (
-                <IconButton
-                  onClick={() => null}
-                  aria-label="empty space"
-                  className={classes.hiddenAction}>
-                  <Menu />
                 </IconButton>
               ),
             }
@@ -105,10 +99,5 @@ const useStyles = makeStyles((theme: MyTheme) => ({
     marginTop: "auto",
     marginBottom: "auto",
     marginLeft: theme.spacing(2),
-  },
-  hiddenAction: {
-    marginTop: 8,
-    marginLeft: -8,
-    visibility: "hidden",
   },
 }))

@@ -14,7 +14,7 @@ export default memo(function LiteratureCustomCard(): JSX.Element {
 
   return (
     <Card elevation={4} className={classes.literatureCustomCard}>
-      <CardActionArea href="/reader/save">
+      <CardActionArea href="/literature/custom">
         <CardHeaderMui
           title="Your Literature"
           action={<Add className={classes.add} />}

@@ -18,6 +18,7 @@ export default function Snackbar({ children }: Props): JSX.Element {
         vertical: "bottom",
         horizontal: "right",
       }}
+      elevation={4}
       hideIconVariant
       preventDuplicate>
       {children}
@@ -32,6 +33,6 @@ const useStyles = makeStyles((theme: any) => ({
   },
   action: {
     flexShrink: 0,
-    paddingLeft: 0,
+    paddingLeft: theme.spacing(1),
   },
 }))

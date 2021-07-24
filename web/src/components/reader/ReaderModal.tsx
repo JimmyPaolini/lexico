@@ -3,11 +3,11 @@ import { makeStyles } from "@material-ui/core/styles"
 import React, { Dispatch, memo, SetStateAction, useRef } from "react"
 import { UseQueryResult } from "react-query"
 import { useSwipeable } from "react-swipeable"
-import Entry from "../../../../../entity/dictionary/Entry"
-import useSearchLatin from "../../../hooks/search/useSearchLatin"
-import useEventListener from "../../../hooks/useEventListener"
-import CardDeck from "../../accessories/CardDeck"
-import EntryCard from "../../EntryCard/EntryCard"
+import Entry from "../../../../entity/dictionary/Entry"
+import useSearchLatin from "../../hooks/search/useSearchLatin"
+import useEventListener from "../../hooks/useEventListener"
+import CardDeck from "../accessories/CardDeck"
+import EntryCard from "../entry/EntryCard"
 
 interface ReaderModalProps {
   searched: string

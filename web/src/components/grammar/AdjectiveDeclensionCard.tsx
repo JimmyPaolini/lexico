@@ -9,8 +9,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import { forwardRef, useState } from "react"
 import { MyTheme } from "../../theme/theme"
-import AdjectiveForms from "../EntryCard/FormsRow/PartsOfSpeech/AdjectiveForms"
-import PrincipalPartsRow from "../EntryCard/PrincipalPartsRow/PrincipalPartsRow"
+import AdjectiveForms from "../entry/FormsRow/PartsOfSpeech/AdjectiveForms"
+import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
 import adjectiveDeclensions from "./adjectiveDeclensions"
 
 interface AdjectiveDeclensionCardProps {

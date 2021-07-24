@@ -7,7 +7,7 @@ import {
   getSettingsLocal,
   setSettingsLocal,
   showSettingsInstructions,
-} from "../../../utils/localSettings"
+} from "../../../utils/settingsLocal"
 import { Context } from "../../layout/Context"
 import SettingsSlider from "./SettingsSlider"
 import SettingsSwitch from "./SettingsSwitch"

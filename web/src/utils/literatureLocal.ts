@@ -1,13 +1,15 @@
+import { validate } from "../components/literature/custom/CustomLiteratureForm"
+
 export interface CustomText {
   id: string
   title: string
   text: string
+  local?: boolean
 }
-export type CustomLiterature = CustomText[]
 
-const localLiteraturePrefix = "literature-"
+const localLiteraturePrefix = "customText-"
 
-export function listLiteratureLocal(): CustomLiterature {
+export function listCustomTextsLocal(): CustomText[] {
   if (typeof window === "undefined") return []
   return Object.keys(window.localStorage)
     .filter((key) => key.startsWith(localLiteraturePrefix))
@@ -18,26 +20,31 @@ export function listLiteratureLocal(): CustomLiterature {
         return null
       }
     })
-    .filter((x) => x) as CustomLiterature
+    .filter((x) => x)
+    .sort((a, b) => a.title.localeCompare(b.title)) as CustomText[]
 }
 
-export function createLiteratureLocal(customText: CustomText): void {
+export function createCustomTextLocal(customText: CustomText): void {
   if (typeof window === "undefined") return
+  if (Object.keys(validate(customText)).length) {
+    console.log("Invalid custom text")
+    return
+  }
+  customText.local = true
   const customTextString = JSON.stringify(customText)
   window.localStorage[localLiteraturePrefix + customText.id] = customTextString
 }
 
-export function getLiteratureLocal(id: string): CustomText {
+export function getCustomTextLocal(id: string): CustomText | undefined {
   if (typeof window === "undefined") return { id, title: "", text: "" }
   try {
-    console.log(window.localStorage[localLiteraturePrefix + id])
     return JSON.parse(window.localStorage[localLiteraturePrefix + id])
   } catch {
-    return { id, title: "", text: "" }
+    return undefined
   }
 }
 
-export function deleteLiteratureLocal(id: string): void {
+export function deleteCustomTextLocal(id: string): void {
   if (typeof window === "undefined") return
   delete window.localStorage[localLiteraturePrefix + id]
 }

@@ -1,27 +1,25 @@
 import { List } from "@material-ui/core"
-import React, { memo, useState } from "react"
-import {
-  CustomLiterature,
-  listLiteratureLocal,
-} from "../../../utils/localLiterature"
+import React from "react"
+import useCustomTexts from "../../../hooks/literature/useCustomTexts"
+import CustomLiteratureLoading from "./CustomLiteratureLoading"
 import CustomLiteratureRow from "./CustomLiteratureRow"
 
-export default memo(function CustomLiteratureRows(): JSX.Element {
-  const [literature, setLiterature] = useState<CustomLiterature>(
-    listLiteratureLocal(),
-  )
-  const refreshLiteratureLocal = () => setLiterature(listLiteratureLocal())
+export default function CustomLiteratureRows(): JSX.Element {
+  const { customTexts, refreshCustomTexts, isLoading } = useCustomTexts()
 
-  if (!literature.length) return <></>
-
+  if (!customTexts.length) return <></>
   return (
     <List style={{ padding: 0 }}>
-      {literature.map((text) => (
-        <CustomLiteratureRow
-          {...{ text, refreshLiteratureLocal }}
-          key={text.title}
-        />
-      ))}
+      {isLoading ? (
+        <CustomLiteratureLoading />
+      ) : (
+        customTexts.map((text) => (
+          <CustomLiteratureRow
+            {...{ text, refreshCustomTexts }}
+            key={text.id}
+          />
+        ))
+      )}
     </List>
   )
-})
+}

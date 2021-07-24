@@ -1,5 +1,5 @@
 -- @block scratch
-SELECT * FROM entry LIMIT 10
+SELECT * FROM custom_text
 
 -- @block find entry
 SELECT id, "partOfSpeech", inflection, forms FROM entry
@@ -49,11 +49,14 @@ SELECT * FROM public.user
 -- @block bookmarks
 SELECT * FROM user_bookmarks_entry
 
+-- @block delete migrations
+DROP TABLE migrations
+
 -- @block show tables
 SELECT * FROM pg_catalog.pg_tables
 
 -- @block describe table
-SELECT * FROM information_schema.columns WHERE table_name = 'user_bookmarks_entry'
+SELECT * FROM information_schema.columns WHERE table_name = 'line'
 
 -- @block describe constraints
 SELECT * FROM pg_catalog.pg_constraint

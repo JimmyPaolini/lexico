@@ -8,8 +8,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import { forwardRef, useState } from "react"
 import { MyTheme } from "../../theme/theme"
-import VerbForms from "../EntryCard/FormsRow/PartsOfSpeech/VerbForms"
-import PrincipalPartsRow from "../EntryCard/PrincipalPartsRow/PrincipalPartsRow"
+import VerbForms from "../entry/FormsRow/PartsOfSpeech/VerbForms"
+import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
 import verbConjugations from "./verbConjugations"
 
 interface VerbConjugationCardProps {

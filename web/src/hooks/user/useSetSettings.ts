@@ -15,6 +15,5 @@ export default function useSetSettings(
       )
       return data
     },
-    { retryDelay: 0 },
   )
 }

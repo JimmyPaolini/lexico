@@ -8,7 +8,7 @@ import { ResolverContext } from "../utils/ResolverContext"
 export function createAccessToken(user: User): string {
   return sign(
     { sub: user.id, iss: "https://www.lexicolatin.com" },
-    JWT_SECRET!,
+    JWT_SECRET as string,
     { expiresIn: "7d" },
   )
 }
@@ -16,7 +16,7 @@ export function createAccessToken(user: User): string {
 export function createPasswordResetToken(email: string): string {
   return sign(
     { sub: email.toLowerCase(), iss: "https://www.lexicolatin.com" },
-    JWT_SECRET!,
+    JWT_SECRET as string,
     {
       expiresIn: "1d",
     },
@@ -30,7 +30,7 @@ export const Authenticate: MiddlewareFn<ResolverContext> = async (
   if (!context.req.cookies.accessToken) throw new Error("no user signed in")
   const claims = verify(
     context.req.cookies.accessToken,
-    JWT_SECRET!,
+    JWT_SECRET as string,
   ) as JwtPayload
   if (!claims) throw new Error("invalid access token")
   const user = await getConnection().getRepository(User).findOne(claims.sub)
@@ -46,7 +46,7 @@ export const IsAuthenticated: MiddlewareFn<ResolverContext> = (
   if (!context.req.cookies.accessToken) throw new Error("no user signed in")
   const claims = verify(
     context.req.cookies.accessToken,
-    JWT_SECRET!,
+    JWT_SECRET as string,
   ) as JwtPayload
   if (!claims) throw new Error("invalid access token")
   return next()
@@ -61,7 +61,7 @@ export const GetBookmarks: MiddlewareFn<ResolverContext> = async (
   try {
     const claims = verify(
       context.req.cookies.accessToken,
-      JWT_SECRET!,
+      JWT_SECRET as string,
     ) as JwtPayload
     if (!claims) return next()
     userId = claims.sub

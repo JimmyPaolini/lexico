@@ -55,6 +55,13 @@ type Book {
   title: String!
 }
 
+type CustomText {
+  id: ID!
+  text: String!
+  title: String!
+  user: User!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -160,20 +167,19 @@ type Line {
   lineLabel: String!
   lineNumber: Float!
   text: Text!
-  users: [User!]
 }
 
 type Mutation {
   bookmark(entryId: String!): Boolean!
   comment(comment: String!): Boolean!
+  createCustomText(id: String!, text: String!, title: String!): CustomText!
+  deleteCustomText(id: String!): Boolean!
   recoverPassword(email: String!): Boolean!
   register(email: String!, password: String!): User!
   resetPassword(password: String!, passwordResetToken: String!): Boolean!
-  saveReading(lineId: String!): Boolean!
   setSettings(settings: SettingsInput!): Boolean!
   unbookmark(entryId: String!): Boolean!
   unregister: Boolean!
-  unsaveReading(lineId: String!): Boolean!
 }
 
 type NonFinite {
@@ -260,14 +266,14 @@ type Query {
   getAuthors: [Author!]!
   getBook(id: String!): Book!
   getBooks: [Book!]!
+  getCustomText(id: String!): CustomText!
   getText(id: String!): Text!
   getTextIds: [Text!]!
   getTexts: [Text!]!
   google(code: String!): User!
+  listCustomTexts: [CustomText!]!
   login(email: String!, password: String!): User!
   logout: Boolean!
-  readingSavePoint(textId: String!): Line!
-  readings: [Line!]!
   searchAuthors(search: String!): [Author!]!
   searchBooks(search: String!): [Book!]!
   searchEnglish(search: String!): [Entry!]!
@@ -349,11 +355,11 @@ type Uninflected {
 type User {
   bookmarks: [Entry!]
   createdAt: DateTime!
+  customTexts: [CustomText!]
   email: String!
   facebookId: String
   googleId: String
   id: ID!
-  readings: [Line!]
   settings: Settings
   updatedAt: DateTime!
 }

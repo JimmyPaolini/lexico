@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react"
 import { print } from "graphql"
 import { rawRequest } from "graphql-request"
-import EntryCard from "../components/EntryCard/EntryCard"
+import EntryCard from "../components/entry/EntryCard"
 import searchLatinQuery from "../graphql/search/searchLatin.graphql"
 
 export default {

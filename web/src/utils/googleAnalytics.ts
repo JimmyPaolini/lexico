@@ -15,6 +15,7 @@ export function googleAnalyticsEvent(
   action: string,
   { category, label, value, ...params }: GoogleAnalyticsEventParams,
 ): void {
+  if (typeof window === "undefined") return
   const gtag = (window as any)?.gtag
   gtag("event", action, {
     event_category: category,

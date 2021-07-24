@@ -1,10 +1,11 @@
 import { GetServerSideProps } from "next"
-import { memo, useState } from "react"
+import { memo } from "react"
 import Author from "../../../../../entity/literature/Author"
 import Book from "../../../../../entity/literature/Book"
 import Text from "../../../../../entity/literature/Text"
-import { CustomText, getLiteratureLocal } from "../../../utils/localLiterature"
-import Reader from "../[id]"
+import useGetCustomText from "../../../hooks/user/useGetCustomText"
+import { CustomText, getCustomTextLocal } from "../../../utils/literatureLocal"
+import Reader from "../[textId]"
 
 interface CustomReaderProps {
   id: string
@@ -12,21 +13,24 @@ interface CustomReaderProps {
 export default memo(function CustomReader({
   id,
 }: CustomReaderProps): JSX.Element {
-  const [localLiterature] = useState(getLiteratureLocal(id))
-  console.log(localLiterature)
-  return <Reader text={localLiteratureToText(localLiterature)} />
+  const { data: userText, isSuccess } = useGetCustomText(id)
+  const localText = getCustomTextLocal(id)
+  const text = (isSuccess ? userText : localText) as CustomText
+  return !text ? <></> : <Reader text={customTextToText(text)} />
 })
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  return { props: { id: params?.id } }
+  return { props: { id: params?.customTextId } }
 }
 
-function localLiteratureToText({ id, title, text }: CustomText): Text {
+function customTextToText({ id, title, text, local }: CustomText): Text {
   const customText = {
     id,
     title,
     author: { id: "custom", name: "custom" } as Author,
-    book: { id: "local", title: "local" } as Book,
+    book: (local
+      ? { id: "local", title: "local" }
+      : { id: "user", title: "user" }) as Book,
     lines: [],
     linesSlice: () => [],
   }

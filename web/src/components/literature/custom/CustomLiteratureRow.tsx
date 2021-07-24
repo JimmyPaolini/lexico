@@ -1,38 +1,31 @@
 import { Divider, ListItem, ListItemText } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useRouter } from "next/router"
-import { memo, useRef } from "react"
+import { memo } from "react"
 import { MyTheme } from "../../../theme/theme"
-import { CustomText } from "../../../utils/localLiterature"
-import { sentenceCase } from "../../../utils/string"
+import { CustomText } from "../../../utils/literatureLocal"
 import CustomLiteratureOptions from "./CustomLiteratureOptions"
 
 interface CustomLiteratureRowProps {
   text: CustomText
-  refreshLiteratureLocal: () => void
+  refreshCustomTexts: () => Promise<void>
 }
 export default memo(function CustomLiteratureRow({
   text,
-  refreshLiteratureLocal,
+  refreshCustomTexts,
 }: CustomLiteratureRowProps): JSX.Element {
   const classes = useStyles()
   const router = useRouter()
-  const listItemRef = useRef<HTMLDivElement>(null)
 
   return (
     <>
       <Divider className={classes.divider} />
-      <ListItem
-        button
-        ref={listItemRef}
-        onClick={() => router.push(`/reader/custom/` + text.id)}>
+      <ListItem button onClick={() => router.push(`/reader/custom/` + text.id)}>
         <ListItemText
-          primary={sentenceCase(text.title)}
+          primary={text.title}
           primaryTypographyProps={{ variant: "body1" }}
         />
-        <CustomLiteratureOptions
-          {...{ text, listItemRef, refreshLiteratureLocal }}
-        />
+        <CustomLiteratureOptions {...{ text, refreshCustomTexts }} />
       </ListItem>
     </>
   )
