@@ -11,5 +11,6 @@ export default function useListCustomTexts(): ReturnType<typeof useQuery> {
       )
       return data
     },
+    { cacheTime: 0 },
   )
 }

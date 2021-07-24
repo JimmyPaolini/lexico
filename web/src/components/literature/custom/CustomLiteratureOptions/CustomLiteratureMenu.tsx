@@ -1,6 +1,7 @@
 import { Menu } from "@material-ui/core"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useContext } from "react"
 import { CustomText } from "../../../../utils/literatureLocal"
+import { Context } from "../../../layout/Context"
 import CustomLiteratureDelete from "./CustomLiteratureDelete"
 import CustomLiteratureEdit from "./CustomLiteratureEdit"
 import CustomLiteratureMoveToLocal from "./CustomLiteratureMoveToLocal"
@@ -18,6 +19,7 @@ export default function CustomLiteratureMenu({
   anchor,
   setAnchor,
 }: CustomLiteratureMenuProps): JSX.Element {
+  const { user } = useContext(Context)
   const closeMenu = () => {
     setAnchor(null)
   }
@@ -39,15 +41,17 @@ export default function CustomLiteratureMenu({
         vertical: "bottom",
         horizontal: "right",
       }}>
-      {text.local ? (
-        <CustomLiteratureMoveToUser
-          {...{ text, refreshCustomTexts, closeMenu }}
-        />
-      ) : (
-        <CustomLiteratureMoveToLocal
-          {...{ text, refreshCustomTexts, closeMenu }}
-        />
-      )}
+      {user ? (
+        text.local ? (
+          <CustomLiteratureMoveToUser
+            {...{ text, refreshCustomTexts, closeMenu }}
+          />
+        ) : (
+          <CustomLiteratureMoveToLocal
+            {...{ text, refreshCustomTexts, closeMenu }}
+          />
+        )
+      ) : null}
       <CustomLiteratureEdit {...{ text }} />
       <CustomLiteratureDelete {...{ text, refreshCustomTexts }} />
     </Menu>

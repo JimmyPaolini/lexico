@@ -1,25 +1,21 @@
 import { List } from "@material-ui/core"
-import React from "react"
+import React, { useContext } from "react"
 import useCustomTexts from "../../../hooks/literature/useCustomTexts"
+import { Context } from "../../layout/Context"
 import CustomLiteratureLoading from "./CustomLiteratureLoading"
 import CustomLiteratureRow from "./CustomLiteratureRow"
 
 export default function CustomLiteratureRows(): JSX.Element {
+  const { user } = useContext(Context)
   const { customTexts, refreshCustomTexts, isLoading } = useCustomTexts()
 
   if (!customTexts.length) return <></>
   return (
     <List style={{ padding: 0 }}>
-      {isLoading ? (
-        <CustomLiteratureLoading />
-      ) : (
-        customTexts.map((text) => (
-          <CustomLiteratureRow
-            {...{ text, refreshCustomTexts }}
-            key={text.id}
-          />
-        ))
-      )}
+      {user && isLoading ? <CustomLiteratureLoading /> : null}{" "}
+      {customTexts.map((text) => (
+        <CustomLiteratureRow {...{ text, refreshCustomTexts }} key={text.id} />
+      ))}
     </List>
   )
 }
