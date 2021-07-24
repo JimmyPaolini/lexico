@@ -31,7 +31,7 @@ export default function CustomLiteratureMenu({
       open={!!anchor}
       onClose={closeMenu}
       elevation={4}
-      MenuListProps={{ style: { padding: 0 } }}
+      MenuListProps={{ style: { padding: 0 }, onMouseLeave: closeMenu }}
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: "bottom",

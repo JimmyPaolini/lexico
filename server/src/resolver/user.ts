@@ -113,6 +113,7 @@ export default class UserResolver {
     @Ctx() { user }: ResolverContext,
   ): Promise<CustomText[]> {
     const customTexts = await this.CustomTexts.find({ user })
+    customTexts?.sort((a, b) => a.title.localeCompare(b.title))
     return customTexts || []
   }
 
