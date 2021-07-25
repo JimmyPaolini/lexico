@@ -11,9 +11,6 @@ export default async function fetchGoogleUser(
   code: string,
   hostname: string,
 ): Promise<GoogleProfile> {
-  const redirect_uri = hostname.match(/localhost/i)
-    ? "http://localhost:3000/google"
-    : "https://www.lexicolatin.com/google"
   const {
     data: { access_token },
   } = await axios
@@ -22,13 +19,14 @@ export default async function fetchGoogleUser(
         code,
         client_id: GOOGLE_ID,
         client_secret: GOOGLE_SECRET,
-        redirect_uri,
+        redirect_uri: hostname.match(/lexicolatin/i)
+          ? "https://www.lexicolatin.com/google"
+          : "http://localhost:3000/google",
         grant_type: "authorization_code",
       },
     })
-    .catch(() => {
-      const error = new Error("error fetching google access token")
-      log.error(error)
+    .catch((error) => {
+      log.error("error fetching google access token", error)
       throw error
     })
   const { data: profile } = await axios
@@ -38,9 +36,8 @@ export default async function fetchGoogleUser(
         access_token,
       },
     })
-    .catch(() => {
-      const error = new Error("error fetching google user info")
-      log.error(error)
+    .catch((error) => {
+      log.error("error fetching google user info", error)
       throw error
     })
   return profile

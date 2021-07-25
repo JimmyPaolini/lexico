@@ -11,9 +11,6 @@ export default async function fetchFacebookUser(
   code: string,
   hostname: string,
 ): Promise<FacebookProfile> {
-  const redirect_uri = hostname.match(/localhost/i)
-    ? "http://localhost:3000/facebook"
-    : "https://www.lexicolatin.com/facebook"
   const {
     data: { access_token },
   } = await axios
@@ -22,12 +19,13 @@ export default async function fetchFacebookUser(
         code: code,
         client_id: FACEBOOK_ID,
         client_secret: FACEBOOK_SECRET,
-        redirect_uri,
+        redirect_uri: hostname.match(/lexicolatin/i)
+          ? "https://www.lexicolatin.com/facebook"
+          : "http://localhost:3000/facebook",
       },
     })
-    .catch(() => {
-      const error = new Error("error fetching facebook access token")
-      log.error(error)
+    .catch((error) => {
+      log.error("error fetching facebook access token", error)
       throw error
     })
   const { data: profile } = await axios
@@ -43,9 +41,8 @@ export default async function fetchFacebookUser(
         // suppress_http_code: 1,
       },
     })
-    .catch(() => {
-      const error = new Error("error fetching facebook user info")
-      log.error(error)
+    .catch((error) => {
+      log.error("error fetching facebook user info", error)
       throw error
     })
   return profile
