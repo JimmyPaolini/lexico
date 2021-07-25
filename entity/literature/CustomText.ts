@@ -5,7 +5,7 @@ import User from "../user/User"
 @Entity()
 @ObjectType()
 export default class CustomText {
-  @PrimaryColumn()
+  @PrimaryColumn("uuid")
   @Field(() => ID)
   id!: string
 

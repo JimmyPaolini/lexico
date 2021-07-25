@@ -23,7 +23,7 @@
     "deploy:elasticsearch": "helm install elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
     "deploy:fluentbit": "helm install fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
     "deploy:kibana": "helm install kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml",
-    "deploy:monitoring": "helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring -f ./infra/helm/monitoring.yaml",
+    "deploy:monitoring": "helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring",
 
     "update:web": "kubectl rollout restart deployment web",
     "update:server": "kubectl rollout restart deployment server",
@@ -32,7 +32,7 @@
     "update:elasticsearch": "helm upgrade elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
     "update:fluentbit": "helm upgrade fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
     "update:kibana": "helm upgrade kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml",
-    "update:monitoring": "helm upgrade monitoring prometheus-community/kube-prometheus-stack -n monitoring -f ./infra/helm/monitoring.yaml"
+    "update:monitoring": "helm upgrade monitoring prometheus-community/kube-prometheus-stack -n monitoring"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -64,6 +64,6 @@
   "author": "Jimmy Paolini",
   "description": "Latin Language Interface",
   "repository": "https://github.com/JimmyPaolini/Lexico",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "license": "MIT"
 }

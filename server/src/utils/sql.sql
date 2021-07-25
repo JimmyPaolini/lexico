@@ -1,5 +1,5 @@
 -- @block scratch
-SELECT * FROM custom_text
+DELETE FROM migrations WHERE id = 10
 
 -- @block find entry
 SELECT id, "partOfSpeech", inflection, forms FROM entry
@@ -49,17 +49,21 @@ SELECT * FROM public.user
 -- @block bookmarks
 SELECT * FROM user_bookmarks_entry
 
+-- @block show migrations
+SELECT * FROM migrations
+
 -- @block delete migrations
 DROP TABLE migrations
 
 -- @block show tables
-SELECT * FROM pg_catalog.pg_tables
+SELECT * FROM pg_catalog.pg_tables ORDER BY schemaname DESC
 
 -- @block describe table
-SELECT * FROM information_schema.columns WHERE table_name = 'line'
+SELECT * FROM information_schema.columns WHERE table_name = 'user'
 
 -- @block describe constraints
 SELECT * FROM pg_catalog.pg_constraint
+
 
 -- @block partOfSpeech_counts
 SELECT "partOfSpeech",
