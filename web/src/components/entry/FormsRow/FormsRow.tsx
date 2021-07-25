@@ -110,6 +110,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     paddingRight: theme.spacing(1),
+    "&:last-child": {
+      paddingBottom: theme.spacing(1),
+    },
   },
   hide: {
     display: "none",

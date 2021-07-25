@@ -15,7 +15,7 @@ import Settings, { SettingsInput } from "../../../entity/user/Settings"
 import User from "../../../entity/user/User"
 import { JWT_SECRET, SLACK_WEBHOOK } from "../../../utils/env"
 import log from "../../../utils/log"
-import { Authenticate } from "../auth/token"
+import { Authenticate } from "../authentication/token"
 import { ResolverContext } from "../utils/ResolverContext"
 
 @Resolver(User)
