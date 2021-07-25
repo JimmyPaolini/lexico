@@ -15,11 +15,13 @@ export default function CustomLiteratureDelete({
   refreshCustomTexts,
 }: CustomLiteratureDeleteProps): JSX.Element {
   const { mutate: deleteCustomTextUser } = useDeleteCustomText(text, {
-    onSuccess: async () => await refreshCustomTexts(),
+    onSuccess: () => refreshCustomTexts(),
   })
   const deleteText = async () => {
-    if (text.local) deleteCustomTextLocal(text.id)
-    else deleteCustomTextUser(text)
+    if (text.local) {
+      deleteCustomTextLocal(text.id)
+      await refreshCustomTexts()
+    } else deleteCustomTextUser(text)
   }
 
   return (

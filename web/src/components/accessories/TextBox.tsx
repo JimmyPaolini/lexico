@@ -32,6 +32,6 @@ const TextBox = forwardRef(
     )
   },
 )
-TextBox.displayName = "TextBok"
+TextBox.displayName = "TextBox"
 
 export default TextBox

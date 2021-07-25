@@ -35,8 +35,4 @@ const useStyles = makeStyles((theme: MyTheme) => ({
   divider: {
     marginRight: theme.spacing(1),
   },
-  options: {
-    padding: 4,
-    marginRight: -4,
-  },
 }))

@@ -12,7 +12,7 @@ export default function LoginCard(): JSX.Element {
     <Card className={classes.card}>
       <CardHeader title="Sign In" className={classes.cardHeader} />
       <Typography align="center" variant="body2" color="textSecondary">
-        Save your Literature, Bookmarks,
+        Save your Bookmarks, Literature,
       </Typography>
       <Typography
         align="center"

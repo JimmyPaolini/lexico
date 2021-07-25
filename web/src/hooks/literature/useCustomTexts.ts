@@ -33,7 +33,6 @@ export default function useCustomTexts(): useCustomTextsReturn {
   }, [customTextsLocal, customTextsUser])
 
   const refreshCustomTexts = async () => {
-    console.log("refreshCustomTexts")
     await refreshCustomTextsUser()
     setCustomTextsLocal(listCustomTextsLocal())
   }

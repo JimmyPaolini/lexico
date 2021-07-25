@@ -73,9 +73,11 @@ export default memo(function CustomLiteratureForm({
           formik={formik}
           color="secondary"
           multiline
+          minRows={4}
           className={classes.item}
           style={{ flexGrow: 1 }}
           InputProps={{ style: { height: "100%", alignItems: "flex-start" } }}
+          inputProps={{ style: { height: "100%", overflow: "inherit" } }}
           placeholder={`automatically numbered line\n#LBL manually labelled line`}
         />
         <SubmitButton name="Save" className={classes.item} />

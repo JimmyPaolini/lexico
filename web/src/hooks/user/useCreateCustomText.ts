@@ -5,7 +5,7 @@ import { CustomText } from "../../utils/literatureLocal"
 
 export default function useCreateCustomText(
   customText: CustomText,
-  options?: UseMutationOptions<any, unknown, unknown, unknown>
+  options?: UseMutationOptions<any, unknown, unknown, unknown>,
 ): ReturnType<typeof useMutation> {
   return useMutation(
     ["createCustomText", customText],

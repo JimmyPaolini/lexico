@@ -20,27 +20,20 @@ export default function CustomLiteratureMoveToUser({
 }: CustomLiteratureMoveToUserProps): JSX.Element {
   const { enqueueSnackbar } = useSnackbarEnhanced()
 
-  const { mutate: createCustomText, error } = useCreateCustomText(text, {
-    onSuccess: () => {
-      deleteCustomTextLocal(text.id)
-      enqueueSnackbar(
-        `Moved custom text "${text.title}" to user, so it can now be accessed across devices/browsers`,
-      )
-    },
+  const { mutate: createCustomTextUser, error } = useCreateCustomText(text, {
     onMutate: closeMenu,
+    onSuccess: () => deleteCustomTextLocal(text.id),
     onSettled: () => refreshCustomTexts(),
   })
-  const moveToUser = () => createCustomText(text)
+  const moveToUser = () => createCustomTextUser(text)
 
   useEffect(() => {
-    if (
-      error &&
-      /user cannot have more than 3 custom texts/.test(
-        (error as any)?.response.errors[0].message,
-      )
-    ) {
+    const errorMessage = (error as any)?.response.errors[0].message
+    const userHasMoreThan3Texts =
+      error && errorMessage.match(/user cannot have more than 3 custom texts/)
+    if (userHasMoreThan3Texts) {
       enqueueSnackbar(
-        `User cannot have more than 3 custom texts saved at once. Please move one to local in order to move another to the user`,
+        `You cannot have more than 3 custom texts saved to your user at once. Move one to local in order to move another to the user`,
       )
     }
   }, [error])

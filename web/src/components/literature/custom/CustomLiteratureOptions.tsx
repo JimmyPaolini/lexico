@@ -21,9 +21,11 @@ export default function CustomLiteratureOptions({
   }
 
   return (
-    <ListItemSecondaryAction onClick={(event) => event.stopPropagation()}>
+    <ListItemSecondaryAction
+      onClick={(event) => event.stopPropagation()}
+      className={classes.iconButtons}>
       {!text?.local ? (
-        <IconButton disabled>
+        <IconButton disabled aria-label="on user" className={classes.options}>
           <AccountCircle />
         </IconButton>
       ) : null}
@@ -41,6 +43,14 @@ export default function CustomLiteratureOptions({
 }
 
 const useStyles = makeStyles(() => ({
+  iconButtons: {
+    position: "relative",
+    right: 0,
+    flexShrink: 0,
+    marginTop: "auto",
+    marginBottom: "auto",
+    transform: "none",
+  },
   options: {
     padding: 4,
   },
