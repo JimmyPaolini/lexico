@@ -9,8 +9,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import { forwardRef, useState } from "react"
 import { MyTheme } from "../../theme/theme"
-import NounForms from "../EntryCard/FormsRow/PartsOfSpeech/NounForms"
-import PrincipalPartsRow from "../EntryCard/PrincipalPartsRow/PrincipalPartsRow"
+import NounForms from "../entry/FormsRow/PartsOfSpeech/NounForms"
+import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
 import nounDeclensions from "./nounDeclensions"
 
 interface NounDeclensionCardProps {
@@ -32,7 +32,7 @@ export default forwardRef(function NounDeclensionCard(
         disableTouchRipple>
         <PrincipalPartsRow {...{ ...declension, expanded }} />
       </CardActionArea>
-      <Collapse in={expanded}>
+      <Collapse in={expanded} mountOnEnter>
         <CardContent className={classes.cardContent}>
           <Divider variant="middle" />
           <Typography align="center" className={classes.info}>

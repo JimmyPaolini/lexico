@@ -6,6 +6,11 @@ import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 import { serverEndpoint } from "./api"
 
 export default function google(): JSX.Element {
+  googleAnalyticsEvent("login", {
+    category: "user",
+    label: "oauth",
+    value: "google",
+  })
   return <></>
 }
 export const getServerSideProps: GetServerSideProps = async ({
@@ -15,18 +20,10 @@ export const getServerSideProps: GetServerSideProps = async ({
   const { headers, errors } = await rawRequest(
     serverEndpoint,
     print(googleQuery),
-    {
-      code,
-    },
+    { code },
   )
   const cookieHeader = headers.get("set-cookie")
   if (!errors && cookieHeader) res.setHeader("set-cookie", cookieHeader)
-
-  googleAnalyticsEvent("login", {
-    category: "user",
-    label: "oauth",
-    value: "google",
-  })
 
   res.writeHead(302, { Location: "/user" })
   res.end()

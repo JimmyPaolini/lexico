@@ -1,26 +1,21 @@
-import { CardHeader as CardHeaderMui, Divider } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { memo } from "react"
+import { List } from "@material-ui/core"
+import React, { useContext } from "react"
+import useCustomTexts from "../../../hooks/literature/useCustomTexts"
+import { Context } from "../../layout/Context"
+import CustomLiteratureLoading from "./CustomLiteratureLoading"
+import CustomLiteratureRow from "./CustomLiteratureRow"
 
-export default memo(function LiteratureLiteratureRows(): JSX.Element {
-  const classes = useStyles()
-  classes
+export default function CustomLiteratureRows(): JSX.Element {
+  const { user } = useContext(Context)
+  const { customTexts, refreshCustomTexts, isLoading } = useCustomTexts()
 
+  if (!customTexts.length) return <></>
   return (
-    <>
-      <Divider style={{ marginRight: 8 }} />
-      <CardHeaderMui />
-    </>
+    <List style={{ padding: 0 }}>
+      {user && isLoading ? <CustomLiteratureLoading /> : null}{" "}
+      {customTexts.map((text) => (
+        <CustomLiteratureRow {...{ text, refreshCustomTexts }} key={text.id} />
+      ))}
+    </List>
   )
-})
-
-const useStyles = makeStyles(() => ({
-  summary: {
-    display: "block",
-    lineHeight: 1.3,
-    marginTop: 4,
-  },
-  none: {
-    display: "none",
-  },
-}))
+}

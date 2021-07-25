@@ -8,7 +8,7 @@ import VerbForms from "../../../entity/dictionary/word/forms/VerbForms"
 import identifyEntryWord from "../../../utils/identifiers"
 import log from "../../../utils/log"
 import { hasSuffix } from "../../../utils/string"
-import { GetBookmarks } from "../auth/token"
+import { GetBookmarks } from "../authentication/token"
 import { camelCaseFuturePerfect } from "../utils/forms"
 import { ResolverContext } from "../utils/ResolverContext"
 
@@ -57,7 +57,7 @@ export default class DictionaryResolver {
         )
         return entry
       })
-    log.info("searchLatin response", {
+    log.info("searchLatin", {
       search,
       responseTime: performance.now() - t0,
       entries: entries.map(({ id }) => id),
@@ -94,7 +94,7 @@ export default class DictionaryResolver {
         )
         return entry
       })
-    log.info("searchEnglish response", {
+    log.info("searchEnglish", {
       search,
       responseTime: performance.now() - t0,
       entries: entries.map(({ id }) => id),

@@ -14,14 +14,14 @@ import User from "../../../entity/user/User"
 import { JWT_SECRET, SENDGRID_API_KEY } from "../../../utils/env"
 import log from "../../../utils/log"
 import { validateEmail, validatePassword } from "../../../utils/string"
-import fetchFacebookUser, { FacebookProfile } from "../auth/facebook"
-import fetchGoogleUser, { GoogleProfile } from "../auth/google"
+import fetchFacebookUser, { FacebookProfile } from "../authentication/facebook"
+import fetchGoogleUser, { GoogleProfile } from "../authentication/google"
 import {
   Authenticate,
   createAccessToken,
   createPasswordResetToken,
   IsAuthenticated,
-} from "../auth/token"
+} from "../authentication/token"
 import { ResolverContext } from "../utils/ResolverContext"
 
 @Resolver(User)
@@ -138,7 +138,7 @@ export default class AuthenticationResolver {
     const passwordResetToken = createPasswordResetToken(email)
     await this.Users.update(user.id, { passwordResetToken })
 
-    sgMail.setApiKey(SENDGRID_API_KEY!)
+    sgMail.setApiKey(SENDGRID_API_KEY as string)
     const origin =
       process.env.NODE_ENV === "production"
         ? "https://www.lexicolatin.com"
@@ -162,7 +162,10 @@ export default class AuthenticationResolver {
   async validatePasswordResetToken(
     @Arg("passwordResetToken") passwordResetToken: string,
   ): Promise<boolean> {
-    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as JwtPayload & {
+    const claims = verifyJWT(
+      passwordResetToken,
+      JWT_SECRET as string,
+    ) as JwtPayload & {
       sub: string
     }
     if (!claims) throw new Error("invalid password reset token")
@@ -182,7 +185,10 @@ export default class AuthenticationResolver {
     @Arg("password") password: string,
     @Ctx() ctx: ResolverContext,
   ): Promise<boolean> {
-    const claims = verifyJWT(passwordResetToken, JWT_SECRET!) as JwtPayload & {
+    const claims = verifyJWT(
+      passwordResetToken,
+      JWT_SECRET as string,
+    ) as JwtPayload & {
       sub: string
     }
     if (!claims) throw new Error("invalid password reset token")

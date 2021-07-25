@@ -33,7 +33,7 @@ export default memo(function LiteratureCard({
   return (
     <Card elevation={4} className={classes.literatureCard}>
       <LiteratureAuthor {...{ author, expanded, setExpanded }} />
-      <Collapse in={expanded}>
+      <Collapse in={expanded} mountOnEnter>
         <Divider style={{ marginRight: 8 }} />
         <CardContent className={classes.noPadding}>
           <List className={classes.noPadding} dense>

@@ -7,7 +7,7 @@ import { useContext, useEffect, useMemo, useState } from "react"
 import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
 import BookmarkInstructionsCard from "../components/bookmarks/BookmarkInstructionsCard"
-import EntryCard from "../components/EntryCard/EntryCard"
+import EntryCard from "../components/entry/EntryCard"
 import { Context } from "../components/layout/Context"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
 import useBookmarks, { bookmarks } from "../hooks/bookmarks/useBookmarks"
@@ -17,7 +17,7 @@ import identifyEntryWord from "../utils/identifiers"
 import {
   getBookmarksLocal,
   showBookmarkInstructions,
-} from "../utils/localBookmarks"
+} from "../utils/bookmarksLocal"
 import { normalize } from "../utils/string"
 import { queryClient } from "./_app"
 

@@ -14,10 +14,9 @@ export default memo(function LiteratureCustomCard(): JSX.Element {
 
   return (
     <Card elevation={4} className={classes.literatureCustomCard}>
-      <CardActionArea>
+      <CardActionArea href="/literature/custom">
         <CardHeaderMui
           title="Your Literature"
-          titleTypographyProps={{ variant: "h5" }}
           action={<Add className={classes.add} />}
           classes={{ action: classes.action }}
         />
@@ -46,6 +45,7 @@ const useStyles = makeStyles((theme: any) => ({
   },
   add: {
     margin: theme.spacing(1),
+    marginRight: 12,
   },
   action: {
     marginTop: "auto",

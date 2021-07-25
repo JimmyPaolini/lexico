@@ -7,6 +7,7 @@ import Book from "../../../entity/literature/Book"
 import Text from "../../../entity/literature/Text"
 import CardDeck from "../components/accessories/CardDeck"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
+import CustomLiteratureCard from "../components/literature/custom/CustomLiteratureCard"
 import LiteratureCard from "../components/literature/LiteratureCard"
 import { getAuthors } from "../hooks/literature/useGetAuthors"
 
@@ -31,7 +32,8 @@ export default function Literature({ authors }: LiteratureProps): JSX.Element {
       }),
     [searched],
   )
-  // cards.unshift({ key: "custom", Card: <LiteratureCustomCard /> })
+  if (cards[0].key !== "custom")
+    cards.unshift({ key: "custom", Card: <CustomLiteratureCard /> })
 
   return (
     <>

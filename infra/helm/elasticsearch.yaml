@@ -8,6 +8,19 @@ resources:
     cpu: 250m
     memory: 512Mi
 
+volumeClaimTemplate:
+  resources:
+    requests:
+      storage: 10Gi
+
+clusterHealthCheckParams: wait_for_status=yellow&timeout=10s
+readinessProbe:
+  failureThreshold: 10
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 10
+
 replicas: 1
 extraEnvs:
   - name: discovery.type
@@ -15,15 +28,13 @@ extraEnvs:
   - name: cluster.initial_master_nodes
     value: null
 
-clusterHealthCheckParams: wait_for_status=yellow&timeout=10s
-readinessProbe:
-  failureThreshold: 10
-  initialDelaySeconds: 60
-  periodSeconds: 10
-  successThreshold: 3
-  timeoutSeconds: 10
-
-volumeClaimTemplate:
-  resources:
-    requests:
-      storage: 10Gi
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: statefulset.kubernetes.io/pod-name
+              operator: In
+              values:
+                - database-primary-0
+        topologyKey: kubernetes.io/hostname

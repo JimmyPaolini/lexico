@@ -24,6 +24,9 @@ spec:
           envFrom:
             - configMapRef:
                 name: env
+            - secretRef:
+                name: env
+
       # affinity:
       #   podAntiAffinity:
       #     preferredDuringSchedulingIgnoredDuringExecution:

@@ -34,7 +34,7 @@ export default function ToolIconGrid(): JSX.Element {
           }
         />
       </CardActionArea>
-      <Collapse in={expanded}>
+      <Collapse in={expanded} appear>
         <Grid
           container
           spacing={1}

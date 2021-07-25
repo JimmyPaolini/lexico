@@ -49,7 +49,7 @@ export default memo(function CardDeck({ cards }: CardDeckProps): JSX.Element {
               return (
                 <Grid item key={card.key}>
                   <Grow in appear exit timeout={timeout}>
-                    <LazyLoad offset={100} throttle={50} height={28}>
+                    <LazyLoad offset={100} throttle={50} height={28} once>
                       {card.Card}
                     </LazyLoad>
                   </Grow>

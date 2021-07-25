@@ -63,6 +63,7 @@ export default function SearchBar({
             placeholder={"Search " + pascalCase(target)}
             inputProps={{ "aria-label": "search", ref: input }}
             value={search}
+            autoFocus
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => {
               if (e.keyCode === 13) handleSearchExecute()
