@@ -1,3 +1,84 @@
+<<<<<<< HEAD:server/src/sql/analyze.sql
+=======
+-- @block scratch
+SELECT * FROM entry LIMIT 10
+
+-- @block find entry
+SELECT id, "partOfSpeech", inflection, forms FROM entry
+WHERE entry.id LIKE 'cano:%'
+
+-- @block find entry words
+SELECT id, "partOfSpeech", inflection, forms, "wordWord" as word
+FROM entry
+JOIN word_entries_entry
+ON entry.id = word_entries_entry."entryId"
+WHERE entry.id LIKE 'mmix:%'
+
+-- @block find entry translations
+SELECT entry.id, "partOfSpeech", inflection, forms, translation
+FROM entry
+JOIN translation
+ON entry.id = translation."entryId"
+WHERE entry.id LIKE 'iii:%'
+
+-- @block find translation
+SELECT *
+FROM translation
+WHERE translation.translation ~* 'fuck'
+
+-- @block find word
+SELECT word, "entryId" FROM word
+JOIN word_entries_entry
+ON word = word_entries_entry."wordWord"
+WHERE word LIKE 'iii'
+
+-- @block count
+SELECT COUNT(*) FROM translation
+
+-- @block find a partOfSpeech
+SELECT * FROM entry WHERE "partOfSpeech"='determiner'
+
+-- @block untranslated
+SELECT * FROM entry
+LEFT OUTER JOIN translation
+ON (entry."id" = translation."entryId")
+WHERE translation."entryId" IS NULL;
+
+
+-- @block users
+SELECT * FROM public.user
+
+-- @block bookmarks
+SELECT * FROM user_bookmarks_entry
+
+-- @block show tables
+SELECT * FROM pg_catalog.pg_tables
+
+-- @block describe table
+SELECT * FROM information_schema.columns WHERE table_name = 'user_bookmarks_entry'
+
+-- @block describe constraints
+SELECT * FROM pg_catalog.pg_constraint
+
+-- @block partOfSpeech_counts
+SELECT "partOfSpeech",
+COUNT(DISTINCT(id)) as count,
+COUNT(DISTINCT(id)) / (SELECT COUNT(*) FROM entry)::float * 100 as percent
+FROM entry GROUP BY "partOfSpeech"
+
+-- @block entry_letter_counts
+SELECT LOWER(LEFT(id, 1)) as letter,
+COUNT(DISTINCT(id)) as count,
+COUNT(DISTINCT(id)) / (SELECT COUNT(*) FROM entry)::float * 100 as percent
+FROM entry GROUP BY LOWER(LEFT(id, 1))
+
+-- @block word_letter_counts
+SELECT LOWER(LEFT(word, 1)) as letter,
+COUNT(DISTINCT(word)) as count,
+COUNT(DISTINCT(word)) / (SELECT COUNT(*) FROM word)::float * 100 as percent
+FROM word GROUP BY LOWER(LEFT(word, 1))
+
+>>>>>>> main:server/src/utils/sql.sql
 -- @block typeorm searchLatin
 EXPLAIN ANALYZE SELECT
   "Word"."word" AS "Word_word",
