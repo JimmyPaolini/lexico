@@ -11,9 +11,9 @@ export default async function fetchFacebookUser(
   code: string,
   hostname: string,
 ): Promise<FacebookProfile> {
-  const redirect_uri = hostname.match(/lexicolatin/i)
-    ? "https://www.lexicolatin.com/facebook"
-    : "http://localhost:3000/facebook"
+  const redirect_uri = hostname.match(/localhost/i)
+    ? "http://localhost:3000/facebook"
+    : "https://www.lexicolatin.com/facebook"
   const {
     data: { access_token },
   } = await axios
