@@ -11,17 +11,18 @@ export default async function fetchFacebookUser(
   code: string,
   hostname: string,
 ): Promise<FacebookProfile> {
+  const redirect_uri = hostname.match(/lexicolatin/i)
+    ? "https://www.lexicolatin.com/facebook"
+    : "http://localhost:3000/facebook"
   const {
     data: { access_token },
   } = await axios
     .get("https://graph.facebook.com/v10.0/oauth/access_token", {
       params: {
-        code: code,
+        code,
         client_id: FACEBOOK_ID,
         client_secret: FACEBOOK_SECRET,
-        redirect_uri: hostname.match(/lexicolatin/i)
-          ? "https://www.lexicolatin.com/facebook"
-          : "http://localhost:3000/facebook",
+        redirect_uri,
       },
     })
     .catch((error) => {
