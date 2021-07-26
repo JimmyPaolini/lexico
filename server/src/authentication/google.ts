@@ -11,9 +11,9 @@ export default async function fetchGoogleUser(
   code: string,
   hostname: string,
 ): Promise<GoogleProfile> {
-  const redirect_uri = hostname.match(/lexicolatin/i)
-    ? "https://www.lexicolatin.com/google"
-    : "http://localhost:3000/google"
+  const redirect_uri = hostname.match(/localhost/i)
+    ? "http://localhost:3000/google"
+    : "https://www.lexicolatin.com/google"
   const {
     data: { access_token },
   } = await axios
