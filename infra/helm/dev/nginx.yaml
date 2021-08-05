@@ -1,0 +1,12 @@
+# https://github.com/kubernetes/ingress-nginx/blob/master/charts/ingress-nginx/values.yaml
+
+fullnameOverride: nginx-dev
+extraArgs:
+  default-ssl-certificate: lexico-dev/secret/tls-dev
+
+rbac:
+  scope: true
+
+controller:
+  scope:
+    enabled: true

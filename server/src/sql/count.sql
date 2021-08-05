@@ -1,5 +1,11 @@
--- @block count
+-- @block entry count
+SELECT COUNT(*) FROM entry
+-- @block word count
+SELECT COUNT(*) FROM word
+-- @block translation count
 SELECT COUNT(*) FROM translation
+-- @block user count
+SELECT COUNT(*) FROM user
 
 -- @block partOfSpeech_counts
 SELECT "partOfSpeech",

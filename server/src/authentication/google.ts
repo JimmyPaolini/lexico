@@ -19,14 +19,14 @@ export default async function fetchGoogleUser(
         code,
         client_id: GOOGLE_ID,
         client_secret: GOOGLE_SECRET,
-        redirect_uri: hostname.match(/lexicolatin/i)
-          ? "https://www.lexicolatin.com/google"
-          : "http://localhost:3000/google",
+        redirect_uri: hostname.match(/localhost/i)
+          ? "http://localhost:3000/google"
+          : "https://lexicolatin.com/google",
         grant_type: "authorization_code",
       },
     })
     .catch((error) => {
-      log.error("error fetching google access token", error)
+      log.error("error fetching google access token", error.response)
       throw error
     })
   const { data: profile } = await axios

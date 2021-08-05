@@ -19,13 +19,13 @@ export default async function fetchFacebookUser(
         code: code,
         client_id: FACEBOOK_ID,
         client_secret: FACEBOOK_SECRET,
-        redirect_uri: hostname.match(/lexicolatin/i)
-          ? "https://www.lexicolatin.com/facebook"
-          : "http://localhost:3000/facebook",
+        redirect_uri: hostname.match(/localhost/i)
+          ? "http://localhost:3000/facebook"
+          : "https://lexicolatin.com/facebook",
       },
     })
     .catch((error) => {
-      log.error("error fetching facebook access token", error)
+      log.error("error fetching facebook access token", error.response)
       throw error
     })
   const { data: profile } = await axios

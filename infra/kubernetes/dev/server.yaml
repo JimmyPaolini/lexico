@@ -8,8 +8,8 @@ spec:
   selector:
     matchLabels:
       app: server
-  replicas: 3
-  revisionHistoryLimit: 2
+  replicas: 1
+  revisionHistoryLimit: 0
   template:
     metadata:
       labels:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: jimmypaolini/lexico-server:latest
+          image: jimmypaolini/lexico-server:dev
           imagePullPolicy: Always
           ports:
             - containerPort: 3001
