@@ -1,24 +1,20 @@
-import { Button, Typography } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import { GetServerSideProps } from "next"
 import Head from "next/head"
-import { useRouter } from "next/router"
-import { SnackbarKey } from "notistack"
 import { useContext, useEffect, useMemo, useState } from "react"
+import { UseQueryResult } from "react-query"
 import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
 import BookmarkInstructionsCard from "../components/bookmarks/BookmarkInstructionsCard"
+import filterBookmarks from "../components/bookmarks/filterBookmarks"
 import EntryCard from "../components/entry/EntryCard"
 import { Context } from "../components/layout/Context"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
+import useBookmarkInstructions from "../hooks/bookmarks/useBookmarkInstructions"
 import useBookmarks, { bookmarks } from "../hooks/bookmarks/useBookmarks"
 import useEntries from "../hooks/bookmarks/useEntries"
-import useSnackbarEnhanced from "../hooks/useSnackbarEnhanced"
+import { getBookmarksLocal } from "../utils/bookmarksLocal"
 import identifyEntryWord from "../utils/identifiers"
-import {
-  getBookmarksLocal,
-  showBookmarkInstructions,
-} from "../utils/bookmarksLocal"
-import { normalize } from "../utils/string"
 import { queryClient } from "./_app"
 
 export default function Bookmarks(): JSX.Element {
@@ -30,21 +26,16 @@ export default function Bookmarks(): JSX.Element {
     if (!search) setSearched("")
   }, [search])
 
-  let bookmarks: Entry[], isLoading: boolean, isSuccess: boolean
-  if (user) {
-    const response = useBookmarks()
-    bookmarks = response.data as Entry[]
-    isLoading = response.isLoading
-    isSuccess = response.isSuccess
-  } else {
-    const response = useEntries(getBookmarksLocal())
-    bookmarks = response.data as Entry[]
-    isLoading = response.isLoading
-    isSuccess = response.isSuccess
-  }
+  const {
+    data: bookmarks,
+    isLoading,
+    isSuccess,
+  } = (
+    user ? useBookmarks() : useEntries(getBookmarksLocal())
+  ) as UseQueryResult<Entry[], unknown>
 
   const cards = useMemo(() => {
-    const filteredEntries = filterEntries(bookmarks, searched) || []
+    const filteredEntries = filterBookmarks(bookmarks, searched) || []
 
     return filteredEntries.length
       ? filteredEntries.map((entry: Entry) => {
@@ -66,29 +57,7 @@ export default function Bookmarks(): JSX.Element {
         ]
   }, [user, bookmarks, searched])
 
-  const router = useRouter()
-  const { enqueueSnackbar, closeSnackbar } = useSnackbarEnhanced()
-  useEffect(() => {
-    if (!user && showBookmarkInstructions()) {
-      const action = (key: SnackbarKey) => (
-        <Button
-          onClick={() => {
-            closeSnackbar(key)
-            router.push("/user")
-          }}
-          color="secondary">
-          Sign in
-        </Button>
-      )
-      enqueueSnackbar(
-        `Your bookmarks are saved locally, sign in to save them across devices/browsers`,
-        {
-          autoHideDuration: 10000,
-          action,
-        },
-      )
-    }
-  }, [])
+  useBookmarkInstructions(user)
 
   return (
     <>
@@ -118,24 +87,4 @@ export default function Bookmarks(): JSX.Element {
 export const getServerSideProps: GetServerSideProps = async () => {
   await queryClient.prefetchQuery("bookmarks", bookmarks)
   return { props: {} }
-}
-
-const filterEntries = (entries: Entry[], search: string) => {
-  const re = new RegExp(search, "i")
-  return (
-    entries?.filter((entry: Entry) => {
-      return (
-        entry.principalParts?.some((principalPart) =>
-          principalPart.text.some((principalPartText) =>
-            normalize(principalPartText).match(re),
-          ),
-        ) ||
-        entry.translations?.some((translation) =>
-          translation.translation.match(re),
-        ) ||
-        entry.partOfSpeech.match(re) ||
-        normalize(JSON.stringify(entry?.forms || "false")).match(re)
-      )
-    }) || []
-  )
 }

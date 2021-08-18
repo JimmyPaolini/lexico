@@ -9,6 +9,7 @@ import CardDeck from "../components/accessories/CardDeck"
 import Logo from "../components/accessories/Logo"
 import EntryCard from "../components/entry/EntryCard"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
+import getSearchPageMetadata from "../components/search/getSearchPageMetadata"
 import useSearch from "../hooks/search/useSearch"
 import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 
@@ -52,7 +53,10 @@ export default function Search({
       return { key: entry.id, Card }
     }) || []
 
-  const { title, description, keywords } = getPageMetadata(searched, isLatin)
+  const { title, description, keywords } = getSearchPageMetadata(
+    searched,
+    isLatin,
+  )
 
   return (
     <>
@@ -81,30 +85,6 @@ export default function Search({
       </SearchBarLayout>
     </>
   )
-}
-
-function getPageMetadata(searched: string, isLatin: boolean) {
-  let title = `Lexico - Search`
-  if (searched) {
-    if (isLatin) title += ` Latin: ${searched}`
-    else title += ` English: ${searched}`
-  }
-
-  let description = "Search for Latin and English"
-  if (searched) {
-    description = `Search ${isLatin ? "Latin" : "English"} for ${searched}`
-  }
-  description +=
-    " translations, principle parts, part of speech, and other grammatical information"
-
-  let keywords = "Latin, English"
-  if (searched) {
-    if (isLatin) keywords += ", Latin " + searched
-    else keywords += ", English " + searched
-  }
-  keywords += ", translation, grammar, principle parts, part of speech"
-
-  return { title, description, keywords }
 }
 
 export const getServerSideProps: GetServerSideProps = async ({

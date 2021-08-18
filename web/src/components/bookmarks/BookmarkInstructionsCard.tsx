@@ -19,8 +19,8 @@ export default function BookmarkInstructionsCard(): JSX.Element {
     <Grow in={true}>
       <Card className={classes.card}>
         <CardContent>
-          <List className={classes.noPadding}>
-            <ListItem className={classes.noPadding}>
+          <List style={{ padding: 0 }}>
+            <ListItem style={{ padding: 0 }}>
               <ListItemIcon>
                 <IconButton>
                   <BookmarkBorder />
@@ -28,7 +28,7 @@ export default function BookmarkInstructionsCard(): JSX.Element {
               </ListItemIcon>
               <ListItemText primary="Click the bookmark icon to bookmark entries" />
             </ListItem>
-            <ListItem className={classes.noPadding}>
+            <ListItem style={{ padding: 0 }}>
               <ListItemIcon>
                 <IconButton>
                   <Bookmark />
@@ -48,9 +48,6 @@ const useStyles = makeStyles((theme: any) => ({
     maxWidth: theme.custom.cardWidth,
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-  },
-  noPadding: {
-    padding: 0,
   },
   bookmarkIcon: {
     display: "inline",

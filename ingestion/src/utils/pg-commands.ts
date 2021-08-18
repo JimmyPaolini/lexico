@@ -39,8 +39,7 @@ const createCommand = (isBackup: boolean, fileKey: string, tables: string[]) =>
   `--host ${
     process.env.NODE_ENV === "production" ? "database" : "localhost"
   } ` +
-  `--port 5432 ` +
-  `--format c --data-only ` +
+  `--port 5432 --format c --data-only ` +
   `${isBackup ? ">" : "<"} "${fileKey}${backupFileNameExtension}"`
 
 export async function backupDatabase(

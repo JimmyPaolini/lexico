@@ -21,11 +21,14 @@ SELECT entry.id, "partOfSpeech", inflection, forms, translation FROM entry
 JOIN translation ON entry.id = translation."entryId"
 WHERE entry.id LIKE 'iii:%'
 
+-- @block entries by partOfSpeech
+SELECT * FROM entry WHERE "partOfSpeech"='determiner'
+
 -- @block untranslated
 SELECT * FROM entry
 LEFT OUTER JOIN translation
 ON (entry."id" = translation."entryId")
 WHERE translation."entryId" IS NULL;
 
--- @block entries by partOfSpeech
-SELECT * FROM entry WHERE "partOfSpeech"='determiner'
+-- @block translations to review
+SELECT * FROM translation WHERE translation ~* ':' LIMIT 100;

@@ -26,34 +26,31 @@ export default function User(): JSX.Element {
     }
   }, [])
 
-  return !user ? (
+  return (
     <>
       <Head>
         <title>Lexico - User</title>
       </Head>
-      <Grid container justify="center" className={classes.noUser}>
-        <CardDeck
-          cards={[
-            {
-              key: "LoginCard",
-              Card: <LoginCard />,
-            },
-            {
-              key: "SettingsCard",
-              Card: <SettingsCard />,
-            },
-          ]}
-        />
-      </Grid>
-    </>
-  ) : (
-    <>
-      <Head>
-        <title>Lexico - User</title>
-      </Head>
-      <SingleCardLayout>
-        <SettingsCard />
-      </SingleCardLayout>
+      {!user ? (
+        <Grid container justify="center" className={classes.noUser}>
+          <CardDeck
+            cards={[
+              {
+                key: "LoginCard",
+                Card: <LoginCard />,
+              },
+              {
+                key: "SettingsCard",
+                Card: <SettingsCard />,
+              },
+            ]}
+          />
+        </Grid>
+      ) : (
+        <SingleCardLayout>
+          <SettingsCard />
+        </SingleCardLayout>
+      )}
     </>
   )
 }

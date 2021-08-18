@@ -47,7 +47,6 @@ async function main() {
           "https://vulgate.org/nt/gospel/matthew_1.htm",
         ),
       ]),
-    views: () => null,
   } as { [key: string]: () => any }
 
   if (!(command in instructions)) throw new Error("unknown command")

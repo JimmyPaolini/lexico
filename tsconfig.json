@@ -23,7 +23,7 @@
     "allowJs": true,
     "jsx": "preserve"
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.graphql"],
   "exclude": [
     "**/node_modules",
     "**/dist",

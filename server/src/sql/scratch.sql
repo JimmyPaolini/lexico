@@ -1,3 +1,2 @@
 -- @block scratch
-SELECT * FROM custom_text
-
+SELECT * FROM word LIMIT 1000;

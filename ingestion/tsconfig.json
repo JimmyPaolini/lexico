@@ -7,5 +7,5 @@
     "outDir": "dist",
     "baseUrl": "."
   },
-  "exclude": ["../data", "../server", "../web", "dist"]
+  "exclude": ["../data", "../server", "../web"]
 }

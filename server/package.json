@@ -15,7 +15,6 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "graphql": "^15.4.0",
-    "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.4.18",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
