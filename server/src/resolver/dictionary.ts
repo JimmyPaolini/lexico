@@ -109,6 +109,8 @@ export default class DictionaryResolver {
 
   @Query(() => [Entry])
   async entries(@Arg("ids", () => [String]) ids: string[]): Promise<Entry[]> {
-    return await this.Entries.findByIds(ids)
+    return (await this.Entries.findByIds(ids)).sort((a, b) =>
+      a.id.localeCompare(b.id),
+    )
   }
 }

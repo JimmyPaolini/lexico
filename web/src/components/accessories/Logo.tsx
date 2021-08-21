@@ -1,6 +1,7 @@
 import { Box, Fade } from "@material-ui/core"
 import { makeStyles, useTheme } from "@material-ui/core/styles"
 import Image from "next/image"
+import logo from "public/lexico_logo.svg"
 import React, { useRef } from "react"
 
 export default function Logo(): JSX.Element {
@@ -15,7 +16,7 @@ export default function Logo(): JSX.Element {
     <Fade in={true}>
       <Box className={classes.container}>
         <Image
-          src="/lexico_logo.svg"
+          src={logo}
           alt="lexico logo"
           className={classes.logo}
           // layout="fill"

@@ -1,2 +1,2 @@
 -- @block scratch
-SELECT * FROM word LIMIT 1000;
+SELECT * FROM "text" WHERE id ~* 'caesar';

@@ -3,7 +3,7 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Typography,
+  Typography
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Visibility, VisibilityOff } from "@material-ui/icons"
@@ -103,7 +103,7 @@ export default function BasicLogin(): JSX.Element {
         </Typography>
       </Grid>
       <Grid item>
-        <Link href="/user/recoverPassword">
+        <Link href="/user/recoverPassword" passHref>
           <Button
             color="secondary"
             variant="contained"

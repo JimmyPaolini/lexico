@@ -14,11 +14,13 @@ async function main() {
   const Texts = connection.getRepository(Text)
   const dictionaryResolver = new DictionaryResolver()
 
-  const text = await Texts.findOne("virgil_aeneid_book 1")
+  const id = "caesar_de bello gallico_book 1"
+  const text = await Texts.findOne(id)
   if (!text) return
   const lines = getLineGeneratorByText(text)
   const wordsWithNoResults = [] as string[]
   const entryCounts = {} as { [word: string]: number }
+  let lineCount = 0
 
   for await (const line of lines) {
     const words = getWordGenerator(line.line)
@@ -37,15 +39,23 @@ async function main() {
         }
       }),
     )
+    lineCount++
   }
   fs.writeFileSync(
-    JSON.stringify({
-      entryCounts,
-      wordsWithNoResults,
-      wordsWithNoResultsNonCapitalized: wordsWithNoResults.filter(
-        (word) => !word.match(/^[A-Z]/),
-      ),
-    }),
-    "../../../data/dictionary/wordIteratorResult.json",
+    `../data/dictionary/analysis/${id}.json`,
+    JSON.stringify(
+      {
+        lineCount,
+        wordsWithNoResultsNonCapitalized: wordsWithNoResults
+          .filter((word) => !word.match(/^[A-Z]/))
+          .sort((a, b) => entryCounts[b] - entryCounts[a]),
+        entryCounts: Object.keys(entryCounts)
+          .sort((a, b) => entryCounts[b] - entryCounts[a])
+          .map((id) => ({ [id]: entryCounts[id] })),
+        wordsWithNoResults,
+      },
+      null,
+      2,
+    ),
   )
 }

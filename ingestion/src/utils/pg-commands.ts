@@ -39,7 +39,8 @@ const createCommand = (isBackup: boolean, fileKey: string, tables: string[]) =>
   `--host ${
     process.env.NODE_ENV === "production" ? "database" : "localhost"
   } ` +
-  `--port 5432 --format c --data-only ` +
+  `--port 5432 --format c ` +
+  (fileKey.match(/all$/) ? "" : `--data-only `) +
   `${isBackup ? ">" : "<"} "${fileKey}${backupFileNameExtension}"`
 
 export async function backupDatabase(
@@ -70,11 +71,7 @@ export async function backupIngested(): Promise<void> {
 }
 
 export async function backupAll(): Promise<void> {
-  await backupDatabase("all", [
-    ...dictionaryTables,
-    ...literatureTables,
-    ...userTables,
-  ])
+  await backupDatabase("all", [])
 }
 
 export async function restoreDatabase(
@@ -114,11 +111,7 @@ export async function restoreIngested(backupName: string): Promise<void> {
 
 export async function restoreAll(backupName: string): Promise<void> {
   await clearAll()
-  await restoreDatabase(backupName, "all", [
-    ...dictionaryTables,
-    ...literatureTables,
-    ...userTables,
-  ])
+  await restoreDatabase(backupName, "all", [])
 }
 
 async function execute(command: string) {

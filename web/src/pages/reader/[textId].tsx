@@ -99,6 +99,7 @@ export default memo(function Reader({ text }: Props): JSX.Element {
 })
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  if (process.env.FULL_BUILD !== "true") return { fallback: true, paths: [] }
   const { getTextIds: texts } = await graphQLClient.request(getTextIdsQuery)
   return {
     fallback: true,

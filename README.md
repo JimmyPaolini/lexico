@@ -49,4 +49,4 @@
 
 ### Database Schema
 
-<p align="center"><a href="https://drawsql.app/lexico/diagrams/lexico"><img src="assets/database_schema.png"></a></p>
+<p align="center"><img src="assets/erd.png"></p>

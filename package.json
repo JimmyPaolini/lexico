@@ -9,6 +9,7 @@
     "start": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml up",
     "stop": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml down --remove-orphans",
     "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
+    "build:web:small": "DOCKER_BUILDKIT=1 docker build --build-arg FULL_BUILD=false -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
     "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server .",
     "build:database": "docker image pull postgres:13",
     "apply:web:dev": "kubectl apply -f infra/kubernetes/dev/web.yaml -n lexico-dev",
@@ -48,6 +49,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^11.1.0",
     "@types/graphql": "^14.5.0",
     "@types/node": "^14.14.11",
     "@types/number-to-words": "^1.2.0",

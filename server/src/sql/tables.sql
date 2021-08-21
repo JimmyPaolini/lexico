@@ -2,7 +2,7 @@
 SELECT * FROM pg_catalog.pg_tables ORDER BY schemaname DESC
 
 -- @block describe table
-SELECT * FROM information_schema.columns WHERE table_name = 'user'
+SELECT * FROM information_schema.columns WHERE table_name = 'migrations'
 
 -- @block describe constraints
 SELECT * FROM pg_catalog.pg_constraint

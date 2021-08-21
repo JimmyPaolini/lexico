@@ -1,0 +1,108 @@
+{
+  "id": "omnis:100",
+  "partOfSpeech": "adjective",
+  "principalParts": [
+    {
+      "name": "masculine",
+      "text": ["omnis"]
+    },
+    {
+      "name": "feminine",
+      "text": ["omnis"]
+    },
+    {
+      "name": "neuter",
+      "text": ["omne"]
+    }
+  ],
+  "inflection": {
+    "declension": "third",
+    "degree": "",
+    "other": "third"
+  },
+  "translations": [
+    {
+      "translation": "every (sg), all (pl)"
+    }
+  ],
+  "forms": {
+    "masculine": {
+      "nominative": {
+        "singular": ["omnis"],
+        "plural": ["omnēs"]
+      },
+      "genitive": {
+        "singular": ["omnis"],
+        "plural": ["omnium"]
+      },
+      "dative": {
+        "singular": ["omnī"],
+        "plural": ["omnibus"]
+      },
+      "accusative": {
+        "singular": ["omnem"],
+        "plural": ["omnēs", "omnīs"]
+      },
+      "ablative": {
+        "singular": ["omnī"],
+        "plural": ["omnibus"]
+      },
+      "vocative": {
+        "singular": ["omnis"],
+        "plural": ["omnēs"]
+      }
+    },
+    "feminine": {
+      "nominative": {
+        "singular": ["omnis"],
+        "plural": ["omnēs"]
+      },
+      "genitive": {
+        "singular": ["omnis"],
+        "plural": ["omnium"]
+      },
+      "dative": {
+        "singular": ["omnī"],
+        "plural": ["omnibus"]
+      },
+      "accusative": {
+        "singular": ["omnem"],
+        "plural": ["omnēs", "omnīs"]
+      },
+      "ablative": {
+        "singular": ["omnī"],
+        "plural": ["omnibus"]
+      },
+      "vocative": {
+        "singular": ["omnis"],
+        "plural": ["omnēs"]
+      }
+    },
+    "neuter": {
+      "nominative": {
+        "singular": ["omne"],
+        "plural": ["omnia"]
+      },
+      "genitive": {
+        "singular": ["omnis"],
+        "plural": ["omnium"]
+      },
+      "dative": {
+        "singular": ["omnī"],
+        "plural": ["omnibus"]
+      },
+      "accusative": {
+        "singular": ["omne"],
+        "plural": ["omnia"]
+      },
+      "ablative": {
+        "singular": ["omnī"],
+        "plural": ["omnibus"]
+      },
+      "vocative": {
+        "singular": ["omne"],
+        "plural": ["omnia"]
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { getConnection } from "typeorm"
 import hic from "../../../data/dictionary/hic.json"
 import ille from "../../../data/dictionary/ille.json"
+import omnis from "../../../data/dictionary/omnis.json"
 import Entry from "../../../entity/dictionary/Entry"
 import log from "../../../utils/log"
 import { ingestEntryWords } from "./ingestEntryWords"
@@ -15,9 +16,11 @@ export default async function ingestManual(): Promise<void> {
   await deleteManual("latinitas:0")
   await deleteManual("ille:0")
   await deleteManual("ille:1")
+  await deleteManual("omnis:0")
 
   await createManual(hic as Entry)
   await createManual(ille as Entry)
+  await createManual(omnis as Entry)
 
   await ingestPraenomenAbbreviations()
   await ingestRomanNumerals()

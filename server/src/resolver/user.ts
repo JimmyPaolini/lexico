@@ -142,7 +142,11 @@ export default class UserResolver {
     )
       throw new Error("user cannot have more than 3 custom texts")
     const customText = await this.CustomTexts.save({ id, title, text, user })
-    log.info("createCustomText", { ...customText, user: user.email })
+    log.info("createCustomText", {
+      id: customText.id,
+      title: customText.title,
+      user: user.email,
+    })
     return customText
   }
 

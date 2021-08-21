@@ -1,4 +1,8 @@
-module.exports = {
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: false,
+})
+
+module.exports = withBundleAnalyzer({
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
@@ -31,4 +35,4 @@ module.exports = {
   images: {
     imageSizes: [512],
   },
-}
+})

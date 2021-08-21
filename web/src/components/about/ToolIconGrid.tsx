@@ -9,7 +9,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import Image from "next/image"
 import React, { useState } from "react"
-import tools from "../../../../utils/tools"
+import tools from "../../utils/tools"
 import ExpandIcon from "../accessories/ExpandIcon"
 
 export default function ToolIconGrid(): JSX.Element {
@@ -47,12 +47,13 @@ export default function ToolIconGrid(): JSX.Element {
                 target="_blank"
                 onClick={(e: any) => e.stopPropagation()}>
                 <Image
-                  src={`/icon/tool/${tool.name}.png`}
+                  src={tool.icon}
                   alt={tool.name}
                   width={128}
                   height={128}
                   priority
                   loading="eager"
+                  placeholder="blur"
                 />
               </Link>
             </Grid>
