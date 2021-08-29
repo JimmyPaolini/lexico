@@ -58,7 +58,7 @@ export default function CommentBox(): JSX.Element {
           titleTypographyProps={{ variant: "body1" }}
           className={classes.dropdown}
           action={
-            <Box style={{ paddingTop: 8, paddingRight: 8 }}>
+            <Box p={1.5} mt={1} mr={1}>
               <ExpandIcon expanded={expanded} />
             </Box>
           }
@@ -119,9 +119,6 @@ export default function CommentBox(): JSX.Element {
 
 const useStyles = makeStyles((theme: any) => ({
   textBox: {
-    margin: theme.spacing(1),
-  },
-  divider: {
     margin: theme.spacing(1),
   },
   formError: {

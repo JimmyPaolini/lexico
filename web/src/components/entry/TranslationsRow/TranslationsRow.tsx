@@ -1,4 +1,10 @@
-import { CardActionArea, CardContent, Collapse, Grid } from "@material-ui/core"
+import {
+  Box,
+  CardActionArea,
+  CardContent,
+  Collapse,
+  Grid,
+} from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useContext, useState } from "react"
 import Translation from "../../../../../entity/dictionary/Translation"
@@ -44,9 +50,9 @@ export default function TranslationsRow({ translations }: Props): JSX.Element {
             </Collapse>
           </Grid>
           {expandable && (
-            <Grid item>
+            <Box mt={0.5} mr={1.5}>
               <ExpandIcon {...{ expanded }} />
-            </Grid>
+            </Box>
           )}
         </Grid>
       </CardActionArea>

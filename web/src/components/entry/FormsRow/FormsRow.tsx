@@ -1,4 +1,5 @@
 import {
+  Box,
   CardActionArea,
   CardContent,
   Collapse,
@@ -74,9 +75,9 @@ export default function FormsRow({
               ))}
             </Grid>
             {FormsCard && (
-              <Grid item>
+              <Box mt={0.5} mr={1.5}>
                 <ExpandIcon {...{ expanded }} />
-              </Grid>
+              </Box>
             )}
           </Grid>
         </CardActionArea>

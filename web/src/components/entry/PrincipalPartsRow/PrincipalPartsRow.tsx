@@ -1,4 +1,4 @@
-import { CardHeader } from "@material-ui/core"
+import { Box, CardHeader } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
 import { Inflection } from "../../../../../entity/dictionary/word/Inflection"
@@ -47,7 +47,9 @@ export default function PrincipalPartsRow({
         expanded === undefined ? (
           <BookmarkButton {...{ id, bookmarked }} />
         ) : (
-          <ExpandIcon {...{ expanded }} style={{ marginTop: 8 }} />
+          <Box mt={2.5} mr={1.5}>
+            <ExpandIcon expanded={expanded} />
+          </Box>
         )
       }
       aria-label="Principal Parts, Inflection, and Bookmark toggle"

@@ -1,4 +1,5 @@
 import {
+  Box,
   CardActionArea,
   CardHeader as CardHeaderMui,
   Collapse,
@@ -58,7 +59,11 @@ export default memo(function LiteratureAuthor({
             </Collapse>
           </>
         }
-        action={<ExpandIcon {...{ expanded }} />}
+        action={
+          <Box mt={1.5} mr={1.5}>
+            <ExpandIcon {...{ expanded }} />
+          </Box>
+        }
       />
     </CardActionArea>
   )

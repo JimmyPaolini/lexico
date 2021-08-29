@@ -1,4 +1,5 @@
 import {
+  Box,
   Collapse,
   Divider,
   Grid,
@@ -39,7 +40,9 @@ export default memo(function LiteratureBook({
           primary={sentenceCase(book.title).replace(/^\d+ /, "")}
           primaryTypographyProps={{ variant: "body1" }}
         />
-        <ExpandIcon {...{ expanded }} style={{ padding: 0 }} />
+        <Box py="auto" mr={0.5} display="flex">
+          <ExpandIcon expanded={expanded} />
+        </Box>
       </ListItem>
       <Collapse in={expanded} mountOnEnter>
         <Grid container justify="center" alignItems="stretch">
@@ -54,12 +57,6 @@ export default memo(function LiteratureBook({
 })
 
 const useStyles = makeStyles((theme: any) => ({
-  noPadding: {
-    padding: 0,
-    "&:last-child": {
-      paddingBottom: 0,
-    },
-  },
   hideHoverHighlight: {
     "&:hover": {
       backgroundColor: "inherit",

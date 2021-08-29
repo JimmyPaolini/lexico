@@ -28,8 +28,8 @@ export default function ToolIconGrid(): JSX.Element {
           titleTypographyProps={{ variant: "body1" }}
           className={classes.dropdown}
           action={
-            <Box style={{ paddingTop: 8, paddingRight: 8 }}>
-              <ExpandIcon {...{ expanded }} />
+            <Box p={1.5} mt={1} mr={1}>
+              <ExpandIcon expanded={expanded} />
             </Box>
           }
         />

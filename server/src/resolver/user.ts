@@ -102,8 +102,7 @@ export default class UserResolver {
     @Arg("settings") settings: Settings,
     @Ctx() { user }: ResolverContext,
   ): Promise<boolean> {
-    console.log("HERE", user)
-    user.settings = { ...user.settings, ...settings }
+    user.settings = settings
     await this.Users.save(user)
     return true
   }
