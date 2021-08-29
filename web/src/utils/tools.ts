@@ -13,6 +13,7 @@ import github from "public/icon/tool/github.png"
 import grafana from "public/icon/tool/grafana.png"
 import graphql from "public/icon/tool/graphql.png"
 import helm from "public/icon/tool/helm.png"
+import jss from "public/icon/tool/jss.png"
 import jwt from "public/icon/tool/jwt.png"
 import kubernetes from "public/icon/tool/kubernetes.png"
 import lens from "public/icon/tool/lens.png"
@@ -57,6 +58,7 @@ export default [
   { icon: nextjs, name: "nextjs", url: "https://nextjs.org" },
   { icon: react, name: "react", url: "https://reactjs.org" },
   { icon: materialui, name: "materialui", url: "https://material-ui.com" },
+  { icon: jss, name: "jss", url: "https://cssinjs.org" },
   { icon: storybook, name: "storybook", url: "https://storybook.js.org" },
   {
     icon: reactQuery,

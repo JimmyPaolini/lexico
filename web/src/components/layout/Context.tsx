@@ -7,7 +7,7 @@ import {
   useState,
 } from "react"
 import User from "../../../../entity/user/User"
-import useUser from "../../hooks/user/useUser"
+import useUser from "../../hooks/user/login/useUser"
 
 export interface ReactContext {
   isNavOpen: boolean

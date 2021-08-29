@@ -1,7 +1,7 @@
 import { print } from "graphql"
 import { rawRequest } from "graphql-request"
 import { GetServerSideProps } from "next"
-import googleQuery from "../graphql/authentication/google.graphql"
+import googleQuery from "../graphql/user/login/google.graphql"
 import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 import { serverEndpoint } from "./api"
 

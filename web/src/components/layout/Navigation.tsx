@@ -58,7 +58,11 @@ export default function Navigation(): JSX.Element {
           </ListItem>
           <Divider />
           {pages.map((page) => (
-            <Link href={"/" + page.name} prefetch={false} key={page.name} passHref>
+            <Link
+              href={"/" + page.name}
+              prefetch={false}
+              key={page.name}
+              passHref>
               <ListItem
                 button
                 selected={selected === page.name}

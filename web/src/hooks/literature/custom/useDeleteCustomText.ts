@@ -1,7 +1,7 @@
 import { useMutation, UseMutationOptions } from "react-query"
-import deleteCustomTextMutation from "../../graphql/user/deleteCustomText.graphql"
-import { graphQLClient } from "../../pages/_app"
-import { CustomText } from "../../utils/literatureLocal"
+import deleteCustomTextMutation from "../../graphql/literature/custom/deleteCustomText.graphql"
+import { graphQLClient } from "../../../pages/_app"
+import { CustomText } from "../../../utils/literatureLocal"
 
 export default function useDeleteCustomText(
   customText: CustomText,

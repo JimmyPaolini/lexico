@@ -1,6 +1,6 @@
 import { AccountCircle } from "@material-ui/icons"
 import { useEffect } from "react"
-import useCreateCustomText from "../../../../hooks/user/useCreateCustomText"
+import useCreateCustomText from "../../../../hooks/literature/custom/useCreateCustomText"
 import useSnackbarEnhanced from "../../../../hooks/useSnackbarEnhanced"
 import {
   CustomText,

@@ -1,7 +1,7 @@
 import { print } from "graphql"
 import { rawRequest } from "graphql-request"
 import { GetServerSideProps } from "next"
-import facebookQuery from "../graphql/authentication/facebook.graphql"
+import facebookQuery from "../graphql/user/login/facebook.graphql"
 import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 import { serverEndpoint } from "./api"
 

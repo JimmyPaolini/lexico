@@ -1,7 +1,7 @@
 import { useMutation, UseMutationOptions } from "react-query"
-import createCustomTextMutation from "../../graphql/user/createCustomText.graphql"
-import { graphQLClient } from "../../pages/_app"
-import { CustomText } from "../../utils/literatureLocal"
+import createCustomTextMutation from "../../graphql/literature/custom/createCustomText.graphql"
+import { graphQLClient } from "../../../pages/_app"
+import { CustomText } from "../../../utils/literatureLocal"
 
 export default function useCreateCustomText(
   customText: CustomText,

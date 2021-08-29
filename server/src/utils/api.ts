@@ -19,11 +19,13 @@ export default async function buildAPI(
         AuthenticationResolver,
         UserResolver,
       ],
-      emitSchemaFile: path.join(process.cwd(), "./src/utils/schema.graphql"),
+      emitSchemaFile:
+        process.env.NODE_ENV === "production" &&
+        path.join(process.cwd(), "./src/utils/schema.graphql"),
     }),
     context: ({ req, res }) => ({ req, res }),
     introspection: true,
-    playground: true,
+    playground: process.env.NODE_ENV !== "production",
   })
   api.applyMiddleware({ app, cors })
   return api

@@ -31,5 +31,15 @@
     },
     "ecmaVersion": 12,
     "sourceType": "module"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.graphql"],
+      "parser": "@graphql-eslint/eslint-plugin",
+      "plugins": ["@graphql-eslint"],
+      "parserOptions": {
+        "schema": "server/src/utils/schema.graphql"
+      }
+    }
+  ]
 }

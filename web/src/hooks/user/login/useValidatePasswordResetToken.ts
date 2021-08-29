@@ -1,6 +1,6 @@
 import { useQuery } from "react-query"
-import validatePasswordResetTokenQuery from "../../graphql/authentication/validatePasswordResetToken.graphql"
-import { graphQLClient } from "../../pages/_app"
+import validatePasswordResetTokenQuery from "../../../graphql/user/login/validatePasswordResetToken.graphql"
+import { graphQLClient } from "../../../pages/_app"
 
 export default function useValidatePasswordResetToken(
   passwordResetToken: string,

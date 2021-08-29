@@ -1,7 +1,7 @@
 import { Divider, Typography } from "@material-ui/core"
 import { useFormik } from "formik"
 import React, { useContext } from "react"
-import useSetSettings from "../../../hooks/user/useSetSettings"
+import useSetSettings from "../../../hooks/user/settings/useSetSettings"
 import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
 import {
   getSettingsLocal,

@@ -73,7 +73,7 @@ export default class DictionaryResolver {
     const t0 = performance.now()
     if (!search) return []
     search = search.trim()
-    
+
     const translations = await this.Translations.createQueryBuilder(
       "translation",
     )

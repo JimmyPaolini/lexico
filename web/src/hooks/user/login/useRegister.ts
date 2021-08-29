@@ -1,19 +1,19 @@
 import { useQuery } from "react-query"
-import loginQuery from "../../graphql/authentication/login.graphql"
-import { graphQLClient, queryClient } from "../../pages/_app"
+import registerMutation from "../../../graphql/user/login/register.graphql"
+import { graphQLClient, queryClient } from "../../../pages/_app"
 
 interface UserInfo {
   email: string
   password: string
 }
-export default function useLogin(
+export default function useRegister(
   userInfo: UserInfo,
 ): ReturnType<typeof useQuery> {
   return useQuery(
-    "login",
+    "register",
     async () => {
       const { searchLatin: data } = await graphQLClient.request(
-        loginQuery,
+        registerMutation,
         userInfo,
       )
       return data

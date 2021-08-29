@@ -1,6 +1,6 @@
 import { useQuery } from "react-query"
-import listCustomTextsQuery from "../../graphql/user/listCustomTexts.graphql"
-import { graphQLClient } from "../../pages/_app"
+import { graphQLClient } from "../../../pages/_app"
+import listCustomTextsQuery from "../../graphql/literature/custom/listCustomTexts.graphql"
 
 export default function useListCustomTexts(): ReturnType<typeof useQuery> {
   return useQuery(

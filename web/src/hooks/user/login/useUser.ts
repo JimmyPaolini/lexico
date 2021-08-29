@@ -1,6 +1,6 @@
 import { useQuery } from "react-query"
-import userQuery from "../../graphql/user/user.graphql"
-import { graphQLClient } from "../../pages/_app"
+import userQuery from "../../../graphql/user/login/user.graphql"
+import { graphQLClient } from "../../../pages/_app"
 
 export default function useUser(): ReturnType<typeof useQuery> {
   return useQuery(

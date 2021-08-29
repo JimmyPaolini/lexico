@@ -1,6 +1,6 @@
 import { useMutation, UseMutationResult } from "react-query"
-import unregisterMutation from "../../graphql/authentication/unregister.graphql"
-import { graphQLClient, queryClient } from "../../pages/_app"
+import unregisterMutation from "../../../graphql/user/login/unregister.graphql"
+import { graphQLClient, queryClient } from "../../../pages/_app"
 
 export default function useUnregister(): UseMutationResult<
   any,

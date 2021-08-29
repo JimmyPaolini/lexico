@@ -1,7 +1,7 @@
 import { useMutation, UseMutationResult } from "react-query"
-import Settings from "../../../../entity/user/Settings"
-import setSettingsMutation from "../../graphql/user/setSettings.graphql"
-import { graphQLClient } from "../../pages/_app"
+import Settings from "../../../../../entity/user/Settings"
+import setSettingsMutation from "../../../graphql/user/settings/setSettings.graphql"
+import { graphQLClient } from "../../../pages/_app"
 
 export default function useSetSettings(): UseMutationResult<
   any,

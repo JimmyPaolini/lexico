@@ -8,9 +8,7 @@ interface Props {
 export default function ExpandIcon({ expanded, ...props }: Props): JSX.Element {
   const classes = useStyles()
   const direction = expanded ? classes.upSideDown : classes.rightSideUp
-  return (
-    <ExpandMore className={direction} {...props} />
-  )
+  return <ExpandMore className={direction} {...props} />
 }
 
 const useStyles = makeStyles(() => ({

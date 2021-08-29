@@ -9,10 +9,9 @@
 **/out
 
 **/database_volume
-**/elasticsearch_volume
 
-**/data/wiktionary
-**/assets
+data
+assets
 
 **/ingestion/src/dictionary
 **/README.md

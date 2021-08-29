@@ -3,15 +3,15 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Typography
+  Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Visibility, VisibilityOff } from "@material-ui/icons"
 import { useFormik } from "formik"
 import Link from "next/link"
 import React, { useRef, useState } from "react"
-import useLogin from "../../../hooks/authentication/useLogin"
-import useRegister from "../../../hooks/authentication/useRegister"
+import useLogin from "../../../hooks/user/login/useLogin"
+import useRegister from "../../../hooks/user/login/useRegister"
 import { googleAnalyticsEvent } from "../../../utils/googleAnalytics"
 import { capitalizeFirstLetter, validateEmail } from "../../../utils/string"
 import SubmitButton from "../../accessories/SubmitButton"
