@@ -2,7 +2,9 @@ import { Logger } from "typeorm"
 import { createLogger, format, transports } from "winston"
 import { LOG_SQL } from "./env"
 
-const circularReplacer = () => {
+export const circularReplacer: () =>
+  | ((this: any, key: string, value: any) => any)
+  | undefined = () => {
   const seen = new WeakSet()
   return (_: any, value: any) => {
     if (typeof value === "object" && value !== null)

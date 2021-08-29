@@ -1,10 +1,12 @@
 import {
+  Card,
   CardContent,
   Divider,
   Grid,
   IconButton,
   InputAdornment,
 } from "@material-ui/core"
+import { makeStyles, Theme } from "@material-ui/core/styles"
 import { Visibility, VisibilityOff } from "@material-ui/icons"
 import { useFormik } from "formik"
 import { GetServerSideProps } from "next"
@@ -25,6 +27,7 @@ interface Props {
 export default function ResetPassword({
   passwordResetToken,
 }: Props): JSX.Element {
+  const classes = useStyles()
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const passwordTextBoxRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -48,38 +51,40 @@ export default function ResetPassword({
 
   return (
     <SingleCardLayout>
-      <CardHeader title="Reset Password" />
-      <Divider variant="middle" />
-      <CardContent>
-        <form onSubmit={formik.handleSubmit}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item>
-              <TextBox
-                name="password"
-                formik={formik}
-                type={showPassword ? "text" : "password"}
-                ref={passwordTextBoxRef}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={() =>
-                          setShowPassword((showPassword) => !showPassword)
-                        }>
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
+      <Card className={classes.card}>
+        <CardHeader title="Reset Password" />
+        <Divider variant="middle" />
+        <CardContent>
+          <form onSubmit={formik.handleSubmit}>
+            <Grid container direction="column" spacing={2}>
+              <Grid item>
+                <TextBox
+                  name="password"
+                  formik={formik}
+                  type={showPassword ? "text" : "password"}
+                  ref={passwordTextBoxRef}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={() =>
+                            setShowPassword((showPassword) => !showPassword)
+                          }>
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <SubmitButton name="Reset Password" />
+              </Grid>
             </Grid>
-            <Grid item>
-              <SubmitButton name="Reset Password" />
-            </Grid>
-          </Grid>
-        </form>
-      </CardContent>
+          </form>
+        </CardContent>
+      </Card>{" "}
     </SingleCardLayout>
   )
 }
@@ -120,3 +125,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log("valid password reset token")
   return { props: { passwordResetToken } }
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+  card: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+}))

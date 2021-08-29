@@ -26,9 +26,8 @@ export default class DictionaryResolver {
   ): Promise<Entry[]> {
     const t0 = performance.now()
     if (!search || !search.match(/^-?(\w| )+\.?$/)) return []
-    // log.info("searchLatin request", { search })
 
-    search = search.toLowerCase()
+    search = search.toLowerCase().trim()
     const pushSuffix = async (suffix: string) => {
       const [nonSuffixWord, suffixEntry] = await Promise.all([
         this.Words.findOne(search.replace(new RegExp(suffix + "$", "i"), "")),
@@ -73,7 +72,8 @@ export default class DictionaryResolver {
   ): Promise<Entry[]> {
     const t0 = performance.now()
     if (!search) return []
-    // log.info("searchEnglish request", { search })
+    search = search.trim()
+    
     const translations = await this.Translations.createQueryBuilder(
       "translation",
     )
@@ -109,8 +109,6 @@ export default class DictionaryResolver {
 
   @Query(() => [Entry])
   async entries(@Arg("ids", () => [String]) ids: string[]): Promise<Entry[]> {
-    return (await this.Entries.findByIds(ids)).sort((a, b) =>
-      a.id.localeCompare(b.id),
-    )
+    return await this.Entries.findByIds(ids, { order: { id: "ASC" } })
   }
 }

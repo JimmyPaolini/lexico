@@ -11,7 +11,7 @@ import {
 import { getConnection } from "typeorm"
 import Entry from "../../../entity/dictionary/Entry"
 import CustomText from "../../../entity/literature/CustomText"
-import Settings, { SettingsInput } from "../../../entity/user/Settings"
+import Settings from "../../../entity/user/Settings"
 import User from "../../../entity/user/User"
 import { JWT_SECRET, SLACK_WEBHOOK } from "../../../utils/env"
 import log from "../../../utils/log"
@@ -99,9 +99,10 @@ export default class UserResolver {
   @Mutation(() => Boolean)
   @UseMiddleware(Authenticate)
   async setSettings(
-    @Arg("settings") settings: SettingsInput,
+    @Arg("settings") settings: Settings,
     @Ctx() { user }: ResolverContext,
   ): Promise<boolean> {
+    console.log("HERE", user)
     user.settings = { ...user.settings, ...settings }
     await this.Users.save(user)
     return true

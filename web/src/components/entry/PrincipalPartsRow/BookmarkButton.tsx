@@ -7,10 +7,10 @@ import React, { useContext, useState } from "react"
 import useBookmark from "../../../hooks/bookmarks/useBookmark"
 import useUnbookmark from "../../../hooks/bookmarks/useUnbookmark"
 import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
+import { showBookmarkInstructions } from "../../../utils/bookmarkInstructions"
 import {
   bookmarkLocal,
   isBookmarkedLocal,
-  showBookmarkInstructions,
   unbookmarkLocal,
 } from "../../../utils/bookmarksLocal"
 import { Context } from "../../layout/Context"

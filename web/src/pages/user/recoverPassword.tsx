@@ -1,4 +1,5 @@
 import { Card, CardContent, Divider, Grid } from "@material-ui/core"
+import { makeStyles, Theme } from "@material-ui/core/styles"
 import { useFormik } from "formik"
 import { useRouter } from "next/router"
 import React from "react"
@@ -11,6 +12,7 @@ import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
 import { validateEmail } from "../../utils/string"
 
 export default function RecoverPassword(): JSX.Element {
+  const classes = useStyles()
   const router = useRouter()
   const { enqueueSnackbar } = useSnackbarEnhanced()
 
@@ -46,7 +48,7 @@ export default function RecoverPassword(): JSX.Element {
 
   return (
     <SingleCardLayout>
-      <Card>
+      <Card className={classes.card}>
         <CardHeader title="Recover Password" />
         <Divider variant="middle" />
         <CardContent>
@@ -74,3 +76,11 @@ export function validate({ email }: RecoverPasswordInfo): { email: string } {
   if (!validateEmail(email)) errors.email = "Invalid email"
   return errors
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+  card: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+}))

@@ -10,19 +10,14 @@ async function main() {
   await connectDatabase()
 
   const app = express()
-  const corsOptions = {
-    credentials: true,
-    origin: [
-      `http://${
-        process.env.NODE_ENV === "production" ? "web" : "localhost"
-      }:3000/`,
-      ...(process.env.NODE_ENV === "production"
-        ? []
-        : ["http://localhost:6006"]),
-      "https://lexicolatin.com/",
-      "https://www.lexicolatin.com/",
-    ],
-  } as CorsOptions
+  const origin = ["https://lexicolatin.com", "https://www.lexicolatin.com"]
+  if (process.env.NODE_ENV === "production") {
+    origin.push("http://web:3000")
+    origin.push("http://localhost:6006")
+  } else {
+    origin.push("http://localhost:3000")
+  }
+  const corsOptions = { credentials: true, origin } as CorsOptions
   app.use(cors(corsOptions))
   app.use(cookieParser())
   app.get("/health", (_, res) => res.send("check"))

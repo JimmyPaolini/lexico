@@ -20,22 +20,20 @@ export default function SettingsForm(): JSX.Element {
     initialValues: user ? user.settings : getSettingsLocal(),
     onSubmit: async () => {
       if (user) {
-        await setSettings(formik.values)
+        await setSettingsUser(formik.values)
       } else {
         setSettingsLocal(formik.values)
         if (showSettingsInstructions()) {
           enqueueSnackbar(
             `Your settings are saved locally, sign in to save them across devices/browsers`,
-            {
-              autoHideDuration: 10000,
-            },
+            { autoHideDuration: 10000 },
           )
         }
       }
     },
   })
 
-  const { mutateAsync: setSettings } = useSetSettings(formik.values)
+  const { mutateAsync: setSettingsUser } = useSetSettings()
 
   return (
     <form onChange={formik.handleSubmit}>

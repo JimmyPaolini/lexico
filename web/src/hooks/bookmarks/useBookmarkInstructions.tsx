@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { SnackbarKey } from "notistack"
 import { useEffect } from "react"
 import User from "../../../../entity/user/User"
-import { showBookmarkInstructions } from "../../utils/bookmarksLocal"
+import { showBookmarkInstructions } from "../../utils/bookmarkInstructions"
 import useSnackbarEnhanced from "../useSnackbarEnhanced"
 
 export default function useBookmarkInstructions(user?: User): void {

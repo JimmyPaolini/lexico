@@ -28,7 +28,7 @@ const dictionaryTables = ["entry", "word", "translation", "word_entries_entry"]
 
 const literatureTables = ["author", "book", "text", "line"]
 
-const userTables = ["user", "user_bookmarks_entry", "user_readings_line"]
+const userTables = ["user", "user_bookmarks_entry", "custom_texts"]
 
 const createCommand = (isBackup: boolean, fileKey: string, tables: string[]) =>
   `PGPASSWORD=${POSTGRES_PASSWORD} ` +
