@@ -11,12 +11,13 @@ import useGoogleAnalytics from "../hooks/useGoogleAnalytics"
 import theme from "../theme/theme"
 import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 
-const clientEndpoint =
+export const clientEndpoint =
   process.env.NEXT_ENV === "build"
     ? "https://lexicolatin.com/api"
     : typeof window === "undefined"
     ? `http://localhost:3001/graphql`
     : window.location.origin + "/api"
+
 export const graphQLClient = new GraphQLClient(clientEndpoint, {
   credentials: "include",
   mode: "cors",

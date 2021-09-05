@@ -1,0 +1,22 @@
+overwrite: true
+schema: ../server/src/utils/schema.graphql
+documents: src/**/*.graphql
+generates:
+  src/hooks/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      # - typescript-document-nodes
+      - typescript-react-query
+      - add:
+          content: "import { clientEndpoint as endpointUrl } from '../pages/_app';"
+    config:
+      # omitOperationSuffix: true
+      dedupeOperationSuffix: true
+      experimentalFragmentVariables: true
+      dedupeFragments: true
+      fetcher:
+        endpoint: "endpointUrl"
+  src/utils/graphql.schema.json:
+    plugins:
+      - introspection

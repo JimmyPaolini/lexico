@@ -41,7 +41,7 @@ export default function ToolIconGrid(): JSX.Element {
           justify="center"
           className={classes.toolGrid}>
           {tools.map((tool) => (
-            <Grid item xs={2} key={tool.name} container justify="center">
+            <Grid item key={tool.name}>
               <Link
                 href={tool.url}
                 target="_blank"
@@ -49,11 +49,10 @@ export default function ToolIconGrid(): JSX.Element {
                 <Image
                   src={tool.icon}
                   alt={tool.name}
-                  width={128}
-                  height={128}
+                  width={64}
+                  height={64}
                   priority
                   loading="eager"
-                  placeholder="blur"
                 />
               </Link>
             </Grid>

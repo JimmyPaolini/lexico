@@ -21,7 +21,8 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@next/next/recommended"
+    "plugin:@next/next/recommended",
+    "plugin:cypress/recommended"
   ],
   "plugins": ["react", "@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
@@ -39,6 +40,12 @@
       "plugins": ["@graphql-eslint"],
       "parserOptions": {
         "schema": "server/src/utils/schema.graphql"
+      }
+    },
+    {
+      "files": ["graphql.ts"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": ["off"]
       }
     }
   ]

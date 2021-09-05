@@ -1,6 +1,7 @@
 **/.DS_Store
 **/.vscode
 **/.gitignore
+**/.github
 **/.git
 
 **/node_modules
@@ -8,12 +9,9 @@
 **/*Dockerfile*
 
 **/database_volume
-**/elasticsearch_volume
 **/infra
-**/.github
 **/*.env*
 **/ingestion
 **/server
-
-/.next/
-/out/
+**/assets
+**/cypress
