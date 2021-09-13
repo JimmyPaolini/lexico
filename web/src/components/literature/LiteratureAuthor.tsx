@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Dispatch, memo, SetStateAction } from "react"
-import Author from "../../../../entity/literature/Author"
+import { Author } from "../../graphql/generated"
 import { sentenceCase } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
 

@@ -1,5 +1,3 @@
-#import "../fragments/Entry.graphql"
-
 query SearchEnglish($search: String!) {
   searchEnglish(search: $search) {
     ...allEntry

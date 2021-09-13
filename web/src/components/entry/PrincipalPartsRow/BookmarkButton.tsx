@@ -4,9 +4,13 @@ import { Bookmark, BookmarkBorder } from "@material-ui/icons"
 import { useRouter } from "next/router"
 import { SnackbarKey } from "notistack"
 import React, { useContext, useState } from "react"
-import useBookmark from "../../../hooks/bookmarks/useBookmark"
-import useUnbookmark from "../../../hooks/bookmarks/useUnbookmark"
+import {
+  Maybe,
+  useBookmarkMutation,
+  useUnbookmarkMutation,
+} from "../../../graphql/generated"
 import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
+import { queryClient } from "../../../pages/_app"
 import { showBookmarkInstructions } from "../../../utils/bookmarkInstructions"
 import {
   bookmarkLocal,
@@ -17,7 +21,7 @@ import { Context } from "../../layout/Context"
 
 interface Props {
   id: string
-  bookmarked?: boolean
+  bookmarked?: Maybe<boolean>
 }
 export default function PrincipalPartsRow({
   id,
@@ -29,15 +33,39 @@ export default function PrincipalPartsRow({
   const bookmarkedInitial = user ? !!bookmarkedOriginal : isBookmarkedLocal(id)
   const [bookmarked, setBookmarked] = useState<boolean>(bookmarkedInitial)
 
-  const { mutateAsync: bookmark } = useBookmark(setBookmarked)
-  const { mutateAsync: unbookmark } = useUnbookmark(setBookmarked)
+  const { mutateAsync: bookmark } = useBookmarkMutation({
+    onMutate: async () => {
+      await queryClient.cancelMutations()
+      setBookmarked(true)
+    },
+    onError: async () => {
+      await queryClient.cancelMutations()
+      setBookmarked(false)
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("bookmarks")
+    },
+  })
+  const { mutateAsync: unbookmark } = useUnbookmarkMutation({
+    onMutate: async () => {
+      await queryClient.cancelMutations()
+      setBookmarked(false)
+    },
+    onError: async () => {
+      await queryClient.cancelMutations()
+      setBookmarked(true)
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("bookmarks")
+    },
+  })
 
   const router = useRouter()
   const { enqueueSnackbar, closeSnackbar } = useSnackbarEnhanced()
   const toggleBookmark = async () => {
     if (user) {
-      if (!bookmarked) await bookmark(id)
-      else await unbookmark(id)
+      if (!bookmarked) await bookmark({ entryId: id })
+      else await unbookmark({ entryId: id })
     } else {
       if (!bookmarked) {
         bookmarkLocal(id)

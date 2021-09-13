@@ -2,11 +2,11 @@
 import { Box, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import { Forms } from "../../../../../../entity/dictionary/word/Forms"
+import {Forms, Maybe} from '../../../../graphql/generated';
 import FormsTable from "../FormsTable"
 
 interface NounFormsProps {
-  forms: Forms | null | undefined
+  forms?: Maybe<Forms>
 }
 
 export default function NounForms({ forms }: NounFormsProps): JSX.Element {

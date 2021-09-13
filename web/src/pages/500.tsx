@@ -14,7 +14,7 @@ export default function Error500(): JSX.Element {
       <Card className={classes.card}>
         <CardHeader title="Error: Server Issue" />
         <CardContent>
-          <SubmitButton name="Return to Homepage" />
+          <SubmitButton name="Return to Homepage" href="/search" />
         </CardContent>
       </Card>
     </SingleCardLayout>

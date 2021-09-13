@@ -1,0 +1,36 @@
+overwrite: true
+schema: ../server/src/utils/schema.graphql
+documents: src/**/*.graphql
+generates:
+  src/graphql/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-document-nodes
+      - typescript-react-query
+      - add:
+          content: |
+            /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+            import { clientEndpoint as endpointUrl } from '../pages/_app'
+    config:
+      dedupeFragments: true
+      fetcher:
+        endpoint: "endpointUrl"
+        fetchParams:
+          credentials: include
+          mode: cors
+          headers:
+            content-type: application/json
+      exposeQueryKeys: true
+      exposeFetcher: true
+      flattenGeneratedTypes: true
+      dedupeOperationSuffix: true
+      skipTypename: true
+  src/graphql/schema.json:
+    plugins:
+      - introspection
+hooks:
+  afterOneFileWrite:
+    - sed -r -i '' -e '1h;2,$H;$!d;g' -e 's/FragmentDoc = `([^$]+)[^`]+`/FragmentDoc = `\1`/g' src/graphql/generated.ts
+    - eslint --fix
+    - prettier --write

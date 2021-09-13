@@ -1,4 +1,4 @@
-import Entry from "../../../../entity/dictionary/Entry"
+import { Entry } from "../../graphql/generated"
 import { normalize } from "../../utils/string"
 
 export default function filterBookmarks(

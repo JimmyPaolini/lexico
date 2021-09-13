@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { FiberManualRecord } from "@material-ui/icons"
-import Translation from "../../../../../entity/dictionary/Translation"
+import { Translation } from "../../../graphql/generated"
 
 interface TranslationBulletProps {
   translation: Translation

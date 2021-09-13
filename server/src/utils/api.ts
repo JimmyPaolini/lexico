@@ -19,9 +19,7 @@ export default async function buildAPI(
         AuthenticationResolver,
         UserResolver,
       ],
-      emitSchemaFile:
-        process.env.NODE_ENV === "production" &&
-        path.join(process.cwd(), "./src/utils/schema.graphql"),
+      emitSchemaFile: path.join(process.cwd(), "./src/utils/schema.graphql"),
     }),
     context: ({ req, res }) => ({ req, res }),
     introspection: true,

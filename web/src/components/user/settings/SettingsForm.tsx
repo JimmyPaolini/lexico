@@ -1,7 +1,7 @@
 import { Divider, Typography } from "@material-ui/core"
 import { useFormik } from "formik"
 import React, { useContext } from "react"
-import useSetSettings from "../../../hooks/user/settings/useSetSettings"
+import { useSetSettingsMutation } from "../../../graphql/generated"
 import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
 import {
   getSettingsLocal,
@@ -20,7 +20,7 @@ export default function SettingsForm(): JSX.Element {
     initialValues: user ? user.settings : getSettingsLocal(),
     onSubmit: async () => {
       if (user) {
-        await setSettingsUser(formik.values)
+        await setSettingsUser({ settings: formik.values })
       } else {
         setSettingsLocal(formik.values)
         if (showSettingsInstructions()) {
@@ -33,7 +33,7 @@ export default function SettingsForm(): JSX.Element {
     },
   })
 
-  const { mutateAsync: setSettingsUser } = useSetSettings()
+  const { mutateAsync: setSettingsUser } = useSetSettingsMutation()
 
   return (
     <form onChange={formik.handleSubmit}>

@@ -11,8 +11,9 @@ import { Visibility, VisibilityOff } from "@material-ui/icons"
 import { useFormik } from "formik"
 import { useRouter } from "next/router"
 import React, { useRef, useState } from "react"
-import useResetPassword from "../../../hooks/user/login/useResetPassword"
+import { useResetPasswordMutation } from "../../../graphql/generated"
 import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
+import { queryClient } from "../../../pages/_app"
 import CardHeader from "../../accessories/CardHeader"
 import SubmitButton from "../../accessories/SubmitButton"
 import TextBox from "../../accessories/TextBox"
@@ -35,15 +36,16 @@ export default function ResetPasswordCard({
     },
     validate,
     onSubmit: async () => {
-      await resetPassword()
+      await resetPassword({ passwordResetToken, ...formik.values })
       router.push("/user")
       enqueueSnackbar(`Your password has been successfully reset!`)
     },
   })
-  const { mutateAsync: resetPassword } = useResetPassword(
-    passwordResetToken,
-    formik.values.password,
-  )
+  const { mutateAsync: resetPassword } = useResetPasswordMutation({
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("user")
+    },
+  })
 
   return (
     <Card className={classes.card}>

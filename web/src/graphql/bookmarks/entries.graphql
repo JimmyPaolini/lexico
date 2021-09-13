@@ -1,5 +1,3 @@
-#import "../fragments/Entry.graphql"
-
 query Entries($ids: [String!]!) {
   entries(ids: $ids) {
     ...allEntry

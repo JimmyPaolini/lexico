@@ -1,10 +1,8 @@
 import { Box, Modal, Paper, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { Dispatch, memo, SetStateAction, useRef } from "react"
-import { UseQueryResult } from "react-query"
 import { useSwipeable } from "react-swipeable"
-import Entry from "../../../../entity/dictionary/Entry"
-import useSearchLatin from "../../hooks/search/useSearchLatin"
+import { Entry, useSearchLatinQuery } from "../../graphql/generated"
 import useEventListener from "../../hooks/useEventListener"
 import CardDeck from "../accessories/CardDeck"
 import EntryCard from "../entry/EntryCard"
@@ -22,19 +20,21 @@ export default memo(function ReaderModal({
   const classes = useStyles()
   const ref = useRef<HTMLDivElement>(null)
 
-  const {
-    data: entries,
-    isFetched,
-    isSuccess,
-    isError,
-  } = useSearchLatin(searched) as UseQueryResult<Entry[], unknown>
+  const { data, isFetched, isSuccess, isError } = useSearchLatinQuery(
+    { search: searched },
+    {
+      retryDelay: 0,
+      staleTime: 1000 * 60 * 5,
+    },
+  )
+  const entries = data?.searchLatin as Entry[]
 
   useEventListener("keydown", (e: any) => {
     if (e.key === "Escape") setOpen(false)
   })
 
   const cards =
-    entries?.map((entry: Entry) => {
+    entries?.map((entry) => {
       const Card = <EntryCard {...{ entry, searched }} />
       return { key: entry.id, Card }
     }) || []

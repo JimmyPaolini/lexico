@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { useRouter } from "next/router"
 import React, { memo } from "react"
 import LinesEllipsis from "react-lines-ellipsis"
-import Text from "../../../../entity/literature/Text"
+import { Text } from "../../graphql/generated"
 import { romanNumeralize } from "../../utils/romanNumeral"
 import { sentenceCase } from "../../utils/string"
 

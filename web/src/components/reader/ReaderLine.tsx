@@ -1,8 +1,8 @@
 import { Divider, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React, { memo, useContext } from "react"
+import React, { useContext } from "react"
 import LazyLoad from "react-lazyload"
-import Line from "../../../../entity/literature/Line"
+import { Line } from "../../graphql/generated"
 import { getSettingsLocal } from "../../utils/settingsLocal"
 import { normalize } from "../../utils/string"
 import { Context } from "../layout/Context"
@@ -13,13 +13,15 @@ interface ReaderLineProps {
   openModal: (word: string) => void
 }
 
-export default memo(function ReaderLine({
+export default function ReaderLine({
   line,
   openModal,
 }: ReaderLineProps): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
   const words = normalize(line.line).match(/\w+|\W+/gi)
+  const lineLabelFontSize =
+    ((user?.settings?.fontSize || getSettingsLocal().fontSize) as number) - 3
 
   return (
     <Grid container wrap="nowrap">
@@ -28,10 +30,7 @@ export default memo(function ReaderLine({
         align="right"
         component="span"
         variant="inherit"
-        style={{
-          fontSize:
-            (user?.settings.fontSize || getSettingsLocal().fontSize) - 3,
-        }}>
+        style={{ fontSize: lineLabelFontSize }}>
         {line.lineLabel}
       </Typography>
       <Divider orientation="vertical" flexItem className={classes.divider} />
@@ -51,7 +50,7 @@ export default memo(function ReaderLine({
       </LazyLoad>
     </Grid>
   )
-})
+}
 
 const useStyles = makeStyles((theme: any) => ({
   lineLabel: {

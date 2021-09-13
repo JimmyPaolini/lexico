@@ -338,7 +338,7 @@ type Text {
   book: Book
   id: ID!
   lines: [Line!]!
-  linesSlice(end: Float = 1.7976931348623157e+308, start: Float = 0): [Line!]!
+  linesSlice(end: Float = 1.7976931348623157e+308, start: Float = 0): [Line!]
   title: String!
 }
 

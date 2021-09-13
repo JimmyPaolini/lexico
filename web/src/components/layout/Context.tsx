@@ -6,8 +6,7 @@ import {
   SetStateAction,
   useState,
 } from "react"
-import User from "../../../../entity/user/User"
-import useUser from "../../hooks/user/login/useUser"
+import { User, useUserQuery } from "../../graphql/generated"
 
 export interface ReactContext {
   isNavOpen: boolean
@@ -22,7 +21,8 @@ interface Props {
   children?: ReactNode
 }
 export function ContextProvider({ children }: Props): JSX.Element {
-  const { data: user } = useUser()
+  const { data } = useUserQuery({}, { staleTime: 1000 * 60 * 5 })
+  const user = data?.user
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
   const [isNavOpen, setNavOpen] = useState(false)
 

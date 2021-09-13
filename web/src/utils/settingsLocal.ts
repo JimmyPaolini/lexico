@@ -1,23 +1,23 @@
-import Settings, { SettingsInput } from "../../../entity/user/Settings"
+import { Settings } from "../graphql/generated"
 
-const settingsInput = () =>
+const settingsDefault = () =>
   ({
     theme: "dark",
     fontSize: 24,
     formsExpandedDefault: false,
     translationsExpandedDefault: false,
-    dictionaryMacronized: false,
+    dictionaryMacronized: true,
     literatureMacronized: false,
-  } as SettingsInput)
+  } as Settings)
 
 export function getSettingsLocal(): Settings {
-  if (typeof window === "undefined") return settingsInput()
+  if (typeof window === "undefined") return settingsDefault()
   return window.localStorage?.settings
-    ? (JSON.parse(window.localStorage.settings) as SettingsInput)
-    : settingsInput()
+    ? (JSON.parse(window.localStorage.settings) as Settings)
+    : settingsDefault()
 }
 
-export function setSettingsLocal(settings: SettingsInput): Settings | void {
+export function setSettingsLocal(settings: Settings): Settings | void {
   if (typeof window === "undefined") return
   window.localStorage.settings = JSON.stringify(settings)
 }

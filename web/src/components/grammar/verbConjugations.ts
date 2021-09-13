@@ -1,11 +1,9 @@
-import { Inflection } from "../../../../entity/dictionary/word/Inflection"
-import { PartOfSpeech } from "../../../../entity/dictionary/word/PartOfSpeech"
-import PrincipalPart from "../../../../entity/dictionary/word/PrincipalPart"
+import { Inflection, PrincipalPart } from "../../graphql/generated"
 
 export default [
   {
     id: "first",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       {
         name: "title",
@@ -349,7 +347,7 @@ export default [
   },
   {
     id: "second",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       {
         name: "title",
@@ -693,7 +691,7 @@ export default [
   },
   {
     id: "third",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       {
         name: "title",
@@ -1037,7 +1035,7 @@ export default [
   },
   {
     id: "third i-stem",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       {
         name: "title",
@@ -1381,7 +1379,7 @@ export default [
   },
   {
     id: "fourth",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       {
         name: "title",

@@ -1,9 +1,11 @@
 import { GetServerSideProps } from "next"
 import { memo } from "react"
-import Author from "../../../../../entity/literature/Author"
-import Book from "../../../../../entity/literature/Book"
-import Text from "../../../../../entity/literature/Text"
-import useGetCustomText from "../../../hooks/user/useGetCustomText"
+import {
+  Author,
+  Book,
+  Text,
+  useGetCustomTextQuery,
+} from "../../../graphql/generated"
 import { CustomText, getCustomTextLocal } from "../../../utils/literatureLocal"
 import Reader from "../[textId]"
 
@@ -13,9 +15,9 @@ interface CustomReaderProps {
 export default memo(function CustomReader({
   id,
 }: CustomReaderProps): JSX.Element {
-  const { data: userText, isSuccess } = useGetCustomText(id)
+  const { data, isSuccess } = useGetCustomTextQuery({ id })
   const localText = getCustomTextLocal(id)
-  const text = (isSuccess ? userText : localText) as CustomText
+  const text = (isSuccess ? data?.getCustomText : localText) as CustomText
   return !text ? <></> : <Reader text={customTextToText(text)} />
 })
 
@@ -32,7 +34,6 @@ function customTextToText({ id, title, text, local }: CustomText): Text {
       ? { id: "local", title: "local" }
       : { id: "user", title: "user" }) as Book,
     lines: [],
-    linesSlice: () => [],
   }
   customText.author.texts = [customText as never]
   customText.book.author = customText.author

@@ -3,7 +3,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles"
 import { useFormik } from "formik"
 import { useRouter } from "next/router"
 import React from "react"
-import useRecoverPassword from "../../../hooks/user/login/useRecoverPassword"
+import { useRecoverPasswordMutation } from "../../../graphql/generated"
 import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
 import { validateEmail } from "../../../utils/string"
 import CardHeader from "../../accessories/CardHeader"
@@ -22,14 +22,14 @@ export default function RecoverPasswordCard(): JSX.Element {
     validate,
     onSubmit: async () => {
       try {
-        await recoverPassword()
+        await recoverPassword(formik.values)
         router.push("/user")
         enqueueSnackbar(
           `A password recovery email has been sent to: ${formik.values.email}`,
         )
-      } catch (e) {
+      } catch (e: any) {
         console.log(JSON.stringify(e))
-        if (e.response.errors[0].message === "email not found") {
+        if (e?.response?.errors?.[0]?.message === "email not found") {
           enqueueSnackbar(
             `No user with the following email exists: ${formik.values.email}. Try signing in through a provider if this email is correct`,
           )
@@ -41,9 +41,7 @@ export default function RecoverPasswordCard(): JSX.Element {
       }
     },
   })
-  const { mutateAsync: recoverPassword } = useRecoverPassword(
-    formik.values.email,
-  )
+  const { mutateAsync: recoverPassword } = useRecoverPasswordMutation()
 
   return (
     <Card className={classes.card}>

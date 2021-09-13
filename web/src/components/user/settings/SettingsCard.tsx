@@ -1,8 +1,8 @@
 import { Card, CardContent, Divider, Grid } from "@material-ui/core"
 import { makeStyles, Theme } from "@material-ui/core/styles"
 import React, { useContext } from "react"
-import useLogout from "../../../hooks/user/login/useLogout"
-import useUnregister from "../../../hooks/user/login/useUnregister"
+import { useLogoutQuery, useUnregisterMutation } from "../../../graphql/generated"
+import { queryClient } from "../../../pages/_app"
 import CardHeader from "../../accessories/CardHeader"
 import SubmitButton from "../../accessories/SubmitButton"
 import { Context } from "../../layout/Context"
@@ -13,13 +13,26 @@ export default function SettingsCard(): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
 
-  const { mutateAsync: logout } = useLogout()
-  const { mutateAsync: unregister } = useUnregister()
+  const { refetch: logout } = useLogoutQuery(
+    {},
+    {
+      enabled: false,
+      onSuccess: async () => {
+        await queryClient.invalidateQueries("user")
+      },
+    },
+  )
+  const { mutateAsync: unregister } = useUnregisterMutation({
+    retry: false,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("user")
+    },
+  })
 
   const confirmUnregister = async () => {
     const unregisterDialog =
       "Are you sure you want to delete your account? All your bookmarks and settings will be lost."
-    if (window.confirm(unregisterDialog)) await unregister()
+    if (window.confirm(unregisterDialog)) await unregister({})
   }
 
   return (

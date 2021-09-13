@@ -3,13 +3,12 @@ import { GetServerSideProps } from "next"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
-import { UseQueryResult } from "react-query"
-import Entry from "../../../entity/dictionary/Entry"
 import CardDeck from "../components/accessories/CardDeck"
 import Logo from "../components/accessories/Logo"
 import EntryCard from "../components/entry/EntryCard"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
 import getSearchPageMetadata from "../components/search/getSearchPageMetadata"
+import { Entry } from "../graphql/generated"
 import useSearch from "../hooks/search/useSearch"
 import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 
@@ -27,10 +26,7 @@ export default function Search({
   const [search, setSearch] = useState<string>(initialSearch)
   const [searched, setSearched] = useState<string>(initialSearch)
 
-  const { data: entries, isLoading } = useSearch(
-    searched,
-    isLatin,
-  ) as UseQueryResult<Entry[], unknown>
+  const { entries, isLoading } = useSearch(isLatin, searched)
 
   useEffect(() => setSearched(search), [isLatin])
   useEffect(() => {

@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core"
 import { useRouter } from "next/router"
 import { SnackbarKey } from "notistack"
 import { useEffect } from "react"
-import User from "../../../../entity/user/User"
+import { User } from "../../graphql/generated"
 import { showBookmarkInstructions } from "../../utils/bookmarkInstructions"
 import useSnackbarEnhanced from "../useSnackbarEnhanced"
 

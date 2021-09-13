@@ -41,12 +41,6 @@
       "parserOptions": {
         "schema": "server/src/utils/schema.graphql"
       }
-    },
-    {
-      "files": ["graphql.ts"],
-      "rules": {
-        "@typescript-eslint/explicit-module-boundary-types": ["off"]
-      }
     }
   ]
 }

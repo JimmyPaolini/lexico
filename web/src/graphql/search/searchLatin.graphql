@@ -1,5 +1,3 @@
-#import "../fragments/Entry.graphql"
-
 query SearchLatin($search: String!) {
   searchLatin(search: $search) {
     ...allEntry

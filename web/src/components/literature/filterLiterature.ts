@@ -1,6 +1,4 @@
-import Author from "../../../../entity/literature/Author"
-import Book from "../../../../entity/literature/Book"
-import Text from "../../../../entity/literature/Text"
+import { Author, Book, Text } from "../../graphql/generated"
 
 export default function filterLiterature(
   authors: Author[],

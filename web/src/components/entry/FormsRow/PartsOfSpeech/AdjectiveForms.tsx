@@ -2,15 +2,17 @@
 import { Box, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { useState } from "react"
-import { Forms } from "../../../../../../entity/dictionary/word/Forms"
+import { Forms, Maybe } from "../../../../graphql/generated"
 import FormsTable from "../FormsTable"
 import FormTabs from "../FormTabs"
 
-interface Props {
-  forms: Forms | null | undefined
+export interface AdjectiveFormsProps {
+  forms?: Maybe<Forms>
 }
 
-export default function AdjectiveForms({ forms }: Props): JSX.Element {
+export default function AdjectiveForms({
+  forms,
+}: AdjectiveFormsProps): JSX.Element {
   const classes = useStyles()
   const [tab, setTab] = useState(0)
   const structure = adjectiveFormsRestructure(forms)

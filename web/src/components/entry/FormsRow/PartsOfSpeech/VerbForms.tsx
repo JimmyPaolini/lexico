@@ -2,12 +2,12 @@
 import { Box, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { useState } from "react"
-import { Forms } from "../../../../../../entity/dictionary/word/Forms"
+import { Forms, Maybe } from "../../../../graphql/generated"
 import FormsTable from "../FormsTable"
 import FormTabs from "../FormTabs"
 
 interface Props {
-  forms: Forms | null | undefined
+  forms?: Maybe<Forms>
 }
 
 export default function VerbForms({ forms }: Props): JSX.Element {

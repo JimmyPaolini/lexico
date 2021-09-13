@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next"
 import { memo } from "react"
-import useGetCustomText from "../../../hooks/user/useGetCustomText"
+import { useGetCustomTextQuery } from "../../../graphql/generated"
 import { CustomText, getCustomTextLocal } from "../../../utils/literatureLocal"
 import CustomReaderNew from "../custom"
 
@@ -10,7 +10,7 @@ interface CustomReaderEditProps {
 export default memo(function CustomReaderEdit({
   id,
 }: CustomReaderEditProps): JSX.Element {
-  const { data: userText, isSuccess } = useGetCustomText(id)
+  const { data: userText, isSuccess } = useGetCustomTextQuery({ id })
   const localText = getCustomTextLocal(id)
   const text = (isSuccess ? userText : localText) as CustomText
   return !text ? <></> : <CustomReaderNew text={text} />

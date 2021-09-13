@@ -1,11 +1,9 @@
-import { Inflection } from "../../../../entity/dictionary/word/Inflection"
-import { PartOfSpeech } from "../../../../entity/dictionary/word/PartOfSpeech"
-import PrincipalPart from "../../../../entity/dictionary/word/PrincipalPart"
+import { Inflection, PrincipalPart } from "../../graphql/generated"
 
 export default [
   {
     id: "first",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       { name: "title", text: ["Noun First Declension"] },
     ] as PrincipalPart[],
@@ -42,7 +40,7 @@ export default [
   },
   {
     id: "second",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       { name: "title", text: ["Noun Second Declension"] },
     ] as PrincipalPart[],
@@ -77,7 +75,7 @@ export default [
   },
   {
     id: "second neuter",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       { name: "title", text: ["Noun Second Declension Neuter"] },
     ] as PrincipalPart[],
@@ -112,7 +110,7 @@ export default [
   },
   {
     id: "third masc/fem",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       { name: "title", text: ["Noun Third Declension"] },
     ] as PrincipalPart[],
@@ -147,7 +145,7 @@ export default [
   },
   {
     id: "third neuter",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       { name: "title", text: ["Noun Third Declension Neuter"] },
     ] as PrincipalPart[],
@@ -182,7 +180,7 @@ export default [
   },
   {
     id: "fourth",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       { name: "title", text: ["Noun Fourth Declension"] },
     ] as PrincipalPart[],
@@ -219,7 +217,7 @@ export default [
   },
   {
     id: "fifth",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       { name: "title", text: ["Noun Fifth Declension"] },
     ] as PrincipalPart[],

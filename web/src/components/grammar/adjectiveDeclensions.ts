@@ -1,11 +1,9 @@
-import { Inflection } from "../../../../entity/dictionary/word/Inflection"
-import { PartOfSpeech } from "../../../../entity/dictionary/word/PartOfSpeech"
-import PrincipalPart from "../../../../entity/dictionary/word/PrincipalPart"
+import { Inflection, PrincipalPart } from "../../graphql/generated"
 
 export default [
   {
     id: "first/second",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       {
         name: "title",
@@ -99,7 +97,7 @@ export default [
   },
   {
     id: "third",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       { name: "title", text: ["Adjective Third Declension"] },
     ] as PrincipalPart[],
@@ -190,7 +188,7 @@ export default [
   },
   {
     id: "comparative",
-    partOfSpeech: "" as PartOfSpeech,
+    partOfSpeech: "",
     principalParts: [
       { name: "title", text: ["Adjective Comparative"] },
     ] as PrincipalPart[],

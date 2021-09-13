@@ -10,7 +10,7 @@ import {
 import { makeStyles } from "@material-ui/styles"
 import { useFormik } from "formik"
 import React, { useContext, useState } from "react"
-import useComment from "../../hooks/about/useComment"
+import { useCommentMutation } from "../../graphql/generated"
 import { capitalizeFirstLetter } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
 import SubmitButton from "../accessories/SubmitButton"
@@ -26,10 +26,14 @@ export default function CommentBox(): JSX.Element {
       comment: "",
     },
     onSubmit: async () => {
-      await comment(formik.values.comment)
+      await comment(formik.values)
     },
   })
-  const { mutateAsync: comment, error: commentError, isSuccess } = useComment()
+  const {
+    mutateAsync: comment,
+    error: commentError,
+    isSuccess,
+  } = useCommentMutation()
   const error: string = commentError
     ? (commentError as any).response.errors[0].message
     : ""

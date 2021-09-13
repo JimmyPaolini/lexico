@@ -2,13 +2,12 @@ import { Typography } from "@material-ui/core"
 import { GetStaticProps } from "next"
 import Head from "next/head"
 import React, { useEffect, useMemo, useState } from "react"
-import Author from "../../../entity/literature/Author"
 import CardDeck from "../components/accessories/CardDeck"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
 import CustomLiteratureCard from "../components/literature/custom/CustomLiteratureCard"
 import filterLiterature from "../components/literature/filterLiterature"
 import LiteratureCard from "../components/literature/LiteratureCard"
-import { getAuthors } from "../hooks/literature/useGetAuthors"
+import { Author, useGetAuthorsQuery } from "../graphql/generated"
 
 interface LiteratureProps {
   authors: Author[]
@@ -68,6 +67,6 @@ export default function Literature({ authors }: LiteratureProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const authors = await getAuthors()
+  const { getAuthors: authors } = await useGetAuthorsQuery.fetcher()()
   return { props: { authors } }
 }

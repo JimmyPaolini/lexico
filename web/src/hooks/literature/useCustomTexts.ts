@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
-import { UseQueryResult } from "react-query"
 import {
   CustomText,
   deleteCustomTextLocal,
   listCustomTextsLocal,
 } from "../../utils/literatureLocal"
-import useListCustomTexts from "../user/useListCustomTexts"
+import { useListCustomTextsQuery } from "../../graphql/generated"
 
 interface useCustomTextsReturn {
   customTexts: CustomText[]
@@ -18,10 +17,11 @@ export default function useCustomTexts(): useCustomTextsReturn {
   )
 
   const {
-    data: customTextsUser,
+    data,
     isLoading,
     refetch: refreshCustomTextsUser,
-  } = useListCustomTexts() as UseQueryResult<CustomText[], unknown>
+  } = useListCustomTextsQuery()
+  const customTextsUser = data?.listCustomTexts
 
   const [customTexts, setCustomTexts] = useState<CustomText[]>([
     ...(customTextsUser || []),

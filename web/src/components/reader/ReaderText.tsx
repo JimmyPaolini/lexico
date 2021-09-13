@@ -2,8 +2,8 @@ import { Box, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Edit } from "@material-ui/icons"
 import { useRouter } from "next/router"
-import React, { memo } from "react"
-import Text from "../../../../entity/literature/Text"
+import React from "react"
+import { Text } from "../../graphql/generated"
 import { MyTheme } from "../../theme/theme"
 import { sentenceCase } from "../../utils/string"
 import CardHeader from "../accessories/CardHeader"
@@ -13,7 +13,7 @@ interface ReaderTextProps {
   text: Text
   openModal: (word: string) => void
 }
-export default memo(function ReaderText({
+export default function ReaderText({
   text,
   openModal,
 }: ReaderTextProps): JSX.Element {
@@ -24,6 +24,19 @@ export default memo(function ReaderText({
   let subtitle = sentenceCase(text.author.id)
   if (text.book)
     subtitle += " - " + sentenceCase(text.book.title).replace(/^\d+ /, "")
+
+  const action = !router.pathname.match(/\/reader\/custom/) ? undefined : (
+    <IconButton
+      onClick={() =>
+        router.push(
+          window?.location.pathname.replace("reader", "literature") ||
+            "/literature",
+        )
+      }
+      aria-label="edit">
+      <Edit />
+    </IconButton>
+  )
 
   return (
     <Box className={classes.readerText}>
@@ -40,31 +53,14 @@ export default memo(function ReaderText({
         }}
         className={classes.cardHeader}
         classes={{ action: classes.shownAction }}
-        {...(router.pathname.match(/\/reader\/custom/)
-          ? {
-              action: (
-                <IconButton
-                  onClick={() =>
-                    router.push(
-                      window?.location.pathname.replace(
-                        "reader",
-                        "literature",
-                      ) || "/literature",
-                    )
-                  }
-                  aria-label="edit">
-                  <Edit />
-                </IconButton>
-              ),
-            }
-          : {})}
+        action={action}
       />
       {text.lines.map((line) => (
         <ReaderLine {...{ line, openModal }} key={line.id} />
       ))}
     </Box>
   )
-})
+}
 
 const useStyles = makeStyles((theme: MyTheme) => ({
   readerText: {

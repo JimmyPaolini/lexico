@@ -9,8 +9,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles, Theme } from "@material-ui/core/styles"
 import { useContext, useState } from "react"
-import { Forms } from "../../../../../entity/dictionary/word/Forms"
-import { PartOfSpeech } from "../../../../../entity/dictionary/word/PartOfSpeech"
+import { Forms } from "../../../graphql/generated"
 import identifierAbbreviations from "../../../utils/identifierAbbreviations"
 import { getSettingsLocal } from "../../../utils/settingsLocal"
 import ExpandIcon from "../../accessories/ExpandIcon"
@@ -21,8 +20,8 @@ import VerbForms from "./PartsOfSpeech/VerbForms"
 
 interface Props {
   searched: string
-  forms: Forms | null | undefined
-  partOfSpeech: PartOfSpeech
+  forms?: Forms | null
+  partOfSpeech: string
   identifiers: string[]
 }
 

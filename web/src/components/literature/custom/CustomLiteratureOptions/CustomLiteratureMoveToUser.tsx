@@ -1,6 +1,6 @@
 import { AccountCircle } from "@material-ui/icons"
 import { useEffect } from "react"
-import useCreateCustomText from "../../../../hooks/literature/custom/useCreateCustomText"
+import { useCreateCustomTextMutation } from "../../../../graphql/generated"
 import useSnackbarEnhanced from "../../../../hooks/useSnackbarEnhanced"
 import {
   CustomText,
@@ -20,7 +20,7 @@ export default function CustomLiteratureMoveToUser({
 }: CustomLiteratureMoveToUserProps): JSX.Element {
   const { enqueueSnackbar } = useSnackbarEnhanced()
 
-  const { mutate: createCustomTextUser, error } = useCreateCustomText(text, {
+  const { mutate: createCustomTextUser, error } = useCreateCustomTextMutation({
     onMutate: closeMenu,
     onSuccess: () => deleteCustomTextLocal(text.id),
     onSettled: () => refreshCustomTexts(),

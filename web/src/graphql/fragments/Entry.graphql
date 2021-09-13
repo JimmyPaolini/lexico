@@ -1,8 +1,3 @@
-#import "./PrincipalParts.graphql"
-#import "./Translations.graphql"
-#import "./forms/Forms.graphql"
-#import "./inflections/Inflections.graphql"
-
 fragment allEntry on Entry {
   id
   partOfSpeech

@@ -6,7 +6,9 @@
     "baseUrl": ".",
     "noEmit": true,
     "skipLibCheck": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "exclude": ["../data", "../ingestion", "../server"]
 }

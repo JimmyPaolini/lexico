@@ -14,7 +14,7 @@ export default function Error404(): JSX.Element {
       <Card className={classes.card}>
         <CardHeader title="Error: Not Found" />
         <CardContent>
-          <SubmitButton name="Return to Homepage" />
+          <SubmitButton name="Return to Homepage" href="/search" />
         </CardContent>
       </Card>
     </SingleCardLayout>

@@ -3,26 +3,27 @@ import { makeStyles } from "@material-ui/core/styles"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { memo, useContext, useEffect, useState } from "react"
-import Text from "../../../../entity/literature/Text"
+import { useContext, useEffect, useState } from "react"
 import { Context } from "../../components/layout/Context"
 import LiteratureFallback from "../../components/literature/LiteratureFallback"
 import ReaderModal from "../../components/reader/ReaderModal"
 import ReaderText from "../../components/reader/ReaderText"
-import getTextIdsQuery from "../../graphql/literature/getTextIds.graphql"
-import { getText } from "../../hooks/literature/useGetText"
+import {
+  Text,
+  useGetTextIdsQuery,
+  useGetTextQuery,
+} from "../../graphql/generated"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
 import { MyTheme } from "../../theme/theme"
 import { googleAnalyticsEvent } from "../../utils/googleAnalytics"
 import { showReaderInstructions } from "../../utils/readerInstructions"
 import { getSettingsLocal } from "../../utils/settingsLocal"
 import { sentenceCase } from "../../utils/string"
-import { graphQLClient } from "../_app"
 
 interface Props {
   text: Text
 }
-export default memo(function Reader({ text }: Props): JSX.Element {
+export default function Reader({ text }: Props): JSX.Element {
   const router = useRouter()
   if (router.isFallback) return <LiteratureFallback />
   const classes = useStyles({})
@@ -63,6 +64,9 @@ export default memo(function Reader({ text }: Props): JSX.Element {
     title += " " + sentenceCase(text.book.title).replace(/^\d+ /, "")
   title += " " + sentenceCase(text.title)
 
+  const fontSize = (user?.settings?.fontSize ||
+    getSettingsLocal().fontSize) as number
+
   return (
     <>
       <Head>
@@ -84,9 +88,7 @@ export default memo(function Reader({ text }: Props): JSX.Element {
         square
         elevation={0}
         className={classes.reader}
-        style={{
-          fontSize: user?.settings.fontSize || getSettingsLocal().fontSize,
-        }}>
+        style={{ fontSize }}>
         <Grid container justify="center">
           {!!text && user !== undefined ? (
             <ReaderText {...{ text, openModal }} />
@@ -96,14 +98,13 @@ export default memo(function Reader({ text }: Props): JSX.Element {
       </Paper>
     </>
   )
-})
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  if (process.env.FULL_BUILD !== "true") return { fallback: true, paths: [] }
-  const { getTextIds: texts } = await graphQLClient.request(getTextIdsQuery)
+  const { getTextIds: texts } = await useGetTextIdsQuery.fetcher()()
   return {
     fallback: true,
-    paths: texts.map((text: Text) => ({ params: { textId: text.id } })),
+    paths: texts.map((text) => ({ params: { textId: text.id } })),
   }
 }
 
@@ -111,8 +112,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const textId = params?.textId as string
   if (!textId) return { notFound: true }
   try {
-    const text = await getText({ queryKey: ["getText", textId] })
+    const { getText: text } = await useGetTextQuery.fetcher({ id: textId })()
     if (!text) return { notFound: true }
+    console.log(text)
     return { props: { text } }
   } catch {
     return { notFound: true }

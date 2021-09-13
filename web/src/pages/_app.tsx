@@ -1,5 +1,4 @@
 import { CssBaseline, ThemeProvider } from "@material-ui/core"
-import { GraphQLClient } from "graphql-request"
 import type { AppProps, NextWebVitalsMetric } from "next/app"
 import Head from "next/head"
 import React, { useEffect } from "react"
@@ -17,12 +16,6 @@ export const clientEndpoint =
     : typeof window === "undefined"
     ? `http://localhost:3001/graphql`
     : window.location.origin + "/api"
-
-export const graphQLClient = new GraphQLClient(clientEndpoint, {
-  credentials: "include",
-  mode: "cors",
-  keepalive: true,
-})
 
 export const queryClient = new QueryClient()
 

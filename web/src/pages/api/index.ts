@@ -5,7 +5,7 @@ export const serverEndpoint = `http://${
   process.env.NODE_ENV === "production" ? "server" : "localhost"
 }:3001/graphql`
 
-const circularReplacer: () =>
+export const circularReplacer: () =>
   | ((this: any, key: string, value: any) => any)
   | undefined = () => {
   const seen = new WeakSet()
@@ -22,19 +22,21 @@ export default async (
   res: NextApiResponse,
 ): Promise<void> => {
   const request: AxiosRequestConfig = {
+    ...req,
     method: "POST",
     url: serverEndpoint,
     data: req.body,
-    headers: req.headers,
     withCredentials: true,
   }
 
-  const response = await axios(request).catch((e) => {
-    console.log(JSON.stringify(e, circularReplacer()))
-    return Promise.reject(e)
-  })
-
-  if (response.headers["set-cookie"])
-    res.setHeader("set-cookie", response.headers["set-cookie"])
-  res.send(response.data)
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const response = await axios(request)
+    if (response.headers["set-cookie"])
+      res.setHeader("set-cookie", response.headers["set-cookie"])
+    res.send(response.data)
+  } catch (error) {
+    console.log(JSON.stringify((error as any)?.response, circularReplacer()))
+    throw error
+  }
 }

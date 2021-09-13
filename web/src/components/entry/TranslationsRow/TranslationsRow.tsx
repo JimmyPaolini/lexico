@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useContext, useState } from "react"
-import Translation from "../../../../../entity/dictionary/Translation"
+import { Translation } from "../../../graphql/generated"
 import { getSettingsLocal } from "../../../utils/settingsLocal"
 import ExpandIcon from "../../accessories/ExpandIcon"
 import { Context } from "../../layout/Context"

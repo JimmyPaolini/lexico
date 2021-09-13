@@ -1,5 +1,5 @@
 import { Home } from "@material-ui/icons"
-import useDeleteCustomText from "../../../../hooks/user/useDeleteCustomText"
+import { useDeleteCustomTextMutation } from "../../../../graphql/generated"
 import {
   createCustomTextLocal,
   CustomText,
@@ -16,13 +16,13 @@ export default function CustomLiteratureMoveToLocal({
   refreshCustomTexts,
   closeMenu,
 }: CustomLiteratureMoveToLocalProps): JSX.Element {
-  const { mutate: deleteCustomTextUser } = useDeleteCustomText(text, {
+  const { mutate: deleteCustomTextUser } = useDeleteCustomTextMutation({
     onMutate: closeMenu,
     onSettled: () => refreshCustomTexts(),
   })
   const moveToLocal = () => {
     createCustomTextLocal(text)
-    deleteCustomTextUser(text.id)
+    deleteCustomTextUser(text)
   }
 
   return (

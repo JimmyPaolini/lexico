@@ -1,20 +1,18 @@
 import { Box, CardHeader } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import { Inflection } from "../../../../../entity/dictionary/word/Inflection"
-import { PartOfSpeech } from "../../../../../entity/dictionary/word/PartOfSpeech"
-import PrincipalPart from "../../../../../entity/dictionary/word/PrincipalPart"
+import { Inflection, Maybe, PrincipalPart } from "../../../graphql/generated"
 import { unCamelCase } from "../../../utils/string"
 import ExpandIcon from "../../accessories/ExpandIcon"
 import BookmarkButton from "./BookmarkButton"
 import inflectionToString from "./inflectionToString"
 
-interface PrincipalPartsRowProps {
+export interface PrincipalPartsRowProps {
   id: string
-  partOfSpeech: PartOfSpeech
-  principalParts: PrincipalPart[] | null
+  partOfSpeech: string
+  principalParts: Maybe<PrincipalPart[]> | undefined
   inflection: Inflection | null | undefined
-  bookmarked?: boolean
+  bookmarked?: Maybe<boolean>
   expanded?: boolean
 }
 export default function PrincipalPartsRow({

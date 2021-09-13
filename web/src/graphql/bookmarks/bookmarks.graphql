@@ -1,5 +1,3 @@
-#import "../fragments/Entry.graphql"
-
 query Bookmarks {
   bookmarks {
     ...allEntry

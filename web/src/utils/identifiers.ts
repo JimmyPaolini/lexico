@@ -1,5 +1,4 @@
-import Entry from "../../../entity/dictionary/Entry"
-import { Forms } from "../../../entity/dictionary/word/Forms"
+import { Entry, Forms, Maybe } from "../graphql/generated"
 import { hasSuffix, normalize } from "./string"
 
 const identifiablePartsOfSpeech = [
@@ -24,7 +23,7 @@ export default function identifyEntryWord(word: string, entry: Entry): Entry {
 
 function identifyWordRecursive(
   word: string,
-  forms: Forms | null | undefined,
+  forms: Maybe<Forms> | undefined,
   current: string[],
   identifiers: string[],
 ) {
@@ -40,7 +39,7 @@ function identifyWordRecursive(
     for (const key in forms) {
       identifiers = identifyWordRecursive(
         word,
-        forms[key as keyof Forms],
+        forms[key as keyof Forms] as Maybe<Forms> | undefined,
         [...current, key],
         identifiers,
       )

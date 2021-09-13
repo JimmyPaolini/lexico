@@ -3,15 +3,15 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Typography,
+  Typography
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Visibility, VisibilityOff } from "@material-ui/icons"
 import { useFormik } from "formik"
 import Link from "next/link"
 import React, { useRef, useState } from "react"
-import useLogin from "../../../hooks/user/login/useLogin"
-import useRegister from "../../../hooks/user/login/useRegister"
+import { useLoginQuery, useRegisterMutation } from "../../../graphql/generated"
+import { queryClient } from "../../../pages/_app"
 import { googleAnalyticsEvent } from "../../../utils/googleAnalytics"
 import { capitalizeFirstLetter, validateEmail } from "../../../utils/string"
 import SubmitButton from "../../accessories/SubmitButton"
@@ -37,7 +37,7 @@ export default function BasicLogin(): JSX.Element {
           value: formik.values.email,
         })
       } else {
-        await register()
+        await register(formik.values)
         googleAnalyticsEvent("register", {
           category: "user",
           label: "email",
@@ -46,8 +46,14 @@ export default function BasicLogin(): JSX.Element {
       }
     },
   })
-  const { refetch: login, error: loginError } = useLogin(formik.values)
-  const { refetch: register, error: registerError } = useRegister(formik.values)
+  const { refetch: login, error: loginError } = useLoginQuery(formik.values, {
+    enabled: false,
+    retry: false,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("user")
+    },
+  })
+  const { mutateAsync: register, error: registerError } = useRegisterMutation()
 
   let error: any = registerError || loginError
   error = error ? error.response.errors[0].message : ""
