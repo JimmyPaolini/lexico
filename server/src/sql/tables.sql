@@ -7,6 +7,9 @@ SELECT * FROM information_schema.columns WHERE table_name = 'migrations'
 -- @block describe constraints
 SELECT * FROM pg_catalog.pg_constraint
 
+-- @block show indices
+SELECT * FROM pg_indexes WHERE tablename NOT LIKE 'pg%'
+
 -- @block show migrations
 SELECT * FROM migrations
 
