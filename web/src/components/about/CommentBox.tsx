@@ -17,9 +17,9 @@ import { capitalizeFirstLetter } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
 import SubmitButton from "../accessories/SubmitButton"
 import TextBox from "../accessories/TextBox"
-import { Context } from "../Context"
+import { Context } from "../layout/Context"
 
-export default function CommentBox() {
+export default function CommentBox(): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(false)
@@ -31,16 +31,17 @@ export default function CommentBox() {
       await comment()
     },
   })
-  const { mutateAsync: comment, error: commentError, isSuccess } = useMutation(
-    "comment",
-    async () => {
-      const { comment: data } = await graphQLClient.request(
-        commentMutation,
-        formik.values,
-      )
-      return data
-    },
-  )
+  const {
+    mutateAsync: comment,
+    error: commentError,
+    isSuccess,
+  } = useMutation("comment", async () => {
+    const { comment: data } = await graphQLClient.request(
+      commentMutation,
+      formik.values,
+    )
+    return data
+  })
   const error: string = commentError
     ? (commentError as any).response.errors[0].message
     : ""
@@ -51,8 +52,7 @@ export default function CommentBox() {
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
         disableTouchRipple
-        classes={{ focusHighlight: classes.hide }}
-      >
+        classes={{ focusHighlight: classes.hide }}>
         <CardHeaderMui
           title="Questions and Feedback"
           titleTypographyProps={{ variant: "body1" }}
@@ -69,8 +69,7 @@ export default function CommentBox() {
           Join the Lexico{" "}
           <Link
             href="https://lexico-group.slack.com/archives/C01SN2QN2BF"
-            color="secondary"
-          >
+            color="secondary">
             Slack channel
           </Link>{" "}
           to chat and stay up to date with improvements!
@@ -106,8 +105,7 @@ export default function CommentBox() {
                   variant="caption"
                   align="center"
                   display="block"
-                  className={classes.formError}
-                >
+                  className={classes.formError}>
                   {capitalizeFirstLetter(error as any)}
                 </Typography>
               </>

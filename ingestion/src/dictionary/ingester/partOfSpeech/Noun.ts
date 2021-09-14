@@ -1,3 +1,4 @@
+import { Inflection } from "../../../../../entity/dictionary/word/Inflection"
 import NounInflection, {
   genderRegex,
   NounDeclension,
@@ -10,7 +11,7 @@ import Ingester from "../../Ingester"
 export default class Noun extends Ingester {
   firstPrincipalPartName = "nominative"
 
-  async ingestInflection() {
+  async ingestInflection(): Promise<Inflection> {
     const $ = this.$
     const elt = this.elt
     const inflectionHtml = $(elt)
@@ -20,7 +21,7 @@ export default class Noun extends Ingester {
     if (!$(inflectionHtml).length) return new Uninflected()
     let declension = $(inflectionHtml)
       .text()
-      .replace(/(-declension)|(declension)|(noun)|[.\d\[\]]/gi, "")
+      .replace(/(-declension)|(declension)|(noun)|[.\d[\]]/gi, "")
       .replace(/\s+/g, " ")
       .toLowerCase()
       .trim()
@@ -34,7 +35,7 @@ export default class Noun extends Ingester {
       .replace("pl", "plural")
 
     if (!declension.length && !gender.length) return new Uninflected()
-    let other = declension + ", " + gender
+    const other = declension + ", " + gender
     declension = declension.match(nounDeclensionRegex)?.[0] || ""
     gender = gender.match(genderRegex)?.[0] || ""
     return new NounInflection(

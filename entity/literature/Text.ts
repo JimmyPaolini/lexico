@@ -5,7 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from "typeorm"
 import Author from "./Author"
 import Book from "./Book"
@@ -14,9 +14,9 @@ import Line from "./Line"
 @Entity()
 @ObjectType()
 export default class Text {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   @Field(() => ID)
-  id: string
+  id!: string
 
   @Column("varchar", { length: 64 })
   @Field()
@@ -41,6 +41,7 @@ export default class Text {
 
   @Field(() => [Line])
   linesSlice(
+    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
     @Arg("start", { defaultValue: 0 }) start: number = 0,
     @Arg("end", { defaultValue: Number.MAX_VALUE })
     end: number = Number.MAX_VALUE,

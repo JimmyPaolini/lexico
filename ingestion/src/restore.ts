@@ -7,7 +7,7 @@ import {
   restoreIngested,
   restoreLiterature,
   restoreUsers,
-} from "./utils/backup"
+} from "./utils/pg-commands"
 
 async function main() {
   const [, , command] = process.argv

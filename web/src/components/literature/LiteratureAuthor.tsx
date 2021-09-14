@@ -5,70 +5,72 @@ import {
   Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Dispatch, SetStateAction, useContext } from "react"
+import { Dispatch, memo, SetStateAction } from "react"
 import Author from "../../../../entity/literature/Author"
 import { sentenceCase } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
-import { Context } from "../Context"
 
-interface Props {
+interface LiteratureAuthorProps {
   author: Author
   expanded: boolean
   setExpanded: Dispatch<SetStateAction<boolean>>
 }
-
-export default function LiteratureAuthor({
+export default memo(function LiteratureAuthor({
   author,
   expanded,
   setExpanded,
-}: Props) {
+}: LiteratureAuthorProps): JSX.Element {
   const classes = useStyles()
-  const { isMobile } = useContext(Context)
-  const summary = [
+  let summary = [
     ...(author.books || []),
-    ...author.texts.filter((text) => !text.book),
+    ...author.texts.filter(
+      (text) =>
+        !(author.books || []).some((book) =>
+          book.texts.some((bookText) => bookText.id === text.id),
+        ),
+    ),
   ]
-    .map((item) => sentenceCase(item.title))
+    .sort()
+    .map((item) => sentenceCase(item.title).replace(/^\d+ /, ""))
     .join(" • ")
+  if (author.id === "catullus") summary = "Carmina 1-116"
 
-  const cardHeader = (
-    <CardHeaderMui
-      title={sentenceCase(author.name)}
-      subheader={
-        <>
-          <Typography variant="body1" color="textSecondary">
-            {sentenceCase(author.fullname)}
-          </Typography>
-          {isMobile ? (
+  return (
+    <CardActionArea
+      onClick={() => setExpanded((expanded) => !expanded)}
+      classes={{ focusHighlight: classes.none }}
+      disableRipple
+      disableTouchRipple>
+      <CardHeaderMui
+        title={sentenceCase(author.id)}
+        subheader={
+          <>
+            <Typography variant="body1" color="textSecondary">
+              {sentenceCase(author.name)}
+            </Typography>
             <Collapse in={!expanded}>
               <Typography
                 variant="caption"
                 color="textPrimary"
-                className={classes.summary}
-              >
+                className={classes.summary}>
                 {summary}
               </Typography>
             </Collapse>
-          ) : null}
-        </>
-      }
-      action={isMobile && <ExpandIcon {...{ expanded }} />}
-    />
-  )
-
-  return isMobile ? (
-    <CardActionArea onClick={() => setExpanded((expanded) => !expanded)}>
-      {cardHeader}
+          </>
+        }
+        action={<ExpandIcon {...{ expanded }} />}
+      />
     </CardActionArea>
-  ) : (
-    cardHeader
   )
-}
+})
 
 const useStyles = makeStyles(() => ({
   summary: {
     display: "block",
     lineHeight: 1.3,
     marginTop: 4,
+  },
+  none: {
+    display: "none",
   },
 }))

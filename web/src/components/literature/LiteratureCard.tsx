@@ -7,29 +7,33 @@ import {
   List,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { useContext, useState } from "react"
+import { memo, useState } from "react"
 import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
-import { Context } from "../Context"
 import LiteratureAuthor from "./LiteratureAuthor"
 import LiteratureBook from "./LiteratureBook"
 import LiteratureText from "./LiteratureText"
 
-interface Props {
+interface LiteratureCardProps {
   author: Author
 }
-
-export default function LiteratureCard({ author }: Props) {
+export default memo(function LiteratureCard({
+  author,
+}: LiteratureCardProps): JSX.Element {
   const classes = useStyles()
-  const { isMobile } = useContext(Context)
-  const [expanded, setExpanded] = useState<boolean>(false)
   const books = author.books || ([] as Book[])
-  const nonBookTexts = author.texts.filter((text) => !text.book)
+  const nonBookTexts = author.texts.filter(
+    (text) =>
+      !books.some((book) =>
+        book.texts.some((bookText) => bookText.id === text.id),
+      ),
+  )
+  const [expanded, setExpanded] = useState<boolean>(false)
 
   return (
-    <Card elevation={4} className={classes.authorCard}>
+    <Card elevation={4} className={classes.literatureCard}>
       <LiteratureAuthor {...{ author, expanded, setExpanded }} />
-      <Collapse in={!isMobile || expanded}>
+      <Collapse in={expanded} mountOnEnter>
         <Divider style={{ marginRight: 8 }} />
         <CardContent className={classes.noPadding}>
           <List className={classes.noPadding} dense>
@@ -41,7 +45,7 @@ export default function LiteratureCard({ author }: Props) {
             })}
             <Grid container justify="center" alignItems="stretch">
               {nonBookTexts.map((text) => (
-                <LiteratureText {...{ author, text }} key={text.id} />
+                <LiteratureText {...{ text }} key={text.id} />
               ))}
             </Grid>
           </List>
@@ -49,21 +53,19 @@ export default function LiteratureCard({ author }: Props) {
       </Collapse>
     </Card>
   )
-}
+})
 
 const useStyles = makeStyles((theme: any) => ({
-  authorCard: {
-    "width": theme.custom.cardWidth,
-    "marginLeft": theme.spacing(1),
-    "marginRight": theme.spacing(1),
-    "display": "inline-block",
-    "paddingBottom": 0,
-    "&:last-child": {
-      paddingBottom: 0,
-    },
+  literatureCard: {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: theme.custom.cardWidth,
+    minWidth: theme.custom.cardWidth - theme.spacing(4),
+    paddingBottom: 0,
+    margin: theme.spacing(1),
   },
   noPadding: {
-    "padding": 0,
+    padding: 0,
     "&:last-child": {
       paddingBottom: 0,
     },

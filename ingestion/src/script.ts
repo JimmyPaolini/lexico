@@ -1,38 +1,11 @@
-import fs from "fs-extra"
+import { connectDatabase } from "../../utils/database"
 
-const oratoria = `Pro Quinctio	Pro Roscio Amerino	Pro Roscio Comodeo
-de Lege Agraria Contra Rullum	In Verrem	de Imperio Gnaeus Pompei
-Pro Caecina	Pro Cluentio	Pro Rabirio Perduellionis Reo
-In Catilinam I-IV	Pro Murena	Pro Sulla
-Pro Flacco	Pro Archia	Post Reditum in Senatu
-Post Reditum in Quirites	de Domo Sua	de Haruspicum Responsis
-Pro Gnaeus Plancio	Pro Sestio	In Vatinium
-Pro Caelio	de Provinciis Consularibus	Pro Balbo
-Pro Milone	In Pisonem	Pro Scauro
-Pro Fonteio	Pro Rabirio Postumo	Pro Marcello
-Pro Ligario	Pro Deiotaro	Philippics`
-  .toLowerCase()
-  .split(/\t|\n/)
-
-for (const name of oratoria)
-  fs.ensureFileSync(`data/literature/cicero/oratoria/${name}.txt`)
-
-const philosophia = `de Inventione	de Optimo Genere Oratorum	Topica
-  de Oratore	de Fato	Paradoxa Stoicorum
-  De Partitione Oratoria	Brutus	Orator
-  De Re Publica	de Consulatu Suo	de Legibus
-  de Finibus	Tusculanae Disputationes	de Natura Deorum
-  Academica	Cato Maior de Senectute	Laelius de Amicitia
-  de Divinatione	de Officiis	Commentariolum Petitionis`
-  .toLowerCase()
-  .split(/\t|\n/)
-
-for (const name of philosophia)
-  fs.ensureFileSync(`data/literature/cicero/philosophia/${name.trim()}.txt`)
-
-const epistulae = `ad Atticum	ad Familiares	ad Quintum	ad Brutum`
-  .toLowerCase()
-  .split(/\t|\n/)
-
-for (const name of epistulae)
-  fs.ensureFileSync(`data/literature/cicero/epistulae/${name.trim()}.txt`)
+async function main() {
+  const connection = await connectDatabase()
+  connection.query(
+    `ANALYZE SELECT "Word"."word" AS "Word_word", "Word_entries"."id" AS "Word_entries_id", "Word_entries"."partOfSpeech" AS "Word_entries_partOfSpeech", "Word_entries"."principalParts" AS "Word_entries_principalParts", "Word_entries"."inflection" AS "Word_entries_inflection", "Word_entries"."forms" AS "Word_entries_forms", "Word_entries"."pronunciation" AS "Word_entries_pronunciation", "Word_entries"."etymology" AS "Word_entries_etymology", "Word_entries_translations"."id" AS "Word_entries_translations_id", "Word_entries_translations"."translation" AS "Word_entries_translations_translation", "Word_entries_translations"."entryId" AS "Word_entries_translations_entryId" FROM "word" "Word" ` +
+      `LEFT JOIN "word_entries_entry" "Word_Word_entries" ON "Word_Word_entries"."wordWord"="Word"."word" LEFT JOIN "entry" "Word_entries" ON "Word_entries"."id"="Word_Word_entries"."entryId"  LEFT JOIN "translation" "Word_entries_translations" ON "Word_entries_translations"."entryId"="Word_entries"."id" ` +
+      `WHERE "Word"."word" IN ($1) ["amoenus"]`,
+  )
+}
+main()

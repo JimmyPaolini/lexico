@@ -35,7 +35,7 @@ export default abstract class Ingester {
 
   abstract ingestInflection(): Promise<Inflection>
 
-  firstPrincipalPartName: string = ""
+  firstPrincipalPartName = ""
   principalParts: PrincipalPart[]
   async ingestPrincipalParts(): Promise<PrincipalPart[]> {
     this.principalParts = await parsePrincipalParts(

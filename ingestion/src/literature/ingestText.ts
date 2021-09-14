@@ -8,10 +8,15 @@ export default async function ingestText(
   author: Author,
   book: Book | undefined,
   title: string,
-) {
+): Promise<void> {
   const Texts = getConnection().getRepository(Text)
+  title = title.replace(/\.txt$/, "")
+  let id = author.id
+  if (book) id += "_" + book.title
+  id += "_" + title
   const text = await Texts.save({
-    title: title.replace(/\.txt$/, ""),
+    id,
+    title,
     author,
     book,
   })

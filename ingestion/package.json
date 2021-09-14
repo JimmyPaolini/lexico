@@ -1,10 +1,12 @@
 {
   "scripts": {
-    "ingest": "tsc; node dist/ingestion/src/ingest.js",
-    "clear": "tsc; node dist/ingestion/src/clear.js",
-    "backup": "tsc; node dist/ingestion/src/backup.js",
-    "restore": "tsc; node dist/ingestion/src/restore.js",
+    "ingest": "tsc && node dist/ingestion/src/ingest.js",
+    "clear": "tsc && node dist/ingestion/src/clear.js",
+    "backup": "tsc && node dist/ingestion/src/backup.js",
+    "restore": "tsc && node dist/ingestion/src/restore.js",
+    "rewrite": "node dist/ingestion/src/rewrite.js",
     "script": "node dist/ingestion/src/script.js",
+    "tsw": "tsc -w",
     "tsc": "tsc"
   },
   "dependencies": {
@@ -29,5 +31,5 @@
   "author": "Jimmy Paolini",
   "description": "lexico-ingestion",
   "repository": "https://github.com/JimmyPaolini/Lexico",
-  "license": "ISC"
+  "license": "MIT"
 }

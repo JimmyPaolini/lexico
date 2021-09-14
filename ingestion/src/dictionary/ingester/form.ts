@@ -52,8 +52,8 @@ export default async function parseForms(
     } else return [...identifiers]
   }
 
-  let forms = {}
-  let disorganizedForms = table.reduce(
+  const forms = {}
+  const disorganizedForms = table.reduce(
     (disorganizedForms: any, row: string[], i: number) => {
       return row.reduce((_, cell, j) => {
         if (cell.includes("<span ")) {
@@ -78,7 +78,7 @@ export default async function parseForms(
   }
   return forms as Forms
 }
-export function parseFormTable($: cheerio.Root, elt: any) {
+export function parseFormTable($: cheerio.Root, elt: any): any {
   const tableHtml = $(elt).nextUntil("h3", "table").first()
   if (tableHtml.length <= 0) return
   const $table = cheerio.load($.html(tableHtml))
@@ -98,7 +98,7 @@ export function parseFormTable($: cheerio.Root, elt: any) {
   return table
 }
 
-export function sortIdentifiers(inflection: any, obj: any) {
+export function sortIdentifiers(inflection: any, obj: any): any {
   const identifier = inflection.identifiers.pop()
   if (!inflection.identifiers.length) {
     obj[identifier] = inflection.word

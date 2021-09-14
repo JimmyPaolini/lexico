@@ -1,5 +1,5 @@
 export function flattenForms(
-  obj: object | string[] | undefined | null,
+  obj: string[] | Record<string, string[]>,
 ): string[] {
   if (!obj) return []
   if (Array.isArray(obj)) return obj
@@ -9,16 +9,16 @@ export function flattenForms(
   )
 }
 
-export function isNumber(str: string) {
+export function isNumber(str: string): boolean {
   return !!str.match(/^((singular)|(plural))$/i)
 }
 
-export function isCase(str: string) {
+export function isCase(str: string): boolean {
   return !!str.match(
     /^((nominative)|(genitive)|(dative)|(accusative)|(ablative)|(vocative)|(locative))$/i,
   )
 }
 
-export function isGender(str: string) {
+export function isGender(str: string): boolean {
   return !!str.match(/^((masculine)|(feminine)|(neuter))$/i)
 }

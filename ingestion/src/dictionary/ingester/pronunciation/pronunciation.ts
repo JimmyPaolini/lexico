@@ -25,7 +25,7 @@ function phonemesToPronunciations(
   return pronunciations
 }
 
-export function getEcclesiasticalPronunciations(word: string) {
+export function getEcclesiasticalPronunciations(word: string): string[] {
   return phonemesToPronunciations(getEcclesiasticalPhonemes(word))
 }
 

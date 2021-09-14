@@ -3,14 +3,14 @@ import Document, { Head, Html, Main, NextScript } from "next/document"
 import React from "react"
 
 export default class MyDocument extends Document {
-  render() {
+  render(): JSX.Element {
     return (
       <Html lang="en">
         <Head>
-          <link rel="icon" href="/icon/favicon.ico" />
           <meta name="lexico" content="latin translation assistant" />
           <meta name="theme-color" content="#000000" />
           <meta charSet="utf-8" />
+          <link rel="icon" href="/icon/favicon.ico" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -28,11 +28,22 @@ export default class MyDocument extends Document {
             sizes="16x16"
             href="icon/favicon-16x16.png"
           />
-          {/* <style>{`
-            html {
-              height: 100% !important;
-            }
-          `}</style> */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `,
+            }}
+          />
         </Head>
         <body id="body">
           <noscript>You need to enable JavaScript to run this app.</noscript>

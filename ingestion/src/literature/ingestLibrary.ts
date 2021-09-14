@@ -3,20 +3,20 @@ import cheerio from "cheerio"
 import cheerioTableParser from "cheerio-tableparser"
 import fs from "fs"
 import log from "../../../utils/log"
-import { authorNameToFullname } from "./literatureMaps"
+import { authorIdToName } from "./literatureMaps"
 
 const host = "https://www.thelatinlibrary.com/"
 
-export default async function ingestLibrary() {
+export default async function ingestLibrary(): Promise<void> {
   const tableHtml = cheerio.load((await axios.get(host)).data)
   cheerioTableParser(tableHtml)
-  let authors = (tableHtml("p>table").first() as any)
+  const authors = (tableHtml("p>table").first() as any)
     .parsetable(true, true, false)
     .reduce((table: any, row: any) => [...table, ...row], [])
     .map((elt: any) => {
       const a = cheerio.load(elt.trim())("a")
       const nickname = a.text().replace(/\s/, " ").trim().toLowerCase()
-      const name = authorNameToFullname[nickname] || nickname
+      const name = authorIdToName[nickname] || nickname
       const path = a.attr("href")
       return { nickname, name, path, works: [] }
     })

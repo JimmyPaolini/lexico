@@ -1,52 +1,12 @@
 {
   "compileOnSave": true,
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
-    "lib": ["dom", "es2020"],
-    "sourceMap": true,
-    "outDir": "./dist",
-    "moduleResolution": "node",
-    "removeComments": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
+    "outDir": "dist",
     "baseUrl": ".",
-    "strictPropertyInitialization": false,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
+    "noEmit": true,
     "skipLibCheck": true,
-    "strict": true,
-    "noEmit": false
+    "isolatedModules": true
   },
-  "exclude": [
-    "../ingestion",
-    "../server",
-    "**/node_modules",
-    "**/dist",
-    "**/database_volume",
-    "**/elasticsearch_volume"
-  ],
-  "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./src/**/*.graphql",
-    "./src/**/*.graphql",
-    "../**/*.ts",
-    "../**/*.tsx",
-    "server.js",
-    "../**/.env"
-  ]
+  "exclude": ["../data", "../ingestion", "../server"]
 }

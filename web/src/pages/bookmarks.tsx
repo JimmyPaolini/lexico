@@ -1,20 +1,27 @@
-import { Grid, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { Button, Typography } from "@material-ui/core"
 import { GetServerSideProps } from "next"
+import Head from "next/head"
+import { useRouter } from "next/router"
+import { SnackbarKey } from "notistack"
 import { useContext, useEffect, useMemo, useState } from "react"
 import Entry from "../../../entity/dictionary/Entry"
-import BookmarkInstructionsCard from "../components/accessories/BookmarkInstructionsCard"
 import CardDeck from "../components/accessories/CardDeck"
-import SearchBarLayout from "../components/accessories/SearchBarLayout"
-import { Context } from "../components/Context"
-import EntryCard from "../components/EntryCard/EntryCard"
-import LoginCard from "../components/settings/LoginCard"
+import BookmarkInstructionsCard from "../components/bookmarks/BookmarkInstructionsCard"
+import EntryCard from "../components/entry/EntryCard"
+import { Context } from "../components/layout/Context"
+import SearchBarLayout from "../components/layout/SearchBarLayout"
 import useBookmarks, { bookmarks } from "../hooks/bookmarks/useBookmarks"
+import useEntries from "../hooks/bookmarks/useEntries"
+import useSnackbarEnhanced from "../hooks/useSnackbarEnhanced"
+import identifyEntryWord from "../utils/identifiers"
+import {
+  getBookmarksLocal,
+  showBookmarkInstructions,
+} from "../utils/bookmarksLocal"
 import { normalize } from "../utils/string"
 import { queryClient } from "./_app"
 
-export default function Bookmarks() {
-  const classes = useStyles()
+export default function Bookmarks(): JSX.Element {
   const { user } = useContext(Context)
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
@@ -23,51 +30,88 @@ export default function Bookmarks() {
     if (!search) setSearched("")
   }, [search])
 
-  const { data: bookmarks, isLoading, isSuccess } = useBookmarks(user !== null)
+  let bookmarks: Entry[], isLoading: boolean, isSuccess: boolean
+  if (user) {
+    const response = useBookmarks()
+    bookmarks = response.data as Entry[]
+    isLoading = response.isLoading
+    isSuccess = response.isSuccess
+  } else {
+    const response = useEntries(getBookmarksLocal())
+    bookmarks = response.data as Entry[]
+    isLoading = response.isLoading
+    isSuccess = response.isSuccess
+  }
 
   const cards = useMemo(() => {
     const filteredEntries = filterEntries(bookmarks, searched) || []
+
     return filteredEntries.length
-      ? filteredEntries.map((entry: Entry) => ({
-          key: entry.id,
-          Card: () => <EntryCard {...{ entry, searched }} />,
-        }))
+      ? filteredEntries.map((entry: Entry) => {
+          entry = identifyEntryWord(searched, entry)
+          return {
+            key: entry.id,
+            Card: <EntryCard {...{ entry, searched }} />,
+          }
+        })
       : [
           {
             key: "no results",
-            Card: () => <Typography variant="h4">Not Found</Typography>,
+            Card: (
+              <Typography variant="h4" align="center">
+                Not Found
+              </Typography>
+            ),
           },
         ]
   }, [user, bookmarks, searched])
 
-  if (user === null) {
-    return (
-      <Grid container justify="center" alignItems="center">
-        <Grid item className={classes.loginCard}>
-          <LoginCard title="sign in to use bookmarks" />
-        </Grid>
-      </Grid>
-    )
-  }
+  const router = useRouter()
+  const { enqueueSnackbar, closeSnackbar } = useSnackbarEnhanced()
+  useEffect(() => {
+    if (!user && showBookmarkInstructions()) {
+      const action = (key: SnackbarKey) => (
+        <Button
+          onClick={() => {
+            closeSnackbar(key)
+            router.push("/user")
+          }}
+          color="secondary">
+          Sign in
+        </Button>
+      )
+      enqueueSnackbar(
+        `Your bookmarks are saved locally, sign in to save them across devices/browsers`,
+        {
+          autoHideDuration: 10000,
+          action,
+        },
+      )
+    }
+  }, [])
 
   return (
-    <SearchBarLayout
-      searchBarProps={{
-        search,
-        setSearch,
-        isLoading,
-        handleSearchExecute: () => setSearched(search),
-        target: "bookmarks",
-      }}
-    >
-      {isLoading ? null : isSuccess &&
-        Array.isArray(bookmarks) &&
-        !bookmarks.length ? (
-        <BookmarkInstructionsCard />
-      ) : (
-        <CardDeck cards={cards} />
-      )}
-    </SearchBarLayout>
+    <>
+      <Head>
+        <title>Lexico - Bookmarks</title>
+      </Head>
+      <SearchBarLayout
+        searchBarProps={{
+          search,
+          setSearch,
+          isLoading,
+          handleSearchExecute: () => setSearched(search),
+          target: "bookmarks",
+        }}>
+        {isLoading ? null : isSuccess &&
+          Array.isArray(bookmarks) &&
+          !bookmarks.length ? (
+          <BookmarkInstructionsCard />
+        ) : (
+          <CardDeck cards={cards} />
+        )}
+      </SearchBarLayout>
+    </>
   )
 }
 
@@ -89,16 +133,9 @@ const filterEntries = (entries: Entry[], search: string) => {
         entry.translations?.some((translation) =>
           translation.translation.match(re),
         ) ||
-        entry.partOfSpeech.match(re)
+        entry.partOfSpeech.match(re) ||
+        normalize(JSON.stringify(entry?.forms || "false")).match(re)
       )
     }) || []
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  loginCard: {
-    width: theme.custom.cardWidth,
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-  },
-}))

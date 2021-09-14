@@ -2,19 +2,18 @@ import Grid from "@material-ui/core/Grid"
 import Grow from "@material-ui/core/Grow"
 import { makeStyles, Theme } from "@material-ui/core/styles"
 import useMediaQuery from "@material-ui/core/useMediaQuery"
-import React, { Dispatch, useEffect, useState } from "react"
+import React, { Dispatch, memo, useEffect, useState } from "react"
 import LazyLoad from "react-lazyload"
 
 type Card = {
   key: string | number
-  Card: () => JSX.Element
+  Card: JSX.Element
 }
 
-interface Props {
+interface CardDeckProps {
   cards: Card[]
 }
-
-export default function CardDeck({ cards }: Props) {
+export default memo(function CardDeck({ cards }: CardDeckProps): JSX.Element {
   const classes = useStyles()
 
   let numCols = 1
@@ -30,31 +29,28 @@ export default function CardDeck({ cards }: Props) {
 
   if (!cards.every((card) => card.key && card.Card)) {
     console.error("Invalid card structure passed into CardDeck")
-    return null
+    return <></>
   }
-  if (!columns.length || !columns[0].length) return null
+  if (!columns.length || !columns[0].length) return <></>
   return (
     <>
       {columns.map((column, col) => {
         if (!column.length) return null
-        const key = column.map((card) => card.key).join("")
         return (
           <Grid
             item
             container
             direction="column"
-            alignItems="center"
-            spacing={4}
+            alignItems="stretch"
             className={classes.column}
-            key={key}
-          >
+            key={column.map((card) => card.key).join()}>
             {column.map((card, row) => {
-              const timeout = 400 * Math.pow(col + row, 1 / 2)
+              const timeout = Math.min(400 * Math.pow(col + row, 1 / 2), 1000)
               return (
                 <Grid item key={card.key}>
-                  <Grow in appear exit {...(row || col ? { timeout } : {})}>
-                    <LazyLoad offset={100} throttle={50} height={28}>
-                      <card.Card />
+                  <Grow in appear exit timeout={timeout}>
+                    <LazyLoad offset={100} throttle={50} height={28} once>
+                      {card.Card}
                     </LazyLoad>
                   </Grow>
                 </Grid>
@@ -65,7 +61,7 @@ export default function CardDeck({ cards }: Props) {
       })}
     </>
   )
-}
+})
 
 function reorganizeCards(
   cards: Card[],
@@ -82,7 +78,8 @@ function reorganizeCards(
 
 const useStyles = makeStyles((theme: any) => ({
   column: {
-    maxWidth: theme.custom.cardWidth + 2 * theme.spacing(4),
+    maxWidth: theme.custom.cardWidth + theme.spacing(2),
+    minWidth: theme.custom.cardWidth - theme.spacing(2),
     outline: "none",
   },
 }))

@@ -1,0 +1,20 @@
+{
+  "id": "{{romanNumeral}}:100",
+  "partOfSpeech": "numeral",
+  "principalParts": [
+    {
+      "name": "masculine",
+      "text": ["{{romanNumeral}}"]
+    }
+  ],
+  "inflection": {
+    "declension": "",
+    "degree": "",
+    "other": ""
+  },
+  "translations": [
+    {
+      "translation": "Roman numeral: {{number}} ({{word}})"
+    }
+  ]
+}

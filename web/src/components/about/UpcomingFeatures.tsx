@@ -6,9 +6,11 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import { Launch } from "@material-ui/icons"
 import React from "react"
-import { version } from "../../../../package.json"
+import packageJson from "../../../../package.json"
 
-export default function ToolIconGrid() {
+const { version } = packageJson
+
+export default function ToolIconGrid(): JSX.Element {
   const classes = useStyles()
 
   return (
@@ -18,8 +20,7 @@ export default function ToolIconGrid() {
         disableTouchRipple
         classes={{ focusHighlight: classes.hide }}
         href="https://github.com/JimmyPaolini/Lexico/issues"
-        target="_blank"
-      >
+        target="_blank">
         <CardHeaderMui
           title={`Upcoming Releases (current v${version})`}
           titleTypographyProps={{ variant: "body1" }}

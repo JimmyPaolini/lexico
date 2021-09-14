@@ -1,8 +1,10 @@
 import dotenv from "dotenv"
 import expand from "dotenv-expand"
 
-const env = dotenv.config({ path: "../.env" })
-expand(env)
+if (process.env.NODE_ENV !== "production") {
+  const env = dotenv.config({ path: "../.env" })
+  expand(env)
+}
 
 export const {
   LOG_SQL,
@@ -16,5 +18,8 @@ export const {
   GOOGLE_SECRET,
   FACEBOOK_ID,
   FACEBOOK_SECRET,
+
   SLACK_WEBHOOK,
+  SENDGRID_API_KEY,
+  GOOGLE_ANALYTICS_ID,
 } = process.env

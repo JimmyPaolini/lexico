@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction } from "react"
-import { useMutation } from "react-query"
+import { useMutation, UseMutationResult } from "react-query"
 import bookmarkMutation from "../../graphql/bookmarks/bookmark.graphql"
 import { graphQLClient, queryClient } from "../../pages/_app"
 
 export default function useBookmark(
   setBookmarked: Dispatch<SetStateAction<boolean>>,
-) {
+): UseMutationResult<any, unknown, string, void> {
   return useMutation(
     async (entryId: string) => {
       console.log(typeof entryId)
@@ -25,7 +25,7 @@ export default function useBookmark(
       },
       onSuccess: async () => {
         await queryClient.invalidateQueries("bookmarks")
-      }
+      },
     },
   )
 }

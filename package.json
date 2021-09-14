@@ -1,49 +1,69 @@
 {
   "scripts": {
-    "dev": "docker-compose -f docker-compose.services.yml up",
-    "undev": "docker-compose -f docker-compose.services.yml down",
-    "start": "docker-compose -f docker-compose.services.yml -f docker-compose.yml up",
-    "stop": "docker-compose -f docker-compose.services.yml -f docker-compose.yml down",
-    "build": "docker-compose pull && docker-compose build",
-    "build-web": "DOCKER_BUILDKIT=1 docker build -f web/web.Dockerfile -t jimmypaolini/lexico-web . --network host",
-    "build-server": "DOCKER_BUILDKIT=1 docker build -f server/server.Dockerfile -t jimmypaolini/lexico-server .",
-    "build-kibana": "docker image pull docker.elastic.co/kibana/kibana:7.11.1",
-    "build-elasticsearch": "docker image pull docker.elastic.co/elasticsearch/elasticsearch:7.11.1",
-    "build-database": "docker image pull postgres:13",
-    "deploy": "kubectl apply -f ./infra/kubernetes",
-    "deploy-web": "kubectl apply -f ./infra/kubernetes/web.yaml",
-    "deploy-server": "kubectl apply -f ./infra/kubernetes/server.yaml",
-    "deploy-database": "kubectl apply -f ./infra/kubernetes/database.yaml",
-    "deploy-nginx": "helm install nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
-    "deploy-elasticsearch": "helm install elasticsearch elastic/elasticsearch -f ./infra/helm/elasticsearch.yaml",
-    "deploy-kibana": "helm install kibana elastic/kibana -f ./infra/helm/kibana.yaml",
-    "deploy-k8s-dashboard": "kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml",
-    "start-k8s-dashboard": "kubectl proxy",
-    "update-server": "kubectl rollout restart deployment server",
-    "update-web": "kubectl rollout restart deployment web"
+    "lint": "eslint --no-error-on-unmatched-pattern * && prettier --check .",
+    "lint:watch": "nodemon -e ts --exec \"clear; yarn lint\"",
+    "format": "prettier .",
+
+    "dev": "docker compose -f infra/docker/docker-compose.database.yml up",
+    "undev": "docker compose -f infra/docker/docker-compose.database.yml down --remove-orphans",
+    "build": "yarn build:database & yarn build:server & yarn build:web & wait; echo \"Lexico built!\"",
+    "start": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml up",
+    "stop": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml down --remove-orphans",
+
+    "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
+    "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server .",
+    "build:database": "docker image pull postgres:13",
+
+    "deploy:web": "kubectl apply -f ./infra/kubernetes/web.yaml",
+    "deploy:server": "kubectl apply -f ./infra/kubernetes/server.yaml",
+    "deploy:env": "kubectl apply -f ./infra/kubernetes/.env.yaml",
+    "deploy:ingress": "kubectl apply -f ./infra/kubernetes/ingress.yaml",
+    "deploy:database": "helm install database bitnami/postgresql -f ./infra/helm/database.yaml --set postgresqlPassword=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\") --set replication.password=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\")",
+    "deploy:nginx": "helm install nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
+    "deploy:elasticsearch": "helm install elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
+    "deploy:fluentbit": "helm install fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
+    "deploy:kibana": "helm install kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml",
+    "deploy:monitoring": "helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring",
+
+    "update:web": "kubectl rollout restart deployment web",
+    "update:server": "kubectl rollout restart deployment server",
+    "update:database": "helm upgrade database bitnami/postgresql -f ./infra/helm/database.yaml --set postgresqlPassword=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\") --set replication.password=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\")",
+    "update:nginx": "helm upgrade nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
+    "update:elasticsearch": "helm upgrade elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
+    "update:fluentbit": "helm upgrade fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
+    "update:kibana": "helm upgrade kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml",
+    "update:monitoring": "helm upgrade monitoring prometheus-community/kube-prometheus-stack -n monitoring"
   },
   "dependencies": {
-    "@elastic/elasticsearch": "^7.12.0",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
+    "graphql": "^15.5.0",
+    "number-to-words": "^1.2.4",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.31",
-    "winston": "^3.3.3",
-    "winston-elasticsearch": "^0.15.2"
+    "winston": "^3.3.3"
   },
   "devDependencies": {
-    "@types/elasticsearch": "^5.0.37",
     "@types/node": "^14.14.11",
+    "@types/number-to-words": "^1.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
     "class-validator": "^0.12.2",
-    "eslint": "^7.21.0",
+    "eslint": "^7.23.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-config-prettier": "^8.1.0",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.2"
   },
+  "bugs": {
+    "url": "https://github.com/JimmyPaolini/Lexico/issues"
+  },
+  "homepage": "https://www.lexicolatin.com",
   "name": "lexico",
   "author": "Jimmy Paolini",
-  "description": "lexico",
+  "description": "Latin Language Interface",
   "repository": "https://github.com/JimmyPaolini/Lexico",
-  "version": "1.0.0",
-  "license": "ISC"
+  "version": "2.0.0",
+  "license": "MIT"
 }

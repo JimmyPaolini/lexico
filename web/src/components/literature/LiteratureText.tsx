@@ -1,31 +1,24 @@
 import { Avatar, CardActionArea, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useRouter } from "next/router"
-import React from "react"
+import React, { memo } from "react"
 import LinesEllipsis from "react-lines-ellipsis"
-import Author from "../../../../entity/literature/Author"
-import Book from "../../../../entity/literature/Book"
 import Text from "../../../../entity/literature/Text"
 import { romanNumeralize } from "../../utils/romanNumeral"
 import { sentenceCase } from "../../utils/string"
 
 interface Props {
-  author: Author
-  book?: Book
   text: Text
 }
-export default function LiteratureText({ author, book, text }: Props) {
+export default memo(function LiteratureText({ text }: Props): JSX.Element {
   const classes = useStyles()
   const router = useRouter()
 
-  let url = `literature/${author.name}`
-  if (book) url += `/${book.title}/${book.id}`
-  url += `/${text.title}/${text.id}`
   const isTitleBook = text.title.match(/book \d+/i)
 
   return (
     <Grid item xs={isTitleBook ? 2 : 4} container justify="center">
-      <CardActionArea onClick={() => router.push(url)}>
+      <CardActionArea onClick={() => router.push(`reader/${text.id}`)}>
         {isTitleBook ? (
           <Avatar className={classes.bookText}>
             {text.title.match(/\d+/)?.[0]}
@@ -46,7 +39,7 @@ export default function LiteratureText({ author, book, text }: Props) {
       </CardActionArea>
     </Grid>
   )
-}
+})
 
 const useStyles = makeStyles((theme: any) => ({
   textContainer: {
@@ -72,7 +65,7 @@ const useStyles = makeStyles((theme: any) => ({
     alignItems: "center",
     height: "100%",
     margin: "auto",
-    lineHeight: 1.2,
+    lineHeight: 1.1,
     textAlign: "center",
   },
 }))

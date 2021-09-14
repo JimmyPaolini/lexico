@@ -6,13 +6,13 @@ import Text from "./Text"
 @Entity()
 @ObjectType()
 export default class Author {
-  @PrimaryColumn("varchar", { length: 64 })
+  @PrimaryColumn()
   @Field()
-  name!: string
+  id!: string
 
   @Column("varchar", { length: 64 })
   @Field()
-  fullname!: string
+  name!: string
 
   @OneToMany(() => Book, (book) => book.author, {
     cascade: true,

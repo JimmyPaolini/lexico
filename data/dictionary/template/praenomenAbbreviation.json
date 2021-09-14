@@ -1,0 +1,24 @@
+{
+  "id": "{{lettersOnly}}:100",
+  "partOfSpeech": "noun",
+  "principalParts": [
+    {
+      "name": "letters",
+      "text": ["{{lettersOnly}}"]
+    },
+    {
+      "name": "period",
+      "text": ["{{withPeriod}}"]
+    }
+  ],
+  "inflection": {
+    "declension": "",
+    "gender": "{{gender}}",
+    "other": ""
+  },
+  "translations": [
+    {
+      "translation": "Praenomen abbreviation: {{praenomen}}"
+    }
+  ]
+}

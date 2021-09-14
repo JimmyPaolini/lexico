@@ -1,11 +1,13 @@
 {
   "scripts": {
-    "dev": "nodemon dist/server/src/app.js",
+    "tsc": "tsc",
+    "dev": "nodemon -e ts --exec \"tsc && node dist/server/src/app.js\"",
     "start": "node dist/server/src/app.js",
-    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
-    "tsc": "tsc"
+    "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js -f ../utils/ormconfig.ts",
+    "migrate": "yarn typeorm migration:generate -n"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.4.4",
     "apollo-server-express": "^2.19.0",
     "argon2": "^0.27.1",
     "axios": "^0.21.1",
@@ -45,5 +47,5 @@
   "author": "Jimmy Paolini",
   "description": "lexico-server",
   "repository": "https://github.com/JimmyPaolini/Lexico",
-  "license": "ISC"
+  "license": "MIT"
 }

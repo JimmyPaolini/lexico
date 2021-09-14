@@ -2,12 +2,16 @@ import { useQuery } from "react-query"
 import userQuery from "../../graphql/user/user.graphql"
 import { graphQLClient } from "../../pages/_app"
 
-export default function useUser() {
+export default function useUser(): ReturnType<typeof useQuery> {
   return useQuery(
     "user",
     async () => {
-      const { user: data } = await graphQLClient.request(userQuery)
-      return data
+      try {
+        const { user: data } = await graphQLClient.request(userQuery)
+        return data
+      } catch {
+        return null
+      }
     },
     {
       keepPreviousData: true,

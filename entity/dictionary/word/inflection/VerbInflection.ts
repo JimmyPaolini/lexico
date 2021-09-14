@@ -8,7 +8,7 @@ export default class VerbInflection {
   @Field()
   other?: string = ""
 
-  constructor(conjugation: VerbConjugation = "", other: string = "") {
+  constructor(conjugation: VerbConjugation = "", other = "") {
     this.conjugation = conjugation
     this.other = other
   }

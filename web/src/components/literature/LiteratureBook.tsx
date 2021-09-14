@@ -6,7 +6,7 @@ import {
   ListItemText,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React, { useState } from "react"
+import React, { memo, useState } from "react"
 import Author from "../../../../entity/literature/Author"
 import Book from "../../../../entity/literature/Book"
 import { sentenceCase } from "../../utils/string"
@@ -19,7 +19,10 @@ interface Props {
   isLast: boolean
 }
 
-export default function LiteratureBook({ author, book, isLast }: Props) {
+export default memo(function LiteratureBook({
+  book,
+  isLast,
+}: Props): JSX.Element {
   const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(false)
 
@@ -29,30 +32,37 @@ export default function LiteratureBook({ author, book, isLast }: Props) {
         button
         onClick={() => setExpanded((expanded) => !expanded)}
         key={book.id}
-      >
+        classes={{ button: classes.hideHoverHighlight }}
+        disableRipple
+        disableTouchRipple>
         <ListItemText
-          primary={sentenceCase(book.title)}
+          primary={sentenceCase(book.title).replace(/^\d+ /, "")}
           primaryTypographyProps={{ variant: "body1" }}
         />
         <ExpandIcon {...{ expanded }} style={{ padding: 0 }} />
       </ListItem>
-      <Collapse in={expanded}>
+      <Collapse in={expanded} mountOnEnter>
         <Grid container justify="center" alignItems="stretch">
           {book.texts.map((text) => (
-            <LiteratureText {...{ author, book, text }} key={text.id} />
+            <LiteratureText {...{ text }} key={text.id} />
           ))}
         </Grid>
       </Collapse>
       {!isLast ? <Divider className={classes.inset1} /> : null}
     </>
   )
-}
+})
 
 const useStyles = makeStyles((theme: any) => ({
   noPadding: {
-    "padding": 0,
+    padding: 0,
     "&:last-child": {
       paddingBottom: 0,
+    },
+  },
+  hideHoverHighlight: {
+    "&:hover": {
+      backgroundColor: "inherit",
     },
   },
   inset1: {

@@ -1,10 +1,10 @@
 import log from "../../../utils/log"
 
 export function LogRuntime(
-  _: Object,
+  _: unknown,
   functionName: string,
   descriptor: PropertyDescriptor,
-) {
+): void {
   const fn = descriptor.value
   descriptor.value = async function (...args: any[]) {
     const start = process.hrtime()
@@ -16,10 +16,10 @@ export function LogRuntime(
 }
 
 export function LogResult(
-  _: Object,
+  _: unknown,
   functionName: string,
   descriptor: PropertyDescriptor,
-) {
+): void {
   const fn = descriptor.value
   descriptor.value = async function (...args: any[]) {
     const result = await fn.apply(this, args)

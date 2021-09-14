@@ -1,5 +1,5 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: web
   labels:
@@ -9,6 +9,7 @@ spec:
     matchLabels:
       app: web
   replicas: 3
+  # revisionHistoryLimit: 2
   template:
     metadata:
       labels:
@@ -23,8 +24,21 @@ spec:
           envFrom:
             - configMapRef:
                 name: env
+            - secretRef:
+                name: env
+
       # affinity:
       #   podAntiAffinity:
+      #     preferredDuringSchedulingIgnoredDuringExecution:
+      #       - weight: 1
+      #         podAffinityTerm:
+      #           labelSelector:
+      #             matchExpressions:
+      #               - key: app
+      #                 operator: In
+      #                 values:
+      #                   - web
+      #           topologyKey: kubernetes.io/hostname
       #     requiredDuringSchedulingIgnoredDuringExecution:
       #       - labelSelector:
       #           matchExpressions:

@@ -6,19 +6,20 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm"
 import Entry from "../dictionary/Entry"
-import Line from "../literature/Line"
+import CustomText from "../literature/CustomText"
 import Settings from "./Settings"
 
 @Entity()
 @ObjectType()
 export default class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   @Field(() => ID)
-  id: number
+  id: string
 
   @Column()
   @CreateDateColumn()
@@ -51,12 +52,17 @@ export default class User {
   @Field(() => [Entry], { nullable: true })
   bookmarks?: Entry[]
 
-  @ManyToMany(() => Line, (line) => line.users, { nullable: true })
-  @JoinTable()
-  @Field(() => [Line], { nullable: true })
-  readings?: Line[]
+  @OneToMany(() => CustomText, (customText) => customText.user, {
+    nullable: true,
+    cascade: true,
+  })
+  @Field(() => [CustomText], { nullable: true })
+  customTexts?: CustomText[]
 
   @Column("json", { default: new Settings() })
   @Field(() => Settings, { defaultValue: new Settings() })
   settings: Settings = new Settings()
+
+  @Column({ nullable: true })
+  passwordResetToken?: string
 }

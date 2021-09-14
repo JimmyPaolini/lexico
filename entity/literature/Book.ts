@@ -5,7 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from "typeorm"
 import Author from "./Author"
 import Text from "./Text"
@@ -13,9 +13,9 @@ import Text from "./Text"
 @Entity()
 @ObjectType()
 export default class Book {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   @Field(() => ID)
-  id: string
+  id!: string
 
   @Column("varchar", { length: 64 })
   @Field()

@@ -7,7 +7,7 @@ import {
   backupLiterature,
   backups,
   backupUsers,
-} from "./utils/backup"
+} from "./utils/pg-commands"
 
 async function main() {
   const [, , command] = process.argv
@@ -22,7 +22,7 @@ async function main() {
     users: () => backupUsers(),
     all: () => backupAll(),
     list: () => log.info({ backups: backups() }),
-  } as { [key: string]: () => any }
+  } as { [key: string]: () => unknown }
 
   await instructions[command]()
   process.exit()

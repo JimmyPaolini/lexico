@@ -22,7 +22,7 @@ export default class Adjective extends Ingester {
     let declension = $(inflectionHtml)
       .text()
       .replace(
-        /(-declension)|(declension)|(adjective)|(participle)|(numeral)|[.\d\[\]]/gi,
+        /(-declension)|(declension)|(adjective)|(participle)|(numeral)|[.\d[\]]/gi,
         "",
       )
       .replace(/\s+/g, " ")
@@ -30,8 +30,8 @@ export default class Adjective extends Ingester {
       .trim()
 
     if (!declension.length) return new Uninflected()
-    let other = declension
-    let degree = declension.match(adjectiveDegreeRegex)?.[0] || ""
+    const other = declension
+    const degree = declension.match(adjectiveDegreeRegex)?.[0] || ""
     declension = declension.match(adjectiveDelensionRegex)?.[0] || ""
     return new AdjectiveInflection(
       declension as AdjectiveDeclension,
