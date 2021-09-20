@@ -3,7 +3,7 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Typography
+  Typography,
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Visibility, VisibilityOff } from "@material-ui/icons"

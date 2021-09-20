@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { memo, useState } from "react"
-import { Author , Book} from "../../graphql/generated"
+import { Author, Book } from "../../graphql/generated"
 import { sentenceCase } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
 import LiteratureText from "./LiteratureText"

@@ -2,7 +2,7 @@ import { Delete } from "@material-ui/icons"
 import { useDeleteCustomTextMutation } from "../../../../graphql/generated"
 import {
   CustomText,
-  deleteCustomTextLocal
+  deleteCustomTextLocal,
 } from "../../../../utils/literatureLocal"
 import CustomLiteratureMenuItem from "./CustomLiteratureMenuItem"
 
@@ -14,7 +14,7 @@ export default function CustomLiteratureDelete({
   text,
   refreshCustomTexts,
 }: CustomLiteratureDeleteProps): JSX.Element {
-  const { mutate: deleteCustomTextUser } = useDeleteCustomTextMutation( {
+  const { mutate: deleteCustomTextUser } = useDeleteCustomTextMutation({
     onSuccess: () => refreshCustomTexts(),
   })
   const deleteText = async () => {

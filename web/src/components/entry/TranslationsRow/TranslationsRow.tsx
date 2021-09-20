@@ -20,8 +20,9 @@ export default function TranslationsRow({ translations }: Props): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(
-    user?.settings.translationsExpandedDefault ||
-      getSettingsLocal().translationsExpandedDefault,
+    user?.settings?.translationsExpandedDefault ||
+      getSettingsLocal().translationsExpandedDefault ||
+      false,
   )
   const expandable = translations.length > 2
 

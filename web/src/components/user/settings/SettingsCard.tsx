@@ -1,7 +1,10 @@
 import { Card, CardContent, Divider, Grid } from "@material-ui/core"
 import { makeStyles, Theme } from "@material-ui/core/styles"
 import React, { useContext } from "react"
-import { useLogoutQuery, useUnregisterMutation } from "../../../graphql/generated"
+import {
+  useLogoutQuery,
+  useUnregisterMutation,
+} from "../../../graphql/generated"
 import { queryClient } from "../../../pages/_app"
 import CardHeader from "../../accessories/CardHeader"
 import SubmitButton from "../../accessories/SubmitButton"

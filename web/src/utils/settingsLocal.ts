@@ -1,6 +1,6 @@
 import { Settings } from "../graphql/generated"
 
-const settingsDefault = () =>
+export const settingsDefault = (): Settings =>
   ({
     theme: "dark",
     fontSize: 24,
@@ -8,7 +8,7 @@ const settingsDefault = () =>
     translationsExpandedDefault: false,
     dictionaryMacronized: true,
     literatureMacronized: false,
-  } as Settings)
+  })
 
 export function getSettingsLocal(): Settings {
   if (typeof window === "undefined") return settingsDefault()
