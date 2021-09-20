@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "lint": "eslint --no-error-on-unmatched-pattern * && prettier --check .",
+    "lint": "eslint --no-error-on-unmatched-pattern --config cleaning/.eslintrc.json --ignore-path cleaning/.eslintignore * && prettier --check --config cleaning/.prettierrc.json --ignore-path cleaning/.prettierignore  .",
     "lint:watch": "nodemon -e ts --exec \"clear; yarn lint\"",
-    "format": "prettier .",
+    "format": "prettier --config cleaning/.prettierrc.json --ignore-path cleaning/.prettierignore .",
     "cypress:open": "cypress open",
     "dev": "docker compose -f infra/docker/docker-compose.database.yml up",
     "undev": "docker compose -f infra/docker/docker-compose.database.yml down --remove-orphans",
