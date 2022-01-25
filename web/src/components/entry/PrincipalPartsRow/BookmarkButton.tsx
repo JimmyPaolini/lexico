@@ -10,7 +10,6 @@ import {
   useUnbookmarkMutation,
 } from "../../../graphql/generated"
 import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
-import { queryClient } from "../../../pages/_app"
 import { showBookmarkInstructions } from "../../../utils/bookmarkInstructions"
 import {
   bookmarkLocal,
@@ -28,7 +27,7 @@ export default function PrincipalPartsRow({
   bookmarked: bookmarkedOriginal,
 }: Props): JSX.Element {
   const classes = useStyles()
-  const { user } = useContext(Context)
+  const { user, queryClient } = useContext(Context)
 
   const bookmarkedInitial = user ? !!bookmarkedOriginal : isBookmarkedLocal(id)
   const [bookmarked, setBookmarked] = useState<boolean>(bookmarkedInitial)
@@ -43,7 +42,7 @@ export default function PrincipalPartsRow({
       setBookmarked(false)
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries("bookmarks")
+      await queryClient.invalidateQueries("Bookmarks")
     },
   })
   const { mutateAsync: unbookmark } = useUnbookmarkMutation({
@@ -56,7 +55,7 @@ export default function PrincipalPartsRow({
       setBookmarked(true)
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries("bookmarks")
+      await queryClient.invalidateQueries("Bookmarks")
     },
   })
 

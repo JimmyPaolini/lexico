@@ -24,8 +24,7 @@ export default class UserResolver {
   Entries = getConnection().getRepository(Entry)
   CustomTexts = getConnection().getRepository(CustomText)
 
-  @Query(() => User)
-  @UseMiddleware(Authenticate)
+  @Query(() => User, { nullable: true })
   async user(@Ctx() context: ResolverContext): Promise<User | null> {
     if (!context.req.cookies.accessToken) return null
     const claims = verify(
@@ -33,7 +32,8 @@ export default class UserResolver {
       JWT_SECRET as string,
     ) as JwtPayload
     if (!claims) return null
-    return (await this.Users.findOne(claims.sub)) || null
+    const user = await this.Users.findOne(claims.sub)
+    return user || null
   }
 
   @Query(() => [User])
@@ -47,7 +47,6 @@ export default class UserResolver {
     const user = await this.Users.findOneOrFail(id, {
       relations: ["bookmarks"],
     })
-    // if (!user!.bookmarks) throw new Error("user has no bookmarks")
     return (
       user.bookmarks?.map((entry) => {
         entry.bookmarked = true

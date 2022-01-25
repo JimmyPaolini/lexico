@@ -5,7 +5,6 @@ import {
   useLogoutQuery,
   useUnregisterMutation,
 } from "../../../graphql/generated"
-import { queryClient } from "../../../pages/_app"
 import CardHeader from "../../accessories/CardHeader"
 import SubmitButton from "../../accessories/SubmitButton"
 import { Context } from "../../layout/Context"
@@ -14,27 +13,27 @@ import SettingsForm from "./SettingsForm"
 
 export default function SettingsCard(): JSX.Element {
   const classes = useStyles()
-  const { user } = useContext(Context)
+  const { user, queryClient } = useContext(Context)
 
   const { refetch: logout } = useLogoutQuery(
     {},
     {
       enabled: false,
       onSuccess: async () => {
-        await queryClient.invalidateQueries("user")
+        await queryClient.invalidateQueries("User")
       },
     },
   )
   const { mutateAsync: unregister } = useUnregisterMutation({
     retry: false,
     onSuccess: async () => {
-      await queryClient.invalidateQueries("user")
+      await queryClient.invalidateQueries("User")
     },
   })
 
   const confirmUnregister = async () => {
     const unregisterDialog =
-      "Are you sure you want to delete your account? All your bookmarks and settings will be lost."
+      "Are you sure you want to delete your account? All your Bookmarks, Literature, and Settings will be lost."
     if (window.confirm(unregisterDialog)) await unregister({})
   }
 

@@ -9,16 +9,17 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Visibility, VisibilityOff } from "@material-ui/icons"
 import { useFormik } from "formik"
 import Link from "next/link"
-import React, { useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import { useLoginQuery, useRegisterMutation } from "../../../graphql/generated"
-import { queryClient } from "../../../pages/_app"
 import { googleAnalyticsEvent } from "../../../utils/googleAnalytics"
 import { capitalizeFirstLetter, validateEmail } from "../../../utils/string"
 import SubmitButton from "../../accessories/SubmitButton"
 import TextBox from "../../accessories/TextBox"
+import { Context } from "../../layout/Context"
 
 export default function BasicLogin(): JSX.Element {
   const classes = useStyles()
+  const { queryClient } = useContext(Context)
   const [submit, setSubmit] = useState<"sign up" | "sign in">("sign in")
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const passwordTextBoxRef = useRef<HTMLDivElement>(null)
@@ -50,7 +51,7 @@ export default function BasicLogin(): JSX.Element {
     enabled: false,
     retry: false,
     onSuccess: async () => {
-      await queryClient.invalidateQueries("user")
+      await queryClient.invalidateQueries("User")
     },
   })
   const { mutateAsync: register, error: registerError } = useRegisterMutation()

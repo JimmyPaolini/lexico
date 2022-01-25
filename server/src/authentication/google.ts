@@ -19,9 +19,9 @@ export default async function fetchGoogleUser(
         code,
         client_id: GOOGLE_ID,
         client_secret: GOOGLE_SECRET,
-        redirect_uri: hostname.match(/localhost/i)
-          ? "http://localhost:3000/google"
-          : "https://lexicolatin.com/google",
+        redirect_uri: hostname.match(/lexicolatin.com/i)
+          ? "https://lexicolatin.com/google"
+          : "http://localhost:3000/google",
         grant_type: "authorization_code",
       },
     })

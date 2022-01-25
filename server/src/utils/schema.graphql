@@ -282,7 +282,7 @@ type Query {
   searchLiterature(search: String!): [Author!]!
   searchTexts(search: String!): [Text!]!
   settings: Settings!
-  user: User!
+  user: User
   users: [User!]!
   validatePasswordResetToken(passwordResetToken: String!): Boolean!
 }

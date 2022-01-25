@@ -1,7 +1,7 @@
 import { CssBaseline, ThemeProvider } from "@material-ui/core"
 import type { AppProps, NextWebVitalsMetric } from "next/app"
 import Head from "next/head"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { Hydrate } from "react-query/hydration"
 import { ContextProvider } from "../components/layout/Context"
@@ -17,9 +17,8 @@ export const clientEndpoint =
     ? `http://localhost:3001/graphql`
     : window.location.origin + "/api"
 
-export const queryClient = new QueryClient()
-
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
+  const [queryClient] = useState(() => new QueryClient())
   useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side")
     if (jssStyles) jssStyles.parentElement?.removeChild(jssStyles)
@@ -31,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <ContextProvider>
+          <ContextProvider queryClient={queryClient}>
             <Head>
               <title>Lexico</title>
             </Head>

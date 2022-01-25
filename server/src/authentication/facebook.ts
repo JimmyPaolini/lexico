@@ -19,9 +19,9 @@ export default async function fetchFacebookUser(
         code: code,
         client_id: FACEBOOK_ID,
         client_secret: FACEBOOK_SECRET,
-        redirect_uri: hostname.match(/localhost/i)
-          ? "http://localhost:3000/facebook"
-          : "https://lexicolatin.com/facebook",
+        redirect_uri: hostname.match(/lexicolatin/i)
+          ? "https://lexicolatin.com/facebook"
+          : "http://localhost:3000/facebook",
       },
     })
     .catch((error) => {

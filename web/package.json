@@ -29,6 +29,7 @@
     "react-lines-ellipsis": "^0.14.1",
     "react-query": "^3.5.11",
     "react-swipeable": "^6.1.0",
+    "sharp": "^0.29.1",
     "uuid": "^3.4.0"
   },
   "devDependencies": {

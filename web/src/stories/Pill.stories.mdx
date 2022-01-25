@@ -1,0 +1,119 @@
+import { Canvas, Meta, Story } from "@storybook/addon-essentials";
+import Pill from "../components/accessories/Pill";
+
+<Meta title="Lexico/Pill" component={Pill} />
+
+# Pill
+
+Red: red, crimson, tomato
+Blue: blue, cadetblue, cornflowerblue
+Yellow: yellow, gold, goldenrod
+Green: green, forestgreen
+Pink/Purple: hotpink, indigo, fuchsia
+Brown: brown, saddlebrown
+Neutral: white, black, gray
+
+# Voice Pills
+
+Voice Pills
+
+<Canvas>
+  <Story name="Voice Pills">
+    <div style={{ display: "flex", gap: 4 }}>
+      <Pill backgroundColor="silver" color="black">
+        Act
+      </Pill>
+      <Pill backgroundColor="gray">Pas</Pill>
+    </div>
+  </Story>
+</Canvas>
+
+# Case Pills
+
+Case Pills
+
+<Canvas>
+  <Story name="Case Pills">
+    <div style={{ display: "flex", gap: 4 }}>
+      <Pill backgroundColor="blue">NOM</Pill>
+      <Pill backgroundColor="forestgreen">GEN</Pill>
+      <Pill backgroundColor="yellow" color="black">
+        DAT
+      </Pill>
+      <Pill backgroundColor="crimson">ACC</Pill>
+      <Pill backgroundColor="hotpink">ABL</Pill>
+      <Pill backgroundColor="orangered">VOC</Pill>
+      <Pill backgroundColor="brown">LOC</Pill>
+    </div>
+  </Story>
+</Canvas>
+
+# Mood Pills
+
+Mood Pills
+
+<Canvas>
+  <Story name="Mood Pills">
+    <div style={{ display: "flex", gap: 4 }}>
+      <Pill backgroundColor="blue">IND</Pill>
+      <Pill backgroundColor="fuchsia">SUB</Pill>
+      <Pill backgroundColor="red">IMP</Pill>
+      <Pill backgroundColor="yellow" color="black">
+        INF
+      </Pill>
+      <Pill backgroundColor="#00FF00">NONF</Pill>
+    </div>
+  </Story>
+</Canvas>
+
+# Tense Pills
+
+Tense Pills
+
+<Canvas>
+  <Story name="Tense Pills">
+    <div style={{ display: "flex", gap: 4 }}>
+      <Pill backgroundColor="blue">PRES</Pill>
+      <Pill backgroundColor="forestgreen">IMP</Pill>
+      <Pill backgroundColor="yellow" color="black">
+        FUT
+      </Pill>
+      <Pill backgroundColor="crimson">PERF</Pill>
+      <Pill backgroundColor="cyan" color="black">
+        PLUP
+      </Pill>
+      <Pill backgroundColor="limegreen">FUTP</Pill>
+    </div>
+  </Story>
+</Canvas>
+
+# Person Pills
+
+Person Pills
+
+<Canvas>
+  <Story name="Person Pills">
+    <div style={{ display: "flex", gap: 4 }}>
+      <Pill backgroundColor="blue">1ST</Pill>
+      <Pill backgroundColor="red">2ND</Pill>
+      <Pill backgroundColor="yellow" color="black">
+        3RD
+      </Pill>
+    </div>
+  </Story>
+</Canvas>
+
+# Number Pills
+
+Number Pills
+
+<Canvas>
+  <Story name="Number Pills">
+    <div style={{ display: "flex", gap: 4 }}>
+      <Pill backgroundColor="white" color="black">
+        SG
+      </Pill>
+      <Pill backgroundColor="black">PL</Pill>
+    </div>
+  </Story>
+</Canvas>

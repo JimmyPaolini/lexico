@@ -2,17 +2,18 @@ import { Typography } from "@material-ui/core"
 import { GetServerSideProps } from "next"
 import Head from "next/head"
 import { useContext, useEffect, useMemo, useState } from "react"
+import { QueryClient } from "react-query"
+import { dehydrate } from "react-query/hydration"
 import CardDeck from "../components/accessories/CardDeck"
 import BookmarkInstructionsCard from "../components/bookmarks/BookmarkInstructionsCard"
 import filterBookmarks from "../components/bookmarks/filterBookmarks"
 import EntryCard from "../components/entry/EntryCard"
 import { Context } from "../components/layout/Context"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
-import useBookmarkInstructions from "../hooks/bookmarks/useBookmarkInstructions"
 import { Entry, useBookmarksQuery, useEntriesQuery } from "../graphql/generated"
+import useBookmarkInstructions from "../hooks/bookmarks/useBookmarkInstructions"
 import { getBookmarksLocal } from "../utils/bookmarksLocal"
 import identifyEntryWord from "../utils/identifiers"
-import { queryClient } from "./_app"
 
 export default function Bookmarks(): JSX.Element {
   const { user } = useContext(Context)
@@ -107,9 +108,10 @@ export default function Bookmarks(): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const queryClient = new QueryClient()
   await queryClient.prefetchQuery(
-    useBookmarksQuery.getKey(),
+    useBookmarksQuery.getKey({}),
     useBookmarksQuery.fetcher(),
   )
-  return { props: {} }
+  return { props: { dehydratedState: dehydrate(queryClient) } }
 }

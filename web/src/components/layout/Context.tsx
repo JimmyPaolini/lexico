@@ -6,6 +6,7 @@ import {
   SetStateAction,
   useState,
 } from "react"
+import { QueryClient } from "react-query"
 import { User, useUserQuery } from "../../graphql/generated"
 
 export interface ReactContext {
@@ -13,15 +14,17 @@ export interface ReactContext {
   setNavOpen: Dispatch<SetStateAction<boolean>>
   isMobile: boolean
   user: User
+  queryClient: QueryClient
 }
 
 export const Context = createContext({} as ReactContext)
 
 interface Props {
   children?: ReactNode
+  queryClient: QueryClient
 }
-export function ContextProvider({ children }: Props): JSX.Element {
-  const { data } = useUserQuery({}, { staleTime: 1000 * 60 * 5 })
+export function ContextProvider({ children, queryClient }: Props): JSX.Element {
+  const { data } = useUserQuery({}, { staleTime: 1000 * 60 * 5 }) // 5 minutes
   const user = data?.user
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
   const [isNavOpen, setNavOpen] = useState(false)
@@ -34,6 +37,7 @@ export function ContextProvider({ children }: Props): JSX.Element {
           isMobile,
           isNavOpen,
           setNavOpen,
+          queryClient,
         } as ReactContext
       }>
       {children}

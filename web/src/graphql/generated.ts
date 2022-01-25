@@ -369,7 +369,7 @@ export type Query = {
   searchLiterature: Array<Author>
   searchTexts: Array<Text>
   settings: Settings
-  user: User
+  user?: Maybe<User>
   users: Array<User>
   validatePasswordResetToken: Scalars["Boolean"]
 }
@@ -2618,7 +2618,7 @@ export type UnregisterMutation = { unregister: boolean }
 export type UserQueryVariables = Exact<{ [key: string]: never }>
 
 export type UserQuery = {
-  user: {
+  user?: Maybe<{
     id: string
     email: string
     googleId?: Maybe<string>
@@ -2631,7 +2631,7 @@ export type UserQuery = {
       dictionaryMacronized?: Maybe<boolean>
       literatureMacronized?: Maybe<boolean>
     }>
-  }
+  }>
 }
 
 export type ValidatePasswordResetTokenQueryVariables = Exact<{

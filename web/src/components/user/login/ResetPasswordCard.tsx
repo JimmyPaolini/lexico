@@ -10,13 +10,13 @@ import { makeStyles, Theme } from "@material-ui/core/styles"
 import { Visibility, VisibilityOff } from "@material-ui/icons"
 import { useFormik } from "formik"
 import { useRouter } from "next/router"
-import React, { useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import { useResetPasswordMutation } from "../../../graphql/generated"
 import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
-import { queryClient } from "../../../pages/_app"
 import CardHeader from "../../accessories/CardHeader"
 import SubmitButton from "../../accessories/SubmitButton"
 import TextBox from "../../accessories/TextBox"
+import { Context } from "../../layout/Context"
 
 interface ResetPasswordCardProps {
   passwordResetToken: string
@@ -25,6 +25,7 @@ export default function ResetPasswordCard({
   passwordResetToken,
 }: ResetPasswordCardProps): JSX.Element {
   const classes = useStyles()
+  const { queryClient } = useContext(Context)
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const passwordTextBoxRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -43,7 +44,7 @@ export default function ResetPasswordCard({
   })
   const { mutateAsync: resetPassword } = useResetPasswordMutation({
     onSuccess: async () => {
-      await queryClient.invalidateQueries("user")
+      await queryClient.invalidateQueries("User")
     },
   })
 

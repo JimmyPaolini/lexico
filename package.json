@@ -39,6 +39,7 @@
     "update:monitoring": "helm upgrade monitoring prometheus-community/kube-prometheus-stack -n monitoring"
   },
   "dependencies": {
+    "@storybook/addon-essentials": "^6.4.14",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "jsonwebtoken": "^8.5.1",

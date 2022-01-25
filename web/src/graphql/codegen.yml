@@ -32,5 +32,5 @@ generates:
 hooks:
   afterOneFileWrite:
     - sed -r -i '' -e '1h;2,$H;$!d;g' -e 's/FragmentDoc = `([^$]+)[^`]+`/FragmentDoc = `\1`/g' src/graphql/generated.ts
-    - eslint --fix
-    - prettier --write
+    - eslint --fix --config ../cleaning/.eslintrc.json --ignore-path ../cleaning/.eslintignore
+    - prettier --write --config ../cleaning/.prettierrc.json --ignore-path ../cleaning/.prettierignore
