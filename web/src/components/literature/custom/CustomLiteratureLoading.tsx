@@ -1,7 +1,7 @@
 import { CircularProgress, Divider, ListItem } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { memo } from "react"
-import { MyTheme } from "../../../theme/theme"
+import { MyTheme } from "../../../theme"
 
 export default memo(function CustomLiteratureLoading(): JSX.Element {
   const classes = useStyles()

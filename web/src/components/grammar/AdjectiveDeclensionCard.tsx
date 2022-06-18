@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { forwardRef, useState } from "react"
-import { MyTheme } from "../../theme/theme"
+import { MyTheme } from "../../theme"
 import AdjectiveForms from "../entry/FormsRow/PartsOfSpeech/AdjectiveForms"
 import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
 import adjectiveDeclensions from "./adjectiveDeclensions"

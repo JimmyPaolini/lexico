@@ -4,7 +4,7 @@ import React from "react"
 import CardHeader from "../components/accessories/CardHeader"
 import SubmitButton from "../components/accessories/SubmitButton"
 import SingleCardLayout from "../components/layout/SingleCardLayout"
-import { MyTheme } from "../theme/theme"
+import { MyTheme } from "../theme"
 
 export default function Error404(): JSX.Element {
   const classes = useStyles()

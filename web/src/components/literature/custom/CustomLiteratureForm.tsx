@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 import { memo, useContext } from "react"
 import { v4 as uuid } from "uuid"
 import { useCreateCustomTextMutation } from "../../../graphql/generated"
-import { MyTheme } from "../../../theme/theme"
+import { MyTheme } from "../../../theme"
 import {
   createCustomTextLocal,
   CustomText,

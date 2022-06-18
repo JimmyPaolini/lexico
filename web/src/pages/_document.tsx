@@ -1,6 +1,7 @@
 import { ServerStyleSheets } from "@material-ui/core/styles"
 import Document, { Head, Html, Main, NextScript } from "next/document"
 import React from "react"
+import theme from "../theme"
 
 export default class MyDocument extends Document {
   render(): JSX.Element {
@@ -8,7 +9,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta name="lexico" content="latin translation assistant" />
-          <meta name="theme-color" content="#000000" />
+          <meta name="theme-color" content={theme.palette.primary.main} />
           <meta charSet="utf-8" />
           <link rel="icon" href="/icon/favicon.ico" />
           <link

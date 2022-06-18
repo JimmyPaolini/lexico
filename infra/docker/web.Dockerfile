@@ -4,11 +4,11 @@ RUN apk add --update nodejs npm curl
 
 WORKDIR /Lexico
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
 WORKDIR /Lexico/web
 COPY web/package*.json ./
-RUN npm install
+RUN npm ci
 
 COPY . ../
 RUN NEXT_ENV=build npm run build

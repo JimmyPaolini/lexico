@@ -7,7 +7,7 @@ import { Hydrate } from "react-query/hydration"
 import { ContextProvider } from "../components/layout/Context"
 import Layout from "../components/layout/Layout"
 import useGoogleAnalytics from "../hooks/useGoogleAnalytics"
-import theme from "../theme/theme"
+import theme from "../theme"
 import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 
 export const clientEndpoint =

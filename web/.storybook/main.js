@@ -1,5 +1,5 @@
 module.exports = {
-  stories: ["../src/**/*.stories.mdx"],
+  stories: ["../src/**/*.stories.@(ts|mdx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
@@ -10,7 +10,7 @@ module.exports = {
       test: /\.graphql$/,
       exclude: /node_modules/,
       loader: "graphql-tag/loader",
-    });
-    return config;
+    })
+    return config
   },
-};
+}

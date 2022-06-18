@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { forwardRef, useState } from "react"
-import { MyTheme } from "../../theme/theme"
+import { MyTheme } from "../../theme"
 import NounForms from "../entry/FormsRow/PartsOfSpeech/NounForms"
 import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
 import nounDeclensions from "./nounDeclensions"

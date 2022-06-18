@@ -2,7 +2,7 @@ import { Divider, ListItem, ListItemText } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useRouter } from "next/router"
 import { memo } from "react"
-import { MyTheme } from "../../../theme/theme"
+import { MyTheme } from "../../../theme"
 import { CustomText } from "../../../utils/literatureLocal"
 import CustomLiteratureOptions from "./CustomLiteratureOptions"
 

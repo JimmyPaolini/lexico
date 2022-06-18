@@ -2,7 +2,7 @@ import { CssBaseline, ThemeProvider } from "@material-ui/core"
 import { SnackbarProvider } from "notistack"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { ContextProvider } from "../src/components/layout/Context"
-import theme from "../src/theme/theme"
+import theme from "../src/theme"
 
 export const parameters = {
   actions: { argTypesRegex: "^(on|set|handle)[A-Z].*" },

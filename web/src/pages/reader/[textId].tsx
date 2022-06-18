@@ -14,7 +14,7 @@ import {
   useGetTextQuery,
 } from "../../graphql/generated"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
-import { MyTheme } from "../../theme/theme"
+import { MyTheme } from "../../theme"
 import { googleAnalyticsEvent } from "../../utils/googleAnalytics"
 import { showReaderInstructions } from "../../utils/readerInstructions"
 import { getSettingsLocal } from "../../utils/settingsLocal"

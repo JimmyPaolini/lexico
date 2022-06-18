@@ -6,7 +6,7 @@ import CommentBox from "../components/about/CommentBox"
 import ToolIconGrid from "../components/about/ToolIconGrid"
 import UpcommingFeatures from "../components/about/UpcomingFeatures"
 import CardHeader from "../components/accessories/CardHeader"
-import { MyTheme } from "../theme/theme"
+import { MyTheme } from "../theme"
 
 export default function About(): JSX.Element {
   const classes = useStyles()
