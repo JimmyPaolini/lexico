@@ -5,7 +5,7 @@
     "start": "next start",
     "tsw": "tsc -w",
     "tsc": "tsc",
-    "story": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "graphqlgen": "graphql-codegen --config src/graphql/codegen.yml"
   },
