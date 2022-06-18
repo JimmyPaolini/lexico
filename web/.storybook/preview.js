@@ -6,6 +6,7 @@ import theme from "../src/theme"
 
 export const parameters = {
   actions: { argTypesRegex: "^(on|set|handle)[A-Z].*" },
+  layout: "centered",
   controls: {
     matchers: {
       color: /(background|color)$/i,
