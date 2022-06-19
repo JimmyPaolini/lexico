@@ -2,10 +2,10 @@ import { ComponentMeta, ComponentStory } from "@storybook/react"
 import { print } from "graphql"
 import { rawRequest } from "graphql-request"
 import EntryCard from "../components/entry/EntryCard"
-import searchLatinQuery from "../graphql/search/searchLatin.graphql"
+import { SearchLatin } from "../graphql/generated"
 
 export default {
-  title: "EntryCard",
+  title: "Cards/EntryCard",
   component: EntryCard,
 } as ComponentMeta<typeof EntryCard>
 
@@ -19,13 +19,9 @@ Amo.args = {
 Amo.loaders = [
   async () => ({
     entry: (
-      await rawRequest(
-        "http://localhost:3001/graphql",
-        print(searchLatinQuery),
-        {
-          search: Amo.args?.searched,
-        },
-      )
+      await rawRequest("http://localhost:3001/graphql", print(SearchLatin), {
+        search: Amo.args?.searched,
+      })
     ).data.searchLatin[0],
   }),
 ]
