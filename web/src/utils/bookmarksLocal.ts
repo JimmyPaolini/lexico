@@ -22,7 +22,6 @@ function setBookmarksLocal(bookmarks: Bookmarks): void {
 
 export function isBookmarkedLocal(id: string): boolean {
   const bookmarks = getBookmarksLocal()
-  console.log(bookmarks)
   return bookmarks.includes(id)
 }
 

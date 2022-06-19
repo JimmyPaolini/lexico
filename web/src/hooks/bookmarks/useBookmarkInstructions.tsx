@@ -23,10 +23,7 @@ export default function useBookmarkInstructions(user?: User): void {
       )
       enqueueSnackbar(
         `Your bookmarks are saved locally, sign in to save them across devices/browsers`,
-        {
-          autoHideDuration: 10000,
-          action,
-        },
+        { autoHideDuration: 10000, action },
       )
     }
   }, [])

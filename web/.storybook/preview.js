@@ -1,5 +1,5 @@
 import { CssBaseline, ThemeProvider } from "@material-ui/core"
-import { SnackbarProvider } from "notistack"
+import SnackbarProvider from "../src/components/layout/Snackbar"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { ContextProvider } from "../src/components/layout/Context"
 import theme from "../src/theme"
@@ -33,7 +33,7 @@ export const decorators = [
       <QueryClientProvider client={new QueryClient()}>
         <ContextProvider>
           <CssBaseline />
-          <SnackbarProvider style={{ display: "none" }}>
+          <SnackbarProvider>
             <Story />
           </SnackbarProvider>
         </ContextProvider>
