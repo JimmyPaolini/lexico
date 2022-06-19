@@ -4,23 +4,19 @@ import { Typography } from "@material-ui/core"
 
 type PillProps = {
   backgroundColor: string
-  color?: string
+  color: string
 }
 
-const Pill: FC<PillProps> = ({
-  backgroundColor = "#000000",
-  color = "#FFFFFF",
-  children,
-}) => {
+const Pill: FC<PillProps> = ({ backgroundColor, color, children }) => {
   const classes = useStyles()
-
   return (
     <Typography
       variant="button"
+      align="center"
+      noWrap
       className={classes.pill}
       style={{ color, backgroundColor }}
-      align="center"
-      noWrap>
+    >
       {children}
     </Typography>
   )

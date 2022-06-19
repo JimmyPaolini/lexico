@@ -16,7 +16,7 @@ export default {
 
   indicative: "IND",
   subjunctive: "SUB",
-  imperative: "IMP",
+  imperative: "IMPV",
   infinitive: "INF",
   "non finite": "NONF",
 
