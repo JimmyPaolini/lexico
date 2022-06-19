@@ -1,18 +1,18 @@
-import { FC } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
+import { FC } from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import { Typography } from "@material-ui/core"
 
 type PillProps = {
-  backgroundColor: string;
-  color: string;
-};
+  backgroundColor: string
+  color?: string
+}
 
 const Pill: FC<PillProps> = ({
   backgroundColor = "#000000",
   color = "#FFFFFF",
   children,
 }) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <Typography
@@ -20,12 +20,11 @@ const Pill: FC<PillProps> = ({
       className={classes.pill}
       style={{ color, backgroundColor }}
       align="center"
-      noWrap
-    >
+      noWrap>
       {children}
     </Typography>
-  );
-};
+  )
+}
 
 const useStyles = makeStyles(() => ({
   pill: {
@@ -34,6 +33,6 @@ const useStyles = makeStyles(() => ({
     padding: "0px 6px",
     borderRadius: 100,
   },
-}));
+}))
 
-export default Pill;
+export default Pill

@@ -15,9 +15,7 @@ export default {
   ],
 } as ComponentMeta<typeof NounDeclensionCard>
 
-const Template: ComponentStory<typeof NounDeclensionCard> = (args) => {
-  return <NounDeclensionCard {...args} />
-}
+export const Default: ComponentStory<typeof NounDeclensionCard> = () => <NounDeclensionCard {...{ declension: declensions[0] }} />
 
-export const Default = Template.bind({})
-Default.args = { declension: declensions[0] }
+// export const Default = Template.bind({})
+// Default.args = { declension: declensions[0] }

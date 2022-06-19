@@ -1,4 +1,4 @@
-import { createMuiTheme, Theme, ThemeOptions } from "@material-ui/core/styles"
+import { createTheme, Theme, ThemeOptions } from "@material-ui/core/styles"
 import {
   Typography,
   TypographyOptions,
@@ -51,6 +51,6 @@ const myThemeOptions = {
     cardWidth: 382,
   },
 } as unknown
-const theme = createMuiTheme(myThemeOptions as MyThemeOptions)
+const theme = createTheme(myThemeOptions as MyThemeOptions)
 
 export default theme

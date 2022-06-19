@@ -14,7 +14,6 @@ export const parameters = {
     },
   },
   backgrounds: {
-    default: "Lexico",
     values: [
       {
         name: "Lexico",
