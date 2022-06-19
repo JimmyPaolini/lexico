@@ -88,8 +88,9 @@ export default function Reader({ text }: Props): JSX.Element {
         square
         elevation={0}
         className={classes.reader}
-        style={{ fontSize }}>
-        <Grid container justify="center">
+        style={{ fontSize }}
+      >
+        <Grid container justifyContent="center">
           {!!text && user !== undefined ? (
             <ReaderText {...{ text, openModal }} />
           ) : null}

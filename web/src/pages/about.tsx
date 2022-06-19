@@ -18,9 +18,10 @@ export default function About(): JSX.Element {
       </Head>
       <Grid
         container
-        justify="center"
+        justifyContent="center"
         alignItems="center"
-        style={{ overflowX: "hidden" }}>
+        style={{ overflowX: "hidden" }}
+      >
         <Grow in={true}>
           <Card className={classes.card}>
             <CardHeader title="About" />

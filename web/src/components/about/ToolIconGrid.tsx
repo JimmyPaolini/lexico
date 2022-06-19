@@ -22,7 +22,8 @@ export default function ToolIconGrid(): JSX.Element {
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
         disableTouchRipple
-        classes={{ focusHighlight: classes.hide }}>
+        classes={{ focusHighlight: classes.hide }}
+      >
         <CardHeaderMui
           title="Frameworks, Libraries, and Tools"
           titleTypographyProps={{ variant: "body1" }}
@@ -38,14 +39,16 @@ export default function ToolIconGrid(): JSX.Element {
         <Grid
           container
           spacing={1}
-          justify="center"
-          className={classes.toolGrid}>
+          justifyContent="center"
+          className={classes.toolGrid}
+        >
           {tools.map((tool) => (
             <Grid item key={tool.name}>
               <Link
                 href={tool.url}
                 target="_blank"
-                onClick={(e: any) => e.stopPropagation()}>
+                onClick={(e: any) => e.stopPropagation()}
+              >
                 <Image
                   src={tool.icon}
                   alt={tool.name}

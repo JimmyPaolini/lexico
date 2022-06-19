@@ -1,11 +1,11 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react"
-import TranslationsRow from "src/components/entry/TranslationsRow/TranslationsRow"
+import FormsRow from "src/components/entry/FormsRow/FormsRow"
 import theme from "src/theme"
 import { searchEntry } from "src/utils/stories"
 
 export default {
-  title: "Cards/EntryCard/TranslationsRow",
-  component: TranslationsRow,
+  title: "Cards/EntryCard/FormsRow",
+  component: FormsRow,
   decorators: [
     (Story) => (
       <div style={{ width: theme.custom.cardWidth, border: "1px solid white" }}>
@@ -13,14 +13,26 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof TranslationsRow>
+} as ComponentMeta<typeof FormsRow>
 
-export const Default: ComponentStory<typeof TranslationsRow> & {
+export const Default: ComponentStory<typeof FormsRow> & {
   loaders: any[]
-} = (args, { loaded }) => <TranslationsRow {...args} {...loaded} />
+} = (args, { loaded }) => <FormsRow {...args} {...loaded} />
 Default.loaders = [
   async () => {
-    const { translations } = await searchEntry("amat")
-    return { translations }
+    const searched = "amat"
+    const { forms, partOfSpeech, identifiers } = await searchEntry(searched)
+    return { searched, forms, partOfSpeech, identifiers }
+  },
+]
+
+export const TwoRows: ComponentStory<typeof FormsRow> & {
+  loaders: any[]
+} = (args, { loaded }) => <FormsRow {...args} {...loaded} />
+TwoRows.loaders = [
+  async () => {
+    const searched = "credam"
+    const { forms, partOfSpeech, identifiers } = await searchEntry(searched)
+    return { searched, forms, partOfSpeech, identifiers }
   },
 ]

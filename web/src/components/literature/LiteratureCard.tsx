@@ -42,7 +42,7 @@ export default memo(function LiteratureCard({
                 <LiteratureBook {...{ author, book, isLast }} key={book.id} />
               )
             })}
-            <Grid container justify="center" alignItems="stretch">
+            <Grid container justifyContent="center" alignItems="stretch">
               {nonBookTexts.map((text) => (
                 <LiteratureText {...{ text }} key={text.id} />
               ))}

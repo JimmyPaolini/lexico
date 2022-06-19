@@ -33,8 +33,14 @@ export default function TranslationsRow({ translations }: Props): JSX.Element {
         disabled={!expandable}
         disableRipple
         disableTouchRipple
-        classes={{ focusHighlight: classes.hide }}>
-        <Grid container direction="row" justify="space-evenly" wrap="nowrap">
+        classes={{ focusHighlight: classes.hide }}
+      >
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-evenly"
+          wrap="nowrap"
+        >
           <Grid container item direction="column">
             {translations.slice(0, 2).map((translation) => (
               <TranslationBullet {...{ translation }} key={translation.id} />

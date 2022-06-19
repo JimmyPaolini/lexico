@@ -15,10 +15,15 @@ export default function SearchBarLayout({
 
   return (
     <Grid container direction="column" alignItems="stretch">
-      <Grid item container justify="center" className={classes.searchBar}>
+      <Grid
+        item
+        container
+        justifyContent="center"
+        className={classes.searchBar}
+      >
         <SearchBar {...searchBarProps} />
       </Grid>
-      <Grid item container justify="center" className={classes.children}>
+      <Grid item container justifyContent="center" className={classes.children}>
         {children}
       </Grid>
     </Grid>

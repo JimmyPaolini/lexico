@@ -1,5 +1,4 @@
 import {
-  Box,
   CardActionArea,
   CardContent,
   Collapse,
@@ -10,9 +9,9 @@ import {
 import { makeStyles, Theme } from "@material-ui/core/styles"
 import { useContext, useState } from "react"
 import { Forms } from "../../../graphql/generated"
-import identifierAbbreviations from "../../../utils/identifierAbbreviations"
 import { getSettingsLocal } from "../../../utils/settingsLocal"
 import ExpandIcon from "../../accessories/ExpandIcon"
+import IdentifierPill from "../../accessories/IdentifierPill"
 import { Context } from "../../layout/Context"
 import AdjectiveForms from "./PartsOfSpeech/AdjectiveForms"
 import NounForms from "./PartsOfSpeech/NounForms"
@@ -29,21 +28,15 @@ export default function FormsRow({
   searched,
   forms,
   partOfSpeech,
-  identifiers = [],
+  identifiers: identifiersList = [],
 }: Props): JSX.Element {
   const classes = useStyles()
   const { user } = useContext(Context)
-  const [expanded, setExpanded] = useState<boolean>(
+  const expandedInitial =
     user?.settings?.formsExpandedDefault ||
-      getSettingsLocal().formsExpandedDefault ||
-      false,
-  )
-  identifiers = identifiers.map((identifier) =>
-    identifier
-      .split(" ")
-      .map((inflector) => identifierAbbreviations[inflector])
-      .join(" "),
-  )
+    getSettingsLocal().formsExpandedDefault ||
+    false
+  const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   if (!searched)
     searched =
@@ -64,20 +57,30 @@ export default function FormsRow({
           disabled={!expandable}
           disableRipple
           disableTouchRipple
-          classes={{ focusHighlight: classes.hide }}>
-          <Grid container direction="row" justify="space-evenly">
-            <Grid container item direction="column" justify="center" xs={true}>
-              <Typography variant="body1">{searched}</Typography>
-              {identifiers.map((identifier, i) => (
-                <Typography variant="button" key={identifier + i}>
-                  {identifier}
-                </Typography>
+          classes={{ focusHighlight: classes.hide }}
+        >
+          <Grid container wrap="nowrap">
+            <Grid container item direction="column">
+              <Grid item>
+                <Typography variant="body1">{searched}</Typography>
+              </Grid>
+              {identifiersList.map((identifiers) => (
+                <Grid
+                  container
+                  item
+                  key={identifiers}
+                  className={classes.identifiers}
+                >
+                  {identifiers.split(" ").map((identifier) => (
+                    <IdentifierPill identifier={identifier} key={identifier} />
+                  ))}
+                </Grid>
               ))}
             </Grid>
             {FormsCard && (
-              <Box mt={0.5} mr={1.5}>
+              <Grid item className={classes.expandIcon}>
                 <ExpandIcon {...{ expanded }} />
-              </Box>
+              </Grid>
             )}
           </Grid>
         </CardActionArea>
@@ -117,5 +120,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   hide: {
     display: "none",
+  },
+  identifiers: {
+    marginTop: theme.spacing(1),
+  },
+  expandIcon: {
+    marginTop: theme.spacing(0.5),
+    marginRight: theme.spacing(1.5),
   },
 }))

@@ -12,7 +12,7 @@ export default function SettingsSwitch({
   formik,
 }: Props): JSX.Element {
   return (
-    <Grid container justify="space-between" alignItems="center">
+    <Grid container justifyContent="space-between" alignItems="center">
       <Typography>{label}:</Typography>
       <Switch
         id={field}

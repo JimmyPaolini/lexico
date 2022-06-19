@@ -9,7 +9,7 @@ export default function SingleCardLayout({ children }: Props): JSX.Element {
   const classes = useStyles()
 
   return (
-    <Grid container justify="center" alignItems="center">
+    <Grid container justifyContent="center" alignItems="center">
       <Grid item className={classes.column}>
         <Grow in={true}>
           <Grid>{children}</Grid>

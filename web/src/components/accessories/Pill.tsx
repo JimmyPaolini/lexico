@@ -12,7 +12,6 @@ const Pill: FC<PillProps> = ({ backgroundColor, color, children }) => {
   return (
     <Typography
       variant="button"
-      align="center"
       noWrap
       className={classes.pill}
       style={{ color, backgroundColor }}
@@ -24,11 +23,11 @@ const Pill: FC<PillProps> = ({ backgroundColor, color, children }) => {
 
 const useStyles = makeStyles(() => ({
   pill: {
-    width: "min-content",
-    height: 24,
+    height: 20,
     padding: "0px 6px",
     borderRadius: 100,
-    flexShrink: 0,
+    display: "inline-flex",
+    alignItems: "center",
   },
 }))
 

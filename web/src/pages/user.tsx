@@ -35,7 +35,7 @@ export default function User(): JSX.Element {
         <title>Lexico - User</title>
       </Head>
       {!user ? (
-        <Grid container justify="center" className={classes.noUser}>
+        <Grid container justifyContent="center" className={classes.noUser}>
           <CardDeck
             cards={[
               {

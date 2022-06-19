@@ -78,7 +78,8 @@ export default function BasicLogin(): JSX.Element {
                   aria-label="toggle password visibility"
                   onClick={() =>
                     setShowPassword((showPassword) => !showPassword)
-                  }>
+                  }
+                >
                   {showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
@@ -90,8 +91,9 @@ export default function BasicLogin(): JSX.Element {
         container
         direction="row-reverse"
         item
-        justify="space-between"
-        spacing={1}>
+        justifyContent="space-between"
+        spacing={1}
+      >
         <Grid item xs>
           <SubmitButton name="sign in" onClick={() => setSubmit("sign in")} />
         </Grid>
@@ -105,7 +107,8 @@ export default function BasicLogin(): JSX.Element {
           variant="caption"
           align="center"
           display="block"
-          className={classes.formError}>
+          className={classes.formError}
+        >
           {capitalizeFirstLetter(error)}
         </Typography>
       </Grid>
@@ -116,7 +119,8 @@ export default function BasicLogin(): JSX.Element {
             variant="contained"
             size="small"
             disableElevation
-            fullWidth>
+            fullWidth
+          >
             Recover Password
           </Button>
         </Link>

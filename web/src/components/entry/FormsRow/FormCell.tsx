@@ -73,19 +73,22 @@ export default function FormCell({
       interactive
       arrow
       classes={{ tooltip: classes.tooltip }}
-      aria-label={center}>
+      aria-label={center}
+    >
       <Grid
         container
-        justify="space-between"
+        justifyContent="space-between"
         className={classes.formCell}
-        wrap="nowrap">
+        wrap="nowrap"
+      >
         <Grid
           container
           item
           direction="column"
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="flex-start"
-          className={classes.left}>
+          className={classes.left}
+        >
           <CornerCaptionText text={topLeft} />
           <CornerCaptionText text={bottomLeft} />
         </Grid>
@@ -93,12 +96,14 @@ export default function FormCell({
           container
           item
           style={{ flexGrow: 1 }}
-          justify="center"
-          alignItems="center">
+          justifyContent="center"
+          alignItems="center"
+        >
           <Typography
             style={{ fontSize }}
             className={classes.center}
-            ref={centerRef}>
+            ref={centerRef}
+          >
             {center || "-"}
           </Typography>
         </Grid>
@@ -106,9 +111,10 @@ export default function FormCell({
           container
           item
           direction="column"
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="flex-end"
-          className={classes.right}>
+          className={classes.right}
+        >
           <CornerCaptionText text={topRight} />
           <CornerCaptionText text={bottomRight} />
         </Grid>

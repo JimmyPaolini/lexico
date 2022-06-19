@@ -34,7 +34,8 @@ export default memo(function LiteratureBook({
         key={book.id}
         classes={{ button: classes.hideHoverHighlight }}
         disableRipple
-        disableTouchRipple>
+        disableTouchRipple
+      >
         <ListItemText
           primary={sentenceCase(book.title).replace(/^\d+ /, "")}
           primaryTypographyProps={{ variant: "body1" }}
@@ -44,7 +45,7 @@ export default memo(function LiteratureBook({
         </Box>
       </ListItem>
       <Collapse in={expanded} mountOnEnter>
-        <Grid container justify="center" alignItems="stretch">
+        <Grid container justifyContent="center" alignItems="stretch">
           {book.texts.map((text) => (
             <LiteratureText {...{ text }} key={text.id} />
           ))}
