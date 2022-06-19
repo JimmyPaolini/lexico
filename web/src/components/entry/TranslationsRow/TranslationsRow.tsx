@@ -40,14 +40,9 @@ export default function TranslationsRow({ translations }: Props): JSX.Element {
               <TranslationBullet {...{ translation }} key={translation.id} />
             ))}
             <Collapse in={expanded || !expandable} timeout={250} mountOnEnter>
-              <Grid item>
-                {translations.slice(2).map((translation) => (
-                  <TranslationBullet
-                    {...{ translation }}
-                    key={translation.id}
-                  />
-                ))}
-              </Grid>
+              {translations.slice(2).map((translation) => (
+                <TranslationBullet {...{ translation }} key={translation.id} />
+              ))}
             </Collapse>
           </Grid>
           {expandable && (
@@ -63,9 +58,10 @@ export default function TranslationsRow({ translations }: Props): JSX.Element {
 
 const useStyles = makeStyles((theme) => ({
   translationsRow: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    paddingRight: theme.spacing(1),
+    padding: theme.spacing(1),
+    "&:last-child": {
+      padding: theme.spacing(1),
+    },
   },
   hide: {
     display: "none",

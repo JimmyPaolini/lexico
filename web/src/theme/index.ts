@@ -25,7 +25,7 @@ interface MyTypographyOptions extends TypographyOptions {
   literature?: Record<string, unknown>
 }
 
-const myThemeOptions = {
+const theme = createTheme({
   palette: {
     type: "dark",
     primary: {
@@ -50,7 +50,6 @@ const myThemeOptions = {
   custom: {
     cardWidth: 382,
   },
-} as unknown
-const theme = createTheme(myThemeOptions as MyThemeOptions)
+} as MyThemeOptions) as MyTheme
 
 export default theme

@@ -3,7 +3,7 @@ import BookmarkButton from "../components/entry/PrincipalPartsRow/BookmarkButton
 import { searchEntry } from "../utils/stories"
 
 export default {
-  title: "Cards/BookmarkButton",
+  title: "Cards/PrincipalPartsRow/BookmarkButton",
   component: BookmarkButton,
   decorators: [
     (Story) => (
