@@ -1,10 +1,10 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react"
-import TranslationBullet from "../components/entry/TranslationsRow/TranslationBullet"
-import theme from "../theme"
-import { searchEntry } from "../utils/stories"
+import TranslationBullet from "src/components/entry/TranslationsRow/TranslationBullet"
+import theme from "src/theme"
+import { searchEntry } from "src/utils/stories"
 
 export default {
-  title: "Cards/TranslationsRow/TranslationBullet",
+  title: "Cards/EntryCard/TranslationsRow/TranslationBullet",
   component: TranslationBullet,
   decorators: [
     (Story) => (

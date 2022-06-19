@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react"
-import EntryCard from "../components/entry/EntryCard"
-import { searchEntry } from "../utils/stories"
+import EntryCard from "src/components/entry/EntryCard"
+import { searchEntry } from "src/utils/stories"
 
 export default {
   title: "Cards/EntryCard",

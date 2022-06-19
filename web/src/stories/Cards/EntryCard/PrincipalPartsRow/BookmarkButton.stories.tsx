@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory, forceReRender } from "@storybook/react"
-import BookmarkButton from "../components/entry/PrincipalPartsRow/BookmarkButton"
-import { searchEntry } from "../utils/stories"
+import BookmarkButton from "src/components/entry/PrincipalPartsRow/BookmarkButton"
+import { searchEntry } from "src/utils/stories"
 
 export default {
-  title: "Cards/PrincipalPartsRow/BookmarkButton",
+  title: "Cards/EntryCard/PrincipalPartsRow/BookmarkButton",
   component: BookmarkButton,
   decorators: [
     (Story) => (

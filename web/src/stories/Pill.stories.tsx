@@ -1,10 +1,10 @@
-import Pill from "../components/accessories/Pill"
+import Pill from "src/components/accessories/Pill"
 import { ComponentMeta, ComponentStory } from "@storybook/react"
 
 // Red: red, crimson, tomato
 // Blue: blue, cadetblue, cornflowerblue
 // Yellow: yellow, gold, goldenrod
-// Green: green, forestgreen
+// Green: green, forestgreen, limegreen, darkgreen, darkolivegreen
 // Pink/Purple: hotpink, indigo, fuchsia
 // Brown: brown, saddlebrown
 // Neutral: white, black, gray
@@ -23,16 +23,16 @@ export default {
 
 export const VoicePills: ComponentStory<typeof Pill> = () => (
   <>
-    <Pill backgroundColor="silver" color="black">
+    <Pill backgroundColor="#999" color="black">
       Act
     </Pill>
-    <Pill backgroundColor="gray">Pas</Pill>
+    <Pill backgroundColor="#555">Pas</Pill>
   </>
 )
 
 export const CasePills: ComponentStory<typeof Pill> = () => (
   <>
-    <Pill backgroundColor="darkslateblue">NOM</Pill>
+    <Pill backgroundColor="royalblue">NOM</Pill>
     <Pill backgroundColor="forestgreen">GEN</Pill>
     <Pill backgroundColor="yellow" color="black">
       DAT
@@ -52,7 +52,9 @@ export const MoodPills: ComponentStory<typeof Pill> = () => (
     <Pill backgroundColor="yellow" color="black">
       INF
     </Pill>
-    <Pill backgroundColor="#00FF00">NONF</Pill>
+    <Pill backgroundColor="green" color="black">
+      NONF
+    </Pill>
   </>
 )
 
@@ -67,17 +69,19 @@ export const TensePills: ComponentStory<typeof Pill> = () => (
     <Pill backgroundColor="cyan" color="black">
       PLUP
     </Pill>
-    <Pill backgroundColor="limegreen">FUTP</Pill>
+    <Pill backgroundColor="green" color="black">
+      FUTP
+    </Pill>
   </>
 )
 
 export const PersonPills: ComponentStory<typeof Pill> = () => (
   <>
-    <Pill backgroundColor="royalblue">1ST</Pill>
-    <Pill backgroundColor="darkorange">2ND</Pill>
-    <Pill backgroundColor="gold" color="black">
-      3RD
+    <Pill backgroundColor="yellow" color="black">
+      1ST
     </Pill>
+    <Pill backgroundColor="red">2ND</Pill>
+    <Pill backgroundColor="blue">3RD</Pill>
   </>
 )
 

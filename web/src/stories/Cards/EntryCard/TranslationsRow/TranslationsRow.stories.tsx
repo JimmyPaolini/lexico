@@ -1,10 +1,10 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react"
-import TranslationsRow from "../components/entry/TranslationsRow/TranslationsRow"
-import theme from "../theme"
-import { searchEntry } from "../utils/stories"
+import TranslationsRow from "src/components/entry/TranslationsRow/TranslationsRow"
+import theme from "src/theme"
+import { searchEntry } from "src/utils/stories"
 
 export default {
-  title: "Cards/TranslationsRow",
+  title: "Cards/EntryCard/TranslationsRow",
   component: TranslationsRow,
   decorators: [
     (Story) => (

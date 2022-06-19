@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react"
-import NounDeclensionCard from "../components/grammar/NounDeclensionCard"
-import declensions from "../components/grammar/nounDeclensions"
+import NounDeclensionCard from "src/components/grammar/NounDeclensionCard"
+import declensions from "src/components/grammar/nounDeclensions"
 
 export default {
   title: "Cards/NounDeclensionCard",
