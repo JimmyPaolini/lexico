@@ -32,6 +32,7 @@ const useStyles = makeStyles(() => ({
     height: 24,
     padding: "0px 6px",
     borderRadius: 100,
+    flexShrink: 0,
   },
 }))
 

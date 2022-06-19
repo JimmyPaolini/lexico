@@ -15,10 +15,10 @@ export default {
   ],
 } as ComponentMeta<typeof TranslationBullet>
 
-export const Amat: ComponentStory<typeof TranslationBullet> & {
+export const Default: ComponentStory<typeof TranslationBullet> & {
   loaders: any[]
 } = (args, { loaded }) => <TranslationBullet {...args} {...loaded} />
-Amat.loaders = [
+Default.loaders = [
   async () => {
     const { translations } = await searchEntry("amat")
     return { translation: translations![0] }

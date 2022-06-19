@@ -22,7 +22,7 @@ export default {
   ],
 } as ComponentMeta<typeof BookmarkButton>
 
-export const Amat: ComponentStory<typeof BookmarkButton> & {
+export const Default: ComponentStory<typeof BookmarkButton> & {
   loaders: any[]
 } = (args, { loaded }) => (
   <>
@@ -43,8 +43,8 @@ export const Amat: ComponentStory<typeof BookmarkButton> & {
     </div>
   </>
 )
-Amat.args = { bookmarked: false }
-Amat.loaders = [
+Default.args = { bookmarked: false }
+Default.loaders = [
   async () => {
     const { id } = await searchEntry("amat")
     return { id }

@@ -15,10 +15,10 @@ export default {
   ],
 } as ComponentMeta<typeof PrincipalPartsRow>
 
-export const Amat: ComponentStory<typeof PrincipalPartsRow> & {
+export const Default: ComponentStory<typeof PrincipalPartsRow> & {
   loaders: any[]
 } = (args, { loaded }) => <PrincipalPartsRow {...args} {...loaded} />
-Amat.loaders = [
+Default.loaders = [
   async () => {
     const { id, partOfSpeech, principalParts, inflection, bookmarked } =
       await searchEntry("amat")

@@ -33,4 +33,4 @@ export default {
   first: "1ST",
   second: "2ND",
   third: "3RD",
-} as { [key: string]: string }
+}

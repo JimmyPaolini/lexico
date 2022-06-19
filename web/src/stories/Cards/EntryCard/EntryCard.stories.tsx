@@ -7,14 +7,14 @@ export default {
   component: EntryCard,
 } as ComponentMeta<typeof EntryCard>
 
-export const Amat: ComponentStory<typeof EntryCard> & { loaders: any[] } = (
+export const Default: ComponentStory<typeof EntryCard> & { loaders: any[] } = (
   args,
   { loaded },
 ) => <EntryCard {...args} {...loaded} />
-Amat.args = {
+Default.args = {
   searched: "amat",
 }
-Amat.loaders = [
+Default.loaders = [
   async () => {
     const entry = await searchEntry("amat")
     return { entry }
