@@ -13,15 +13,16 @@ import NounForms from "../entry/FormsRow/PartsOfSpeech/NounFormsTable"
 import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
 import nounDeclensions from "./nounDeclensions"
 
-interface NounDeclensionCardProps {
+interface Props {
   declension: typeof nounDeclensions[0]
+  expandedInitial: boolean
 }
 export default forwardRef(function NounDeclensionCard(
-  { declension }: NounDeclensionCardProps,
+  { declension, expandedInitial = false }: Props,
   ref,
 ): JSX.Element {
   const classes = useStyles()
-  const [expanded, setExpanded] = useState<boolean>(declension.id === "first")
+  const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
     <Card className={classes.card} ref={ref}>
@@ -29,7 +30,8 @@ export default forwardRef(function NounDeclensionCard(
         onClick={() => setExpanded((expanded) => !expanded)}
         classes={{ focusHighlight: classes.none }}
         disableRipple
-        disableTouchRipple>
+        disableTouchRipple
+      >
         <PrincipalPartsRow {...{ ...declension, expanded }} />
       </CardActionArea>
       <Collapse in={expanded} mountOnEnter>

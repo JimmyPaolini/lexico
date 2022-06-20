@@ -15,13 +15,14 @@ import adjectiveDeclensions from "./adjectiveDeclensions"
 
 interface AdjectiveDeclensionCardProps {
   declension: typeof adjectiveDeclensions[0]
+  expandedInitial?: boolean
 }
 export default forwardRef(function AdjectiveDeclensionCard(
-  { declension }: AdjectiveDeclensionCardProps,
+  { declension, expandedInitial = false }: AdjectiveDeclensionCardProps,
   ref,
 ): JSX.Element {
   const classes = useStyles()
-  const [expanded, setExpanded] = useState<boolean>(declension.id === "third")
+  const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
     <Card className={classes.card} ref={ref}>
@@ -29,7 +30,8 @@ export default forwardRef(function AdjectiveDeclensionCard(
         onClick={() => setExpanded((expanded) => !expanded)}
         classes={{ focusHighlight: classes.none }}
         disableRipple
-        disableTouchRipple>
+        disableTouchRipple
+      >
         <PrincipalPartsRow {...{ ...declension, expanded }} />
       </CardActionArea>
       <Collapse in={expanded} mountOnEnter>

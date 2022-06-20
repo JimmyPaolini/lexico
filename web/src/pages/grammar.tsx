@@ -14,17 +14,35 @@ export default function Grammar(): JSX.Element {
   const grammarCards = [
     ...verbConjugations.map((conjugation) => {
       const ref = useRef<HTMLDivElement>()
-      const Card = <VerbConjugationCard conjugation={conjugation} ref={ref} />
+      const Card = (
+        <VerbConjugationCard
+          conjugation={conjugation}
+          ref={ref}
+          expandedInitial={conjugation.id === "first"}
+        />
+      )
       return { key: "verb" + conjugation.id, ref, Card }
     }),
     ...Object.values(nounDeclensions).map((declension) => {
       const ref = useRef<HTMLDivElement>()
-      const Card = <NounDeclensionCard declension={declension} ref={ref} />
+      const Card = (
+        <NounDeclensionCard
+          declension={declension}
+          ref={ref}
+          expandedInitial={declension.id === "first"}
+        />
+      )
       return { key: "noun" + declension.id, ref, Card }
     }),
     ...adjectiveDeclensions.map((declension) => {
       const ref = useRef<HTMLDivElement>()
-      const Card = <AdjectiveDeclensionCard declension={declension} ref={ref} />
+      const Card = (
+        <AdjectiveDeclensionCard
+          declension={declension}
+          ref={ref}
+          expandedInitial={declension.id === "third"}
+        />
+      )
       return { key: "adjective" + declension.id, ref, Card }
     }),
   ]
@@ -66,7 +84,8 @@ export default function Grammar(): JSX.Element {
           isLoading: false,
           handleSearchExecute,
           target: "grammar",
-        }}>
+        }}
+      >
         <CardDeck cards={cards} />
       </SearchBarLayout>
     </>

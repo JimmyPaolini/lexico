@@ -14,13 +14,14 @@ import verbConjugations from "./verbConjugations"
 
 interface VerbConjugationCardProps {
   conjugation: typeof verbConjugations[0]
+  expandedInitial?: boolean
 }
 export default forwardRef(function VerbConjugationCard(
-  { conjugation }: VerbConjugationCardProps,
+  { conjugation, expandedInitial = false }: VerbConjugationCardProps,
   ref,
 ): JSX.Element {
   const classes = useStyles()
-  const [expanded, setExpanded] = useState<boolean>(conjugation.id === "first")
+  const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
     <Card className={classes.card} ref={ref}>
@@ -28,7 +29,8 @@ export default forwardRef(function VerbConjugationCard(
         onClick={() => setExpanded((expanded) => !expanded)}
         classes={{ focusHighlight: classes.none }}
         disableRipple
-        disableTouchRipple>
+        disableTouchRipple
+      >
         <PrincipalPartsRow {...{ ...conjugation, expanded }} />
       </CardActionArea>
       <Collapse in={expanded} mountOnEnter>
