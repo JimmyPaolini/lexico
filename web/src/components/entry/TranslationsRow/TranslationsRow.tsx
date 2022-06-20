@@ -64,6 +64,7 @@ export default function TranslationsRow({ translations }: Props): JSX.Element {
 
 const useStyles = makeStyles((theme) => ({
   translationsRow: {
+    background: theme.palette.background.paper,
     padding: theme.spacing(1),
     "&:last-child": {
       padding: theme.spacing(1),

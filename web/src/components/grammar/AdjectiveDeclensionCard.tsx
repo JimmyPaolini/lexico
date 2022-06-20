@@ -9,7 +9,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import { forwardRef, useState } from "react"
 import { MyTheme } from "../../theme"
-import AdjectiveForms from "../entry/FormsRow/PartsOfSpeech/AdjectiveForms"
+import AdjectiveForms from "../entry/FormsRow/PartsOfSpeech/AdjectiveFormsTable"
 import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
 import adjectiveDeclensions from "./adjectiveDeclensions"
 

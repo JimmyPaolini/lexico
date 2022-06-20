@@ -13,9 +13,9 @@ import { getSettingsLocal } from "../../../utils/settingsLocal"
 import ExpandIcon from "../../accessories/ExpandIcon"
 import IdentifierPill from "../../accessories/IdentifierPill"
 import { Context } from "../../layout/Context"
-import AdjectiveForms from "./PartsOfSpeech/AdjectiveForms"
-import NounForms from "./PartsOfSpeech/NounForms"
-import VerbForms from "./PartsOfSpeech/VerbForms"
+import AdjectiveForms from "./PartsOfSpeech/AdjectiveFormsTable"
+import NounForms from "./PartsOfSpeech/NounFormsTable"
+import VerbForms from "./PartsOfSpeech/VerbFormsTable"
 
 interface Props {
   searched: string
@@ -111,6 +111,7 @@ const partOfSpeechToFormsCard = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   formsRow: {
+    background: theme.palette.background.paper,
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     paddingRight: theme.spacing(1),

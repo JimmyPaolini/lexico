@@ -1,26 +1,53 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react"
-import TranslationsRow from "src/components/entry/TranslationsRow/TranslationsRow"
+import FormCell from "src/components/entry/FormsRow/FormCell"
 import theme from "src/theme"
-import { searchEntry } from "src/utils/stories"
 
 export default {
-  title: "Cards/EntryCard/TranslationsRow",
-  component: TranslationsRow,
+  title: "Cards/EntryCard/FormsRow/FormCell",
+  component: FormCell,
   decorators: [
     (Story) => (
-      <div style={{ width: theme.custom.cardWidth, border: "1px solid white" }}>
+      <div
+        style={{ width: theme.custom.cardWidth / 2, border: "1px solid white" }}
+      >
         <Story />
       </div>
     ),
   ],
-} as ComponentMeta<typeof TranslationsRow>
+} as ComponentMeta<typeof FormCell>
 
-export const Default: ComponentStory<typeof TranslationsRow> & {
-  loaders: any[]
-} = (args, { loaded }) => <TranslationsRow {...args} {...loaded} />
-Default.loaders = [
-  async () => {
-    const { translations } = await searchEntry("amat")
-    return { translations }
-  },
-]
+export const Default: ComponentStory<typeof FormCell> = (args) => (
+  <FormCell {...args} />
+)
+Default.args = {
+  position: "midLeft",
+  centerText: "amat",
+  topLeftText: "TL",
+  topRightText: "TR",
+  bottomLeftText: "BL",
+  bottomRightText: "BR",
+}
+
+export const TwoLines: ComponentStory<typeof FormCell> = (args) => (
+  <FormCell {...args} />
+)
+TwoLines.args = {
+  position: "midLeft",
+  centerText: "amāvērunt, amāvērere",
+  topLeftText: "TL",
+  topRightText: "TR",
+  bottomLeftText: "BL",
+  bottomRightText: "BR",
+}
+
+export const Ellipsis: ComponentStory<typeof FormCell> = (args) => (
+  <FormCell {...args} />
+)
+Ellipsis.args = {
+  position: "midLeft",
+  centerText: "amāvērunt, amāvērere, amāvērunt",
+  topLeftText: "TL",
+  topRightText: "TR",
+  bottomLeftText: "BL",
+  bottomRightText: "BR",
+}

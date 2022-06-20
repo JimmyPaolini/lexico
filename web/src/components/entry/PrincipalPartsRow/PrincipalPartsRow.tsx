@@ -57,6 +57,7 @@ export default function PrincipalPartsRow({
 
 const useStyles = makeStyles((theme) => ({
   principalPartsRow: {
+    background: theme.palette.background.paper,
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
