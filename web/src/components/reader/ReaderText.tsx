@@ -13,10 +13,7 @@ interface ReaderTextProps {
   text: Text
   openModal: (word: string) => void
 }
-export default function ReaderText({
-  text,
-  openModal,
-}: ReaderTextProps): JSX.Element {
+export default function ReaderText({ text, openModal }: ReaderTextProps) {
   const classes = useStyles()
   const router = useRouter()
 
@@ -33,7 +30,8 @@ export default function ReaderText({
             "/literature",
         )
       }
-      aria-label="edit">
+      aria-label="edit"
+    >
       <Edit />
     </IconButton>
   )

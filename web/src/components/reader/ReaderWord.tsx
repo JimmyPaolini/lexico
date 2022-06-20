@@ -6,10 +6,7 @@ interface ReaderWordProps {
   word: string
   openModal: (word: string) => void
 }
-export default memo(function ReaderWord({
-  word,
-  openModal,
-}: ReaderWordProps): JSX.Element {
+export default memo(function ReaderWord({ word, openModal }: ReaderWordProps) {
   const classes = useStyles()
   const isWord = word.match(/\w+/i)
 
@@ -17,7 +14,8 @@ export default memo(function ReaderWord({
     <CardActionArea
       className={classes.readerWord}
       component="span"
-      onClick={() => openModal(word.toLowerCase())}>
+      onClick={() => openModal(word.toLowerCase())}
+    >
       {word}
     </CardActionArea>
   ) : (

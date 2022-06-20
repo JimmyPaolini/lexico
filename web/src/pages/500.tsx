@@ -6,7 +6,7 @@ import SubmitButton from "../components/accessories/SubmitButton"
 import SingleCardLayout from "../components/layout/SingleCardLayout"
 import { MyTheme } from "../theme"
 
-export default function Error500(): JSX.Element {
+export default function Error500() {
   const classes = useStyles()
 
   return (

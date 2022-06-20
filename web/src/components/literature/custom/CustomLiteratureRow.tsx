@@ -13,7 +13,7 @@ interface CustomLiteratureRowProps {
 export default memo(function CustomLiteratureRow({
   text,
   refreshCustomTexts,
-}: CustomLiteratureRowProps): JSX.Element {
+}: CustomLiteratureRowProps) {
   const classes = useStyles()
   const router = useRouter()
 

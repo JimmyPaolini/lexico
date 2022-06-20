@@ -16,9 +16,7 @@ import LiteratureText from "./LiteratureText"
 interface LiteratureCardProps {
   author: Author
 }
-export default memo(function LiteratureCard({
-  author,
-}: LiteratureCardProps): JSX.Element {
+export default memo(function LiteratureCard({ author }: LiteratureCardProps) {
   const classes = useStyles()
   const books = author.books || ([] as Book[])
   const nonBookTexts = author.texts.filter(

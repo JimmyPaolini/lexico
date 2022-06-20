@@ -5,7 +5,7 @@ interface Props {
   expanded: boolean
   [key: string]: any
 }
-export default function ExpandIcon({ expanded, ...props }: Props): JSX.Element {
+export default function ExpandIcon({ expanded, ...props }: Props) {
   const classes = useStyles()
   const direction = expanded ? classes.upSideDown : classes.rightSideUp
   return <ExpandMore className={direction} {...props} />

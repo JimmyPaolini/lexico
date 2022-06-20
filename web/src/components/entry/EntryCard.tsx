@@ -11,10 +11,7 @@ interface Props {
   entry: Entry
   searched: string
 }
-export default memo(function EntryCard({
-  entry,
-  searched = "",
-}: Props): JSX.Element {
+export default memo(function EntryCard({ entry, searched = "" }: Props) {
   const classes = useStyles()
   const {
     id,

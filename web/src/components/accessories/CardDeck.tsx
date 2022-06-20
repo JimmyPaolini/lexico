@@ -13,7 +13,7 @@ type Card = {
 interface CardDeckProps {
   cards: Card[]
 }
-export default memo(function CardDeck({ cards }: CardDeckProps): JSX.Element {
+export default memo(function CardDeck({ cards }: CardDeckProps) {
   const classes = useStyles()
 
   let numCols = 1
@@ -43,7 +43,8 @@ export default memo(function CardDeck({ cards }: CardDeckProps): JSX.Element {
             direction="column"
             alignItems="stretch"
             className={classes.column}
-            key={column.map((card) => card.key).join()}>
+            key={column.map((card) => card.key).join()}
+          >
             {column.map((card, row) => {
               const timeout = Math.min(400 * Math.pow(col + row, 1 / 2), 1000)
               return (

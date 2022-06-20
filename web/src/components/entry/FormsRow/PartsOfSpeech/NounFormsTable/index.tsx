@@ -10,7 +10,7 @@ interface NounFormsProps {
   forms?: Maybe<Forms>
 }
 
-export default function NounForms({ forms }: NounFormsProps): JSX.Element {
+export default function NounForms({ forms }: NounFormsProps) {
   const classes = useStyles()
   const formsStructure = nounFormsRestructure(forms)
   return (

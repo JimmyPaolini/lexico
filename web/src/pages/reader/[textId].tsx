@@ -23,7 +23,7 @@ import { sentenceCase } from "../../utils/string"
 interface Props {
   text: Text
 }
-export default function Reader({ text }: Props): JSX.Element {
+export default function Reader({ text }: Props) {
   const router = useRouter()
   if (router.isFallback) return <LiteratureFallback />
   const classes = useStyles({})

@@ -5,7 +5,7 @@ import CardHeader from "../../accessories/CardHeader"
 import BasicLogin from "./BasicLoginForm"
 import OAuthLogin from "./OAuthLogin"
 
-export default function LoginCard(): JSX.Element {
+export default function LoginCard() {
   const classes = useStyles()
 
   return (
@@ -18,7 +18,8 @@ export default function LoginCard(): JSX.Element {
         align="center"
         variant="body2"
         color="textSecondary"
-        gutterBottom>
+        gutterBottom
+      >
         and Settings across devices
       </Typography>
       <Divider variant="middle" />

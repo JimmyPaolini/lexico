@@ -4,7 +4,7 @@ import Image from "next/image"
 import logo from "public/lexico_logo.svg"
 import React, { useRef } from "react"
 
-export default function Logo(): JSX.Element {
+export default function Logo() {
   const classes = useStyles()
   const theme = useTheme() as any
   const ref = useRef<any>()

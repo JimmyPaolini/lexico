@@ -16,7 +16,7 @@ export default memo(function ReaderModal({
   searched,
   open,
   setOpen,
-}: ReaderModalProps): JSX.Element {
+}: ReaderModalProps) {
   const classes = useStyles()
   const ref = useRef<HTMLDivElement>(null)
 
@@ -52,7 +52,8 @@ export default memo(function ReaderModal({
       {...useSwipeable({
         onSwipedLeft: () => setOpen(false),
         onSwipedRight: () => setOpen(false),
-      })}>
+      })}
+    >
       <Box className={classes.container} tabIndex={-1}>
         {isError || !entries?.length ? (
           <Paper className={classes.notFound}>

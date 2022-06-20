@@ -16,10 +16,7 @@ interface SearchProps {
   initialSearch: string
   initialIsLatin: boolean
 }
-export default function Search({
-  initialSearch,
-  initialIsLatin,
-}: SearchProps): JSX.Element {
+export default function Search({ initialSearch, initialIsLatin }: SearchProps) {
   const router = useRouter()
 
   const [isLatin, setLatin] = useState<boolean>(initialIsLatin)
@@ -70,7 +67,8 @@ export default function Search({
           target: "lexico",
           isLatin,
           setLatin,
-        }}>
+        }}
+      >
         {!searched ? (
           <Logo />
         ) : !entries?.length && !isLoading ? (

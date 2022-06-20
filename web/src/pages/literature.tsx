@@ -12,7 +12,7 @@ import { Author, useGetAuthorsQuery } from "../graphql/generated"
 interface LiteratureProps {
   authors: Author[]
 }
-export default function Literature({ authors }: LiteratureProps): JSX.Element {
+export default function Literature({ authors }: LiteratureProps) {
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
   useEffect(() => {
@@ -55,7 +55,8 @@ export default function Literature({ authors }: LiteratureProps): JSX.Element {
           isLoading: false,
           handleSearchExecute,
           target: "literature",
-        }}>
+        }}
+      >
         {!cards.length ? (
           <Typography variant="h4">No Results</Typography>
         ) : (

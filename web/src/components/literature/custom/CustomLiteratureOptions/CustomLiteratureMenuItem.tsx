@@ -10,7 +10,7 @@ export default function CustomLiteratureMenuItem({
   action,
   icon,
   text,
-}: CustomLiteratureMenuItemProps): JSX.Element {
+}: CustomLiteratureMenuItemProps) {
   const classes = useStyles()
 
   return (

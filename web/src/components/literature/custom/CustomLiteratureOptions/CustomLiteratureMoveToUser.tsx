@@ -17,7 +17,7 @@ export default function CustomLiteratureMoveToUser({
   text,
   refreshCustomTexts,
   closeMenu,
-}: CustomLiteratureMoveToUserProps): JSX.Element {
+}: CustomLiteratureMoveToUserProps) {
   const { enqueueSnackbar } = useSnackbarEnhanced()
 
   const { mutate: createCustomTextUser, error } = useCreateCustomTextMutation({

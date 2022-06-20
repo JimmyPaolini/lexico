@@ -10,7 +10,7 @@ import CardHeader from "../../accessories/CardHeader"
 import SubmitButton from "../../accessories/SubmitButton"
 import TextBox from "../../accessories/TextBox"
 
-export default function RecoverPasswordCard(): JSX.Element {
+export default function RecoverPasswordCard() {
   const classes = useStyles()
   const router = useRouter()
   const { enqueueSnackbar } = useSnackbarEnhanced()

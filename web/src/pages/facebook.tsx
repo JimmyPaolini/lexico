@@ -5,7 +5,7 @@ import facebookQuery from "../graphql/user/login/facebook.graphql"
 import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 import { serverEndpoint } from "./api"
 
-export default function facebook(): JSX.Element {
+export default function facebook() {
   googleAnalyticsEvent("login", {
     category: "user",
     label: "oauth",

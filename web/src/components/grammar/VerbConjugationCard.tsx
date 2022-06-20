@@ -19,7 +19,7 @@ interface VerbConjugationCardProps {
 export default forwardRef(function VerbConjugationCard(
   { conjugation, expandedInitial = false }: VerbConjugationCardProps,
   ref,
-): JSX.Element {
+) {
   const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 

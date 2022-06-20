@@ -11,7 +11,7 @@ interface Props {
   forms?: Maybe<Forms>
 }
 
-export default function VerbForms({ forms }: Props): JSX.Element {
+export default function VerbForms({ forms }: Props) {
   const classes = useStyles()
   const [topTab, setTopTabState] = useState(0)
   const [midTab, setMidTabState] = useState(0)

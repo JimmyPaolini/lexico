@@ -5,7 +5,7 @@ import React, { ReactNode } from "react"
 interface Props {
   children?: ReactNode
 }
-export default function SingleCardLayout({ children }: Props): JSX.Element {
+export default function SingleCardLayout({ children }: Props) {
   const classes = useStyles()
 
   return (

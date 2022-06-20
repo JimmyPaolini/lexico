@@ -5,7 +5,7 @@ import googleQuery from "../graphql/user/login/google.graphql"
 import { googleAnalyticsEvent } from "../utils/googleAnalytics"
 import { serverEndpoint } from "./api"
 
-export default function google(): JSX.Element {
+export default function google() {
   googleAnalyticsEvent("login", {
     category: "user",
     label: "oauth",

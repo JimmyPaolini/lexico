@@ -6,9 +6,7 @@ import { CustomText } from "../../utils/literatureLocal"
 interface CustomReaderNewProps {
   text?: CustomText
 }
-export default memo(function CustomReaderNew({
-  text,
-}: CustomReaderNewProps): JSX.Element {
+export default memo(function CustomReaderNew({ text }: CustomReaderNewProps) {
   return (
     <>
       <Head>

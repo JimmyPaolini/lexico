@@ -10,7 +10,7 @@ import { sentenceCase } from "../../utils/string"
 interface Props {
   text: Text
 }
-export default memo(function LiteratureText({ text }: Props): JSX.Element {
+export default memo(function LiteratureText({ text }: Props) {
   const classes = useStyles()
   const router = useRouter()
 

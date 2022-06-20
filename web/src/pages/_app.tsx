@@ -17,7 +17,7 @@ export const clientEndpoint =
     ? `http://localhost:3001/graphql`
     : window.location.origin + "/api"
 
-export default function App({ Component, pageProps }: AppProps): JSX.Element {
+export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
   useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side")

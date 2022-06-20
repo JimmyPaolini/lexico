@@ -17,7 +17,7 @@ import SubmitButton from "../accessories/SubmitButton"
 import TextBox from "../accessories/TextBox"
 import { Context } from "../layout/Context"
 
-export default function CommentBox(): JSX.Element {
+export default function CommentBox() {
   const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(false)
@@ -44,7 +44,8 @@ export default function CommentBox(): JSX.Element {
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
         disableTouchRipple
-        classes={{ focusHighlight: classes.hide }}>
+        classes={{ focusHighlight: classes.hide }}
+      >
         <CardHeaderMui
           title="Questions and Feedback"
           titleTypographyProps={{ variant: "body1" }}
@@ -61,7 +62,8 @@ export default function CommentBox(): JSX.Element {
           Join the Lexico{" "}
           <Link
             href="https://lexico-group.slack.com/archives/C01SN2QN2BF"
-            color="secondary">
+            color="secondary"
+          >
             Slack channel
           </Link>{" "}
           to chat and stay up to date with improvements!
@@ -97,7 +99,8 @@ export default function CommentBox(): JSX.Element {
                   variant="caption"
                   align="center"
                   display="block"
-                  className={classes.formError}>
+                  className={classes.formError}
+                >
                   {capitalizeFirstLetter(error as any)}
                 </Typography>
               </>

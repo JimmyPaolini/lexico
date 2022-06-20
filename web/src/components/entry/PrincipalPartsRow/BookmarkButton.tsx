@@ -14,7 +14,7 @@ interface Props {
 export default function PrincipalPartsRow({
   id,
   bookmarked: bookmarkedOriginal,
-}: Props): JSX.Element {
+}: Props) {
   const classes = useStyles()
   const { user, queryClient } = useContext(Context)
 
@@ -34,7 +34,8 @@ export default function PrincipalPartsRow({
     <IconButton
       onClick={toggleBookmark}
       className={classes.bookmark}
-      aria-label="Bookmark">
+      aria-label="Bookmark"
+    >
       {bookmarked ? <Bookmark /> : <BookmarkBorder />}
     </IconButton>
   )

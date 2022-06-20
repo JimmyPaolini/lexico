@@ -20,7 +20,7 @@ interface CustomLiteratureFormProps {
 }
 export default memo(function CustomLiteratureForm({
   text,
-}: CustomLiteratureFormProps): JSX.Element {
+}: CustomLiteratureFormProps) {
   const classes = useStyles()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
 
@@ -46,18 +46,21 @@ export default memo(function CustomLiteratureForm({
         container
         direction="column"
         wrap="nowrap"
-        className={classes.customReader}>
+        className={classes.customReader}
+      >
         <Grid
           item
           container
           wrap="nowrap"
           alignItems="center"
-          className={classes.item}>
+          className={classes.item}
+        >
           {isMobile ? (
             <IconButton
               onClick={() => setNavOpen(!isNavOpen)}
               style={{ marginRight: 8 }}
-              aria-label="menu">
+              aria-label="menu"
+            >
               <Menu />
             </IconButton>
           ) : null}

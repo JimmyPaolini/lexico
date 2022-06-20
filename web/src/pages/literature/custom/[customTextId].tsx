@@ -7,9 +7,7 @@ import CustomReaderNew from "../custom"
 interface CustomReaderEditProps {
   id: string
 }
-export default memo(function CustomReaderEdit({
-  id,
-}: CustomReaderEditProps): JSX.Element {
+export default memo(function CustomReaderEdit({ id }: CustomReaderEditProps) {
   const { data: userText, isSuccess } = useGetCustomTextQuery({ id })
   const localText = getCustomTextLocal(id)
   const text = (isSuccess ? userText : localText) as CustomText

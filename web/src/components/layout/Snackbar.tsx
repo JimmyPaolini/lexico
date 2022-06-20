@@ -6,7 +6,7 @@ interface Props {
   children?: ReactNode
 }
 
-export default function Snackbar({ children }: Props): JSX.Element {
+export default function Snackbar({ children }: Props) {
   const classes = useStyles()
 
   return (
@@ -20,7 +20,8 @@ export default function Snackbar({ children }: Props): JSX.Element {
       }}
       elevation={4}
       hideIconVariant
-      preventDuplicate>
+      preventDuplicate
+    >
       {children}
     </SnackbarProvider>
   )

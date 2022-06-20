@@ -8,7 +8,7 @@ interface CustomLiteratureEditProps {
 }
 export default function CustomLiteratureEdit({
   text,
-}: CustomLiteratureEditProps): JSX.Element {
+}: CustomLiteratureEditProps) {
   const router = useRouter()
 
   const editText = () => {

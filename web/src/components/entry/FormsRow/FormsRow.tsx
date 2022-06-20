@@ -29,7 +29,7 @@ export default function FormsRow({
   forms,
   partOfSpeech,
   identifiers: identifiersList = [],
-}: Props): JSX.Element {
+}: Props) {
   const classes = useStyles()
   const { user } = useContext(Context)
   const expandedInitial =

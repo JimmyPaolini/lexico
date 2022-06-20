@@ -2,7 +2,7 @@ import { CircularProgress, Paper } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import Head from "next/head"
 
-export default function LiteratureFallback(): JSX.Element {
+export default function LiteratureFallback() {
   const classes = useStyles()
   return (
     <>

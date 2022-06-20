@@ -15,7 +15,7 @@ export default function CustomLiteratureMoveToLocal({
   text,
   refreshCustomTexts,
   closeMenu,
-}: CustomLiteratureMoveToLocalProps): JSX.Element {
+}: CustomLiteratureMoveToLocalProps) {
   const { mutate: deleteCustomTextUser } = useDeleteCustomTextMutation({
     onMutate: closeMenu,
     onSettled: () => refreshCustomTexts(),

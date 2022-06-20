@@ -28,7 +28,7 @@ export default function SearchBar({
   target = "",
   isLatin = true,
   setLatin = () => null,
-}: SearchBarProps): JSX.Element {
+}: SearchBarProps) {
   const classes = useStyles()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
   const input = useRef<any>()
@@ -51,7 +51,8 @@ export default function SearchBar({
             <IconButton
               onClick={() => setNavOpen(!isNavOpen)}
               className={classes.iconButton}
-              aria-label="menu">
+              aria-label="menu"
+            >
               <MenuIcon />
             </IconButton>
           )}
@@ -74,7 +75,8 @@ export default function SearchBar({
           <IconButton
             onClick={() => handleSearchExecute()}
             className={classes.iconButton}
-            aria-label="search">
+            aria-label="search"
+          >
             {!isLoading ? (
               <SearchIcon />
             ) : (

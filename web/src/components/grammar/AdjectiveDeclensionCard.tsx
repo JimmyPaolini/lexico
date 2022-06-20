@@ -20,7 +20,7 @@ interface AdjectiveDeclensionCardProps {
 export default forwardRef(function AdjectiveDeclensionCard(
   { declension, expandedInitial = false }: AdjectiveDeclensionCardProps,
   ref,
-): JSX.Element {
+) {
   const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 

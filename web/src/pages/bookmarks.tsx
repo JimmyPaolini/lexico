@@ -15,7 +15,7 @@ import useBookmarkInstructions from "../hooks/bookmarks/useBookmarkInstructions"
 import { getBookmarksLocal } from "../utils/bookmarksLocal"
 import identifyEntryWord from "../utils/identifiers"
 
-export default function Bookmarks(): JSX.Element {
+export default function Bookmarks() {
   const { user } = useContext(Context)
   const [search, setSearch] = useState<string>("")
   const [searched, setSearched] = useState<string>(search)
@@ -94,7 +94,8 @@ export default function Bookmarks(): JSX.Element {
           isLoading,
           handleSearchExecute: () => setSearched(search),
           target: "bookmarks",
-        }}>
+        }}
+      >
         {isLoading ? null : isSuccess &&
           Array.isArray(bookmarks) &&
           !bookmarks.length ? (

@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { memo } from "react"
 import { MyTheme } from "../../../theme"
 
-export default memo(function CustomLiteratureLoading(): JSX.Element {
+export default memo(function CustomLiteratureLoading() {
   const classes = useStyles()
 
   return (

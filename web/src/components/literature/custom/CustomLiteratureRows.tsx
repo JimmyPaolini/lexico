@@ -5,7 +5,7 @@ import { Context } from "../../layout/Context"
 import CustomLiteratureLoading from "./CustomLiteratureLoading"
 import CustomLiteratureRow from "./CustomLiteratureRow"
 
-export default function CustomLiteratureRows(): JSX.Element {
+export default function CustomLiteratureRows() {
   const { user } = useContext(Context)
   const { customTexts, refreshCustomTexts, isLoading } = useCustomTexts()
 

@@ -19,10 +19,7 @@ interface Props {
   isLast: boolean
 }
 
-export default memo(function LiteratureBook({
-  book,
-  isLast,
-}: Props): JSX.Element {
+export default memo(function LiteratureBook({ book, isLast }: Props) {
   const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(false)
 

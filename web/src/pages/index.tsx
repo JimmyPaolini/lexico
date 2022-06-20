@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next"
 
-export default function index(): JSX.Element {
+export default function index() {
   return <></>
 }
 

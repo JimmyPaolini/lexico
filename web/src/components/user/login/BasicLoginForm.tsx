@@ -17,7 +17,7 @@ import SubmitButton from "../../accessories/SubmitButton"
 import TextBox from "../../accessories/TextBox"
 import { Context } from "../../layout/Context"
 
-export default function BasicLogin(): JSX.Element {
+export default function BasicLogin() {
   const classes = useStyles()
   const { queryClient } = useContext(Context)
   const [submit, setSubmit] = useState<"sign up" | "sign in">("sign in")

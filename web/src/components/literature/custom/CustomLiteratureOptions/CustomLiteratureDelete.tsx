@@ -13,7 +13,7 @@ interface CustomLiteratureDeleteProps {
 export default function CustomLiteratureDelete({
   text,
   refreshCustomTexts,
-}: CustomLiteratureDeleteProps): JSX.Element {
+}: CustomLiteratureDeleteProps) {
   const { mutate: deleteCustomTextUser } = useDeleteCustomTextMutation({
     onSuccess: () => refreshCustomTexts(),
   })

@@ -4,7 +4,7 @@ import React from "react"
 interface Props {
   formik: any
 }
-export default function SettingsSlider({ formik }: Props): JSX.Element {
+export default function SettingsSlider({ formik }: Props) {
   const min = 16
   const max = 32
   const marks = new Array((max - min) / 2 + 1)

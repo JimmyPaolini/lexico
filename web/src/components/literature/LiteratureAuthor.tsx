@@ -20,7 +20,7 @@ export default memo(function LiteratureAuthor({
   author,
   expanded,
   setExpanded,
-}: LiteratureAuthorProps): JSX.Element {
+}: LiteratureAuthorProps) {
   const classes = useStyles()
   let summary = [
     ...(author.books || []),
@@ -41,7 +41,8 @@ export default memo(function LiteratureAuthor({
       onClick={() => setExpanded((expanded) => !expanded)}
       classes={{ focusHighlight: classes.none }}
       disableRipple
-      disableTouchRipple>
+      disableTouchRipple
+    >
       <CardHeaderMui
         title={sentenceCase(author.id)}
         subheader={
@@ -53,7 +54,8 @@ export default memo(function LiteratureAuthor({
               <Typography
                 variant="caption"
                 color="textPrimary"
-                className={classes.summary}>
+                className={classes.summary}
+              >
                 {summary}
               </Typography>
             </Collapse>

@@ -12,7 +12,7 @@ import { Context } from "../../layout/Context"
 import SettingsSlider from "./SettingsSlider"
 import SettingsSwitch from "./SettingsSwitch"
 
-export default function SettingsForm(): JSX.Element {
+export default function SettingsForm() {
   const { user } = useContext(Context)
 
   const { enqueueSnackbar } = useSnackbarEnhanced()

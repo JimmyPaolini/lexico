@@ -10,7 +10,7 @@ import verbConjugations from "../components/grammar/verbConjugations"
 import SearchBarLayout from "../components/layout/SearchBarLayout"
 import { getMacronOptionRegex } from "../utils/string"
 
-export default function Grammar(): JSX.Element {
+export default function Grammar() {
   const grammarCards = [
     ...verbConjugations.map((conjugation) => {
       const ref = useRef<HTMLDivElement>()

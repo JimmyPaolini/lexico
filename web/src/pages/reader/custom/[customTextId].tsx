@@ -12,9 +12,7 @@ import Reader from "../[textId]"
 interface CustomReaderProps {
   id: string
 }
-export default memo(function CustomReader({
-  id,
-}: CustomReaderProps): JSX.Element {
+export default memo(function CustomReader({ id }: CustomReaderProps) {
   const { data, isSuccess } = useGetCustomTextQuery({ id })
   const localText = getCustomTextLocal(id)
   const text = (isSuccess ? data?.getCustomText : localText) as CustomText

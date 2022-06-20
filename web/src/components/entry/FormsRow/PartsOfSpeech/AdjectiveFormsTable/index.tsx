@@ -11,9 +11,7 @@ export interface AdjectiveFormsProps {
   forms?: Maybe<Forms>
 }
 
-export default function AdjectiveForms({
-  forms,
-}: AdjectiveFormsProps): JSX.Element {
+export default function AdjectiveForms({ forms }: AdjectiveFormsProps) {
   const classes = useStyles()
   const [tab, setTab] = useState(0)
   const structure = adjectiveFormsRestructure(forms)

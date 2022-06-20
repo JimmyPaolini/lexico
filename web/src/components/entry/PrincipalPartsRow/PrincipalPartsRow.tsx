@@ -22,7 +22,7 @@ export default function PrincipalPartsRow({
   inflection,
   bookmarked,
   expanded,
-}: PrincipalPartsRowProps): JSX.Element {
+}: PrincipalPartsRowProps) {
   const classes = useStyles()
 
   const principalPartsFormatted = principalParts

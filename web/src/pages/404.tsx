@@ -6,7 +6,7 @@ import SubmitButton from "../components/accessories/SubmitButton"
 import SingleCardLayout from "../components/layout/SingleCardLayout"
 import { MyTheme } from "../theme"
 
-export default function Error404(): JSX.Element {
+export default function Error404() {
   const classes = useStyles()
 
   return (

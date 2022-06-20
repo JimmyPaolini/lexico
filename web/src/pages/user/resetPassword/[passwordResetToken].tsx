@@ -7,9 +7,7 @@ import { useValidatePasswordResetTokenQuery } from "../../../graphql/generated"
 interface Props {
   passwordResetToken: string
 }
-export default function ResetPassword({
-  passwordResetToken,
-}: Props): JSX.Element {
+export default function ResetPassword({ passwordResetToken }: Props) {
   return (
     <SingleCardLayout>
       <ResetPasswordCard passwordResetToken={passwordResetToken} />

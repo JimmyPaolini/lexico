@@ -18,7 +18,7 @@ export default function CustomLiteratureMenu({
   refreshCustomTexts,
   anchor,
   setAnchor,
-}: CustomLiteratureMenuProps): JSX.Element {
+}: CustomLiteratureMenuProps) {
   const { user } = useContext(Context)
   const closeMenu = () => {
     setAnchor(null)
@@ -40,7 +40,8 @@ export default function CustomLiteratureMenu({
       transformOrigin={{
         vertical: "bottom",
         horizontal: "right",
-      }}>
+      }}
+    >
       {user ? (
         text.local ? (
           <CustomLiteratureMoveToUser

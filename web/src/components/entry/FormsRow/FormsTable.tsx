@@ -7,7 +7,7 @@ interface Props {
   forms: FormCellProps[]
 }
 
-export default function FormsTable({ forms }: Props): JSX.Element {
+export default function FormsTable({ forms }: Props) {
   const classes = useStyles()
   return (
     <Grid container className={classes.formsTable}>

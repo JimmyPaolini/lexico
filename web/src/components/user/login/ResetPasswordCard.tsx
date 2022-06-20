@@ -23,7 +23,7 @@ interface ResetPasswordCardProps {
 }
 export default function ResetPasswordCard({
   passwordResetToken,
-}: ResetPasswordCardProps): JSX.Element {
+}: ResetPasswordCardProps) {
   const classes = useStyles()
   const { queryClient } = useContext(Context)
   const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -68,7 +68,8 @@ export default function ResetPasswordCard({
                         aria-label="toggle password visibility"
                         onClick={() =>
                           setShowPassword((showPassword) => !showPassword)
-                        }>
+                        }
+                      >
                         {showPassword ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>

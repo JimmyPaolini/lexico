@@ -12,7 +12,7 @@ import React, { useState } from "react"
 import tools from "../../utils/tools"
 import ExpandIcon from "../accessories/ExpandIcon"
 
-export default function ToolIconGrid(): JSX.Element {
+export default function ToolIconGrid() {
   const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(false)
 

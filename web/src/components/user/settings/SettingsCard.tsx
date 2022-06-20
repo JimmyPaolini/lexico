@@ -11,7 +11,7 @@ import { Context } from "../../layout/Context"
 import { Identity } from "./Identity"
 import SettingsForm from "./SettingsForm"
 
-export default function SettingsCard(): JSX.Element {
+export default function SettingsCard() {
   const classes = useStyles()
   const { user, queryClient } = useContext(Context)
 

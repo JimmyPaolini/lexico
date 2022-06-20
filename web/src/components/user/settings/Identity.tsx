@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core"
 import { useContext } from "react"
 import { Context } from "../../layout/Context"
 
-export function Identity(): JSX.Element {
+export function Identity() {
   const { user } = useContext(Context)
 
   return user ? (

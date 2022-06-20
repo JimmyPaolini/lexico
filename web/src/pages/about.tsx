@@ -8,9 +8,8 @@ import UpcommingFeatures from "../components/about/UpcomingFeatures"
 import CardHeader from "../components/accessories/CardHeader"
 import { MyTheme } from "../theme"
 
-export default function About(): JSX.Element {
+export default function About() {
   const classes = useStyles()
-
   return (
     <>
       <Head>

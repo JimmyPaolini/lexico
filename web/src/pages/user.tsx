@@ -16,7 +16,7 @@ import useSnackbarEnhanced from "../hooks/useSnackbarEnhanced"
 import { showSettingsInstructions } from "../utils/settingsLocal"
 import { serverEndpoint } from "./api"
 
-export default function User(): JSX.Element {
+export default function User() {
   const classes = useStyles()
   const { user } = useContext(Context)
   const { enqueueSnackbar } = useSnackbarEnhanced()

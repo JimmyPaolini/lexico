@@ -7,11 +7,7 @@ interface Props {
   onClick?: () => any
   [key: string]: any
 }
-export default function SubmitButton({
-  name,
-  onClick,
-  ...props
-}: Props): JSX.Element {
+export default function SubmitButton({ name, onClick, ...props }: Props) {
   return (
     <Button
       color="primary"
@@ -21,7 +17,8 @@ export default function SubmitButton({
       fullWidth
       type="submit"
       onClick={onClick}
-      {...props}>
+      {...props}
+    >
       {sentenceCase(name)}
     </Button>
   )

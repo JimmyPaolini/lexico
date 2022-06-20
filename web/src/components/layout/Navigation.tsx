@@ -17,7 +17,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { Context } from "./Context"
 import pages from "./pages"
 
-export default function Navigation(): JSX.Element {
+export default function Navigation() {
   const classes = useStyles()
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
   const router = useRouter()
@@ -42,7 +42,8 @@ export default function Navigation(): JSX.Element {
       classes={{
         paper: open ? classes.drawerOpen : classes.drawerClosed,
       }}
-      className={open ? classes.drawerOpen : classes.drawerClosed}>
+      className={open ? classes.drawerOpen : classes.drawerClosed}
+    >
       <Grid item>
         <List>
           <ListItem className={classes.header}>
@@ -52,7 +53,8 @@ export default function Navigation(): JSX.Element {
             <IconButton
               onClick={() => setOpen(!open)}
               className={classes.expander}
-              aria-label="toggle navigation drawer">
+              aria-label="toggle navigation drawer"
+            >
               {open ? <ChevronLeft /> : <Menu />}
             </IconButton>
           </ListItem>
@@ -62,11 +64,13 @@ export default function Navigation(): JSX.Element {
               href={"/" + page.name}
               prefetch={false}
               key={page.name}
-              passHref>
+              passHref
+            >
               <ListItem
                 button
                 selected={selected === page.name}
-                onClick={() => handleSelection(page.name)}>
+                onClick={() => handleSelection(page.name)}
+              >
                 <ListItemIcon>{page.icon}</ListItemIcon>
                 <ListItemText primary={page.Name} />
               </ListItem>

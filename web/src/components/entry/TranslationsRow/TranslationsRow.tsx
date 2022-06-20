@@ -16,7 +16,7 @@ import TranslationBullet from "./TranslationBullet"
 interface Props {
   translations: Translation[]
 }
-export default function TranslationsRow({ translations }: Props): JSX.Element {
+export default function TranslationsRow({ translations }: Props) {
   const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(

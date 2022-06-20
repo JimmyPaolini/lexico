@@ -8,7 +8,7 @@ interface Props {
   title: string
   [key: string]: any
 }
-export default function CardHeader({ title, ...props }: Props): JSX.Element {
+export default function CardHeader({ title, ...props }: Props) {
   const classes = useStyles()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
 
@@ -28,7 +28,8 @@ export default function CardHeader({ title, ...props }: Props): JSX.Element {
           <IconButton
             onClick={() => null}
             aria-label="empty space"
-            className={classes.hiddenAction}>
+            className={classes.hiddenAction}
+          >
             <Menu />
           </IconButton>
         )

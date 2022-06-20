@@ -20,7 +20,7 @@ interface Props {
 export default forwardRef(function NounDeclensionCard(
   { declension, expandedInitial = false }: Props,
   ref,
-): JSX.Element {
+) {
   const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 

@@ -7,7 +7,7 @@ interface TranslationBulletProps {
 }
 export default function TranslationBullet({
   translation,
-}: TranslationBulletProps): JSX.Element {
+}: TranslationBulletProps) {
   const classes = useStyles()
   return (
     <Grid
@@ -17,7 +17,8 @@ export default function TranslationBullet({
       xs
       alignItems="flex-start"
       wrap="nowrap"
-      className={classes.translationBullet}>
+      className={classes.translationBullet}
+    >
       <div className={classes.bullet} />
       <Typography color="textPrimary">{translation.translation}</Typography>
     </Grid>

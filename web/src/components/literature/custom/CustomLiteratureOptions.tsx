@@ -12,7 +12,7 @@ interface CustomLiteratureOptionsProps {
 export default function CustomLiteratureOptions({
   text,
   refreshCustomTexts,
-}: CustomLiteratureOptionsProps): JSX.Element {
+}: CustomLiteratureOptionsProps) {
   const classes = useStyles()
 
   const [anchor, setAnchor] = useState<null | HTMLElement>(null)
@@ -23,7 +23,8 @@ export default function CustomLiteratureOptions({
   return (
     <ListItemSecondaryAction
       onClick={(event) => event.stopPropagation()}
-      className={classes.iconButtons}>
+      className={classes.iconButtons}
+    >
       {!text?.local ? (
         <IconButton disabled aria-label="on user" className={classes.options}>
           <AccountCircle />
@@ -32,7 +33,8 @@ export default function CustomLiteratureOptions({
       <IconButton
         aria-label="options"
         className={classes.options}
-        onClick={openMenu}>
+        onClick={openMenu}
+      >
         <MoreHoriz />
       </IconButton>
       <CustomLiteratureMenu

@@ -23,7 +23,7 @@ interface Props {
   children?: ReactNode
   queryClient: QueryClient
 }
-export function ContextProvider({ children, queryClient }: Props): JSX.Element {
+export function ContextProvider({ children, queryClient }: Props) {
   const { data } = useUserQuery({}, { staleTime: 1000 * 60 * 5 }) // 5 minutes
   const user = data?.user
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down("sm"))
@@ -39,7 +39,8 @@ export function ContextProvider({ children, queryClient }: Props): JSX.Element {
           setNavOpen,
           queryClient,
         } as ReactContext
-      }>
+      }
+    >
       {children}
     </Context.Provider>
   )

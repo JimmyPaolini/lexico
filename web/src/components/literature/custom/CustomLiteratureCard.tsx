@@ -9,7 +9,7 @@ import { Add } from "@material-ui/icons"
 import React, { memo } from "react"
 import CustomLiteratureRows from "./CustomLiteratureRows"
 
-export default memo(function LiteratureCustomCard(): JSX.Element {
+export default memo(function LiteratureCustomCard() {
   const classes = useStyles()
 
   return (
