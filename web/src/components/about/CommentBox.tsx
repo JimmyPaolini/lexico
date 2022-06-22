@@ -5,9 +5,9 @@ import {
   Collapse,
   Grid,
   Link,
+  makeStyles,
   Typography,
 } from "@material-ui/core"
-import { makeStyles } from "@material-ui/styles"
 import { useFormik } from "formik"
 import React, { useContext, useState } from "react"
 import { useCommentMutation } from "../../graphql/generated"

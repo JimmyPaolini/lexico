@@ -19,7 +19,7 @@ export interface ReactContext {
 
 export const Context = createContext({} as ReactContext)
 
-interface Props {
+type Props = {
   children?: ReactNode
   queryClient: QueryClient
 }

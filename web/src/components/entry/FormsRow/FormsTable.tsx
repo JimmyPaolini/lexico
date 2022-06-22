@@ -1,9 +1,9 @@
 import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React from "react"
-import FormCell, { FormCellPosition, FormCellProps } from "./FormCell"
+import FormCell, { FormCellPosition, Props as FormCellProps } from "./FormCell"
 
-interface Props {
+type Props = {
   forms: FormCellProps[]
 }
 

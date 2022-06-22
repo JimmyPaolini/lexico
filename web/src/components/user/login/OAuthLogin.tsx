@@ -3,7 +3,7 @@ import Image from "next/image"
 import React from "react"
 import { sentenceCase } from "../../../utils/string"
 
-interface Props {
+type Props = {
   provider: string
 }
 export default function OAuthLogin({ provider }: Props) {

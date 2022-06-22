@@ -5,14 +5,14 @@ import { MouseEvent, useState } from "react"
 import { CustomText } from "../../../utils/literatureLocal"
 import CustomLiteratureMenu from "./CustomLiteratureOptions/CustomLiteratureMenu"
 
-interface CustomLiteratureOptionsProps {
+type Props = {
   text: CustomText
   refreshCustomTexts: () => Promise<void>
 }
 export default function CustomLiteratureOptions({
   text,
   refreshCustomTexts,
-}: CustomLiteratureOptionsProps) {
+}: Props) {
   const classes = useStyles()
 
   const [anchor, setAnchor] = useState<null | HTMLElement>(null)

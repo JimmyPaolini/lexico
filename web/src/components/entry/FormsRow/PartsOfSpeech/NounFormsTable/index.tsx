@@ -6,11 +6,11 @@ import { Forms, Maybe } from "../../../../../graphql/generated"
 import FormsTable from "../../FormsTable"
 import { nounFormsRestructure } from "./nounFormsRestructure"
 
-interface NounFormsProps {
+type Props = {
   forms?: Maybe<Forms>
 }
 
-export default function NounForms({ forms }: NounFormsProps) {
+export default function NounForms({ forms }: Props) {
   const classes = useStyles()
   const formsStructure = nounFormsRestructure(forms)
   return (

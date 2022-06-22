@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { SnackbarProvider } from "notistack"
 import React, { ReactNode } from "react"
 
-interface Props {
+type Props = {
   children?: ReactNode
 }
 

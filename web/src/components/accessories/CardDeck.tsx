@@ -10,10 +10,10 @@ type Card = {
   Card: JSX.Element
 }
 
-interface CardDeckProps {
+type Props = {
   cards: Card[]
 }
-export default memo(function CardDeck({ cards }: CardDeckProps) {
+export default memo(function CardDeck({ cards }: Props) {
   const classes = useStyles()
 
   let numCols = 1

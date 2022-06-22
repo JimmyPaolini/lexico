@@ -4,7 +4,7 @@ import { Edit } from "@material-ui/icons"
 import { useRouter } from "next/router"
 import React from "react"
 import { Text } from "../../graphql/generated"
-import { MyTheme } from "../../theme"
+import { LexicoTheme } from "../../theme"
 import { sentenceCase } from "../../utils/string"
 import CardHeader from "../accessories/CardHeader"
 import ReaderLine from "./ReaderLine"
@@ -60,7 +60,7 @@ export default function ReaderText({ text, openModal }: ReaderTextProps) {
   )
 }
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   readerText: {
     marginLeft: "auto",
     marginRight: "auto",

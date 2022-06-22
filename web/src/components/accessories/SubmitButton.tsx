@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core"
 import React from "react"
 import { sentenceCase } from "../../utils/string"
 
-interface Props {
+type Props = {
   name: string
   onClick?: () => any
   [key: string]: any

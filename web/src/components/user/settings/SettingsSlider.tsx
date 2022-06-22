@@ -1,7 +1,7 @@
 import { Slider } from "@material-ui/core"
 import React from "react"
 
-interface Props {
+type Props = {
   formik: any
 }
 export default function SettingsSlider({ formik }: Props) {

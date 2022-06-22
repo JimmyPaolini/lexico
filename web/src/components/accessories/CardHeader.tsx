@@ -4,7 +4,7 @@ import { Menu } from "@material-ui/icons"
 import React, { useContext } from "react"
 import { Context } from "../layout/Context"
 
-interface Props {
+type Props = {
   title: string
   [key: string]: any
 }

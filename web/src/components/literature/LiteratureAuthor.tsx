@@ -11,7 +11,7 @@ import { Author } from "../../graphql/generated"
 import { sentenceCase } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
 
-interface LiteratureAuthorProps {
+type Props = {
   author: Author
   expanded: boolean
   setExpanded: Dispatch<SetStateAction<boolean>>
@@ -20,7 +20,7 @@ export default memo(function LiteratureAuthor({
   author,
   expanded,
   setExpanded,
-}: LiteratureAuthorProps) {
+}: Props) {
   const classes = useStyles()
   let summary = [
     ...(author.books || []),

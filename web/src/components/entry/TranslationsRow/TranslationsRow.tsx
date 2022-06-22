@@ -13,7 +13,7 @@ import ExpandIcon from "../../accessories/ExpandIcon"
 import { Context } from "../../layout/Context"
 import TranslationBullet from "./TranslationBullet"
 
-interface Props {
+type Props = {
   translations: Translation[]
 }
 export default function TranslationsRow({ translations }: Props) {

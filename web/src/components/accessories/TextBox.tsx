@@ -2,7 +2,7 @@ import { TextField } from "@material-ui/core"
 import { forwardRef, MutableRefObject } from "react"
 import { sentenceCase } from "../../utils/string"
 
-interface Props {
+type Props = {
   formik: any
   name: string
   [key: string]: unknown

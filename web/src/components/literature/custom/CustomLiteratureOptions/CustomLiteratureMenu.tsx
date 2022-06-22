@@ -7,7 +7,7 @@ import CustomLiteratureEdit from "./CustomLiteratureEdit"
 import CustomLiteratureMoveToLocal from "./CustomLiteratureMoveToLocal"
 import CustomLiteratureMoveToUser from "./CustomLiteratureMoveToUser"
 
-interface CustomLiteratureMenuProps {
+type Props = {
   text: CustomText
   refreshCustomTexts: () => Promise<void>
   anchor: HTMLElement | null
@@ -18,7 +18,7 @@ export default function CustomLiteratureMenu({
   refreshCustomTexts,
   anchor,
   setAnchor,
-}: CustomLiteratureMenuProps) {
+}: Props) {
   const { user } = useContext(Context)
   const closeMenu = () => {
     setAnchor(null)

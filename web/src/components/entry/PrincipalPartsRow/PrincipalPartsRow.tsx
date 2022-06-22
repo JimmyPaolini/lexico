@@ -7,7 +7,7 @@ import ExpandIcon from "../../accessories/ExpandIcon"
 import BookmarkButton from "./BookmarkButton"
 import inflectionToString from "./inflectionToString"
 
-export interface PrincipalPartsRowProps {
+type Props = {
   id: string
   partOfSpeech: string
   principalParts: Maybe<PrincipalPart[]> | undefined
@@ -22,7 +22,7 @@ export default function PrincipalPartsRow({
   inflection,
   bookmarked,
   expanded,
-}: PrincipalPartsRowProps) {
+}: Props) {
   const classes = useStyles()
 
   const principalPartsFormatted = principalParts

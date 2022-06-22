@@ -2,7 +2,7 @@ import { Grid, Grow } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { ReactNode } from "react"
 
-interface Props {
+type Props = {
   children?: ReactNode
 }
 export default function SingleCardLayout({ children }: Props) {

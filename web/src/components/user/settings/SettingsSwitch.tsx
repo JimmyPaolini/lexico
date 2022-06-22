@@ -1,7 +1,7 @@
 import { Grid, Switch, Typography } from "@material-ui/core"
 import React from "react"
 
-interface Props {
+type Props = {
   field: string
   label: string
   formik: any

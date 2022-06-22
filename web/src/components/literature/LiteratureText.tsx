@@ -7,7 +7,7 @@ import { Text } from "../../graphql/generated"
 import { romanNumeralize } from "../../utils/romanNumeral"
 import { sentenceCase } from "../../utils/string"
 
-interface Props {
+type Props = {
   text: Text
 }
 export default memo(function LiteratureText({ text }: Props) {

@@ -4,24 +4,24 @@ import {
   TypographyOptions,
 } from "@material-ui/core/styles/createTypography"
 
-export interface MyTheme extends Theme {
-  typography: MyTypography
+export interface LexicoTheme extends Theme {
+  typography: LexicoTypography
   custom: {
     cardWidth: number
   }
 }
-interface MyTypography extends Typography {
+interface LexicoTypography extends Typography {
   literature: Record<string, unknown>
 }
 
-interface MyThemeOptions extends ThemeOptions {
-  typography?: MyTypographyOptions
+interface LexicoThemeOptions extends ThemeOptions {
+  typography?: LexicoTypographyOptions
   custom?: {
     cardWidth?: number
   }
 }
 
-interface MyTypographyOptions extends TypographyOptions {
+interface LexicoTypographyOptions extends TypographyOptions {
   literature?: Record<string, unknown>
 }
 
@@ -50,6 +50,6 @@ const theme = createTheme({
   custom: {
     cardWidth: 382,
   },
-} as MyThemeOptions) as MyTheme
+} as LexicoThemeOptions) as LexicoTheme
 
 export default theme

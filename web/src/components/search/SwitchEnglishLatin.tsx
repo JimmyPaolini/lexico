@@ -4,7 +4,7 @@ import SwitchMui from "@material-ui/core/Switch"
 import Typography from "@material-ui/core/Typography"
 import React, { Dispatch, SetStateAction } from "react"
 
-interface Props {
+type Props = {
   isLatin: boolean
   setLatin: Dispatch<SetStateAction<boolean>>
 }

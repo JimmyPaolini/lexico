@@ -1,13 +1,13 @@
-import { FC } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Typography } from "@material-ui/core"
+import { PropsWithChildren } from "react"
 
-type PillProps = {
+type Props = PropsWithChildren<{
   backgroundColor: string
   color: string
-}
+}>
 
-const Pill: FC<PillProps> = ({ backgroundColor, color, children }) => {
+export default function Pill({ backgroundColor, color, children }: Props) {
   const classes = useStyles()
   return (
     <Typography
@@ -30,5 +30,3 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
   },
 }))
-
-export default Pill

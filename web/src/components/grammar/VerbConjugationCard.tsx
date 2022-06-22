@@ -7,17 +7,17 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { forwardRef, useState } from "react"
-import { MyTheme } from "../../theme"
+import { LexicoTheme } from "../../theme"
 import VerbForms from "../entry/FormsRow/PartsOfSpeech/VerbFormsTable"
 import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
 import verbConjugations from "./verbConjugations"
 
-interface VerbConjugationCardProps {
+type Props = {
   conjugation: typeof verbConjugations[0]
   expandedInitial?: boolean
 }
 export default forwardRef(function VerbConjugationCard(
-  { conjugation, expandedInitial = false }: VerbConjugationCardProps,
+  { conjugation, expandedInitial = false }: Props,
   ref,
 ) {
   const classes = useStyles()
@@ -43,7 +43,7 @@ export default forwardRef(function VerbConjugationCard(
   )
 })
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   card: {
     margin: theme.spacing(1),
   },

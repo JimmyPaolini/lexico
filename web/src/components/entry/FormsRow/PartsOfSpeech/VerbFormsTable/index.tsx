@@ -7,7 +7,7 @@ import FormsTable from "../../FormsTable"
 import FormTabs from "../../FormTabs"
 import { verbFormsRestructure } from "./verbFormsRestructure"
 
-interface Props {
+type Props = {
   forms?: Maybe<Forms>
 }
 

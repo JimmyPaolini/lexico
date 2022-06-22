@@ -2,18 +2,18 @@ import { Divider, ListItem, ListItemText } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useRouter } from "next/router"
 import { memo } from "react"
-import { MyTheme } from "../../../theme"
+import { LexicoTheme } from "../../../theme"
 import { CustomText } from "../../../utils/literatureLocal"
 import CustomLiteratureOptions from "./CustomLiteratureOptions"
 
-interface CustomLiteratureRowProps {
+type Props = {
   text: CustomText
   refreshCustomTexts: () => Promise<void>
 }
 export default memo(function CustomLiteratureRow({
   text,
   refreshCustomTexts,
-}: CustomLiteratureRowProps) {
+}: Props) {
   const classes = useStyles()
   const router = useRouter()
 
@@ -31,7 +31,7 @@ export default memo(function CustomLiteratureRow({
   )
 })
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   divider: {
     marginRight: theme.spacing(1),
   },

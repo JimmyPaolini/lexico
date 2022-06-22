@@ -7,7 +7,7 @@ import useToggleBookmark from "../../../hooks/bookmarks/useToggleBookmark"
 import { isBookmarkedLocal } from "../../../utils/bookmarksLocal"
 import { Context } from "../../layout/Context"
 
-interface Props {
+type Props = {
   id: string
   bookmarked?: Maybe<boolean>
 }

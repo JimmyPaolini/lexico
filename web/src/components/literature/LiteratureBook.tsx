@@ -13,7 +13,7 @@ import { sentenceCase } from "../../utils/string"
 import ExpandIcon from "../accessories/ExpandIcon"
 import LiteratureText from "./LiteratureText"
 
-interface Props {
+type Props = {
   author: Author
   book: Book
   isLast: boolean

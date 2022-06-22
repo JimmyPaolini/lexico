@@ -4,7 +4,7 @@ import React from "react"
 import CardHeader from "../components/accessories/CardHeader"
 import SubmitButton from "../components/accessories/SubmitButton"
 import SingleCardLayout from "../components/layout/SingleCardLayout"
-import { MyTheme } from "../theme"
+import { LexicoTheme } from "../theme"
 
 export default function Error404() {
   const classes = useStyles()
@@ -21,7 +21,7 @@ export default function Error404() {
   )
 }
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   card: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),

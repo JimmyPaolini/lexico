@@ -6,7 +6,7 @@ import CommentBox from "../components/about/CommentBox"
 import ToolIconGrid from "../components/about/ToolIconGrid"
 import UpcommingFeatures from "../components/about/UpcomingFeatures"
 import CardHeader from "../components/accessories/CardHeader"
-import { MyTheme } from "../theme"
+import { LexicoTheme } from "../theme"
 
 export default function About() {
   const classes = useStyles()
@@ -49,7 +49,7 @@ export default function About() {
   )
 }
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   card: {
     padding: theme.spacing(1),
     margin: theme.spacing(2),

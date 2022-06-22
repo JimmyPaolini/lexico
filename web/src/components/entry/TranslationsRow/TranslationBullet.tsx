@@ -2,12 +2,10 @@ import { Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Translation } from "../../../graphql/generated"
 
-interface TranslationBulletProps {
+type Props = {
   translation: Translation
 }
-export default function TranslationBullet({
-  translation,
-}: TranslationBulletProps) {
+export default function TranslationBullet({ translation }: Props) {
   const classes = useStyles()
   return (
     <Grid

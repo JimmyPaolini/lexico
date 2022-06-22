@@ -7,7 +7,7 @@ import FormsRow from "./FormsRow/FormsRow"
 import PrincipalPartsRow from "./PrincipalPartsRow/PrincipalPartsRow"
 import TranslationsRow from "./TranslationsRow/TranslationsRow"
 
-interface Props {
+type Props = {
   entry: Entry
   searched: string
 }

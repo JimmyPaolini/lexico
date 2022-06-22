@@ -1,7 +1,7 @@
 import { CircularProgress, Divider, ListItem } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { memo } from "react"
-import { MyTheme } from "../../../theme"
+import { LexicoTheme } from "../../../theme"
 
 export default memo(function CustomLiteratureLoading() {
   const classes = useStyles()
@@ -16,7 +16,7 @@ export default memo(function CustomLiteratureLoading() {
   )
 })
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   divider: {
     marginRight: theme.spacing(1),
   },

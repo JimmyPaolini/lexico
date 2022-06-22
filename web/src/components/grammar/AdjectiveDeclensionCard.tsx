@@ -8,17 +8,17 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { forwardRef, useState } from "react"
-import { MyTheme } from "../../theme"
+import { LexicoTheme } from "../../theme"
 import AdjectiveForms from "../entry/FormsRow/PartsOfSpeech/AdjectiveFormsTable"
 import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
 import adjectiveDeclensions from "./adjectiveDeclensions"
 
-interface AdjectiveDeclensionCardProps {
+type Props = {
   declension: typeof adjectiveDeclensions[0]
   expandedInitial?: boolean
 }
 export default forwardRef(function AdjectiveDeclensionCard(
-  { declension, expandedInitial = false }: AdjectiveDeclensionCardProps,
+  { declension, expandedInitial = false }: Props,
   ref,
 ) {
   const classes = useStyles()
@@ -48,7 +48,7 @@ export default forwardRef(function AdjectiveDeclensionCard(
   )
 })
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   card: {
     margin: theme.spacing(1),
   },

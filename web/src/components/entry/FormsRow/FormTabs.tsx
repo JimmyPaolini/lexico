@@ -2,7 +2,7 @@ import { Box, Tab, Tabs } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { ReactNode } from "react"
 
-interface Props {
+type Props = {
   activeTab: number
   tabs: string[]
   setActiveTab: any

@@ -3,12 +3,10 @@ import { useRouter } from "next/router"
 import { CustomText } from "../../../../utils/literatureLocal"
 import CustomLiteratureMenuItem from "./CustomLiteratureMenuItem"
 
-interface CustomLiteratureEditProps {
+type Props = {
   text: CustomText
 }
-export default function CustomLiteratureEdit({
-  text,
-}: CustomLiteratureEditProps) {
+export default function CustomLiteratureEdit({ text }: Props) {
   const router = useRouter()
 
   const editText = () => {

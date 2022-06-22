@@ -7,11 +7,11 @@ import FormsTable from "../../FormsTable"
 import FormTabs from "../../FormTabs"
 import { adjectiveFormsRestructure } from "./adjectiveFormsRestructure"
 
-export interface AdjectiveFormsProps {
+type Props = {
   forms?: Maybe<Forms>
 }
 
-export default function AdjectiveForms({ forms }: AdjectiveFormsProps) {
+export default function AdjectiveForms({ forms }: Props) {
   const classes = useStyles()
   const [tab, setTab] = useState(0)
   const structure = adjectiveFormsRestructure(forms)

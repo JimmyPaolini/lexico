@@ -3,7 +3,7 @@ import React, { ReactNode } from "react"
 import Navigation from "./Navigation"
 import Snackbar from "./Snackbar"
 
-interface Props {
+type Props = {
   children?: ReactNode
 }
 

@@ -6,14 +6,14 @@ import {
 } from "../../../../utils/literatureLocal"
 import CustomLiteratureMenuItem from "./CustomLiteratureMenuItem"
 
-interface CustomLiteratureDeleteProps {
+type Props = {
   text: CustomText
   refreshCustomTexts: () => Promise<void>
 }
 export default function CustomLiteratureDelete({
   text,
   refreshCustomTexts,
-}: CustomLiteratureDeleteProps) {
+}: Props) {
   const { mutate: deleteCustomTextUser } = useDeleteCustomTextMutation({
     onSuccess: () => refreshCustomTexts(),
   })

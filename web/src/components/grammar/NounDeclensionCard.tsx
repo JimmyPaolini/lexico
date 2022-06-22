@@ -8,12 +8,12 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { forwardRef, useState } from "react"
-import { MyTheme } from "../../theme"
+import { LexicoTheme } from "../../theme"
 import NounForms from "../entry/FormsRow/PartsOfSpeech/NounFormsTable"
 import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
 import nounDeclensions from "./nounDeclensions"
 
-interface Props {
+type Props = {
   declension: typeof nounDeclensions[0]
   expandedInitial: boolean
 }
@@ -48,7 +48,7 @@ export default forwardRef(function NounDeclensionCard(
   )
 })
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   card: {
     margin: theme.spacing(1),
   },

@@ -1,7 +1,7 @@
 import Grid from "@material-ui/core/Grid"
 import { makeStyles } from "@material-ui/core/styles"
 import Tooltip from "@material-ui/core/Tooltip"
-import { MyTheme } from "../../../../theme"
+import { LexicoTheme } from "../../../../theme"
 import CenterText from "./CenterText"
 import SideCornerTexts from "./SideCornerTexts"
 
@@ -13,7 +13,7 @@ export type FormCellPosition =
   | "bottomLeftText"
   | "bottomRightText"
 
-export interface FormCellProps {
+export type Props = {
   position: FormCellPosition
   centerText: string
   topLeftText: string
@@ -29,7 +29,7 @@ export default function FormCell({
   topRightText,
   bottomLeftText,
   bottomRightText,
-}: FormCellProps) {
+}: Props) {
   const classes = useStyles()
   const borderRule = "1px solid rgba(255, 255, 255, 0.12)"
 
@@ -71,7 +71,7 @@ export default function FormCell({
   )
 }
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   tooltip: {
     maxWidth: theme.custom.cardWidth / 2,
     fontSize: 14,

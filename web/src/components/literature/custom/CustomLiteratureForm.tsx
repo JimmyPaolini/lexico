@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 import { memo, useContext } from "react"
 import { v4 as uuid } from "uuid"
 import { useCreateCustomTextMutation } from "../../../graphql/generated"
-import { MyTheme } from "../../../theme"
+import { LexicoTheme } from "../../../theme"
 import {
   createCustomTextLocal,
   CustomText,
@@ -15,12 +15,10 @@ import SubmitButton from "../../accessories/SubmitButton"
 import TextBox from "../../accessories/TextBox"
 import { Context } from "../../layout/Context"
 
-interface CustomLiteratureFormProps {
+type Props = {
   text?: CustomText
 }
-export default memo(function CustomLiteratureForm({
-  text,
-}: CustomLiteratureFormProps) {
+export default memo(function CustomLiteratureForm({ text }: Props) {
   const classes = useStyles()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
 
@@ -100,7 +98,7 @@ export function validate({ title, text }: CustomText): CustomText {
   return errors
 }
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   customReader: {
     width: "100%",
     maxWidth: theme.custom.cardWidth * 2,

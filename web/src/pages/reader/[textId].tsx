@@ -14,13 +14,13 @@ import {
   useGetTextQuery,
 } from "../../graphql/generated"
 import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
-import { MyTheme } from "../../theme"
+import { LexicoTheme } from "../../theme"
 import { googleAnalyticsEvent } from "../../utils/googleAnalytics"
 import { showReaderInstructions } from "../../utils/readerInstructions"
 import { getSettingsLocal } from "../../utils/settingsLocal"
 import { sentenceCase } from "../../utils/string"
 
-interface Props {
+type Props = {
   text: Text
 }
 export default function Reader({ text }: Props) {
@@ -122,7 +122,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 }
 
-const useStyles = makeStyles((theme: MyTheme) => ({
+const useStyles = makeStyles((theme: LexicoTheme) => ({
   reader: {
     width: "100%",
     height: "100%",

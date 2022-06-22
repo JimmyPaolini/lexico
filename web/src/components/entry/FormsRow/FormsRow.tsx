@@ -17,7 +17,7 @@ import AdjectiveForms from "./PartsOfSpeech/AdjectiveFormsTable"
 import NounForms from "./PartsOfSpeech/NounFormsTable"
 import VerbForms from "./PartsOfSpeech/VerbFormsTable"
 
-interface Props {
+type Props = {
   searched: string
   forms?: Forms | null
   partOfSpeech: string
