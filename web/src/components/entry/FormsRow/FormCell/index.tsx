@@ -1,17 +1,18 @@
-import Grid from "@material-ui/core/Grid"
-import { makeStyles } from "@material-ui/core/styles"
-import Tooltip from "@material-ui/core/Tooltip"
-import { LexicoTheme } from "../../../../theme"
-import CenterText from "./CenterText"
-import SideCornerTexts from "./SideCornerTexts"
+import Grid from '@material-ui/core/Grid'
+import Tooltip from '@material-ui/core/Tooltip'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { LexicoTheme } from '../../../../theme'
+import CenterText from './CenterText'
+import SideCornerTexts from './SideCornerTexts'
 
 export type FormCellPosition =
-  | "topLeftText"
-  | "topRightText"
-  | "midLeft"
-  | "midRight"
-  | "bottomLeftText"
-  | "bottomRightText"
+  | 'topLeftText'
+  | 'topRightText'
+  | 'midLeft'
+  | 'midRight'
+  | 'bottomLeftText'
+  | 'bottomRightText'
 
 export type Props = {
   position: FormCellPosition
@@ -31,11 +32,11 @@ export default function FormCell({
   bottomRightText,
 }: Props) {
   const classes = useStyles()
-  const borderRule = "1px solid rgba(255, 255, 255, 0.12)"
+  const borderRule = '1px solid rgba(255, 255, 255, 0.12)'
 
   return (
     <Tooltip
-      title={centerText?.length > 20 ? centerText : ""}
+      title={centerText?.length > 20 ? centerText : ''}
       placement="top"
       enterDelay={0}
       interactive
@@ -49,10 +50,10 @@ export default function FormCell({
         wrap="nowrap"
         className={classes.formCell}
         style={{
-          borderTop: position.match(/bottom|mid/i) ? borderRule : "",
-          borderBottom: position.match(/top|mid/i) ? borderRule : "",
-          borderRight: position.match(/Left/i) ? borderRule : "",
-          borderLeft: position.match(/Right/i) ? borderRule : "",
+          borderTop: position.match(/bottom|mid/i) ? borderRule : '',
+          borderBottom: position.match(/top|mid/i) ? borderRule : '',
+          borderRight: position.match(/Left/i) ? borderRule : '',
+          borderLeft: position.match(/Right/i) ? borderRule : '',
         }}
       >
         <SideCornerTexts
@@ -75,11 +76,11 @@ const useStyles = makeStyles((theme: LexicoTheme) => ({
   tooltip: {
     maxWidth: theme.custom.cardWidth / 2,
     fontSize: 14,
-    textAlign: "center",
+    textAlign: 'center',
   },
   formCell: {
     background: theme.palette.background.paper,
     height: 48,
-    position: "relative",
+    position: 'relative',
   },
 }))

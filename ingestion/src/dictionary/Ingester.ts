@@ -1,15 +1,15 @@
-import Entry from "../../../entity/dictionary/Entry"
-import Translation from "../../../entity/dictionary/Translation"
-import { Forms } from "../../../entity/dictionary/word/Forms"
-import { Inflection } from "../../../entity/dictionary/word/Inflection"
-import { PartOfSpeech } from "../../../entity/dictionary/word/PartOfSpeech"
-import PrincipalPart from "../../../entity/dictionary/word/PrincipalPart"
-import { Pronunciation } from "../../../entity/dictionary/word/Pronunciation"
-import parseEtymology from "./ingester/etymology"
-import parseForms from "./ingester/form"
-import parsePrincipalParts from "./ingester/principalPart"
-import parsePronunciation from "./ingester/pronunciation"
-import parseTranslations from "./ingester/translation"
+import Entry from '../../../entity/dictionary/Entry'
+import Translation from '../../../entity/dictionary/Translation'
+import { Forms } from '../../../entity/dictionary/word/Forms'
+import { Inflection } from '../../../entity/dictionary/word/Inflection'
+import { PartOfSpeech } from '../../../entity/dictionary/word/PartOfSpeech'
+import PrincipalPart from '../../../entity/dictionary/word/PrincipalPart'
+import { Pronunciation } from '../../../entity/dictionary/word/Pronunciation'
+import parseEtymology from './ingester/etymology'
+import parseForms from './ingester/form'
+import parsePrincipalParts from './ingester/principalPart'
+import parsePronunciation from './ingester/pronunciation'
+import parseTranslations from './ingester/translation'
 
 export default abstract class Ingester {
   $: cheerio.Root
@@ -24,18 +24,18 @@ export default abstract class Ingester {
 
   static getPartOfSpeech($: cheerio.Root, elt: any): PartOfSpeech {
     return $(elt)
-      .prevAll(":header, h3, h4")
+      .prevAll(':header, h3, h4')
       .last()
       .text()
       .toLowerCase()
-      .replace(/(\[edit])|\d+/g, "")
+      .replace(/(\[edit])|\d+/g, '')
       .trim()
-      .replace("proper noun", "properNoun") as PartOfSpeech
+      .replace('proper noun', 'properNoun') as PartOfSpeech
   }
 
   abstract ingestInflection(): Promise<Inflection>
 
-  firstPrincipalPartName = ""
+  firstPrincipalPartName = ''
   principalParts: PrincipalPart[]
   async ingestPrincipalParts(): Promise<PrincipalPart[]> {
     this.principalParts = await parsePrincipalParts(

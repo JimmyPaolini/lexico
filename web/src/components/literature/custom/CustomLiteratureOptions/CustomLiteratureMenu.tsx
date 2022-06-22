@@ -1,11 +1,13 @@
-import { Menu } from "@material-ui/core"
-import { Dispatch, SetStateAction, useContext } from "react"
-import { CustomText } from "../../../../utils/literatureLocal"
-import { Context } from "../../../layout/Context"
-import CustomLiteratureDelete from "./CustomLiteratureDelete"
-import CustomLiteratureEdit from "./CustomLiteratureEdit"
-import CustomLiteratureMoveToLocal from "./CustomLiteratureMoveToLocal"
-import CustomLiteratureMoveToUser from "./CustomLiteratureMoveToUser"
+import { Dispatch, SetStateAction, useContext } from 'react'
+
+import { Menu } from '@material-ui/core'
+
+import { CustomText } from '../../../../utils/literatureLocal'
+import { Context } from '../../../layout/Context'
+import CustomLiteratureDelete from './CustomLiteratureDelete'
+import CustomLiteratureEdit from './CustomLiteratureEdit'
+import CustomLiteratureMoveToLocal from './CustomLiteratureMoveToLocal'
+import CustomLiteratureMoveToUser from './CustomLiteratureMoveToUser'
 
 type Props = {
   text: CustomText
@@ -34,12 +36,12 @@ export default function CustomLiteratureMenu({
       MenuListProps={{ style: { padding: 0 }, onMouseLeave: closeMenu }}
       getContentAnchorEl={null}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
+        vertical: 'bottom',
+        horizontal: 'right',
       }}
       transformOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
+        vertical: 'bottom',
+        horizontal: 'right',
       }}
     >
       {user ? (

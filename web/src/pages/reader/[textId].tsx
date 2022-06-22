@@ -1,24 +1,27 @@
-import { Grid, Paper } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { GetStaticPaths, GetStaticProps } from "next"
-import Head from "next/head"
-import { useRouter } from "next/router"
-import { useContext, useEffect, useState } from "react"
-import { Context } from "../../components/layout/Context"
-import LiteratureFallback from "../../components/literature/LiteratureFallback"
-import ReaderModal from "../../components/reader/ReaderModal"
-import ReaderText from "../../components/reader/ReaderText"
+import { useContext, useEffect, useState } from 'react'
+
+import { Grid, Paper } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { GetStaticPaths, GetStaticProps } from 'next'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+
+import { Context } from '../../components/layout/Context'
+import LiteratureFallback from '../../components/literature/LiteratureFallback'
+import ReaderModal from '../../components/reader/ReaderModal'
+import ReaderText from '../../components/reader/ReaderText'
 import {
   Text,
   useGetTextIdsQuery,
   useGetTextQuery,
-} from "../../graphql/generated"
-import useSnackbarEnhanced from "../../hooks/useSnackbarEnhanced"
-import { LexicoTheme } from "../../theme"
-import { googleAnalyticsEvent } from "../../utils/googleAnalytics"
-import { showReaderInstructions } from "../../utils/readerInstructions"
-import { getSettingsLocal } from "../../utils/settingsLocal"
-import { sentenceCase } from "../../utils/string"
+} from '../../graphql/generated'
+import useSnackbarEnhanced from '../../hooks/useSnackbarEnhanced'
+import { LexicoTheme } from '../../theme'
+import { googleAnalyticsEvent } from '../../utils/googleAnalytics'
+import { showReaderInstructions } from '../../utils/readerInstructions'
+import { getSettingsLocal } from '../../utils/settingsLocal'
+import { sentenceCase } from '../../utils/string'
 
 type Props = {
   text: Text
@@ -29,13 +32,13 @@ export default function Reader({ text }: Props) {
   const classes = useStyles({})
   const { user } = useContext(Context)
 
-  const [searched, setSearched] = useState<string>("")
+  const [searched, setSearched] = useState<string>('')
   const [open, setOpen] = useState<boolean>(false)
   const openModal = (word: string) => {
     setSearched(word)
     setOpen(true)
-    googleAnalyticsEvent("search", {
-      category: "literature",
+    googleAnalyticsEvent('search', {
+      category: 'literature',
       label: text.title,
       value: word,
     })
@@ -46,23 +49,23 @@ export default function Reader({ text }: Props) {
     if (showReaderInstructions()) {
       enqueueSnackbar(
         `Click a word to see its dictionary entry, then click elsewhere or swipe it away to keep reading`,
-        { variant: "info" },
+        { variant: 'info' },
       )
     }
   }, [])
 
   useEffect(() => {
-    googleAnalyticsEvent("reader", {
-      category: "literature",
-      label: "open",
+    googleAnalyticsEvent('reader', {
+      category: 'literature',
+      label: 'open',
       value: text.title,
     })
   }, [])
 
-  let title = "Lexico - Literature: " + sentenceCase(text.author.id)
+  let title = 'Lexico - Literature: ' + sentenceCase(text.author.id)
   if (text.book)
-    title += " " + sentenceCase(text.book.title).replace(/^\d+ /, "")
-  title += " " + sentenceCase(text.title)
+    title += ' ' + sentenceCase(text.book.title).replace(/^\d+ /, '')
+  title += ' ' + sentenceCase(text.title)
 
   const fontSize = (user?.settings?.fontSize ||
     getSettingsLocal().fontSize) as number
@@ -75,7 +78,7 @@ export default function Reader({ text }: Props) {
         <meta
           name="keywords"
           content={`Latin ${text.author.name}${
-            text.book ? ", " + text.book.title : ""
+            text.book ? ', ' + text.book.title : ''
           }, ${text.title}, Literature, Read, English, Translation`}
         />
       </Head>
@@ -124,15 +127,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const useStyles = makeStyles((theme: LexicoTheme) => ({
   reader: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "black",
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'black',
     ...theme.typography.literature,
   },
   modal: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   spinner: {
     color: theme.palette.primary.contrastText,

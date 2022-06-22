@@ -1,21 +1,22 @@
-import { ComponentMeta, ComponentStory, forceReRender } from "@storybook/react"
-import BookmarkButton from "src/components/entry/PrincipalPartsRow/BookmarkButton"
-import { searchEntry } from "src/utils/stories"
+import { ComponentMeta, ComponentStory, forceReRender } from '@storybook/react'
+import BookmarkButton from 'src/components/entry/PrincipalPartsRow/BookmarkButton'
+import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: "Cards/EntryCard/PrincipalPartsRow/BookmarkButton",
+  title: 'Cards/EntryCard/PrincipalPartsRow/BookmarkButton',
   component: BookmarkButton,
   decorators: [
     (Story) => (
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          alignContent: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          alignContent: 'center',
           gap: 20,
         }}
-        onClick={() => forceReRender()}>
+        onClick={() => forceReRender()}
+      >
         <Story />
       </div>
     ),
@@ -29,16 +30,17 @@ export const Default: ComponentStory<typeof BookmarkButton> & {
     <BookmarkButton {...args} {...loaded} />
     <div>localStorage.bookmarks = {window.localStorage.bookmarks}</div>
     <div>
-      localStorage.showBookmarkInstructions ={" "}
+      localStorage.showBookmarkInstructions ={' '}
       {window.localStorage.showBookmarkInstructions}
     </div>
     <div
-      style={{ cursor: "pointer" }}
+      style={{ cursor: 'pointer' }}
       onClick={() => {
         delete window.localStorage.bookmarks
         delete window.localStorage.showBookmarkInstructions
         forceReRender
-      }}>
+      }}
+    >
       Click here to reset localStorage
     </div>
   </>
@@ -46,7 +48,7 @@ export const Default: ComponentStory<typeof BookmarkButton> & {
 Default.args = { bookmarked: false }
 Default.loaders = [
   async () => {
-    const { id } = await searchEntry("amat")
+    const { id } = await searchEntry('amat')
     return { id }
   },
 ]

@@ -1,12 +1,14 @@
+import React from 'react'
+
 import {
   Box,
   CardActionArea,
   CardHeader as CardHeaderMui,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { Launch } from "@material-ui/icons"
-import React from "react"
-import packageJson from "../../../../package.json"
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { Launch } from '@material-ui/icons'
+
+import packageJson from '../../../../package.json'
 
 const { version } = packageJson
 
@@ -24,7 +26,7 @@ export default function ToolIconGrid() {
       >
         <CardHeaderMui
           title={`Upcoming Releases (current v${version})`}
-          titleTypographyProps={{ variant: "body1" }}
+          titleTypographyProps={{ variant: 'body1' }}
           className={classes.dropdown}
           action={
             <Box className={classes.iconContainer}>
@@ -51,7 +53,7 @@ const useStyles = makeStyles((theme: any) => ({
     marginBottom: theme.spacing(1),
   },
   hide: {
-    display: "none",
+    display: 'none',
   },
   iconContainer: {
     padding: 12,

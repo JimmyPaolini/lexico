@@ -8,19 +8,19 @@ export default function getPageMetadata(
     else title += ` English: ${searched}`
   }
 
-  let description = "Search for Latin and English"
+  let description = 'Search for Latin and English'
   if (searched) {
-    description = `Search ${isLatin ? "Latin" : "English"} for ${searched}`
+    description = `Search ${isLatin ? 'Latin' : 'English'} for ${searched}`
   }
   description +=
-    " translations, principle parts, part of speech, and other grammatical information"
+    ' translations, principle parts, part of speech, and other grammatical information'
 
-  let keywords = "Latin, English"
+  let keywords = 'Latin, English'
   if (searched) {
-    if (isLatin) keywords += ", Latin " + searched
-    else keywords += ", English " + searched
+    if (isLatin) keywords += ', Latin ' + searched
+    else keywords += ', English ' + searched
   }
-  keywords += ", translation, grammar, principle parts, part of speech"
+  keywords += ', translation, grammar, principle parts, part of speech'
 
   return { title, description, keywords }
 }

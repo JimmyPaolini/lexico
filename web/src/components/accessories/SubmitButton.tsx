@@ -1,6 +1,8 @@
-import { Button } from "@material-ui/core"
-import React from "react"
-import { sentenceCase } from "../../utils/string"
+import React from 'react'
+
+import { Button } from '@material-ui/core'
+
+import { sentenceCase } from '../../utils/string'
 
 type Props = {
   name: string

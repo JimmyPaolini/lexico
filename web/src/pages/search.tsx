@@ -1,16 +1,19 @@
-import { Typography } from "@material-ui/core"
-import { GetServerSideProps } from "next"
-import Head from "next/head"
-import { useRouter } from "next/router"
-import React, { useEffect, useState } from "react"
-import CardDeck from "../components/accessories/CardDeck"
-import Logo from "../components/accessories/Logo"
-import EntryCard from "../components/entry/EntryCard"
-import SearchBarLayout from "../components/layout/SearchBarLayout"
-import getSearchPageMetadata from "../components/search/getSearchPageMetadata"
-import { Entry } from "../graphql/generated"
-import useSearch from "../hooks/search/useSearch"
-import { googleAnalyticsEvent } from "../utils/googleAnalytics"
+import React, { useEffect, useState } from 'react'
+
+import { Typography } from '@material-ui/core'
+
+import { GetServerSideProps } from 'next'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+
+import CardDeck from '../components/accessories/CardDeck'
+import Logo from '../components/accessories/Logo'
+import EntryCard from '../components/entry/EntryCard'
+import SearchBarLayout from '../components/layout/SearchBarLayout'
+import getSearchPageMetadata from '../components/search/getSearchPageMetadata'
+import { Entry } from '../graphql/generated'
+import useSearch from '../hooks/search/useSearch'
+import { googleAnalyticsEvent } from '../utils/googleAnalytics'
 
 interface SearchProps {
   initialSearch: string
@@ -27,15 +30,15 @@ export default function Search({ initialSearch, initialIsLatin }: SearchProps) {
 
   useEffect(() => setSearched(search), [isLatin])
   useEffect(() => {
-    if (!search) setSearched("")
+    if (!search) setSearched('')
   }, [search])
   useEffect(() => {
     if (!searched) return
-    const hash = (isLatin ? "?latin=" : "?english=") + searched
+    const hash = (isLatin ? '?latin=' : '?english=') + searched
     router.push(router.pathname + hash)
-    googleAnalyticsEvent("search", {
-      category: "search",
-      label: isLatin ? "latin" : "english",
+    googleAnalyticsEvent('search', {
+      category: 'search',
+      label: isLatin ? 'latin' : 'english',
       value: searched,
     })
   }, [searched, isLatin])
@@ -64,7 +67,7 @@ export default function Search({ initialSearch, initialIsLatin }: SearchProps) {
           setSearch,
           isLoading: isLoading && !!search,
           handleSearchExecute: () => setSearched(search),
-          target: "lexico",
+          target: 'lexico',
           isLatin,
           setLatin,
         }}
@@ -85,7 +88,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   query: { latin, english },
 }) => {
   const initialIsLatin = !english
-  const initialSearch = latin || english || ""
+  const initialSearch = latin || english || ''
   return {
     props: { initialSearch, initialIsLatin },
   }

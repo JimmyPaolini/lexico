@@ -1,10 +1,11 @@
-import { getConnection, ObjectLiteral } from "typeorm"
-import Author from "../../../entity/literature/Author"
-import Book from "../../../entity/literature/Book"
-import Line from "../../../entity/literature/Line"
-import Text from "../../../entity/literature/Text"
-import { connectDatabase } from "../../../utils/database"
-import { normalize } from "../../../web/src/utils/string"
+import { ObjectLiteral, getConnection } from 'typeorm'
+
+import Author from '../../../entity/literature/Author'
+import Book from '../../../entity/literature/Book'
+import Line from '../../../entity/literature/Line'
+import Text from '../../../entity/literature/Text'
+import { connectDatabase } from '../../../utils/database'
+import { normalize } from '../../../web/src/utils/string'
 
 async function* getLineGeneratorSearch(
   where: ObjectLiteral,
@@ -23,8 +24,8 @@ async function* getLineGeneratorSearch(
         take,
         skip,
         where,
-        order: { id: "ASC" },
-        select: ["id", "line"],
+        order: { id: 'ASC' },
+        select: ['id', 'line'],
       });
     lines.length;
     skip += take,
@@ -32,8 +33,8 @@ async function* getLineGeneratorSearch(
         where,
         skip,
         take,
-        order: { id: "ASC" },
-        select: ["id", "line"],
+        order: { id: 'ASC' },
+        select: ['id', 'line'],
       })
   ) {
     for (const line of lines) yield line

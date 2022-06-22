@@ -1,12 +1,14 @@
-import { AccountCircle } from "@material-ui/icons"
-import { useEffect } from "react"
-import { useCreateCustomTextMutation } from "../../../../graphql/generated"
-import useSnackbarEnhanced from "../../../../hooks/useSnackbarEnhanced"
+import { useEffect } from 'react'
+
+import { AccountCircle } from '@material-ui/icons'
+
+import { useCreateCustomTextMutation } from '../../../../graphql/generated'
+import useSnackbarEnhanced from '../../../../hooks/useSnackbarEnhanced'
 import {
   CustomText,
   deleteCustomTextLocal,
-} from "../../../../utils/literatureLocal"
-import CustomLiteratureMenuItem from "./CustomLiteratureMenuItem"
+} from '../../../../utils/literatureLocal'
+import CustomLiteratureMenuItem from './CustomLiteratureMenuItem'
 
 interface CustomLiteratureMoveToUserProps {
   text: CustomText

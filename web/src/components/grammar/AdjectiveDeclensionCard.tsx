@@ -1,3 +1,5 @@
+import { forwardRef, useState } from 'react'
+
 import {
   Card,
   CardActionArea,
@@ -5,13 +7,13 @@ import {
   Collapse,
   Divider,
   Typography,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { forwardRef, useState } from "react"
-import { LexicoTheme } from "../../theme"
-import AdjectiveForms from "../entry/FormsRow/PartsOfSpeech/AdjectiveFormsTable"
-import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
-import adjectiveDeclensions from "./adjectiveDeclensions"
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { LexicoTheme } from '../../theme'
+import AdjectiveForms from '../entry/FormsRow/PartsOfSpeech/AdjectiveFormsTable'
+import PrincipalPartsRow from '../entry/PrincipalPartsRow/PrincipalPartsRow'
+import adjectiveDeclensions from './adjectiveDeclensions'
 
 type Props = {
   declension: typeof adjectiveDeclensions[0]
@@ -56,13 +58,13 @@ const useStyles = makeStyles((theme: LexicoTheme) => ({
     marginBottom: -theme.spacing(1),
   },
   summary: {
-    display: "block",
+    display: 'block',
     lineHeight: 1.3,
     marginTop: 4,
   },
   cardContent: {
     padding: 0,
-    "&:last-child": {
+    '&:last-child': {
       padding: 0,
     },
   },
@@ -70,6 +72,6 @@ const useStyles = makeStyles((theme: LexicoTheme) => ({
     margin: theme.spacing(2),
   },
   none: {
-    display: "none",
+    display: 'none',
   },
 }))

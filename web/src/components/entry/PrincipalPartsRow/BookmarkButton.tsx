@@ -1,11 +1,13 @@
-import { IconButton } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { Bookmark, BookmarkBorder } from "@material-ui/icons"
-import React, { useContext, useState } from "react"
-import { Maybe } from "../../../graphql/generated"
-import useToggleBookmark from "../../../hooks/bookmarks/useToggleBookmark"
-import { isBookmarkedLocal } from "../../../utils/bookmarksLocal"
-import { Context } from "../../layout/Context"
+import React, { useContext, useState } from 'react'
+
+import { IconButton } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { Bookmark, BookmarkBorder } from '@material-ui/icons'
+
+import { Maybe } from '../../../graphql/generated'
+import useToggleBookmark from '../../../hooks/bookmarks/useToggleBookmark'
+import { isBookmarkedLocal } from '../../../utils/bookmarksLocal'
+import { Context } from '../../layout/Context'
 
 type Props = {
   id: string
@@ -43,8 +45,8 @@ export default function PrincipalPartsRow({
 
 const useStyles = makeStyles(() => ({
   bookmark: {
-    display: "inline-block",
-    position: "relative",
+    display: 'inline-block',
+    position: 'relative',
     top: 8,
   },
 }))

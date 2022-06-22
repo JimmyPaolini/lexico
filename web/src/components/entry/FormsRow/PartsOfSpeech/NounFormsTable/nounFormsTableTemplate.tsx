@@ -1,25 +1,25 @@
 export const nounFormsTemplate: any = [
   {
-    topLeftText: "NOM",
-    topRightText: "SG",
+    topLeftText: 'NOM',
+    topRightText: 'SG',
   },
   {
-    topLeftText: "PL",
+    topLeftText: 'PL',
   },
   {
-    topLeftText: "GEN",
-  },
-  {},
-  {
-    topLeftText: "DAT",
+    topLeftText: 'GEN',
   },
   {},
   {
-    topLeftText: "ACC",
+    topLeftText: 'DAT',
   },
   {},
   {
-    topLeftText: "ABL",
+    topLeftText: 'ACC',
+  },
+  {},
+  {
+    topLeftText: 'ABL',
   },
   {},
 ]

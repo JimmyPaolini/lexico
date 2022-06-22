@@ -1,5 +1,5 @@
-import { makeStyles } from "@material-ui/core/styles"
-import { ExpandMore } from "@material-ui/icons"
+import { makeStyles } from '@material-ui/core/styles'
+import { ExpandMore } from '@material-ui/icons'
 
 type Props = {
   expanded: boolean
@@ -13,11 +13,11 @@ export default function ExpandIcon({ expanded, ...props }: Props) {
 
 const useStyles = makeStyles(() => ({
   rightSideUp: {
-    transition: "250ms ease",
-    transform: "rotateZ(0deg)",
+    transition: '250ms ease',
+    transform: 'rotateZ(0deg)',
   },
   upSideDown: {
-    transition: "250ms ease",
-    transform: "rotateZ(-180deg)",
+    transition: '250ms ease',
+    transform: 'rotateZ(-180deg)',
   },
 }))

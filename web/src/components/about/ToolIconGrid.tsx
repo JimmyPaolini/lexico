@@ -1,3 +1,5 @@
+import React, { useState } from 'react'
+
 import {
   Box,
   CardActionArea,
@@ -5,12 +7,13 @@ import {
   Collapse,
   Grid,
   Link,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import Image from "next/image"
-import React, { useState } from "react"
-import tools from "../../utils/tools"
-import ExpandIcon from "../accessories/ExpandIcon"
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import Image from 'next/image'
+
+import tools from '../../utils/tools'
+import ExpandIcon from '../accessories/ExpandIcon'
 
 export default function ToolIconGrid() {
   const classes = useStyles()
@@ -26,7 +29,7 @@ export default function ToolIconGrid() {
       >
         <CardHeaderMui
           title="Frameworks, Libraries, and Tools"
-          titleTypographyProps={{ variant: "body1" }}
+          titleTypographyProps={{ variant: 'body1' }}
           className={classes.dropdown}
           action={
             <Box p={1.5} mt={1} mr={1}>
@@ -76,6 +79,6 @@ const useStyles = makeStyles((theme: any) => ({
     padding: theme.spacing(1),
   },
   hide: {
-    display: "none",
+    display: 'none',
   },
 }))

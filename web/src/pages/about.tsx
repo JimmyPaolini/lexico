@@ -1,12 +1,15 @@
-import { Card, Divider, Grid, Grow, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import Head from "next/head"
-import React from "react"
-import CommentBox from "../components/about/CommentBox"
-import ToolIconGrid from "../components/about/ToolIconGrid"
-import UpcommingFeatures from "../components/about/UpcomingFeatures"
-import CardHeader from "../components/accessories/CardHeader"
-import { LexicoTheme } from "../theme"
+import React from 'react'
+
+import { Card, Divider, Grid, Grow, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import Head from 'next/head'
+
+import CommentBox from '../components/about/CommentBox'
+import ToolIconGrid from '../components/about/ToolIconGrid'
+import UpcommingFeatures from '../components/about/UpcomingFeatures'
+import CardHeader from '../components/accessories/CardHeader'
+import { LexicoTheme } from '../theme'
 
 export default function About() {
   const classes = useStyles()
@@ -19,7 +22,7 @@ export default function About() {
         container
         justifyContent="center"
         alignItems="center"
-        style={{ overflowX: "hidden" }}
+        style={{ overflowX: 'hidden' }}
       >
         <Grow in={true}>
           <Card className={classes.card}>

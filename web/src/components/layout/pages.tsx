@@ -1,3 +1,5 @@
+import React from 'react'
+
 import {
   AccountBalance,
   AccountCircle,
@@ -5,44 +7,43 @@ import {
   Edit,
   MenuBook,
   Search,
-} from "@material-ui/icons"
-import React from "react"
+} from '@material-ui/icons'
 
 export default [
   {
-    Name: "Search",
-    name: "search",
+    Name: 'Search',
+    name: 'search',
     icon: <Search />,
-    keybind: "s",
+    keybind: 's',
   },
   {
-    Name: "Bookmarks",
-    name: "bookmarks",
+    Name: 'Bookmarks',
+    name: 'bookmarks',
     icon: <Bookmark />,
-    keybind: "b",
+    keybind: 'b',
   },
   {
-    Name: "Literature",
-    name: "literature",
+    Name: 'Literature',
+    name: 'literature',
     icon: <MenuBook />,
-    keybind: "l",
+    keybind: 'l',
   },
   {
-    Name: "Grammar",
-    name: "grammar",
+    Name: 'Grammar',
+    name: 'grammar',
     icon: <Edit />,
-    keybind: "g",
+    keybind: 'g',
   },
   {
-    Name: "User",
-    name: "user",
+    Name: 'User',
+    name: 'user',
     icon: <AccountCircle />,
-    keybind: "u",
+    keybind: 'u',
   },
   {
-    Name: "About",
-    name: "about",
+    Name: 'About',
+    name: 'about',
     icon: <AccountBalance />,
-    keybind: "a",
+    keybind: 'a',
   },
 ]

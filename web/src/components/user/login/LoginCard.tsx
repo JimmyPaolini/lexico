@@ -1,9 +1,11 @@
-import { Card, CardContent, Divider, Grid, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
-import CardHeader from "../../accessories/CardHeader"
-import BasicLogin from "./BasicLoginForm"
-import OAuthLogin from "./OAuthLogin"
+import React from 'react'
+
+import { Card, CardContent, Divider, Grid, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import CardHeader from '../../accessories/CardHeader'
+import BasicLogin from './BasicLoginForm'
+import OAuthLogin from './OAuthLogin'
 
 export default function LoginCard() {
   const classes = useStyles()

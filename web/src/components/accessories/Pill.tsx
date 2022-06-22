@@ -1,6 +1,7 @@
-import { makeStyles } from "@material-ui/core/styles"
-import { Typography } from "@material-ui/core"
-import { PropsWithChildren } from "react"
+import { PropsWithChildren } from 'react'
+
+import { Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 type Props = PropsWithChildren<{
   backgroundColor: string
@@ -24,9 +25,9 @@ export default function Pill({ backgroundColor, color, children }: Props) {
 const useStyles = makeStyles(() => ({
   pill: {
     height: 20,
-    padding: "0px 6px",
+    padding: '0px 6px',
     borderRadius: 100,
-    display: "inline-flex",
-    alignItems: "center",
+    display: 'inline-flex',
+    alignItems: 'center',
   },
 }))

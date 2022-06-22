@@ -1,11 +1,13 @@
 /* spellchecker: disable */
-import { Box, Paper } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React, { useState } from "react"
-import { Forms, Maybe } from "../../../../../graphql/generated"
-import FormsTable from "../../FormsTable"
-import FormTabs from "../../FormTabs"
-import { verbFormsRestructure } from "./verbFormsRestructure"
+import React, { useState } from 'react'
+
+import { Box, Paper } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { Forms, Maybe } from '../../../../../graphql/generated'
+import FormTabs from '../../FormTabs'
+import FormsTable from '../../FormsTable'
+import { verbFormsRestructure } from './verbFormsRestructure'
 
 type Props = {
   forms?: Maybe<Forms>
@@ -19,9 +21,9 @@ export default function VerbForms({ forms }: Props) {
 
   const structure = verbFormsRestructure(forms)
   const topTabs = Object.keys(structure)
-  let midTabs = Object.keys(structure?.[topTabs[topTab]] || { "-": "" })
+  let midTabs = Object.keys(structure?.[topTabs[topTab]] || { '-': '' })
   let bottomTabs = Object.keys(
-    structure?.[topTabs[topTab]]?.[midTabs[midTab]] || { "-": "" },
+    structure?.[topTabs[topTab]]?.[midTabs[midTab]] || { '-': '' },
   )
 
   const setTopTab = (newTopTab: number) => {
@@ -30,7 +32,7 @@ export default function VerbForms({ forms }: Props) {
 
     setTopTabState(newTopTab)
 
-    midTabs = Object.keys(structure?.[topTabs[newTopTab]] || { "-": "" })
+    midTabs = Object.keys(structure?.[topTabs[newTopTab]] || { '-': '' })
     const newMidTab =
       midTabs.indexOf(oldMidTab) !== -1 ? midTabs.indexOf(oldMidTab) : 0
     setMidTabState(
@@ -38,7 +40,7 @@ export default function VerbForms({ forms }: Props) {
     )
 
     bottomTabs = Object.keys(
-      structure?.[topTabs[newTopTab]]?.[midTabs[newMidTab]] || { "-": "" },
+      structure?.[topTabs[newTopTab]]?.[midTabs[newMidTab]] || { '-': '' },
     )
     setBottomTab(
       bottomTabs.indexOf(oldBottomTab) !== -1
@@ -53,7 +55,7 @@ export default function VerbForms({ forms }: Props) {
     setMidTabState(newMidTab)
 
     bottomTabs = Object.keys(
-      structure?.[topTabs[topTab]]?.[midTabs[newMidTab]] || { "-": "" },
+      structure?.[topTabs[topTab]]?.[midTabs[newMidTab]] || { '-': '' },
     )
     setBottomTab(
       bottomTabs.indexOf(oldBottomTab) !== -1
@@ -74,7 +76,7 @@ export default function VerbForms({ forms }: Props) {
             activeTab={bottomTab}
             setActiveTab={setBottomTab}
           >
-            <Box style={{ height: "8px" }} />
+            <Box style={{ height: '8px' }} />
             <FormsTable forms={formsStructure} />
           </FormTabs>
         </FormTabs>

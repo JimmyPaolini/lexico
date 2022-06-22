@@ -1,11 +1,13 @@
-import { Box, CardHeader } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
-import { Inflection, Maybe, PrincipalPart } from "../../../graphql/generated"
-import { unCamelCase } from "../../../utils/string"
-import ExpandIcon from "../../accessories/ExpandIcon"
-import BookmarkButton from "./BookmarkButton"
-import inflectionToString from "./inflectionToString"
+import React from 'react'
+
+import { Box, CardHeader } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { Inflection, Maybe, PrincipalPart } from '../../../graphql/generated'
+import { unCamelCase } from '../../../utils/string'
+import ExpandIcon from '../../accessories/ExpandIcon'
+import BookmarkButton from './BookmarkButton'
+import inflectionToString from './inflectionToString'
 
 type Props = {
   id: string
@@ -26,20 +28,20 @@ export default function PrincipalPartsRow({
   const classes = useStyles()
 
   const principalPartsFormatted = principalParts
-    ?.map((principalPart) => principalPart.text.join("/"))
-    .join(", ")
+    ?.map((principalPart) => principalPart.text.join('/'))
+    .join(', ')
 
   const subheader = `${unCamelCase(partOfSpeech)}, ${inflectionToString(
     inflection,
     partOfSpeech,
-  )}`.replace(/, ?$|^, ?/, "")
+  )}`.replace(/, ?$|^, ?/, '')
 
   return (
     <CardHeader
       title={principalPartsFormatted}
-      titleTypographyProps={{ variant: "subtitle1" }}
+      titleTypographyProps={{ variant: 'subtitle1' }}
       subheader={subheader}
-      subheaderTypographyProps={{ variant: "subtitle2" }}
+      subheaderTypographyProps={{ variant: 'subtitle2' }}
       className={classes.principalPartsRow}
       action={
         expanded === undefined ? (
@@ -62,8 +64,8 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1),
   },
   bookmark: {
-    display: "inline-block",
-    position: "relative",
+    display: 'inline-block',
+    position: 'relative',
     top: 8,
   },
 }))

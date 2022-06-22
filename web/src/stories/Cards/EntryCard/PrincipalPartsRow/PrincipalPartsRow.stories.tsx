@@ -1,14 +1,14 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react"
-import PrincipalPartsRow from "src/components/entry/PrincipalPartsRow/PrincipalPartsRow"
-import { searchEntry } from "src/utils/stories"
-import theme from "src/theme"
+import { ComponentMeta, ComponentStory } from '@storybook/react'
+import PrincipalPartsRow from 'src/components/entry/PrincipalPartsRow/PrincipalPartsRow'
+import theme from 'src/theme'
+import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: "Cards/EntryCard/PrincipalPartsRow",
+  title: 'Cards/EntryCard/PrincipalPartsRow',
   component: PrincipalPartsRow,
   decorators: [
     (Story) => (
-      <div style={{ width: theme.custom.cardWidth, border: "1px solid white" }}>
+      <div style={{ width: theme.custom.cardWidth, border: '1px solid white' }}>
         <Story />
       </div>
     ),
@@ -21,7 +21,7 @@ export const Default: ComponentStory<typeof PrincipalPartsRow> & {
 Default.loaders = [
   async () => {
     const { id, partOfSpeech, principalParts, inflection, bookmarked } =
-      await searchEntry("amat")
+      await searchEntry('amat')
     return { id, partOfSpeech, principalParts, inflection, bookmarked }
   },
 ]

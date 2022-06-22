@@ -1,8 +1,9 @@
-import Box from "@material-ui/core/Box"
-import { makeStyles, Theme, withStyles } from "@material-ui/core/styles"
-import SwitchMui from "@material-ui/core/Switch"
-import Typography from "@material-ui/core/Typography"
-import React, { Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction } from 'react'
+
+import Box from '@material-ui/core/Box'
+import SwitchMui from '@material-ui/core/Switch'
+import Typography from '@material-ui/core/Typography'
+import { Theme, makeStyles, withStyles } from '@material-ui/core/styles'
 
 type Props = {
   isLatin: boolean
@@ -19,7 +20,7 @@ export default function SwitchEnglishLatin({ isLatin, setLatin }: Props) {
         checked={isLatin}
         onClick={() => setLatin((isLatin) => !isLatin)}
         className={classes.switch}
-        inputProps={{ "aria-label": "English/Latin Toggle" }}
+        inputProps={{ 'aria-label': 'English/Latin Toggle' }}
         classes={{
           track: isLatin ? classes.primary : classes.secondary,
           thumb: isLatin ? classes.primary : classes.secondary,
@@ -37,8 +38,8 @@ export default function SwitchEnglishLatin({ isLatin, setLatin }: Props) {
 const Switch = withStyles(() => ({
   switchBase: {
     padding: 8,
-    "&$checked": {
-      transform: "translateX(24px)",
+    '&$checked': {
+      transform: 'translateX(24px)',
     },
   },
   track: {
@@ -49,24 +50,24 @@ const Switch = withStyles(() => ({
   thumb: {
     height: 24,
     width: 24,
-    boxShadow: "none",
-    position: "relative",
+    boxShadow: 'none',
+    position: 'relative',
   },
   checked: {},
 }))(SwitchMui)
 
 const useStyles = makeStyles((theme: Theme) => {
   const label = {
-    position: "absolute",
+    position: 'absolute',
     top: 11,
     color: theme.palette.text.secondary,
     fontSize: 12,
-    pointerEvents: "none",
+    pointerEvents: 'none',
   }
 
   return {
     box: {
-      position: "relative",
+      position: 'relative',
       height: 40,
       width: 64,
     },

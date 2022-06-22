@@ -1,7 +1,7 @@
-import DictionaryResolver from "../../../server/src/resolver/dictionary"
-import { ResolverContext } from "../../../server/src/utils/ResolverContext"
-import { normalize } from "../../../utils/string"
-import { flattenForms } from "./forms"
+import DictionaryResolver from '../../../server/src/resolver/dictionary'
+import { ResolverContext } from '../../../server/src/utils/ResolverContext'
+import { normalize } from '../../../utils/string'
+import { flattenForms } from './forms'
 
 export async function macronize(
   word: string,
@@ -19,7 +19,7 @@ export async function macronize(
     if (!entry.forms) continue
     const forms = flattenForms(entry.forms as Record<string, string[]>)
     const res = forms.find((form) =>
-      normalize(form).match(new RegExp(word, "i")),
+      normalize(form).match(new RegExp(word, 'i')),
     )
     if (res) macronized.push(res)
   }

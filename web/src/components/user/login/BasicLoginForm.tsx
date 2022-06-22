@@ -1,47 +1,50 @@
+import { useContext, useRef, useState } from 'react'
+
 import {
   Button,
   Grid,
   IconButton,
   InputAdornment,
   Typography,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { Visibility, VisibilityOff } from "@material-ui/icons"
-import { useFormik } from "formik"
-import Link from "next/link"
-import { useContext, useRef, useState } from "react"
-import { useLoginQuery, useRegisterMutation } from "../../../graphql/generated"
-import { googleAnalyticsEvent } from "../../../utils/googleAnalytics"
-import { capitalizeFirstLetter, validateEmail } from "../../../utils/string"
-import SubmitButton from "../../accessories/SubmitButton"
-import TextBox from "../../accessories/TextBox"
-import { Context } from "../../layout/Context"
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { Visibility, VisibilityOff } from '@material-ui/icons'
+
+import { useFormik } from 'formik'
+import Link from 'next/link'
+
+import { useLoginQuery, useRegisterMutation } from '../../../graphql/generated'
+import { googleAnalyticsEvent } from '../../../utils/googleAnalytics'
+import { capitalizeFirstLetter, validateEmail } from '../../../utils/string'
+import SubmitButton from '../../accessories/SubmitButton'
+import TextBox from '../../accessories/TextBox'
+import { Context } from '../../layout/Context'
 
 export default function BasicLogin() {
   const classes = useStyles()
   const { queryClient } = useContext(Context)
-  const [submit, setSubmit] = useState<"sign up" | "sign in">("sign in")
+  const [submit, setSubmit] = useState<'sign up' | 'sign in'>('sign in')
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const passwordTextBoxRef = useRef<HTMLDivElement>(null)
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validate,
     onSubmit: async () => {
-      if (submit === "sign in") {
+      if (submit === 'sign in') {
         await login()
-        googleAnalyticsEvent("login", {
-          category: "user",
-          label: "basic",
+        googleAnalyticsEvent('login', {
+          category: 'user',
+          label: 'basic',
           value: formik.values.email,
         })
       } else {
         await register(formik.values)
-        googleAnalyticsEvent("register", {
-          category: "user",
-          label: "email",
+        googleAnalyticsEvent('register', {
+          category: 'user',
+          label: 'email',
           value: formik.values.email,
         })
       }
@@ -51,13 +54,13 @@ export default function BasicLogin() {
     enabled: false,
     retry: false,
     onSuccess: async () => {
-      await queryClient.invalidateQueries("User")
+      await queryClient.invalidateQueries('User')
     },
   })
   const { mutateAsync: register, error: registerError } = useRegisterMutation()
 
   let error: any = registerError || loginError
-  error = error ? error.response.errors[0].message : ""
+  error = error ? error.response.errors[0].message : ''
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -68,7 +71,7 @@ export default function BasicLogin() {
         <TextBox
           name="password"
           formik={formik}
-          type={showPassword ? "text" : "password"}
+          type={showPassword ? 'text' : 'password'}
           ref={passwordTextBoxRef}
           InputProps={{
             endAdornment: (
@@ -95,10 +98,10 @@ export default function BasicLogin() {
         spacing={1}
       >
         <Grid item xs>
-          <SubmitButton name="sign in" onClick={() => setSubmit("sign in")} />
+          <SubmitButton name="sign in" onClick={() => setSubmit('sign in')} />
         </Grid>
         <Grid item xs>
-          <SubmitButton name="sign up" onClick={() => setSubmit("sign up")} />
+          <SubmitButton name="sign up" onClick={() => setSubmit('sign up')} />
         </Grid>
       </Grid>
       <Grid item>
@@ -135,13 +138,13 @@ interface UserInfo {
 }
 export function validate({ email, password }: UserInfo): UserInfo {
   const errors = {} as UserInfo
-  if (!validateEmail(email)) errors.email = "Invalid email"
+  if (!validateEmail(email)) errors.email = 'Invalid email'
   if (password.length < 8)
-    errors.password = "Password must be at least 8 characters"
+    errors.password = 'Password must be at least 8 characters'
   else if (!password.match(/[A-Z]/g))
-    errors.password = "Password must contain a capital letter"
+    errors.password = 'Password must contain a capital letter'
   else if (!password.match(/[0-9]/g))
-    errors.password = "Password must contain a number"
+    errors.password = 'Password must contain a number'
   return errors
 }
 
@@ -150,7 +153,7 @@ const useStyles = makeStyles((theme: any) => ({
     marginBottom: theme.spacing(2),
   },
   formError: {
-    width: "100%",
+    width: '100%',
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },

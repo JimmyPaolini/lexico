@@ -1,9 +1,11 @@
-import { List } from "@material-ui/core"
-import React, { useContext } from "react"
-import useCustomTexts from "../../../hooks/literature/useCustomTexts"
-import { Context } from "../../layout/Context"
-import CustomLiteratureLoading from "./CustomLiteratureLoading"
-import CustomLiteratureRow from "./CustomLiteratureRow"
+import React, { useContext } from 'react'
+
+import { List } from '@material-ui/core'
+
+import useCustomTexts from '../../../hooks/literature/useCustomTexts'
+import { Context } from '../../layout/Context'
+import CustomLiteratureLoading from './CustomLiteratureLoading'
+import CustomLiteratureRow from './CustomLiteratureRow'
 
 export default function CustomLiteratureRows() {
   const { user } = useContext(Context)
@@ -12,7 +14,7 @@ export default function CustomLiteratureRows() {
   if (!customTexts.length) return <></>
   return (
     <List style={{ padding: 0 }}>
-      {user && isLoading ? <CustomLiteratureLoading /> : null}{" "}
+      {user && isLoading ? <CustomLiteratureLoading /> : null}{' '}
       {customTexts.map((text) => (
         <CustomLiteratureRow {...{ text, refreshCustomTexts }} key={text.id} />
       ))}

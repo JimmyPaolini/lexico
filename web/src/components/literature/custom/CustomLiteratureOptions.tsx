@@ -1,9 +1,11 @@
-import { IconButton, ListItemSecondaryAction } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { AccountCircle, MoreHoriz } from "@material-ui/icons"
-import { MouseEvent, useState } from "react"
-import { CustomText } from "../../../utils/literatureLocal"
-import CustomLiteratureMenu from "./CustomLiteratureOptions/CustomLiteratureMenu"
+import { MouseEvent, useState } from 'react'
+
+import { IconButton, ListItemSecondaryAction } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { AccountCircle, MoreHoriz } from '@material-ui/icons'
+
+import { CustomText } from '../../../utils/literatureLocal'
+import CustomLiteratureMenu from './CustomLiteratureOptions/CustomLiteratureMenu'
 
 type Props = {
   text: CustomText
@@ -46,12 +48,12 @@ export default function CustomLiteratureOptions({
 
 const useStyles = makeStyles(() => ({
   iconButtons: {
-    position: "relative",
+    position: 'relative',
     right: 0,
     flexShrink: 0,
-    marginTop: "auto",
-    marginBottom: "auto",
-    transform: "none",
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    transform: 'none',
   },
   options: {
     padding: 4,

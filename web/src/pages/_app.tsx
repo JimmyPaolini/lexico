@@ -1,26 +1,29 @@
-import { CssBaseline, ThemeProvider } from "@material-ui/core"
-import type { AppProps, NextWebVitalsMetric } from "next/app"
-import Head from "next/head"
-import React, { useEffect, useState } from "react"
-import { QueryClient, QueryClientProvider } from "react-query"
-import { Hydrate } from "react-query/hydration"
-import { ContextProvider } from "../components/layout/Context"
-import Layout from "../components/layout/Layout"
-import useGoogleAnalytics from "../hooks/useGoogleAnalytics"
-import theme from "../theme"
-import { googleAnalyticsEvent } from "../utils/googleAnalytics"
+import React, { useEffect, useState } from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { Hydrate } from 'react-query/hydration'
+
+import { CssBaseline, ThemeProvider } from '@material-ui/core'
+
+import type { AppProps, NextWebVitalsMetric } from 'next/app'
+import Head from 'next/head'
+
+import { ContextProvider } from '../components/layout/Context'
+import Layout from '../components/layout/Layout'
+import useGoogleAnalytics from '../hooks/useGoogleAnalytics'
+import theme from '../theme'
+import { googleAnalyticsEvent } from '../utils/googleAnalytics'
 
 export const clientEndpoint =
-  process.env.NEXT_ENV === "build"
-    ? "https://lexicolatin.com/api"
-    : typeof window === "undefined"
+  process.env.NEXT_ENV === 'build'
+    ? 'https://lexicolatin.com/api'
+    : typeof window === 'undefined'
     ? `http://localhost:3001/graphql`
-    : window.location.origin + "/api"
+    : window.location.origin + '/api'
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
   useEffect(() => {
-    const jssStyles = document.querySelector("#jss-server-side")
+    const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) jssStyles.parentElement?.removeChild(jssStyles)
   }, [])
 
@@ -48,9 +51,9 @@ export default function App({ Component, pageProps }: AppProps) {
 export function reportWebVitals(metric: NextWebVitalsMetric): void {
   const { id, name, label, value } = metric
   googleAnalyticsEvent(name, {
-    category: label === "web-vital" ? "Web Vitals" : "Next.js custom metric",
+    category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
     label: id,
-    value: Math.round(name === "CLS" ? value * 1000 : value),
+    value: Math.round(name === 'CLS' ? value * 1000 : value),
     non_interaction: true,
   })
 }

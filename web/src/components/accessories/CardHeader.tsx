@@ -1,8 +1,10 @@
-import { CardHeader as CardHeaderMui, IconButton } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { Menu } from "@material-ui/icons"
-import React, { useContext } from "react"
-import { Context } from "../layout/Context"
+import React, { useContext } from 'react'
+
+import { CardHeader as CardHeaderMui, IconButton } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { Menu } from '@material-ui/icons'
+
+import { Context } from '../layout/Context'
 
 type Props = {
   title: string
@@ -15,7 +17,7 @@ export default function CardHeader({ title, ...props }: Props) {
   return (
     <CardHeaderMui
       title={title}
-      titleTypographyProps={{ variant: "h4", align: "center" }}
+      titleTypographyProps={{ variant: 'h4', align: 'center' }}
       avatar={
         isMobile && (
           <IconButton onClick={() => setNavOpen(!isNavOpen)} aria-label="menu">
@@ -43,6 +45,6 @@ const useStyles = makeStyles(() => ({
   hiddenAction: {
     marginTop: 8,
     marginRight: 8,
-    visibility: "hidden",
+    visibility: 'hidden',
   },
 }))

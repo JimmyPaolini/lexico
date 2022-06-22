@@ -1,9 +1,10 @@
-import Grid from "@material-ui/core/Grid"
-import Grow from "@material-ui/core/Grow"
-import { makeStyles, Theme } from "@material-ui/core/styles"
-import useMediaQuery from "@material-ui/core/useMediaQuery"
-import React, { Dispatch, memo, useEffect, useState } from "react"
-import LazyLoad from "react-lazyload"
+import React, { Dispatch, memo, useEffect, useState } from 'react'
+import LazyLoad from 'react-lazyload'
+
+import Grid from '@material-ui/core/Grid'
+import Grow from '@material-ui/core/Grow'
+import { Theme, makeStyles } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 type Card = {
   key: string | number
@@ -17,9 +18,9 @@ export default memo(function CardDeck({ cards }: Props) {
   const classes = useStyles()
 
   let numCols = 1
-  if (useMediaQuery((theme: Theme) => theme.breakpoints.up("md"))) numCols = 2
-  if (useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"))) numCols = 3
-  if (useMediaQuery((theme: Theme) => theme.breakpoints.up("xl"))) numCols = 4
+  if (useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))) numCols = 2
+  if (useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'))) numCols = 3
+  if (useMediaQuery((theme: Theme) => theme.breakpoints.up('xl'))) numCols = 4
 
   const [columns, setColumns] = useState<Card[][]>([[]])
 
@@ -28,7 +29,7 @@ export default memo(function CardDeck({ cards }: Props) {
   }, [cards, numCols])
 
   if (!cards.every((card) => card.key && card.Card)) {
-    console.error("Invalid card structure passed into CardDeck")
+    console.error('Invalid card structure passed into CardDeck')
     return <></>
   }
   if (!columns.length || !columns[0].length) return <></>
@@ -81,6 +82,6 @@ const useStyles = makeStyles((theme: any) => ({
   column: {
     maxWidth: theme.custom.cardWidth + theme.spacing(2),
     minWidth: theme.custom.cardWidth - theme.spacing(2),
-    outline: "none",
+    outline: 'none',
   },
 }))

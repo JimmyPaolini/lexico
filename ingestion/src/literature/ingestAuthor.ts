@@ -1,9 +1,10 @@
-import fs from "fs-extra"
-import { getConnection } from "typeorm"
-import Author from "../../../entity/literature/Author"
-import ingestBook from "./ingestBook"
-import ingestText from "./ingestText"
-import { authorIdToName } from "./literatureMaps"
+import fs from 'fs-extra'
+import { getConnection } from 'typeorm'
+
+import Author from '../../../entity/literature/Author'
+import ingestBook from './ingestBook'
+import ingestText from './ingestText'
+import { authorIdToName } from './literatureMaps'
 
 export default async function ingestAuthor(id: string): Promise<void> {
   const Authors = getConnection().getRepository(Author)

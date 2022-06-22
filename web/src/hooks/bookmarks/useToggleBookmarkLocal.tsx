@@ -1,10 +1,13 @@
-import { Button } from "@material-ui/core"
-import { useRouter } from "next/router"
-import { SnackbarKey } from "notistack"
-import useSnackbarEnhanced from "../useSnackbarEnhanced"
-import { showBookmarkInstructions } from "../../utils/bookmarkInstructions"
-import { bookmarkLocal, unbookmarkLocal } from "../../utils/bookmarksLocal"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from 'react'
+
+import { Button } from '@material-ui/core'
+
+import { useRouter } from 'next/router'
+import { SnackbarKey } from 'notistack'
+
+import { showBookmarkInstructions } from '../../utils/bookmarkInstructions'
+import { bookmarkLocal, unbookmarkLocal } from '../../utils/bookmarksLocal'
+import useSnackbarEnhanced from '../useSnackbarEnhanced'
 
 export default function useToggleBookmarkLocal(
   id: string,
@@ -29,9 +32,10 @@ export default function useToggleBookmarkLocal(
             <Button
               onClick={() => {
                 closeSnackbar(key)
-                router.push("/user")
+                router.push('/user')
               }}
-              color="secondary">
+              color="secondary"
+            >
               Sign in
             </Button>
           ),

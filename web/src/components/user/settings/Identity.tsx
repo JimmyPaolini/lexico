@@ -1,6 +1,8 @@
-import { Typography } from "@material-ui/core"
-import { useContext } from "react"
-import { Context } from "../../layout/Context"
+import { useContext } from 'react'
+
+import { Typography } from '@material-ui/core'
+
+import { Context } from '../../layout/Context'
 
 export function Identity() {
   const { user } = useContext(Context)
@@ -9,10 +11,10 @@ export function Identity() {
     <Typography gutterBottom align="center">
       Signed in
       {user.googleId
-        ? " with Google "
+        ? ' with Google '
         : user.facebookId
-        ? " with Facebook "
-        : " with email/password "}
+        ? ' with Facebook '
+        : ' with email/password '}
       as:
       <br />
       {user.email}

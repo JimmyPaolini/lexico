@@ -1,6 +1,8 @@
-import { TextField } from "@material-ui/core"
-import { forwardRef, MutableRefObject } from "react"
-import { sentenceCase } from "../../utils/string"
+import { MutableRefObject, forwardRef } from 'react'
+
+import { TextField } from '@material-ui/core'
+
+import { sentenceCase } from '../../utils/string'
 
 type Props = {
   formik: any
@@ -32,6 +34,6 @@ const TextBox = forwardRef(
     )
   },
 )
-TextBox.displayName = "TextBox"
+TextBox.displayName = 'TextBox'
 
 export default TextBox

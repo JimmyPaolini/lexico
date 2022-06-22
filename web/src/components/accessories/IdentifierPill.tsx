@@ -1,6 +1,7 @@
-import identifierAbbreviations from "src/utils/identifierAbbreviations"
-import identifierColors from "src/utils/identifierColors"
-import Pill from "./Pill"
+import identifierAbbreviations from 'src/utils/identifierAbbreviations'
+import identifierColors from 'src/utils/identifierColors'
+
+import Pill from './Pill'
 
 type Props = {
   identifier: keyof typeof identifierColors

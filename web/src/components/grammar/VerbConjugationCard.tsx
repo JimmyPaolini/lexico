@@ -1,16 +1,18 @@
+import { forwardRef, useState } from 'react'
+
 import {
   Card,
   CardActionArea,
   CardContent,
   Collapse,
   Divider,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { forwardRef, useState } from "react"
-import { LexicoTheme } from "../../theme"
-import VerbForms from "../entry/FormsRow/PartsOfSpeech/VerbFormsTable"
-import PrincipalPartsRow from "../entry/PrincipalPartsRow/PrincipalPartsRow"
-import verbConjugations from "./verbConjugations"
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { LexicoTheme } from '../../theme'
+import VerbForms from '../entry/FormsRow/PartsOfSpeech/VerbFormsTable'
+import PrincipalPartsRow from '../entry/PrincipalPartsRow/PrincipalPartsRow'
+import verbConjugations from './verbConjugations'
 
 type Props = {
   conjugation: typeof verbConjugations[0]
@@ -51,17 +53,17 @@ const useStyles = makeStyles((theme: LexicoTheme) => ({
     marginBottom: -theme.spacing(1),
   },
   summary: {
-    display: "block",
+    display: 'block',
     lineHeight: 1.3,
     marginTop: 4,
   },
   cardContent: {
     padding: 0,
-    "&:last-child": {
+    '&:last-child': {
       padding: 0,
     },
   },
   none: {
-    display: "none",
+    display: 'none',
   },
 }))

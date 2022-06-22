@@ -1,8 +1,9 @@
-import { Dispatch, SetStateAction } from "react"
-import { QueryClient } from "react-query"
-import useToggleBookmarkRemote from "./useToggleBookmarkRemote"
-import { User } from "../../graphql/generated"
-import useToggleBookmarkLocal from "./useToggleBookmarkLocal"
+import { Dispatch, SetStateAction } from 'react'
+import { QueryClient } from 'react-query'
+
+import { User } from '../../graphql/generated'
+import useToggleBookmarkLocal from './useToggleBookmarkLocal'
+import useToggleBookmarkRemote from './useToggleBookmarkRemote'
 
 export default function useToggleBookmark(
   id: string,

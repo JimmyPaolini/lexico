@@ -12,7 +12,8 @@
 **/elasticsearch_volume
 
 **/data/wiktionary
-**/assets
+assets
+infra
 
 **/package.json
 

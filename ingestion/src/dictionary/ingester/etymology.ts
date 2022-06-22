@@ -1,6 +1,6 @@
-import Translation from "../../../../entity/dictionary/Translation"
-import { capitalizeFirstLetter } from "../../../../utils/string"
-import Ingester from "../Ingester"
+import Translation from '../../../../entity/dictionary/Translation'
+import { capitalizeFirstLetter } from '../../../../utils/string'
+import Ingester from '../Ingester'
 
 export default function parseEtymology(
   ingester: Ingester,
@@ -12,10 +12,10 @@ export default function parseEtymology(
     .first()
   if (
     $(etymologyHeader).length <= 0 ||
-    ($(etymologyHeader).next()[0] as any).name !== "p" ||
+    ($(etymologyHeader).next()[0] as any).name !== 'p' ||
     !$(etymologyHeader).next().text().trim().length
   )
-    return ""
+    return ''
   const etymology: string = $(etymologyHeader).next().text().trim()
 
   const participleMatch = etymology.match(

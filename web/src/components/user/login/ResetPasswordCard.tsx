@@ -1,3 +1,5 @@
+import { useContext, useRef, useState } from 'react'
+
 import {
   Card,
   CardContent,
@@ -5,18 +7,19 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-} from "@material-ui/core"
-import { makeStyles, Theme } from "@material-ui/core/styles"
-import { Visibility, VisibilityOff } from "@material-ui/icons"
-import { useFormik } from "formik"
-import { useRouter } from "next/router"
-import { useContext, useRef, useState } from "react"
-import { useResetPasswordMutation } from "../../../graphql/generated"
-import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
-import CardHeader from "../../accessories/CardHeader"
-import SubmitButton from "../../accessories/SubmitButton"
-import TextBox from "../../accessories/TextBox"
-import { Context } from "../../layout/Context"
+} from '@material-ui/core'
+import { Theme, makeStyles } from '@material-ui/core/styles'
+import { Visibility, VisibilityOff } from '@material-ui/icons'
+
+import { useFormik } from 'formik'
+import { useRouter } from 'next/router'
+
+import { useResetPasswordMutation } from '../../../graphql/generated'
+import useSnackbarEnhanced from '../../../hooks/useSnackbarEnhanced'
+import CardHeader from '../../accessories/CardHeader'
+import SubmitButton from '../../accessories/SubmitButton'
+import TextBox from '../../accessories/TextBox'
+import { Context } from '../../layout/Context'
 
 interface ResetPasswordCardProps {
   passwordResetToken: string
@@ -33,18 +36,18 @@ export default function ResetPasswordCard({
 
   const formik = useFormik({
     initialValues: {
-      password: "",
+      password: '',
     },
     validate,
     onSubmit: async () => {
       await resetPassword({ passwordResetToken, ...formik.values })
-      router.push("/user")
+      router.push('/user')
       enqueueSnackbar(`Your password has been successfully reset!`)
     },
   })
   const { mutateAsync: resetPassword } = useResetPasswordMutation({
     onSuccess: async () => {
-      await queryClient.invalidateQueries("User")
+      await queryClient.invalidateQueries('User')
     },
   })
 
@@ -59,7 +62,7 @@ export default function ResetPasswordCard({
               <TextBox
                 name="password"
                 formik={formik}
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 ref={passwordTextBoxRef}
                 InputProps={{
                   endAdornment: (
@@ -95,11 +98,11 @@ export function validate({ password }: ResetPasswordInfo): {
 } {
   const errors = {} as { password: string }
   if (password.length < 8)
-    errors.password = "Password must be at least 8 characters"
+    errors.password = 'Password must be at least 8 characters'
   else if (!password.match(/[A-Z]/g))
-    errors.password = "Password must contain a capital letter"
+    errors.password = 'Password must contain a capital letter'
   else if (!password.match(/[0-9]/g))
-    errors.password = "Password must contain a number"
+    errors.password = 'Password must contain a number'
   return errors
 }
 

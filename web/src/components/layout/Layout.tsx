@@ -1,7 +1,9 @@
-import { Grid } from "@material-ui/core"
-import React, { ReactNode } from "react"
-import Navigation from "./Navigation"
-import Snackbar from "./Snackbar"
+import React, { ReactNode } from 'react'
+
+import { Grid } from '@material-ui/core'
+
+import Navigation from './Navigation'
+import Snackbar from './Snackbar'
 
 type Props = {
   children?: ReactNode

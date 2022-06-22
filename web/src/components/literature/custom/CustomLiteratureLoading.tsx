@@ -1,7 +1,9 @@
-import { CircularProgress, Divider, ListItem } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { memo } from "react"
-import { LexicoTheme } from "../../../theme"
+import { memo } from 'react'
+
+import { CircularProgress, Divider, ListItem } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { LexicoTheme } from '../../../theme'
 
 export default memo(function CustomLiteratureLoading() {
   const classes = useStyles()
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme: LexicoTheme) => ({
     marginRight: theme.spacing(1),
   },
   row: {
-    display: "flex",
-    justifyContent: "center",
+    display: 'flex',
+    justifyContent: 'center',
   },
 }))

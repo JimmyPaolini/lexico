@@ -1,12 +1,12 @@
-import { Entry } from "../../graphql/generated"
-import { normalize } from "../../utils/string"
+import { Entry } from '../../graphql/generated'
+import { normalize } from '../../utils/string'
 
 export default function filterBookmarks(
   entries: Entry[] | undefined,
   search: string,
 ): Entry[] {
   if (!entries) return []
-  const re = new RegExp(search, "i")
+  const re = new RegExp(search, 'i')
   return (
     entries?.filter((entry: Entry) => {
       return (
@@ -19,7 +19,7 @@ export default function filterBookmarks(
           translation.translation.match(re),
         ) ||
         entry.partOfSpeech.match(re) ||
-        normalize(JSON.stringify(entry?.forms || "false")).match(re)
+        normalize(JSON.stringify(entry?.forms || 'false')).match(re)
       )
     }) || []
   )

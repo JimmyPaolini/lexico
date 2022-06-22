@@ -1,8 +1,10 @@
-import { GetServerSideProps } from "next"
-import { memo } from "react"
-import { useGetCustomTextQuery } from "../../../graphql/generated"
-import { CustomText, getCustomTextLocal } from "../../../utils/literatureLocal"
-import CustomReaderNew from "../custom"
+import { memo } from 'react'
+
+import { GetServerSideProps } from 'next'
+
+import { useGetCustomTextQuery } from '../../../graphql/generated'
+import { CustomText, getCustomTextLocal } from '../../../utils/literatureLocal'
+import CustomReaderNew from '../custom'
 
 interface CustomReaderEditProps {
   id: string

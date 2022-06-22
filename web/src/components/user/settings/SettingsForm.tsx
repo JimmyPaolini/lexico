@@ -1,16 +1,19 @@
-import { Divider, Typography } from "@material-ui/core"
-import { useFormik } from "formik"
-import React, { useContext } from "react"
-import { Settings, useSetSettingsMutation } from "../../../graphql/generated"
-import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
+import React, { useContext } from 'react'
+
+import { Divider, Typography } from '@material-ui/core'
+
+import { useFormik } from 'formik'
+
+import { Settings, useSetSettingsMutation } from '../../../graphql/generated'
+import useSnackbarEnhanced from '../../../hooks/useSnackbarEnhanced'
 import {
   getSettingsLocal,
   setSettingsLocal,
   showSettingsInstructions,
-} from "../../../utils/settingsLocal"
-import { Context } from "../../layout/Context"
-import SettingsSlider from "./SettingsSlider"
-import SettingsSwitch from "./SettingsSwitch"
+} from '../../../utils/settingsLocal'
+import { Context } from '../../layout/Context'
+import SettingsSlider from './SettingsSlider'
+import SettingsSwitch from './SettingsSwitch'
 
 export default function SettingsForm() {
   const { user } = useContext(Context)

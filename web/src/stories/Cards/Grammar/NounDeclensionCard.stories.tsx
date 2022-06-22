@@ -1,9 +1,9 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react"
-import NounDeclensionCard from "src/components/grammar/NounDeclensionCard"
-import declensions from "src/components/grammar/nounDeclensions"
+import { ComponentMeta, ComponentStory } from '@storybook/react'
+import NounDeclensionCard from 'src/components/grammar/NounDeclensionCard'
+import declensions from 'src/components/grammar/nounDeclensions'
 
 export default {
-  title: "Cards/Grammar/NounDeclensionCard",
+  title: 'Cards/Grammar/NounDeclensionCard',
   component: NounDeclensionCard,
 } as ComponentMeta<typeof NounDeclensionCard>
 

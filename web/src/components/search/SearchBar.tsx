@@ -1,15 +1,17 @@
-import { Grid } from "@material-ui/core"
-import CircularProgress from "@material-ui/core/CircularProgress"
-import IconButton from "@material-ui/core/IconButton"
-import InputBase from "@material-ui/core/InputBase"
-import Paper from "@material-ui/core/Paper"
-import { makeStyles } from "@material-ui/core/styles"
-import MenuIcon from "@material-ui/icons/Menu"
-import SearchIcon from "@material-ui/icons/Search"
-import React, { Dispatch, SetStateAction, useContext, useRef } from "react"
-import { pascalCase } from "../../utils/string"
-import { Context } from "../layout/Context"
-import SwitchEnglishLatin from "./SwitchEnglishLatin"
+import React, { Dispatch, SetStateAction, useContext, useRef } from 'react'
+
+import { Grid } from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import IconButton from '@material-ui/core/IconButton'
+import InputBase from '@material-ui/core/InputBase'
+import Paper from '@material-ui/core/Paper'
+import { makeStyles } from '@material-ui/core/styles'
+import MenuIcon from '@material-ui/icons/Menu'
+import SearchIcon from '@material-ui/icons/Search'
+
+import { pascalCase } from '../../utils/string'
+import { Context } from '../layout/Context'
+import SwitchEnglishLatin from './SwitchEnglishLatin'
 
 export interface SearchBarProps {
   search: string
@@ -25,7 +27,7 @@ export default function SearchBar({
   setSearch,
   handleSearchExecute,
   isLoading = false,
-  target = "",
+  target = '',
   isLatin = true,
   setLatin = () => null,
 }: SearchBarProps) {
@@ -61,8 +63,8 @@ export default function SearchBar({
           <InputBase
             id="searchBar"
             className={classes.input}
-            placeholder={"Search " + pascalCase(target)}
-            inputProps={{ "aria-label": "search", ref: input }}
+            placeholder={'Search ' + pascalCase(target)}
+            inputProps={{ 'aria-label': 'search', ref: input }}
             value={search}
             autoFocus
             onChange={(e) => setSearch(e.target.value)}
@@ -83,12 +85,12 @@ export default function SearchBar({
               <CircularProgress
                 size={24}
                 thickness={5.4}
-                color={isLatin ? "secondary" : "primary"}
+                color={isLatin ? 'secondary' : 'primary'}
               />
             )}
           </IconButton>
         </Grid>
-        {target === "lexico" && (
+        {target === 'lexico' && (
           <Grid item>
             <SwitchEnglishLatin {...{ isLatin, setLatin }} />
           </Grid>
@@ -101,7 +103,7 @@ export default function SearchBar({
 const useStyles = makeStyles((theme: any) => ({
   searchBar: {
     width: theme.custom.cardWidth,
-    padding: "4px 4px",
+    padding: '4px 4px',
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },

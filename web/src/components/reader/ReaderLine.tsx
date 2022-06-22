@@ -1,12 +1,14 @@
-import { Divider, Grid, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React, { useContext } from "react"
-import LazyLoad from "react-lazyload"
-import { Line } from "../../graphql/generated"
-import { getSettingsLocal } from "../../utils/settingsLocal"
-import { normalize } from "../../utils/string"
-import { Context } from "../layout/Context"
-import ReaderWord from "./ReaderWord"
+import React, { useContext } from 'react'
+import LazyLoad from 'react-lazyload'
+
+import { Divider, Grid, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { Line } from '../../graphql/generated'
+import { getSettingsLocal } from '../../utils/settingsLocal'
+import { normalize } from '../../utils/string'
+import { Context } from '../layout/Context'
+import ReaderWord from './ReaderWord'
 
 interface ReaderLineProps {
   line: Line
@@ -36,7 +38,7 @@ export default function ReaderLine({ line, openModal }: ReaderLineProps) {
         offset={1000}
         throttle={50}
         height={28}
-        style={{ display: "inline" }}
+        style={{ display: 'inline' }}
         placeholder={
           <Typography component="span" variant="inherit">
             ...
@@ -53,16 +55,16 @@ export default function ReaderLine({ line, openModal }: ReaderLineProps) {
 
 const useStyles = makeStyles((theme: any) => ({
   lineLabel: {
-    userSelect: "none",
-    pointerEvents: "none",
-    display: "inline-block",
-    height: "100%",
+    userSelect: 'none',
+    pointerEvents: 'none',
+    display: 'inline-block',
+    height: '100%',
     marginRight: theme.spacing(1) - 2,
     marginLeft: theme.spacing(1) - 2,
-    fontFamily: "courier, monospace",
+    fontFamily: 'courier, monospace',
   },
   divider: {
-    display: "inline",
+    display: 'inline',
     marginRight: theme.spacing(1) + 2,
     backgroundColor: theme.palette.primary.main,
   },

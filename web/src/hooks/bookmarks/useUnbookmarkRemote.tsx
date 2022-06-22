@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from "react"
-import { QueryClient } from "react-query"
-import { useUnbookmarkMutation } from "../../graphql/generated"
+import { Dispatch, SetStateAction } from 'react'
+import { QueryClient } from 'react-query'
+
+import { useUnbookmarkMutation } from '../../graphql/generated'
 
 export default function useUnbookmarkRemote(
   queryClient: QueryClient,
@@ -16,7 +17,7 @@ export default function useUnbookmarkRemote(
       setBookmarked(true)
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries("Bookmarks")
+      await queryClient.invalidateQueries('Bookmarks')
     },
   })
   return unbookmarkRemote

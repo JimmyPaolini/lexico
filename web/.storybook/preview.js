@@ -1,12 +1,14 @@
-import { CssBaseline, ThemeProvider } from "@material-ui/core"
-import SnackbarProvider from "../src/components/layout/Snackbar"
-import { QueryClient, QueryClientProvider } from "react-query"
-import { ContextProvider } from "../src/components/layout/Context"
-import theme from "../src/theme"
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+import { CssBaseline, ThemeProvider } from '@material-ui/core'
+
+import { ContextProvider } from '../src/components/layout/Context'
+import SnackbarProvider from '../src/components/layout/Snackbar'
+import theme from '../src/theme'
 
 export const parameters = {
-  actions: { argTypesRegex: "^(on|set|handle)[A-Z].*" },
-  layout: "centered",
+  actions: { argTypesRegex: '^(on|set|handle)[A-Z].*' },
+  layout: 'centered',
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -16,12 +18,12 @@ export const parameters = {
   backgrounds: {
     values: [
       {
-        name: "Lexico",
-        value: "#66023C",
+        name: 'Lexico',
+        value: '#66023C',
       },
       {
-        name: "Paper",
-        value: "#424242",
+        name: 'Paper',
+        value: '#424242',
       },
     ],
   },

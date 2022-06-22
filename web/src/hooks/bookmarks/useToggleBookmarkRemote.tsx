@@ -1,7 +1,8 @@
-import useBookmarkRemote from "./useBookmarkRemote"
-import useUnbookmarkRemote from "./useUnbookmarkRemote"
-import { Dispatch, SetStateAction } from "react"
-import { QueryClient } from "react-query"
+import { Dispatch, SetStateAction } from 'react'
+import { QueryClient } from 'react-query'
+
+import useBookmarkRemote from './useBookmarkRemote'
+import useUnbookmarkRemote from './useUnbookmarkRemote'
 
 export default function useToggleBookmarkRemote(
   id: string,

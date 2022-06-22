@@ -1,13 +1,14 @@
-import { EntityTarget, getConnection } from "typeorm"
-import Entry from "../../../entity/dictionary/Entry"
-import Translation from "../../../entity/dictionary/Translation"
-import Word from "../../../entity/dictionary/Word"
-import Author from "../../../entity/literature/Author"
-import Book from "../../../entity/literature/Book"
-import Line from "../../../entity/literature/Line"
-import Text from "../../../entity/literature/Text"
-import User from "../../../entity/user/User"
-import log from "../../../utils/log"
+import { EntityTarget, getConnection } from 'typeorm'
+
+import Entry from '../../../entity/dictionary/Entry'
+import Translation from '../../../entity/dictionary/Translation'
+import Word from '../../../entity/dictionary/Word'
+import Author from '../../../entity/literature/Author'
+import Book from '../../../entity/literature/Book'
+import Line from '../../../entity/literature/Line'
+import Text from '../../../entity/literature/Text'
+import User from '../../../entity/user/User'
+import log from '../../../utils/log'
 
 export async function clearEntity(
   Entity: EntityTarget<unknown>,

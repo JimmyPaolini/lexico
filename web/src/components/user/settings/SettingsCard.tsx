@@ -1,15 +1,17 @@
-import { Card, CardContent, Divider, Grid } from "@material-ui/core"
-import { makeStyles, Theme } from "@material-ui/core/styles"
-import React, { useContext } from "react"
+import React, { useContext } from 'react'
+
+import { Card, CardContent, Divider, Grid } from '@material-ui/core'
+import { Theme, makeStyles } from '@material-ui/core/styles'
+
 import {
   useLogoutQuery,
   useUnregisterMutation,
-} from "../../../graphql/generated"
-import CardHeader from "../../accessories/CardHeader"
-import SubmitButton from "../../accessories/SubmitButton"
-import { Context } from "../../layout/Context"
-import { Identity } from "./Identity"
-import SettingsForm from "./SettingsForm"
+} from '../../../graphql/generated'
+import CardHeader from '../../accessories/CardHeader'
+import SubmitButton from '../../accessories/SubmitButton'
+import { Context } from '../../layout/Context'
+import { Identity } from './Identity'
+import SettingsForm from './SettingsForm'
 
 export default function SettingsCard() {
   const classes = useStyles()
@@ -20,20 +22,20 @@ export default function SettingsCard() {
     {
       enabled: false,
       onSuccess: async () => {
-        await queryClient.invalidateQueries("User")
+        await queryClient.invalidateQueries('User')
       },
     },
   )
   const { mutateAsync: unregister } = useUnregisterMutation({
     retry: false,
     onSuccess: async () => {
-      await queryClient.invalidateQueries("User")
+      await queryClient.invalidateQueries('User')
     },
   })
 
   const confirmUnregister = async () => {
     const unregisterDialog =
-      "Are you sure you want to delete your account? All your Bookmarks, Literature, and Settings will be lost."
+      'Are you sure you want to delete your account? All your Bookmarks, Literature, and Settings will be lost.'
     if (window.confirm(unregisterDialog)) await unregister({})
   }
 
@@ -77,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   unregister: {
     backgroundColor: theme.palette.error.main,
-    "&:hover": {
+    '&:hover': {
       backgroundColor: theme.palette.error.dark,
     },
   },

@@ -1,11 +1,13 @@
-import { Box, Modal, Paper, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React, { Dispatch, memo, SetStateAction, useRef } from "react"
-import { useSwipeable } from "react-swipeable"
-import { Entry, useSearchLatinQuery } from "../../graphql/generated"
-import useEventListener from "../../hooks/useEventListener"
-import CardDeck from "../accessories/CardDeck"
-import EntryCard from "../entry/EntryCard"
+import React, { Dispatch, SetStateAction, memo, useRef } from 'react'
+import { useSwipeable } from 'react-swipeable'
+
+import { Box, Modal, Paper, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { Entry, useSearchLatinQuery } from '../../graphql/generated'
+import useEventListener from '../../hooks/useEventListener'
+import CardDeck from '../accessories/CardDeck'
+import EntryCard from '../entry/EntryCard'
 
 interface ReaderModalProps {
   searched: string
@@ -29,8 +31,8 @@ export default memo(function ReaderModal({
   )
   const entries = data?.searchLatin as Entry[]
 
-  useEventListener("keydown", (e: any) => {
-    if (e.key === "Escape") setOpen(false)
+  useEventListener('keydown', (e: any) => {
+    if (e.key === 'Escape') setOpen(false)
   })
 
   const cards =
@@ -69,15 +71,15 @@ export default memo(function ReaderModal({
 
 const useStyles = makeStyles((theme: any) => ({
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: theme.spacing(12),
   },
   container: {
-    maxHeight: "100%",
-    overflow: "scroll",
-    outline: "none",
+    maxHeight: '100%',
+    overflow: 'scroll',
+    outline: 'none',
   },
   notFound: {
     padding: theme.spacing(2),

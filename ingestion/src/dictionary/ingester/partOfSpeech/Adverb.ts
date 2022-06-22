@@ -1,15 +1,15 @@
-import AdverbForms from "../../../../../entity/dictionary/word/forms/AdverbForms"
-import AdverbInflection from "../../../../../entity/dictionary/word/inflection/AdverbInflection"
-import Ingester from "../../Ingester"
+import AdverbForms from '../../../../../entity/dictionary/word/forms/AdverbForms'
+import AdverbInflection from '../../../../../entity/dictionary/word/inflection/AdverbInflection'
+import Ingester from '../../Ingester'
 
 export default class Adverb extends Ingester {
-  firstPrincipalPartName = "positive"
+  firstPrincipalPartName = 'positive'
 
   async ingestInflection() {
     if (!this.principalParts) await this.ingestPrincipalParts()
     return this.principalParts.length > 1
-      ? new AdverbInflection("descriptive")
-      : new AdverbInflection("conjunctional")
+      ? new AdverbInflection('descriptive')
+      : new AdverbInflection('conjunctional')
   }
 
   async ingestForms() {

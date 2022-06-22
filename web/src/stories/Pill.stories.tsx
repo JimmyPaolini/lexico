@@ -1,7 +1,9 @@
-import Pill from "src/components/accessories/Pill"
-import { ComponentMeta, ComponentStory } from "@storybook/react"
-import { Grid } from "@material-ui/core"
-import IdentifierPill from "../components/accessories/IdentifierPill"
+import { Grid } from '@material-ui/core'
+
+import { ComponentMeta, ComponentStory } from '@storybook/react'
+import Pill from 'src/components/accessories/Pill'
+
+import IdentifierPill from '../components/accessories/IdentifierPill'
 
 // Red: red, crimson, tomato
 // Blue: blue, cadetblue, cornflowerblue
@@ -12,7 +14,7 @@ import IdentifierPill from "../components/accessories/IdentifierPill"
 // Neutral: white, black, gray
 
 export default {
-  title: "Pill",
+  title: 'Pill',
   component: Pill,
 } as ComponentMeta<typeof Pill>
 

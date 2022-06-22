@@ -1,6 +1,8 @@
-import { makeStyles } from "@material-ui/core/styles"
-import { SnackbarProvider } from "notistack"
-import React, { ReactNode } from "react"
+import React, { ReactNode } from 'react'
+
+import { makeStyles } from '@material-ui/core/styles'
+
+import { SnackbarProvider } from 'notistack'
 
 type Props = {
   children?: ReactNode
@@ -15,8 +17,8 @@ export default function Snackbar({ children }: Props) {
       /* @ts-ignore */
       classes={{ variantInfo: classes.snackbarInfo, action: classes.action }}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
+        vertical: 'bottom',
+        horizontal: 'right',
       }}
       elevation={4}
       hideIconVariant
@@ -30,7 +32,7 @@ export default function Snackbar({ children }: Props) {
 const useStyles = makeStyles((theme: any) => ({
   snackbarInfo: {
     backgroundColor: `${theme.palette.background.paper} !important`,
-    flexWrap: "nowrap",
+    flexWrap: 'nowrap',
   },
   action: {
     flexShrink: 0,

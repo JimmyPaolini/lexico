@@ -1,5 +1,11 @@
 {
   "semi": false,
+  "singleQuote": true,
   "trailingComma": "all",
-  "jsxBracketSameLine": false
+  "jsxBracketSameLine": false,
+  "printWidth": 80,
+  "tabWidth": 2,
+  "importOrder": ["^react", "^@material-ui", "<THIRD_PARTY_MODULES>", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

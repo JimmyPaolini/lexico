@@ -1,3 +1,5 @@
+import React, { memo, useState } from 'react'
+
 import {
   Box,
   Collapse,
@@ -5,13 +7,13 @@ import {
   Grid,
   ListItem,
   ListItemText,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React, { memo, useState } from "react"
-import { Author, Book } from "../../graphql/generated"
-import { sentenceCase } from "../../utils/string"
-import ExpandIcon from "../accessories/ExpandIcon"
-import LiteratureText from "./LiteratureText"
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { Author, Book } from '../../graphql/generated'
+import { sentenceCase } from '../../utils/string'
+import ExpandIcon from '../accessories/ExpandIcon'
+import LiteratureText from './LiteratureText'
 
 type Props = {
   author: Author
@@ -34,8 +36,8 @@ export default memo(function LiteratureBook({ book, isLast }: Props) {
         disableTouchRipple
       >
         <ListItemText
-          primary={sentenceCase(book.title).replace(/^\d+ /, "")}
-          primaryTypographyProps={{ variant: "body1" }}
+          primary={sentenceCase(book.title).replace(/^\d+ /, '')}
+          primaryTypographyProps={{ variant: 'body1' }}
         />
         <Box py="auto" mr={0.5} display="flex">
           <ExpandIcon expanded={expanded} />
@@ -55,8 +57,8 @@ export default memo(function LiteratureBook({ book, isLast }: Props) {
 
 const useStyles = makeStyles((theme: any) => ({
   hideHoverHighlight: {
-    "&:hover": {
-      backgroundColor: "inherit",
+    '&:hover': {
+      backgroundColor: 'inherit',
     },
   },
   inset1: {

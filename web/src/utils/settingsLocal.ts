@@ -1,24 +1,23 @@
-import { Settings } from "../graphql/generated"
+import { Settings } from '../graphql/generated'
 
-export const settingsDefault = (): Settings =>
-  ({
-    theme: "dark",
-    fontSize: 24,
-    formsExpandedDefault: false,
-    translationsExpandedDefault: false,
-    dictionaryMacronized: true,
-    literatureMacronized: false,
-  })
+export const settingsDefault = (): Settings => ({
+  theme: 'dark',
+  fontSize: 24,
+  formsExpandedDefault: false,
+  translationsExpandedDefault: false,
+  dictionaryMacronized: true,
+  literatureMacronized: false,
+})
 
 export function getSettingsLocal(): Settings {
-  if (typeof window === "undefined") return settingsDefault()
+  if (typeof window === 'undefined') return settingsDefault()
   return window.localStorage?.settings
     ? (JSON.parse(window.localStorage.settings) as Settings)
     : settingsDefault()
 }
 
 export function setSettingsLocal(settings: Settings): Settings | void {
-  if (typeof window === "undefined") return
+  if (typeof window === 'undefined') return
   window.localStorage.settings = JSON.stringify(settings)
 }
 
@@ -29,9 +28,9 @@ class ShowSettingsInstructions {
 
 // only called when the user is not signed in
 export function showSettingsInstructions(): boolean {
-  if (typeof window === "undefined") return false
+  if (typeof window === 'undefined') return false
   const showSettingsInstructions = JSON.parse(
-    window.localStorage.showSettingsInstructions || "null",
+    window.localStorage.showSettingsInstructions || 'null',
   ) as ShowSettingsInstructions
 
   if (!showSettingsInstructions) {

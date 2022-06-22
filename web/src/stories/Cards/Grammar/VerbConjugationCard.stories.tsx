@@ -1,9 +1,9 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react"
-import VerbConjugationCard from "src/components/grammar/VerbConjugationCard"
-import conjugations from "src/components/grammar/verbConjugations"
+import { ComponentMeta, ComponentStory } from '@storybook/react'
+import VerbConjugationCard from 'src/components/grammar/VerbConjugationCard'
+import conjugations from 'src/components/grammar/verbConjugations'
 
 export default {
-  title: "Cards/Grammar/VerbConjugationCard",
+  title: 'Cards/Grammar/VerbConjugationCard',
   component: VerbConjugationCard,
 } as ComponentMeta<typeof VerbConjugationCard>
 

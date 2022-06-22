@@ -1,4 +1,4 @@
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: false,
 })
 
@@ -7,7 +7,7 @@ module.exports = withBundleAnalyzer({
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
-      loader: "graphql-tag/loader",
+      loader: 'graphql-tag/loader',
     })
     // config.module.rules.push({
     //   test: /\.\.\/.*\/\.ts$/,

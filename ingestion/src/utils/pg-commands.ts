@@ -1,47 +1,48 @@
-import { exec } from "child_process"
-import { readdirSync } from "fs"
+import { exec } from 'child_process'
+import { readdirSync } from 'fs'
+
 import {
   POSTGRES_DB,
   POSTGRES_PASSWORD,
   POSTGRES_USER,
-} from "../../../utils/env"
-import log from "../../../utils/log"
+} from '../../../utils/env'
+import log from '../../../utils/log'
 import {
   clearAll,
   clearDictionary,
   clearIngested,
   clearLiterature,
   clearUsers,
-} from "./clear"
+} from './clear'
 
-export const backupFileNameExtension = ".zip"
+export const backupFileNameExtension = '.zip'
 
 export const backups = (filter?: RegExp): string[] =>
   readdirSync(`../data/backup`)
     .filter((fileName) => !fileName.match(/\.DS_Store/))
     .filter((fileName) => fileName.match(filter || /[\s\S]*/))
-    .map((fileName) => fileName.replace(backupFileNameExtension, ""))
+    .map((fileName) => fileName.replace(backupFileNameExtension, ''))
     .sort()
     .reverse()
 
-const dictionaryTables = ["entry", "word", "translation", "word_entries_entry"]
+const dictionaryTables = ['entry', 'word', 'translation', 'word_entries_entry']
 
-const literatureTables = ["author", "book", "text", "line"]
+const literatureTables = ['author', 'book', 'text', 'line']
 
-const userTables = ["user", "user_bookmarks_entry", "custom_texts"]
+const userTables = ['user', 'user_bookmarks_entry', 'custom_texts']
 
 const createCommand = (isBackup: boolean, fileKey: string, tables: string[]) =>
   `PGPASSWORD=${POSTGRES_PASSWORD} ` +
-  `${isBackup ? "pg_dump --compress 9" : "pg_restore"} ` +
+  `${isBackup ? 'pg_dump --compress 9' : 'pg_restore'} ` +
   `--dbname ${POSTGRES_DB} ` +
-  tables.map((table) => `-t ${table} `).join("") +
+  tables.map((table) => `-t ${table} `).join('') +
   `--username ${POSTGRES_USER} ` +
   `--host ${
-    process.env.NODE_ENV === "production" ? "database" : "localhost"
+    process.env.NODE_ENV === 'production' ? 'database' : 'localhost'
   } ` +
   `--port 5432 --format c ` +
-  (fileKey.match(/all$/) ? "" : `--data-only `) +
-  `${isBackup ? ">" : "<"} "${fileKey}${backupFileNameExtension}"`
+  (fileKey.match(/all$/) ? '' : `--data-only `) +
+  `${isBackup ? '>' : '<'} "${fileKey}${backupFileNameExtension}"`
 
 export async function backupDatabase(
   type: string,
@@ -55,23 +56,23 @@ export async function backupDatabase(
 }
 
 export async function backupDictionary(): Promise<void> {
-  await backupDatabase("dictionary", dictionaryTables)
+  await backupDatabase('dictionary', dictionaryTables)
 }
 
 export async function backupLiterature(): Promise<void> {
-  await backupDatabase("literature", literatureTables)
+  await backupDatabase('literature', literatureTables)
 }
 
 export async function backupUsers(): Promise<void> {
-  await backupDatabase("users", userTables)
+  await backupDatabase('users', userTables)
 }
 
 export async function backupIngested(): Promise<void> {
-  await backupDatabase("ingested", [...dictionaryTables, ...literatureTables])
+  await backupDatabase('ingested', [...dictionaryTables, ...literatureTables])
 }
 
 export async function backupAll(): Promise<void> {
-  await backupDatabase("all", [])
+  await backupDatabase('all', [])
 }
 
 export async function restoreDatabase(
@@ -88,22 +89,22 @@ export async function restoreDatabase(
 
 export async function restoreDictionary(backupName: string): Promise<void> {
   await clearDictionary()
-  await restoreDatabase(backupName, "dictionary", dictionaryTables)
+  await restoreDatabase(backupName, 'dictionary', dictionaryTables)
 }
 
 export async function restoreLiterature(backupName: string): Promise<void> {
   await clearLiterature()
-  await restoreDatabase(backupName, "literature", literatureTables)
+  await restoreDatabase(backupName, 'literature', literatureTables)
 }
 
 export async function restoreUsers(backupName: string): Promise<void> {
   await clearUsers()
-  await restoreDatabase(backupName, "users", userTables)
+  await restoreDatabase(backupName, 'users', userTables)
 }
 
 export async function restoreIngested(backupName: string): Promise<void> {
   await clearIngested()
-  await restoreDatabase(backupName, "ingested", [
+  await restoreDatabase(backupName, 'ingested', [
     ...dictionaryTables,
     ...literatureTables,
   ])
@@ -111,7 +112,7 @@ export async function restoreIngested(backupName: string): Promise<void> {
 
 export async function restoreAll(backupName: string): Promise<void> {
   await clearAll()
-  await restoreDatabase(backupName, "all", [])
+  await restoreDatabase(backupName, 'all', [])
 }
 
 async function execute(command: string) {

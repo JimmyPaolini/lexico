@@ -1,10 +1,12 @@
-import { Card, CardContent } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React from "react"
-import CardHeader from "../components/accessories/CardHeader"
-import SubmitButton from "../components/accessories/SubmitButton"
-import SingleCardLayout from "../components/layout/SingleCardLayout"
-import { LexicoTheme } from "../theme"
+import React from 'react'
+
+import { Card, CardContent } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import CardHeader from '../components/accessories/CardHeader'
+import SubmitButton from '../components/accessories/SubmitButton'
+import SingleCardLayout from '../components/layout/SingleCardLayout'
+import { LexicoTheme } from '../theme'
 
 export default function Error500() {
   const classes = useStyles()

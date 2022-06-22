@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { clientEndpoint as endpointUrl } from "../pages/_app"
-
-import gql from "graphql-tag"
 import {
-  useMutation,
   UseMutationOptions,
-  useQuery,
   UseQueryOptions,
-} from "react-query"
+  useMutation,
+  useQuery,
+} from 'react-query'
+
+import gql from 'graphql-tag'
+
+import { clientEndpoint as endpointUrl } from '../pages/_app'
+
 export type Maybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]
@@ -20,10 +22,10 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
 function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
     const res = await fetch(endpointUrl as string, {
-      method: "POST",
-      credentials: "include",
-      mode: "cors",
-      headers: { "content-type": "application/json" },
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ query, variables }),
     })
 
@@ -66,56 +68,56 @@ export type AdjectiveForms = {
 }
 
 export type AdjectiveInflection = {
-  declension: Scalars["String"]
-  degree: Scalars["String"]
-  other: Scalars["String"]
+  declension: Scalars['String']
+  degree: Scalars['String']
+  other: Scalars['String']
 }
 
 export type AdjectiveNumber = {
-  plural?: Maybe<Array<Scalars["String"]>>
-  singular?: Maybe<Array<Scalars["String"]>>
+  plural?: Maybe<Array<Scalars['String']>>
+  singular?: Maybe<Array<Scalars['String']>>
 }
 
 export type AdverbForms = {
-  comparative?: Maybe<Array<Scalars["String"]>>
-  positive?: Maybe<Array<Scalars["String"]>>
-  superlative?: Maybe<Array<Scalars["String"]>>
+  comparative?: Maybe<Array<Scalars['String']>>
+  positive?: Maybe<Array<Scalars['String']>>
+  superlative?: Maybe<Array<Scalars['String']>>
 }
 
 export type AdverbInflection = {
-  degree: Scalars["String"]
-  type: Scalars["String"]
+  degree: Scalars['String']
+  type: Scalars['String']
 }
 
 export type Author = {
   books?: Maybe<Array<Book>>
-  id: Scalars["String"]
-  name: Scalars["String"]
+  id: Scalars['String']
+  name: Scalars['String']
   texts: Array<Text>
 }
 
 export type Book = {
   author: Author
-  id: Scalars["ID"]
+  id: Scalars['ID']
   texts: Array<Text>
-  title: Scalars["String"]
+  title: Scalars['String']
 }
 
 export type CustomText = {
-  id: Scalars["ID"]
-  text: Scalars["String"]
-  title: Scalars["String"]
+  id: Scalars['ID']
+  text: Scalars['String']
+  title: Scalars['String']
   user: User
 }
 
 export type Entry = {
-  bookmarked?: Maybe<Scalars["Boolean"]>
-  etymology?: Maybe<Scalars["String"]>
+  bookmarked?: Maybe<Scalars['Boolean']>
+  etymology?: Maybe<Scalars['String']>
   forms?: Maybe<Forms>
-  id: Scalars["ID"]
-  identifiers?: Maybe<Array<Scalars["String"]>>
+  id: Scalars['ID']
+  identifiers?: Maybe<Array<Scalars['String']>>
   inflection?: Maybe<Inflection>
-  partOfSpeech: Scalars["String"]
+  partOfSpeech: Scalars['String']
   principalParts?: Maybe<Array<PrincipalPart>>
   pronunciation?: Maybe<Pronunciation>
   translations?: Maybe<Array<Translation>>
@@ -126,10 +128,10 @@ export type Entry = {
 export type Forms = AdjectiveForms | AdverbForms | NounForms | VerbForms
 
 export type Gerund = {
-  ablative?: Maybe<Array<Scalars["String"]>>
-  accusative?: Maybe<Array<Scalars["String"]>>
-  dative?: Maybe<Array<Scalars["String"]>>
-  genitive?: Maybe<Array<Scalars["String"]>>
+  ablative?: Maybe<Array<Scalars['String']>>
+  accusative?: Maybe<Array<Scalars['String']>>
+  dative?: Maybe<Array<Scalars['String']>>
+  genitive?: Maybe<Array<Scalars['String']>>
 }
 
 export type Imperative = {
@@ -163,16 +165,16 @@ export type ImperativePresent = {
 }
 
 export type ImperativeSecond = {
-  second?: Maybe<Array<Scalars["String"]>>
+  second?: Maybe<Array<Scalars['String']>>
 }
 
 export type ImperativeSecondThird = {
-  second?: Maybe<Array<Scalars["String"]>>
-  third?: Maybe<Array<Scalars["String"]>>
+  second?: Maybe<Array<Scalars['String']>>
+  third?: Maybe<Array<Scalars['String']>>
 }
 
 export type ImperativeThird = {
-  third?: Maybe<Array<Scalars["String"]>>
+  third?: Maybe<Array<Scalars['String']>>
 }
 
 export type Indicative = {
@@ -186,9 +188,9 @@ export type IndicativeNumber = {
 }
 
 export type IndicativePerson = {
-  first?: Maybe<Array<Scalars["String"]>>
-  second?: Maybe<Array<Scalars["String"]>>
-  third?: Maybe<Array<Scalars["String"]>>
+  first?: Maybe<Array<Scalars['String']>>
+  second?: Maybe<Array<Scalars['String']>>
+  third?: Maybe<Array<Scalars['String']>>
 }
 
 export type IndicativeTense = {
@@ -209,56 +211,56 @@ export type Inflection =
   | VerbInflection
 
 export type Line = {
-  id: Scalars["ID"]
-  line: Scalars["String"]
-  lineLabel: Scalars["String"]
-  lineNumber: Scalars["Float"]
+  id: Scalars['ID']
+  line: Scalars['String']
+  lineLabel: Scalars['String']
+  lineNumber: Scalars['Float']
   text: Text
 }
 
 export type Mutation = {
-  bookmark: Scalars["Boolean"]
-  comment: Scalars["Boolean"]
+  bookmark: Scalars['Boolean']
+  comment: Scalars['Boolean']
   createCustomText: CustomText
-  deleteCustomText: Scalars["Boolean"]
-  recoverPassword: Scalars["Boolean"]
+  deleteCustomText: Scalars['Boolean']
+  recoverPassword: Scalars['Boolean']
   register: User
-  resetPassword: Scalars["Boolean"]
-  setSettings: Scalars["Boolean"]
-  unbookmark: Scalars["Boolean"]
-  unregister: Scalars["Boolean"]
+  resetPassword: Scalars['Boolean']
+  setSettings: Scalars['Boolean']
+  unbookmark: Scalars['Boolean']
+  unregister: Scalars['Boolean']
 }
 
 export type MutationBookmarkArgs = {
-  entryId: Scalars["String"]
+  entryId: Scalars['String']
 }
 
 export type MutationCommentArgs = {
-  comment: Scalars["String"]
+  comment: Scalars['String']
 }
 
 export type MutationCreateCustomTextArgs = {
-  id: Scalars["String"]
-  text: Scalars["String"]
-  title: Scalars["String"]
+  id: Scalars['String']
+  text: Scalars['String']
+  title: Scalars['String']
 }
 
 export type MutationDeleteCustomTextArgs = {
-  id: Scalars["String"]
+  id: Scalars['String']
 }
 
 export type MutationRecoverPasswordArgs = {
-  email: Scalars["String"]
+  email: Scalars['String']
 }
 
 export type MutationRegisterArgs = {
-  email: Scalars["String"]
-  password: Scalars["String"]
+  email: Scalars['String']
+  password: Scalars['String']
 }
 
 export type MutationResetPasswordArgs = {
-  password: Scalars["String"]
-  passwordResetToken: Scalars["String"]
+  password: Scalars['String']
+  passwordResetToken: Scalars['String']
 }
 
 export type MutationSetSettingsArgs = {
@@ -266,7 +268,7 @@ export type MutationSetSettingsArgs = {
 }
 
 export type MutationUnbookmarkArgs = {
-  entryId: Scalars["String"]
+  entryId: Scalars['String']
 }
 
 export type NonFinite = {
@@ -285,19 +287,19 @@ export type NonFiniteParticiple = {
 }
 
 export type NonFinitePerfectFuture = {
-  future?: Maybe<Array<Scalars["String"]>>
-  perfect?: Maybe<Array<Scalars["String"]>>
+  future?: Maybe<Array<Scalars['String']>>
+  perfect?: Maybe<Array<Scalars['String']>>
 }
 
 export type NonFinitePresentFuture = {
-  future?: Maybe<Array<Scalars["String"]>>
-  present?: Maybe<Array<Scalars["String"]>>
+  future?: Maybe<Array<Scalars['String']>>
+  present?: Maybe<Array<Scalars['String']>>
 }
 
 export type NonFinitePresentPerfectFuture = {
-  future?: Maybe<Array<Scalars["String"]>>
-  perfect?: Maybe<Array<Scalars["String"]>>
-  present?: Maybe<Array<Scalars["String"]>>
+  future?: Maybe<Array<Scalars['String']>>
+  perfect?: Maybe<Array<Scalars['String']>>
+  present?: Maybe<Array<Scalars['String']>>
 }
 
 export type NounForms = {
@@ -311,24 +313,24 @@ export type NounForms = {
 }
 
 export type NounInflection = {
-  declension: Scalars["String"]
-  gender: Scalars["String"]
-  other: Scalars["String"]
+  declension: Scalars['String']
+  gender: Scalars['String']
+  other: Scalars['String']
 }
 
 export type NounNumber = {
-  plural?: Maybe<Array<Scalars["String"]>>
-  singular?: Maybe<Array<Scalars["String"]>>
+  plural?: Maybe<Array<Scalars['String']>>
+  singular?: Maybe<Array<Scalars['String']>>
 }
 
 export type PrepositionInflection = {
-  case: Scalars["String"]
-  other: Scalars["String"]
+  case: Scalars['String']
+  other: Scalars['String']
 }
 
 export type PrincipalPart = {
-  name: Scalars["String"]
-  text: Array<Scalars["String"]>
+  name: Scalars['String']
+  text: Array<Scalars['String']>
 }
 
 export type Pronunciation = {
@@ -338,9 +340,9 @@ export type Pronunciation = {
 }
 
 export type PronunciationParts = {
-  phonemes: Scalars["String"]
-  phonemic: Scalars["String"]
-  phonetic: Scalars["String"]
+  phonemes: Scalars['String']
+  phonemic: Scalars['String']
+  phonetic: Scalars['String']
 }
 
 export type Query = {
@@ -360,7 +362,7 @@ export type Query = {
   google: User
   listCustomTexts: Array<CustomText>
   login: User
-  logout: Scalars["Boolean"]
+  logout: Scalars['Boolean']
   searchAuthors: Array<Author>
   searchBooks: Array<Book>
   searchEnglish: Array<Entry>
@@ -371,100 +373,100 @@ export type Query = {
   settings: Settings
   user?: Maybe<User>
   users: Array<User>
-  validatePasswordResetToken: Scalars["Boolean"]
+  validatePasswordResetToken: Scalars['Boolean']
 }
 
 export type QueryEntriesArgs = {
-  ids: Array<Scalars["String"]>
+  ids: Array<Scalars['String']>
 }
 
 export type QueryEntryArgs = {
-  id: Scalars["String"]
+  id: Scalars['String']
 }
 
 export type QueryFacebookArgs = {
-  code: Scalars["String"]
+  code: Scalars['String']
 }
 
 export type QueryFindTextArgs = {
-  author: Scalars["String"]
-  book?: Maybe<Scalars["String"]>
-  title: Scalars["String"]
+  author: Scalars['String']
+  book?: Maybe<Scalars['String']>
+  title: Scalars['String']
 }
 
 export type QueryGetAuthorArgs = {
-  id: Scalars["String"]
+  id: Scalars['String']
 }
 
 export type QueryGetBookArgs = {
-  id: Scalars["String"]
+  id: Scalars['String']
 }
 
 export type QueryGetCustomTextArgs = {
-  id: Scalars["String"]
+  id: Scalars['String']
 }
 
 export type QueryGetTextArgs = {
-  id: Scalars["String"]
+  id: Scalars['String']
 }
 
 export type QueryGoogleArgs = {
-  code: Scalars["String"]
+  code: Scalars['String']
 }
 
 export type QueryLoginArgs = {
-  email: Scalars["String"]
-  password: Scalars["String"]
+  email: Scalars['String']
+  password: Scalars['String']
 }
 
 export type QuerySearchAuthorsArgs = {
-  search: Scalars["String"]
+  search: Scalars['String']
 }
 
 export type QuerySearchBooksArgs = {
-  search: Scalars["String"]
+  search: Scalars['String']
 }
 
 export type QuerySearchEnglishArgs = {
-  search: Scalars["String"]
+  search: Scalars['String']
 }
 
 export type QuerySearchLatinArgs = {
-  search: Scalars["String"]
+  search: Scalars['String']
 }
 
 export type QuerySearchLinesArgs = {
-  search: Scalars["String"]
+  search: Scalars['String']
 }
 
 export type QuerySearchLiteratureArgs = {
-  search: Scalars["String"]
+  search: Scalars['String']
 }
 
 export type QuerySearchTextsArgs = {
-  search: Scalars["String"]
+  search: Scalars['String']
 }
 
 export type QueryValidatePasswordResetTokenArgs = {
-  passwordResetToken: Scalars["String"]
+  passwordResetToken: Scalars['String']
 }
 
 export type Settings = {
-  dictionaryMacronized?: Maybe<Scalars["Boolean"]>
-  fontSize?: Maybe<Scalars["Float"]>
-  formsExpandedDefault?: Maybe<Scalars["Boolean"]>
-  literatureMacronized?: Maybe<Scalars["Boolean"]>
-  theme?: Maybe<Scalars["String"]>
-  translationsExpandedDefault?: Maybe<Scalars["Boolean"]>
+  dictionaryMacronized?: Maybe<Scalars['Boolean']>
+  fontSize?: Maybe<Scalars['Float']>
+  formsExpandedDefault?: Maybe<Scalars['Boolean']>
+  literatureMacronized?: Maybe<Scalars['Boolean']>
+  theme?: Maybe<Scalars['String']>
+  translationsExpandedDefault?: Maybe<Scalars['Boolean']>
 }
 
 export type SettingsInput = {
-  dictionaryMacronized?: Maybe<Scalars["Boolean"]>
-  fontSize?: Maybe<Scalars["Float"]>
-  formsExpandedDefault?: Maybe<Scalars["Boolean"]>
-  literatureMacronized?: Maybe<Scalars["Boolean"]>
-  theme?: Maybe<Scalars["String"]>
-  translationsExpandedDefault?: Maybe<Scalars["Boolean"]>
+  dictionaryMacronized?: Maybe<Scalars['Boolean']>
+  fontSize?: Maybe<Scalars['Float']>
+  formsExpandedDefault?: Maybe<Scalars['Boolean']>
+  literatureMacronized?: Maybe<Scalars['Boolean']>
+  theme?: Maybe<Scalars['String']>
+  translationsExpandedDefault?: Maybe<Scalars['Boolean']>
 }
 
 export type Subjunctive = {
@@ -478,9 +480,9 @@ export type SubjunctiveNumber = {
 }
 
 export type SubjunctivePerson = {
-  first?: Maybe<Array<Scalars["String"]>>
-  second?: Maybe<Array<Scalars["String"]>>
-  third?: Maybe<Array<Scalars["String"]>>
+  first?: Maybe<Array<Scalars['String']>>
+  second?: Maybe<Array<Scalars['String']>>
+  third?: Maybe<Array<Scalars['String']>>
 }
 
 export type SubjunctiveTense = {
@@ -491,44 +493,44 @@ export type SubjunctiveTense = {
 }
 
 export type Supine = {
-  ablative?: Maybe<Array<Scalars["String"]>>
-  accusative?: Maybe<Array<Scalars["String"]>>
+  ablative?: Maybe<Array<Scalars['String']>>
+  accusative?: Maybe<Array<Scalars['String']>>
 }
 
 export type Text = {
   author: Author
   book?: Maybe<Book>
-  id: Scalars["ID"]
+  id: Scalars['ID']
   lines: Array<Line>
   linesSlice?: Maybe<Array<Line>>
-  title: Scalars["String"]
+  title: Scalars['String']
 }
 
 export type TextLinesSliceArgs = {
-  end?: Maybe<Scalars["Float"]>
-  start?: Maybe<Scalars["Float"]>
+  end?: Maybe<Scalars['Float']>
+  start?: Maybe<Scalars['Float']>
 }
 
 export type Translation = {
   entry: Entry
-  id: Scalars["ID"]
-  translation: Scalars["String"]
+  id: Scalars['ID']
+  translation: Scalars['String']
 }
 
 export type Uninflected = {
-  other: Scalars["String"]
+  other: Scalars['String']
 }
 
 export type User = {
   bookmarks?: Maybe<Array<Entry>>
-  createdAt: Scalars["DateTime"]
+  createdAt: Scalars['DateTime']
   customTexts?: Maybe<Array<CustomText>>
-  email: Scalars["String"]
-  facebookId?: Maybe<Scalars["String"]>
-  googleId?: Maybe<Scalars["String"]>
-  id: Scalars["ID"]
+  email: Scalars['String']
+  facebookId?: Maybe<Scalars['String']>
+  googleId?: Maybe<Scalars['String']>
+  id: Scalars['ID']
   settings?: Maybe<Settings>
-  updatedAt: Scalars["DateTime"]
+  updatedAt: Scalars['DateTime']
 }
 
 export type VerbForms = {
@@ -540,8 +542,8 @@ export type VerbForms = {
 }
 
 export type VerbInflection = {
-  conjugation: Scalars["String"]
-  other: Scalars["String"]
+  conjugation: Scalars['String']
+  other: Scalars['String']
 }
 
 export type VerbalNoun = {
@@ -551,17 +553,17 @@ export type VerbalNoun = {
 
 export type Word = {
   entries: Array<Entry>
-  word: Scalars["String"]
+  word: Scalars['String']
 }
 
 export type CommentMutationVariables = Exact<{
-  comment: Scalars["String"]
+  comment: Scalars['String']
 }>
 
 export type CommentMutation = { comment: boolean }
 
 export type BookmarkMutationVariables = Exact<{
-  entryId: Scalars["String"]
+  entryId: Scalars['String']
 }>
 
 export type BookmarkMutation = { bookmark: boolean }
@@ -1038,7 +1040,7 @@ export type BookmarksQuery = {
 }
 
 export type EntriesQueryVariables = Exact<{
-  ids: Array<Scalars["String"]> | Scalars["String"]
+  ids: Array<Scalars['String']> | Scalars['String']
 }>
 
 export type EntriesQuery = {
@@ -1511,15 +1513,15 @@ export type EntriesQuery = {
 }
 
 export type UnbookmarkMutationVariables = Exact<{
-  entryId: Scalars["String"]
+  entryId: Scalars['String']
 }>
 
 export type UnbookmarkMutation = { unbookmark: boolean }
 
 export type CreateCustomTextMutationVariables = Exact<{
-  id: Scalars["String"]
-  title: Scalars["String"]
-  text: Scalars["String"]
+  id: Scalars['String']
+  title: Scalars['String']
+  text: Scalars['String']
 }>
 
 export type CreateCustomTextMutation = {
@@ -1527,13 +1529,13 @@ export type CreateCustomTextMutation = {
 }
 
 export type DeleteCustomTextMutationVariables = Exact<{
-  id: Scalars["String"]
+  id: Scalars['String']
 }>
 
 export type DeleteCustomTextMutation = { deleteCustomText: boolean }
 
 export type GetCustomTextQueryVariables = Exact<{
-  id: Scalars["String"]
+  id: Scalars['String']
 }>
 
 export type GetCustomTextQuery = {
@@ -1547,9 +1549,9 @@ export type ListCustomTextsQuery = {
 }
 
 export type FindTextQueryVariables = Exact<{
-  author: Scalars["String"]
-  book?: Maybe<Scalars["String"]>
-  title: Scalars["String"]
+  author: Scalars['String']
+  book?: Maybe<Scalars['String']>
+  title: Scalars['String']
 }>
 
 export type FindTextQuery = {
@@ -1585,7 +1587,7 @@ export type GetAuthorsQuery = {
 }
 
 export type GetTextQueryVariables = Exact<{
-  id: Scalars["String"]
+  id: Scalars['String']
 }>
 
 export type GetTextQuery = {
@@ -1619,7 +1621,7 @@ export type GetTextsQuery = {
 }
 
 export type SearchEnglishQueryVariables = Exact<{
-  search: Scalars["String"]
+  search: Scalars['String']
 }>
 
 export type SearchEnglishQuery = {
@@ -2092,7 +2094,7 @@ export type SearchEnglishQuery = {
 }
 
 export type SearchLatinQueryVariables = Exact<{
-  search: Scalars["String"]
+  search: Scalars['String']
 }>
 
 export type SearchLatinQuery = {
@@ -2565,7 +2567,7 @@ export type SearchLatinQuery = {
 }
 
 export type FacebookQueryVariables = Exact<{
-  code: Scalars["String"]
+  code: Scalars['String']
 }>
 
 export type FacebookQuery = {
@@ -2573,7 +2575,7 @@ export type FacebookQuery = {
 }
 
 export type GoogleQueryVariables = Exact<{
-  code: Scalars["String"]
+  code: Scalars['String']
 }>
 
 export type GoogleQuery = {
@@ -2581,8 +2583,8 @@ export type GoogleQuery = {
 }
 
 export type LoginQueryVariables = Exact<{
-  email: Scalars["String"]
-  password: Scalars["String"]
+  email: Scalars['String']
+  password: Scalars['String']
 }>
 
 export type LoginQuery = { login: { id: string; email: string } }
@@ -2592,21 +2594,21 @@ export type LogoutQueryVariables = Exact<{ [key: string]: never }>
 export type LogoutQuery = { logout: boolean }
 
 export type RecoverPasswordMutationVariables = Exact<{
-  email: Scalars["String"]
+  email: Scalars['String']
 }>
 
 export type RecoverPasswordMutation = { recoverPassword: boolean }
 
 export type RegisterMutationVariables = Exact<{
-  email: Scalars["String"]
-  password: Scalars["String"]
+  email: Scalars['String']
+  password: Scalars['String']
 }>
 
 export type RegisterMutation = { register: { id: string; email: string } }
 
 export type ResetPasswordMutationVariables = Exact<{
-  passwordResetToken: Scalars["String"]
-  password: Scalars["String"]
+  passwordResetToken: Scalars['String']
+  password: Scalars['String']
 }>
 
 export type ResetPasswordMutation = { resetPassword: boolean }
@@ -2635,7 +2637,7 @@ export type UserQuery = {
 }
 
 export type ValidatePasswordResetTokenQueryVariables = Exact<{
-  passwordResetToken: Scalars["String"]
+  passwordResetToken: Scalars['String']
 }>
 
 export type ValidatePasswordResetTokenQuery = {
@@ -4117,7 +4119,7 @@ export const useBookmarksQuery = <TData = BookmarksQuery, TError = unknown>(
   options?: UseQueryOptions<BookmarksQuery, TError, TData>,
 ) =>
   useQuery<BookmarksQuery, TError, TData>(
-    ["Bookmarks", variables],
+    ['Bookmarks', variables],
     fetcher<BookmarksQuery, BookmarksQueryVariables>(
       BookmarksDocument,
       variables,
@@ -4125,7 +4127,7 @@ export const useBookmarksQuery = <TData = BookmarksQuery, TError = unknown>(
     options,
   )
 useBookmarksQuery.getKey = (variables?: BookmarksQueryVariables) => [
-  "Bookmarks",
+  'Bookmarks',
   variables,
 ]
 
@@ -4186,12 +4188,12 @@ export const useEntriesQuery = <TData = EntriesQuery, TError = unknown>(
   options?: UseQueryOptions<EntriesQuery, TError, TData>,
 ) =>
   useQuery<EntriesQuery, TError, TData>(
-    ["Entries", variables],
+    ['Entries', variables],
     fetcher<EntriesQuery, EntriesQueryVariables>(EntriesDocument, variables),
     options,
   )
 useEntriesQuery.getKey = (variables: EntriesQueryVariables) => [
-  "Entries",
+  'Entries',
   variables,
 ]
 
@@ -4234,7 +4236,7 @@ export const CreateCustomTextDocument = `
     `
 export const useCreateCustomTextMutation = <
   TError = unknown,
-  TContext = unknown
+  TContext = unknown,
 >(
   options?: UseMutationOptions<
     CreateCustomTextMutation,
@@ -4263,7 +4265,7 @@ export const DeleteCustomTextDocument = `
     `
 export const useDeleteCustomTextMutation = <
   TError = unknown,
-  TContext = unknown
+  TContext = unknown,
 >(
   options?: UseMutationOptions<
     DeleteCustomTextMutation,
@@ -4296,13 +4298,13 @@ export const GetCustomTextDocument = `
     `
 export const useGetCustomTextQuery = <
   TData = GetCustomTextQuery,
-  TError = unknown
+  TError = unknown,
 >(
   variables: GetCustomTextQueryVariables,
   options?: UseQueryOptions<GetCustomTextQuery, TError, TData>,
 ) =>
   useQuery<GetCustomTextQuery, TError, TData>(
-    ["GetCustomText", variables],
+    ['GetCustomText', variables],
     fetcher<GetCustomTextQuery, GetCustomTextQueryVariables>(
       GetCustomTextDocument,
       variables,
@@ -4310,7 +4312,7 @@ export const useGetCustomTextQuery = <
     options,
   )
 useGetCustomTextQuery.getKey = (variables: GetCustomTextQueryVariables) => [
-  "GetCustomText",
+  'GetCustomText',
   variables,
 ]
 
@@ -4330,13 +4332,13 @@ export const ListCustomTextsDocument = `
     `
 export const useListCustomTextsQuery = <
   TData = ListCustomTextsQuery,
-  TError = unknown
+  TError = unknown,
 >(
   variables?: ListCustomTextsQueryVariables,
   options?: UseQueryOptions<ListCustomTextsQuery, TError, TData>,
 ) =>
   useQuery<ListCustomTextsQuery, TError, TData>(
-    ["ListCustomTexts", variables],
+    ['ListCustomTexts', variables],
     fetcher<ListCustomTextsQuery, ListCustomTextsQueryVariables>(
       ListCustomTextsDocument,
       variables,
@@ -4345,7 +4347,7 @@ export const useListCustomTextsQuery = <
   )
 useListCustomTextsQuery.getKey = (
   variables?: ListCustomTextsQueryVariables,
-) => ["ListCustomTexts", variables]
+) => ['ListCustomTexts', variables]
 
 useListCustomTextsQuery.fetcher = (variables?: ListCustomTextsQueryVariables) =>
   fetcher<ListCustomTextsQuery, ListCustomTextsQueryVariables>(
@@ -4379,12 +4381,12 @@ export const useFindTextQuery = <TData = FindTextQuery, TError = unknown>(
   options?: UseQueryOptions<FindTextQuery, TError, TData>,
 ) =>
   useQuery<FindTextQuery, TError, TData>(
-    ["FindText", variables],
+    ['FindText', variables],
     fetcher<FindTextQuery, FindTextQueryVariables>(FindTextDocument, variables),
     options,
   )
 useFindTextQuery.getKey = (variables: FindTextQueryVariables) => [
-  "FindText",
+  'FindText',
   variables,
 ]
 
@@ -4415,7 +4417,7 @@ export const useGetAuthorsQuery = <TData = GetAuthorsQuery, TError = unknown>(
   options?: UseQueryOptions<GetAuthorsQuery, TError, TData>,
 ) =>
   useQuery<GetAuthorsQuery, TError, TData>(
-    ["GetAuthors", variables],
+    ['GetAuthors', variables],
     fetcher<GetAuthorsQuery, GetAuthorsQueryVariables>(
       GetAuthorsDocument,
       variables,
@@ -4423,7 +4425,7 @@ export const useGetAuthorsQuery = <TData = GetAuthorsQuery, TError = unknown>(
     options,
   )
 useGetAuthorsQuery.getKey = (variables?: GetAuthorsQueryVariables) => [
-  "GetAuthors",
+  'GetAuthors',
   variables,
 ]
 
@@ -4459,12 +4461,12 @@ export const useGetTextQuery = <TData = GetTextQuery, TError = unknown>(
   options?: UseQueryOptions<GetTextQuery, TError, TData>,
 ) =>
   useQuery<GetTextQuery, TError, TData>(
-    ["GetText", variables],
+    ['GetText', variables],
     fetcher<GetTextQuery, GetTextQueryVariables>(GetTextDocument, variables),
     options,
   )
 useGetTextQuery.getKey = (variables: GetTextQueryVariables) => [
-  "GetText",
+  'GetText',
   variables,
 ]
 
@@ -4482,7 +4484,7 @@ export const useGetTextIdsQuery = <TData = GetTextIdsQuery, TError = unknown>(
   options?: UseQueryOptions<GetTextIdsQuery, TError, TData>,
 ) =>
   useQuery<GetTextIdsQuery, TError, TData>(
-    ["GetTextIds", variables],
+    ['GetTextIds', variables],
     fetcher<GetTextIdsQuery, GetTextIdsQueryVariables>(
       GetTextIdsDocument,
       variables,
@@ -4490,7 +4492,7 @@ export const useGetTextIdsQuery = <TData = GetTextIdsQuery, TError = unknown>(
     options,
   )
 useGetTextIdsQuery.getKey = (variables?: GetTextIdsQueryVariables) => [
-  "GetTextIds",
+  'GetTextIds',
   variables,
 ]
 
@@ -4519,12 +4521,12 @@ export const useGetTextsQuery = <TData = GetTextsQuery, TError = unknown>(
   options?: UseQueryOptions<GetTextsQuery, TError, TData>,
 ) =>
   useQuery<GetTextsQuery, TError, TData>(
-    ["GetTexts", variables],
+    ['GetTexts', variables],
     fetcher<GetTextsQuery, GetTextsQueryVariables>(GetTextsDocument, variables),
     options,
   )
 useGetTextsQuery.getKey = (variables?: GetTextsQueryVariables) => [
-  "GetTexts",
+  'GetTexts',
   variables,
 ]
 
@@ -4582,13 +4584,13 @@ ${AllAdjectiveNumberFragmentDoc}
 ${AllAdverbFormsFragmentDoc}`
 export const useSearchEnglishQuery = <
   TData = SearchEnglishQuery,
-  TError = unknown
+  TError = unknown,
 >(
   variables: SearchEnglishQueryVariables,
   options?: UseQueryOptions<SearchEnglishQuery, TError, TData>,
 ) =>
   useQuery<SearchEnglishQuery, TError, TData>(
-    ["SearchEnglish", variables],
+    ['SearchEnglish', variables],
     fetcher<SearchEnglishQuery, SearchEnglishQueryVariables>(
       SearchEnglishDocument,
       variables,
@@ -4596,7 +4598,7 @@ export const useSearchEnglishQuery = <
     options,
   )
 useSearchEnglishQuery.getKey = (variables: SearchEnglishQueryVariables) => [
-  "SearchEnglish",
+  'SearchEnglish',
   variables,
 ]
 
@@ -4660,7 +4662,7 @@ export const useSearchLatinQuery = <TData = SearchLatinQuery, TError = unknown>(
   options?: UseQueryOptions<SearchLatinQuery, TError, TData>,
 ) =>
   useQuery<SearchLatinQuery, TError, TData>(
-    ["SearchLatin", variables],
+    ['SearchLatin', variables],
     fetcher<SearchLatinQuery, SearchLatinQueryVariables>(
       SearchLatinDocument,
       variables,
@@ -4668,7 +4670,7 @@ export const useSearchLatinQuery = <TData = SearchLatinQuery, TError = unknown>(
     options,
   )
 useSearchLatinQuery.getKey = (variables: SearchLatinQueryVariables) => [
-  "SearchLatin",
+  'SearchLatin',
   variables,
 ]
 
@@ -4691,12 +4693,12 @@ export const useFacebookQuery = <TData = FacebookQuery, TError = unknown>(
   options?: UseQueryOptions<FacebookQuery, TError, TData>,
 ) =>
   useQuery<FacebookQuery, TError, TData>(
-    ["Facebook", variables],
+    ['Facebook', variables],
     fetcher<FacebookQuery, FacebookQueryVariables>(FacebookDocument, variables),
     options,
   )
 useFacebookQuery.getKey = (variables: FacebookQueryVariables) => [
-  "Facebook",
+  'Facebook',
   variables,
 ]
 
@@ -4716,12 +4718,12 @@ export const useGoogleQuery = <TData = GoogleQuery, TError = unknown>(
   options?: UseQueryOptions<GoogleQuery, TError, TData>,
 ) =>
   useQuery<GoogleQuery, TError, TData>(
-    ["Google", variables],
+    ['Google', variables],
     fetcher<GoogleQuery, GoogleQueryVariables>(GoogleDocument, variables),
     options,
   )
 useGoogleQuery.getKey = (variables: GoogleQueryVariables) => [
-  "Google",
+  'Google',
   variables,
 ]
 
@@ -4740,11 +4742,11 @@ export const useLoginQuery = <TData = LoginQuery, TError = unknown>(
   options?: UseQueryOptions<LoginQuery, TError, TData>,
 ) =>
   useQuery<LoginQuery, TError, TData>(
-    ["Login", variables],
+    ['Login', variables],
     fetcher<LoginQuery, LoginQueryVariables>(LoginDocument, variables),
     options,
   )
-useLoginQuery.getKey = (variables: LoginQueryVariables) => ["Login", variables]
+useLoginQuery.getKey = (variables: LoginQueryVariables) => ['Login', variables]
 
 useLoginQuery.fetcher = (variables: LoginQueryVariables) =>
   fetcher<LoginQuery, LoginQueryVariables>(LoginDocument, variables)
@@ -4758,12 +4760,12 @@ export const useLogoutQuery = <TData = LogoutQuery, TError = unknown>(
   options?: UseQueryOptions<LogoutQuery, TError, TData>,
 ) =>
   useQuery<LogoutQuery, TError, TData>(
-    ["Logout", variables],
+    ['Logout', variables],
     fetcher<LogoutQuery, LogoutQueryVariables>(LogoutDocument, variables),
     options,
   )
 useLogoutQuery.getKey = (variables?: LogoutQueryVariables) => [
-  "Logout",
+  'Logout',
   variables,
 ]
 
@@ -4776,7 +4778,7 @@ export const RecoverPasswordDocument = `
     `
 export const useRecoverPasswordMutation = <
   TError = unknown,
-  TContext = unknown
+  TContext = unknown,
 >(
   options?: UseMutationOptions<
     RecoverPasswordMutation,
@@ -4892,11 +4894,11 @@ export const useUserQuery = <TData = UserQuery, TError = unknown>(
   options?: UseQueryOptions<UserQuery, TError, TData>,
 ) =>
   useQuery<UserQuery, TError, TData>(
-    ["User", variables],
+    ['User', variables],
     fetcher<UserQuery, UserQueryVariables>(UserDocument, variables),
     options,
   )
-useUserQuery.getKey = (variables?: UserQueryVariables) => ["User", variables]
+useUserQuery.getKey = (variables?: UserQueryVariables) => ['User', variables]
 
 useUserQuery.fetcher = (variables?: UserQueryVariables) =>
   fetcher<UserQuery, UserQueryVariables>(UserDocument, variables)
@@ -4907,13 +4909,13 @@ export const ValidatePasswordResetTokenDocument = `
     `
 export const useValidatePasswordResetTokenQuery = <
   TData = ValidatePasswordResetTokenQuery,
-  TError = unknown
+  TError = unknown,
 >(
   variables: ValidatePasswordResetTokenQueryVariables,
   options?: UseQueryOptions<ValidatePasswordResetTokenQuery, TError, TData>,
 ) =>
   useQuery<ValidatePasswordResetTokenQuery, TError, TData>(
-    ["ValidatePasswordResetToken", variables],
+    ['ValidatePasswordResetToken', variables],
     fetcher<
       ValidatePasswordResetTokenQuery,
       ValidatePasswordResetTokenQueryVariables
@@ -4922,7 +4924,7 @@ export const useValidatePasswordResetTokenQuery = <
   )
 useValidatePasswordResetTokenQuery.getKey = (
   variables: ValidatePasswordResetTokenQueryVariables,
-) => ["ValidatePasswordResetToken", variables]
+) => ['ValidatePasswordResetToken', variables]
 
 useValidatePasswordResetTokenQuery.fetcher = (
   variables: ValidatePasswordResetTokenQueryVariables,

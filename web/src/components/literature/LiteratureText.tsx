@@ -1,11 +1,14 @@
-import { Avatar, CardActionArea, Grid, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { useRouter } from "next/router"
-import React, { memo } from "react"
-import LinesEllipsis from "react-lines-ellipsis"
-import { Text } from "../../graphql/generated"
-import { romanNumeralize } from "../../utils/romanNumeral"
-import { sentenceCase } from "../../utils/string"
+import React, { memo } from 'react'
+import LinesEllipsis from 'react-lines-ellipsis'
+
+import { Avatar, CardActionArea, Grid, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { useRouter } from 'next/router'
+
+import { Text } from '../../graphql/generated'
+import { romanNumeralize } from '../../utils/romanNumeral'
+import { sentenceCase } from '../../utils/string'
 
 type Props = {
   text: Text
@@ -43,29 +46,29 @@ export default memo(function LiteratureText({ text }: Props) {
 
 const useStyles = makeStyles((theme: any) => ({
   textContainer: {
-    flex: "20%",
+    flex: '20%',
   },
   bookText: {
-    margin: "auto",
+    margin: 'auto',
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
   standaloneTextContainer: {
     height: 56,
     margin: theme.spacing(1),
-    padding: "8px 8px",
+    padding: '8px 8px',
     borderRadius: 16,
     backgroundColor: theme.palette.grey[600],
     color: theme.palette.primary.main,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   standaloneText: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-    margin: "auto",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    margin: 'auto',
     lineHeight: 1.1,
-    textAlign: "center",
+    textAlign: 'center',
   },
 }))

@@ -1,3 +1,5 @@
+import { useContext, useState } from 'react'
+
 import {
   CardActionArea,
   CardContent,
@@ -5,17 +7,17 @@ import {
   Divider,
   Grid,
   Typography,
-} from "@material-ui/core"
-import { makeStyles, Theme } from "@material-ui/core/styles"
-import { useContext, useState } from "react"
-import { Forms } from "../../../graphql/generated"
-import { getSettingsLocal } from "../../../utils/settingsLocal"
-import ExpandIcon from "../../accessories/ExpandIcon"
-import IdentifierPill from "../../accessories/IdentifierPill"
-import { Context } from "../../layout/Context"
-import AdjectiveForms from "./PartsOfSpeech/AdjectiveFormsTable"
-import NounForms from "./PartsOfSpeech/NounFormsTable"
-import VerbForms from "./PartsOfSpeech/VerbFormsTable"
+} from '@material-ui/core'
+import { Theme, makeStyles } from '@material-ui/core/styles'
+
+import { Forms } from '../../../graphql/generated'
+import { getSettingsLocal } from '../../../utils/settingsLocal'
+import ExpandIcon from '../../accessories/ExpandIcon'
+import IdentifierPill from '../../accessories/IdentifierPill'
+import { Context } from '../../layout/Context'
+import AdjectiveForms from './PartsOfSpeech/AdjectiveFormsTable'
+import NounForms from './PartsOfSpeech/NounFormsTable'
+import VerbForms from './PartsOfSpeech/VerbFormsTable'
 
 type Props = {
   searched: string
@@ -40,7 +42,7 @@ export default function FormsRow({
 
   if (!searched)
     searched =
-      partOfSpeech === "verb" ? "Conjugation Table" : "Declension Table"
+      partOfSpeech === 'verb' ? 'Conjugation Table' : 'Declension Table'
 
   const FormsCard = !forms ? null : partOfSpeechToFormsCard[partOfSpeech]
 
@@ -71,7 +73,7 @@ export default function FormsRow({
                   key={identifiers}
                   className={classes.identifiers}
                 >
-                  {identifiers.split(" ").map((identifier) => (
+                  {identifiers.split(' ').map((identifier) => (
                     <IdentifierPill identifier={identifier} key={identifier} />
                   ))}
                 </Grid>
@@ -115,12 +117,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     paddingRight: theme.spacing(1),
-    "&:last-child": {
+    '&:last-child': {
       paddingBottom: theme.spacing(1),
     },
   },
   hide: {
-    display: "none",
+    display: 'none',
   },
   identifiers: {
     marginTop: theme.spacing(1),

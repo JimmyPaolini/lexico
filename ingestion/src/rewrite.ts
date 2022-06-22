@@ -1,5 +1,6 @@
-import fs from "fs-extra"
-import { romanToDecimal } from "../../web/src/utils/romanNumeral"
+import fs from 'fs-extra'
+
+import { romanToDecimal } from '../../web/src/utils/romanNumeral'
 
 class Writing {
   fileName: string
@@ -7,24 +8,24 @@ class Writing {
 
   constructor(fileName: string) {
     this.fileName = fileName
-    this.text = fs.readFileSync(fileName, "utf8")
+    this.text = fs.readFileSync(fileName, 'utf8')
   }
 
   clean() {
     this.text = this.text
-      .replace(/\(\*\*\*\*\*\)/gim, "")
-      .replace(/^\n/gim, "")
-      .replace(/^\s+/gim, "")
-      .replace(/\. \. \. ?/gim, "... ")
-      .replace(/\[?M\.\]? (CICERO|TULLIUS)/gm, "CICERO")
-      .replace(/Cicero The Latin Library The Classics Page/, "")
+      .replace(/\(\*\*\*\*\*\)/gim, '')
+      .replace(/^\n/gim, '')
+      .replace(/^\s+/gim, '')
+      .replace(/\. \. \. ?/gim, '... ')
+      .replace(/\[?M\.\]? (CICERO|TULLIUS)/gm, 'CICERO')
+      .replace(/Cicero The Latin Library The Classics Page/, '')
     return this
   }
 
   splitLinesOnlyOnBracketedDecimals() {
     this.text = this.text
-      .replace(/\n/gim, "")
-      .replace(/\[(\D+)\] ?/gim, "")
+      .replace(/\n/gim, '')
+      .replace(/\[(\D+)\] ?/gim, '')
       .replace(/\[(\d+)\]/gim, (_: any, lineLabel: string) => `\n#${lineLabel}`)
       .trim()
     return this
@@ -52,7 +53,7 @@ class Writing {
 
   splitLinesOnParenthesizedDecimals() {
     this.text = this.text
-      .replace(/\((\D+)\) ?/gim, "")
+      .replace(/\((\D+)\) ?/gim, '')
       .replace(
         /\n?\((\d+)\)/gim,
         (_: any, lineLabel: string) => `\n#${lineLabel}`,
@@ -74,7 +75,7 @@ class Writing {
         /\n?16\.(\d+)/gim,
         (_: any, lineLabel: string) => `\n\n#${lineLabel}`,
       )
-      .replace(/^\s+/, "")
+      .replace(/^\s+/, '')
       .trim()
     return this
   }
@@ -87,7 +88,7 @@ class Writing {
   }
 
   removeBracketedDecimals() {
-    this.text = this.text.replace(/\[\d+\]\s?/gim, "").trim()
+    this.text = this.text.replace(/\[\d+\]\s?/gim, '').trim()
     return this
   }
 
@@ -136,12 +137,12 @@ class Writing {
   }
 
   removeRomanLineStarters() {
-    this.text = this.text.replace(/^[IVXLCDM]+\.?\W/gim, "")
+    this.text = this.text.replace(/^[IVXLCDM]+\.?\W/gim, '')
     return this
   }
 
   removeDecimalStarters() {
-    this.text = this.text.replace(/^\d+\.?\W/gim, "")
+    this.text = this.text.replace(/^\d+\.?\W/gim, '')
     return this
   }
 
@@ -151,12 +152,12 @@ class Writing {
   }
 
   logLabels() {
-    console.log(this.text.split("\n").map((s: string) => s.match(/^\S+/)?.[0]))
+    console.log(this.text.split('\n').map((s: string) => s.match(/^\S+/)?.[0]))
     return this
   }
 
   logLines() {
-    console.log(this.text.split("\n").join("\n\n"))
+    console.log(this.text.split('\n').join('\n\n'))
     return this
   }
 
@@ -170,9 +171,9 @@ class Writing {
   }
 }
 
-const author = "cicero"
-const book = "ad familiares"
-const text = "book 16"
+const author = 'cicero'
+const book = 'ad familiares'
+const text = 'book 16'
 new Writing(`../data/literature/${author}/${book}/${text}.txt`)
   .clean()
   .removeTagsOnWords()

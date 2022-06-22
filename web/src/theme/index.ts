@@ -1,8 +1,8 @@
-import { createTheme, Theme, ThemeOptions } from "@material-ui/core/styles"
+import { Theme, ThemeOptions, createTheme } from '@material-ui/core/styles'
 import {
   Typography,
   TypographyOptions,
-} from "@material-ui/core/styles/createTypography"
+} from '@material-ui/core/styles/createTypography'
 
 export interface LexicoTheme extends Theme {
   typography: LexicoTypography
@@ -27,24 +27,24 @@ interface LexicoTypographyOptions extends TypographyOptions {
 
 const theme = createTheme({
   palette: {
-    type: "dark",
+    type: 'dark',
     primary: {
-      main: "#66023C",
+      main: '#66023C',
     },
     secondary: {
-      main: "#02662C",
+      main: '#02662C',
     },
     background: {
-      default: "#66023C",
+      default: '#66023C',
     },
   },
   typography: {
-    fontFamily: "Helvetica Neue",
+    fontFamily: 'Helvetica Neue',
     literature: {
-      fontFamily: "Serif",
+      fontFamily: 'Serif',
       fontWeight: 400,
-      fontSize: "1.5rem",
-      letterSpacing: "0.00938em",
+      fontSize: '1.5rem',
+      letterSpacing: '0.00938em',
     },
   },
   custom: {

@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig } from "axios"
-import type { NextApiRequest, NextApiResponse } from "next"
+import axios, { AxiosRequestConfig } from 'axios'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 export const serverEndpoint = `http://${
-  process.env.NODE_ENV === "production" ? "server" : "localhost"
+  process.env.NODE_ENV === 'production' ? 'server' : 'localhost'
 }:3001/graphql`
 
 export const circularReplacer: () =>
@@ -10,7 +10,7 @@ export const circularReplacer: () =>
   | undefined = () => {
   const seen = new WeakSet()
   return (_: any, value: any) => {
-    if (typeof value === "object" && value !== null)
+    if (typeof value === 'object' && value !== null)
       if (seen.has(value)) return
       else seen.add(value)
     return value
@@ -23,7 +23,7 @@ export default async (
 ): Promise<void> => {
   const request: AxiosRequestConfig = {
     ...req,
-    method: "POST",
+    method: 'POST',
     url: serverEndpoint,
     data: req.body,
     withCredentials: true,
@@ -32,8 +32,8 @@ export default async (
   // eslint-disable-next-line no-useless-catch
   try {
     const response = await axios(request)
-    if (response.headers["set-cookie"])
-      res.setHeader("set-cookie", response.headers["set-cookie"])
+    if (response.headers['set-cookie'])
+      res.setHeader('set-cookie', response.headers['set-cookie'])
     res.send(response.data)
   } catch (error) {
     console.log(JSON.stringify((error as any)?.response, circularReplacer()))

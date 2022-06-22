@@ -1,8 +1,10 @@
-import { Box, Fade } from "@material-ui/core"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import Image from "next/image"
-import logo from "public/lexico_logo.svg"
-import React, { useRef } from "react"
+import React, { useRef } from 'react'
+
+import { Box, Fade } from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+
+import Image from 'next/image'
+import logo from 'public/lexico_logo.svg'
 
 export default function Logo() {
   const classes = useStyles()

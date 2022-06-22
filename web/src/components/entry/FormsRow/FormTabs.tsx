@@ -1,6 +1,7 @@
-import { Box, Tab, Tabs } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React, { ReactNode } from "react"
+import React, { ReactNode } from 'react'
+
+import { Box, Tab, Tabs } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 type Props = {
   activeTab: number
@@ -37,7 +38,7 @@ export default function FormTabs({
           <Tab
             label={tab}
             style={{ minWidth }}
-            disabled={tab === "-"}
+            disabled={tab === '-'}
             aria-label={tab}
             key={i}
           />

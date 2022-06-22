@@ -1,15 +1,17 @@
+import { Dispatch, SetStateAction, memo } from 'react'
+
 import {
   Box,
   CardActionArea,
   CardHeader as CardHeaderMui,
   Collapse,
   Typography,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { Dispatch, memo, SetStateAction } from "react"
-import { Author } from "../../graphql/generated"
-import { sentenceCase } from "../../utils/string"
-import ExpandIcon from "../accessories/ExpandIcon"
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { Author } from '../../graphql/generated'
+import { sentenceCase } from '../../utils/string'
+import ExpandIcon from '../accessories/ExpandIcon'
 
 type Props = {
   author: Author
@@ -32,9 +34,9 @@ export default memo(function LiteratureAuthor({
     ),
   ]
     .sort()
-    .map((item) => sentenceCase(item.title).replace(/^\d+ /, ""))
-    .join(" • ")
-  if (author.id === "catullus") summary = "Carmina 1-116"
+    .map((item) => sentenceCase(item.title).replace(/^\d+ /, ''))
+    .join(' • ')
+  if (author.id === 'catullus') summary = 'Carmina 1-116'
 
   return (
     <CardActionArea
@@ -73,11 +75,11 @@ export default memo(function LiteratureAuthor({
 
 const useStyles = makeStyles(() => ({
   summary: {
-    display: "block",
+    display: 'block',
     lineHeight: 1.3,
     marginTop: 4,
   },
   none: {
-    display: "none",
+    display: 'none',
   },
 }))

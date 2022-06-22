@@ -1,10 +1,11 @@
-import { Delete } from "@material-ui/icons"
-import { useDeleteCustomTextMutation } from "../../../../graphql/generated"
+import { Delete } from '@material-ui/icons'
+
+import { useDeleteCustomTextMutation } from '../../../../graphql/generated'
 import {
   CustomText,
   deleteCustomTextLocal,
-} from "../../../../utils/literatureLocal"
-import CustomLiteratureMenuItem from "./CustomLiteratureMenuItem"
+} from '../../../../utils/literatureLocal'
+import CustomLiteratureMenuItem from './CustomLiteratureMenuItem'
 
 type Props = {
   text: CustomText

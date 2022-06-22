@@ -4,9 +4,9 @@ class ShowReaderInstructions {
 }
 
 export function showReaderInstructions(): boolean {
-  if (typeof window === "undefined") return false
+  if (typeof window === 'undefined') return false
   const showReaderInstructions = JSON.parse(
-    window.localStorage.showReaderInstructions || "null",
+    window.localStorage.showReaderInstructions || 'null',
   ) as ShowReaderInstructions
 
   if (!showReaderInstructions) {

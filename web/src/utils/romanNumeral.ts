@@ -23,38 +23,38 @@ export function romanToDecimal(roman: string): number {
 }
 
 export function decimalToRoman(decimal: number): string {
-  let roman = ""
+  let roman = ''
   if (decimal > 3999)
-    throw new Error("Decimal number too large (>3999) for roman numerals")
+    throw new Error('Decimal number too large (>3999) for roman numerals')
   function convertDigit(digit: number, low: string, mid: string, top: string) {
-    if (digit < 4) roman += new Array(digit).fill(low).join("")
+    if (digit < 4) roman += new Array(digit).fill(low).join('')
     else if (digit === 4) roman += low + mid
-    else if (digit < 9) roman += mid + new Array(digit - 5).fill(low).join("")
+    else if (digit < 9) roman += mid + new Array(digit - 5).fill(low).join('')
     else if (digit === 9) roman += low + top
   }
 
   const thousands = Math.floor((decimal % 10000) / 1000)
-  convertDigit(thousands, "M", "", "")
+  convertDigit(thousands, 'M', '', '')
 
   const hundreds = Math.floor((decimal % 1000) / 100)
-  convertDigit(hundreds, "C", "D", "M")
+  convertDigit(hundreds, 'C', 'D', 'M')
 
   const tens = Math.floor((decimal % 100) / 10)
-  convertDigit(tens, "X", "L", "C")
+  convertDigit(tens, 'X', 'L', 'C')
 
   const ones = Math.floor((decimal % 10) / 1)
-  convertDigit(ones, "I", "V", "X")
+  convertDigit(ones, 'I', 'V', 'X')
 
   return roman
 }
 
 export function romanNumeralize(str: string | undefined): string {
-  if (!str) return ""
+  if (!str) return ''
   return str.replace(/\d+/g, (d) => decimalToRoman(parseInt(d)))
 }
 
 export function decimalize(str: string | undefined): string {
-  if (!str) return ""
+  if (!str) return ''
   return str.replace(
     /(^| )([IVXLCDM]+)( |$)/gi,
     (_, s, r, e) => s + romanToDecimal(r) + e,

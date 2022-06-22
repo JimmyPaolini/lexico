@@ -1,7 +1,9 @@
-import { Grid } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React, { ReactNode } from "react"
-import SearchBar, { SearchBarProps } from "../search/SearchBar"
+import React, { ReactNode } from 'react'
+
+import { Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import SearchBar, { SearchBarProps } from '../search/SearchBar'
 
 type Props = {
   searchBarProps: SearchBarProps

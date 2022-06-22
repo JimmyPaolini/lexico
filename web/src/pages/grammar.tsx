@@ -1,14 +1,16 @@
-import Head from "next/head"
-import React, { useEffect, useRef, useState } from "react"
-import CardDeck from "../components/accessories/CardDeck"
-import AdjectiveDeclensionCard from "../components/grammar/AdjectiveDeclensionCard"
-import adjectiveDeclensions from "../components/grammar/adjectiveDeclensions"
-import NounDeclensionCard from "../components/grammar/NounDeclensionCard"
-import nounDeclensions from "../components/grammar/nounDeclensions"
-import VerbConjugationCard from "../components/grammar/VerbConjugationCard"
-import verbConjugations from "../components/grammar/verbConjugations"
-import SearchBarLayout from "../components/layout/SearchBarLayout"
-import { getMacronOptionRegex } from "../utils/string"
+import React, { useEffect, useRef, useState } from 'react'
+
+import Head from 'next/head'
+
+import CardDeck from '../components/accessories/CardDeck'
+import AdjectiveDeclensionCard from '../components/grammar/AdjectiveDeclensionCard'
+import NounDeclensionCard from '../components/grammar/NounDeclensionCard'
+import VerbConjugationCard from '../components/grammar/VerbConjugationCard'
+import adjectiveDeclensions from '../components/grammar/adjectiveDeclensions'
+import nounDeclensions from '../components/grammar/nounDeclensions'
+import verbConjugations from '../components/grammar/verbConjugations'
+import SearchBarLayout from '../components/layout/SearchBarLayout'
+import { getMacronOptionRegex } from '../utils/string'
 
 export default function Grammar() {
   const grammarCards = [
@@ -18,10 +20,10 @@ export default function Grammar() {
         <VerbConjugationCard
           conjugation={conjugation}
           ref={ref}
-          expandedInitial={conjugation.id === "first"}
+          expandedInitial={conjugation.id === 'first'}
         />
       )
-      return { key: "verb" + conjugation.id, ref, Card }
+      return { key: 'verb' + conjugation.id, ref, Card }
     }),
     ...Object.values(nounDeclensions).map((declension) => {
       const ref = useRef<HTMLDivElement>()
@@ -29,10 +31,10 @@ export default function Grammar() {
         <NounDeclensionCard
           declension={declension}
           ref={ref}
-          expandedInitial={declension.id === "first"}
+          expandedInitial={declension.id === 'first'}
         />
       )
-      return { key: "noun" + declension.id, ref, Card }
+      return { key: 'noun' + declension.id, ref, Card }
     }),
     ...adjectiveDeclensions.map((declension) => {
       const ref = useRef<HTMLDivElement>()
@@ -40,14 +42,14 @@ export default function Grammar() {
         <AdjectiveDeclensionCard
           declension={declension}
           ref={ref}
-          expandedInitial={declension.id === "third"}
+          expandedInitial={declension.id === 'third'}
         />
       )
-      return { key: "adjective" + declension.id, ref, Card }
+      return { key: 'adjective' + declension.id, ref, Card }
     }),
   ]
 
-  const [search, setSearch] = useState<string>("")
+  const [search, setSearch] = useState<string>('')
   const [cards, setCards] = useState(grammarCards)
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export default function Grammar() {
 
   const handleSearchExecute = () => {
     if (!search) return
-    const re = new RegExp(getMacronOptionRegex(search), "i")
+    const re = new RegExp(getMacronOptionRegex(search), 'i')
     setCards(
       grammarCards.filter(
         (card) =>
@@ -83,7 +85,7 @@ export default function Grammar() {
           setSearch,
           isLoading: false,
           handleSearchExecute,
-          target: "grammar",
+          target: 'grammar',
         }}
       >
         <CardDeck cards={cards} />

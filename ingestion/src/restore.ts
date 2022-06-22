@@ -1,5 +1,5 @@
-import { connectDatabase } from "../../utils/database"
-import log from "../../utils/log"
+import { connectDatabase } from '../../utils/database'
+import log from '../../utils/log'
 import {
   backups,
   restoreAll,
@@ -7,11 +7,11 @@ import {
   restoreIngested,
   restoreLiterature,
   restoreUsers,
-} from "./utils/pg-commands"
+} from './utils/pg-commands'
 
 async function main() {
   const [, , command] = process.argv
-  if (!command) throw new Error("no command")
+  if (!command) throw new Error('no command')
 
   await connectDatabase()
 

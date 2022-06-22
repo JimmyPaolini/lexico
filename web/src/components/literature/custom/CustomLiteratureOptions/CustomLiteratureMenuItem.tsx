@@ -1,5 +1,5 @@
-import { ListItemIcon, ListItemText, MenuItem } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
+import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 interface CustomLiteratureMenuItemProps {
   action: () => void

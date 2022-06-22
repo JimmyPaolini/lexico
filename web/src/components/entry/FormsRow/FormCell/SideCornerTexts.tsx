@@ -1,11 +1,12 @@
-import Grid from "@material-ui/core/Grid"
-import { makeStyles } from "@material-ui/core/styles"
-import CornerText from "./CornerText"
+import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@material-ui/core/styles'
+
+import CornerText from './CornerText'
 
 type Props = {
   top: string
   bottom: string
-  side: "right" | "left"
+  side: 'right' | 'left'
 }
 
 export default function SideCornerTexts({ top, bottom, side }: Props) {
@@ -16,7 +17,7 @@ export default function SideCornerTexts({ top, bottom, side }: Props) {
       xs
       direction="column"
       justifyContent="space-between"
-      className={side === "right" ? classes.right : classes.left}
+      className={side === 'right' ? classes.right : classes.left}
     >
       <CornerText text={top} />
       <CornerText text={bottom} />
@@ -26,11 +27,11 @@ export default function SideCornerTexts({ top, bottom, side }: Props) {
 
 const useStyles = makeStyles(() => ({
   left: {
-    position: "relative",
+    position: 'relative',
     left: 2,
   },
   right: {
-    position: "relative",
+    position: 'relative',
     right: 2,
   },
 }))

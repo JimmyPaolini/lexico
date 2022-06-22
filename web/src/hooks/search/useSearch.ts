@@ -2,7 +2,7 @@ import {
   Entry,
   useSearchEnglishQuery,
   useSearchLatinQuery,
-} from "../../graphql/generated"
+} from '../../graphql/generated'
 
 export default function useSearch(
   isLatin: boolean,

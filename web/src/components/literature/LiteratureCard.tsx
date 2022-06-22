@@ -1,3 +1,5 @@
+import { memo, useState } from 'react'
+
 import {
   Card,
   CardContent,
@@ -5,13 +7,13 @@ import {
   Divider,
   Grid,
   List,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { memo, useState } from "react"
-import { Author, Book } from "../../graphql/generated"
-import LiteratureAuthor from "./LiteratureAuthor"
-import LiteratureBook from "./LiteratureBook"
-import LiteratureText from "./LiteratureText"
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { Author, Book } from '../../graphql/generated'
+import LiteratureAuthor from './LiteratureAuthor'
+import LiteratureBook from './LiteratureBook'
+import LiteratureText from './LiteratureText'
 
 interface LiteratureCardProps {
   author: Author
@@ -54,8 +56,8 @@ export default memo(function LiteratureCard({ author }: LiteratureCardProps) {
 
 const useStyles = makeStyles((theme: any) => ({
   literatureCard: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     maxWidth: theme.custom.cardWidth,
     minWidth: theme.custom.cardWidth - theme.spacing(4),
     paddingBottom: 0,
@@ -63,7 +65,7 @@ const useStyles = makeStyles((theme: any) => ({
   },
   noPadding: {
     padding: 0,
-    "&:last-child": {
+    '&:last-child': {
       paddingBottom: 0,
     },
   },

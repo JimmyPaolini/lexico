@@ -1,6 +1,6 @@
-import Entry from "../../../../entity/dictionary/Entry"
-import Translation from "../../../../entity/dictionary/Translation"
-import { capitalizeFirstLetter, normalize } from "../../../../utils/string"
+import Entry from '../../../../entity/dictionary/Entry'
+import Translation from '../../../../entity/dictionary/Translation'
+import { capitalizeFirstLetter, normalize } from '../../../../utils/string'
 
 const translationSkipRegex = new RegExp(
   /(alternative)|(alternate)|(abbreviation)|(initialism)|(archaic)|(synonym)|(clipping)|(spelling)/gi,
@@ -11,27 +11,27 @@ export default async function parseTranslations(
   elt: any,
   entry: Entry,
 ): Promise<Translation[]> {
-  const translationsHeader = $(elt).nextAll("ol").first()
+  const translationsHeader = $(elt).nextAll('ol').first()
   if (translationsHeader.length <= 0) return []
   let translations: Translation[] = []
 
-  for (const li of $(translationsHeader).children("li").get()) {
-    if ($(li).find("span.form-of-definition-link .selflink").length) continue
+  for (const li of $(translationsHeader).children('li').get()) {
+    if ($(li).find('span.form-of-definition-link .selflink').length) continue
     if ($(li).text().length <= 0) continue
-    $(li).children("ol, ul, dl").remove()
+    $(li).children('ol, ul, dl').remove()
     let translation = $(li).text()
     if (translation.match(/This term needs a translation to English/)) continue
-    translation = capitalizeFirstLetter(translation.trim().replace(/\.$/, ""))
+    translation = capitalizeFirstLetter(translation.trim().replace(/\.$/, ''))
 
-    if ($(li).find("span.form-of-definition-link").length > 0) {
+    if ($(li).find('span.form-of-definition-link').length > 0) {
       if (!translation.match(translationSkipRegex)) continue
       translation +=
-        " " +
+        ' ' +
         $(li)
-          .find("span.form-of-definition-link")
+          .find('span.form-of-definition-link')
           .get()
           .map((ref) => `{*${normalize($(ref).text())}*}`)
-          .join(" ")
+          .join(' ')
     }
 
     translations.push({ translation, entry } as Translation)

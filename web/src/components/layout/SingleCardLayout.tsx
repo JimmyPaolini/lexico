@@ -1,6 +1,7 @@
-import { Grid, Grow } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React, { ReactNode } from "react"
+import React, { ReactNode } from 'react'
+
+import { Grid, Grow } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 type Props = {
   children?: ReactNode

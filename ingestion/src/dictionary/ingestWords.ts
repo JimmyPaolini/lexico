@@ -1,13 +1,14 @@
-import { FindManyOptions, getConnection } from "typeorm"
-import Entry from "../../../entity/dictionary/Entry"
-import log from "../../../utils/log"
-import { ingestEntryWords } from "./ingestEntryWords"
+import { FindManyOptions, getConnection } from 'typeorm'
+
+import Entry from '../../../entity/dictionary/Entry'
+import log from '../../../utils/log'
+import { ingestEntryWords } from './ingestEntryWords'
 
 export default async function ingestWords(): Promise<void> {
-  log.info("Ingesting Words")
+  log.info('Ingesting Words')
   const Entries = getConnection().getRepository(Entry)
   const params = {
-    order: { word: "ASC" },
+    order: { word: 'ASC' },
     take: 100,
   } as FindManyOptions<Entry>
   let skip = 0
@@ -20,5 +21,5 @@ export default async function ingestWords(): Promise<void> {
     skip += params.take as number
     entries = await Entries.find({ ...params, skip })
   }
-  log.info("Ingested Words")
+  log.info('Ingested Words')
 }

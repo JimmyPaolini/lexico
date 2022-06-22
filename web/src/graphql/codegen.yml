@@ -15,7 +15,7 @@ generates:
     config:
       dedupeFragments: true
       fetcher:
-        endpoint: "endpointUrl"
+        endpoint: 'endpointUrl'
         fetchParams:
           credentials: include
           mode: cors

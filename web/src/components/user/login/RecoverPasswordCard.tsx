@@ -1,14 +1,17 @@
-import { Card, CardContent, Divider, Grid } from "@material-ui/core"
-import { makeStyles, Theme } from "@material-ui/core/styles"
-import { useFormik } from "formik"
-import { useRouter } from "next/router"
-import React from "react"
-import { useRecoverPasswordMutation } from "../../../graphql/generated"
-import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
-import { validateEmail } from "../../../utils/string"
-import CardHeader from "../../accessories/CardHeader"
-import SubmitButton from "../../accessories/SubmitButton"
-import TextBox from "../../accessories/TextBox"
+import React from 'react'
+
+import { Card, CardContent, Divider, Grid } from '@material-ui/core'
+import { Theme, makeStyles } from '@material-ui/core/styles'
+
+import { useFormik } from 'formik'
+import { useRouter } from 'next/router'
+
+import { useRecoverPasswordMutation } from '../../../graphql/generated'
+import useSnackbarEnhanced from '../../../hooks/useSnackbarEnhanced'
+import { validateEmail } from '../../../utils/string'
+import CardHeader from '../../accessories/CardHeader'
+import SubmitButton from '../../accessories/SubmitButton'
+import TextBox from '../../accessories/TextBox'
 
 export default function RecoverPasswordCard() {
   const classes = useStyles()
@@ -17,19 +20,19 @@ export default function RecoverPasswordCard() {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      email: '',
     },
     validate,
     onSubmit: async () => {
       try {
         await recoverPassword(formik.values)
-        router.push("/user")
+        router.push('/user')
         enqueueSnackbar(
           `A password recovery email has been sent to: ${formik.values.email}`,
         )
       } catch (e: any) {
         console.log(JSON.stringify(e))
-        if (e?.response?.errors?.[0]?.message === "email not found") {
+        if (e?.response?.errors?.[0]?.message === 'email not found') {
           enqueueSnackbar(
             `No user with the following email exists: ${formik.values.email}. Try signing in through a provider if this email is correct`,
           )
@@ -68,7 +71,7 @@ interface RecoverPasswordInfo {
 }
 export function validate({ email }: RecoverPasswordInfo): { email: string } {
   const errors = {} as { email: string }
-  if (!validateEmail(email)) errors.email = "Invalid email"
+  if (!validateEmail(email)) errors.email = 'Invalid email'
   return errors
 }
 

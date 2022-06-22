@@ -1,12 +1,13 @@
-import fs from "fs"
-import Text from "../../../entity/literature/Text"
-import DictionaryResolver from "../../../server/src/resolver/dictionary"
-import { ResolverContext } from "../../../server/src/utils/ResolverContext"
-import { connectDatabase } from "../../../utils/database"
+import fs from 'fs'
+
+import Text from '../../../entity/literature/Text'
+import DictionaryResolver from '../../../server/src/resolver/dictionary'
+import { ResolverContext } from '../../../server/src/utils/ResolverContext'
+import { connectDatabase } from '../../../utils/database'
 import {
   getLineGeneratorByText,
   getWordGenerator,
-} from "../literature/generator"
+} from '../literature/generator'
 
 main()
 async function main() {
@@ -14,7 +15,7 @@ async function main() {
   const Texts = connection.getRepository(Text)
   const dictionaryResolver = new DictionaryResolver()
 
-  const id = "caesar_de bello gallico_book 1"
+  const id = 'caesar_de bello gallico_book 1'
   const text = await Texts.findOne(id)
   if (!text) return
   const lines = getLineGeneratorByText(text)

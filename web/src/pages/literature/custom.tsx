@@ -1,7 +1,9 @@
-import Head from "next/head"
-import { memo } from "react"
-import CustomLiteratureForm from "../../components/literature/custom/CustomLiteratureForm"
-import { CustomText } from "../../utils/literatureLocal"
+import { memo } from 'react'
+
+import Head from 'next/head'
+
+import CustomLiteratureForm from '../../components/literature/custom/CustomLiteratureForm'
+import { CustomText } from '../../utils/literatureLocal'
 
 interface CustomReaderNewProps {
   text?: CustomText

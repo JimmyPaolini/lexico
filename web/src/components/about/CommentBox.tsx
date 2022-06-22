@@ -1,3 +1,5 @@
+import React, { useContext, useState } from 'react'
+
 import {
   Box,
   CardActionArea,
@@ -5,17 +7,18 @@ import {
   Collapse,
   Grid,
   Link,
-  makeStyles,
   Typography,
-} from "@material-ui/core"
-import { useFormik } from "formik"
-import React, { useContext, useState } from "react"
-import { useCommentMutation } from "../../graphql/generated"
-import { capitalizeFirstLetter } from "../../utils/string"
-import ExpandIcon from "../accessories/ExpandIcon"
-import SubmitButton from "../accessories/SubmitButton"
-import TextBox from "../accessories/TextBox"
-import { Context } from "../layout/Context"
+  makeStyles,
+} from '@material-ui/core'
+
+import { useFormik } from 'formik'
+
+import { useCommentMutation } from '../../graphql/generated'
+import { capitalizeFirstLetter } from '../../utils/string'
+import ExpandIcon from '../accessories/ExpandIcon'
+import SubmitButton from '../accessories/SubmitButton'
+import TextBox from '../accessories/TextBox'
+import { Context } from '../layout/Context'
 
 export default function CommentBox() {
   const classes = useStyles()
@@ -23,7 +26,7 @@ export default function CommentBox() {
   const [expanded, setExpanded] = useState<boolean>(false)
   const formik = useFormik({
     initialValues: {
-      comment: "",
+      comment: '',
     },
     onSubmit: async () => {
       await comment(formik.values)
@@ -36,7 +39,7 @@ export default function CommentBox() {
   } = useCommentMutation()
   const error: string = commentError
     ? (commentError as any).response.errors[0].message
-    : ""
+    : ''
 
   return (
     <>
@@ -48,7 +51,7 @@ export default function CommentBox() {
       >
         <CardHeaderMui
           title="Questions and Feedback"
-          titleTypographyProps={{ variant: "body1" }}
+          titleTypographyProps={{ variant: 'body1' }}
           className={classes.dropdown}
           action={
             <Box p={1.5} mt={1} mr={1}>
@@ -59,13 +62,13 @@ export default function CommentBox() {
       </CardActionArea>
       <Collapse in={expanded}>
         <Typography variant="body1" align="center" gutterBottom={true}>
-          Join the Lexico{" "}
+          Join the Lexico{' '}
           <Link
             href="https://lexico-group.slack.com/archives/C01SN2QN2BF"
             color="secondary"
           >
             Slack channel
-          </Link>{" "}
+          </Link>{' '}
           to chat and stay up to date with improvements!
           <br />
           Or login (so I have a reply email) to send a message below
@@ -74,7 +77,7 @@ export default function CommentBox() {
           <Grid container>
             {!user ? (
               <SubmitButton
-                name={"login to send a message"}
+                name={'login to send a message'}
                 href="/user"
                 className={classes.textBox}
               />
@@ -89,7 +92,7 @@ export default function CommentBox() {
                   rows={4}
                 />
                 <SubmitButton
-                  name={isSuccess ? "sent" : "send"}
+                  name={isSuccess ? 'sent' : 'send'}
                   disabled={isSuccess}
                   onClick={() => null}
                   className={classes.textBox}
@@ -117,7 +120,7 @@ const useStyles = makeStyles((theme: any) => ({
     margin: theme.spacing(1),
   },
   formError: {
-    width: "100%",
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   dropdown: {
@@ -126,6 +129,6 @@ const useStyles = makeStyles((theme: any) => ({
     padding: theme.spacing(1),
   },
   hide: {
-    display: "none",
+    display: 'none',
   },
 }))

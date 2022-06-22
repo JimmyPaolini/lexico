@@ -1,4 +1,4 @@
-import log from "../../../utils/log"
+import log from '../../../utils/log'
 
 export function LogRuntime(
   _: unknown,

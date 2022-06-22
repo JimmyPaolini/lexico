@@ -1,17 +1,19 @@
+import { useContext, useState } from 'react'
+
 import {
   Box,
   CardActionArea,
   CardContent,
   Collapse,
   Grid,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { useContext, useState } from "react"
-import { Translation } from "../../../graphql/generated"
-import { getSettingsLocal } from "../../../utils/settingsLocal"
-import ExpandIcon from "../../accessories/ExpandIcon"
-import { Context } from "../../layout/Context"
-import TranslationBullet from "./TranslationBullet"
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { Translation } from '../../../graphql/generated'
+import { getSettingsLocal } from '../../../utils/settingsLocal'
+import ExpandIcon from '../../accessories/ExpandIcon'
+import { Context } from '../../layout/Context'
+import TranslationBullet from './TranslationBullet'
 
 type Props = {
   translations: Translation[]
@@ -66,11 +68,11 @@ const useStyles = makeStyles((theme) => ({
   translationsRow: {
     background: theme.palette.background.paper,
     padding: theme.spacing(1),
-    "&:last-child": {
+    '&:last-child': {
       padding: theme.spacing(1),
     },
   },
   hide: {
-    display: "none",
+    display: 'none',
   },
 }))

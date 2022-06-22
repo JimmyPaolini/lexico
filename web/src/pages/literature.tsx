@@ -1,22 +1,25 @@
-import { Typography } from "@material-ui/core"
-import { GetStaticProps } from "next"
-import Head from "next/head"
-import React, { useEffect, useMemo, useState } from "react"
-import CardDeck from "../components/accessories/CardDeck"
-import SearchBarLayout from "../components/layout/SearchBarLayout"
-import CustomLiteratureCard from "../components/literature/custom/CustomLiteratureCard"
-import filterLiterature from "../components/literature/filterLiterature"
-import LiteratureCard from "../components/literature/LiteratureCard"
-import { Author, useGetAuthorsQuery } from "../graphql/generated"
+import React, { useEffect, useMemo, useState } from 'react'
+
+import { Typography } from '@material-ui/core'
+
+import { GetStaticProps } from 'next'
+import Head from 'next/head'
+
+import CardDeck from '../components/accessories/CardDeck'
+import SearchBarLayout from '../components/layout/SearchBarLayout'
+import LiteratureCard from '../components/literature/LiteratureCard'
+import CustomLiteratureCard from '../components/literature/custom/CustomLiteratureCard'
+import filterLiterature from '../components/literature/filterLiterature'
+import { Author, useGetAuthorsQuery } from '../graphql/generated'
 
 interface LiteratureProps {
   authors: Author[]
 }
 export default function Literature({ authors }: LiteratureProps) {
-  const [search, setSearch] = useState<string>("")
+  const [search, setSearch] = useState<string>('')
   const [searched, setSearched] = useState<string>(search)
   useEffect(() => {
-    if (!search) setSearched("")
+    if (!search) setSearched('')
   }, [search])
 
   const handleSearchExecute = () => setSearched(search)
@@ -30,8 +33,8 @@ export default function Literature({ authors }: LiteratureProps) {
       }),
     [searched],
   )
-  if (cards[0].key !== "custom")
-    cards.unshift({ key: "custom", Card: <CustomLiteratureCard /> })
+  if (cards[0].key !== 'custom')
+    cards.unshift({ key: 'custom', Card: <CustomLiteratureCard /> })
 
   return (
     <>
@@ -45,7 +48,7 @@ export default function Literature({ authors }: LiteratureProps) {
           name="keywords"
           content={`Latin, Literature, Read, English, Translation, ${authors
             .map((author) => author.name)
-            .join(", ")}`}
+            .join(', ')}`}
         />
       </Head>
       <SearchBarLayout
@@ -54,7 +57,7 @@ export default function Literature({ authors }: LiteratureProps) {
           setSearch,
           isLoading: false,
           handleSearchExecute,
-          target: "literature",
+          target: 'literature',
         }}
       >
         {!cards.length ? (

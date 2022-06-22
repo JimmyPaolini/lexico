@@ -1,20 +1,23 @@
-import { Grid } from "@material-ui/core"
-import { makeStyles, Theme } from "@material-ui/core/styles"
-import { IncomingHttpHeaders } from "http2"
-import { GetServerSideProps } from "next"
-import Head from "next/head"
-import { useContext, useEffect } from "react"
-import { QueryClient } from "react-query"
-import { dehydrate } from "react-query/hydration"
-import CardDeck from "../components/accessories/CardDeck"
-import { Context } from "../components/layout/Context"
-import SingleCardLayout from "../components/layout/SingleCardLayout"
-import LoginCard from "../components/user/login/LoginCard"
-import SettingsCard from "../components/user/settings/SettingsCard"
-import { UserDocument, useUserQuery } from "../graphql/generated"
-import useSnackbarEnhanced from "../hooks/useSnackbarEnhanced"
-import { showSettingsInstructions } from "../utils/settingsLocal"
-import { serverEndpoint } from "./api"
+import { useContext, useEffect } from 'react'
+import { QueryClient } from 'react-query'
+import { dehydrate } from 'react-query/hydration'
+
+import { Grid } from '@material-ui/core'
+import { Theme, makeStyles } from '@material-ui/core/styles'
+
+import { IncomingHttpHeaders } from 'http2'
+import { GetServerSideProps } from 'next'
+import Head from 'next/head'
+
+import CardDeck from '../components/accessories/CardDeck'
+import { Context } from '../components/layout/Context'
+import SingleCardLayout from '../components/layout/SingleCardLayout'
+import LoginCard from '../components/user/login/LoginCard'
+import SettingsCard from '../components/user/settings/SettingsCard'
+import { UserDocument, useUserQuery } from '../graphql/generated'
+import useSnackbarEnhanced from '../hooks/useSnackbarEnhanced'
+import { showSettingsInstructions } from '../utils/settingsLocal'
+import { serverEndpoint } from './api'
 
 export default function User() {
   const classes = useStyles()
@@ -39,11 +42,11 @@ export default function User() {
           <CardDeck
             cards={[
               {
-                key: "LoginCard",
+                key: 'LoginCard',
                 Card: <LoginCard />,
               },
               {
-                key: "SettingsCard",
+                key: 'SettingsCard',
                 Card: <SettingsCard />,
               },
             ]}
@@ -72,11 +75,11 @@ export const getServerSideProps: GetServerSideProps = async ({
 
 const getUserFetcher = (headers: IncomingHttpHeaders) => async () => {
   const res = await fetch(serverEndpoint as string, {
-    method: "POST",
-    credentials: "include",
-    mode: "cors",
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
     headers: {
-      "content-type": "application/json",
+      'content-type': 'application/json',
       cookie: headers?.cookie,
     } as HeadersInit,
     body: JSON.stringify({ query: UserDocument, variables: {} }),

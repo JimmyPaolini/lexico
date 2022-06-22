@@ -1,5 +1,5 @@
-import { PronunciationParts } from "../../../../../entity/dictionary/word/Pronunciation"
-import getEcclesiasticalPhonemes from "./ecclesiastical"
+import { PronunciationParts } from '../../../../../entity/dictionary/word/Pronunciation'
+import getEcclesiasticalPhonemes from './ecclesiastical'
 
 function phonemesToPronunciations(
   phonemes: Array<string | string[][]>,
@@ -9,7 +9,7 @@ function phonemesToPronunciations(
     prev: Array<string | string[][]>,
     next: Array<string | string[][]>,
   ): any {
-    if (next.length === 0) return pronunciations.push(prev.join(" "))
+    if (next.length === 0) return pronunciations.push(prev.join(' '))
     const phoneme = next.shift()
     if (Array.isArray(phoneme))
       for (const option of phoneme)

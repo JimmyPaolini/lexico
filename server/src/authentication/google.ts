@@ -1,6 +1,7 @@
-import axios from "axios"
-import { GOOGLE_ID, GOOGLE_SECRET } from "../../../utils/env"
-import log from "../../../utils/log"
+import axios from 'axios'
+
+import { GOOGLE_ID, GOOGLE_SECRET } from '../../../utils/env'
+import log from '../../../utils/log'
 
 export type GoogleProfile = {
   id: string
@@ -14,30 +15,30 @@ export default async function fetchGoogleUser(
   const {
     data: { access_token },
   } = await axios
-    .post("https://oauth2.googleapis.com/token", null, {
+    .post('https://oauth2.googleapis.com/token', null, {
       params: {
         code,
         client_id: GOOGLE_ID,
         client_secret: GOOGLE_SECRET,
         redirect_uri: hostname.match(/lexicolatin.com/i)
-          ? "https://lexicolatin.com/google"
-          : "http://localhost:3000/google",
-        grant_type: "authorization_code",
+          ? 'https://lexicolatin.com/google'
+          : 'http://localhost:3000/google',
+        grant_type: 'authorization_code',
       },
     })
     .catch((error) => {
-      log.error("error fetching google access token", error.response)
+      log.error('error fetching google access token', error.response)
       throw error
     })
   const { data: profile } = await axios
-    .get("https://www.googleapis.com/oauth2/v1/userinfo", {
+    .get('https://www.googleapis.com/oauth2/v1/userinfo', {
       params: {
-        alt: "json",
+        alt: 'json',
         access_token,
       },
     })
     .catch((error) => {
-      log.error("error fetching google user info", error)
+      log.error('error fetching google user info', error)
       throw error
     })
   return profile

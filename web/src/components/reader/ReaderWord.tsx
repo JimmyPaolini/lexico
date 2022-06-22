@@ -1,6 +1,7 @@
-import { CardActionArea } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { memo } from "react"
+import { memo } from 'react'
+
+import { CardActionArea } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 
 interface ReaderWordProps {
   word: string
@@ -25,9 +26,9 @@ export default memo(function ReaderWord({ word, openModal }: ReaderWordProps) {
 
 const useStyles = makeStyles(() => ({
   readerWord: {
-    display: "inline",
-    cursor: "pointer",
+    display: 'inline',
+    cursor: 'pointer',
     borderRadius: 4,
-    verticalAlign: "top",
+    verticalAlign: 'top',
   },
 }))

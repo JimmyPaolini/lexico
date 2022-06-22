@@ -1,14 +1,14 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react"
-import theme from "src/theme"
-import { searchEntry } from "src/utils/stories"
-import NounForms from "src/components/entry/FormsRow/PartsOfSpeech/NounFormsTable"
+import { ComponentMeta, ComponentStory } from '@storybook/react'
+import NounForms from 'src/components/entry/FormsRow/PartsOfSpeech/NounFormsTable'
+import theme from 'src/theme'
+import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: "Cards/EntryCard/FormsRow/PartsOfSpeech/NounForms",
+  title: 'Cards/EntryCard/FormsRow/PartsOfSpeech/NounForms',
   component: NounForms,
   decorators: [
     (Story) => (
-      <div style={{ width: theme.custom.cardWidth, border: "1px solid white" }}>
+      <div style={{ width: theme.custom.cardWidth, border: '1px solid white' }}>
         <Story />
       </div>
     ),
@@ -20,7 +20,7 @@ export const Default: ComponentStory<typeof NounForms> & {
 } = (args, { loaded }) => <NounForms {...args} {...loaded} />
 Default.loaders = [
   async () => {
-    const { forms } = await searchEntry("hortus")
+    const { forms } = await searchEntry('hortus')
     return { forms }
   },
 ]

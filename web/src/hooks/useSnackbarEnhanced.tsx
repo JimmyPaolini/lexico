@@ -1,13 +1,15 @@
-import { IconButton } from "@material-ui/core"
-import { Close } from "@material-ui/icons"
+import { ReactNode } from 'react'
+
+import { IconButton } from '@material-ui/core'
+import { Close } from '@material-ui/icons'
+
 import {
   OptionsObject,
   ProviderContext,
   SnackbarKey,
   SnackbarMessage,
   useSnackbar,
-} from "notistack"
-import { ReactNode } from "react"
+} from 'notistack'
 
 export default function useSnackbarEnhanced(): ProviderContext {
   const snackbar = useSnackbar()
@@ -29,7 +31,7 @@ export default function useSnackbarEnhanced(): ProviderContext {
     )
     return enqueueSnackbar(message, {
       ...(options || {}),
-      variant: "info",
+      variant: 'info',
       autoHideDuration: 8000,
       action: SnackbarAction,
     })

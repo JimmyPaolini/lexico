@@ -1,6 +1,7 @@
-import { Grid, Typography } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { Translation } from "../../../graphql/generated"
+import { Grid, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { Translation } from '../../../graphql/generated'
 
 type Props = {
   translation: Translation
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   bullet: {
     width: 8,
     height: 8,
-    borderRadius: "50%",
+    borderRadius: '50%',
     backgroundColor: theme.palette.text.primary,
     margin: theme.spacing(1),
     flexShrink: 0,

@@ -1,1 +1,1 @@
-declare module "fs-extra"
+declare module 'fs-extra'

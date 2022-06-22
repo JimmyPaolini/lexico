@@ -1,1 +1,1 @@
-declare module "cheerio-tableparser"
+declare module 'cheerio-tableparser'

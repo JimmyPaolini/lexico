@@ -1,14 +1,14 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react"
-import theme from "src/theme"
-import { searchEntry } from "src/utils/stories"
-import AdjectiveForms from "src/components/entry/FormsRow/PartsOfSpeech/AdjectiveFormsTable"
+import { ComponentMeta, ComponentStory } from '@storybook/react'
+import AdjectiveForms from 'src/components/entry/FormsRow/PartsOfSpeech/AdjectiveFormsTable'
+import theme from 'src/theme'
+import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: "Cards/EntryCard/FormsRow/PartsOfSpeech/AdjectiveForms",
+  title: 'Cards/EntryCard/FormsRow/PartsOfSpeech/AdjectiveForms',
   component: AdjectiveForms,
   decorators: [
     (Story) => (
-      <div style={{ width: theme.custom.cardWidth, border: "1px solid white" }}>
+      <div style={{ width: theme.custom.cardWidth, border: '1px solid white' }}>
         <Story />
       </div>
     ),
@@ -20,7 +20,7 @@ export const Default: ComponentStory<typeof AdjectiveForms> & {
 } = (args, { loaded }) => <AdjectiveForms {...args} {...loaded} />
 Default.loaders = [
   async () => {
-    const { forms } = await searchEntry("amoenus")
+    const { forms } = await searchEntry('amoenus')
     return { forms }
   },
 ]

@@ -1,11 +1,13 @@
 /* spellchecker: disable */
-import { Box, Paper } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import React, { useState } from "react"
-import { Forms, Maybe } from "../../../../../graphql/generated"
-import FormsTable from "../../FormsTable"
-import FormTabs from "../../FormTabs"
-import { adjectiveFormsRestructure } from "./adjectiveFormsRestructure"
+import React, { useState } from 'react'
+
+import { Box, Paper } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+import { Forms, Maybe } from '../../../../../graphql/generated'
+import FormTabs from '../../FormTabs'
+import FormsTable from '../../FormsTable'
+import { adjectiveFormsRestructure } from './adjectiveFormsRestructure'
 
 type Props = {
   forms?: Maybe<Forms>
@@ -20,7 +22,7 @@ export default function AdjectiveForms({ forms }: Props) {
   return (
     <Paper className={classes.paper} elevation={0}>
       <FormTabs tabs={tabs} activeTab={tab} setActiveTab={setTab}>
-        <Box style={{ height: "8px" }} />
+        <Box style={{ height: '8px' }} />
         <FormsTable forms={formsStructure} />
       </FormTabs>
     </Paper>

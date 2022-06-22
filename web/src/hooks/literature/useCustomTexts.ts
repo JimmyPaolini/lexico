@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
+
+import { useListCustomTextsQuery } from '../../graphql/generated'
 import {
   CustomText,
   deleteCustomTextLocal,
   listCustomTextsLocal,
-} from "../../utils/literatureLocal"
-import { useListCustomTextsQuery } from "../../graphql/generated"
+} from '../../utils/literatureLocal'
 
 interface useCustomTextsReturn {
   customTexts: CustomText[]

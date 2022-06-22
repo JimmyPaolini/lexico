@@ -1,8 +1,9 @@
-import { getConnection } from "typeorm"
-import Entry from "../../../entity/dictionary/Entry"
-import Word from "../../../entity/dictionary/Word"
-import { escapeCapitals, normalize } from "../../../utils/string"
-import { flattenForms } from "../utils/forms"
+import { getConnection } from 'typeorm'
+
+import Entry from '../../../entity/dictionary/Entry'
+import Word from '../../../entity/dictionary/Word'
+import { escapeCapitals, normalize } from '../../../utils/string'
+import { flattenForms } from '../utils/forms'
 
 export async function ingestEntryWords(entry: Entry): Promise<void> {
   for (const word of getEntryWords(entry)) {

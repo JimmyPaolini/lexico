@@ -1,5 +1,5 @@
-describe("Search Page", () => {
-  it("loads", () => {
-    cy.visit("/")
+describe('Search Page', () => {
+  it('loads', () => {
+    cy.visit('/')
   })
 })
