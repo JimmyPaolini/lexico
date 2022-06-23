@@ -26,6 +26,7 @@ import { sentenceCase } from '../../utils/string'
 type Props = {
   text: Text
 }
+
 export default function Reader({ text }: Props) {
   const router = useRouter()
   if (router.isFallback) return <LiteratureFallback />

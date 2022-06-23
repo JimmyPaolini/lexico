@@ -21,12 +21,11 @@ import SubmitButton from '../../accessories/SubmitButton'
 import TextBox from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
 
-interface ResetPasswordCardProps {
+type Props = {
   passwordResetToken: string
 }
-export default function ResetPasswordCard({
-  passwordResetToken,
-}: ResetPasswordCardProps) {
+
+export default function ResetPasswordCard({ passwordResetToken }: Props) {
   const classes = useStyles()
   const { queryClient } = useContext(Context)
   const [showPassword, setShowPassword] = useState<boolean>(false)

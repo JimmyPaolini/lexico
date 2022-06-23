@@ -6,6 +6,7 @@ import { Translation } from '../../../graphql/generated'
 type Props = {
   translation: Translation
 }
+
 export default function TranslationBullet({ translation }: Props) {
   const classes = useStyles()
   return (

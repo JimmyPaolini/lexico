@@ -11,6 +11,7 @@ type Props = {
   text: CustomText
   refreshCustomTexts: () => Promise<void>
 }
+
 export default function CustomLiteratureDelete({
   text,
   refreshCustomTexts,

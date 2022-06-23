@@ -10,12 +10,12 @@ import { normalize } from '../../utils/string'
 import { Context } from '../layout/Context'
 import ReaderWord from './ReaderWord'
 
-interface ReaderLineProps {
+type Props = {
   line: Line
   openModal: (word: string) => void
 }
 
-export default function ReaderLine({ line, openModal }: ReaderLineProps) {
+export default function ReaderLine({ line, openModal }: Props) {
   const classes = useStyles()
   const { user } = useContext(Context)
   const words = normalize(line.line).match(/\w+|\W+/gi)

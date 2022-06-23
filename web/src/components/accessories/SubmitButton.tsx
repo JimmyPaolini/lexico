@@ -9,6 +9,7 @@ type Props = {
   onClick?: () => any
   [key: string]: any
 }
+
 export default function SubmitButton({ name, onClick, ...props }: Props) {
   return (
     <Button

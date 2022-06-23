@@ -1,14 +1,15 @@
-import React, { ReactNode } from 'react'
+import React, { ComponentProps, ReactNode } from 'react'
 
 import { Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-import SearchBar, { SearchBarProps } from '../search/SearchBar'
+import SearchBar from '../search/SearchBar'
 
 type Props = {
-  searchBarProps: SearchBarProps
+  searchBarProps: ComponentProps<typeof SearchBar>
   children?: ReactNode
 }
+
 export default function SearchBarLayout({ searchBarProps, children }: Props) {
   const classes = useStyles()
 

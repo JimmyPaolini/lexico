@@ -12,10 +12,11 @@ import CustomLiteratureCard from '../components/literature/custom/CustomLiteratu
 import filterLiterature from '../components/literature/filterLiterature'
 import { Author, useGetAuthorsQuery } from '../graphql/generated'
 
-interface LiteratureProps {
+type Props = {
   authors: Author[]
 }
-export default function Literature({ authors }: LiteratureProps) {
+
+export default function Literature({ authors }: Props) {
   const [search, setSearch] = useState<string>('')
   const [searched, setSearched] = useState<string>(search)
   useEffect(() => {

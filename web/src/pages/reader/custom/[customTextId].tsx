@@ -11,10 +11,11 @@ import {
 import { CustomText, getCustomTextLocal } from '../../../utils/literatureLocal'
 import Reader from '../[textId]'
 
-interface CustomReaderProps {
+type Props = {
   id: string
 }
-export default memo(function CustomReader({ id }: CustomReaderProps) {
+
+export default memo(function CustomReader({ id }: Props) {
   const { data, isSuccess } = useGetCustomTextQuery({ id })
   const localText = getCustomTextLocal(id)
   const text = (isSuccess ? data?.getCustomText : localText) as CustomText

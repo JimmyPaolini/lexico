@@ -1,16 +1,17 @@
 import { ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-interface CustomLiteratureMenuItemProps {
+type Props = {
   action: () => void
   icon: JSX.Element
   text: string
 }
+
 export default function CustomLiteratureMenuItem({
   action,
   icon,
   text,
-}: CustomLiteratureMenuItemProps) {
+}: Props) {
   const classes = useStyles()
 
   return (

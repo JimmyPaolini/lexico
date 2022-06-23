@@ -17,6 +17,7 @@ type Props = {
   bookmarked?: Maybe<boolean>
   expanded?: boolean
 }
+
 export default function PrincipalPartsRow({
   id,
   partOfSpeech,

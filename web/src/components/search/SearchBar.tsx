@@ -13,7 +13,7 @@ import { pascalCase } from '../../utils/string'
 import { Context } from '../layout/Context'
 import SwitchEnglishLatin from './SwitchEnglishLatin'
 
-export interface SearchBarProps {
+type Props = {
   search: string
   setSearch: Dispatch<SetStateAction<string>>
   handleSearchExecute: any
@@ -22,6 +22,7 @@ export interface SearchBarProps {
   isLatin?: boolean
   setLatin?: Dispatch<SetStateAction<boolean>>
 }
+
 export default function SearchBar({
   search,
   setSearch,
@@ -30,7 +31,7 @@ export default function SearchBar({
   target = '',
   isLatin = true,
   setLatin = () => null,
-}: SearchBarProps) {
+}: Props) {
   const classes = useStyles()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
   const input = useRef<any>()

@@ -5,6 +5,7 @@ import { Slider } from '@material-ui/core'
 type Props = {
   formik: any
 }
+
 export default function SettingsSlider({ formik }: Props) {
   const min = 16
   const max = 32

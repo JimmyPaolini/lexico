@@ -13,6 +13,7 @@ type Props = {
   id: string
   bookmarked?: Maybe<boolean>
 }
+
 export default function PrincipalPartsRow({
   id,
   bookmarked: bookmarkedOriginal,

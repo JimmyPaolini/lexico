@@ -10,16 +10,17 @@ import {
 } from '../../../../utils/literatureLocal'
 import CustomLiteratureMenuItem from './CustomLiteratureMenuItem'
 
-interface CustomLiteratureMoveToUserProps {
+type Props = {
   text: CustomText
   refreshCustomTexts: () => Promise<void>
   closeMenu: () => void
 }
+
 export default function CustomLiteratureMoveToUser({
   text,
   refreshCustomTexts,
   closeMenu,
-}: CustomLiteratureMoveToUserProps) {
+}: Props) {
   const { enqueueSnackbar } = useSnackbarEnhanced()
 
   const { mutate: createCustomTextUser, error } = useCreateCustomTextMutation({

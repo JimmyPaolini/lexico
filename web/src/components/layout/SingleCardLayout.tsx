@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 type Props = {
   children?: ReactNode
 }
+
 export default function SingleCardLayout({ children }: Props) {
   const classes = useStyles()
 

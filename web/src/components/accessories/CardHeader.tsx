@@ -10,6 +10,7 @@ type Props = {
   title: string
   [key: string]: any
 }
+
 export default function CardHeader({ title, ...props }: Props) {
   const classes = useStyles()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)

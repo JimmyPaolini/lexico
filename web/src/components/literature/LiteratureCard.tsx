@@ -15,10 +15,10 @@ import LiteratureAuthor from './LiteratureAuthor'
 import LiteratureBook from './LiteratureBook'
 import LiteratureText from './LiteratureText'
 
-interface LiteratureCardProps {
+interface Props {
   author: Author
 }
-export default memo(function LiteratureCard({ author }: LiteratureCardProps) {
+export default memo(function LiteratureCard({ author }: Props) {
   const classes = useStyles()
   const books = author.books || ([] as Book[])
   const nonBookTexts = author.texts.filter(

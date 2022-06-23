@@ -9,6 +9,7 @@ type Props = {
   isLatin: boolean
   setLatin: Dispatch<SetStateAction<boolean>>
 }
+
 export default function SwitchEnglishLatin({ isLatin, setLatin }: Props) {
   const classes = useStyles()
 

@@ -15,6 +15,7 @@ type Props = {
   anchor: HTMLElement | null
   setAnchor: Dispatch<SetStateAction<HTMLElement | null>>
 }
+
 export default function CustomLiteratureMenu({
   text,
   refreshCustomTexts,

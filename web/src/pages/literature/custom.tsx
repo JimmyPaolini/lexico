@@ -5,10 +5,11 @@ import Head from 'next/head'
 import CustomLiteratureForm from '../../components/literature/custom/CustomLiteratureForm'
 import { CustomText } from '../../utils/literatureLocal'
 
-interface CustomReaderNewProps {
+type Props = {
   text?: CustomText
 }
-export default memo(function CustomReaderNew({ text }: CustomReaderNewProps) {
+
+export default memo(function CustomReaderNew({ text }: Props) {
   return (
     <>
       <Head>

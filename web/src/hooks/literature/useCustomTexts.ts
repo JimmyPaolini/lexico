@@ -12,6 +12,7 @@ interface useCustomTextsReturn {
   refreshCustomTexts: () => Promise<void>
   isLoading: boolean
 }
+
 export default function useCustomTexts(): useCustomTextsReturn {
   const [customTextsLocal, setCustomTextsLocal] = useState<CustomText[]>(
     listCustomTextsLocal(),

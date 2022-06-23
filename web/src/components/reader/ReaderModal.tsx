@@ -9,16 +9,13 @@ import useEventListener from '../../hooks/useEventListener'
 import CardDeck from '../accessories/CardDeck'
 import EntryCard from '../entry/EntryCard'
 
-interface ReaderModalProps {
+type Props = {
   searched: string
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
-export default memo(function ReaderModal({
-  searched,
-  open,
-  setOpen,
-}: ReaderModalProps) {
+
+export default memo(function ReaderModal({ searched, open, setOpen }: Props) {
   const classes = useStyles()
   const ref = useRef<HTMLDivElement>(null)
 

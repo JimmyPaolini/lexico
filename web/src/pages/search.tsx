@@ -15,11 +15,12 @@ import { Entry } from '../graphql/generated'
 import useSearch from '../hooks/search/useSearch'
 import { googleAnalyticsEvent } from '../utils/googleAnalytics'
 
-interface SearchProps {
+type Props = {
   initialSearch: string
   initialIsLatin: boolean
 }
-export default function Search({ initialSearch, initialIsLatin }: SearchProps) {
+
+export default function Search({ initialSearch, initialIsLatin }: Props) {
   const router = useRouter()
 
   const [isLatin, setLatin] = useState<boolean>(initialIsLatin)

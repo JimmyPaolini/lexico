@@ -8,6 +8,7 @@ import CustomLiteratureMenuItem from './CustomLiteratureMenuItem'
 type Props = {
   text: CustomText
 }
+
 export default function CustomLiteratureEdit({ text }: Props) {
   const router = useRouter()
 

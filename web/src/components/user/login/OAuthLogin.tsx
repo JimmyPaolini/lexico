@@ -9,6 +9,7 @@ import { sentenceCase } from '../../../utils/string'
 type Props = {
   provider: string
 }
+
 export default function OAuthLogin({ provider }: Props) {
   const href = provider === 'google' ? useGoogleUrl() : useFacebookUrl()
   return (

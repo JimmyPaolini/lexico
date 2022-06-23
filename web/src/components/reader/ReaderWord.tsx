@@ -3,11 +3,12 @@ import { memo } from 'react'
 import { CardActionArea } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
-interface ReaderWordProps {
+type Props = {
   word: string
   openModal: (word: string) => void
 }
-export default memo(function ReaderWord({ word, openModal }: ReaderWordProps) {
+
+export default memo(function ReaderWord({ word, openModal }: Props) {
   const classes = useStyles()
   const isWord = word.match(/\w+/i)
 

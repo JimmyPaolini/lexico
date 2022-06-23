@@ -12,11 +12,12 @@ import { sentenceCase } from '../../utils/string'
 import CardHeader from '../accessories/CardHeader'
 import ReaderLine from './ReaderLine'
 
-interface ReaderTextProps {
+type Props = {
   text: Text
   openModal: (word: string) => void
 }
-export default function ReaderText({ text, openModal }: ReaderTextProps) {
+
+export default function ReaderText({ text, openModal }: Props) {
   const classes = useStyles()
   const router = useRouter()
 

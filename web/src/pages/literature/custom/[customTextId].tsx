@@ -6,10 +6,11 @@ import { useGetCustomTextQuery } from '../../../graphql/generated'
 import { CustomText, getCustomTextLocal } from '../../../utils/literatureLocal'
 import CustomReaderNew from '../custom'
 
-interface CustomReaderEditProps {
+type Props = {
   id: string
 }
-export default memo(function CustomReaderEdit({ id }: CustomReaderEditProps) {
+
+export default memo(function CustomReaderEdit({ id }: Props) {
   const { data: userText, isSuccess } = useGetCustomTextQuery({ id })
   const localText = getCustomTextLocal(id)
   const text = (isSuccess ? userText : localText) as CustomText

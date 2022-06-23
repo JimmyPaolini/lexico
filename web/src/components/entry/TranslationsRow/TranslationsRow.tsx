@@ -18,6 +18,7 @@ import TranslationBullet from './TranslationBullet'
 type Props = {
   translations: Translation[]
 }
+
 export default function TranslationsRow({ translations }: Props) {
   const classes = useStyles()
   const { user } = useContext(Context)
