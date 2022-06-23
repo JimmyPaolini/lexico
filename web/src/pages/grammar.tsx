@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 
 import CardDeck from '../components/accessories/CardDeck'
-import grammarCards from '../components/grammar/grammarCards'
+import useGrammarCards from '../components/grammar/grammarCards'
 import SearchBarLayout from '../components/layout/SearchBarLayout'
 import { getMacronOptionRegex } from '../utils/string'
 
 export default function Grammar() {
   const [search, setSearch] = useState<string>('')
+  const grammarCards = useGrammarCards()
   const [cards, setCards] = useState(grammarCards)
 
   useEffect(() => {

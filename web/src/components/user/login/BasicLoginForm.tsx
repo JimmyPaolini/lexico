@@ -8,7 +8,7 @@ import {
   InputAdornment,
   Typography,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { useFormik } from 'formik'
 import Link from 'next/link'
@@ -20,26 +20,8 @@ import SubmitButton from '../../accessories/SubmitButton'
 import TextBox from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
 
-const PREFIX = 'BasicLoginForm'
-
-const classes = {
-  columnItem: `${PREFIX}-columnItem`,
-  formError: `${PREFIX}-formError`,
-}
-
-const Root = styled()(({ theme }) => ({
-  [`& .${classes.columnItem}`]: {
-    marginBottom: theme.spacing(2),
-  },
-
-  [`& .${classes.formError}`]: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}))
-
 export default function BasicLogin() {
+  const theme = useTheme()
   const { queryClient } = useContext(Context)
   const [submit, setSubmit] = useState<'sign up' | 'sign in'>('sign in')
   const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -82,10 +64,10 @@ export default function BasicLogin() {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Grid item className={classes.columnItem}>
+      <Grid item sx={{ marginBottom: theme.spacing(2) }}>
         <TextBox name="email" formik={formik} />
       </Grid>
-      <Grid item className={classes.columnItem}>
+      <Grid item sx={{ marginBottom: theme.spacing(2) }}>
         <TextBox
           name="password"
           formik={formik}
@@ -129,7 +111,11 @@ export default function BasicLogin() {
           variant="caption"
           align="center"
           display="block"
-          className={classes.formError}
+          sx={{
+            width: '100%',
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(1),
+          }}
         >
           {capitalizeFirstLetter(error)}
         </Typography>

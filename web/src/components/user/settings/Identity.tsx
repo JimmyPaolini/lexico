@@ -6,16 +6,15 @@ import { Context } from '../../layout/Context'
 
 export function Identity() {
   const { user } = useContext(Context)
+  const provider = user.googleId
+    ? 'Google'
+    : user.facebookId
+    ? 'Facebook'
+    : 'email/password'
 
   return user ? (
     <Typography gutterBottom align="center">
-      Signed in
-      {user.googleId
-        ? ' with Google '
-        : user.facebookId
-        ? ' with Facebook '
-        : ' with email/password '}
-      as:
+      Signed in with {provider} as:
       <br />
       {user.email}
     </Typography>
@@ -23,7 +22,7 @@ export function Identity() {
     <Typography gutterBottom align="center">
       No user signed in:
       <br />
-      settings saved locally on device/browser
+      Settings saved locally on device/browser
     </Typography>
   )
 }

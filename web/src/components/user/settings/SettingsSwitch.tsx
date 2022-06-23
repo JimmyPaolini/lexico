@@ -2,10 +2,14 @@ import React from 'react'
 
 import { Grid, Switch, Typography } from '@mui/material'
 
+import { FormikProps } from 'formik'
+
+import { Settings } from '../../../graphql/generated'
+
 type Props = {
-  field: string
+  field: keyof Settings
   label: string
-  formik: any
+  formik: FormikProps<Settings>
 }
 
 export default function SettingsSwitch({ field, label, formik }: Props) {
@@ -16,8 +20,8 @@ export default function SettingsSwitch({ field, label, formik }: Props) {
         id={field}
         name={field}
         color="primary"
-        value={formik.values[field]}
-        checked={formik.values[field]}
+        value={formik.values[field] as boolean}
+        checked={formik.values[field] as boolean}
         onChange={formik.handleChange}
       />
     </Grid>

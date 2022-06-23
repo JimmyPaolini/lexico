@@ -1,31 +1,10 @@
+import { ComponentProps } from 'react'
+
 import { ExpandMore } from '@mui/icons-material'
-import { styled } from '@mui/material/styles'
 
-const PREFIX = 'ExpandIcon'
-
-const classes = {
-  rightSideUp: `${PREFIX}-rightSideUp`,
-  upSideDown: `${PREFIX}-upSideDown`,
-}
-
-const StyledExpandMore = styled(ExpandMore)(() => ({
-  [`& .${classes.rightSideUp}`]: {
-    transition: '250ms ease',
-    transform: 'rotateZ(0deg)',
-  },
-
-  [`& .${classes.upSideDown}`]: {
-    transition: '250ms ease',
-    transform: 'rotateZ(-180deg)',
-  },
-}))
-
-type Props = {
-  expanded: boolean
-  [key: string]: any
-}
+type Props = { expanded: boolean } & ComponentProps<typeof ExpandMore>
 
 export default function ExpandIcon({ expanded, ...props }: Props) {
-  const direction = expanded ? classes.upSideDown : classes.rightSideUp
-  return <StyledExpandMore className={direction} {...props} />
+  const transform = expanded ? 'rotateZ(-180deg)' : 'rotateZ(0deg)'
+  return <ExpandMore sx={{ transition: '250ms ease', transform }} {...props} />
 }

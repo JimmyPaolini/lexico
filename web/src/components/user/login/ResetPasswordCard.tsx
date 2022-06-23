@@ -9,7 +9,7 @@ import {
   IconButton,
   InputAdornment,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
@@ -21,25 +21,10 @@ import SubmitButton from '../../accessories/SubmitButton'
 import TextBox from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
 
-const PREFIX = 'ResetPasswordCard'
-
-const classes = {
-  card: `${PREFIX}-card`,
-}
-
-const Root = styled('div')(({ theme }) => ({
-  [`& .${classes.card}`]: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}))
-
-type Props = {
-  passwordResetToken: string
-}
+type Props = { passwordResetToken: string }
 
 export default function ResetPasswordCard({ passwordResetToken }: Props) {
+  const theme = useTheme()
   const { queryClient } = useContext(Context)
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const passwordTextBoxRef = useRef<HTMLDivElement>(null)
@@ -64,50 +49,53 @@ export default function ResetPasswordCard({ passwordResetToken }: Props) {
   })
 
   return (
-    <Root>
-      <Card className={classes.card}>
-        <CardHeader title="Reset Password" />
-        <Divider variant="middle" />
-        <CardContent>
-          <form onSubmit={formik.handleSubmit}>
-            <Grid container direction="column" spacing={2}>
-              <Grid item>
-                <TextBox
-                  name="password"
-                  formik={formik}
-                  type={showPassword ? 'text' : 'password'}
-                  ref={passwordTextBoxRef}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={() =>
-                            setShowPassword((showPassword) => !showPassword)
-                          }
-                          size="large"
-                        >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-              <Grid item>
-                <SubmitButton name="Reset Password" />
-              </Grid>
+    <Card
+      sx={{
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+      }}
+    >
+      <CardHeader title="Reset Password" />
+      <Divider variant="middle" />
+      <CardContent>
+        <form onSubmit={formik.handleSubmit}>
+          <Grid container direction="column" spacing={2}>
+            <Grid item>
+              <TextBox
+                name="password"
+                formik={formik}
+                type={showPassword ? 'text' : 'password'}
+                ref={passwordTextBoxRef}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() =>
+                          setShowPassword((showPassword) => !showPassword)
+                        }
+                        size="large"
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
             </Grid>
-          </form>
-        </CardContent>
-      </Card>
-    </Root>
+            <Grid item>
+              <SubmitButton name="Reset Password" />
+            </Grid>
+          </Grid>
+        </form>
+      </CardContent>
+    </Card>
   )
 }
 
-interface ResetPasswordInfo {
-  password: string
-}
+type ResetPasswordInfo = { password: string }
+
 export function validate({ password }: ResetPasswordInfo): {
   password: string
 } {

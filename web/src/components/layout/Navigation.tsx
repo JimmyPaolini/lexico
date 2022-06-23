@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 
 import { ChevronLeft, Menu } from '@mui/icons-material'
 import {
@@ -12,7 +12,7 @@ import {
   SwipeableDrawer,
   Typography,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -20,56 +20,8 @@ import { useRouter } from 'next/router'
 import { Context } from './Context'
 import pages from './pages'
 
-const PREFIX = 'Navigation'
-
-const classes = {
-  drawerOpen: `${PREFIX}-drawerOpen`,
-  drawerClosed: `${PREFIX}-drawerClosed`,
-  title: `${PREFIX}-title`,
-  header: `${PREFIX}-header`,
-  expander: `${PREFIX}-expander`,
-}
-
-const StyledSwipeableDrawer = styled(SwipeableDrawer)(({ theme }) => ({
-  [`& .${classes.drawerOpen}`]: {
-    width: theme.spacing(24),
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-
-  [`& .${classes.drawerClosed}`]: {
-    width: theme.spacing(7),
-    [theme.breakpoints.down('md')]: {
-      width: 0,
-    },
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-  },
-
-  [`& .${classes.title}`]: {
-    position: 'relative',
-    float: 'left',
-    right: 12,
-  },
-
-  [`& .${classes.header}`]: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-
-  [`& .${classes.expander}`]: {
-    display: 'inline-block',
-    position: 'relative',
-    left: 12,
-  },
-}))
-
 export default function Navigation() {
+  const theme = useTheme()
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
   const router = useRouter()
   const pageName = router.pathname.split('/')[1]
@@ -84,26 +36,51 @@ export default function Navigation() {
     setSelected(pageName)
   }, [pageName])
 
+  const drawerOpenStyles = {
+    width: theme.spacing(24),
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }
+
+  const drawerClosedStyles = {
+    width: theme.spacing(7),
+    [theme.breakpoints.down('md')]: {
+      width: 0,
+    },
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+  }
+
+  const drawerStyles = useMemo(
+    () => (open ? drawerOpenStyles : drawerClosedStyles),
+    [open],
+  )
+
   return (
-    <StyledSwipeableDrawer
+    <SwipeableDrawer
       variant={isMobile ? 'temporary' : 'permanent'}
       open={open}
       onClose={() => setOpen(false)}
       onOpen={() => null}
-      classes={{
-        paper: open ? classes.drawerOpen : classes.drawerClosed,
-      }}
-      className={open ? classes.drawerOpen : classes.drawerClosed}
+      sx={{ ...drawerStyles, '& .MuiDrawer-paper': drawerStyles }}
     >
       <Grid item>
         <List>
-          <ListItem className={classes.header}>
-            <Typography variant="h4" className={classes.title}>
+          <ListItem sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Typography
+              variant="h4"
+              sx={{ position: 'relative', float: 'left', right: 12 }}
+            >
               Lexico
             </Typography>
             <IconButton
               onClick={() => setOpen(!open)}
-              className={classes.expander}
+              sx={{ display: 'inline-block', position: 'relative', left: 12 }}
               aria-label="toggle navigation drawer"
               size="large"
             >
@@ -130,6 +107,6 @@ export default function Navigation() {
           ))}
         </List>
       </Grid>
-    </StyledSwipeableDrawer>
+    </SwipeableDrawer>
   )
 }

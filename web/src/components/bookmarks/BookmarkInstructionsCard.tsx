@@ -11,34 +11,22 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
-
-const PREFIX = 'BookmarkInstructionsCard'
-
-const classes = {
-  card: `${PREFIX}-card`,
-  bookmarkIcon: `${PREFIX}-bookmarkIcon`,
-}
-
-const StyledGrow = styled(Grow)(({ theme }) => ({
-  [`& .${classes.card}`]: {
-    maxWidth: theme.custom.cardWidth,
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-
-  [`& .${classes.bookmarkIcon}`]: {
-    display: 'inline',
-  },
-}))
+import { useTheme } from '@mui/material/styles'
 
 export default function BookmarkInstructionsCard() {
+  const theme = useTheme()
   return (
-    <StyledGrow in={true}>
-      <Card className={classes.card}>
+    <Grow in>
+      <Card
+        sx={{
+          maxWidth: theme.custom.cardWidth,
+          marginLeft: theme.spacing(1),
+          marginRight: theme.spacing(1),
+        }}
+      >
         <CardContent>
-          <List style={{ padding: 0 }}>
-            <ListItem style={{ padding: 0 }}>
+          <List sx={{ padding: 0 }}>
+            <ListItem sx={{ padding: 0 }}>
               <ListItemIcon>
                 <IconButton size="large">
                   <BookmarkBorder />
@@ -46,7 +34,7 @@ export default function BookmarkInstructionsCard() {
               </ListItemIcon>
               <ListItemText primary="Click the bookmark icon to bookmark entries" />
             </ListItem>
-            <ListItem style={{ padding: 0 }}>
+            <ListItem sx={{ padding: 0 }}>
               <ListItemIcon>
                 <IconButton size="large">
                   <Bookmark />
@@ -57,6 +45,6 @@ export default function BookmarkInstructionsCard() {
           </List>
         </CardContent>
       </Card>
-    </StyledGrow>
+    </Grow>
   )
 }

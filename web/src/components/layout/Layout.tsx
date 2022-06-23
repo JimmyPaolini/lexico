@@ -1,13 +1,11 @@
-import React, { ReactNode } from 'react'
+import React, { PropsWithChildren } from 'react'
 
 import { Grid } from '@mui/material'
 
 import Navigation from './Navigation'
 import Snackbar from './Snackbar'
 
-type Props = {
-  children?: ReactNode
-}
+type Props = PropsWithChildren<{}>
 
 export default function Layout({ children }: Props) {
   return (

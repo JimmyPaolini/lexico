@@ -1,6 +1,6 @@
 import {
   Dispatch,
-  ReactNode,
+  PropsWithChildren,
   SetStateAction,
   createContext,
   useState,
@@ -22,10 +22,8 @@ export interface ReactContext {
 
 export const Context = createContext({} as ReactContext)
 
-type Props = {
-  children?: ReactNode
-  queryClient: QueryClient
-}
+type Props = PropsWithChildren<{ queryClient: QueryClient }>
+
 export function ContextProvider({ children, queryClient }: Props) {
   const { data } = useUserQuery({}, { staleTime: 1000 * 60 * 5 }) // 5 minutes
   const user = data?.user

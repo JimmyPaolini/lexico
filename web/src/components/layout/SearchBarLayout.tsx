@@ -1,47 +1,34 @@
-import React, { ComponentProps, ReactNode } from 'react'
+import React, { ComponentProps, PropsWithChildren } from 'react'
 
 import { Grid } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import SearchBar from '../search/SearchBar'
 
-const PREFIX = 'SearchBarLayout'
-
-const classes = {
-  searchBar: `${PREFIX}-searchBar`,
-  children: `${PREFIX}-children`,
-}
-
-const StyledGrid = styled(Grid)(({ theme }) => ({
-  [`& .${classes.searchBar}`]: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-  },
-
-  [`& .${classes.children}`]: {
-    marginTop: theme.spacing(4),
-  },
-}))
-
-type Props = {
+type Props = PropsWithChildren<{
   searchBarProps: ComponentProps<typeof SearchBar>
-  children?: ReactNode
-}
+}>
 
 export default function SearchBarLayout({ searchBarProps, children }: Props) {
+  const theme = useTheme()
   return (
-    <StyledGrid container direction="column" alignItems="stretch">
+    <Grid container direction="column" alignItems="stretch">
       <Grid
         item
         container
         justifyContent="center"
-        className={classes.searchBar}
+        sx={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}
       >
         <SearchBar {...searchBarProps} />
       </Grid>
-      <Grid item container justifyContent="center" className={classes.children}>
+      <Grid
+        item
+        container
+        justifyContent="center"
+        sx={{ marginTop: theme.spacing(4) }}
+      >
         {children}
       </Grid>
-    </StyledGrid>
+    </Grid>
   )
 }

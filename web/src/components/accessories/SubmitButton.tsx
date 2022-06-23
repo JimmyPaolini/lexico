@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentProps } from 'react'
 
 import { Button } from '@mui/material'
 
@@ -7,8 +7,7 @@ import { sentenceCase } from '../../utils/string'
 type Props = {
   name: string
   onClick?: () => any
-  [key: string]: any
-}
+} & ComponentProps<typeof Button>
 
 export default function SubmitButton({ name, onClick, ...props }: Props) {
   return (

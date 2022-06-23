@@ -9,7 +9,7 @@ import {
   Link,
   Typography,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { useFormik } from 'formik'
 
@@ -20,39 +20,9 @@ import SubmitButton from '../accessories/SubmitButton'
 import TextBox from '../accessories/TextBox'
 import { Context } from '../layout/Context'
 
-const PREFIX = 'CommentBox'
-
-const classes = {
-  textBox: `${PREFIX}-textBox`,
-  formError: `${PREFIX}-formError`,
-  dropdown: `${PREFIX}-dropdown`,
-  hide: `${PREFIX}-hide`,
-}
-
-// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
-const Root = styled('div')(({ theme }) => ({
-  [`& .${classes.textBox}`]: {
-    margin: theme.spacing(1),
-  },
-
-  [`& .${classes.formError}`]: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-  },
-
-  [`& .${classes.dropdown}`]: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    padding: theme.spacing(1),
-  },
-
-  [`& .${classes.hide}`]: {
-    display: 'none',
-  },
-}))
-
 export default function CommentBox() {
   const { user } = useContext(Context)
+  const theme = useTheme()
   const [expanded, setExpanded] = useState<boolean>(false)
   const formik = useFormik({
     initialValues: {
@@ -72,17 +42,21 @@ export default function CommentBox() {
     : ''
 
   return (
-    <Root>
+    <>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
         disableTouchRipple
-        classes={{ focusHighlight: classes.hide }}
+        sx={{
+          '& .MuiCardActionArea-focusHighlight': {
+            display: 'hide',
+          },
+        }}
       >
         <CardHeaderMui
           title="Questions and Feedback"
           titleTypographyProps={{ variant: 'body1' }}
-          className={classes.dropdown}
+          sx={{ paddingTop: 0, paddingBottom: 0, padding: theme.spacing(1) }}
           action={
             <Box p={1.5} mt={1} mr={1}>
               <ExpandIcon expanded={expanded} />
@@ -109,7 +83,7 @@ export default function CommentBox() {
               <SubmitButton
                 name={'login to send a message'}
                 href="/user"
-                className={classes.textBox}
+                sx={{ margin: theme.spacing(1) }}
               />
             ) : (
               <>
@@ -117,7 +91,7 @@ export default function CommentBox() {
                   formik={formik}
                   name="comment"
                   label="Message"
-                  className={classes.textBox}
+                  sx={{ margin: theme.spacing(1) }}
                   multiline
                   rows={4}
                 />
@@ -125,14 +99,14 @@ export default function CommentBox() {
                   name={isSuccess ? 'sent' : 'send'}
                   disabled={isSuccess}
                   onClick={() => null}
-                  className={classes.textBox}
+                  sx={{ margin: theme.spacing(1) }}
                 />
                 <Typography
                   color="error"
                   variant="caption"
                   align="center"
                   display="block"
-                  className={classes.formError}
+                  sx={{ width: '100%', marginTop: theme.spacing(1) }}
                 >
                   {capitalizeFirstLetter(error as any)}
                 </Typography>
@@ -141,6 +115,6 @@ export default function CommentBox() {
           </Grid>
         </form>
       </Collapse>
-    </Root>
+    </>
   )
 }

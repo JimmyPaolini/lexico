@@ -2,9 +2,11 @@ import React from 'react'
 
 import { Slider } from '@mui/material'
 
-type Props = {
-  formik: any
-}
+import { FormikProps } from 'formik'
+
+import { Settings } from '../../../graphql/generated'
+
+type Props = { formik: FormikProps<Settings> }
 
 export default function SettingsSlider({ formik }: Props) {
   const min = 16
@@ -23,7 +25,7 @@ export default function SettingsSlider({ formik }: Props) {
     <Slider
       id="fontSize"
       name="fontSize"
-      value={formik.values.fontSize}
+      value={formik.values.fontSize!}
       onChange={handleSliderChange}
       onChangeCommitted={() => formik.handleSubmit()}
       valueLabelDisplay="off"

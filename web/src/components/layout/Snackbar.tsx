@@ -1,38 +1,27 @@
-import React, { ReactNode } from 'react'
+import React, { PropsWithChildren } from 'react'
 
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { SnackbarProvider } from 'notistack'
 
-const PREFIX = 'Snackbar'
-
-const classes = {
-  snackbarInfo: `${PREFIX}-snackbarInfo`,
-  action: `${PREFIX}-action`,
-}
-
-const StyledSnackbarProvider = styled(SnackbarProvider)(({ theme }) => ({
-  [`& .${classes.snackbarInfo}`]: {
-    backgroundColor: `${theme.palette.background.paper} !important`,
-    flexWrap: 'nowrap',
-  },
-
-  [`& .${classes.action}`]: {
-    flexShrink: 0,
-    paddingLeft: theme.spacing(1),
-  },
-}))
-
-type Props = {
-  children?: ReactNode
-}
+type Props = PropsWithChildren<{}>
 
 export default function Snackbar({ children }: Props) {
+  const theme = useTheme()
   return (
-    <StyledSnackbarProvider
+    <SnackbarProvider
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       /* @ts-ignore */
-      classes={{ variantInfo: classes.snackbarInfo, action: classes.action }}
+      sx={{
+        '& .Snackbar-snackbarInfo': {
+          backgroundColor: `${theme.palette.background.paper} !important`,
+          flexWrap: 'nowrap',
+        },
+        '& .Snackbar-action': {
+          flexShrink: 0,
+          paddingLeft: theme.spacing(1),
+        },
+      }}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'right',
@@ -42,6 +31,6 @@ export default function Snackbar({ children }: Props) {
       preventDuplicate
     >
       {children}
-    </StyledSnackbarProvider>
+    </SnackbarProvider>
   )
 }

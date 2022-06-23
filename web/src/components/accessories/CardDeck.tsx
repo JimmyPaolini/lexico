@@ -1,35 +1,19 @@
-import React, { Dispatch, memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 
 import { useTheme } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Grow from '@mui/material/Grow'
-import { styled } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import LazyLoad from 'react-lazyload'
-
-const PREFIX = 'CardDeck'
-
-const classes = {
-  column: `${PREFIX}-column`,
-}
-
-const Root = styled(Grid)(({ theme }) => ({
-  [`& .${classes.column}`]: {
-    maxWidth: theme.custom.cardWidth + theme.spacing(2),
-    minWidth: theme.custom.cardWidth - parseInt(theme.spacing(2)),
-    outline: 'none',
-  },
-}))
 
 type Card = {
   key: string | number
   Card: JSX.Element
 }
 
-type Props = {
-  cards: Card[]
-}
+type Props = { cards: Card[] }
+
 export default memo(function CardDeck({ cards }: Props) {
   const theme = useTheme()
   let numCols = 1
@@ -40,7 +24,7 @@ export default memo(function CardDeck({ cards }: Props) {
   const [columns, setColumns] = useState<Card[][]>([[]])
 
   useEffect(() => {
-    reorganizeCards(cards, numCols, setColumns)
+    setColumns(arrangeCards(cards, numCols))
   }, [cards, numCols])
 
   if (!cards.every((card) => card.key && card.Card)) {
@@ -49,7 +33,7 @@ export default memo(function CardDeck({ cards }: Props) {
   }
   if (!columns.length || !columns[0].length) return <></>
   return (
-    <Root>
+    <Grid>
       {columns.map((column, col) => {
         if (!column.length) return null
         return (
@@ -58,7 +42,11 @@ export default memo(function CardDeck({ cards }: Props) {
             container
             direction="column"
             alignItems="stretch"
-            className={classes.column}
+            sx={{
+              maxWidth: theme.custom.cardWidth + theme.spacing(2),
+              minWidth: theme.custom.cardWidth - parseInt(theme.spacing(2)),
+              outline: 'none',
+            }}
             key={column.map((card) => card.key).join()}
           >
             {column.map((card, row) => {
@@ -76,19 +64,16 @@ export default memo(function CardDeck({ cards }: Props) {
           </Grid>
         )
       })}
-    </Root>
+    </Grid>
   )
 })
 
-function reorganizeCards(
-  cards: Card[],
-  numCols: number,
-  setColumns: Dispatch<React.SetStateAction<Card[][]>>,
-): any {
-  if (numCols <= 0 || !Array.isArray(cards)) return [[]]
-  setColumns(
-    [...Array(numCols).keys()].map((_, col) =>
+function arrangeCards(cards: Card[], numCols: number): any {
+  if (!Array.isArray(cards) || numCols <= 0) {
+    return [[]]
+  } else {
+    return [...Array(numCols).keys()].map((_, col) =>
       cards.filter((_, row) => row % numCols === col),
-    ),
-  )
+    )
+  }
 }

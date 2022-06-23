@@ -1,34 +1,25 @@
-import React, { ReactNode } from 'react'
+import React, { PropsWithChildren } from 'react'
 
-import { Grid, Grow } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { Grid, Grow, useTheme } from '@mui/material'
 
-const PREFIX = 'SingleCardLayout'
-
-const classes = {
-  column: `${PREFIX}-column`,
-}
-
-const StyledGrid = styled(Grid)(({ theme }) => ({
-  [`& .${classes.column}`]: {
-    width: theme.custom.cardWidth,
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-  },
-}))
-
-type Props = {
-  children?: ReactNode
-}
+type Props = PropsWithChildren<{}>
 
 export default function SingleCardLayout({ children }: Props) {
+  const theme = useTheme()
   return (
-    <StyledGrid container justifyContent="center" alignItems="center">
-      <Grid item className={classes.column}>
-        <Grow in={true}>
+    <Grid container justifyContent="center" alignItems="center">
+      <Grid
+        item
+        sx={{
+          width: theme.custom.cardWidth,
+          marginTop: theme.spacing(4),
+          marginBottom: theme.spacing(4),
+        }}
+      >
+        <Grow in>
           <Grid>{children}</Grid>
         </Grow>
       </Grid>
-    </StyledGrid>
+    </Grid>
   )
 }

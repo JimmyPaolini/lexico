@@ -1,4 +1,4 @@
-import { MutableRefObject, forwardRef } from 'react'
+import { ComponentProps, MutableRefObject, forwardRef } from 'react'
 
 import { TextField } from '@mui/material'
 
@@ -7,8 +7,8 @@ import { sentenceCase } from '../../utils/string'
 type Props = {
   formik: any
   name: string
-  [key: string]: unknown
-}
+} & ComponentProps<typeof TextField>
+
 const TextBox = forwardRef(
   (
     { formik, name, ...props }: Props,
