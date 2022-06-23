@@ -7,20 +7,43 @@ import {
   Collapse,
   Grid,
   Link,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-
+} from '@mui/material'
+import { styled } from '@mui/material/styles'
 import Image from 'next/image'
 
 import tools from '../../utils/tools'
 import ExpandIcon from '../accessories/ExpandIcon'
 
+const PREFIX = 'ToolIconGrid'
+
+const classes = {
+  dropdown: `${PREFIX}-dropdown`,
+  toolGrid: `${PREFIX}-toolGrid`,
+  hide: `${PREFIX}-hide`,
+}
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.dropdown}`]: {
+    paddingTop: 0,
+    paddingBottom: 0,
+    padding: theme.spacing(1),
+  },
+
+  [`& .${classes.toolGrid}`]: {
+    padding: theme.spacing(1),
+  },
+
+  [`& .${classes.hide}`]: {
+    display: 'none',
+  },
+}))
+
 export default function ToolIconGrid() {
-  const classes = useStyles()
   const [expanded, setExpanded] = useState<boolean>(false)
 
   return (
-    <>
+    <Root>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
@@ -65,20 +88,6 @@ export default function ToolIconGrid() {
           ))}
         </Grid>
       </Collapse>
-    </>
+    </Root>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  dropdown: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    padding: theme.spacing(1),
-  },
-  toolGrid: {
-    padding: theme.spacing(1),
-  },
-  hide: {
-    display: 'none',
-  },
-}))

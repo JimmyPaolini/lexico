@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { Bookmark, BookmarkBorder } from '@mui/icons-material'
 import {
   Card,
   CardContent,
@@ -9,21 +10,37 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { Bookmark, BookmarkBorder } from '@material-ui/icons'
+} from '@mui/material'
+import { styled } from '@mui/material/styles'
+
+const PREFIX = 'BookmarkInstructionsCard'
+
+const classes = {
+  card: `${PREFIX}-card`,
+  bookmarkIcon: `${PREFIX}-bookmarkIcon`,
+}
+
+const StyledGrow = styled(Grow)(({ theme }) => ({
+  [`& .${classes.card}`]: {
+    maxWidth: theme.custom.cardWidth,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+
+  [`& .${classes.bookmarkIcon}`]: {
+    display: 'inline',
+  },
+}))
 
 export default function BookmarkInstructionsCard() {
-  const classes = useStyles()
-
   return (
-    <Grow in={true}>
+    <StyledGrow in={true}>
       <Card className={classes.card}>
         <CardContent>
           <List style={{ padding: 0 }}>
             <ListItem style={{ padding: 0 }}>
               <ListItemIcon>
-                <IconButton>
+                <IconButton size="large">
                   <BookmarkBorder />
                 </IconButton>
               </ListItemIcon>
@@ -31,7 +48,7 @@ export default function BookmarkInstructionsCard() {
             </ListItem>
             <ListItem style={{ padding: 0 }}>
               <ListItemIcon>
-                <IconButton>
+                <IconButton size="large">
                   <Bookmark />
                 </IconButton>
               </ListItemIcon>
@@ -40,17 +57,6 @@ export default function BookmarkInstructionsCard() {
           </List>
         </CardContent>
       </Card>
-    </Grow>
+    </StyledGrow>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  card: {
-    maxWidth: theme.custom.cardWidth,
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-  bookmarkIcon: {
-    display: 'inline',
-  },
-}))

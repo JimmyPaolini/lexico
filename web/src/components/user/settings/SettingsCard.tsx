@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 
-import { Card, CardContent, Divider, Grid } from '@material-ui/core'
-import { Theme, makeStyles } from '@material-ui/core/styles'
+import { Card, CardContent, Divider, Grid } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import {
   useLogoutQuery,
@@ -13,8 +13,29 @@ import { Context } from '../../layout/Context'
 import { Identity } from './Identity'
 import SettingsForm from './SettingsForm'
 
+const PREFIX = 'SettingsCard'
+
+const classes = {
+  card: `${PREFIX}-card`,
+  unregister: `${PREFIX}-unregister`,
+}
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  [`&.${classes.card}`]: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+
+  [`& .${classes.unregister}`]: {
+    backgroundColor: theme.palette.error.main,
+    '&:hover': {
+      backgroundColor: theme.palette.error.dark,
+    },
+  },
+}))
+
 export default function SettingsCard() {
-  const classes = useStyles()
   const { user, queryClient } = useContext(Context)
 
   const { refetch: logout } = useLogoutQuery(
@@ -40,7 +61,7 @@ export default function SettingsCard() {
   }
 
   return (
-    <Card className={classes.card}>
+    <StyledCard className={classes.card}>
       <CardHeader title="Settings" />
       <Divider variant="middle" />
       <CardContent>
@@ -67,20 +88,6 @@ export default function SettingsCard() {
           ) : null}
         </Grid>
       </CardContent>
-    </Card>
+    </StyledCard>
   )
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  unregister: {
-    backgroundColor: theme.palette.error.main,
-    '&:hover': {
-      backgroundColor: theme.palette.error.dark,
-    },
-  },
-}))

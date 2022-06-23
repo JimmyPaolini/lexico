@@ -1,18 +1,34 @@
 import React, { ReactNode } from 'react'
 
-import { makeStyles } from '@material-ui/core/styles'
-
+import { styled } from '@mui/material/styles'
 import { SnackbarProvider } from 'notistack'
+
+const PREFIX = 'Snackbar'
+
+const classes = {
+  snackbarInfo: `${PREFIX}-snackbarInfo`,
+  action: `${PREFIX}-action`,
+}
+
+const StyledSnackbarProvider = styled(SnackbarProvider)(({ theme }) => ({
+  [`& .${classes.snackbarInfo}`]: {
+    backgroundColor: `${theme.palette.background.paper} !important`,
+    flexWrap: 'nowrap',
+  },
+
+  [`& .${classes.action}`]: {
+    flexShrink: 0,
+    paddingLeft: theme.spacing(1),
+  },
+}))
 
 type Props = {
   children?: ReactNode
 }
 
 export default function Snackbar({ children }: Props) {
-  const classes = useStyles()
-
   return (
-    <SnackbarProvider
+    <StyledSnackbarProvider
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       /* @ts-ignore */
       classes={{ variantInfo: classes.snackbarInfo, action: classes.action }}
@@ -25,17 +41,6 @@ export default function Snackbar({ children }: Props) {
       preventDuplicate
     >
       {children}
-    </SnackbarProvider>
+    </StyledSnackbarProvider>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  snackbarInfo: {
-    backgroundColor: `${theme.palette.background.paper} !important`,
-    flexWrap: 'nowrap',
-  },
-  action: {
-    flexShrink: 0,
-    paddingLeft: theme.spacing(1),
-  },
-}))

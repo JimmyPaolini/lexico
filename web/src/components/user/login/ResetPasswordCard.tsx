@@ -1,5 +1,6 @@
 import { useContext, useRef, useState } from 'react'
 
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import {
   Card,
   CardContent,
@@ -7,10 +8,8 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-} from '@material-ui/core'
-import { Theme, makeStyles } from '@material-ui/core/styles'
-import { Visibility, VisibilityOff } from '@material-ui/icons'
-
+} from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 
@@ -21,12 +20,25 @@ import SubmitButton from '../../accessories/SubmitButton'
 import TextBox from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
 
+const PREFIX = 'ResetPasswordCard'
+
+const classes = {
+  card: `${PREFIX}-card`,
+}
+
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.card}`]: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+}))
+
 type Props = {
   passwordResetToken: string
 }
 
 export default function ResetPasswordCard({ passwordResetToken }: Props) {
-  const classes = useStyles()
   const { queryClient } = useContext(Context)
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const passwordTextBoxRef = useRef<HTMLDivElement>(null)
@@ -51,41 +63,44 @@ export default function ResetPasswordCard({ passwordResetToken }: Props) {
   })
 
   return (
-    <Card className={classes.card}>
-      <CardHeader title="Reset Password" />
-      <Divider variant="middle" />
-      <CardContent>
-        <form onSubmit={formik.handleSubmit}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item>
-              <TextBox
-                name="password"
-                formik={formik}
-                type={showPassword ? 'text' : 'password'}
-                ref={passwordTextBoxRef}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={() =>
-                          setShowPassword((showPassword) => !showPassword)
-                        }
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
+    <Root>
+      <Card className={classes.card}>
+        <CardHeader title="Reset Password" />
+        <Divider variant="middle" />
+        <CardContent>
+          <form onSubmit={formik.handleSubmit}>
+            <Grid container direction="column" spacing={2}>
+              <Grid item>
+                <TextBox
+                  name="password"
+                  formik={formik}
+                  type={showPassword ? 'text' : 'password'}
+                  ref={passwordTextBoxRef}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={() =>
+                            setShowPassword((showPassword) => !showPassword)
+                          }
+                          size="large"
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+              <Grid item>
+                <SubmitButton name="Reset Password" />
+              </Grid>
             </Grid>
-            <Grid item>
-              <SubmitButton name="Reset Password" />
-            </Grid>
-          </Grid>
-        </form>
-      </CardContent>
-    </Card>
+          </form>
+        </CardContent>
+      </Card>
+    </Root>
   )
 }
 
@@ -104,11 +119,3 @@ export function validate({ password }: ResetPasswordInfo): {
     errors.password = 'Password must contain a number'
   return errors
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}))

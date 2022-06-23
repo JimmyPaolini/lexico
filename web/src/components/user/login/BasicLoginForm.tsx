@@ -1,15 +1,14 @@
 import { useContext, useRef, useState } from 'react'
 
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import {
   Button,
   Grid,
   IconButton,
   InputAdornment,
   Typography,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { Visibility, VisibilityOff } from '@material-ui/icons'
-
+} from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { useFormik } from 'formik'
 import Link from 'next/link'
 
@@ -20,8 +19,26 @@ import SubmitButton from '../../accessories/SubmitButton'
 import TextBox from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
 
+const PREFIX = 'BasicLoginForm'
+
+const classes = {
+  columnItem: `${PREFIX}-columnItem`,
+  formError: `${PREFIX}-formError`,
+}
+
+const Root = styled()(({ theme }) => ({
+  [`& .${classes.columnItem}`]: {
+    marginBottom: theme.spacing(2),
+  },
+
+  [`& .${classes.formError}`]: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+}))
+
 export default function BasicLogin() {
-  const classes = useStyles()
   const { queryClient } = useContext(Context)
   const [submit, setSubmit] = useState<'sign up' | 'sign in'>('sign in')
   const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -82,6 +99,7 @@ export default function BasicLogin() {
                   onClick={() =>
                     setShowPassword((showPassword) => !showPassword)
                   }
+                  size="large"
                 >
                   {showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
@@ -147,14 +165,3 @@ export function validate({ email, password }: UserInfo): UserInfo {
     errors.password = 'Password must contain a number'
   return errors
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  columnItem: {
-    marginBottom: theme.spacing(2),
-  },
-  formError: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}))

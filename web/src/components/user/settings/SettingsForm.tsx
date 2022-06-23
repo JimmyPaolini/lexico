@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { Divider, Typography } from '@material-ui/core'
+import { Divider, Typography } from '@mui/material'
 
 import { useFormik } from 'formik'
 

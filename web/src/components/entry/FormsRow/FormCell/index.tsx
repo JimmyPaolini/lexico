@@ -1,10 +1,30 @@
-import Grid from '@material-ui/core/Grid'
-import Tooltip from '@material-ui/core/Tooltip'
-import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@mui/material/Grid'
+import Tooltip from '@mui/material/Tooltip'
+import { styled } from '@mui/material/styles'
 
-import { LexicoTheme } from '../../../../theme'
 import CenterText from './CenterText'
 import SideCornerTexts from './SideCornerTexts'
+
+const PREFIX = 'index'
+
+const classes = {
+  tooltip: `${PREFIX}-tooltip`,
+  formCell: `${PREFIX}-formCell`,
+}
+
+const StyledTooltip = styled(Tooltip)(({ theme }) => ({
+  [`& .${classes.tooltip}`]: {
+    maxWidth: theme.custom.cardWidth / 2,
+    fontSize: 14,
+    textAlign: 'center',
+  },
+
+  [`& .${classes.formCell}`]: {
+    background: theme.palette.background.paper,
+    height: 48,
+    position: 'relative',
+  },
+}))
 
 export type FormCellPosition =
   | 'topLeftText'
@@ -31,15 +51,14 @@ export default function FormCell({
   bottomLeftText,
   bottomRightText,
 }: Props) {
-  const classes = useStyles()
   const borderRule = '1px solid rgba(255, 255, 255, 0.12)'
 
   return (
-    <Tooltip
+    <StyledTooltip
       title={centerText?.length > 20 ? centerText : ''}
       placement="top"
       enterDelay={0}
-      interactive
+      // interactive
       arrow
       classes={{ tooltip: classes.tooltip }}
       aria-label={centerText}
@@ -68,19 +87,6 @@ export default function FormCell({
           side="right"
         />
       </Grid>
-    </Tooltip>
+    </StyledTooltip>
   )
 }
-
-const useStyles = makeStyles((theme: LexicoTheme) => ({
-  tooltip: {
-    maxWidth: theme.custom.cardWidth / 2,
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  formCell: {
-    background: theme.palette.background.paper,
-    height: 48,
-    position: 'relative',
-  },
-}))

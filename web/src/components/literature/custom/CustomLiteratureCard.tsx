@@ -1,21 +1,56 @@
 import React, { memo } from 'react'
 
+import { Add } from '@mui/icons-material'
 import {
   Card,
   CardActionArea,
   CardContent,
   CardHeader as CardHeaderMui,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { Add } from '@material-ui/icons'
+} from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import CustomLiteratureRows from './CustomLiteratureRows'
 
-export default memo(function LiteratureCustomCard() {
-  const classes = useStyles()
+const PREFIX = 'CustomLiteratureCard'
 
+const classes = {
+  literatureCustomCard: `${PREFIX}-literatureCustomCard`,
+  noPadding: `${PREFIX}-noPadding`,
+  add: `${PREFIX}-add`,
+  action: `${PREFIX}-action`,
+}
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  [`&.${classes.literatureCustomCard}`]: {
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: theme.custom.cardWidth,
+    minWidth: theme.custom.cardWidth - theme.spacing(4),
+    paddingBottom: 0,
+    margin: theme.spacing(1),
+  },
+
+  [`& .${classes.noPadding}`]: {
+    padding: 0,
+    '&:last-child': {
+      paddingBottom: 0,
+    },
+  },
+
+  [`& .${classes.add}`]: {
+    margin: theme.spacing(1),
+    marginRight: 12,
+  },
+
+  [`& .${classes.action}`]: {
+    marginTop: 'auto',
+    marginBottom: 'auto',
+  },
+}))
+
+export default memo(function LiteratureCustomCard() {
   return (
-    <Card elevation={4} className={classes.literatureCustomCard}>
+    <StyledCard elevation={4} className={classes.literatureCustomCard}>
       <CardActionArea href="/literature/custom">
         <CardHeaderMui
           title="Your Literature"
@@ -26,31 +61,6 @@ export default memo(function LiteratureCustomCard() {
       <CardContent className={classes.noPadding}>
         <CustomLiteratureRows />
       </CardContent>
-    </Card>
+    </StyledCard>
   )
 })
-
-const useStyles = makeStyles((theme: any) => ({
-  literatureCustomCard: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: theme.custom.cardWidth,
-    minWidth: theme.custom.cardWidth - theme.spacing(4),
-    paddingBottom: 0,
-    margin: theme.spacing(1),
-  },
-  noPadding: {
-    padding: 0,
-    '&:last-child': {
-      paddingBottom: 0,
-    },
-  },
-  add: {
-    margin: theme.spacing(1),
-    marginRight: 12,
-  },
-  action: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
-  },
-}))

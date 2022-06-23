@@ -1,37 +1,42 @@
 /* spellchecker: disable */
 import React, { useState } from 'react'
 
-import { Box, Paper } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Box, Paper } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { Forms, Maybe } from '../../../../../graphql/generated'
 import FormTabs from '../../FormTabs'
 import FormsTable from '../../FormsTable'
 import { adjectiveFormsRestructure } from './adjectiveFormsRestructure'
 
+const PREFIX = 'index'
+
+const classes = {
+  paper: `${PREFIX}-paper`,
+}
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  [`&.${classes.paper}`]: {
+    maxWidth: theme.custom.cardWidth,
+    borderRadius: 0,
+  },
+}))
+
 type Props = {
   forms?: Maybe<Forms>
 }
 
 export default function AdjectiveForms({ forms }: Props) {
-  const classes = useStyles()
   const [tab, setTab] = useState(0)
   const structure = adjectiveFormsRestructure(forms)
   const tabs = Object.keys(structure)
   const formsStructure = structure[tabs[tab]]
   return (
-    <Paper className={classes.paper} elevation={0}>
+    <StyledPaper className={classes.paper} elevation={0}>
       <FormTabs tabs={tabs} activeTab={tab} setActiveTab={setTab}>
         <Box style={{ height: '8px' }} />
         <FormsTable forms={formsStructure} />
       </FormTabs>
-    </Paper>
+    </StyledPaper>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  paper: {
-    maxWidth: theme.custom.cardWidth,
-    borderRadius: 0,
-  },
-}))

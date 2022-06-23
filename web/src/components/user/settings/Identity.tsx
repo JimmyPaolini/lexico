@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { Typography } from '@material-ui/core'
+import { Typography } from '@mui/material'
 
 import { Context } from '../../layout/Context'
 

@@ -1,25 +1,47 @@
 import { memo, useState } from 'react'
 
-import {
-  Card,
-  CardContent,
-  Collapse,
-  Divider,
-  Grid,
-  List,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Card, CardContent, Collapse, Divider, Grid, List } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { Author, Book } from '../../graphql/generated'
 import LiteratureAuthor from './LiteratureAuthor'
 import LiteratureBook from './LiteratureBook'
 import LiteratureText from './LiteratureText'
 
+const PREFIX = 'LiteratureCard'
+
+const classes = {
+  literatureCard: `${PREFIX}-literatureCard`,
+  noPadding: `${PREFIX}-noPadding`,
+  inset1: `${PREFIX}-inset1`,
+}
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  [`&.${classes.literatureCard}`]: {
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: theme.custom.cardWidth,
+    minWidth: theme.custom.cardWidth - theme.spacing(4),
+    paddingBottom: 0,
+    margin: theme.spacing(1),
+  },
+
+  [`& .${classes.noPadding}`]: {
+    padding: 0,
+    '&:last-child': {
+      paddingBottom: 0,
+    },
+  },
+
+  [`& .${classes.inset1}`]: {
+    marginLeft: theme.spacing(1),
+  },
+}))
+
 interface Props {
   author: Author
 }
 export default memo(function LiteratureCard({ author }: Props) {
-  const classes = useStyles()
   const books = author.books || ([] as Book[])
   const nonBookTexts = author.texts.filter(
     (text) =>
@@ -30,7 +52,7 @@ export default memo(function LiteratureCard({ author }: Props) {
   const [expanded, setExpanded] = useState<boolean>(false)
 
   return (
-    <Card elevation={4} className={classes.literatureCard}>
+    <StyledCard elevation={4} className={classes.literatureCard}>
       <LiteratureAuthor {...{ author, expanded, setExpanded }} />
       <Collapse in={expanded} mountOnEnter>
         <Divider style={{ marginRight: 8 }} />
@@ -50,26 +72,6 @@ export default memo(function LiteratureCard({ author }: Props) {
           </List>
         </CardContent>
       </Collapse>
-    </Card>
+    </StyledCard>
   )
 })
-
-const useStyles = makeStyles((theme: any) => ({
-  literatureCard: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: theme.custom.cardWidth,
-    minWidth: theme.custom.cardWidth - theme.spacing(4),
-    paddingBottom: 0,
-    margin: theme.spacing(1),
-  },
-  noPadding: {
-    padding: 0,
-    '&:last-child': {
-      paddingBottom: 0,
-    },
-  },
-  inset1: {
-    marginLeft: theme.spacing(1),
-  },
-}))

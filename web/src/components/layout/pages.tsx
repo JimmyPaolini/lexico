@@ -7,7 +7,7 @@ import {
   Edit,
   MenuBook,
   Search,
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 
 export default [
   {

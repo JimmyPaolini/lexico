@@ -1,15 +1,13 @@
 import { memo, useContext } from 'react'
 
-import { Grid, IconButton, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import Menu from '@material-ui/icons/Menu'
-
+import Menu from '@mui/icons-material/Menu'
+import { Grid, IconButton, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 import { v4 as uuid } from 'uuid'
 
 import { useCreateCustomTextMutation } from '../../../graphql/generated'
-import { LexicoTheme } from '../../../theme'
 import {
   CustomText,
   createCustomTextLocal,
@@ -18,11 +16,33 @@ import SubmitButton from '../../accessories/SubmitButton'
 import TextBox from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
 
+const PREFIX = 'CustomLiteratureForm'
+
+const classes = {
+  customReader: `${PREFIX}-customReader`,
+  item: `${PREFIX}-item`,
+}
+
+const Root = styled('form')(({ theme }) => ({
+  [`& .${classes.customReader}`]: {
+    width: '100%',
+    maxWidth: theme.custom.cardWidth * 2,
+    height: '100vh',
+    padding: theme.spacing(2),
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    backgroundColor: 'black',
+  },
+
+  [`& .${classes.item}`]: {
+    marginBottom: theme.spacing(2),
+  },
+}))
+
 type Props = {
   text?: CustomText
 }
 export default memo(function CustomLiteratureForm({ text }: Props) {
-  const classes = useStyles()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
 
   const router = useRouter()
@@ -42,7 +62,7 @@ export default memo(function CustomLiteratureForm({ text }: Props) {
   const { mutateAsync: createCustomText } = useCreateCustomTextMutation()
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <Root onSubmit={formik.handleSubmit}>
       <Grid
         container
         direction="column"
@@ -61,6 +81,7 @@ export default memo(function CustomLiteratureForm({ text }: Props) {
               onClick={() => setNavOpen(!isNavOpen)}
               style={{ marginRight: 8 }}
               aria-label="menu"
+              size="large"
             >
               <Menu />
             </IconButton>
@@ -86,7 +107,7 @@ export default memo(function CustomLiteratureForm({ text }: Props) {
         />
         <SubmitButton name="Save" className={classes.item} />
       </Grid>
-    </form>
+    </Root>
   )
 })
 
@@ -100,18 +121,3 @@ export function validate({ title, text }: CustomText): CustomText {
     errors.text = 'Text must be less than 100,000 characters'
   return errors
 }
-
-const useStyles = makeStyles((theme: LexicoTheme) => ({
-  customReader: {
-    width: '100%',
-    maxWidth: theme.custom.cardWidth * 2,
-    height: '100vh',
-    padding: theme.spacing(2),
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    backgroundColor: 'black',
-  },
-  item: {
-    marginBottom: theme.spacing(2),
-  },
-}))

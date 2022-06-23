@@ -1,20 +1,32 @@
 /* spellchecker: disable */
 import React, { useState } from 'react'
 
-import { Box, Paper } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Box, Paper } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { Forms, Maybe } from '../../../../../graphql/generated'
 import FormTabs from '../../FormTabs'
 import FormsTable from '../../FormsTable'
 import { verbFormsRestructure } from './verbFormsRestructure'
 
+const PREFIX = 'index'
+
+const classes = {
+  paper: `${PREFIX}-paper`,
+}
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  [`&.${classes.paper}`]: {
+    maxWidth: theme.custom.cardWidth,
+    borderRadius: 0,
+  },
+}))
+
 type Props = {
   forms?: Maybe<Forms>
 }
 
 export default function VerbForms({ forms }: Props) {
-  const classes = useStyles()
   const [topTab, setTopTabState] = useState(0)
   const [midTab, setMidTabState] = useState(0)
   const [bottomTab, setBottomTab] = useState(0)
@@ -68,7 +80,7 @@ export default function VerbForms({ forms }: Props) {
     structure[topTabs[topTab]][midTabs[midTab]][bottomTabs[bottomTab]]
 
   return (
-    <Paper className={classes.paper} elevation={0}>
+    <StyledPaper className={classes.paper} elevation={0}>
       <FormTabs tabs={topTabs} activeTab={topTab} setActiveTab={setTopTab}>
         <FormTabs tabs={midTabs} activeTab={midTab} setActiveTab={setMidTab}>
           <FormTabs
@@ -81,13 +93,6 @@ export default function VerbForms({ forms }: Props) {
           </FormTabs>
         </FormTabs>
       </FormTabs>
-    </Paper>
+    </StyledPaper>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  paper: {
-    maxWidth: theme.custom.cardWidth,
-    borderRadius: 0,
-  },
-}))

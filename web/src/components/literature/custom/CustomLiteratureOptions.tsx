@@ -1,11 +1,34 @@
 import { MouseEvent, useState } from 'react'
 
-import { IconButton, ListItemSecondaryAction } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { AccountCircle, MoreHoriz } from '@material-ui/icons'
+import { styled } from '@mui/material/styles';
+
+import { IconButton, ListItemSecondaryAction } from '@mui/material'
+import { AccountCircle, MoreHoriz } from '@mui/icons-material'
 
 import { CustomText } from '../../../utils/literatureLocal'
 import CustomLiteratureMenu from './CustomLiteratureOptions/CustomLiteratureMenu'
+
+const PREFIX = 'CustomLiteratureOptions';
+
+const classes = {
+  iconButtons: `${PREFIX}-iconButtons`,
+  options: `${PREFIX}-options`
+};
+
+const StyledListItemSecondaryAction = styled(ListItemSecondaryAction)(() => ({
+  [`&.${classes.iconButtons}`]: {
+    position: 'relative',
+    right: 0,
+    flexShrink: 0,
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    transform: 'none',
+  },
+
+  [`& .${classes.options}`]: {
+    padding: 4,
+  }
+}));
 
 type Props = {
   text: CustomText
@@ -16,7 +39,7 @@ export default function CustomLiteratureOptions({
   text,
   refreshCustomTexts,
 }: Props) {
-  const classes = useStyles()
+
 
   const [anchor, setAnchor] = useState<null | HTMLElement>(null)
   const openMenu = (event: MouseEvent<HTMLElement>) => {
@@ -24,12 +47,12 @@ export default function CustomLiteratureOptions({
   }
 
   return (
-    <ListItemSecondaryAction
+    <StyledListItemSecondaryAction
       onClick={(event) => event.stopPropagation()}
       className={classes.iconButtons}
     >
       {!text?.local ? (
-        <IconButton disabled aria-label="on user" className={classes.options}>
+        <IconButton disabled aria-label="on user" className={classes.options} size="large">
           <AccountCircle />
         </IconButton>
       ) : null}
@@ -37,26 +60,12 @@ export default function CustomLiteratureOptions({
         aria-label="options"
         className={classes.options}
         onClick={openMenu}
-      >
+        size="large">
         <MoreHoriz />
       </IconButton>
       <CustomLiteratureMenu
         {...{ text, refreshCustomTexts, anchor, setAnchor }}
       />
-    </ListItemSecondaryAction>
-  )
+    </StyledListItemSecondaryAction>
+  );
 }
-
-const useStyles = makeStyles(() => ({
-  iconButtons: {
-    position: 'relative',
-    right: 0,
-    flexShrink: 0,
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    transform: 'none',
-  },
-  options: {
-    padding: 4,
-  },
-}))

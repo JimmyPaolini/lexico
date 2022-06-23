@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Card, CardContent, Divider, Grid } from '@material-ui/core'
-import { Theme, makeStyles } from '@material-ui/core/styles'
+import { styled } from '@mui/material/styles';
+
+import { Card, CardContent, Divider, Grid } from '@mui/material'
 
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
@@ -13,8 +14,26 @@ import CardHeader from '../../accessories/CardHeader'
 import SubmitButton from '../../accessories/SubmitButton'
 import TextBox from '../../accessories/TextBox'
 
+const PREFIX = 'RecoverPasswordCard';
+
+const classes = {
+  card: `${PREFIX}-card`
+};
+
+const StyledCard = styled(Card)((
+  {
+    theme
+  }
+) => ({
+  [`&.${classes.card}`]: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  }
+}));
+
 export default function RecoverPasswordCard() {
-  const classes = useStyles()
+
   const router = useRouter()
   const { enqueueSnackbar } = useSnackbarEnhanced()
 
@@ -47,7 +66,7 @@ export default function RecoverPasswordCard() {
   const { mutateAsync: recoverPassword } = useRecoverPasswordMutation()
 
   return (
-    <Card className={classes.card}>
+    <StyledCard className={classes.card}>
       <CardHeader title="Recover Password" />
       <Divider variant="middle" />
       <CardContent>
@@ -62,8 +81,8 @@ export default function RecoverPasswordCard() {
           </Grid>
         </form>
       </CardContent>
-    </Card>
-  )
+    </StyledCard>
+  );
 }
 
 interface RecoverPasswordInfo {
@@ -74,11 +93,3 @@ export function validate({ email }: RecoverPasswordInfo): { email: string } {
   if (!validateEmail(email)) errors.email = 'Invalid email'
   return errors
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-}))

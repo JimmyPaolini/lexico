@@ -1,9 +1,65 @@
 import React, { Dispatch, SetStateAction } from 'react'
 
-import Box from '@material-ui/core/Box'
-import SwitchMui from '@material-ui/core/Switch'
-import Typography from '@material-ui/core/Typography'
-import { Theme, makeStyles, withStyles } from '@material-ui/core/styles'
+import Box from '@mui/material/Box'
+import SwitchMui from '@mui/material/Switch'
+import Typography from '@mui/material/Typography'
+import { styled } from '@mui/material/styles'
+import { Theme } from '@mui/material/styles'
+
+const PREFIX = 'SwitchEnglishLatin'
+
+const classes = {
+  switchBase: `${PREFIX}-switchBase`,
+  track: `${PREFIX}-track`,
+  thumb: `${PREFIX}-thumb`,
+  checked: `${PREFIX}-checked`,
+  box: `${PREFIX}-box`,
+  switch: `${PREFIX}-switch`,
+  primary: `${PREFIX}-primary`,
+  secondary: `${PREFIX}-secondary`,
+  la: `${PREFIX}-la`,
+  en: `${PREFIX}-en`,
+}
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  [`&.${classes.box}`]: {
+    position: 'relative',
+    height: 40,
+    width: 64,
+  },
+
+  [`& .${classes.switch}`]: {
+    height: 40,
+    width: 64,
+    padding: 8,
+  },
+
+  [`& .${classes.primary}`]: {
+    backgroundColor: theme.palette.primary.main,
+  },
+
+  [`& .${classes.secondary}`]: {
+    backgroundColor: theme.palette.secondary.main,
+  },
+
+  [`& .${classes.la}`]: {
+    position: 'absolute',
+    top: 11,
+    color: theme.palette.text.secondary,
+    fontSize: 12,
+    pointerEvents: 'none',
+    left: 37,
+  },
+
+  [`& .${classes.en}`]: {
+    position: 'absolute',
+    top: 11,
+    color: theme.palette.text.secondary,
+    fontSize: 12,
+    pointerEvents: 'none',
+    left: 12,
+  },
+}))
 
 type Props = {
   isLatin: boolean
@@ -11,10 +67,8 @@ type Props = {
 }
 
 export default function SwitchEnglishLatin({ isLatin, setLatin }: Props) {
-  const classes = useStyles()
-
   return (
-    <Box className={classes.box}>
+    <StyledBox className={classes.box}>
       <Switch
         name="English/Latin"
         color="primary"
@@ -25,6 +79,8 @@ export default function SwitchEnglishLatin({ isLatin, setLatin }: Props) {
         classes={{
           track: isLatin ? classes.primary : classes.secondary,
           thumb: isLatin ? classes.primary : classes.secondary,
+          switchBase: classes.switchBase,
+          checked: classes.checked,
         }}
         disableRipple
         disableTouchRipple
@@ -32,58 +88,8 @@ export default function SwitchEnglishLatin({ isLatin, setLatin }: Props) {
       />
       <Typography className={classes.en}>EN</Typography>
       <Typography className={classes.la}>LA</Typography>
-    </Box>
+    </StyledBox>
   )
 }
 
-const Switch = withStyles(() => ({
-  switchBase: {
-    padding: 8,
-    '&$checked': {
-      transform: 'translateX(24px)',
-    },
-  },
-  track: {
-    height: 24,
-    width: 48,
-    borderRadius: 12,
-  },
-  thumb: {
-    height: 24,
-    width: 24,
-    boxShadow: 'none',
-    position: 'relative',
-  },
-  checked: {},
-}))(SwitchMui)
-
-const useStyles = makeStyles((theme: Theme) => {
-  const label = {
-    position: 'absolute',
-    top: 11,
-    color: theme.palette.text.secondary,
-    fontSize: 12,
-    pointerEvents: 'none',
-  }
-
-  return {
-    box: {
-      position: 'relative',
-      height: 40,
-      width: 64,
-    },
-    switch: {
-      height: 40,
-      width: 64,
-      padding: 8,
-    },
-    primary: {
-      backgroundColor: theme.palette.primary.main,
-    },
-    secondary: {
-      backgroundColor: theme.palette.secondary.main,
-    },
-    la: { ...label, left: 37 },
-    en: { ...label, left: 12 },
-  } as Record<string, any>
-})
+const Switch = SwitchMui

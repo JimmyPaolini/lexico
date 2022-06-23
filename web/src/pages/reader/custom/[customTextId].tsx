@@ -46,7 +46,7 @@ function customTextToText({ id, title, text, local }: CustomText): Text {
       lineNumber: i + 1,
       lineLabel: line.match(/^#\S+/)?.[0].slice(1) || `${i + 1}`,
       text: customText,
-    }
+    };
   }) as never[]
   return customText
 }

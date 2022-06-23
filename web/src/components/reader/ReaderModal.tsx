@@ -1,13 +1,40 @@
 import React, { Dispatch, SetStateAction, memo, useRef } from 'react'
 import { useSwipeable } from 'react-swipeable'
 
-import { Box, Modal, Paper, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Box, Modal, Paper, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { Entry, useSearchLatinQuery } from '../../graphql/generated'
 import useEventListener from '../../hooks/useEventListener'
 import CardDeck from '../accessories/CardDeck'
 import EntryCard from '../entry/EntryCard'
+
+const PREFIX = 'ReaderModal'
+
+const classes = {
+  modal: `${PREFIX}-modal`,
+  container: `${PREFIX}-container`,
+  notFound: `${PREFIX}-notFound`,
+}
+
+const StyledModal = styled(Modal)(({ theme }) => ({
+  [`&.${classes.modal}`]: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: theme.spacing(12),
+  },
+
+  [`& .${classes.container}`]: {
+    maxHeight: '100%',
+    overflow: 'scroll',
+    outline: 'none',
+  },
+
+  [`& .${classes.notFound}`]: {
+    padding: theme.spacing(2),
+  },
+}))
 
 type Props = {
   searched: string
@@ -16,7 +43,6 @@ type Props = {
 }
 
 export default memo(function ReaderModal({ searched, open, setOpen }: Props) {
-  const classes = useStyles()
   const ref = useRef<HTMLDivElement>(null)
 
   const { data, isFetched, isSuccess, isError } = useSearchLatinQuery(
@@ -39,7 +65,7 @@ export default memo(function ReaderModal({ searched, open, setOpen }: Props) {
     }) || []
 
   return (
-    <Modal
+    <StyledModal
       disablePortal
       disableEnforceFocus
       disableAutoFocus
@@ -62,23 +88,6 @@ export default memo(function ReaderModal({ searched, open, setOpen }: Props) {
           <CardDeck {...{ cards }} />
         ) : null}
       </Box>
-    </Modal>
+    </StyledModal>
   )
 })
-
-const useStyles = makeStyles((theme: any) => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: theme.spacing(12),
-  },
-  container: {
-    maxHeight: '100%',
-    overflow: 'scroll',
-    outline: 'none',
-  },
-  notFound: {
-    padding: theme.spacing(2),
-  },
-}))

@@ -1,13 +1,30 @@
 import React, { useRef } from 'react'
 
-import { Box, Fade } from '@material-ui/core'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
-
+import { Box, Fade } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 import Image from 'next/image'
 import logo from 'public/lexico_logo.svg'
 
+const PREFIX = 'Logo'
+
+const classes = {
+  container: `${PREFIX}-container`,
+  logo: `${PREFIX}-logo`,
+}
+
+const StyledFade = styled(Fade)(({ theme }) => ({
+  [`& .${classes.container}`]: {
+    padding: theme.spacing(2),
+  },
+
+  [`& .${classes.logo}`]: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+}))
+
 export default function Logo() {
-  const classes = useStyles()
   const theme = useTheme() as any
   const ref = useRef<any>()
   const announcement = `Announcement, not always present, this day in latin history, roman holiday, link to <a href="https://www.wikipedia.org/">wikipedia</a>, medieval scientific research, featured content, contains emojis🐋😤💯👀`
@@ -15,7 +32,7 @@ export default function Logo() {
     ref.current.innerHTML = announcement
 
   return (
-    <Fade in={true}>
+    <StyledFade in={true}>
       <Box className={classes.container}>
         <Image
           src={logo}
@@ -28,16 +45,6 @@ export default function Logo() {
           loading="eager"
         />
       </Box>
-    </Fade>
+    </StyledFade>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  container: {
-    padding: theme.spacing(2),
-  },
-  logo: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-}))

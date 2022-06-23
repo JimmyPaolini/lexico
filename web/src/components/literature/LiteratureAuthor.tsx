@@ -1,17 +1,37 @@
 import { Dispatch, SetStateAction, memo } from 'react'
 
+import { styled } from '@mui/material/styles';
+
 import {
   Box,
   CardActionArea,
   CardHeader as CardHeaderMui,
   Collapse,
   Typography,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+} from '@mui/material'
 
 import { Author } from '../../graphql/generated'
 import { sentenceCase } from '../../utils/string'
 import ExpandIcon from '../accessories/ExpandIcon'
+
+const PREFIX = 'LiteratureAuthor';
+
+const classes = {
+  summary: `${PREFIX}-summary`,
+  none: `${PREFIX}-none`
+};
+
+const StyledCardActionArea = styled(CardActionArea)(() => ({
+  [`& .${classes.summary}`]: {
+    display: 'block',
+    lineHeight: 1.3,
+    marginTop: 4,
+  },
+
+  [`& .${classes.none}`]: {
+    display: 'none',
+  }
+}));
 
 type Props = {
   author: Author
@@ -23,7 +43,7 @@ export default memo(function LiteratureAuthor({
   expanded,
   setExpanded,
 }: Props) {
-  const classes = useStyles()
+
   let summary = [
     ...(author.books || []),
     ...author.texts.filter(
@@ -39,7 +59,7 @@ export default memo(function LiteratureAuthor({
   if (author.id === 'catullus') summary = 'Carmina 1-116'
 
   return (
-    <CardActionArea
+    <StyledCardActionArea
       onClick={() => setExpanded((expanded) => !expanded)}
       classes={{ focusHighlight: classes.none }}
       disableRipple
@@ -69,17 +89,6 @@ export default memo(function LiteratureAuthor({
           </Box>
         }
       />
-    </CardActionArea>
-  )
+    </StyledCardActionArea>
+  );
 })
-
-const useStyles = makeStyles(() => ({
-  summary: {
-    display: 'block',
-    lineHeight: 1.3,
-    marginTop: 4,
-  },
-  none: {
-    display: 'none',
-  },
-}))

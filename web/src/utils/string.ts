@@ -3,7 +3,7 @@ export function normalize(str: string): string {
   return str
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
-    .replace(/æ/g, 'ae')
+    .replace(/æ/g, 'ae');
 }
 
 export function capitalizeFirstLetter(str: string): string {
@@ -15,7 +15,7 @@ export function pascalCase(str: string): string {
   return str.replace(
     /(\w)(\w*)/g,
     (_, g1, g2) => g1.toUpperCase() + g2.toLowerCase(),
-  )
+  );
 }
 
 export function sentenceCase(str: string): string {
@@ -31,7 +31,7 @@ export function unCamelCase(str: string): string {
   return str.replace(
     /[A-Z]/g,
     (upperCaseLetter) => ' ' + upperCaseLetter.toLowerCase(),
-  )
+  );
 }
 
 export function getFirstLetter(word: string): string {
@@ -45,11 +45,11 @@ export function escapeCapitals(str: string): string {
   return str
     .split('')
     .map((c: string) => (c.match(/[A-Z]/g) ? c + '`' : c))
-    .join('')
+    .join('');
 }
 
 export function unescapeCapitals(str: string): string {
-  return str.replace(/([A-Z])`/, '$1')
+  return str.replace(/([A-Z])`/, '$1');
 }
 
 export function hasSuffix(
@@ -76,7 +76,7 @@ export function getMacronOptionRegex(str: string): string {
     .replace(/u/g, '(u|ū)')
     .replace(/U/g, '(U|Ū)')
     .replace(/y/g, '(y|ȳ)')
-    .replace(/Y/g, '(Y|Ȳ)')
+    .replace(/Y/g, '(Y|Ȳ)');
 }
 
 export function validateLetters(letters: string[]): void {
@@ -113,15 +113,15 @@ export function unabbreviateText(text: string): string {
     .replace(/T\./gi, 'titus')
     .replace(/V\./gi, 'vibius')
     .replace(/Vol\./gi, 'volesus')
-    .replace(/Vop\./gi, 'vopiscus')
+    .replace(/Vop\./gi, 'vopiscus');
 }
 
 export function validateEmail(email: string): RegExpMatchArray | null {
   return email.match(
     /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
-  )
+  );
 }
 
 export function validatePassword(password: string): RegExpMatchArray | null {
-  return password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
+  return password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/);
 }

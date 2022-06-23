@@ -1,17 +1,43 @@
 import React, { Dispatch, SetStateAction, useContext, useRef } from 'react'
 
-import { Grid } from '@material-ui/core'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import IconButton from '@material-ui/core/IconButton'
-import InputBase from '@material-ui/core/InputBase'
-import Paper from '@material-ui/core/Paper'
-import { makeStyles } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
-import SearchIcon from '@material-ui/icons/Search'
+import MenuIcon from '@mui/icons-material/Menu'
+import SearchIcon from '@mui/icons-material/Search'
+import { Grid } from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress'
+import IconButton from '@mui/material/IconButton'
+import InputBase from '@mui/material/InputBase'
+import Paper from '@mui/material/Paper'
+import { styled } from '@mui/material/styles'
 
 import { pascalCase } from '../../utils/string'
 import { Context } from '../layout/Context'
 import SwitchEnglishLatin from './SwitchEnglishLatin'
+
+const PREFIX = 'SearchBar'
+
+const classes = {
+  searchBar: `${PREFIX}-searchBar`,
+  input: `${PREFIX}-input`,
+  iconButton: `${PREFIX}-iconButton`,
+}
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  [`&.${classes.searchBar}`]: {
+    width: theme.custom.cardWidth,
+    padding: '4px 4px',
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+
+  [`& .${classes.input}`]: {
+    marginLeft: theme.spacing(1),
+    fontSize: 20,
+  },
+
+  [`& .${classes.iconButton}`]: {
+    padding: theme.spacing(1),
+  },
+}))
 
 type Props = {
   search: string
@@ -32,7 +58,6 @@ export default function SearchBar({
   isLatin = true,
   setLatin = () => null,
 }: Props) {
-  const classes = useStyles()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
   const input = useRef<any>()
 
@@ -47,7 +72,7 @@ export default function SearchBar({
   // })
 
   return (
-    <Paper className={classes.searchBar}>
+    <StyledPaper className={classes.searchBar}>
       <Grid container alignItems="center">
         <Grid item>
           {isMobile && (
@@ -55,6 +80,7 @@ export default function SearchBar({
               onClick={() => setNavOpen(!isNavOpen)}
               className={classes.iconButton}
               aria-label="menu"
+              size="large"
             >
               <MenuIcon />
             </IconButton>
@@ -79,6 +105,7 @@ export default function SearchBar({
             onClick={() => handleSearchExecute()}
             className={classes.iconButton}
             aria-label="search"
+            size="large"
           >
             {!isLoading ? (
               <SearchIcon />
@@ -97,22 +124,6 @@ export default function SearchBar({
           </Grid>
         )}
       </Grid>
-    </Paper>
+    </StyledPaper>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  searchBar: {
-    width: theme.custom.cardWidth,
-    padding: '4px 4px',
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-  input: {
-    marginLeft: theme.spacing(1),
-    fontSize: 20,
-  },
-  iconButton: {
-    padding: theme.spacing(1),
-  },
-}))

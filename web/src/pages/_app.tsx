@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Hydrate } from 'react-query/hydration'
 
-import { CssBaseline, ThemeProvider } from '@material-ui/core'
-
+import { CacheProvider, EmotionCache } from '@emotion/react'
+import { CssBaseline, ThemeProvider } from '@mui/material'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import Head from 'next/head'
 
 import { ContextProvider } from '../components/layout/Context'
 import Layout from '../components/layout/Layout'
 import useGoogleAnalytics from '../hooks/useGoogleAnalytics'
-import theme from '../theme'
+import theme, { createEmotionCache } from '../theme'
 import { googleAnalyticsEvent } from '../utils/googleAnalytics'
 
 export const clientEndpoint =
@@ -20,31 +20,38 @@ export const clientEndpoint =
     ? `http://localhost:3001/graphql`
     : window.location.origin + '/api'
 
-export default function App({ Component, pageProps }: AppProps) {
+const clientSideEmotionCache = createEmotionCache()
+
+type Props = AppProps & {
+  emotionCache?: EmotionCache
+}
+export default function App({
+  Component,
+  pageProps,
+  emotionCache = clientSideEmotionCache,
+}: Props) {
   const [queryClient] = useState(() => new QueryClient())
-  useEffect(() => {
-    const jssStyles = document.querySelector('#jss-server-side')
-    if (jssStyles) jssStyles.parentElement?.removeChild(jssStyles)
-  }, [])
 
   useGoogleAnalytics()
 
   return (
-    <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <ContextProvider queryClient={queryClient}>
-            <Head>
-              <title>Lexico</title>
-            </Head>
-            <CssBaseline />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ContextProvider>
-        </Hydrate>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <CacheProvider value={emotionCache}>
+      <ThemeProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <ContextProvider queryClient={queryClient}>
+              <Head>
+                <title>Lexico</title>
+              </Head>
+              <CssBaseline />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ContextProvider>
+          </Hydrate>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </CacheProvider>
   )
 }
 

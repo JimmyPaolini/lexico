@@ -1,5 +1,24 @@
-import { makeStyles } from '@material-ui/core/styles'
-import { ExpandMore } from '@material-ui/icons'
+import { styled } from '@mui/material/styles';
+import { ExpandMore } from '@mui/icons-material'
+
+const PREFIX = 'ExpandIcon';
+
+const classes = {
+  rightSideUp: `${PREFIX}-rightSideUp`,
+  upSideDown: `${PREFIX}-upSideDown`
+};
+
+const StyledExpandMore = styled(ExpandMore)(() => ({
+  [`& .${classes.rightSideUp}`]: {
+    transition: '250ms ease',
+    transform: 'rotateZ(0deg)',
+  },
+
+  [`& .${classes.upSideDown}`]: {
+    transition: '250ms ease',
+    transform: 'rotateZ(-180deg)',
+  }
+}));
 
 type Props = {
   expanded: boolean
@@ -7,18 +26,7 @@ type Props = {
 }
 
 export default function ExpandIcon({ expanded, ...props }: Props) {
-  const classes = useStyles()
-  const direction = expanded ? classes.upSideDown : classes.rightSideUp
-  return <ExpandMore className={direction} {...props} />
-}
 
-const useStyles = makeStyles(() => ({
-  rightSideUp: {
-    transition: '250ms ease',
-    transform: 'rotateZ(0deg)',
-  },
-  upSideDown: {
-    transition: '250ms ease',
-    transform: 'rotateZ(-180deg)',
-  },
-}))
+  const direction = expanded ? classes.upSideDown : classes.rightSideUp
+  return <StyledExpandMore className={direction} {...props} />;
+}

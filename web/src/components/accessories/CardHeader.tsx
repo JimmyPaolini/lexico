@@ -1,10 +1,25 @@
 import React, { useContext } from 'react'
 
-import { CardHeader as CardHeaderMui, IconButton } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { Menu } from '@material-ui/icons'
+import { styled } from '@mui/material/styles';
+
+import { CardHeader as CardHeaderMui, IconButton } from '@mui/material'
+import { Menu } from '@mui/icons-material'
 
 import { Context } from '../layout/Context'
+
+const PREFIX = 'CardHeader';
+
+const classes = {
+  hiddenAction: `${PREFIX}-hiddenAction`
+};
+
+const StyledIconButton = styled(IconButton)(() => ({
+  [`& .${classes.hiddenAction}`]: {
+    marginTop: 8,
+    marginRight: 8,
+    visibility: 'hidden',
+  }
+}));
 
 type Props = {
   title: string
@@ -12,7 +27,7 @@ type Props = {
 }
 
 export default function CardHeader({ title, ...props }: Props) {
-  const classes = useStyles()
+
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
 
   return (
@@ -21,9 +36,9 @@ export default function CardHeader({ title, ...props }: Props) {
       titleTypographyProps={{ variant: 'h4', align: 'center' }}
       avatar={
         isMobile && (
-          <IconButton onClick={() => setNavOpen(!isNavOpen)} aria-label="menu">
+          <StyledIconButton onClick={() => setNavOpen(!isNavOpen)} aria-label="menu" size="large">
             <Menu />
-          </IconButton>
+          </StyledIconButton>
         )
       }
       action={
@@ -32,20 +47,12 @@ export default function CardHeader({ title, ...props }: Props) {
             onClick={() => null}
             aria-label="empty space"
             className={classes.hiddenAction}
-          >
+            size="large">
             <Menu />
           </IconButton>
         )
       }
       {...props}
     />
-  )
+  );
 }
-
-const useStyles = makeStyles(() => ({
-  hiddenAction: {
-    marginTop: 8,
-    marginRight: 8,
-    visibility: 'hidden',
-  },
-}))

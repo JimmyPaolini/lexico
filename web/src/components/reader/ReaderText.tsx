@@ -1,16 +1,64 @@
 import React from 'react'
 
-import { Box, IconButton } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { Edit } from '@material-ui/icons'
-
+import { Edit } from '@mui/icons-material'
+import { Box, IconButton } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { useRouter } from 'next/router'
 
 import { Text } from '../../graphql/generated'
-import { LexicoTheme } from '../../theme'
 import { sentenceCase } from '../../utils/string'
 import CardHeader from '../accessories/CardHeader'
 import ReaderLine from './ReaderLine'
+
+const PREFIX = 'ReaderText'
+
+const classes = {
+  readerText: `${PREFIX}-readerText`,
+  title: `${PREFIX}-title`,
+  subtitle: `${PREFIX}-subtitle`,
+  cardHeader: `${PREFIX}-cardHeader`,
+  shownAction: `${PREFIX}-shownAction`,
+}
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  [`&.${classes.readerText}`]: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginBottom: theme.spacing(2),
+  },
+
+  [`& .${classes.title}`]: {
+    textAlign: 'center',
+    ...theme.typography.literature,
+    fontSize: '1.7rem',
+    lineHeight: 1.3,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '2.5rem',
+      lineHeight: 1.2,
+    },
+  },
+
+  [`& .${classes.subtitle}`]: {
+    textAlign: 'center',
+    ...theme.typography.literature,
+    fontSize: '1.3rem',
+    lineHeight: 1.0,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '2.0rem',
+      lineHeight: 1.0,
+    },
+  },
+
+  [`& .${classes.cardHeader}`]: {
+    width: '100%',
+  },
+
+  [`& .${classes.shownAction}`]: {
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    marginLeft: theme.spacing(2),
+  },
+}))
 
 type Props = {
   text: Text
@@ -18,7 +66,6 @@ type Props = {
 }
 
 export default function ReaderText({ text, openModal }: Props) {
-  const classes = useStyles()
   const router = useRouter()
 
   const title = sentenceCase(text.title)
@@ -35,13 +82,14 @@ export default function ReaderText({ text, openModal }: Props) {
         )
       }
       aria-label="edit"
+      size="large"
     >
       <Edit />
     </IconButton>
   )
 
   return (
-    <Box className={classes.readerText}>
+    <StyledBox className={classes.readerText}>
       <CardHeader
         title={router.pathname.match(/\/reader\/custom/) ? text.title : title}
         titleTypographyProps={{
@@ -60,42 +108,6 @@ export default function ReaderText({ text, openModal }: Props) {
       {text.lines.map((line) => (
         <ReaderLine {...{ line, openModal }} key={line.id} />
       ))}
-    </Box>
+    </StyledBox>
   )
 }
-
-const useStyles = makeStyles((theme: LexicoTheme) => ({
-  readerText: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: theme.spacing(2),
-  },
-  title: {
-    textAlign: 'center',
-    ...theme.typography.literature,
-    fontSize: '1.7rem',
-    lineHeight: 1.3,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: '2.5rem',
-      lineHeight: 1.2,
-    },
-  },
-  subtitle: {
-    textAlign: 'center',
-    ...theme.typography.literature,
-    fontSize: '1.3rem',
-    lineHeight: 1.0,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: '2.0rem',
-      lineHeight: 1.0,
-    },
-  },
-  cardHeader: {
-    width: '100%',
-  },
-  shownAction: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    marginLeft: theme.spacing(2),
-  },
-}))

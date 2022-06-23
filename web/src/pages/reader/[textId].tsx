@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { Grid, Paper } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-
+import { Grid, Paper } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -17,11 +16,38 @@ import {
   useGetTextQuery,
 } from '../../graphql/generated'
 import useSnackbarEnhanced from '../../hooks/useSnackbarEnhanced'
-import { LexicoTheme } from '../../theme'
 import { googleAnalyticsEvent } from '../../utils/googleAnalytics'
 import { showReaderInstructions } from '../../utils/readerInstructions'
 import { getSettingsLocal } from '../../utils/settingsLocal'
 import { sentenceCase } from '../../utils/string'
+
+const PREFIX = '[textId]'
+
+const classes = {
+  reader: `${PREFIX}-reader`,
+  modal: `${PREFIX}-modal`,
+  spinner: `${PREFIX}-spinner`,
+}
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.reader}`]: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'black',
+    ...theme.typography.literature,
+  },
+
+  [`& .${classes.modal}`]: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  [`& .${classes.spinner}`]: {
+    color: theme.palette.primary.contrastText,
+  },
+}))
 
 type Props = {
   text: Text
@@ -30,7 +56,7 @@ type Props = {
 export default function Reader({ text }: Props) {
   const router = useRouter()
   if (router.isFallback) return <LiteratureFallback />
-  const classes = useStyles({})
+
   const { user } = useContext(Context)
 
   const [searched, setSearched] = useState<string>('')
@@ -72,7 +98,7 @@ export default function Reader({ text }: Props) {
     getSettingsLocal().fontSize) as number
 
   return (
-    <>
+    <Root>
       <Head>
         <title>{title}</title>
         <meta name="description" content={`Read and translate ${title}`} />
@@ -101,7 +127,7 @@ export default function Reader({ text }: Props) {
         </Grid>
         <ReaderModal {...{ searched, open, setOpen }} />
       </Paper>
-    </>
+    </Root>
   )
 }
 
@@ -125,20 +151,3 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return { notFound: true }
   }
 }
-
-const useStyles = makeStyles((theme: LexicoTheme) => ({
-  reader: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'black',
-    ...theme.typography.literature,
-  },
-  modal: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  spinner: {
-    color: theme.palette.primary.contrastText,
-  },
-}))

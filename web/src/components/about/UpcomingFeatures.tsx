@@ -1,22 +1,54 @@
 import React from 'react'
 
-import {
-  Box,
-  CardActionArea,
-  CardHeader as CardHeaderMui,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { Launch } from '@material-ui/icons'
+import { Launch } from '@mui/icons-material'
+import { Box, CardActionArea, CardHeader as CardHeaderMui } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import packageJson from '../../../../package.json'
+
+const PREFIX = 'UpcomingFeatures'
+
+const classes = {
+  dropdown: `${PREFIX}-dropdown`,
+  toolGrid: `${PREFIX}-toolGrid`,
+  tool: `${PREFIX}-tool`,
+  hide: `${PREFIX}-hide`,
+  iconContainer: `${PREFIX}-iconContainer`,
+}
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.dropdown}`]: {
+    paddingTop: 0,
+    paddingBottom: 0,
+    padding: theme.spacing(1),
+  },
+
+  [`& .${classes.toolGrid}`]: {
+    padding: theme.spacing(1),
+  },
+
+  [`& .${classes.tool}`]: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+
+  [`& .${classes.hide}`]: {
+    display: 'none',
+  },
+
+  [`& .${classes.iconContainer}`]: {
+    padding: 12,
+    paddingTop: 20,
+    paddingRight: 20,
+  },
+}))
 
 const { version } = packageJson
 
 export default function ToolIconGrid() {
-  const classes = useStyles()
-
   return (
-    <>
+    <Root>
       <CardActionArea
         disableRipple
         disableTouchRipple
@@ -35,29 +67,6 @@ export default function ToolIconGrid() {
           }
         />
       </CardActionArea>
-    </>
+    </Root>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  dropdown: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    padding: theme.spacing(1),
-  },
-  toolGrid: {
-    padding: theme.spacing(1),
-  },
-  tool: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  hide: {
-    display: 'none',
-  },
-  iconContainer: {
-    padding: 12,
-    paddingTop: 20,
-    paddingRight: 20,
-  },
-}))

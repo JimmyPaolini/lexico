@@ -1,6 +1,6 @@
 import { MutableRefObject, forwardRef } from 'react'
 
-import { TextField } from '@material-ui/core'
+import { TextField } from '@mui/material'
 
 import { sentenceCase } from '../../utils/string'
 

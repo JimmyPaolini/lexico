@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Switch, Typography } from '@material-ui/core'
+import { Grid, Switch, Typography } from '@mui/material'
 
 type Props = {
   field: string

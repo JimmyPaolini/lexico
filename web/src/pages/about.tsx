@@ -1,20 +1,43 @@
 import React from 'react'
 
-import { Card, Divider, Grid, Grow, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-
+import { Card, Divider, Grid, Grow, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import Head from 'next/head'
 
 import CommentBox from '../components/about/CommentBox'
 import ToolIconGrid from '../components/about/ToolIconGrid'
 import UpcommingFeatures from '../components/about/UpcomingFeatures'
 import CardHeader from '../components/accessories/CardHeader'
-import { LexicoTheme } from '../theme'
+
+const PREFIX = 'about'
+
+const classes = {
+  card: `${PREFIX}-card`,
+  body: `${PREFIX}-body`,
+  divider: `${PREFIX}-divider`,
+}
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.card}`]: {
+    padding: theme.spacing(1),
+    margin: theme.spacing(2),
+    marginTop: theme.spacing(4),
+    maxWidth: theme.custom.cardWidth * 2,
+  },
+
+  [`& .${classes.body}`]: {
+    padding: theme.spacing(1),
+  },
+
+  [`& .${classes.divider}`]: {
+    margin: theme.spacing(1),
+  },
+}))
 
 export default function About() {
-  const classes = useStyles()
   return (
-    <>
+    <Root>
       <Head>
         <title>Lexico - About</title>
       </Head>
@@ -48,21 +71,6 @@ export default function About() {
           </Card>
         </Grow>
       </Grid>
-    </>
+    </Root>
   )
 }
-
-const useStyles = makeStyles((theme: LexicoTheme) => ({
-  card: {
-    padding: theme.spacing(1),
-    margin: theme.spacing(2),
-    marginTop: theme.spacing(4),
-    maxWidth: theme.custom.cardWidth * 2,
-  },
-  body: {
-    padding: theme.spacing(1),
-  },
-  divider: {
-    margin: theme.spacing(1),
-  },
-}))

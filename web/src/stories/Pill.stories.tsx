@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core'
+import { Grid } from '@mui/material'
 
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import Pill from 'src/components/accessories/Pill'

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import LazyLoad from 'react-lazyload'
 
-import { Divider, Grid, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Divider, Grid, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { Line } from '../../graphql/generated'
 import { getSettingsLocal } from '../../utils/settingsLocal'
@@ -10,20 +10,44 @@ import { normalize } from '../../utils/string'
 import { Context } from '../layout/Context'
 import ReaderWord from './ReaderWord'
 
+const PREFIX = 'ReaderLine'
+
+const classes = {
+  lineLabel: `${PREFIX}-lineLabel`,
+  divider: `${PREFIX}-divider`,
+}
+
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  [`& .${classes.lineLabel}`]: {
+    userSelect: 'none',
+    pointerEvents: 'none',
+    display: 'inline-block',
+    height: '100%',
+    marginRight: theme.spacing(1) - 2,
+    marginLeft: theme.spacing(1) - 2,
+    fontFamily: 'courier, monospace',
+  },
+
+  [`& .${classes.divider}`]: {
+    display: 'inline',
+    marginRight: theme.spacing(1) + 2,
+    backgroundColor: theme.palette.primary.main,
+  },
+}))
+
 type Props = {
   line: Line
   openModal: (word: string) => void
 }
 
 export default function ReaderLine({ line, openModal }: Props) {
-  const classes = useStyles()
   const { user } = useContext(Context)
   const words = normalize(line.line).match(/\w+|\W+/gi)
   const lineLabelFontSize =
     ((user?.settings?.fontSize || getSettingsLocal().fontSize) as number) - 3
 
   return (
-    <Grid container wrap="nowrap">
+    <StyledGrid container wrap="nowrap">
       <Typography
         className={classes.lineLabel}
         align="right"
@@ -49,23 +73,6 @@ export default function ReaderLine({ line, openModal }: Props) {
           <ReaderWord {...{ word, openModal }} key={line.id + i} />
         ))}
       </LazyLoad>
-    </Grid>
+    </StyledGrid>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  lineLabel: {
-    userSelect: 'none',
-    pointerEvents: 'none',
-    display: 'inline-block',
-    height: '100%',
-    marginRight: theme.spacing(1) - 2,
-    marginLeft: theme.spacing(1) - 2,
-    fontFamily: 'courier, monospace',
-  },
-  divider: {
-    display: 'inline',
-    marginRight: theme.spacing(1) + 2,
-    backgroundColor: theme.palette.primary.main,
-  },
-}))

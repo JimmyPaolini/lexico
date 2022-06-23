@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 
+import { ChevronLeft, Menu } from '@mui/icons-material'
 import {
   Divider,
   Grid,
@@ -10,18 +11,64 @@ import {
   ListItemText,
   SwipeableDrawer,
   Typography,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { ChevronLeft, Menu } from '@material-ui/icons'
-
+} from '@mui/material'
+import { styled } from '@mui/material/styles'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Context } from './Context'
 import pages from './pages'
 
+const PREFIX = 'Navigation'
+
+const classes = {
+  drawerOpen: `${PREFIX}-drawerOpen`,
+  drawerClosed: `${PREFIX}-drawerClosed`,
+  title: `${PREFIX}-title`,
+  header: `${PREFIX}-header`,
+  expander: `${PREFIX}-expander`,
+}
+
+const StyledSwipeableDrawer = styled(SwipeableDrawer)(({ theme }) => ({
+  [`& .${classes.drawerOpen}`]: {
+    width: theme.spacing(24),
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+
+  [`& .${classes.drawerClosed}`]: {
+    width: theme.spacing(7),
+    [theme.breakpoints.down('md')]: {
+      width: 0,
+    },
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+  },
+
+  [`& .${classes.title}`]: {
+    position: 'relative',
+    float: 'left',
+    right: 12,
+  },
+
+  [`& .${classes.header}`]: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+
+  [`& .${classes.expander}`]: {
+    display: 'inline-block',
+    position: 'relative',
+    left: 12,
+  },
+}))
+
 export default function Navigation() {
-  const classes = useStyles()
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
   const router = useRouter()
   const pageName = router.pathname.split('/')[1]
@@ -37,7 +84,7 @@ export default function Navigation() {
   }, [pageName])
 
   return (
-    <SwipeableDrawer
+    <StyledSwipeableDrawer
       variant={isMobile ? 'temporary' : 'permanent'}
       open={open}
       onClose={() => setOpen(false)}
@@ -57,6 +104,7 @@ export default function Navigation() {
               onClick={() => setOpen(!open)}
               className={classes.expander}
               aria-label="toggle navigation drawer"
+              size="large"
             >
               {open ? <ChevronLeft /> : <Menu />}
             </IconButton>
@@ -81,41 +129,6 @@ export default function Navigation() {
           ))}
         </List>
       </Grid>
-    </SwipeableDrawer>
+    </StyledSwipeableDrawer>
   )
 }
-
-const useStyles = makeStyles((theme) => ({
-  drawerOpen: {
-    width: theme.spacing(24),
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClosed: {
-    width: theme.spacing(7),
-    [theme.breakpoints.down('sm')]: {
-      width: 0,
-    },
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-  },
-  title: {
-    position: 'relative',
-    float: 'left',
-    right: 12,
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  expander: {
-    display: 'inline-block',
-    position: 'relative',
-    left: 12,
-  },
-}))

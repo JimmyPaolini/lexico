@@ -1,17 +1,40 @@
 import React from 'react'
 
-import { Card, CardContent, Divider, Grid, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Card, CardContent, Divider, Grid, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import CardHeader from '../../accessories/CardHeader'
 import BasicLogin from './BasicLoginForm'
 import OAuthLogin from './OAuthLogin'
 
-export default function LoginCard() {
-  const classes = useStyles()
+const PREFIX = 'LoginCard'
 
+const classes = {
+  card: `${PREFIX}-card`,
+  cardHeader: `${PREFIX}-cardHeader`,
+  columnItem: `${PREFIX}-columnItem`,
+}
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  [`&.${classes.card}`]: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+
+  [`& .${classes.cardHeader}`]: {
+    paddingBottom: 0,
+    minHeight: 64,
+  },
+
+  [`& .${classes.columnItem}`]: {
+    marginBottom: theme.spacing(2),
+  },
+}))
+
+export default function LoginCard() {
   return (
-    <Card className={classes.card}>
+    <StyledCard className={classes.card}>
       <CardHeader title="Sign In" className={classes.cardHeader} />
       <Typography align="center" variant="body2" color="textSecondary">
         Save your Bookmarks, Literature,
@@ -37,21 +60,6 @@ export default function LoginCard() {
         <Divider className={classes.columnItem} />
         <BasicLogin />
       </CardContent>
-    </Card>
+    </StyledCard>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  card: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  cardHeader: {
-    paddingBottom: 0,
-    minHeight: 64,
-  },
-  columnItem: {
-    marginBottom: theme.spacing(2),
-  },
-}))

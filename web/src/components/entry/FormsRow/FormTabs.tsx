@@ -1,7 +1,24 @@
 import React, { ReactNode } from 'react'
 
-import { Box, Tab, Tabs } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { styled } from '@mui/material/styles';
+
+import { Box, Tab, Tabs } from '@mui/material'
+const PREFIX = 'FormTabs';
+
+const classes = {
+  tabs: `${PREFIX}-tabs`
+};
+
+const StyledBox = styled(Box)((
+  {
+    theme
+  }
+) => ({
+  [`& .${classes.tabs}`]: {
+    height: 42,
+    background: theme.palette.background.paper,
+  }
+}));
 
 type Props = {
   activeTab: number
@@ -16,7 +33,7 @@ export default function FormTabs({
   setActiveTab,
   children,
 }: Props) {
-  const classes = useStyles()
+
   const minWidth = `${100 / tabs.length}%`
 
   const changeActiveTab = (_: any, selectedTab: number) => {
@@ -24,7 +41,7 @@ export default function FormTabs({
   }
 
   return (
-    <Box>
+    <StyledBox>
       <Tabs
         value={activeTab}
         onChange={changeActiveTab}
@@ -45,13 +62,6 @@ export default function FormTabs({
         ))}
       </Tabs>
       {children}
-    </Box>
-  )
+    </StyledBox>
+  );
 }
-
-const useStyles = makeStyles((theme) => ({
-  tabs: {
-    height: 42,
-    background: theme.palette.background.paper,
-  },
-}))

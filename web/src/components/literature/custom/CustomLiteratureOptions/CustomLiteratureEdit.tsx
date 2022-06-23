@@ -1,4 +1,4 @@
-import { Edit } from '@material-ui/icons'
+import { Edit } from '@mui/icons-material'
 
 import { useRouter } from 'next/router'
 

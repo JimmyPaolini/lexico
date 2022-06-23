@@ -7,8 +7,8 @@ import {
   Divider,
   Grid,
   Typography,
-} from '@material-ui/core'
-import { Theme, makeStyles } from '@material-ui/core/styles'
+} from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { Forms } from '../../../graphql/generated'
 import { getSettingsLocal } from '../../../utils/settingsLocal'
@@ -18,6 +18,41 @@ import { Context } from '../../layout/Context'
 import AdjectiveForms from './PartsOfSpeech/AdjectiveFormsTable'
 import NounForms from './PartsOfSpeech/NounFormsTable'
 import VerbForms from './PartsOfSpeech/VerbFormsTable'
+
+const PREFIX = 'FormsRow'
+
+const classes = {
+  formsRow: `${PREFIX}-formsRow`,
+  hide: `${PREFIX}-hide`,
+  identifiers: `${PREFIX}-identifiers`,
+  expandIcon: `${PREFIX}-expandIcon`,
+}
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.formsRow}`]: {
+    background: theme.palette.background.paper,
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    '&:last-child': {
+      paddingBottom: theme.spacing(1),
+    },
+  },
+
+  [`& .${classes.hide}`]: {
+    display: 'none',
+  },
+
+  [`& .${classes.identifiers}`]: {
+    marginTop: theme.spacing(1),
+  },
+
+  [`& .${classes.expandIcon}`]: {
+    marginTop: theme.spacing(0.5),
+    marginRight: theme.spacing(1.5),
+  },
+}))
 
 type Props = {
   searched: string
@@ -32,7 +67,6 @@ export default function FormsRow({
   partOfSpeech,
   identifiers: identifiersList = [],
 }: Props) {
-  const classes = useStyles()
   const { user } = useContext(Context)
   const expandedInitial =
     user?.settings?.formsExpandedDefault ||
@@ -48,7 +82,7 @@ export default function FormsRow({
 
   const expandable = !!FormsCard
 
-  if (searched.match(/Table/i) && !expandable) return <></>
+  if (searched.match(/Table/i) && !expandable) return <Root></Root>
 
   return (
     <>
@@ -110,25 +144,3 @@ const partOfSpeechToFormsCard = {
 } as {
   [key: string]: typeof VerbForms | typeof NounForms | typeof AdjectiveForms
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  formsRow: {
-    background: theme.palette.background.paper,
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-    '&:last-child': {
-      paddingBottom: theme.spacing(1),
-    },
-  },
-  hide: {
-    display: 'none',
-  },
-  identifiers: {
-    marginTop: theme.spacing(1),
-  },
-  expandIcon: {
-    marginTop: theme.spacing(0.5),
-    marginRight: theme.spacing(1.5),
-  },
-}))

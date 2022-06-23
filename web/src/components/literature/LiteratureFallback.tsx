@@ -1,12 +1,31 @@
-import { CircularProgress, Paper } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { CircularProgress, Paper } from '@mui/material'
+import { styled } from '@mui/material/styles';
 
 import Head from 'next/head'
 
+const PREFIX = 'LiteratureFallback';
+
+const classes = {
+  reader: `${PREFIX}-reader`
+};
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(() => ({
+  [`& .${classes.reader}`]: {
+    backgroundColor: 'black',
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+}));
+
 export default function LiteratureFallback() {
-  const classes = useStyles()
+
   return (
-    <>
+    (<Root>
       <Head>
         <title>Lexico - Literature...</title>
         <meta name="description" content={`Read and translate literature`} />
@@ -23,18 +42,6 @@ export default function LiteratureFallback() {
       <Paper square elevation={0} className={classes.reader}>
         <CircularProgress size={60} thickness={5.4} color="secondary" />
       </Paper>
-    </>
-  )
+    </Root>)
+  );
 }
-
-const useStyles = makeStyles(() => ({
-  reader: {
-    backgroundColor: 'black',
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-}))

@@ -1,17 +1,22 @@
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@mui/material/Typography'
+import { styled } from '@mui/material/styles';
+const PREFIX = 'CornerText';
+
+const classes = {
+  cornerText: `${PREFIX}-cornerText`
+};
+
+const StyledTypography = styled(Typography)(() => ({
+  [`&.${classes.cornerText}`]: {
+    lineHeight: 1.2,
+  }
+}));
 
 export default function CornerText({ text }: { text: string }) {
-  const classes = useStyles()
-  return (
-    <Typography variant="caption" className={classes.cornerText}>
-      {text}
-    </Typography>
-  )
-}
 
-const useStyles = makeStyles(() => ({
-  cornerText: {
-    lineHeight: 1.2,
-  },
-}))
+  return (
+    <StyledTypography variant="caption" className={classes.cornerText}>
+      {text}
+    </StyledTypography>
+  );
+}

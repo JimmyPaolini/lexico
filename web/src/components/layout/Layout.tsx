@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 
-import { Grid } from '@material-ui/core'
+import { Grid } from '@mui/material'
 
 import Navigation from './Navigation'
 import Snackbar from './Snackbar'

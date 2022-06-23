@@ -2,9 +2,8 @@ import { useContext, useEffect } from 'react'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
-import { Grid } from '@material-ui/core'
-import { Theme, makeStyles } from '@material-ui/core/styles'
-
+import { Grid } from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { IncomingHttpHeaders } from 'http2'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
@@ -19,8 +18,20 @@ import useSnackbarEnhanced from '../hooks/useSnackbarEnhanced'
 import { showSettingsInstructions } from '../utils/settingsLocal'
 import { serverEndpoint } from './api'
 
+const PREFIX = 'user'
+
+const classes = {
+  noUser: `${PREFIX}-noUser`,
+}
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.noUser}`]: {
+    marginTop: theme.spacing(4),
+  },
+}))
+
 export default function User() {
-  const classes = useStyles()
   const { user } = useContext(Context)
   const { enqueueSnackbar } = useSnackbarEnhanced()
   useEffect(() => {
@@ -33,7 +44,7 @@ export default function User() {
   }, [])
 
   return (
-    <>
+    <Root>
       <Head>
         <title>Lexico - User</title>
       </Head>
@@ -57,7 +68,7 @@ export default function User() {
           <SettingsCard />
         </SingleCardLayout>
       )}
-    </>
+    </Root>
   )
 }
 
@@ -95,9 +106,3 @@ const getUserFetcher = (headers: IncomingHttpHeaders) => async () => {
 
   return json.data
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  noUser: {
-    marginTop: theme.spacing(4),
-  },
-}))

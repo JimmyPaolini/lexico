@@ -1,4 +1,4 @@
-import { Delete } from '@material-ui/icons'
+import { Delete } from '@mui/icons-material'
 
 import { useDeleteCustomTextMutation } from '../../../../graphql/generated'
 import {

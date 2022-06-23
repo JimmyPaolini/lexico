@@ -1,7 +1,26 @@
-import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@mui/material/Grid'
+import { styled } from '@mui/material/styles';
 
 import CornerText from './CornerText'
+
+const PREFIX = 'SideCornerTexts';
+
+const classes = {
+  left: `${PREFIX}-left`,
+  right: `${PREFIX}-right`
+};
+
+const StyledGrid = styled(Grid)(() => ({
+  [`& .${classes.left}`]: {
+    position: 'relative',
+    left: 2,
+  },
+
+  [`& .${classes.right}`]: {
+    position: 'relative',
+    right: 2,
+  }
+}));
 
 type Props = {
   top: string
@@ -10,9 +29,9 @@ type Props = {
 }
 
 export default function SideCornerTexts({ top, bottom, side }: Props) {
-  const classes = useStyles()
+
   return (
-    <Grid
+    <StyledGrid
       container
       xs
       direction="column"
@@ -21,17 +40,6 @@ export default function SideCornerTexts({ top, bottom, side }: Props) {
     >
       <CornerText text={top} />
       <CornerText text={bottom} />
-    </Grid>
-  )
+    </StyledGrid>
+  );
 }
-
-const useStyles = makeStyles(() => ({
-  left: {
-    position: 'relative',
-    left: 2,
-  },
-  right: {
-    position: 'relative',
-    right: 2,
-  },
-}))

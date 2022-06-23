@@ -7,7 +7,7 @@ import {
 } from 'react'
 import { QueryClient } from 'react-query'
 
-import { useMediaQuery } from '@material-ui/core'
+import { useMediaQuery, useTheme } from '@mui/material'
 
 import { User, useUserQuery } from '../../graphql/generated'
 
@@ -28,7 +28,8 @@ type Props = {
 export function ContextProvider({ children, queryClient }: Props) {
   const { data } = useUserQuery({}, { staleTime: 1000 * 60 * 5 }) // 5 minutes
   const user = data?.user
-  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('sm'))
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [isNavOpen, setNavOpen] = useState(false)
 
   return (

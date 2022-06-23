@@ -1,18 +1,35 @@
 import React from 'react'
 
-import { Grid } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { styled } from '@mui/material/styles';
+
+import { Grid } from '@mui/material'
 
 import FormCell, { FormCellPosition, Props as FormCellProps } from './FormCell'
+
+const PREFIX = 'FormsTable';
+
+const classes = {
+  formsTable: `${PREFIX}-formsTable`
+};
+
+const StyledGrid = styled(Grid)((
+  {
+    theme
+  }
+) => ({
+  [`&.${classes.formsTable}`]: {
+    background: theme.palette.background.paper,
+  }
+}));
 
 type Props = {
   forms: FormCellProps[]
 }
 
 export default function FormsTable({ forms }: Props) {
-  const classes = useStyles()
+
   return (
-    <Grid container className={classes.formsTable}>
+    <StyledGrid container className={classes.formsTable}>
       {forms.map((form: FormCellProps, i) => {
         const horizontal =
           i < 2 ? 'top' : i >= forms.length - 2 ? 'bottom' : 'mid'
@@ -31,12 +48,6 @@ export default function FormsTable({ forms }: Props) {
           </Grid>
         )
       })}
-    </Grid>
-  )
+    </StyledGrid>
+  );
 }
-
-const useStyles = makeStyles((theme) => ({
-  formsTable: {
-    background: theme.palette.background.paper,
-  },
-}))

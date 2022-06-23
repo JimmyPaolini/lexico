@@ -1,13 +1,7 @@
 import { useContext, useState } from 'react'
 
-import {
-  Box,
-  CardActionArea,
-  CardContent,
-  Collapse,
-  Grid,
-} from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Box, CardActionArea, CardContent, Collapse, Grid } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { Translation } from '../../../graphql/generated'
 import { getSettingsLocal } from '../../../utils/settingsLocal'
@@ -15,12 +9,32 @@ import ExpandIcon from '../../accessories/ExpandIcon'
 import { Context } from '../../layout/Context'
 import TranslationBullet from './TranslationBullet'
 
+const PREFIX = 'TranslationsRow'
+
+const classes = {
+  translationsRow: `${PREFIX}-translationsRow`,
+  hide: `${PREFIX}-hide`,
+}
+
+const StyledCardContent = styled(CardContent)(({ theme }) => ({
+  [`&.${classes.translationsRow}`]: {
+    background: theme.palette.background.paper,
+    padding: theme.spacing(1),
+    '&:last-child': {
+      padding: theme.spacing(1),
+    },
+  },
+
+  [`& .${classes.hide}`]: {
+    display: 'none',
+  },
+}))
+
 type Props = {
   translations: Translation[]
 }
 
 export default function TranslationsRow({ translations }: Props) {
-  const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(
     user?.settings?.translationsExpandedDefault ||
@@ -30,7 +44,7 @@ export default function TranslationsRow({ translations }: Props) {
   const expandable = translations.length > 2
 
   return (
-    <CardContent className={classes.translationsRow}>
+    <StyledCardContent className={classes.translationsRow}>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
         disabled={!expandable}
@@ -61,19 +75,6 @@ export default function TranslationsRow({ translations }: Props) {
           )}
         </Grid>
       </CardActionArea>
-    </CardContent>
+    </StyledCardContent>
   )
 }
-
-const useStyles = makeStyles((theme) => ({
-  translationsRow: {
-    background: theme.palette.background.paper,
-    padding: theme.spacing(1),
-    '&:last-child': {
-      padding: theme.spacing(1),
-    },
-  },
-  hide: {
-    display: 'none',
-  },
-}))

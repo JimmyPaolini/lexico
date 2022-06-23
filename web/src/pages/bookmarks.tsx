@@ -2,7 +2,7 @@ import { useContext, useEffect, useMemo, useState } from 'react'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
-import { Typography } from '@material-ui/core'
+import { Typography } from '@mui/material'
 
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'

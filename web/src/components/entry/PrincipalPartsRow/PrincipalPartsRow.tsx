@@ -1,13 +1,39 @@
 import React from 'react'
 
-import { Box, CardHeader } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { styled } from '@mui/material/styles';
+
+import { Box, CardHeader } from '@mui/material'
 
 import { Inflection, Maybe, PrincipalPart } from '../../../graphql/generated'
 import { unCamelCase } from '../../../utils/string'
 import ExpandIcon from '../../accessories/ExpandIcon'
 import BookmarkButton from './BookmarkButton'
 import inflectionToString from './inflectionToString'
+
+const PREFIX = 'PrincipalPartsRow';
+
+const classes = {
+  principalPartsRow: `${PREFIX}-principalPartsRow`,
+  bookmark: `${PREFIX}-bookmark`
+};
+
+const StyledBox = styled(Box)((
+  {
+    theme
+  }
+) => ({
+  [`& .${classes.principalPartsRow}`]: {
+    background: theme.palette.background.paper,
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+  },
+
+  [`& .${classes.bookmark}`]: {
+    display: 'inline-block',
+    position: 'relative',
+    top: 8,
+  }
+}));
 
 type Props = {
   id: string
@@ -26,7 +52,7 @@ export default function PrincipalPartsRow({
   bookmarked,
   expanded,
 }: Props) {
-  const classes = useStyles()
+
 
   const principalPartsFormatted = principalParts
     ?.map((principalPart) => principalPart.text.join('/'))
@@ -48,25 +74,12 @@ export default function PrincipalPartsRow({
         expanded === undefined ? (
           <BookmarkButton {...{ id, bookmarked }} />
         ) : (
-          <Box mt={2.5} mr={1.5}>
+          <StyledBox mt={2.5} mr={1.5}>
             <ExpandIcon expanded={expanded} />
-          </Box>
+          </StyledBox>
         )
       }
       aria-label="Principal Parts, Inflection, and Bookmark toggle"
     />
-  )
+  );
 }
-
-const useStyles = makeStyles((theme) => ({
-  principalPartsRow: {
-    background: theme.palette.background.paper,
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  bookmark: {
-    display: 'inline-block',
-    position: 'relative',
-    top: 8,
-  },
-}))

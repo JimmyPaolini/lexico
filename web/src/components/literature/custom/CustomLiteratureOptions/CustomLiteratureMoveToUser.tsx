@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { AccountCircle } from '@material-ui/icons'
+import { AccountCircle } from '@mui/icons-material'
 
 import { useCreateCustomTextMutation } from '../../../../graphql/generated'
 import useSnackbarEnhanced from '../../../../hooks/useSnackbarEnhanced'

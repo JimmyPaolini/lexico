@@ -1,33 +1,40 @@
-import { Theme, ThemeOptions, createTheme } from '@material-ui/core/styles'
-import {
-  Typography,
-  TypographyOptions,
-} from '@material-ui/core/styles/createTypography'
+import createCache from '@emotion/cache'
+import { createTheme } from '@mui/material/styles'
 
-export interface LexicoTheme extends Theme {
-  typography: LexicoTypography
-  custom: {
-    cardWidth: number
+declare module '@mui/material/styles' {
+  interface Theme {
+    custom: {
+      cardWidth: number
+      literature: {
+        fontFamily: String
+        fontWeight: number
+        fontSize: String
+        letterSpacing: String
+      }
+    }
+  }
+  interface ThemeOptions {
+    custom: {
+      cardWidth: number
+      literature: {
+        fontFamily: String
+        fontWeight: number
+        fontSize: String
+        letterSpacing: String
+      }
+    }
   }
 }
-interface LexicoTypography extends Typography {
-  literature: Record<string, unknown>
-}
 
-interface LexicoThemeOptions extends ThemeOptions {
-  typography?: LexicoTypographyOptions
-  custom?: {
-    cardWidth?: number
-  }
-}
-
-interface LexicoTypographyOptions extends TypographyOptions {
-  literature?: Record<string, unknown>
+// prepend: true moves MUI styles to the top of the <head> so they're loaded first.
+// It allows developers to easily override MUI styles with other styling solutions, like CSS modules.
+export function createEmotionCache() {
+  return createCache({ key: 'css', prepend: true })
 }
 
 const theme = createTheme({
   palette: {
-    type: 'dark',
+    mode: 'dark',
     primary: {
       main: '#66023C',
     },
@@ -40,6 +47,9 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'Helvetica Neue',
+  },
+  custom: {
+    cardWidth: 382,
     literature: {
       fontFamily: 'Serif',
       fontWeight: 400,
@@ -47,9 +57,6 @@ const theme = createTheme({
       letterSpacing: '0.00938em',
     },
   },
-  custom: {
-    cardWidth: 382,
-  },
-} as LexicoThemeOptions) as LexicoTheme
+})
 
 export default theme

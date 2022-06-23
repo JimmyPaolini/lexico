@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { List } from '@material-ui/core'
+import { List } from '@mui/material'
 
 import useCustomTexts from '../../../hooks/literature/useCustomTexts'
 import { Context } from '../../layout/Context'

@@ -8,9 +8,8 @@ import {
   Grid,
   Link,
   Typography,
-  makeStyles,
-} from '@material-ui/core'
-
+} from '@mui/material'
+import { styled } from '@mui/material/styles'
 import { useFormik } from 'formik'
 
 import { useCommentMutation } from '../../graphql/generated'
@@ -20,8 +19,38 @@ import SubmitButton from '../accessories/SubmitButton'
 import TextBox from '../accessories/TextBox'
 import { Context } from '../layout/Context'
 
+const PREFIX = 'CommentBox'
+
+const classes = {
+  textBox: `${PREFIX}-textBox`,
+  formError: `${PREFIX}-formError`,
+  dropdown: `${PREFIX}-dropdown`,
+  hide: `${PREFIX}-hide`,
+}
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.textBox}`]: {
+    margin: theme.spacing(1),
+  },
+
+  [`& .${classes.formError}`]: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+  },
+
+  [`& .${classes.dropdown}`]: {
+    paddingTop: 0,
+    paddingBottom: 0,
+    padding: theme.spacing(1),
+  },
+
+  [`& .${classes.hide}`]: {
+    display: 'none',
+  },
+}))
+
 export default function CommentBox() {
-  const classes = useStyles()
   const { user } = useContext(Context)
   const [expanded, setExpanded] = useState<boolean>(false)
   const formik = useFormik({
@@ -42,7 +71,7 @@ export default function CommentBox() {
     : ''
 
   return (
-    <>
+    <Root>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
@@ -111,24 +140,6 @@ export default function CommentBox() {
           </Grid>
         </form>
       </Collapse>
-    </>
+    </Root>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  textBox: {
-    margin: theme.spacing(1),
-  },
-  formError: {
-    width: '100%',
-    marginTop: theme.spacing(1),
-  },
-  dropdown: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    padding: theme.spacing(1),
-  },
-  hide: {
-    display: 'none',
-  },
-}))
