@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import EntryCard from 'src/components/entry/EntryCard'
 import { searchEntry } from 'src/utils/stories'
 

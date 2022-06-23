@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
-import { IconButton } from '@mui/material'
 import { Close } from '@mui/icons-material'
+import { IconButton } from '@mui/material'
 
 import {
   OptionsObject,

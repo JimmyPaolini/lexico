@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
 import { Typography } from '@mui/material'
+
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 

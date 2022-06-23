@@ -1,8 +1,9 @@
 import React, { Dispatch, SetStateAction, memo, useRef } from 'react'
-import { useSwipeable } from 'react-swipeable'
 
 import { Box, Modal, Paper, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
+
+import { useSwipeable } from 'react-swipeable'
 
 import { Entry, useSearchLatinQuery } from '../../graphql/generated'
 import useEventListener from '../../hooks/useEventListener'

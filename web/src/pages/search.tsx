@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { Typography } from '@mui/material'
+
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'

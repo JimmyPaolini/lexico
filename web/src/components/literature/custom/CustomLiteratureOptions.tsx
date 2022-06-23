@@ -1,19 +1,18 @@
 import { MouseEvent, useState } from 'react'
 
-import { styled } from '@mui/material/styles';
-
-import { IconButton, ListItemSecondaryAction } from '@mui/material'
 import { AccountCircle, MoreHoriz } from '@mui/icons-material'
+import { IconButton, ListItemSecondaryAction } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { CustomText } from '../../../utils/literatureLocal'
 import CustomLiteratureMenu from './CustomLiteratureOptions/CustomLiteratureMenu'
 
-const PREFIX = 'CustomLiteratureOptions';
+const PREFIX = 'CustomLiteratureOptions'
 
 const classes = {
   iconButtons: `${PREFIX}-iconButtons`,
-  options: `${PREFIX}-options`
-};
+  options: `${PREFIX}-options`,
+}
 
 const StyledListItemSecondaryAction = styled(ListItemSecondaryAction)(() => ({
   [`&.${classes.iconButtons}`]: {
@@ -27,8 +26,8 @@ const StyledListItemSecondaryAction = styled(ListItemSecondaryAction)(() => ({
 
   [`& .${classes.options}`]: {
     padding: 4,
-  }
-}));
+  },
+}))
 
 type Props = {
   text: CustomText
@@ -39,8 +38,6 @@ export default function CustomLiteratureOptions({
   text,
   refreshCustomTexts,
 }: Props) {
-
-
   const [anchor, setAnchor] = useState<null | HTMLElement>(null)
   const openMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchor(event.currentTarget)
@@ -52,7 +49,12 @@ export default function CustomLiteratureOptions({
       className={classes.iconButtons}
     >
       {!text?.local ? (
-        <IconButton disabled aria-label="on user" className={classes.options} size="large">
+        <IconButton
+          disabled
+          aria-label="on user"
+          className={classes.options}
+          size="large"
+        >
           <AccountCircle />
         </IconButton>
       ) : null}
@@ -60,12 +62,13 @@ export default function CustomLiteratureOptions({
         aria-label="options"
         className={classes.options}
         onClick={openMenu}
-        size="large">
+        size="large"
+      >
         <MoreHoriz />
       </IconButton>
       <CustomLiteratureMenu
         {...{ text, refreshCustomTexts, anchor, setAnchor }}
       />
     </StyledListItemSecondaryAction>
-  );
+  )
 }

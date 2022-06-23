@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material'
 
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import Pill from 'src/components/accessories/Pill'
 
 import IdentifierPill from '../components/accessories/IdentifierPill'

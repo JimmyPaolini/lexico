@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
-import { CacheProvider, EmotionCache } from '@emotion/react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
+
+import { CacheProvider, EmotionCache } from '@emotion/react'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import Head from 'next/head'
 import { QueryClient, QueryClientProvider } from 'react-query'

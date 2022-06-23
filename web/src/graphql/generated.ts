@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import gql from 'graphql-tag'
 import {
   UseMutationOptions,
   UseQueryOptions,
   useMutation,
   useQuery,
 } from 'react-query'
-
-import gql from 'graphql-tag'
 
 import { clientEndpoint as endpointUrl } from '../pages/_app'
 

@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import AdjectiveForms from 'src/components/entry/FormsRow/PartsOfSpeech/AdjectiveFormsTable'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'

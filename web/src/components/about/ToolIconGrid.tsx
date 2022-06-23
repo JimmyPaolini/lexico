@@ -9,6 +9,7 @@ import {
   Link,
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
+
 import Image from 'next/image'
 
 import tools from '../../utils/tools'

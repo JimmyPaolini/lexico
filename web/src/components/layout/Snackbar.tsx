@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 
 import { styled } from '@mui/material/styles'
+
 import { SnackbarProvider } from 'notistack'
 
 const PREFIX = 'Snackbar'

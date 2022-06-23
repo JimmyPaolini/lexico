@@ -50,7 +50,7 @@ export function decimalToRoman(decimal: number): string {
 
 export function romanNumeralize(str: string | undefined): string {
   if (!str) return ''
-  return str.replace(/\d+/g, (d) => decimalToRoman(parseInt(d)));
+  return str.replace(/\d+/g, (d) => decimalToRoman(parseInt(d)))
 }
 
 export function decimalize(str: string | undefined): string {
@@ -58,5 +58,5 @@ export function decimalize(str: string | undefined): string {
   return str.replace(
     /(^| )([IVXLCDM]+)( |$)/gi,
     (_, s, r, e) => s + romanToDecimal(r) + e,
-  );
+  )
 }

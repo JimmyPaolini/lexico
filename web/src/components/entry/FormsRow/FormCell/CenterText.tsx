@@ -1,7 +1,7 @@
-import LinesEllipsis from 'react-lines-ellipsis'
-
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
+
+import LinesEllipsis from 'react-lines-ellipsis'
 
 type Props = { centerText: string }
 

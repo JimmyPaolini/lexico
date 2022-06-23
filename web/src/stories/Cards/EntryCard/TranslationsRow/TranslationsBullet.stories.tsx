@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import TranslationBullet from 'src/components/entry/TranslationsRow/TranslationBullet'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import SearchBar from 'src/components/search/SearchBar'
 
 export default {

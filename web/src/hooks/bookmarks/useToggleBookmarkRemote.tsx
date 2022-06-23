@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
+
 import { QueryClient } from 'react-query'
 
 import useBookmarkRemote from './useBookmarkRemote'

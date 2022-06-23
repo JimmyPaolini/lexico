@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 
 import { Box, Fade } from '@mui/material'
-import { styled, Theme } from '@mui/material/styles'
+import { Theme, styled } from '@mui/material/styles'
 import { useTheme } from '@mui/material/styles'
+
 import Image from 'next/image'
 import logo from 'public/lexico_logo.svg'
 

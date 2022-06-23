@@ -1,11 +1,12 @@
 import React, { Dispatch, memo, useEffect, useState } from 'react'
-import LazyLoad from 'react-lazyload'
 
 import { useTheme } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Grow from '@mui/material/Grow'
 import { styled } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
+
+import LazyLoad from 'react-lazyload'
 
 const PREFIX = 'CardDeck'
 

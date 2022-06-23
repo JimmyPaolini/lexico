@@ -1,16 +1,17 @@
 import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
-import { styled } from '@mui/material/styles';
-const PREFIX = 'CustomLiteratureMenuItem';
+import { styled } from '@mui/material/styles'
+
+const PREFIX = 'CustomLiteratureMenuItem'
 
 const classes = {
-  icon: `${PREFIX}-icon`
-};
+  icon: `${PREFIX}-icon`,
+}
 
 const StyledMenuItem = styled(MenuItem)(() => ({
   [`& .${classes.icon}`]: {
     minWidth: 40,
-  }
-}));
+  },
+}))
 
 type Props = {
   action: () => void
@@ -23,12 +24,10 @@ export default function CustomLiteratureMenuItem({
   icon,
   text,
 }: Props) {
-
-
   return (
     <StyledMenuItem onClick={action}>
       <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
       <ListItemText primary={text} />
     </StyledMenuItem>
-  );
+  )
 }

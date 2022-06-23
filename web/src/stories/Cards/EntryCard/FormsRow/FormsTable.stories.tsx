@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import FormsTable from 'src/components/entry/FormsRow/FormsTable'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'

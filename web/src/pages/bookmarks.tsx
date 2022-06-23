@@ -1,6 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { Typography } from '@mui/material'
+
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { QueryClient } from 'react-query'

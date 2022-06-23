@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import NounForms from 'src/components/entry/FormsRow/PartsOfSpeech/NounFormsTable'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'

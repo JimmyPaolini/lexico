@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import VerbConjugationCard from 'src/components/grammar/VerbConjugationCard'
 import conjugations from 'src/components/grammar/verbConjugations'
 

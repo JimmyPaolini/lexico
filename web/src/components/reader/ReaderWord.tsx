@@ -1,13 +1,13 @@
 import { memo } from 'react'
 
-import { styled } from '@mui/material/styles';
-
 import { CardActionArea } from '@mui/material'
-const PREFIX = 'ReaderWord';
+import { styled } from '@mui/material/styles'
+
+const PREFIX = 'ReaderWord'
 
 const classes = {
-  readerWord: `${PREFIX}-readerWord`
-};
+  readerWord: `${PREFIX}-readerWord`,
+}
 
 // TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
 const Root = styled('div')(() => ({
@@ -16,8 +16,8 @@ const Root = styled('div')(() => ({
     cursor: 'pointer',
     borderRadius: 4,
     verticalAlign: 'top',
-  }
-}));
+  },
+}))
 
 type Props = {
   word: string
@@ -25,7 +25,6 @@ type Props = {
 }
 
 export default memo(function ReaderWord({ word, openModal }: Props) {
-
   const isWord = word.match(/\w+/i)
 
   return isWord ? (
@@ -37,6 +36,6 @@ export default memo(function ReaderWord({ word, openModal }: Props) {
       {word}
     </CardActionArea>
   ) : (
-    (<Root>{word}</Root>)
-  );
+    <Root>{word}</Root>
+  )
 })

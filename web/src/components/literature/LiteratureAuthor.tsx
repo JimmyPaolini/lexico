@@ -1,7 +1,5 @@
 import { Dispatch, SetStateAction, memo } from 'react'
 
-import { styled } from '@mui/material/styles';
-
 import {
   Box,
   CardActionArea,
@@ -9,17 +7,18 @@ import {
   Collapse,
   Typography,
 } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { Author } from '../../graphql/generated'
 import { sentenceCase } from '../../utils/string'
 import ExpandIcon from '../accessories/ExpandIcon'
 
-const PREFIX = 'LiteratureAuthor';
+const PREFIX = 'LiteratureAuthor'
 
 const classes = {
   summary: `${PREFIX}-summary`,
-  none: `${PREFIX}-none`
-};
+  none: `${PREFIX}-none`,
+}
 
 const StyledCardActionArea = styled(CardActionArea)(() => ({
   [`& .${classes.summary}`]: {
@@ -30,8 +29,8 @@ const StyledCardActionArea = styled(CardActionArea)(() => ({
 
   [`& .${classes.none}`]: {
     display: 'none',
-  }
-}));
+  },
+}))
 
 type Props = {
   author: Author
@@ -43,7 +42,6 @@ export default memo(function LiteratureAuthor({
   expanded,
   setExpanded,
 }: Props) {
-
   let summary = [
     ...(author.books || []),
     ...author.texts.filter(
@@ -90,5 +88,5 @@ export default memo(function LiteratureAuthor({
         }
       />
     </StyledCardActionArea>
-  );
+  )
 })

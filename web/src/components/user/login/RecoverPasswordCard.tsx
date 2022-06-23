@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { styled } from '@mui/material/styles';
-
 import { Card, CardContent, Divider, Grid } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
@@ -14,26 +13,21 @@ import CardHeader from '../../accessories/CardHeader'
 import SubmitButton from '../../accessories/SubmitButton'
 import TextBox from '../../accessories/TextBox'
 
-const PREFIX = 'RecoverPasswordCard';
+const PREFIX = 'RecoverPasswordCard'
 
 const classes = {
-  card: `${PREFIX}-card`
-};
+  card: `${PREFIX}-card`,
+}
 
-const StyledCard = styled(Card)((
-  {
-    theme
-  }
-) => ({
+const StyledCard = styled(Card)(({ theme }) => ({
   [`&.${classes.card}`]: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     marginBottom: theme.spacing(1),
-  }
-}));
+  },
+}))
 
 export default function RecoverPasswordCard() {
-
   const router = useRouter()
   const { enqueueSnackbar } = useSnackbarEnhanced()
 
@@ -82,7 +76,7 @@ export default function RecoverPasswordCard() {
         </form>
       </CardContent>
     </StyledCard>
-  );
+  )
 }
 
 interface RecoverPasswordInfo {

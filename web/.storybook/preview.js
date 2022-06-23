@@ -1,6 +1,5 @@
-import { QueryClient, QueryClientProvider } from 'react-query'
-
 import { CssBaseline, ThemeProvider } from '@material-ui/core'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { ContextProvider } from '../src/components/layout/Context'
 import SnackbarProvider from '../src/components/layout/Snackbar'

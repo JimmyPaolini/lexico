@@ -1,20 +1,16 @@
 import { Grid, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles'
 
 import { Translation } from '../../../graphql/generated'
 
-const PREFIX = 'TranslationBullet';
+const PREFIX = 'TranslationBullet'
 
 const classes = {
   translationBullet: `${PREFIX}-translationBullet`,
-  bullet: `${PREFIX}-bullet`
-};
+  bullet: `${PREFIX}-bullet`,
+}
 
-const StyledGrid = styled(Grid)((
-  {
-    theme
-  }
-) => ({
+const StyledGrid = styled(Grid)(({ theme }) => ({
   [`&.${classes.translationBullet}`]: {
     margin: 0, // need to overwrite the negative margin of the Grid component
   },
@@ -26,15 +22,14 @@ const StyledGrid = styled(Grid)((
     backgroundColor: theme.palette.text.primary,
     margin: theme.spacing(1),
     flexShrink: 0,
-  }
-}));
+  },
+}))
 
 type Props = {
   translation: Translation
 }
 
 export default function TranslationBullet({ translation }: Props) {
-
   return (
     <StyledGrid
       container
@@ -48,5 +43,5 @@ export default function TranslationBullet({ translation }: Props) {
       <div className={classes.bullet} />
       <Typography color="textPrimary">{translation.translation}</Typography>
     </StyledGrid>
-  );
+  )
 }

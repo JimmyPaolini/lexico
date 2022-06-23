@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Card, Divider, Grid, Grow, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+
 import Head from 'next/head'
 
 import CommentBox from '../components/about/CommentBox'

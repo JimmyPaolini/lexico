@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import PrincipalPartsRow from 'src/components/entry/PrincipalPartsRow/PrincipalPartsRow'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'

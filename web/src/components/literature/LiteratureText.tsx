@@ -1,9 +1,10 @@
 import React, { memo } from 'react'
-import LinesEllipsis from 'react-lines-ellipsis'
 
 import { Avatar, CardActionArea, Grid, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
+
 import { useRouter } from 'next/router'
+import LinesEllipsis from 'react-lines-ellipsis'
 
 import { Text } from '../../graphql/generated'
 import { romanNumeralize } from '../../utils/romanNumeral'

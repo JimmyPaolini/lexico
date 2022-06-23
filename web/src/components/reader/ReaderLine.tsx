@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
-import LazyLoad from 'react-lazyload'
 
 import { Divider, Grid, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
+
+import LazyLoad from 'react-lazyload'
 
 import { Line } from '../../graphql/generated'
 import { getSettingsLocal } from '../../utils/settingsLocal'

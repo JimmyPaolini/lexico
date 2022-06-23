@@ -5,9 +5,10 @@ import {
   createContext,
   useState,
 } from 'react'
-import { QueryClient } from 'react-query'
 
 import { useMediaQuery, useTheme } from '@mui/material'
+
+import { QueryClient } from 'react-query'
 
 import { User, useUserQuery } from '../../graphql/generated'
 

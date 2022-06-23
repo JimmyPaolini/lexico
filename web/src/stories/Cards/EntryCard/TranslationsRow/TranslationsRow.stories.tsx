@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import TranslationsRow from 'src/components/entry/TranslationsRow/TranslationsRow'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'

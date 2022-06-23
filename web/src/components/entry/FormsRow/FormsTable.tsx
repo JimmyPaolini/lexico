@@ -1,33 +1,27 @@
 import React from 'react'
 
-import { styled } from '@mui/material/styles';
-
 import { Grid } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import FormCell, { FormCellPosition, Props as FormCellProps } from './FormCell'
 
-const PREFIX = 'FormsTable';
+const PREFIX = 'FormsTable'
 
 const classes = {
-  formsTable: `${PREFIX}-formsTable`
-};
+  formsTable: `${PREFIX}-formsTable`,
+}
 
-const StyledGrid = styled(Grid)((
-  {
-    theme
-  }
-) => ({
+const StyledGrid = styled(Grid)(({ theme }) => ({
   [`&.${classes.formsTable}`]: {
     background: theme.palette.background.paper,
-  }
-}));
+  },
+}))
 
 type Props = {
   forms: FormCellProps[]
 }
 
 export default function FormsTable({ forms }: Props) {
-
   return (
     <StyledGrid container className={classes.formsTable}>
       {forms.map((form: FormCellProps, i) => {
@@ -49,5 +43,5 @@ export default function FormsTable({ forms }: Props) {
         )
       })}
     </StyledGrid>
-  );
+  )
 }

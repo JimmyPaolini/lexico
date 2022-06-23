@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory, forceReRender } from '@storybook/react'
+
 import BookmarkButton from 'src/components/entry/PrincipalPartsRow/BookmarkButton'
 import { searchEntry } from 'src/utils/stories'
 

@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import VerbForms from 'src/components/entry/FormsRow/PartsOfSpeech/VerbFormsTable'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'

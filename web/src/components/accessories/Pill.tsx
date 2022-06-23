@@ -1,13 +1,13 @@
 import { PropsWithChildren } from 'react'
 
-import { styled } from '@mui/material/styles';
-
 import { Typography } from '@mui/material'
-const PREFIX = 'Pill';
+import { styled } from '@mui/material/styles'
+
+const PREFIX = 'Pill'
 
 const classes = {
-  pill: `${PREFIX}-pill`
-};
+  pill: `${PREFIX}-pill`,
+}
 
 const StyledTypography = styled(Typography)(() => ({
   [`&.${classes.pill}`]: {
@@ -16,8 +16,8 @@ const StyledTypography = styled(Typography)(() => ({
     borderRadius: 100,
     display: 'inline-flex',
     alignItems: 'center',
-  }
-}));
+  },
+}))
 
 type Props = PropsWithChildren<{
   backgroundColor: string
@@ -25,7 +25,6 @@ type Props = PropsWithChildren<{
 }>
 
 export default function Pill({ backgroundColor, color, children }: Props) {
-
   return (
     <StyledTypography
       variant="button"
@@ -35,5 +34,5 @@ export default function Pill({ backgroundColor, color, children }: Props) {
     >
       {children}
     </StyledTypography>
-  );
+  )
 }

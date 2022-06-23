@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+
 import AdjectiveDeclensionCard from 'src/components/grammar/AdjectiveDeclensionCard'
 import declensions from 'src/components/grammar/adjectiveDeclensions'
 

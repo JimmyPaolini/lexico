@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { styled } from '@mui/material/styles';
-
 import { Box, CardHeader } from '@mui/material'
+import { styled } from '@mui/material/styles'
 
 import { Inflection, Maybe, PrincipalPart } from '../../../graphql/generated'
 import { unCamelCase } from '../../../utils/string'
@@ -10,18 +9,14 @@ import ExpandIcon from '../../accessories/ExpandIcon'
 import BookmarkButton from './BookmarkButton'
 import inflectionToString from './inflectionToString'
 
-const PREFIX = 'PrincipalPartsRow';
+const PREFIX = 'PrincipalPartsRow'
 
 const classes = {
   principalPartsRow: `${PREFIX}-principalPartsRow`,
-  bookmark: `${PREFIX}-bookmark`
-};
+  bookmark: `${PREFIX}-bookmark`,
+}
 
-const StyledBox = styled(Box)((
-  {
-    theme
-  }
-) => ({
+const StyledBox = styled(Box)(({ theme }) => ({
   [`& .${classes.principalPartsRow}`]: {
     background: theme.palette.background.paper,
     paddingTop: theme.spacing(1),
@@ -32,8 +27,8 @@ const StyledBox = styled(Box)((
     display: 'inline-block',
     position: 'relative',
     top: 8,
-  }
-}));
+  },
+}))
 
 type Props = {
   id: string
@@ -52,8 +47,6 @@ export default function PrincipalPartsRow({
   bookmarked,
   expanded,
 }: Props) {
-
-
   const principalPartsFormatted = principalParts
     ?.map((principalPart) => principalPart.text.join('/'))
     .join(', ')
@@ -81,5 +74,5 @@ export default function PrincipalPartsRow({
       }
       aria-label="Principal Parts, Inflection, and Bookmark toggle"
     />
-  );
+  )
 }
