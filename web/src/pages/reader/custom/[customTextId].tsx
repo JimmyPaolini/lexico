@@ -1,19 +1,17 @@
 import { memo } from 'react'
 
 import { GetServerSideProps } from 'next'
-
 import {
   Author,
   Book,
   Text,
   useGetCustomTextQuery,
-} from '../../../graphql/generated'
-import { CustomText, getCustomTextLocal } from '../../../utils/literatureLocal'
+} from 'src/graphql/generated'
+import { CustomText, getCustomTextLocal } from 'src/utils/literatureLocal'
+
 import Reader from '../[textId]'
 
-type Props = {
-  id: string
-}
+type Props = { id: string }
 
 export default memo(function CustomReader({ id }: Props) {
   const { data, isSuccess } = useGetCustomTextQuery({ id })
@@ -46,7 +44,7 @@ function customTextToText({ id, title, text, local }: CustomText): Text {
       lineNumber: i + 1,
       lineLabel: line.match(/^#\S+/)?.[0].slice(1) || `${i + 1}`,
       text: customText,
-    };
+    }
   }) as never[]
   return customText
 }

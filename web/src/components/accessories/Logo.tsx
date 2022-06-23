@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 
 import { Box, Fade } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { styled, Theme } from '@mui/material/styles'
 import { useTheme } from '@mui/material/styles'
 import Image from 'next/image'
 import logo from 'public/lexico_logo.svg'
@@ -25,7 +25,7 @@ const StyledFade = styled(Fade)(({ theme }) => ({
 }))
 
 export default function Logo() {
-  const theme = useTheme() as any
+  const theme = useTheme() as Theme
   const ref = useRef<any>()
   const announcement = `Announcement, not always present, this day in latin history, roman holiday, link to <a href="https://www.wikipedia.org/">wikipedia</a>, medieval scientific research, featured content, contains emojis🐋😤💯👀`
   if (ref && ref.current && ref.current.innerHTML)

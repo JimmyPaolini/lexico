@@ -29,7 +29,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
 
   [`& .${classes.title}`]: {
     textAlign: 'center',
-    ...theme.typography.literature,
+    ...theme.custom.literature,
     fontSize: '1.7rem',
     lineHeight: 1.3,
     [theme.breakpoints.up('sm')]: {
@@ -40,7 +40,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
 
   [`& .${classes.subtitle}`]: {
     textAlign: 'center',
-    ...theme.typography.literature,
+    ...theme.custom.literature,
     fontSize: '1.3rem',
     lineHeight: 1.0,
     [theme.breakpoints.up('sm')]: {

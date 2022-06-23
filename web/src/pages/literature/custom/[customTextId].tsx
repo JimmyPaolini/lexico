@@ -6,9 +6,7 @@ import { useGetCustomTextQuery } from '../../../graphql/generated'
 import { CustomText, getCustomTextLocal } from '../../../utils/literatureLocal'
 import CustomReaderNew from '../custom'
 
-type Props = {
-  id: string
-}
+type Props = { id: string }
 
 export default memo(function CustomReaderEdit({ id }: Props) {
   const { data: userText, isSuccess } = useGetCustomTextQuery({ id })

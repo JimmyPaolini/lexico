@@ -5,7 +5,7 @@
   "jsxBracketSameLine": false,
   "printWidth": 80,
   "tabWidth": 2,
-  "importOrder": ["^react", "^@material-ui", "<THIRD_PARTY_MODULES>", "^[./]"],
+  "importOrder": ["^react$", "^@mui", "<THIRD_PARTY_MODULES>", "^src/", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }

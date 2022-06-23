@@ -6,9 +6,7 @@ import SingleCardLayout from '../../../components/layout/SingleCardLayout'
 import ResetPasswordCard from '../../../components/user/login/ResetPasswordCard'
 import { useValidatePasswordResetTokenQuery } from '../../../graphql/generated'
 
-type Props = {
-  passwordResetToken: string
-}
+type Props = { passwordResetToken: string }
 
 export default function ResetPassword({ passwordResetToken }: Props) {
   return (
