@@ -20,14 +20,16 @@ export default function Logo() {
           padding: theme.spacing(2),
           marginLeft: theme.spacing(1),
           marginRight: theme.spacing(1),
+          maxwidth: theme.custom.card.maxWidth,
+          minwidth: theme.custom.card.minWidth,
         }}
       >
         <Image
           src={logo}
           alt="lexico logo"
           // layout="fill"
-          width={theme.custom.cardWidth}
-          height={(theme.custom.cardWidth * 4) / 3}
+          width={theme.custom.card.maxWidth}
+          height={(theme.custom.card.maxWidth * 4) / 3}
           priority
           loading="eager"
         />

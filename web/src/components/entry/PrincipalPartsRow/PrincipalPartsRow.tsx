@@ -1,34 +1,13 @@
 import React from 'react'
 
 import { Box, CardHeader } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { Inflection, Maybe, PrincipalPart } from '../../../graphql/generated'
 import { unCamelCase } from '../../../utils/string'
 import ExpandIcon from '../../accessories/ExpandIcon'
 import BookmarkButton from './BookmarkButton'
 import inflectionToString from './inflectionToString'
-
-const PREFIX = 'PrincipalPartsRow'
-
-const classes = {
-  principalPartsRow: `${PREFIX}-principalPartsRow`,
-  bookmark: `${PREFIX}-bookmark`,
-}
-
-const StyledBox = styled(Box)(({ theme }) => ({
-  [`& .${classes.principalPartsRow}`]: {
-    background: theme.palette.background.paper,
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-
-  [`& .${classes.bookmark}`]: {
-    display: 'inline-block',
-    position: 'relative',
-    top: 8,
-  },
-}))
 
 type Props = {
   id: string
@@ -47,6 +26,7 @@ export default function PrincipalPartsRow({
   bookmarked,
   expanded,
 }: Props) {
+  const theme = useTheme()
   const principalPartsFormatted = principalParts
     ?.map((principalPart) => principalPart.text.join('/'))
     .join(', ')
@@ -62,17 +42,21 @@ export default function PrincipalPartsRow({
       titleTypographyProps={{ variant: 'subtitle1' }}
       subheader={subheader}
       subheaderTypographyProps={{ variant: 'subtitle2' }}
-      className={classes.principalPartsRow}
+      aria-label="Principal Parts, Inflection, and Bookmark toggle"
       action={
         expanded === undefined ? (
           <BookmarkButton {...{ id, bookmarked }} />
         ) : (
-          <StyledBox mt={2.5} mr={1.5}>
+          <Box
+            sx={{
+              marginTop: theme.spacing(2.5),
+              marginRight: theme.spacing(1.5),
+            }}
+          >
             <ExpandIcon expanded={expanded} />
-          </StyledBox>
+          </Box>
         )
       }
-      aria-label="Principal Parts, Inflection, and Bookmark toggle"
     />
   )
 }

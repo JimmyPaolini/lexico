@@ -9,7 +9,9 @@ export default {
   component: FormsRow,
   decorators: [
     (Story) => (
-      <div style={{ width: theme.custom.cardWidth, border: '1px solid white' }}>
+      <div
+        style={{ width: theme.custom.card.maxWidth, border: '1px solid white' }}
+      >
         <Story />
       </div>
     ),

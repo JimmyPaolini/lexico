@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 
 import { useTheme } from '@mui/material'
 import Grid from '@mui/material/Grid'
@@ -14,42 +14,41 @@ type Card = {
 
 type Props = { cards: Card[] }
 
-export default memo(function CardDeck({ cards }: Props) {
+export default function CardDeck({ cards }: Props) {
   const theme = useTheme()
-  let numCols = 1
-  if (useMediaQuery(theme.breakpoints.up('md'))) numCols = 2
-  if (useMediaQuery(theme.breakpoints.up('lg'))) numCols = 3
-  if (useMediaQuery(theme.breakpoints.up('xl'))) numCols = 4
+  const numCols = useMediaQuery(theme.breakpoints.up('xl'))
+    ? 4
+    : useMediaQuery(theme.breakpoints.up('lg'))
+    ? 3
+    : useMediaQuery(theme.breakpoints.up('md'))
+    ? 2
+    : 1
 
-  const [columns, setColumns] = useState<Card[][]>([[]])
-
-  useEffect(() => {
-    setColumns(arrangeCards(cards, numCols))
-  }, [cards, numCols])
+  const cardMatrix = useMemo<Card[][]>(
+    () => arrangeCards(cards, numCols),
+    [cards, numCols],
+  )
 
   if (!cards.every((card) => card.key && card.Card)) {
     console.error('Invalid card structure passed into CardDeck')
     return <></>
   }
-  if (!columns.length || !columns[0].length) return <></>
+  if (!cardMatrix.length || !cardMatrix[0].length) return <></>
   return (
-    <Grid>
-      {columns.map((column, col) => {
-        if (!column.length) return null
+    <Grid container justifyContent="center" wrap="nowrap">
+      {cardMatrix.map((cardColumn, col) => {
+        if (!cardColumn.length) return null
         return (
           <Grid
             item
+            flexBasis={0}
             container
             direction="column"
-            alignItems="stretch"
-            sx={{
-              maxWidth: theme.custom.cardWidth + theme.spacing(2),
-              minWidth: theme.custom.cardWidth - parseInt(theme.spacing(2)),
-              outline: 'none',
-            }}
-            key={column.map((card) => card.key).join()}
+            alignItems="center"
+            sx={{ margin: theme.spacing(2), outline: 'none' }}
+            key={cardColumn.map((card) => card.key).join()}
           >
-            {column.map((card, row) => {
+            {cardColumn.map((card, row) => {
               const timeout = Math.min(400 * Math.pow(col + row, 1 / 2), 1000)
               return (
                 <Grow in timeout={timeout}>
@@ -66,7 +65,7 @@ export default memo(function CardDeck({ cards }: Props) {
       })}
     </Grid>
   )
-})
+}
 
 function arrangeCards(cards: Card[], numCols: number): any {
   if (!Array.isArray(cards) || numCols <= 0) {

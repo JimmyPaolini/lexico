@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles'
 
-export default createTheme({
+let theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
@@ -18,7 +18,13 @@ export default createTheme({
     fontFamily: 'Helvetica Neue',
   },
   custom: {
-    cardWidth: 382,
+    card: {
+      // Largest iPhone screen width is 414px
+      // Smallest reasonable smartphone screen width is 320px
+      // allow for 8px margin on each side
+      maxWidth: 398,
+      minWidth: 304,
+    },
     literature: {
       fontFamily: 'Serif',
       fontWeight: 400,
@@ -28,10 +34,59 @@ export default createTheme({
   },
 })
 
+export default createTheme({
+  ...theme,
+  components: {
+    MuiCard: {
+      defaultProps: {
+        elevation: 4,
+      },
+      styleOverrides: {
+        root: {
+          margin: theme.spacing(1),
+          maxWidth: theme.custom.card.maxWidth,
+          mixWidth: theme.custom.card.minWidth,
+        },
+      },
+    },
+    MuiCardHeader: {
+      styleOverrides: {
+        root: {
+          background: theme.palette.background.paper,
+          paddingTop: theme.spacing(1),
+          paddingBottom: theme.spacing(1),
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          background: theme.palette.background.paper,
+          padding: theme.spacing(1),
+          '&:last-child': {
+            padding: theme.spacing(1),
+          },
+        },
+      },
+    },
+    MuiCardActionArea: {
+      styleOverrides: {
+        focusHighlight: {
+          display: 'none',
+          // visibility: 'hidden',
+        },
+      },
+    },
+  },
+})
+
 declare module '@mui/material/styles' {
   interface Theme {
     custom: {
-      cardWidth: number
+      card: {
+        maxWidth: number
+        minWidth: number
+      }
       literature: {
         fontFamily: string
         fontWeight: number
@@ -41,14 +96,6 @@ declare module '@mui/material/styles' {
     }
   }
   interface ThemeOptions {
-    custom?: {
-      cardWidth?: number
-      literature?: {
-        fontFamily?: string
-        fontWeight?: number
-        fontSize?: string
-        letterSpacing?: string
-      }
-    }
+    custom?: Partial<Theme['custom']>
   }
 }

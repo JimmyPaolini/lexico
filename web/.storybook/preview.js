@@ -1,4 +1,5 @@
-import { CssBaseline, ThemeProvider } from '@material-ui/core'
+import { CssBaseline, ThemeProvider } from '@mui/material'
+
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { ContextProvider } from '../src/components/layout/Context'
@@ -18,11 +19,11 @@ export const parameters = {
     values: [
       {
         name: 'Lexico',
-        value: '#66023C',
+        value: theme.palette.primary.main,
       },
       {
         name: 'Paper',
-        value: '#424242',
+        value: theme.palette.background.paper,
       },
     ],
   },

@@ -27,7 +27,7 @@ const classes = {
 const Root = styled('form')(({ theme }) => ({
   [`& .${classes.customReader}`]: {
     width: '100%',
-    maxWidth: theme.custom.cardWidth * 2,
+    maxWidth: theme.custom.card.maxWidth * 2,
     height: '100vh',
     padding: theme.spacing(2),
     marginLeft: 'auto',

@@ -24,8 +24,8 @@ const StyledCard = styled(Card)(({ theme }) => ({
   [`&.${classes.literatureCustomCard}`]: {
     display: 'flex',
     flexDirection: 'column',
-    maxWidth: theme.custom.cardWidth,
-    minWidth: theme.custom.cardWidth - theme.spacing(4),
+    maxWidth: theme.custom.card.maxWidth,
+    minWidth: theme.custom.card.minWidth,
     paddingBottom: 0,
     margin: theme.spacing(1),
   },

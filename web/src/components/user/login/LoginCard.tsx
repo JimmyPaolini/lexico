@@ -10,13 +10,7 @@ import OAuthLogin from './OAuthLogin'
 export default function LoginCard() {
   const theme = useTheme()
   return (
-    <Card
-      sx={{
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-      }}
-    >
+    <Card>
       <CardHeader
         title="Sign In"
         sx={{ paddingBottom: 0, minHeight: theme.spacing(8) }}

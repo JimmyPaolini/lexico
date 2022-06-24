@@ -16,7 +16,7 @@ const classes = {
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   [`&.${classes.paper}`]: {
-    maxWidth: theme.custom.cardWidth,
+    maxWidth: theme.custom.card.maxWidth,
     borderRadius: 0,
   },
 }))

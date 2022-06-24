@@ -10,9 +10,10 @@ export default function Pill({ backgroundColor, color, children }: Props) {
       variant="button"
       noWrap
       sx={{
-        height: 20,
+        height: '20px',
         padding: '0px 6px',
-        borderRadius: 100,
+        margin: '2px',
+        borderRadius: '100px',
         display: 'inline-flex',
         alignItems: 'center',
         color,

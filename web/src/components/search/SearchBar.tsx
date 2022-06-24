@@ -7,37 +7,11 @@ import CircularProgress from '@mui/material/CircularProgress'
 import IconButton from '@mui/material/IconButton'
 import InputBase from '@mui/material/InputBase'
 import Paper from '@mui/material/Paper'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { pascalCase } from '../../utils/string'
 import { Context } from '../layout/Context'
 import SwitchEnglishLatin from './SwitchEnglishLatin'
-
-const PREFIX = 'SearchBar'
-
-const classes = {
-  searchBar: `${PREFIX}-searchBar`,
-  input: `${PREFIX}-input`,
-  iconButton: `${PREFIX}-iconButton`,
-}
-
-const StyledPaper = styled(Paper)(({ theme }) => ({
-  [`&.${classes.searchBar}`]: {
-    width: theme.custom.cardWidth,
-    padding: '4px 4px',
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-
-  [`& .${classes.input}`]: {
-    marginLeft: theme.spacing(1),
-    fontSize: 20,
-  },
-
-  [`& .${classes.iconButton}`]: {
-    padding: theme.spacing(1),
-  },
-}))
 
 type Props = {
   search: string
@@ -58,6 +32,7 @@ export default function SearchBar({
   isLatin = true,
   setLatin = () => null,
 }: Props) {
+  const theme = useTheme()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
   const input = useRef<any>()
 
@@ -72,13 +47,23 @@ export default function SearchBar({
   // })
 
   return (
-    <StyledPaper className={classes.searchBar}>
+    <Paper
+      elevation={4}
+      sx={{
+        width: '100%',
+        maxWidth: theme.custom.card.maxWidth,
+        minWidth: theme.custom.card.minWidth,
+        padding: theme.spacing(1 / 2),
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+      }}
+    >
       <Grid container alignItems="center">
         <Grid item>
           {isMobile && (
             <IconButton
               onClick={() => setNavOpen(!isNavOpen)}
-              className={classes.iconButton}
+              sx={{ padding: theme.spacing(1) }}
               aria-label="menu"
               size="large"
             >
@@ -89,7 +74,7 @@ export default function SearchBar({
         <Grid item xs>
           <InputBase
             id="searchBar"
-            className={classes.input}
+            sx={{ marginLeft: theme.spacing(1), fontSize: 20 }}
             placeholder={'Search ' + pascalCase(target)}
             inputProps={{ 'aria-label': 'search', ref: input }}
             value={search}
@@ -103,7 +88,7 @@ export default function SearchBar({
         <Grid item>
           <IconButton
             onClick={() => handleSearchExecute()}
-            className={classes.iconButton}
+            sx={{ padding: theme.spacing(1) }}
             aria-label="search"
             size="large"
           >
@@ -111,7 +96,7 @@ export default function SearchBar({
               <SearchIcon />
             ) : (
               <CircularProgress
-                size={24}
+                size={theme.spacing(3)}
                 thickness={5.4}
                 color={isLatin ? 'secondary' : 'primary'}
               />
@@ -119,11 +104,9 @@ export default function SearchBar({
           </IconButton>
         </Grid>
         {target === 'lexico' && (
-          <Grid item>
-            <SwitchEnglishLatin {...{ isLatin, setLatin }} />
-          </Grid>
+          <SwitchEnglishLatin {...{ isLatin, setLatin }} />
         )}
       </Grid>
-    </StyledPaper>
+    </Paper>
   )
 }

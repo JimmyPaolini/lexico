@@ -25,11 +25,6 @@ export default function ToolIconGrid() {
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
         disableTouchRipple
-        sx={{
-          '& .MuiCardActionArea-focusHighlight': {
-            display: 'hide',
-          },
-        }}
       >
         <CardHeaderMui
           title="Frameworks, Libraries, and Tools"

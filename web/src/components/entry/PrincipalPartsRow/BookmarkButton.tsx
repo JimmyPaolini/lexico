@@ -2,39 +2,20 @@ import React, { useContext, useState } from 'react'
 
 import { Bookmark, BookmarkBorder } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
-import { styled } from '@mui/material/styles'
 
 import { Maybe } from '../../../graphql/generated'
 import useToggleBookmark from '../../../hooks/bookmarks/useToggleBookmark'
 import { isBookmarkedLocal } from '../../../utils/bookmarksLocal'
 import { Context } from '../../layout/Context'
 
-const PREFIX = 'BookmarkButton'
+type Props = { id: string; bookmarked?: Maybe<boolean> }
 
-const classes = {
-  bookmark: `${PREFIX}-bookmark`,
-}
-
-const StyledIconButton = styled(IconButton)(() => ({
-  [`&.${classes.bookmark}`]: {
-    display: 'inline-block',
-    position: 'relative',
-    top: 8,
-  },
-}))
-
-type Props = {
-  id: string
-  bookmarked?: Maybe<boolean>
-}
-
-export default function PrincipalPartsRow({
+export default function BookmarkButton({
   id,
-  bookmarked: bookmarkedOriginal,
+  bookmarked: bookmarkedRemote,
 }: Props) {
   const { user, queryClient } = useContext(Context)
-
-  const bookmarkedInitial = user ? !!bookmarkedOriginal : isBookmarkedLocal(id)
+  const bookmarkedInitial = user ? !!bookmarkedRemote : isBookmarkedLocal(id)
   const [bookmarked, setBookmarked] = useState<boolean>(bookmarkedInitial)
 
   const toggleBookmark = useToggleBookmark(
@@ -45,15 +26,10 @@ export default function PrincipalPartsRow({
     user,
   )
 
-  if (bookmarkedOriginal === undefined) return <></>
+  if (bookmarkedRemote === undefined) return <></>
   return (
-    <StyledIconButton
-      onClick={toggleBookmark}
-      className={classes.bookmark}
-      aria-label="Bookmark"
-      size="large"
-    >
+    <IconButton onClick={toggleBookmark} aria-label="Bookmark" size="large">
       {bookmarked ? <Bookmark /> : <BookmarkBorder />}
-    </StyledIconButton>
+    </IconButton>
   )
 }

@@ -47,13 +47,7 @@ export default function RecoverPasswordCard() {
   const { mutateAsync: recoverPassword } = useRecoverPasswordMutation()
 
   return (
-    <Card
-      sx={{
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-      }}
-    >
+    <Card>
       <CardHeader title="Recover Password" />
       <Divider variant="middle" />
       <CardContent>

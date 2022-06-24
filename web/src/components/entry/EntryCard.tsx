@@ -1,36 +1,18 @@
-import React, { memo } from 'react'
+import React from 'react'
 
 import Card from '@mui/material/Card'
 import Divider from '@mui/material/Divider'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { Entry } from '../../graphql/generated'
 import FormsRow from './FormsRow/FormsRow'
 import PrincipalPartsRow from './PrincipalPartsRow/PrincipalPartsRow'
 import TranslationsRow from './TranslationsRow/TranslationsRow'
 
-const PREFIX = 'EntryCard'
+type Props = { entry: Entry; searched: string }
 
-const classes = {
-  entryCard: `${PREFIX}-entryCard`,
-}
-
-const StyledCard = styled(Card)(({ theme }) => ({
-  [`&.${classes.entryCard}`]: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: theme.custom.cardWidth,
-    minWidth: theme.custom.cardWidth - parseInt(theme.spacing(4)),
-    paddingBottom: 0,
-    margin: theme.spacing(1),
-  },
-}))
-
-type Props = {
-  entry: Entry
-  searched: string
-}
-export default memo(function EntryCard({ entry, searched = '' }: Props) {
+export default (function EntryCard({ entry, searched = '' }: Props) {
+  const theme = useTheme()
   const {
     id,
     partOfSpeech,
@@ -43,7 +25,16 @@ export default memo(function EntryCard({ entry, searched = '' }: Props) {
   } = entry
 
   return (
-    <StyledCard elevation={4} className={classes.entryCard}>
+    <Card
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        maxWidth: theme.custom.card.maxWidth,
+        minWidth: theme.custom.card.minWidth,
+        paddingBottom: 0,
+      }}
+    >
       <PrincipalPartsRow
         {...{ id, partOfSpeech, principalParts, inflection, bookmarked }}
       />
@@ -55,6 +46,6 @@ export default memo(function EntryCard({ entry, searched = '' }: Props) {
         searched={searched}
         identifiers={identifiers || []}
       />
-    </StyledCard>
+    </Card>
   )
 })

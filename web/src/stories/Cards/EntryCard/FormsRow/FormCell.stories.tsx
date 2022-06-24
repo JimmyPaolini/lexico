@@ -9,7 +9,10 @@ export default {
   decorators: [
     (Story) => (
       <div
-        style={{ width: theme.custom.cardWidth / 2, border: '1px solid white' }}
+        style={{
+          width: theme.custom.card.maxWidth / 2,
+          border: '1px solid white',
+        }}
       >
         <Story />
       </div>

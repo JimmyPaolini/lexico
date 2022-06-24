@@ -11,7 +11,9 @@ export default function SingleCardLayout({ children }: Props) {
       <Grid
         item
         sx={{
-          width: theme.custom.cardWidth,
+          width: '100%',
+          maxWidth: theme.custom.card.maxWidth,
+          minWidth: theme.custom.card.minWidth,
           marginTop: theme.spacing(4),
           marginBottom: theme.spacing(4),
         }}

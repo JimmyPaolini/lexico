@@ -8,7 +8,7 @@ import {
   Grid,
   Typography,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { Forms } from '../../../graphql/generated'
 import { getSettingsLocal } from '../../../utils/settingsLocal'
@@ -18,41 +18,6 @@ import { Context } from '../../layout/Context'
 import AdjectiveForms from './PartsOfSpeech/AdjectiveFormsTable'
 import NounForms from './PartsOfSpeech/NounFormsTable'
 import VerbForms from './PartsOfSpeech/VerbFormsTable'
-
-const PREFIX = 'FormsRow'
-
-const classes = {
-  formsRow: `${PREFIX}-formsRow`,
-  hide: `${PREFIX}-hide`,
-  identifiers: `${PREFIX}-identifiers`,
-  expandIcon: `${PREFIX}-expandIcon`,
-}
-
-// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
-const Root = styled('div')(({ theme }) => ({
-  [`& .${classes.formsRow}`]: {
-    background: theme.palette.background.paper,
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-    '&:last-child': {
-      paddingBottom: theme.spacing(1),
-    },
-  },
-
-  [`& .${classes.hide}`]: {
-    display: 'none',
-  },
-
-  [`& .${classes.identifiers}`]: {
-    marginTop: theme.spacing(1),
-  },
-
-  [`& .${classes.expandIcon}`]: {
-    marginTop: theme.spacing(0.5),
-    marginRight: theme.spacing(1.5),
-  },
-}))
 
 type Props = {
   searched: string
@@ -67,6 +32,7 @@ export default function FormsRow({
   partOfSpeech,
   identifiers: identifiersList = [],
 }: Props) {
+  const theme = useTheme()
   const { user } = useContext(Context)
   const expandedInitial =
     user?.settings?.formsExpandedDefault ||
@@ -82,18 +48,18 @@ export default function FormsRow({
 
   const expandable = !!FormsCard
 
-  if (searched.match(/Table/i) && !expandable) return <Root></Root>
+  if (searched.match(/Table/i) && !expandable) return <></>
 
   return (
     <>
       <Divider variant="inset" />
-      <CardContent className={classes.formsRow}>
+      <CardContent>
         <CardActionArea
           onClick={() => setExpanded((expanded) => !expanded)}
           disabled={!expandable}
           disableRipple
           disableTouchRipple
-          classes={{ focusHighlight: classes.hide }}
+          sx={{ paddingLeft: theme.spacing(1), paddingRight: theme.spacing(1) }}
         >
           <Grid container wrap="nowrap">
             <Grid container item direction="column">
@@ -105,7 +71,7 @@ export default function FormsRow({
                   container
                   item
                   key={identifiers}
-                  className={classes.identifiers}
+                  sx={{ marginTop: theme.spacing(0.5) }}
                 >
                   {identifiers.split(' ').map((identifier) => (
                     <IdentifierPill identifier={identifier} key={identifier} />
@@ -114,9 +80,13 @@ export default function FormsRow({
               ))}
             </Grid>
             {FormsCard && (
-              <Grid item className={classes.expandIcon}>
-                <ExpandIcon {...{ expanded }} />
-              </Grid>
+              <ExpandIcon
+                {...{ expanded }}
+                sx={{
+                  marginTop: theme.spacing(0.5),
+                  marginRight: theme.spacing(0.5),
+                }}
+              />
             )}
           </Grid>
         </CardActionArea>

@@ -13,11 +13,6 @@ export default function ToolIconGrid() {
       <CardActionArea
         disableRipple
         disableTouchRipple
-        sx={{
-          '& .MuiCardActionArea-focusHighlight': {
-            display: 'hide',
-          },
-        }}
         href="https://github.com/JimmyPaolini/Lexico/issues"
         target="_blank"
       >

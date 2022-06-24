@@ -27,14 +27,9 @@ export default forwardRef(function NounDeclensionCard(
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
-    <Card sx={{ margin: theme.spacing(1) }} ref={ref}>
+    <Card ref={ref}>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
-        sx={{
-          '& .MuiCardActionArea-focusHighlight': {
-            display: 'hide',
-          },
-        }}
         disableRipple
         disableTouchRipple
       >

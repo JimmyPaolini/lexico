@@ -14,7 +14,7 @@ const classes = {
 
 const StyledTooltip = styled(Tooltip)(({ theme }) => ({
   [`& .${classes.tooltip}`]: {
-    maxWidth: theme.custom.cardWidth / 2,
+    maxWidth: theme.custom.card.maxWidth / 2,
     fontSize: 14,
     textAlign: 'center',
   },

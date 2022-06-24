@@ -49,13 +49,7 @@ export default function ResetPasswordCard({ passwordResetToken }: Props) {
   })
 
   return (
-    <Card
-      sx={{
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-      }}
-    >
+    <Card>
       <CardHeader title="Reset Password" />
       <Divider variant="middle" />
       <CardContent>

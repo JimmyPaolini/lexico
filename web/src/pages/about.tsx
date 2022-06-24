@@ -31,7 +31,7 @@ export default function About() {
               padding: theme.spacing(1),
               margin: theme.spacing(2),
               marginTop: theme.spacing(4),
-              maxWidth: theme.custom.cardWidth * 2,
+              maxWidth: theme.custom.card.maxWidth * 2,
               backgroundColor: theme.palette.background.paper,
             }}
           >

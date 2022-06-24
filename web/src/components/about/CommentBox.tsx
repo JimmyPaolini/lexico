@@ -47,11 +47,6 @@ export default function CommentBox() {
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
         disableTouchRipple
-        sx={{
-          '& .MuiCardActionArea-focusHighlight': {
-            display: 'hide',
-          },
-        }}
       >
         <CardHeaderMui
           title="Questions and Feedback"

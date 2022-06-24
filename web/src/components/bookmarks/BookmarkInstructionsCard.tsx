@@ -19,9 +19,7 @@ export default function BookmarkInstructionsCard() {
     <Grow in>
       <Card
         sx={{
-          maxWidth: theme.custom.cardWidth,
-          marginLeft: theme.spacing(1),
-          marginRight: theme.spacing(1),
+          maxWidth: theme.custom.card.maxWidth,
         }}
       >
         <CardContent>

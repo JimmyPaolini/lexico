@@ -6,7 +6,6 @@ import {
   CardContent,
   Collapse,
   Divider,
-  useTheme,
 } from '@mui/material'
 
 import VerbForms from '../entry/FormsRow/PartsOfSpeech/VerbFormsTable'
@@ -22,18 +21,12 @@ export default forwardRef(function VerbConjugationCard(
   { conjugation, expandedInitial = false }: Props,
   ref,
 ) {
-  const theme = useTheme()
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
-    <Card sx={{ margin: theme.spacing(1) }} ref={ref}>
+    <Card ref={ref}>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
-        sx={{
-          '& .MuiCardActionArea-focusHighlight': {
-            display: 'hide',
-          },
-        }}
         disableRipple
         disableTouchRipple
       >

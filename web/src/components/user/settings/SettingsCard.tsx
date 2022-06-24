@@ -40,13 +40,7 @@ export default function SettingsCard() {
   }
 
   return (
-    <Card
-      sx={{
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-      }}
-    >
+    <Card>
       <CardHeader title="Settings" />
       <Divider variant="middle" />
       <CardContent>
