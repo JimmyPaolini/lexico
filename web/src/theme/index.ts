@@ -73,7 +73,6 @@ export default createTheme({
       styleOverrides: {
         focusHighlight: {
           display: 'none',
-          // visibility: 'hidden',
         },
       },
     },

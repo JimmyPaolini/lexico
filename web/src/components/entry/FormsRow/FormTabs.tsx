@@ -1,20 +1,7 @@
 import React, { ReactNode } from 'react'
 
 import { Box, Tab, Tabs } from '@mui/material'
-import { styled } from '@mui/material/styles'
-
-const PREFIX = 'FormTabs'
-
-const classes = {
-  tabs: `${PREFIX}-tabs`,
-}
-
-const StyledBox = styled(Box)(({ theme }) => ({
-  [`& .${classes.tabs}`]: {
-    height: 42,
-    background: theme.palette.background.paper,
-  },
-}))
+import { useTheme } from '@mui/material/styles'
 
 type Props = {
   activeTab: number
@@ -29,6 +16,7 @@ export default function FormTabs({
   setActiveTab,
   children,
 }: Props) {
+  const theme = useTheme()
   const minWidth = `${100 / tabs.length}%`
 
   const changeActiveTab = (_: any, selectedTab: number) => {
@@ -36,12 +24,12 @@ export default function FormTabs({
   }
 
   return (
-    <StyledBox>
+    <Box>
       <Tabs
         value={activeTab}
         onChange={changeActiveTab}
         onClick={(e) => e.stopPropagation()}
-        className={classes.tabs}
+        sx={{ height: 42, background: theme.palette.background.paper }}
         textColor="secondary"
         indicatorColor="secondary"
         aria-label="conjugation tabs"
@@ -57,6 +45,6 @@ export default function FormTabs({
         ))}
       </Tabs>
       {children}
-    </StyledBox>
+    </Box>
   )
 }
