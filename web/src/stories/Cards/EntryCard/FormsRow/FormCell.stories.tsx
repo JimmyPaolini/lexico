@@ -49,7 +49,7 @@ export const Ellipsis: ComponentStory<typeof FormCell> = (args) => (
 )
 Ellipsis.args = {
   position: 'midLeft',
-  centerText: 'amāvērunt, amāvērere, amāvērunt',
+  centerText: 'amāvērunt, amāvērere, amāvērunt, amāvēruntaxivit',
   topLeftText: 'TL',
   topRightText: 'TR',
   bottomLeftText: 'BL',

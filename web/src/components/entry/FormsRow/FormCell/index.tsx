@@ -1,30 +1,9 @@
 import Grid from '@mui/material/Grid'
 import Tooltip from '@mui/material/Tooltip'
-import { styled } from '@mui/material/styles'
+import { styled, useTheme } from '@mui/material/styles'
 
 import CenterText from './CenterText'
 import SideCornerTexts from './SideCornerTexts'
-
-const PREFIX = 'index'
-
-const classes = {
-  tooltip: `${PREFIX}-tooltip`,
-  formCell: `${PREFIX}-formCell`,
-}
-
-const StyledTooltip = styled(Tooltip)(({ theme }) => ({
-  [`& .${classes.tooltip}`]: {
-    maxWidth: theme.custom.card.maxWidth / 2,
-    fontSize: 14,
-    textAlign: 'center',
-  },
-
-  [`& .${classes.formCell}`]: {
-    background: theme.palette.background.paper,
-    height: 48,
-    position: 'relative',
-  },
-}))
 
 export type FormCellPosition =
   | 'topLeftText'
@@ -51,24 +30,33 @@ export default function FormCell({
   bottomLeftText,
   bottomRightText,
 }: Props) {
+  const theme = useTheme()
   const borderRule = '1px solid rgba(255, 255, 255, 0.12)'
 
   return (
-    <StyledTooltip
+    <Tooltip
       title={centerText?.length > 20 ? centerText : ''}
       placement="top"
       enterDelay={0}
       // interactive
       arrow
-      classes={{ tooltip: classes.tooltip }}
       aria-label={centerText}
+      sx={{
+        ['&.MuiTooltip-tooltip']: {
+          maxWidth: theme.custom.card.maxWidth / 2,
+          fontSize: 14,
+          textAlign: 'center',
+        },
+      }}
     >
       <Grid
         container
         justifyContent="space-between"
         wrap="nowrap"
-        className={classes.formCell}
-        style={{
+        sx={{
+          background: theme.palette.background.paper,
+          height: 48,
+          position: 'relative',
           borderTop: position.match(/bottom|mid/i) ? borderRule : '',
           borderBottom: position.match(/top|mid/i) ? borderRule : '',
           borderRight: position.match(/Left/i) ? borderRule : '',
@@ -87,6 +75,6 @@ export default function FormCell({
           side="right"
         />
       </Grid>
-    </StyledTooltip>
+    </Tooltip>
   )
 }

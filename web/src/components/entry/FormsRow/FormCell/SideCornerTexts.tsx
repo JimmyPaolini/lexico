@@ -1,26 +1,9 @@
 import Grid from '@mui/material/Grid'
 import { styled } from '@mui/material/styles'
 
+import { relative } from 'path'
+
 import CornerText from './CornerText'
-
-const PREFIX = 'SideCornerTexts'
-
-const classes = {
-  left: `${PREFIX}-left`,
-  right: `${PREFIX}-right`,
-}
-
-const StyledGrid = styled(Grid)(() => ({
-  [`& .${classes.left}`]: {
-    position: 'relative',
-    left: 2,
-  },
-
-  [`& .${classes.right}`]: {
-    position: 'relative',
-    right: 2,
-  },
-}))
 
 type Props = {
   top: string
@@ -30,15 +13,18 @@ type Props = {
 
 export default function SideCornerTexts({ top, bottom, side }: Props) {
   return (
-    <StyledGrid
+    <Grid
       container
-      xs
       direction="column"
+      xs="auto"
       justifyContent="space-between"
-      className={side === 'right' ? classes.right : classes.left}
+      sx={{
+        position: 'relative',
+        ...(side === 'right' ? { right: 2 } : { left: 2 }),
+      }}
     >
       <CornerText text={top} />
       <CornerText text={bottom} />
-    </StyledGrid>
+    </Grid>
   )
 }

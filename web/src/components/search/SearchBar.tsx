@@ -103,9 +103,9 @@ export default function SearchBar({
             )}
           </IconButton>
         </Grid>
-        {target === 'lexico' && (
+        {/* {target === 'lexico' && (
           <SwitchEnglishLatin {...{ isLatin, setLatin }} />
-        )}
+        )} */}
       </Grid>
     </Paper>
   )
