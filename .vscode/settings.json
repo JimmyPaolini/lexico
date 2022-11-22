@@ -1,0 +1,69 @@
+{
+  "peacock.color": "#66023C",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBorder": "#121f01"
+  },
+  "terminals.autorun": false,
+  "terminals.autokill": true,
+  "terminals.terminals": [
+    {
+      "name": "lexico",
+      "description": "shell",
+      "icon": "globe",
+      "cwd": "./"
+    },
+    {
+      "name": "react",
+      "description": "react",
+      "icon": "browser",
+      "cwd": "./web"
+    },
+    {
+      "name": "story",
+      "description": "story",
+      "icon": "book",
+      "cwd": "./web"
+    },
+    {
+      "name": "web",
+      "description": "web",
+      "icon": "cloud",
+      "cwd": "./web"
+    },
+    {
+      "name": "server",
+      "description": "server",
+      "icon": "flame",
+      "cwd": "./server"
+    },
+    {
+      "name": "database",
+      "description": "database",
+      "icon": "globe",
+      "cwd": "./"
+    }
+  ],
+  "material-icon-theme.files.associations": {
+    "package.json": "npm",
+    "package-lock.json": "npm",
+    "tsconfig.json": "settings",
+    "docker-compose.database.yml": "docker",
+    "settings.json": "vscode",
+    "keybindings.json": "vscode"
+  },
+  "material-icon-theme.folders.associations": {
+    "database_volume": "database",
+    "infra": "environment",
+    "entity": "class",
+    "ingestion": "scripts",
+    "resolver": "routes",
+    "literature": "lib",
+    "dictionary": "app",
+    "wiktionary": "content",
+    ".next": "vercel",
+    "cypress": "test",
+    "cleaning": "coverage",
+    "migration": "scripts"
+  },
+  "prettier.configPath": "./cleaning/.prettierrc.json"
+}
