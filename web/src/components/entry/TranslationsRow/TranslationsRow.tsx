@@ -42,7 +42,7 @@ export default function TranslationsRow({ translations }: Props) {
                 key={translation.id}
               />
             ))}
-            <Collapse in={expanded || !expandable} timeout={250} mountOnEnter>
+            <Collapse in={expanded || !expandable}>
               {translations.slice(2).map((translation) => (
                 <TranslationBullet
                   translation={translation}

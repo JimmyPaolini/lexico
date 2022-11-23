@@ -2,35 +2,25 @@
 import React from 'react'
 
 import { Box, Paper } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
-import { Forms, Maybe } from '../../../../../graphql/generated'
+import { NounForms } from 'src/graphql/generated'
+
 import FormsTable from '../../FormsTable'
 import { nounFormsRestructure } from './nounFormsRestructure'
 
-const PREFIX = 'index'
+type Props = { forms: NounForms }
 
-const classes = {
-  paper: `${PREFIX}-paper`,
-}
-
-const StyledPaper = styled(Paper)(({ theme }) => ({
-  [`&.${classes.paper}`]: {
-    maxWidth: theme.custom.card.maxWidth,
-    borderRadius: 0,
-  },
-}))
-
-type Props = {
-  forms?: Maybe<Forms>
-}
-
-export default function NounForms({ forms }: Props) {
+export default function NounFormsTable({ forms }: Props) {
+  const theme = useTheme()
   const formsStructure = nounFormsRestructure(forms)
   return (
-    <StyledPaper className={classes.paper} elevation={0}>
+    <Paper
+      sx={{ maxWidth: theme.custom.card.maxWidth, borderRadius: 0 }}
+      elevation={0}
+    >
       <Box style={{ height: '4px' }} />
       <FormsTable forms={formsStructure} />
-    </StyledPaper>
+    </Paper>
   )
 }

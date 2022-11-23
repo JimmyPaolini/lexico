@@ -6,14 +6,14 @@ import { useTheme } from '@mui/material/styles'
 
 import { Identifier } from 'src/utils/identifiers'
 
-import { Forms, Maybe } from '../../../../../graphql/generated'
+import { VerbForms } from '../../../../../graphql/generated'
 import FormTabs from '../../FormTabs'
 import FormsTable from '../../FormsTable'
 import { verbFormsRestructure } from './verbFormsRestructure'
 
-type Props = { forms?: Maybe<Forms> }
+type Props = { forms: VerbForms }
 
-export default function VerbForms({ forms }: Props) {
+export default function VerbFormsTable({ forms }: Props) {
   const theme = useTheme()
   const [topTab, setTopTabState] = useState(0)
   const [midTab, setMidTabState] = useState(0)

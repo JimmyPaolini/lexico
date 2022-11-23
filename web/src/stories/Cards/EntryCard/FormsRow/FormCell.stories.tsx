@@ -26,10 +26,10 @@ export const Default: ComponentStory<typeof FormCell> = (args) => (
 Default.args = {
   position: 'midLeft',
   centerText: 'amat',
-  topLeftText: 'TL',
-  topRightText: 'TR',
-  bottomLeftText: 'BL',
-  bottomRightText: 'BR',
+  topLeftText: 'nominative',
+  topRightText: 'singular',
+  bottomLeftText: 'gerund',
+  bottomRightText: 'plural',
 }
 
 export const TwoLines: ComponentStory<typeof FormCell> = (args) => (
@@ -38,10 +38,10 @@ export const TwoLines: ComponentStory<typeof FormCell> = (args) => (
 TwoLines.args = {
   position: 'midLeft',
   centerText: 'amāvērunt, amāvērere',
-  topLeftText: 'TL',
-  topRightText: 'TR',
-  bottomLeftText: 'BL',
-  bottomRightText: 'BR',
+  topLeftText: 'nominative',
+  topRightText: 'singular',
+  bottomLeftText: 'gerund',
+  bottomRightText: 'plural',
 }
 
 export const Ellipsis: ComponentStory<typeof FormCell> = (args) => (
@@ -50,8 +50,8 @@ export const Ellipsis: ComponentStory<typeof FormCell> = (args) => (
 Ellipsis.args = {
   position: 'midLeft',
   centerText: 'amāvērunt, amāvērere, amāvērunt, amāvēruntaxivit',
-  topLeftText: 'TL',
-  topRightText: 'TR',
-  bottomLeftText: 'BL',
-  bottomRightText: 'BR',
+  topLeftText: 'nominative',
+  topRightText: 'singular',
+  bottomLeftText: 'gerund',
+  bottomRightText: 'plural',
 }

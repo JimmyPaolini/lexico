@@ -27,6 +27,6 @@ Default.loaders = [
   async () => {
     const { forms } = await searchEntry('amat')
     console.log(verbFormsRestructure(forms))
-    return { forms: verbFormsRestructure(forms)['IND']['PRES']['ACT'] }
+    return { forms: verbFormsRestructure(forms).indicative.present.active }
   },
 ]

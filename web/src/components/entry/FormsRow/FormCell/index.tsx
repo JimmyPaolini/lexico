@@ -7,14 +7,14 @@ import CenterText from './CenterText'
 import Sidebar from './Sidebar'
 
 export type FormCellPosition =
-  | 'topLeftText'
-  | 'topRightText'
+  | 'topLeft'
+  | 'topRight'
   | 'midLeft'
   | 'midRight'
-  | 'bottomLeftText'
-  | 'bottomRightText'
+  | 'bottomLeft'
+  | 'bottomRight'
 
-export type Props = {
+type Props = {
   position: FormCellPosition
   centerText: string
   topLeftText?: Identifier
@@ -32,7 +32,7 @@ export default function FormCell({
   bottomRightText,
 }: Props) {
   const theme = useTheme()
-  const borderRule = '1px solid rgba(255, 255, 255, 0.12)'
+  const border = '1px solid rgba(255, 255, 255, 0.12)'
 
   return (
     <Tooltip
@@ -58,10 +58,10 @@ export default function FormCell({
           background: theme.palette.background.paper,
           height: 48,
           position: 'relative',
-          borderTop: position.match(/bottom|mid/i) ? borderRule : '',
-          borderBottom: position.match(/top|mid/i) ? borderRule : '',
-          borderRight: position.match(/Left/i) ? borderRule : '',
-          borderLeft: position.match(/Right/i) ? borderRule : '',
+          borderTop: position.match(/bottom|mid/i) ? border : '',
+          borderBottom: position.match(/top|mid/i) ? border : '',
+          borderRight: position.match(/Left/i) ? border : '',
+          borderLeft: position.match(/Right/i) ? border : '',
         }}
       >
         <Sidebar top={topLeftText} bottom={bottomLeftText} side="left" />

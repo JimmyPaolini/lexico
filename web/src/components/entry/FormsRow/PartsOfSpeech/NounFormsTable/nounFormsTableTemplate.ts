@@ -1,25 +1,31 @@
-export const nounFormsTemplate: any = [
+export const nounFormsTableTemplate = [
   {
-    topLeftText: 'NOM',
-    topRightText: 'SG',
+    topLeftText: 'nominative',
+    topRightText: 'singular',
+    centerText: '-',
   },
   {
-    topLeftText: 'PL',
+    topRightText: 'plural',
+    centerText: '-',
   },
   {
-    topLeftText: 'GEN',
+    topLeftText: 'genitive',
+    centerText: '-',
   },
-  {},
+  { centerText: '-' },
   {
-    topLeftText: 'DAT',
+    topLeftText: 'dative',
+    centerText: '-',
   },
-  {},
+  { centerText: '-' },
   {
-    topLeftText: 'ACC',
+    topLeftText: 'accusative',
+    centerText: '-',
   },
-  {},
+  { centerText: '-' },
   {
-    topLeftText: 'ABL',
+    topLeftText: 'ablative',
+    centerText: '-',
   },
-  {},
+  { centerText: '-' },
 ]

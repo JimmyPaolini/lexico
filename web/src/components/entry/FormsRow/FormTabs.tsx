@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { Dispatch, ReactNode, SetStateAction } from 'react'
 
 import { Box, Tab, Tabs } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
@@ -12,7 +12,7 @@ import { identifierStyles } from '../../accessories/Pills/identifierStyles'
 type Props = {
   tabs: Identifier[]
   activeTab: number
-  setActiveTab: any
+  setActiveTab: Dispatch<SetStateAction<number>> | ((activeTab: number) => void)
   children: ReactNode
 }
 
@@ -41,7 +41,7 @@ export default function FormTabs({
             classes={{
               indicator: css({
                 backgroundColor:
-                  identifierStyles[tabs[activeTab]].backgroundColor ?? 'white',
+                  identifierStyles[tabs[activeTab]].background ?? 'white',
               }),
             }}
             variant="fullWidth"

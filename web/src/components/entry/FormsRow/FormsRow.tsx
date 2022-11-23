@@ -11,6 +11,7 @@ import {
 import { useTheme } from '@mui/material/styles'
 
 import { Forms } from '../../../graphql/generated'
+import { Identifier } from '../../../utils/identifiers'
 import { getSettingsLocal } from '../../../utils/settingsLocal'
 import ExpandIcon from '../../accessories/ExpandIcon'
 import IdentifierPill from '../../accessories/Pills/IdentifierPill'
@@ -74,7 +75,10 @@ export default function FormsRow({
                   sx={{ marginTop: theme.spacing(0.5) }}
                 >
                   {identifiers.split(' ').map((identifier) => (
-                    <IdentifierPill identifier={identifier} key={identifier} />
+                    <IdentifierPill
+                      identifier={identifier as Identifier}
+                      key={identifier}
+                    />
                   ))}
                 </Grid>
               ))}
@@ -92,7 +96,7 @@ export default function FormsRow({
         </CardActionArea>
       </CardContent>
       {FormsCard && (
-        <Collapse in={expanded && !!FormsCard} mountOnEnter>
+        <Collapse in={expanded && !!FormsCard}>
           <Divider variant="inset" />
           <FormsCard forms={forms} />
         </Collapse>

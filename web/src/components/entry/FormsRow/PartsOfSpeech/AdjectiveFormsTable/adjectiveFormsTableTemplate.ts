@@ -1,77 +1,37 @@
+const genderTable = [
+  {
+    topLeftText: 'nominative',
+    topRightText: 'singular',
+    centerText: '-',
+  },
+  {
+    topRightText: 'plural',
+    centerText: '-',
+  },
+  {
+    topLeftText: 'genitive',
+    centerText: '-',
+  },
+  { centerText: '-' },
+  {
+    topLeftText: 'dative',
+    centerText: '-',
+  },
+  { centerText: '-' },
+  {
+    topLeftText: 'accusative',
+    centerText: '-',
+  },
+  { centerText: '-' },
+  {
+    topLeftText: 'ablative',
+    centerText: '-',
+  },
+  { centerText: '-' },
+]
+
 export const adjectiveFormsTableTemplate = {
-  MASC: [
-    {
-      topLeftText: 'NOM',
-      topRightText: 'SG',
-    },
-    {
-      topLeftText: 'PL',
-    },
-    {
-      topLeftText: 'GEN',
-    },
-    {},
-    {
-      topLeftText: 'DAT',
-    },
-    {},
-    {
-      topLeftText: 'ACC',
-    },
-    {},
-    {
-      topLeftText: 'ABL',
-    },
-    {},
-  ],
-  FEM: [
-    {
-      topLeftText: 'NOM',
-      topRightText: 'SG',
-    },
-    {
-      topLeftText: 'PL',
-    },
-    {
-      topLeftText: 'GEN',
-    },
-    {},
-    {
-      topLeftText: 'DAT',
-    },
-    {},
-    {
-      topLeftText: 'ACC',
-    },
-    {},
-    {
-      topLeftText: 'ABL',
-    },
-    {},
-  ],
-  NEU: [
-    {
-      topLeftText: 'NOM',
-      topRightText: 'SG',
-    },
-    {
-      topLeftText: 'PL',
-    },
-    {
-      topLeftText: 'GEN',
-    },
-    {},
-    {
-      topLeftText: 'DAT',
-    },
-    {},
-    {
-      topLeftText: 'ACC',
-    },
-    {},
-    {
-      topLeftText: 'ABL',
-    },
-    {},
-  ],
+  masculine: [...genderTable],
+  feminine: [...genderTable],
+  neuter: [...genderTable],
 }

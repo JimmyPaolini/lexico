@@ -1,41 +1,35 @@
-/* spellchecker: disable */
 import React, { useState } from 'react'
 
 import { Paper } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
-import { Forms, Maybe } from '../../../../../graphql/generated'
+import { AdjectiveForms } from 'src/graphql/generated'
+import { Gender, Identifier } from 'src/utils/identifiers'
+
 import FormTabs from '../../FormTabs'
 import FormsTable from '../../FormsTable'
 import { adjectiveFormsRestructure } from './adjectiveFormsRestructure'
 
-const PREFIX = 'index'
+type Props = { forms: AdjectiveForms }
 
-const classes = {
-  paper: `${PREFIX}-paper`,
-}
-
-const StyledPaper = styled(Paper)(({ theme }) => ({
-  [`&.${classes.paper}`]: {
-    maxWidth: theme.custom.card.maxWidth,
-    borderRadius: 0,
-  },
-}))
-
-type Props = {
-  forms?: Maybe<Forms>
-}
-
-export default function AdjectiveForms({ forms }: Props) {
-  const [tab, setTab] = useState(0)
+export default function AdjectiveFormsTable({ forms }: Props) {
+  const theme = useTheme()
+  const [activeTab, setActiveTab] = useState(0)
   const structure = adjectiveFormsRestructure(forms)
-  const tabs = Object.keys(structure)
-  const formsStructure = structure[tabs[tab]]
+  const tabs = Object.keys(structure) as Gender[]
+  const formsStructure = structure[tabs[activeTab]]
   return (
-    <StyledPaper className={classes.paper} elevation={0}>
-      <FormTabs tabs={tabs} activeTab={tab} setActiveTab={setTab}>
+    <Paper
+      sx={{ maxWidth: theme.custom.card.maxWidth, borderRadius: 0 }}
+      elevation={0}
+    >
+      <FormTabs
+        tabs={tabs as Identifier[]}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      >
         <FormsTable forms={formsStructure} />
       </FormTabs>
-    </StyledPaper>
+    </Paper>
   )
 }
