@@ -1,7 +1,7 @@
 /* spellchecker: disable */
 import React, { useState } from 'react'
 
-import { Box, Paper } from '@mui/material'
+import { Paper } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 import { Forms, Maybe } from '../../../../../graphql/generated'
@@ -34,7 +34,6 @@ export default function AdjectiveForms({ forms }: Props) {
   return (
     <StyledPaper className={classes.paper} elevation={0}>
       <FormTabs tabs={tabs} activeTab={tab} setActiveTab={setTab}>
-        <Box style={{ height: '8px' }} />
         <FormsTable forms={formsStructure} />
       </FormTabs>
     </StyledPaper>

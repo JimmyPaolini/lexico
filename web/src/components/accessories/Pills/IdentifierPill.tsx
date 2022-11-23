@@ -1,16 +1,13 @@
-import {
-  Identifier,
-  abbreviateIdentifier,
-  identifierColors,
-} from 'src/utils/identifiers'
+import { Identifier, abbreviateIdentifier } from 'src/utils/identifiers'
 
-import Pill from './Pill'
+import Pill, { PillVariant } from './Pill'
+import { identifierStyles } from './identifierStyles'
 
-type Props = { identifier: Identifier }
+type Props = { identifier: Identifier; variant?: PillVariant }
 
-export default function IdentifierPill({ identifier }: Props) {
+export default function IdentifierPill({ identifier, variant }: Props) {
   return (
-    <Pill {...identifierColors[identifier]}>
+    <Pill {...identifierStyles[identifier]} variant={variant}>
       {abbreviateIdentifier[identifier]}
     </Pill>
   )

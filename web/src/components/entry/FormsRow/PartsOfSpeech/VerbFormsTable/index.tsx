@@ -1,7 +1,7 @@
 /* spellchecker: disable */
 import React, { useState } from 'react'
 
-import { Box, Paper } from '@mui/material'
+import { Paper } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { Identifier } from 'src/utils/identifiers'
@@ -85,7 +85,6 @@ export default function VerbForms({ forms }: Props) {
             activeTab={bottomTab}
             setActiveTab={setBottomTab}
           >
-            <Box sx={{ height: '8px' }} />
             <FormsTable forms={formsStructure} />
           </FormTabs>
         </FormTabs>

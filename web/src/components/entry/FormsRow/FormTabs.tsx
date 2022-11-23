@@ -5,8 +5,9 @@ import { useTheme } from '@mui/material/styles'
 
 import { ClassNames } from '@emotion/react'
 
-import { Identifier, identifierColors } from '../../../utils/identifiers'
+import { Identifier } from '../../../utils/identifiers'
 import IdentifierPill from '../../accessories/Pills/IdentifierPill'
+import { identifierStyles } from '../../accessories/Pills/identifierStyles'
 
 type Props = {
   tabs: Identifier[]
@@ -40,7 +41,7 @@ export default function FormTabs({
             classes={{
               indicator: css({
                 backgroundColor:
-                  identifierColors[tabs[activeTab]].backgroundColor ?? 'white',
+                  identifierStyles[tabs[activeTab]].backgroundColor ?? 'white',
               }),
             }}
             variant="fullWidth"
@@ -49,8 +50,7 @@ export default function FormTabs({
             {tabs.map((tab) => (
               <Tab
                 icon={<IdentifierPill identifier={tab} />}
-                sx={{ minWidth, padding: '12px 0px' }}
-                // disabled={tab === '-'}
+                sx={{ minWidth, padding: '0px 0px' }}
                 aria-label={tab}
                 key={tab}
               />

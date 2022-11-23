@@ -5,8 +5,8 @@ import { Identifier } from 'src/utils/identifiers/types'
 import CornerIdentifier from './CornerIdentifier'
 
 type Props = {
-  top: Identifier
-  bottom: Identifier
+  top?: Identifier
+  bottom?: Identifier
   side: 'right' | 'left'
 }
 
@@ -19,7 +19,7 @@ export default function Sidebar({ top, bottom, side }: Props) {
       justifyContent="space-between"
       sx={{
         position: 'relative',
-        ...(side === 'right' ? { right: 2 } : { left: 2 }),
+        ...(side === 'right' ? { right: 0 } : { left: 0 }),
       }}
     >
       <CornerIdentifier identifier={top} />

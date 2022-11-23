@@ -2,6 +2,7 @@ import Grid from '@mui/material/Grid'
 import Tooltip from '@mui/material/Tooltip'
 import { useTheme } from '@mui/material/styles'
 
+import { Identifier } from '../../../../utils/identifiers'
 import CenterText from './CenterText'
 import Sidebar from './Sidebar'
 
@@ -16,10 +17,10 @@ export type FormCellPosition =
 export type Props = {
   position: FormCellPosition
   centerText: string
-  topLeftText: string
-  topRightText: string
-  bottomLeftText: string
-  bottomRightText: string
+  topLeftText?: Identifier
+  topRightText?: Identifier
+  bottomLeftText?: Identifier
+  bottomRightText?: Identifier
 }
 
 export default function FormCell({
