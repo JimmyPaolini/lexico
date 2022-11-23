@@ -25,37 +25,26 @@
   "terminals.terminals": [
     {
       "name": "lexico",
-      "description": "shell",
-      "icon": "globe",
+      "icon": "bookmark",
       "cwd": "./"
     },
     {
-      "name": "react",
-      "description": "react",
-      "icon": "browser",
-      "cwd": "./web"
-    },
-    {
       "name": "story",
-      "description": "story",
       "icon": "book",
       "cwd": "./web"
     },
     {
       "name": "web",
-      "description": "web",
-      "icon": "cloud",
+      "icon": "browser",
       "cwd": "./web"
     },
     {
       "name": "server",
-      "description": "server",
-      "icon": "flame",
+      "icon": "cloud",
       "cwd": "./server"
     },
     {
       "name": "database",
-      "description": "database",
       "icon": "globe",
       "cwd": "./"
     }
