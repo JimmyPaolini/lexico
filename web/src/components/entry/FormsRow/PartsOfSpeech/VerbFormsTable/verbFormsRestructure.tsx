@@ -87,28 +87,28 @@ export const verbFormsRestructure = (conjugations: any) => {
     structure.SUB.PLUP.PAS,
   )
 
-  structure.IMP['IMPERATIVE'].ACT[0].centerText =
+  structure.IMPV['IMPERATIVE'].ACT[0].centerText =
     conjugations?.imperative?.active?.present?.singular?.second?.join?.(',\n')
-  structure.IMP['IMPERATIVE'].ACT[2].centerText =
+  structure.IMPV['IMPERATIVE'].ACT[2].centerText =
     conjugations?.imperative?.active?.future?.singular?.second?.join?.(',\n')
-  structure.IMP['IMPERATIVE'].ACT[4].centerText =
+  structure.IMPV['IMPERATIVE'].ACT[4].centerText =
     conjugations?.imperative?.active?.future?.singular?.third?.join?.(',\n')
-  structure.IMP['IMPERATIVE'].ACT[1].centerText =
+  structure.IMPV['IMPERATIVE'].ACT[1].centerText =
     conjugations?.imperative?.active?.present?.plural?.second?.join?.(',\n')
-  structure.IMP['IMPERATIVE'].ACT[3].centerText =
+  structure.IMPV['IMPERATIVE'].ACT[3].centerText =
     conjugations?.imperative?.active?.future?.plural?.second?.join?.(',\n')
-  structure.IMP['IMPERATIVE'].ACT[5].centerText =
+  structure.IMPV['IMPERATIVE'].ACT[5].centerText =
     conjugations?.imperative?.active?.future?.plural?.third?.join?.(',\n')
-  structure.IMP['IMPERATIVE'].PAS[0].centerText =
+  structure.IMPV['IMPERATIVE'].PAS[0].centerText =
     conjugations?.imperative?.passive?.present?.singular?.second?.join?.(',\n')
-  structure.IMP['IMPERATIVE'].PAS[2].centerText =
+  structure.IMPV['IMPERATIVE'].PAS[2].centerText =
     conjugations?.imperative?.passive?.future?.singular?.second?.join?.(',\n')
-  structure.IMP['IMPERATIVE'].PAS[4].centerText =
+  structure.IMPV['IMPERATIVE'].PAS[4].centerText =
     conjugations?.imperative?.passive?.future?.singular?.third?.join?.(',\n')
-  structure.IMP['IMPERATIVE'].PAS[1].centerText =
+  structure.IMPV['IMPERATIVE'].PAS[1].centerText =
     conjugations?.imperative?.passive?.present?.plural?.second?.join?.(',\n')
-  // structure.IMP["IMPERATIVE"].PAS[3].centerText = conjugations?.imperative?.passive?.future?.plural?.second?.join?.(",\n");
-  structure.IMP['IMPERATIVE'].PAS[5].centerText =
+  // structure.IMPV["IMPERATIVE"].PAS[3].centerText = conjugations?.imperative?.passive?.future?.plural?.second?.join?.(",\n");
+  structure.IMPV['IMPERATIVE'].PAS[5].centerText =
     conjugations?.imperative?.passive?.future?.plural?.third?.join?.(',\n')
 
   structure.INF['INFINITIVE']['-'][0].centerText =

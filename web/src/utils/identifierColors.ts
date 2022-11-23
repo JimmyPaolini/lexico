@@ -1,4 +1,4 @@
-import identifierAbbreviations from './identifierAbbreviations'
+import { abbreviateIdentifier } from './identifierAbbreviations'
 
 export default {
   nominative: { backgroundColor: 'royalblue', color: 'white' },
@@ -35,7 +35,9 @@ export default {
   first: { backgroundColor: 'yellow', color: 'black' },
   second: { backgroundColor: 'red', color: 'white' },
   third: { backgroundColor: 'blue', color: 'white' },
+
+  '-': { backgroundColor: 'white', color: 'white' },
 } as Record<
-  keyof typeof identifierAbbreviations,
+  keyof typeof abbreviateIdentifier,
   { backgroundColor: string; color: string }
 >

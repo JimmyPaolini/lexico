@@ -3,6 +3,12 @@ import React, { ReactNode } from 'react'
 import { Box, Tab, Tabs } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
+import { ClassNames } from '@emotion/react'
+
+import { unabbreviateIdentifier } from '../../../utils/identifierAbbreviations'
+import identifierColors from '../../../utils/identifierColors'
+import IdentifierPill from '../../accessories/IdentifierPill'
+
 type Props = {
   activeTab: number
   tabs: string[]
@@ -25,25 +31,39 @@ export default function FormTabs({
 
   return (
     <Box>
-      <Tabs
-        value={activeTab}
-        onChange={changeActiveTab}
-        onClick={(e) => e.stopPropagation()}
-        sx={{ height: 42, background: theme.palette.background.paper }}
-        textColor="secondary"
-        indicatorColor="secondary"
-        aria-label="conjugation tabs"
-      >
-        {tabs.map((tab, i) => (
-          <Tab
-            label={tab}
-            style={{ minWidth }}
-            disabled={tab === '-'}
-            aria-label={tab}
-            key={i}
-          />
-        ))}
-      </Tabs>
+      <ClassNames>
+        {({ css }) => (
+          <Tabs
+            value={activeTab}
+            onChange={changeActiveTab}
+            onClick={(e) => e.stopPropagation()}
+            sx={{ background: theme.palette.background.paper }}
+            classes={{
+              indicator: css({
+                backgroundColor:
+                  identifierColors[unabbreviateIdentifier[tabs[activeTab]]]
+                    ?.backgroundColor ?? 'white',
+              }),
+            }}
+            variant="fullWidth"
+            aria-label="inflection tabs"
+          >
+            {tabs.map((tab) => (
+              <Tab
+                icon={
+                  <IdentifierPill
+                    identifier={unabbreviateIdentifier[tab] ?? '-'}
+                  />
+                }
+                sx={{ minWidth, padding: '12px 0px' }}
+                disabled={tab === '-'}
+                aria-label={tab}
+                key={tab}
+              />
+            ))}
+          </Tabs>
+        )}
+      </ClassNames>
       {children}
     </Box>
   )

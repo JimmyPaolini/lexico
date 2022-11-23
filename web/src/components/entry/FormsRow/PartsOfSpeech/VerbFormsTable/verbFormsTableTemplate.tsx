@@ -63,7 +63,7 @@ export const verbFormsTableTemplate: any = {
       PAS: jsonCopy(verbSextet),
     },
   },
-  IMP: {
+  IMPV: {
     IMPERATIVE: {
       ACT: [
         {
