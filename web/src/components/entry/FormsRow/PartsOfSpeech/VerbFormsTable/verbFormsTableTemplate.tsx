@@ -1,195 +1,225 @@
-const jsonCopy = (json: any) => JSON.parse(JSON.stringify(json))
+// const jsonCopy = (json: any) => JSON.parse(JSON.stringify(json))
 
 const verbSextet = [
   {
-    topLeftText: '1',
-    topRightText: 'SG',
+    topLeftText: 'first',
+    topRightText: 'singular',
+    centerText: '-',
   },
   {
-    topRightText: 'PL',
+    topRightText: 'plural',
+    centerText: '-',
   },
   {
-    topLeftText: '2',
+    topLeftText: 'second',
+    centerText: '-',
   },
-  {},
+  { centerText: '-' },
   {
-    topLeftText: '3',
+    topLeftText: 'third',
+    centerText: '-',
   },
-  {},
+  { centerText: '-' },
 ]
 
-export const verbFormsTableTemplate: any = {
-  IND: {
-    PRES: {
-      ACT: jsonCopy(verbSextet),
-      PAS: jsonCopy(verbSextet),
+export const verbFormsTableTemplate = {
+  indicative: {
+    present: {
+      active: [...verbSextet],
+      passive: [...verbSextet],
     },
-    IMP: {
-      ACT: jsonCopy(verbSextet),
-      PAS: jsonCopy(verbSextet),
+    imperfect: {
+      active: [...verbSextet],
+      passive: [...verbSextet],
     },
-    FUT: {
-      ACT: jsonCopy(verbSextet),
-      PAS: jsonCopy(verbSextet),
+    future: {
+      active: [...verbSextet],
+      passive: [...verbSextet],
     },
-    PERF: {
-      ACT: jsonCopy(verbSextet),
-      PAS: jsonCopy(verbSextet),
+    perfect: {
+      active: [...verbSextet],
+      passive: [...verbSextet],
     },
-    PLUP: {
-      ACT: jsonCopy(verbSextet),
-      PAS: jsonCopy(verbSextet),
+    pluperfect: {
+      active: [...verbSextet],
+      passive: [...verbSextet],
     },
-    FUTP: {
-      ACT: jsonCopy(verbSextet),
-      PAS: jsonCopy(verbSextet),
-    },
-  },
-  SUB: {
-    PRES: {
-      ACT: jsonCopy(verbSextet),
-      PAS: jsonCopy(verbSextet),
-    },
-    IMP: {
-      ACT: jsonCopy(verbSextet),
-      PAS: jsonCopy(verbSextet),
-    },
-    PERF: {
-      ACT: jsonCopy(verbSextet),
-      PAS: jsonCopy(verbSextet),
-    },
-    PLUP: {
-      ACT: jsonCopy(verbSextet),
-      PAS: jsonCopy(verbSextet),
+    'future perfect': {
+      active: [...verbSextet],
+      passive: [...verbSextet],
     },
   },
-  IMPV: {
-    IMPERATIVE: {
-      ACT: [
+  subjunctive: {
+    present: {
+      active: [...verbSextet],
+      passive: [...verbSextet],
+    },
+    imperfect: {
+      active: [...verbSextet],
+      passive: [...verbSextet],
+    },
+    perfect: {
+      active: [...verbSextet],
+      passive: [...verbSextet],
+    },
+    pluperfect: {
+      active: [...verbSextet],
+      passive: [...verbSextet],
+    },
+  },
+  imperative: {
+    imperative: {
+      active: [
         {
-          topLeftText: '2ND',
-          topRightText: 'SG',
-          bottomLeftText: 'PRES',
+          topLeftText: 'second',
+          topRightText: 'singular',
+          bottomLeftText: 'present',
+          centerText: '-',
         },
         {
-          topRightText: 'PL',
-          topLeftText: '2ND',
-          bottomLeftText: 'PRES',
+          topRightText: 'plural',
+          topLeftText: 'second',
+          bottomLeftText: 'present',
+          centerText: '-',
         },
         {
-          topLeftText: '2ND',
-          bottomLeftText: 'FUT',
+          topLeftText: 'second',
+          bottomLeftText: 'future',
+          centerText: '-',
         },
         {
-          topLeftText: '2ND',
-          bottomLeftText: 'FUT',
+          topLeftText: 'second',
+          bottomLeftText: 'future',
+          centerText: '-',
         },
         {
-          topLeftText: '3RD',
-          bottomLeftText: 'FUT',
+          topLeftText: 'third',
+          bottomLeftText: 'future',
+          centerText: '-',
         },
         {
-          topLeftText: '3RD',
-          bottomLeftText: 'FUT',
+          topLeftText: 'third',
+          bottomLeftText: 'future',
+          centerText: '-',
         },
       ],
-      PAS: [
+      passive: [
         {
-          topLeftText: '2ND',
-          topRightText: 'SG',
-          bottomLeftText: 'PRES',
+          topLeftText: 'second',
+          topRightText: 'singular',
+          bottomLeftText: 'present',
+          centerText: '-',
         },
         {
-          topRightText: 'PL',
-          topLeftText: '2ND',
-          bottomLeftText: 'PRES',
+          topRightText: 'plural',
+          topLeftText: 'second',
+          bottomLeftText: 'present',
+          centerText: '-',
         },
         {
-          topLeftText: '2ND',
-          bottomLeftText: 'FUT',
+          topLeftText: 'second',
+          bottomLeftText: 'future',
+          centerText: '-',
         },
         {
-          topLeftText: '2ND',
-          bottomLeftText: 'FUT',
+          topLeftText: 'second',
+          bottomLeftText: 'future',
+          centerText: '-',
         },
         {
-          topLeftText: '3RD',
-          bottomLeftText: 'FUT',
+          topLeftText: 'third',
+          bottomLeftText: 'future',
+          centerText: '-',
         },
         {
-          topLeftText: '3RD',
-          bottomLeftText: 'FUT',
+          topLeftText: 'third',
+          bottomLeftText: 'future',
+          centerText: '-',
         },
-      ],
-    },
-  },
-  INF: {
-    INFINITIVE: {
-      '-': [
-        {
-          topLeftText: 'PRES',
-          topRightText: 'ACT',
-        },
-        {
-          topRightText: 'PAS',
-        },
-        {
-          topLeftText: 'PERF',
-        },
-        {},
-        {
-          topLeftText: 'FUT',
-        },
-        {},
       ],
     },
   },
-  NONF: {
-    'NON FINITE': {
-      PARTICIPLE: [
+  infinitive: {
+    infinitive: {
+      infinitive: [
         {
-          topLeftText: 'ACT',
-          topRightText: 'PRES',
+          topLeftText: 'present',
+          topRightText: 'active',
+          centerText: '-',
         },
         {
-          topLeftText: 'PAS',
-          topRightText: 'PERF',
+          topRightText: 'passive',
+          centerText: '-',
         },
         {
-          topLeftText: 'ACT',
-          topRightText: 'FUT',
+          topLeftText: 'perfect',
+          centerText: '-',
         },
+        { centerText: '-' },
         {
-          topLeftText: 'PAS',
-          topRightText: 'FUT',
+          topLeftText: 'future',
+          centerText: '-',
         },
-        {},
-        {},
+        { centerText: '-' },
       ],
-      'GERUND/SUPINE': [
+    },
+  },
+  'non finite': {
+    'non finite': {
+      participle: [
         {
-          topLeftText: 'GER',
-          topRightText: 'GEN',
+          topLeftText: 'active',
+          topRightText: 'present',
+          centerText: '-',
         },
         {
-          topLeftText: 'GER',
-          topRightText: 'DAT',
+          topLeftText: 'passive',
+          topRightText: 'perfect',
+          centerText: '-',
         },
         {
-          topLeftText: 'GER',
-          topRightText: 'ACC',
+          topLeftText: 'active',
+          topRightText: 'future',
+          centerText: '-',
         },
         {
-          topLeftText: 'GER',
-          topRightText: 'ABL',
+          topLeftText: 'passive',
+          topRightText: 'future',
+          centerText: '-',
+        },
+        { centerText: '-' },
+        { centerText: '-' },
+      ],
+      'gerund/supine': [
+        {
+          topLeftText: 'gerund',
+          topRightText: 'genitive',
+          centerText: '-',
         },
         {
-          topLeftText: 'SUP',
-          topRightText: 'ACC',
+          topLeftText: 'gerund',
+          topRightText: 'dative',
+          centerText: '-',
         },
         {
-          topLeftText: 'SUP',
-          topRightText: 'ABL',
+          topLeftText: 'gerund',
+          topRightText: 'accusative',
+          centerText: '-',
+        },
+        {
+          topLeftText: 'gerund',
+          topRightText: 'ablative',
+          centerText: '-',
+        },
+        {
+          topLeftText: 'supine',
+          topRightText: 'accusative',
+          centerText: '-',
+        },
+        {
+          topLeftText: 'supine',
+          topRightText: 'ablative',
+          centerText: '-',
         },
       ],
     },

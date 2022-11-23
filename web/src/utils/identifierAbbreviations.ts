@@ -17,7 +17,9 @@ export const abbreviateIdentifier = {
   indicative: 'IND',
   subjunctive: 'SUB',
   imperative: 'IMPV',
+  IMPERATIVE: 'IMPV',
   infinitive: 'INF',
+  INFINITIVE: 'INF',
   'non finite': 'NONF',
 
   present: 'PRES',

@@ -8,16 +8,36 @@ export default {
   component: EntryCard,
 } as ComponentMeta<typeof EntryCard>
 
-export const Default: ComponentStory<typeof EntryCard> & { loaders: any[] } = (
+export const Verb: ComponentStory<typeof EntryCard> & { loaders: any[] } = (
   args,
   { loaded },
 ) => <EntryCard {...args} {...loaded} />
-Default.args = {
-  searched: 'amat',
-}
-Default.loaders = [
+Verb.args = { searched: 'amat' }
+Verb.loaders = [
   async () => {
     const entry = await searchEntry('amat')
+    return { entry }
+  },
+]
+
+export const Adjective: ComponentStory<typeof EntryCard> & { loaders: any[] } =
+  (args, { loaded }) => <EntryCard {...args} {...loaded} />
+Adjective.args = { searched: 'amoeni' }
+Adjective.loaders = [
+  async () => {
+    const entry = await searchEntry('amoenus')
+    return { entry }
+  },
+]
+
+export const Noun: ComponentStory<typeof EntryCard> & { loaders: any[] } = (
+  args,
+  { loaded },
+) => <EntryCard {...args} {...loaded} />
+Noun.args = { searched: 'pater' }
+Noun.loaders = [
+  async () => {
+    const entry = await searchEntry('pater')
     return { entry }
   },
 ]
