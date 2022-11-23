@@ -1,9 +1,9 @@
 import Grid from '@mui/material/Grid'
 import Tooltip from '@mui/material/Tooltip'
-import { styled, useTheme } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import CenterText from './CenterText'
-import SideCornerTexts from './SideCornerTexts'
+import Sidebar from './Sidebar'
 
 export type FormCellPosition =
   | 'topLeftText'
@@ -63,17 +63,9 @@ export default function FormCell({
           borderLeft: position.match(/Right/i) ? borderRule : '',
         }}
       >
-        <SideCornerTexts
-          top={topLeftText}
-          bottom={bottomLeftText}
-          side="left"
-        />
+        <Sidebar top={topLeftText} bottom={bottomLeftText} side="left" />
         <CenterText centerText={centerText} />
-        <SideCornerTexts
-          top={topRightText}
-          bottom={bottomRightText}
-          side="right"
-        />
+        <Sidebar top={topRightText} bottom={bottomRightText} side="right" />
       </Grid>
     </Tooltip>
   )

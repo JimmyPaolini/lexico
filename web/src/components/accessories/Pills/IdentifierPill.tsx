@@ -1,9 +1,12 @@
-import { abbreviateIdentifier } from 'src/utils/identifierAbbreviations'
-import identifierColors from 'src/utils/identifierColors'
+import {
+  Identifier,
+  abbreviateIdentifier,
+  identifierColors,
+} from 'src/utils/identifiers'
 
 import Pill from './Pill'
 
-type Props = { identifier: keyof typeof identifierColors }
+type Props = { identifier: Identifier }
 
 export default function IdentifierPill({ identifier }: Props) {
   return (

@@ -4,7 +4,6 @@ import Box from '@mui/material/Box'
 import SwitchMui from '@mui/material/Switch'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
-import { Theme } from '@mui/material/styles'
 
 const PREFIX = 'SwitchEnglishLatin'
 

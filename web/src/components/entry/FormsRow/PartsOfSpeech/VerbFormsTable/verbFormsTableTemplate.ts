@@ -1,5 +1,3 @@
-// const jsonCopy = (json: any) => JSON.parse(JSON.stringify(json))
-
 const verbSextet = [
   {
     topLeftText: 'first',
@@ -25,46 +23,46 @@ const verbSextet = [
 export const verbFormsTableTemplate = {
   indicative: {
     present: {
-      active: [...verbSextet],
-      passive: [...verbSextet],
+      active: JSON.parse(JSON.stringify(verbSextet)),
+      passive: JSON.parse(JSON.stringify(verbSextet)),
     },
     imperfect: {
-      active: [...verbSextet],
-      passive: [...verbSextet],
+      active: JSON.parse(JSON.stringify(verbSextet)),
+      passive: JSON.parse(JSON.stringify(verbSextet)),
     },
     future: {
-      active: [...verbSextet],
-      passive: [...verbSextet],
+      active: JSON.parse(JSON.stringify(verbSextet)),
+      passive: JSON.parse(JSON.stringify(verbSextet)),
     },
     perfect: {
-      active: [...verbSextet],
-      passive: [...verbSextet],
+      active: JSON.parse(JSON.stringify(verbSextet)),
+      passive: JSON.parse(JSON.stringify(verbSextet)),
     },
     pluperfect: {
-      active: [...verbSextet],
-      passive: [...verbSextet],
+      active: JSON.parse(JSON.stringify(verbSextet)),
+      passive: JSON.parse(JSON.stringify(verbSextet)),
     },
     'future perfect': {
-      active: [...verbSextet],
-      passive: [...verbSextet],
+      active: JSON.parse(JSON.stringify(verbSextet)),
+      passive: JSON.parse(JSON.stringify(verbSextet)),
     },
   },
   subjunctive: {
     present: {
-      active: [...verbSextet],
-      passive: [...verbSextet],
+      active: JSON.parse(JSON.stringify(verbSextet)),
+      passive: JSON.parse(JSON.stringify(verbSextet)),
     },
     imperfect: {
-      active: [...verbSextet],
-      passive: [...verbSextet],
+      active: JSON.parse(JSON.stringify(verbSextet)),
+      passive: JSON.parse(JSON.stringify(verbSextet)),
     },
     perfect: {
-      active: [...verbSextet],
-      passive: [...verbSextet],
+      active: JSON.parse(JSON.stringify(verbSextet)),
+      passive: JSON.parse(JSON.stringify(verbSextet)),
     },
     pluperfect: {
-      active: [...verbSextet],
-      passive: [...verbSextet],
+      active: JSON.parse(JSON.stringify(verbSextet)),
+      passive: JSON.parse(JSON.stringify(verbSextet)),
     },
   },
   imperative: {

@@ -16,7 +16,7 @@ import SearchBarLayout from '../components/layout/SearchBarLayout'
 import { Entry, useBookmarksQuery, useEntriesQuery } from '../graphql/generated'
 import useBookmarkInstructions from '../hooks/bookmarks/useBookmarkInstructions'
 import { getBookmarksLocal } from '../utils/bookmarksLocal'
-import identifyEntryWord from '../utils/identifiers'
+import { identifyEntryWord } from '../utils/identifiers'
 
 export default function Bookmarks() {
   const { user } = useContext(Context)

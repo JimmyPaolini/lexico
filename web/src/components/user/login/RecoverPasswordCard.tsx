@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Card, CardContent, Divider, Grid } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
@@ -14,7 +13,6 @@ import SubmitButton from '../../accessories/SubmitButton'
 import TextBox from '../../accessories/TextBox'
 
 export default function RecoverPasswordCard() {
-  const theme = useTheme()
   const router = useRouter()
   const { enqueueSnackbar } = useSnackbarEnhanced()
 

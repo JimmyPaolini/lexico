@@ -1,6 +1,6 @@
-import { abbreviateIdentifier } from './identifierAbbreviations'
+import { Identifier } from './types'
 
-export default {
+export const identifierColors = {
   nominative: { backgroundColor: 'royalblue', color: 'white' },
   genitive: { backgroundColor: 'forestgreen', color: 'white' },
   dative: { backgroundColor: 'chartreuse', color: 'black' },
@@ -36,8 +36,6 @@ export default {
   second: { backgroundColor: 'red', color: 'white' },
   third: { backgroundColor: 'blue', color: 'white' },
 
-  '-': { backgroundColor: 'white', color: 'white' },
-} as Record<
-  keyof typeof abbreviateIdentifier,
-  { backgroundColor: string; color: string }
->
+  participle: { backgroundColor: 'black', color: 'white' },
+  'gerund/supine': { backgroundColor: 'black', color: 'white' },
+} as { [key in Identifier]: { backgroundColor: string; color: string } }

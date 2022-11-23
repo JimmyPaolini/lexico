@@ -9,7 +9,6 @@ import {
   IconButton,
   InputAdornment,
 } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
 
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
@@ -24,7 +23,6 @@ import { Context } from '../../layout/Context'
 type Props = { passwordResetToken: string }
 
 export default function ResetPasswordCard({ passwordResetToken }: Props) {
-  const theme = useTheme()
   const { queryClient } = useContext(Context)
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const passwordTextBoxRef = useRef<HTMLDivElement>(null)

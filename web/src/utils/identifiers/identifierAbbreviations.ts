@@ -1,3 +1,5 @@
+import { Identifier, IdentifierAbbreviation } from './types'
+
 export const abbreviateIdentifier = {
   nominative: 'NOM',
   genitive: 'GEN',
@@ -29,15 +31,18 @@ export const abbreviateIdentifier = {
   pluperfect: 'PLUP',
   'future perfect': 'FUTP',
 
+  participle: 'PART',
+  'gerund/supine': 'GER/SUP',
+  gerund: 'GER',
+  supine: 'SUP',
+
   active: 'ACT',
   passive: 'PAS',
 
   first: '1ST',
   second: '2ND',
   third: '3RD',
-
-  '-': '-',
-} as { [key: string]: string }
+} as { [key in Identifier]: IdentifierAbbreviation }
 
 export const unabbreviateIdentifier = {
   NOM: 'nominative',
@@ -68,12 +73,15 @@ export const unabbreviateIdentifier = {
   PLUP: 'pluperfect',
   FUTP: 'future perfect',
 
+  PART: 'participle',
+  'GER/SUP': 'gerund/supine',
+  GER: 'gerund',
+  SUP: 'supine',
+
   ACT: 'active',
   PAS: 'passive',
 
   '1ST': 'first',
   '2ND': 'second',
   '3RD': 'third',
-
-  '-': '-',
-} as { [key: string]: string }
+} as { [key in IdentifierAbbreviation]: Identifier }

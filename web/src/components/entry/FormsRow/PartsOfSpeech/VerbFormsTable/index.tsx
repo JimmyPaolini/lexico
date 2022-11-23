@@ -2,41 +2,27 @@
 import React, { useState } from 'react'
 
 import { Box, Paper } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
+
+import { Identifier } from 'src/utils/identifiers'
 
 import { Forms, Maybe } from '../../../../../graphql/generated'
 import FormTabs from '../../FormTabs'
 import FormsTable from '../../FormsTable'
 import { verbFormsRestructure } from './verbFormsRestructure'
 
-const PREFIX = 'index'
-
-const classes = {
-  paper: `${PREFIX}-paper`,
-}
-
-const StyledPaper = styled(Paper)(({ theme }) => ({
-  [`&.${classes.paper}`]: {
-    maxWidth: theme.custom.card.maxWidth,
-    borderRadius: 0,
-  },
-}))
-
-type Props = {
-  forms?: Maybe<Forms>
-}
+type Props = { forms?: Maybe<Forms> }
 
 export default function VerbForms({ forms }: Props) {
+  const theme = useTheme()
   const [topTab, setTopTabState] = useState(0)
   const [midTab, setMidTabState] = useState(0)
   const [bottomTab, setBottomTab] = useState(0)
 
-  const structure = verbFormsRestructure(forms)
+  const structure = verbFormsRestructure(forms) as any
   const topTabs = Object.keys(structure)
-  let midTabs = Object.keys(structure?.[topTabs[topTab]] || { '-': '' })
-  let bottomTabs = Object.keys(
-    structure?.[topTabs[topTab]]?.[midTabs[midTab]] || { '-': '' },
-  )
+  let midTabs = Object.keys(structure[topTabs[topTab]])
+  let bottomTabs = Object.keys(structure[topTabs[topTab]][midTabs[midTab]])
 
   const setTopTab = (newTopTab: number) => {
     const oldBottomTab = bottomTabs[bottomTab]
@@ -80,19 +66,30 @@ export default function VerbForms({ forms }: Props) {
     structure[topTabs[topTab]][midTabs[midTab]][bottomTabs[bottomTab]]
 
   return (
-    <StyledPaper className={classes.paper} elevation={0}>
-      <FormTabs tabs={topTabs} activeTab={topTab} setActiveTab={setTopTab}>
-        <FormTabs tabs={midTabs} activeTab={midTab} setActiveTab={setMidTab}>
+    <Paper
+      sx={{ maxWidth: theme.custom.card.maxWidth, borderRadius: 0 }}
+      elevation={0}
+    >
+      <FormTabs
+        tabs={topTabs as Identifier[]}
+        activeTab={topTab}
+        setActiveTab={setTopTab}
+      >
+        <FormTabs
+          tabs={midTabs as Identifier[]}
+          activeTab={midTab}
+          setActiveTab={setMidTab}
+        >
           <FormTabs
-            tabs={bottomTabs}
+            tabs={bottomTabs as Identifier[]}
             activeTab={bottomTab}
             setActiveTab={setBottomTab}
           >
-            <Box style={{ height: '8px' }} />
+            <Box sx={{ height: '8px' }} />
             <FormsTable forms={formsStructure} />
           </FormTabs>
         </FormTabs>
       </FormTabs>
-    </StyledPaper>
+    </Paper>
   )
 }

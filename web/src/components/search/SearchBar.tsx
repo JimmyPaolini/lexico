@@ -11,7 +11,6 @@ import { useTheme } from '@mui/material/styles'
 
 import { pascalCase } from '../../utils/string'
 import { Context } from '../layout/Context'
-import SwitchEnglishLatin from './SwitchEnglishLatin'
 
 type Props = {
   search: string
@@ -30,7 +29,6 @@ export default function SearchBar({
   isLoading = false,
   target = '',
   isLatin = true,
-  setLatin = () => null,
 }: Props) {
   const theme = useTheme()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
@@ -103,9 +101,6 @@ export default function SearchBar({
             )}
           </IconButton>
         </Grid>
-        {/* {target === 'lexico' && (
-          <SwitchEnglishLatin {...{ isLatin, setLatin }} />
-        )} */}
       </Grid>
     </Paper>
   )

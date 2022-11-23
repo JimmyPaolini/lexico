@@ -1,17 +1,16 @@
 import Grid from '@mui/material/Grid'
-import { styled } from '@mui/material/styles'
 
-import { relative } from 'path'
+import { Identifier } from 'src/utils/identifiers/types'
 
-import CornerText from './CornerText'
+import CornerIdentifier from './CornerIdentifier'
 
 type Props = {
-  top: string
-  bottom: string
+  top: Identifier
+  bottom: Identifier
   side: 'right' | 'left'
 }
 
-export default function SideCornerTexts({ top, bottom, side }: Props) {
+export default function Sidebar({ top, bottom, side }: Props) {
   return (
     <Grid
       container
@@ -23,8 +22,8 @@ export default function SideCornerTexts({ top, bottom, side }: Props) {
         ...(side === 'right' ? { right: 2 } : { left: 2 }),
       }}
     >
-      <CornerText text={top} />
-      <CornerText text={bottom} />
+      <CornerIdentifier identifier={top} />
+      <CornerIdentifier identifier={bottom} />
     </Grid>
   )
 }

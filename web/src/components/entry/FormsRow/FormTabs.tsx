@@ -5,20 +5,19 @@ import { useTheme } from '@mui/material/styles'
 
 import { ClassNames } from '@emotion/react'
 
-import { unabbreviateIdentifier } from '../../../utils/identifierAbbreviations'
-import identifierColors from '../../../utils/identifierColors'
-import IdentifierPill from '../../accessories/IdentifierPill'
+import { Identifier, identifierColors } from '../../../utils/identifiers'
+import IdentifierPill from '../../accessories/Pills/IdentifierPill'
 
 type Props = {
+  tabs: Identifier[]
   activeTab: number
-  tabs: string[]
   setActiveTab: any
   children: ReactNode
 }
 
 export default function FormTabs({
-  activeTab,
   tabs,
+  activeTab,
   setActiveTab,
   children,
 }: Props) {
@@ -41,8 +40,7 @@ export default function FormTabs({
             classes={{
               indicator: css({
                 backgroundColor:
-                  identifierColors[unabbreviateIdentifier[tabs[activeTab]]]
-                    ?.backgroundColor ?? 'white',
+                  identifierColors[tabs[activeTab]].backgroundColor ?? 'white',
               }),
             }}
             variant="fullWidth"
@@ -50,13 +48,9 @@ export default function FormTabs({
           >
             {tabs.map((tab) => (
               <Tab
-                icon={
-                  <IdentifierPill
-                    identifier={unabbreviateIdentifier[tab] ?? '-'}
-                  />
-                }
+                icon={<IdentifierPill identifier={tab} />}
                 sx={{ minWidth, padding: '12px 0px' }}
-                disabled={tab === '-'}
+                // disabled={tab === '-'}
                 aria-label={tab}
                 key={tab}
               />
