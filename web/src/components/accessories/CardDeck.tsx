@@ -16,13 +16,10 @@ type Props = { cards: Card[] }
 
 export default function CardDeck({ cards }: Props) {
   const theme = useTheme()
-  const numCols = useMediaQuery(theme.breakpoints.up('xl'))
-    ? 4
-    : useMediaQuery(theme.breakpoints.up('lg'))
-    ? 3
-    : useMediaQuery(theme.breakpoints.up('md'))
-    ? 2
-    : 1
+  const isXl = useMediaQuery(theme.breakpoints.up('xl'))
+  const isLg = useMediaQuery(theme.breakpoints.up('lg'))
+  const isMd = useMediaQuery(theme.breakpoints.up('md'))
+  const numCols = isXl ? 4 : isLg ? 3 : isMd ? 2 : 1
 
   const cardMatrix = useMemo<Card[][]>(
     () => arrangeCards(cards, numCols),

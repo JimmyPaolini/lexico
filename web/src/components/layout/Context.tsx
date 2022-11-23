@@ -25,7 +25,10 @@ export const Context = createContext({} as ReactContext)
 type Props = PropsWithChildren<{ queryClient: QueryClient }>
 
 export function ContextProvider({ children, queryClient }: Props) {
-  const { data } = useUserQuery({}, { staleTime: 1000 * 60 * 5 }) // 5 minutes
+  const { data } = useUserQuery(
+    {},
+    { staleTime: 1000 * 60 * 5 /* 5 minutes */ },
+  )
   const user = data?.user
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))

@@ -1,40 +1,33 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { ChevronLeft, Menu } from '@mui/icons-material'
 import {
   Divider,
   Grid,
-  IconButton,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
   SwipeableDrawer,
-  Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
+import { capitalizeFirstLetter } from '../../utils/string'
 import { Context } from './Context'
-import pages from './pages'
+import { pages } from './pages'
 
-export default function Navigation() {
+type Props = { page?: string }
+export default function Navigation({ page: initialPage }: Props) {
   const theme = useTheme()
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
-  const router = useRouter()
-  const pageName = router.pathname.split('/')[1]
-  const [selected, setSelected] = useState(pageName || 'search')
+  const [selectedPage, setSelectedPage] = useState(initialPage || 'search')
 
-  const handleSelection = (pageName: any) => {
-    setSelected(pageName)
+  const handleSelection = (page: string) => {
+    setSelectedPage(page)
     if (isMobile) setOpen(!open)
   }
-
-  useEffect(() => {
-    setSelected(pageName)
-  }, [pageName])
 
   const drawerOpenStyles = {
     width: theme.spacing(24),
@@ -56,10 +49,7 @@ export default function Navigation() {
     overflowX: 'hidden',
   }
 
-  const drawerStyles = useMemo(
-    () => (open ? drawerOpenStyles : drawerClosedStyles),
-    [open],
-  )
+  const drawerStyles = open ? drawerOpenStyles : drawerClosedStyles
 
   return (
     <SwipeableDrawer
@@ -71,21 +61,19 @@ export default function Navigation() {
     >
       <Grid item>
         <List>
-          <ListItem sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Typography
-              variant="h4"
-              sx={{ position: 'relative', float: 'left', right: 12 }}
-            >
-              Lexico
-            </Typography>
-            <IconButton
-              onClick={() => setOpen(!open)}
-              sx={{ display: 'inline-block', position: 'relative', left: 12 }}
-              aria-label="toggle navigation drawer"
-              size="large"
-            >
+          <ListItem
+            button
+            onClick={() => setOpen(!open)}
+            sx={{ display: 'flex', justifyContent: 'flex-end' }}
+          >
+            <ListItemText
+              primary="Lexico"
+              primaryTypographyProps={{ variant: 'h4' }}
+              sx={{ minWidth: 'auto' }}
+            />
+            <ListItemIcon sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               {open ? <ChevronLeft /> : <Menu />}
-            </IconButton>
+            </ListItemIcon>
           </ListItem>
           <Divider />
           {pages.map((page) => (
@@ -97,11 +85,11 @@ export default function Navigation() {
             >
               <ListItem
                 button
-                selected={selected === page.name}
+                selected={selectedPage === page.name}
                 onClick={() => handleSelection(page.name)}
               >
                 <ListItemIcon>{page.icon}</ListItemIcon>
-                <ListItemText primary={page.Name} />
+                <ListItemText primary={capitalizeFirstLetter(page.name)} />
               </ListItem>
             </Link>
           ))}

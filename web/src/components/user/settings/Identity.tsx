@@ -6,9 +6,9 @@ import { Context } from '../../layout/Context'
 
 export function Identity() {
   const { user } = useContext(Context)
-  const provider = user.googleId
+  const provider = user?.googleId
     ? 'Google'
-    : user.facebookId
+    : user?.facebookId
     ? 'Facebook'
     : 'email/password'
 
