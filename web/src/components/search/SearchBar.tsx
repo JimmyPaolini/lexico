@@ -48,6 +48,7 @@ export default function SearchBar({
     <Paper
       elevation={4}
       sx={{
+        background: theme.palette.background.paper,
         width: '100%',
         maxWidth: theme.custom.card.maxWidth,
         minWidth: theme.custom.card.minWidth,

@@ -53,13 +53,16 @@ export default class Entry {
   @Field(() => String, { nullable: true })
   etymology?: string
 
-  @Field(() => [String], { nullable: true })
-  identifiers?: string[]
-
   @ManyToMany(() => User, (user) => user.bookmarks, { nullable: true })
   @Field(() => [User], { nullable: true })
   users?: User[]
 
+  @Field(() => [String], { nullable: true })
+  identifiers?: string[]
+
   @Field(() => Boolean, { nullable: true })
   bookmarked?: boolean
+
+  @Field(() => Boolean, { nullable: true })
+  isLatinSearchResult?: boolean
 }

@@ -10,15 +10,20 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { Forms } from '../../../graphql/generated'
+import {
+  AdjectiveForms,
+  Forms,
+  NounForms,
+  VerbForms,
+} from '../../../graphql/generated'
 import { Identifier } from '../../../utils/identifiers'
 import { getSettingsLocal } from '../../../utils/settingsLocal'
 import ExpandIcon from '../../accessories/ExpandIcon'
 import IdentifierPill from '../../accessories/Pills/IdentifierPill'
 import { Context } from '../../layout/Context'
-import AdjectiveForms from './PartsOfSpeech/AdjectiveFormsTable'
-import NounForms from './PartsOfSpeech/NounFormsTable'
-import VerbForms from './PartsOfSpeech/VerbFormsTable'
+import AdjectiveFormsTable from './PartsOfSpeech/AdjectiveFormsTable'
+import NounFormsTable from './PartsOfSpeech/NounFormsTable'
+import VerbFormsTable from './PartsOfSpeech/VerbFormsTable'
 
 type Props = {
   searched: string
@@ -45,15 +50,14 @@ export default function FormsRow({
     searched =
       partOfSpeech === 'verb' ? 'Conjugation Table' : 'Declension Table'
 
-  const FormsCard = !forms ? null : partOfSpeechToFormsCard[partOfSpeech]
+  const FormsTable = !forms ? null : partOfSpeechToFormsCard[partOfSpeech]
 
-  const expandable = !!FormsCard
+  const expandable = forms && FormsTable
 
   if (searched.match(/Table/i) && !expandable) return <></>
 
   return (
     <>
-      <Divider variant="inset" />
       <CardContent>
         <CardActionArea
           onClick={() => setExpanded((expanded) => !expanded)}
@@ -83,7 +87,7 @@ export default function FormsRow({
                 </Grid>
               ))}
             </Grid>
-            {FormsCard && (
+            {FormsTable && (
               <ExpandIcon
                 {...{ expanded }}
                 sx={{
@@ -95,10 +99,10 @@ export default function FormsRow({
           </Grid>
         </CardActionArea>
       </CardContent>
-      {FormsCard && (
-        <Collapse in={expanded && !!FormsCard}>
-          <Divider variant="inset" />
-          <FormsCard forms={forms} />
+      {expandable && (
+        <Collapse in={expanded}>
+          <Divider variant="middle" />
+          <FormsTable forms={forms as VerbForms | NounForms | AdjectiveForms} />
         </Collapse>
       )}
     </>
@@ -106,15 +110,18 @@ export default function FormsRow({
 }
 
 const partOfSpeechToFormsCard = {
-  verb: VerbForms,
-  noun: NounForms,
-  properNoun: NounForms,
-  adjective: AdjectiveForms,
-  participle: AdjectiveForms,
-  suffix: AdjectiveForms,
-  numeral: AdjectiveForms,
-  pronoun: AdjectiveForms,
-  determiner: AdjectiveForms,
+  verb: VerbFormsTable,
+  noun: NounFormsTable,
+  properNoun: NounFormsTable,
+  adjective: AdjectiveFormsTable,
+  participle: AdjectiveFormsTable,
+  suffix: AdjectiveFormsTable,
+  numeral: AdjectiveFormsTable,
+  pronoun: AdjectiveFormsTable,
+  determiner: AdjectiveFormsTable,
 } as {
-  [key: string]: typeof VerbForms | typeof NounForms | typeof AdjectiveForms
+  [key: string]:
+    | typeof VerbFormsTable
+    | typeof NounFormsTable
+    | typeof AdjectiveFormsTable
 }

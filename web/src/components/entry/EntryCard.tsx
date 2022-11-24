@@ -30,16 +30,20 @@ export default (function EntryCard({ entry, searched = '' }: Props) {
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
+        background: theme.palette.background.paper,
         maxWidth: theme.custom.card.maxWidth,
         minWidth: theme.custom.card.minWidth,
         paddingBottom: 0,
+        border: '2px solid',
+        borderColor: theme.palette.secondary.main,
       }}
     >
       <PrincipalPartsRow
         {...{ id, partOfSpeech, principalParts, inflection, bookmarked }}
       />
-      <Divider variant="inset" />
+      <Divider variant="middle" />
       <TranslationsRow translations={translations || []} />
+      <Divider variant="middle" />
       <FormsRow
         partOfSpeech={partOfSpeech}
         forms={forms}

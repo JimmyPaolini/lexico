@@ -74,6 +74,7 @@ type Entry {
   id: ID!
   identifiers: [String!]
   inflection: Inflection
+  isLatinSearchResult: Boolean
   partOfSpeech: String!
   principalParts: [PrincipalPart!]
   pronunciation: Pronunciation
@@ -274,6 +275,7 @@ type Query {
   listCustomTexts: [CustomText!]!
   login(email: String!, password: String!): User!
   logout: Boolean!
+  search(search: String!): [Entry!]!
   searchAuthors(search: String!): [Author!]!
   searchBooks(search: String!): [Book!]!
   searchEnglish(search: String!): [Entry!]!
