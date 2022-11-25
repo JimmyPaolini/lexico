@@ -26,7 +26,7 @@ const classes = {
 const Root = styled('div')(({ theme }) => ({
   [`& .${classes.hideHoverHighlight}`]: {
     '&:hover': {
-      backgroundColor: 'inherit',
+      background: 'inherit',
     },
   },
 

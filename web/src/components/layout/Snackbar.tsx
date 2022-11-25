@@ -15,7 +15,7 @@ export default function Snackbar({ children }: Props) {
         <SnackbarProvider
           // classes={{
           //   variantInfo: css({
-          //     backgroundColor: `${theme.palette.background.paper} !important`,
+          //     background: `${theme.palette.background.paper} !important`,
           //     flexWrap: 'nowrap',
           //   }),
 
@@ -26,7 +26,7 @@ export default function Snackbar({ children }: Props) {
           // }}
           className={css({
             '& .Snackbar-snackbarInfo': {
-              backgroundColor: `${theme.palette.background.paper} !important`,
+              background: `${theme.palette.background.paper} !important`,
               flexWrap: 'nowrap',
             },
             '& .Snackbar-action': {

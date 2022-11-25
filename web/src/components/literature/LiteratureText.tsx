@@ -35,7 +35,7 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
     margin: theme.spacing(1),
     padding: '8px 8px',
     borderRadius: 16,
-    backgroundColor: theme.palette.grey[600],
+    background: theme.palette.grey[600],
     color: theme.palette.primary.main,
     overflow: 'hidden',
   },

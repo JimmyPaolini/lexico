@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles'
 
 import { useSwipeable } from 'react-swipeable'
 
-import { Entry, useSearchLatinQuery } from '../../graphql/generated'
+import { Entry, useSearchQuery } from '../../graphql/generated'
 import useEventListener from '../../hooks/useEventListener'
 import CardDeck from '../accessories/CardDeck'
 import EntryCard from '../entry/EntryCard'
@@ -46,14 +46,14 @@ type Props = {
 export default memo(function ReaderModal({ searched, open, setOpen }: Props) {
   const ref = useRef<HTMLDivElement>(null)
 
-  const { data, isFetched, isSuccess, isError } = useSearchLatinQuery(
+  const { data, isFetched, isSuccess, isError } = useSearchQuery(
     { search: searched },
     {
       retryDelay: 0,
       staleTime: 1000 * 60 * 5,
     },
   )
-  const entries = data?.searchLatin as Entry[]
+  const entries = data?.search as Entry[]
 
   useEventListener('keydown', (e: any) => {
     if (e.key === 'Escape') setOpen(false)

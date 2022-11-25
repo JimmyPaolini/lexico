@@ -12,7 +12,7 @@ const classes = {
 // TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
 const Root = styled('div')(() => ({
   [`& .${classes.reader}`]: {
-    backgroundColor: 'black',
+    background: 'black',
     position: 'absolute',
     width: '100%',
     height: '100%',

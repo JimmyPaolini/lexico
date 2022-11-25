@@ -1,5 +1,0 @@
-query SearchEnglish($search: String!) {
-  searchEnglish(search: $search) {
-    ...allEntry
-  }
-}

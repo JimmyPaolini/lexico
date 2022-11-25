@@ -1,5 +1,0 @@
-query SearchLatin($search: String!) {
-  searchLatin(search: $search) {
-    ...allEntry
-  }
-}

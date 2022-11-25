@@ -40,7 +40,14 @@ export default function SettingsCard() {
   }
 
   return (
-    <Card>
+    <Card
+      sx={{
+        background: theme.palette.background.paper,
+        minWidth: theme.custom.card.minWidth,
+        maxWidth: theme.custom.card.maxWidth,
+        width: '100%',
+      }}
+    >
       <CardHeader title="Settings" />
       <Divider variant="middle" />
       <CardContent>
@@ -60,9 +67,9 @@ export default function SettingsCard() {
                 <SubmitButton
                   name="Delete Account"
                   sx={{
-                    backgroundColor: theme.palette.error.main,
+                    background: theme.palette.error.main,
                     '&:hover': {
-                      backgroundColor: theme.palette.error.dark,
+                      background: theme.palette.error.dark,
                     },
                   }}
                   onClick={confirmUnregister}

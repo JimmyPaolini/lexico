@@ -15,14 +15,14 @@ export default function TranslationBullet({ translation }: Props) {
       xs
       alignItems="flex-start"
       wrap="nowrap"
-      sx={{ margin: 0, backgroundColor: theme.palette.background.paper }}
+      sx={{ margin: 0, background: theme.palette.background.paper }}
     >
       <Box
         sx={{
           width: 8,
           height: 8,
           borderRadius: '50%',
-          backgroundColor: theme.palette.text.primary,
+          background: theme.palette.text.primary,
           margin: theme.spacing(1),
           flexShrink: 0,
         }}

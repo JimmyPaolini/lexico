@@ -40,7 +40,7 @@ export default function FormTabs({
             sx={{ background: theme.palette.background.paper }}
             classes={{
               indicator: css({
-                backgroundColor:
+                background:
                   identifierStyles[tabs[activeTab]].background ?? 'white',
               }),
             }}

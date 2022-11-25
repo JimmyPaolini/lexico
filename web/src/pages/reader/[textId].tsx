@@ -92,7 +92,7 @@ export default function Reader({ text }: Props) {
         sx={{
           width: '100%',
           height: '100%',
-          backgroundColor: 'black',
+          background: 'black',
           ...theme.custom.literature,
         }}
         style={{ fontSize }}

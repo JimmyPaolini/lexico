@@ -24,15 +24,15 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
     pointerEvents: 'none',
     display: 'inline-block',
     height: '100%',
-    marginRight: theme.spacing(1) - 2,
-    marginLeft: theme.spacing(1) - 2,
+    marginRight: `calc(${theme.spacing(1)} - 2px`,
+    marginLeft: `calc(${theme.spacing(1)} - 2px`,
     fontFamily: 'courier, monospace',
   },
 
   [`& .${classes.divider}`]: {
     display: 'inline',
     marginRight: theme.spacing(1) + 2,
-    backgroundColor: theme.palette.primary.main,
+    background: theme.palette.primary.main,
   },
 }))
 

@@ -10,10 +10,20 @@ import OAuthLogin from './OAuthLogin'
 export default function LoginCard() {
   const theme = useTheme()
   return (
-    <Card>
+    <Card
+      sx={{
+        background: theme.palette.background.paper,
+        minWidth: theme.custom.card.minWidth,
+        maxWidth: theme.custom.card.maxWidth,
+        width: '100%',
+      }}
+    >
       <CardHeader
         title="Sign In"
-        sx={{ paddingBottom: 0, minHeight: theme.spacing(8) }}
+        sx={{
+          paddingBottom: 0,
+          minHeight: theme.spacing(8),
+        }}
       />
       <Typography align="center" variant="body2" color="textSecondary">
         Save your Bookmarks, Literature,

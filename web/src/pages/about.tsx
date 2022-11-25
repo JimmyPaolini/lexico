@@ -21,9 +21,7 @@ export default function About() {
         container
         justifyContent="center"
         alignItems="center"
-        style={{
-          overflowX: 'hidden',
-        }}
+        style={{ overflowX: 'hidden' }}
       >
         <Grow in={true}>
           <Card
@@ -32,7 +30,7 @@ export default function About() {
               margin: theme.spacing(2),
               marginTop: theme.spacing(4),
               maxWidth: theme.custom.card.maxWidth * 2,
-              backgroundColor: theme.palette.background.paper,
+              background: theme.palette.background.paper,
             }}
           >
             <CardHeader title="About" />

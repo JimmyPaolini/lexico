@@ -32,7 +32,7 @@ const Root = styled('form')(({ theme }) => ({
     padding: theme.spacing(2),
     marginLeft: 'auto',
     marginRight: 'auto',
-    backgroundColor: 'black',
+    background: 'black',
   },
 
   [`& .${classes.item}`]: {
