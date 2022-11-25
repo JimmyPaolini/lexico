@@ -4,15 +4,15 @@ import Card from '@mui/material/Card'
 import Divider from '@mui/material/Divider'
 import { useTheme } from '@mui/material/styles'
 
-import { Entry } from 'src/hooks/search/useSearch'
+import { Entry as EntryType } from 'src/hooks/search/useSearch'
 
-import FormsRow from './FormsRow/FormsRow'
-import PrincipalPartsRow from './PrincipalPartsRow/PrincipalPartsRow'
-import TranslationsRow from './TranslationsRow/TranslationsRow'
+import { Forms } from './Forms/Forms'
+import { PrincipalParts } from './PrincipalParts/PrincipalParts'
+import { Translations } from './Translations/Translations'
 
-type Props = { entry: Entry; searched: string }
+type Props = { entry: EntryType; searched: string }
 
-export default (function EntryCard({ entry, searched = '' }: Props) {
+export const Entry = ({ entry, searched = '' }: Props) => {
   const theme = useTheme()
   const {
     id,
@@ -31,23 +31,23 @@ export default (function EntryCard({ entry, searched = '' }: Props) {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        width: '100%',
         background: theme.palette.background.paper,
         maxWidth: theme.custom.card.maxWidth,
         minWidth: theme.custom.card.minWidth,
+        width: '100%',
         paddingBottom: 0,
-        ...(isLatinSearchResult
-          ? {}
-          : { border: `2px solid ${theme.palette.secondary.main}` }),
+        border: isLatinSearchResult
+          ? undefined
+          : `2px solid ${theme.palette.secondary.main}`,
       }}
     >
-      <PrincipalPartsRow
+      <PrincipalParts
         {...{ id, partOfSpeech, principalParts, inflection, bookmarked }}
       />
       <Divider variant="middle" />
-      <TranslationsRow translations={translations || []} />
+      <Translations translations={translations || []} />
       <Divider variant="middle" />
-      <FormsRow
+      <Forms
         partOfSpeech={partOfSpeech}
         forms={forms}
         searched={searched}
@@ -55,4 +55,4 @@ export default (function EntryCard({ entry, searched = '' }: Props) {
       />
     </Card>
   )
-})
+}

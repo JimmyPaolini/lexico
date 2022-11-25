@@ -1,13 +1,14 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import FormTabs from 'src/components/entry/FormsRow/FormTabs'
+import { FormTabs } from 'src/components/Entry/Forms/FormTabs'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
-import { verbFormsRestructure } from '../../../../components/entry/FormsRow/PartsOfSpeech/VerbFormsTable/verbFormsRestructure'
+import { verbFormsRestructure } from '../../../../components/Entry/Forms/PartsOfSpeech/VerbFormsTable/verbFormsRestructure'
+import { VerbForms } from '../../../../graphql/generated'
 
 export default {
-  title: 'Cards/EntryCard/FormsRow/FormTabs',
+  title: 'Cards/Entry/Forms/FormTabs',
   component: FormTabs,
   decorators: [
     (Story) => (
@@ -26,7 +27,7 @@ export const Default: ComponentStory<typeof FormTabs> & {
 Default.loaders = [
   async () => {
     const { forms } = await searchEntry('amat')
-    const structure = verbFormsRestructure(forms)
+    const structure = verbFormsRestructure(forms as VerbForms)
     return {
       tabs: Object.keys(structure),
       activeTab: 0,

@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid'
 
 import { Identifier } from 'src/utils/identifiers/types'
 
-import CornerIdentifier from './CornerIdentifier'
+import { CornerIdentifier } from './CornerIdentifier'
 
 type Props = {
   top?: Identifier
@@ -10,7 +10,7 @@ type Props = {
   side: 'right' | 'left'
 }
 
-export default function Sidebar({ top, bottom, side }: Props) {
+export const Sidebar = ({ top, bottom, side }: Props) => {
   return (
     <Grid
       container

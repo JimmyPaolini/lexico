@@ -1,12 +1,12 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import TranslationBullet from 'src/components/entry/TranslationsRow/TranslationBullet'
+import { Translation } from 'src/components/Entry/Translations/Translation'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: 'Cards/EntryCard/TranslationsRow/TranslationBullet',
-  component: TranslationBullet,
+  title: 'Cards/Entry/Translations/Translation',
+  component: Translation,
   decorators: [
     (Story) => (
       <div
@@ -16,11 +16,11 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof TranslationBullet>
+} as ComponentMeta<typeof Translation>
 
-export const Default: ComponentStory<typeof TranslationBullet> & {
+export const Default: ComponentStory<typeof Translation> & {
   loaders: any[]
-} = (args, { loaded }) => <TranslationBullet {...args} {...loaded} />
+} = (args, { loaded }) => <Translation {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { translations } = await searchEntry('amat')
@@ -28,9 +28,9 @@ Default.loaders = [
   },
 ]
 
-export const TwoLines: ComponentStory<typeof TranslationBullet> & {
+export const TwoLines: ComponentStory<typeof Translation> & {
   loaders: any[]
-} = (args, { loaded }) => <TranslationBullet {...args} {...loaded} />
+} = (args, { loaded }) => <Translation {...args} {...loaded} />
 TwoLines.loaders = [
   async () => {
     const { translations } = await searchEntry('amat')

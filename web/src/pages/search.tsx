@@ -6,9 +6,9 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
+import { Entry } from '../components/Entry/Entry'
 import CardDeck from '../components/accessories/CardDeck'
 import Logo from '../components/accessories/Logo'
-import EntryCard from '../components/entry/EntryCard'
 import SearchBarLayout from '../components/layout/SearchBarLayout'
 import getSearchPageMetadata from '../components/search/getSearchPageMetadata'
 import { useSearch } from '../hooks/search/useSearch'
@@ -40,7 +40,7 @@ export default function Search({ initialSearch }: Props) {
 
   const cards =
     entries?.map((entry) => {
-      const Card = <EntryCard {...{ entry, searched }} />
+      const Card = <Entry {...{ entry, searched }} />
       return { key: entry.id, Card }
     }) || []
 

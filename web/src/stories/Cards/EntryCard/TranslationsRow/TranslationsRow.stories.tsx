@@ -1,12 +1,12 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import TranslationsRow from 'src/components/entry/TranslationsRow/TranslationsRow'
+import { Translations } from 'src/components/Entry/Translations/Translations'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: 'Cards/EntryCard/TranslationsRow',
-  component: TranslationsRow,
+  title: 'Cards/EntryCard/Translations',
+  component: Translations,
   decorators: [
     (Story) => (
       <div
@@ -16,11 +16,11 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof TranslationsRow>
+} as ComponentMeta<typeof Translations>
 
-export const Default: ComponentStory<typeof TranslationsRow> & {
+export const Default: ComponentStory<typeof Translations> & {
   loaders: any[]
-} = (args, { loaded }) => <TranslationsRow {...args} {...loaded} />
+} = (args, { loaded }) => <Translations {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { translations } = await searchEntry('amat')

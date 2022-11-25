@@ -1,17 +1,17 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import EntryCard from 'src/components/entry/EntryCard'
+import { Entry } from 'src/components/Entry/Entry'
 import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: 'Cards/EntryCard',
-  component: EntryCard,
-} as ComponentMeta<typeof EntryCard>
+  title: 'Cards/Entry',
+  component: Entry,
+} as ComponentMeta<typeof Entry>
 
-export const Verb: ComponentStory<typeof EntryCard> & { loaders: any[] } = (
+export const Verb: ComponentStory<typeof Entry> & { loaders: any[] } = (
   args,
   { loaded },
-) => <EntryCard {...args} {...loaded} />
+) => <Entry {...args} {...loaded} />
 Verb.args = { searched: 'amat' }
 Verb.loaders = [
   async () => {
@@ -20,8 +20,10 @@ Verb.loaders = [
   },
 ]
 
-export const Adjective: ComponentStory<typeof EntryCard> & { loaders: any[] } =
-  (args, { loaded }) => <EntryCard {...args} {...loaded} />
+export const Adjective: ComponentStory<typeof Entry> & { loaders: any[] } = (
+  args,
+  { loaded },
+) => <Entry {...args} {...loaded} />
 Adjective.args = { searched: 'amoeni' }
 Adjective.loaders = [
   async () => {
@@ -30,10 +32,10 @@ Adjective.loaders = [
   },
 ]
 
-export const Noun: ComponentStory<typeof EntryCard> & { loaders: any[] } = (
+export const Noun: ComponentStory<typeof Entry> & { loaders: any[] } = (
   args,
   { loaded },
-) => <EntryCard {...args} {...loaded} />
+) => <Entry {...args} {...loaded} />
 Noun.args = { searched: 'pater' }
 Noun.loaders = [
   async () => {

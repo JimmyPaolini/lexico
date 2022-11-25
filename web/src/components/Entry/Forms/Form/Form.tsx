@@ -4,8 +4,8 @@ import { useTheme } from '@mui/material/styles'
 
 import { Identifier } from '../../../../utils/identifiers'
 import { normalize } from '../../../../utils/string'
-import CenterText from './CenterText'
-import Sidebar from './Sidebar'
+import { CenterText } from './CenterText'
+import { Sidebar } from './Sidebar'
 
 export type FormCellPosition =
   | 'topLeft'
@@ -25,7 +25,7 @@ type Props = {
   searched?: string
 }
 
-export default function FormCell({
+export const Form = ({
   position,
   centerText,
   topLeftText,
@@ -33,7 +33,7 @@ export default function FormCell({
   bottomLeftText,
   bottomRightText,
   searched,
-}: Props) {
+}: Props) => {
   const theme = useTheme()
   const border = '0.5px solid rgba(255, 255, 255, 0.12)'
   const isSearched = normalize(centerText) === searched

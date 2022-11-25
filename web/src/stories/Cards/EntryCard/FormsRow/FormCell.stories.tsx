@@ -1,11 +1,11 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import FormCell from 'src/components/entry/FormsRow/FormCell'
+import { Form } from 'src/components/Entry/Forms/Form/Form'
 import theme from 'src/theme'
 
 export default {
-  title: 'Cards/EntryCard/FormsRow/FormCell',
-  component: FormCell,
+  title: 'Cards/Entry/Forms/Form',
+  component: Form,
   decorators: [
     (Story) => (
       <div
@@ -18,11 +18,9 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof FormCell>
+} as ComponentMeta<typeof Form>
 
-export const Default: ComponentStory<typeof FormCell> = (args) => (
-  <FormCell {...args} />
-)
+export const Default: ComponentStory<typeof Form> = (args) => <Form {...args} />
 Default.args = {
   position: 'midLeft',
   centerText: 'amat',
@@ -32,8 +30,8 @@ Default.args = {
   bottomRightText: 'plural',
 }
 
-export const TwoLines: ComponentStory<typeof FormCell> = (args) => (
-  <FormCell {...args} />
+export const TwoLines: ComponentStory<typeof Form> = (args) => (
+  <Form {...args} />
 )
 TwoLines.args = {
   position: 'midLeft',
@@ -44,8 +42,8 @@ TwoLines.args = {
   bottomRightText: 'plural',
 }
 
-export const Ellipsis: ComponentStory<typeof FormCell> = (args) => (
-  <FormCell {...args} />
+export const Ellipsis: ComponentStory<typeof Form> = (args) => (
+  <Form {...args} />
 )
 Ellipsis.args = {
   position: 'midLeft',

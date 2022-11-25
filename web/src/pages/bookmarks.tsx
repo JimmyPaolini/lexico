@@ -7,13 +7,17 @@ import Head from 'next/head'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
+import { Entry } from '../components/Entry/Entry'
 import CardDeck from '../components/accessories/CardDeck'
 import BookmarkInstructionsCard from '../components/bookmarks/BookmarkInstructionsCard'
 import filterBookmarks from '../components/bookmarks/filterBookmarks'
-import EntryCard from '../components/entry/EntryCard'
 import { Context } from '../components/layout/Context'
 import SearchBarLayout from '../components/layout/SearchBarLayout'
-import { Entry, useBookmarksQuery, useEntriesQuery } from '../graphql/generated'
+import {
+  Entry as EntryType,
+  useBookmarksQuery,
+  useEntriesQuery,
+} from '../graphql/generated'
 import useBookmarkInstructions from '../hooks/bookmarks/useBookmarkInstructions'
 import { getBookmarksLocal } from '../utils/bookmarksLocal'
 import { identifyEntryWord } from '../utils/identifiers'
@@ -56,7 +60,7 @@ export default function Bookmarks() {
   )
   const bookmarks = (
     user ? dataBookmarks?.bookmarks : dataEntries?.entries
-  ) as Entry[]
+  ) as EntryType[]
   const isLoading = user ? isLoadingBookmarks : isLoadingEntries
   const isSuccess = user ? isSuccessBookmarks : isSuccessEntries
 
@@ -68,7 +72,7 @@ export default function Bookmarks() {
           entry = identifyEntryWord(searched, entry)
           return {
             key: entry.id,
-            Card: <EntryCard {...{ entry, searched }} />,
+            Card: <Entry {...{ entry, searched }} />,
           }
         })
       : [

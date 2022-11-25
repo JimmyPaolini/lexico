@@ -5,7 +5,7 @@ import LinesEllipsis from 'react-lines-ellipsis'
 
 type Props = { centerText: string }
 
-export default function CenterText({ centerText }: Props) {
+export const CenterText = ({ centerText }: Props) => {
   return (
     <Grid container justifyContent="center" alignItems="center">
       <Typography align="center">

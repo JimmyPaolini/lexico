@@ -3,11 +3,11 @@ import { ComponentProps } from 'react'
 import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import FormCell, { FormCellPosition } from './FormCell'
+import { Form, FormCellPosition } from './Form/Form'
 
-type Props = { forms: ComponentProps<typeof FormCell>[]; searched: string }
+type Props = { forms: ComponentProps<typeof Form>[]; searched?: string }
 
-export default function FormsTable({ forms, searched }: Props) {
+export const FormsTable = ({ forms, searched }: Props) => {
   const theme = useTheme()
   return (
     <Grid container sx={{ background: theme.palette.background.paper }}>
@@ -18,7 +18,7 @@ export default function FormsTable({ forms, searched }: Props) {
         const position = (horizontal + vertical) as FormCellPosition
         return (
           <Grid item xs={6} key={i}>
-            <FormCell
+            <Form
               position={position}
               centerText={form.centerText}
               topLeftText={form.topLeftText}

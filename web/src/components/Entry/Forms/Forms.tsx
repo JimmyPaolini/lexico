@@ -12,7 +12,7 @@ import { useTheme } from '@mui/material/styles'
 
 import {
   AdjectiveForms,
-  Forms,
+  Forms as FormsType,
   NounForms,
   VerbForms,
 } from '../../../graphql/generated'
@@ -21,23 +21,23 @@ import { getSettingsLocal } from '../../../utils/settingsLocal'
 import ExpandIcon from '../../accessories/ExpandIcon'
 import IdentifierPill from '../../accessories/Pills/IdentifierPill'
 import { Context } from '../../layout/Context'
-import AdjectiveFormsTable from './PartsOfSpeech/AdjectiveFormsTable'
-import NounFormsTable from './PartsOfSpeech/NounFormsTable'
-import VerbFormsTable from './PartsOfSpeech/VerbFormsTable'
+import { AdjectiveFormsTable } from './PartsOfSpeech/AdjectiveFormsTable'
+import { NounFormsTable } from './PartsOfSpeech/NounFormsTable'
+import { VerbFormsTable } from './PartsOfSpeech/VerbFormsTable'
 
 type Props = {
   searched: string
-  forms?: Forms | null
+  forms?: FormsType | null
   partOfSpeech: string
   identifiers: string[]
 }
 
-export default function FormsRow({
+export const Forms = ({
   searched,
   forms,
   partOfSpeech,
   identifiers: identifiersList = [],
-}: Props) {
+}: Props) => {
   const theme = useTheme()
   const { user } = useContext(Context)
   const expandedInitial =
@@ -50,7 +50,7 @@ export default function FormsRow({
     searched =
       partOfSpeech === 'verb' ? 'Conjugation Table' : 'Declension Table'
 
-  const FormsTable = !forms ? null : partOfSpeechToFormsCard[partOfSpeech]
+  const FormsTable = !forms ? null : partOfSpeechToFormsTable[partOfSpeech]
 
   const expandable = forms && FormsTable
 
@@ -110,7 +110,7 @@ export default function FormsRow({
   )
 }
 
-const partOfSpeechToFormsCard = {
+const partOfSpeechToFormsTable = {
   verb: VerbFormsTable,
   noun: NounFormsTable,
   properNoun: NounFormsTable,

@@ -16,12 +16,12 @@ type Props = {
   children: ReactNode
 }
 
-export default function FormTabs({
+export const FormTabs = ({
   tabs,
   activeTab,
   setActiveTab,
   children,
-}: Props) {
+}: Props) => {
   const theme = useTheme()
   const minWidth = `${100 / tabs.length}%`
 

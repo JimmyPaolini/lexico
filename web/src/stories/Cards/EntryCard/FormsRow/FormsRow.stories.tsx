@@ -1,12 +1,12 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import FormsRow from 'src/components/entry/FormsRow/FormsRow'
+import {Forms} from 'src/components/Entry/Forms/Forms'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: 'Cards/EntryCard/FormsRow',
-  component: FormsRow,
+  title: 'Cards/Entry/Forms',
+  component: Forms,
   decorators: [
     (Story) => (
       <div
@@ -16,11 +16,11 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof FormsRow>
+} as ComponentMeta<typeof Forms>
 
-export const Default: ComponentStory<typeof FormsRow> & {
+export const Default: ComponentStory<typeof Forms> & {
   loaders: any[]
-} = (args, { loaded }) => <FormsRow {...args} {...loaded} />
+} = (args, { loaded }) => <Forms {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const searched = 'amat'
@@ -29,9 +29,9 @@ Default.loaders = [
   },
 ]
 
-export const TwoRows: ComponentStory<typeof FormsRow> & {
+export const TwoRows: ComponentStory<typeof Forms> & {
   loaders: any[]
-} = (args, { loaded }) => <FormsRow {...args} {...loaded} />
+} = (args, { loaded }) => <Forms {...args} {...loaded} />
 TwoRows.loaders = [
   async () => {
     const searched = 'credam'

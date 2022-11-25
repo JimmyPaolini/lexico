@@ -1,12 +1,12 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import PrincipalPartsRow from 'src/components/entry/PrincipalPartsRow/PrincipalPartsRow'
+import { PrincipalParts } from 'src/components/Entry/PrincipalParts/PrincipalParts'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: 'Cards/EntryCard/PrincipalPartsRow',
-  component: PrincipalPartsRow,
+  title: 'Cards/Entry/PrincipalParts',
+  component: PrincipalParts,
   decorators: [
     (Story) => (
       <div
@@ -16,11 +16,11 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof PrincipalPartsRow>
+} as ComponentMeta<typeof PrincipalParts>
 
-export const Default: ComponentStory<typeof PrincipalPartsRow> & {
+export const Default: ComponentStory<typeof PrincipalParts> & {
   loaders: any[]
-} = (args, { loaded }) => <PrincipalPartsRow {...args} {...loaded} />
+} = (args, { loaded }) => <PrincipalParts {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { id, partOfSpeech, principalParts, inflection, bookmarked } =

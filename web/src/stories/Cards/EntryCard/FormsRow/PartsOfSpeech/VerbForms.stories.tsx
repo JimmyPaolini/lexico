@@ -1,12 +1,12 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import VerbForms from 'src/components/entry/FormsRow/PartsOfSpeech/VerbFormsTable'
+import { VerbFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/VerbFormsTable'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: 'Cards/EntryCard/FormsRow/PartsOfSpeech/VerbForms',
-  component: VerbForms,
+  title: 'Cards/Entry/Forms/PartsOfSpeech/VerbFormsTable',
+  component: VerbFormsTable,
   decorators: [
     (Story) => (
       <div
@@ -16,11 +16,11 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof VerbForms>
+} as ComponentMeta<typeof VerbFormsTable>
 
-export const Default: ComponentStory<typeof VerbForms> & {
+export const Default: ComponentStory<typeof VerbFormsTable> & {
   loaders: any[]
-} = (args, { loaded }) => <VerbForms {...args} {...loaded} />
+} = (args, { loaded }) => <VerbFormsTable {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { forms } = await searchEntry('amat')

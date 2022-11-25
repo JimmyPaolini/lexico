@@ -3,10 +3,11 @@ import React from 'react'
 import { Box, CardHeader } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { Inflection, Maybe, PrincipalPart } from '../../../graphql/generated'
-import { unCamelCase } from '../../../utils/string'
+import { Inflection, Maybe, PrincipalPart } from 'src/graphql/generated'
+import { unCamelCase } from 'src/utils/string'
+
 import ExpandIcon from '../../accessories/ExpandIcon'
-import BookmarkButton from './BookmarkButton'
+import { BookmarkButton } from './BookmarkButton'
 import inflectionToString from './inflectionToString'
 
 type Props = {
@@ -18,14 +19,14 @@ type Props = {
   expanded?: boolean
 }
 
-export default function PrincipalPartsRow({
+export const PrincipalParts = ({
   id,
   partOfSpeech,
   principalParts,
   inflection,
   bookmarked,
   expanded,
-}: Props) {
+}: Props) => {
   const theme = useTheme()
   const principalPartsFormatted = principalParts
     ?.map((principalPart) => principalPart.text.join('/'))

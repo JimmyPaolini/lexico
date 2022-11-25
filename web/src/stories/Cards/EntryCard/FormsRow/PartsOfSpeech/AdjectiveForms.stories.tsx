@@ -1,12 +1,12 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import AdjectiveForms from 'src/components/entry/FormsRow/PartsOfSpeech/AdjectiveFormsTable'
+import { AdjectiveFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/AdjectiveFormsTable'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: 'Cards/EntryCard/FormsRow/PartsOfSpeech/AdjectiveForms',
-  component: AdjectiveForms,
+  title: 'Cards/Entry/Forms/PartsOfSpeech/AdjectiveFormsTable',
+  component: AdjectiveFormsTable,
   decorators: [
     (Story) => (
       <div
@@ -16,11 +16,11 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof AdjectiveForms>
+} as ComponentMeta<typeof AdjectiveFormsTable>
 
-export const Default: ComponentStory<typeof AdjectiveForms> & {
+export const Default: ComponentStory<typeof AdjectiveFormsTable> & {
   loaders: any[]
-} = (args, { loaded }) => <AdjectiveForms {...args} {...loaded} />
+} = (args, { loaded }) => <AdjectiveFormsTable {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { forms } = await searchEntry('amoenus')

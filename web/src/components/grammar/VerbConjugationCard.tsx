@@ -8,8 +8,8 @@ import {
   Divider,
 } from '@mui/material'
 
-import VerbForms from '../entry/FormsRow/PartsOfSpeech/VerbFormsTable'
-import PrincipalPartsRow from '../entry/PrincipalPartsRow/PrincipalPartsRow'
+import VerbForms from '../Entry/Forms/PartsOfSpeech/VerbFormsTable'
+import PrincipalPartsRow from '../Entry/PrincipalParts/PrincipalParts'
 import verbConjugations from './verbConjugations'
 
 type Props = {

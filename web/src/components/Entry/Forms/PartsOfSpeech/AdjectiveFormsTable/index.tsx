@@ -6,13 +6,13 @@ import { useTheme } from '@mui/material/styles'
 import { AdjectiveForms } from 'src/graphql/generated'
 import { Gender } from 'src/utils/identifiers'
 
-import FormTabs from '../../FormTabs'
-import FormsTable from '../../FormsTable'
+import { FormTabs } from '../../FormTabs'
+import { FormsTable } from '../../FormsTable'
 import { adjectiveFormsRestructure } from './adjectiveFormsRestructure'
 
-type Props = { forms: AdjectiveForms; searched: string }
+type Props = { forms: AdjectiveForms; searched?: string }
 
-export default function AdjectiveFormsTable({ forms, searched }: Props) {
+export const AdjectiveFormsTable = ({ forms, searched }: Props) => {
   const theme = useTheme()
   const [activeTab, setActiveTab] = useState(0)
   const structure = adjectiveFormsRestructure(forms)

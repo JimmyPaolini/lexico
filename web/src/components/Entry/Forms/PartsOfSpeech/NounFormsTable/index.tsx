@@ -5,12 +5,12 @@ import { useTheme } from '@mui/material/styles'
 
 import { NounForms } from 'src/graphql/generated'
 
-import FormsTable from '../../FormsTable'
+import { FormsTable } from '../../FormsTable'
 import { nounFormsRestructure } from './nounFormsRestructure'
 
-type Props = { forms: NounForms; searched: string }
+type Props = { forms: NounForms; searched?: string }
 
-export default function NounFormsTable({ forms, searched }: Props) {
+export const NounFormsTable = ({ forms, searched }: Props) => {
   const theme = useTheme()
   const formsStructure = nounFormsRestructure(forms) as any
   return (

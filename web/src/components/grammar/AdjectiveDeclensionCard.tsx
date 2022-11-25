@@ -10,8 +10,8 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import AdjectiveForms from '../entry/FormsRow/PartsOfSpeech/AdjectiveFormsTable'
-import PrincipalPartsRow from '../entry/PrincipalPartsRow/PrincipalPartsRow'
+import { AdjectiveFormsTable } from '../Entry/Forms/PartsOfSpeech/AdjectiveFormsTable'
+import { PrincipalParts } from '../Entry/PrincipalParts/PrincipalParts'
 import adjectiveDeclensions from './adjectiveDeclensions'
 
 type Props = {
@@ -32,7 +32,7 @@ export default forwardRef(function AdjectiveDeclensionCard(
         disableRipple
         disableTouchRipple
       >
-        <PrincipalPartsRow {...{ ...declension, expanded }} />
+        <PrincipalParts {...{ ...declension, expanded }} />
       </CardActionArea>
       <Collapse in={expanded} mountOnEnter>
         <CardContent
@@ -48,7 +48,7 @@ export default forwardRef(function AdjectiveDeclensionCard(
             {declension.info}
           </Typography>
           <Divider variant="middle" />
-          <AdjectiveForms {...declension} />
+          <AdjectiveFormsTable {...declension} />
         </CardContent>
       </Collapse>
     </Card>

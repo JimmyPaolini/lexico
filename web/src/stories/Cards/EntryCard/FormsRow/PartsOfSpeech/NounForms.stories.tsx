@@ -1,12 +1,12 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import NounForms from 'src/components/entry/FormsRow/PartsOfSpeech/NounFormsTable'
+import { NounFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/NounFormsTable'
 import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: 'Cards/EntryCard/FormsRow/PartsOfSpeech/NounForms',
-  component: NounForms,
+  title: 'Cards/Entry/Forms/PartsOfSpeech/NounFormsTable',
+  component: NounFormsTable,
   decorators: [
     (Story) => (
       <div
@@ -16,11 +16,11 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof NounForms>
+} as ComponentMeta<typeof NounFormsTable>
 
-export const Default: ComponentStory<typeof NounForms> & {
+export const Default: ComponentStory<typeof NounFormsTable> & {
   loaders: any[]
-} = (args, { loaded }) => <NounForms {...args} {...loaded} />
+} = (args, { loaded }) => <NounFormsTable {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { forms } = await searchEntry('hortus')

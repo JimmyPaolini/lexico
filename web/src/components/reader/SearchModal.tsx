@@ -5,10 +5,10 @@ import { useTheme } from '@mui/material/styles'
 
 import { useSwipeable } from 'react-swipeable'
 
-import { Entry, useSearchQuery } from '../../graphql/generated'
+import { Entry as EntryType, useSearchQuery } from '../../graphql/generated'
 import useEventListener from '../../hooks/useEventListener'
+import { Entry } from '../Entry/Entry'
 import CardDeck from '../accessories/CardDeck'
-import EntryCard from '../entry/EntryCard'
 
 type Props = {
   searched: string
@@ -27,7 +27,7 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
       staleTime: 1000 * 60 * 5,
     },
   )
-  const entries = data?.search as Entry[]
+  const entries = data?.search as EntryType[]
 
   useEventListener('keydown', (e: any) => {
     if (e.key === 'Escape') setOpen(false)
@@ -35,7 +35,7 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
 
   const cards =
     entries?.map((entry) => {
-      const Card = <EntryCard {...{ entry, searched }} />
+      const Card = <Entry {...{ entry, searched }} />
       return { key: entry.id, Card }
     }) || []
 
