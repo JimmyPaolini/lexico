@@ -68,9 +68,7 @@ export default function FormsRow({
         >
           <Grid container wrap="nowrap">
             <Grid container item direction="column">
-              <Typography variant="body1" sx={{ textDecoration: 'underline' }}>
-                {searched}
-              </Typography>
+              <Typography variant="body1">{searched}</Typography>
               {identifiersList.map((identifiers) => (
                 <Grid
                   container

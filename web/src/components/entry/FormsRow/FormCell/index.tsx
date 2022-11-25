@@ -3,6 +3,7 @@ import Tooltip from '@mui/material/Tooltip'
 import { useTheme } from '@mui/material/styles'
 
 import { Identifier } from '../../../../utils/identifiers'
+import { normalize } from '../../../../utils/string'
 import CenterText from './CenterText'
 import Sidebar from './Sidebar'
 
@@ -31,10 +32,11 @@ export default function FormCell({
   topRightText,
   bottomLeftText,
   bottomRightText,
-  searched
+  searched,
 }: Props) {
   const theme = useTheme()
   const border = '0.5px solid rgba(255, 255, 255, 0.12)'
+  const isSearched = normalize(centerText) === searched
 
   return (
     <Tooltip
@@ -56,7 +58,9 @@ export default function FormCell({
         justifyContent="space-between"
         wrap="nowrap"
         sx={{
-          background: theme.palette.background.paper,
+          background: isSearched
+            ? theme.palette.grey['900']
+            : theme.palette.background.paper,
           height: 48,
           position: 'relative',
           borderTop: position?.match(/bottom|mid/i) ? border : '',
@@ -66,7 +70,7 @@ export default function FormCell({
         }}
       >
         <Sidebar top={topLeftText} bottom={bottomLeftText} side="left" />
-        <CenterText centerText={centerText} searched={searched} />
+        <CenterText centerText={centerText} />
         <Sidebar top={topRightText} bottom={bottomRightText} side="right" />
       </Grid>
     </Tooltip>

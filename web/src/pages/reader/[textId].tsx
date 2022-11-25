@@ -9,10 +9,10 @@ import { useRouter } from 'next/router'
 
 import { Context } from '../../components/layout/Context'
 import LiteratureFallback from '../../components/literature/LiteratureFallback'
-import ReaderModal from '../../components/reader/ReaderModal'
-import ReaderText from '../../components/reader/ReaderText'
+import { SearchModal } from '../../components/reader/SearchModal'
+import { Text } from '../../components/reader/Text'
 import {
-  Text,
+  Text as ReaderText,
   useGetTextIdsQuery,
   useGetTextQuery,
 } from '../../graphql/generated'
@@ -22,7 +22,7 @@ import { showReaderInstructions } from '../../utils/readerInstructions'
 import { getSettingsLocal } from '../../utils/settingsLocal'
 import { sentenceCase } from '../../utils/string'
 
-type Props = { text: Text }
+type Props = { text: ReaderText }
 
 export default function Reader({ text }: Props) {
   const theme = useTheme()
@@ -98,10 +98,10 @@ export default function Reader({ text }: Props) {
       >
         <Grid container justifyContent="center">
           {!!text && user !== undefined ? (
-            <ReaderText {...{ text, openModal }} />
+            <Text {...{ text, openModal }} />
           ) : null}
         </Grid>
-        <ReaderModal {...{ searched, open, setOpen }} />
+        <SearchModal {...{ searched, open, setOpen }} />
       </Paper>
     </>
   )

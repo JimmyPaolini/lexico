@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, memo, useRef } from 'react'
+import React, { Dispatch, SetStateAction, useRef } from 'react'
 
 import { Box, Modal, Paper, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { useSwipeable } from 'react-swipeable'
 
@@ -10,40 +10,14 @@ import useEventListener from '../../hooks/useEventListener'
 import CardDeck from '../accessories/CardDeck'
 import EntryCard from '../entry/EntryCard'
 
-const PREFIX = 'ReaderModal'
-
-const classes = {
-  modal: `${PREFIX}-modal`,
-  container: `${PREFIX}-container`,
-  notFound: `${PREFIX}-notFound`,
-}
-
-const StyledModal = styled(Modal)(({ theme }) => ({
-  [`&.${classes.modal}`]: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: theme.spacing(12),
-  },
-
-  [`& .${classes.container}`]: {
-    maxHeight: '100%',
-    overflow: 'scroll',
-    outline: 'none',
-  },
-
-  [`& .${classes.notFound}`]: {
-    padding: theme.spacing(2),
-  },
-}))
-
 type Props = {
   searched: string
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export default memo(function ReaderModal({ searched, open, setOpen }: Props) {
+export const SearchModal = ({ searched, open, setOpen }: Props) => {
+  const theme = useTheme()
   const ref = useRef<HTMLDivElement>(null)
 
   const { data, isFetched, isSuccess, isError } = useSearchQuery(
@@ -66,13 +40,18 @@ export default memo(function ReaderModal({ searched, open, setOpen }: Props) {
     }) || []
 
   return (
-    <StyledModal
+    <Modal
       disablePortal
       disableEnforceFocus
       disableAutoFocus
       disableScrollLock
       container={() => ref.current}
-      className={classes.modal}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: theme.spacing(12),
+      }}
       open={open && isFetched}
       onClose={() => setOpen(false)}
       {...useSwipeable({
@@ -80,15 +59,18 @@ export default memo(function ReaderModal({ searched, open, setOpen }: Props) {
         onSwipedRight: () => setOpen(false),
       })}
     >
-      <Box className={classes.container} tabIndex={-1}>
+      <Box
+        sx={{ maxHeight: '100%', overflow: 'scroll', outline: 'none' }}
+        tabIndex={-1}
+      >
         {isError || !entries?.length ? (
-          <Paper className={classes.notFound}>
+          <Paper sx={{ padding: theme.spacing(2) }}>
             <Typography variant="h5">No Results</Typography>
           </Paper>
         ) : isSuccess && !!entries ? (
           <CardDeck {...{ cards }} />
         ) : null}
       </Box>
-    </StyledModal>
+    </Modal>
   )
-})
+}
