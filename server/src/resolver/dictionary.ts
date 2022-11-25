@@ -26,12 +26,16 @@ export default class DictionaryResolver {
   ): Promise<Entry[]> {
     const t0 = performance.now()
 
-    const entries = (
-      await Promise.all([
-        this.searchLatin(search, context),
-        this.searchEnglish(search, context),
-      ])
-    ).flat()
+    const [latinEntries, englishEntries] = await Promise.all([
+      this.searchLatin(search, context),
+      this.searchEnglish(search, context),
+    ])
+    const entries = [
+      ...latinEntries,
+      ...englishEntries.filter((englishEntry) =>
+        !latinEntries.some((latinEntry) => latinEntry.id !== englishEntry.id),
+      ),
+    ]
 
     log.info('search', {
       search,

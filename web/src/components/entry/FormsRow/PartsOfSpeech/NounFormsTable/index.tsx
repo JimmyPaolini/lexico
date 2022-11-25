@@ -1,7 +1,6 @@
-/* spellchecker: disable */
 import React from 'react'
 
-import { Box, Paper } from '@mui/material'
+import { Paper } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { NounForms } from 'src/graphql/generated'
@@ -9,9 +8,9 @@ import { NounForms } from 'src/graphql/generated'
 import FormsTable from '../../FormsTable'
 import { nounFormsRestructure } from './nounFormsRestructure'
 
-type Props = { forms: NounForms }
+type Props = { forms: NounForms; searched: string }
 
-export default function NounFormsTable({ forms }: Props) {
+export default function NounFormsTable({ forms, searched }: Props) {
   const theme = useTheme()
   const formsStructure = nounFormsRestructure(forms)
   return (
@@ -19,8 +18,7 @@ export default function NounFormsTable({ forms }: Props) {
       sx={{ maxWidth: theme.custom.card.maxWidth, borderRadius: 0 }}
       elevation={0}
     >
-      <Box style={{ height: '4px' }} />
-      <FormsTable forms={formsStructure} />
+      <FormsTable forms={formsStructure} searched={searched} />
     </Paper>
   )
 }

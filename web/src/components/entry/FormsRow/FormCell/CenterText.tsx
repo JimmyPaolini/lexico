@@ -3,12 +3,21 @@ import Typography from '@mui/material/Typography'
 
 import LinesEllipsis from 'react-lines-ellipsis'
 
-type Props = { centerText: string }
+import { normalize } from 'src/utils/string'
 
-export default function CenterText({ centerText }: Props) {
+type Props = { centerText: string; searched?: string }
+
+export default function CenterText({ centerText, searched }: Props) {
   return (
     <Grid container justifyContent="center" alignItems="center">
-      <Typography align="center">
+      <Typography
+        align="center"
+        sx={
+          normalize(centerText) === searched
+            ? { textDecoration: 'underline' }
+            : {}
+        }
+      >
         <LinesEllipsis text={centerText || '-'} maxLine={2} />
       </Typography>
     </Grid>

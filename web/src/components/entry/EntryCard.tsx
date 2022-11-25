@@ -4,7 +4,8 @@ import Card from '@mui/material/Card'
 import Divider from '@mui/material/Divider'
 import { useTheme } from '@mui/material/styles'
 
-import { Entry } from '../../graphql/generated'
+import { Entry } from 'src/hooks/search/useSearch'
+
 import FormsRow from './FormsRow/FormsRow'
 import PrincipalPartsRow from './PrincipalPartsRow/PrincipalPartsRow'
 import TranslationsRow from './TranslationsRow/TranslationsRow'
@@ -22,6 +23,7 @@ export default (function EntryCard({ entry, searched = '' }: Props) {
     translations,
     forms,
     identifiers,
+    isLatinSearchResult,
   } = entry
 
   return (
@@ -34,8 +36,9 @@ export default (function EntryCard({ entry, searched = '' }: Props) {
         maxWidth: theme.custom.card.maxWidth,
         minWidth: theme.custom.card.minWidth,
         paddingBottom: 0,
-        border: '2px solid',
-        borderColor: theme.palette.secondary.main,
+        ...(isLatinSearchResult
+          ? {}
+          : { border: `2px solid ${theme.palette.secondary.main}` }),
       }}
     >
       <PrincipalPartsRow

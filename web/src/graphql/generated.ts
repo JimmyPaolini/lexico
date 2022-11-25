@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import gql from 'graphql-tag'
-import {
-  UseMutationOptions,
-  UseQueryOptions,
-  useMutation,
-  useQuery,
-} from 'react-query'
-
 import { clientEndpoint as endpointUrl } from '../pages/_app'
 
+import gql from 'graphql-tag'
+import {
+  useMutation,
+  UseMutationOptions,
+  useQuery,
+  UseQueryOptions,
+} from 'react-query'
 export type Maybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]
@@ -116,6 +115,7 @@ export type Entry = {
   id: Scalars['ID']
   identifiers?: Maybe<Array<Scalars['String']>>
   inflection?: Maybe<Inflection>
+  isLatinSearchResult?: Maybe<Scalars['Boolean']>
   partOfSpeech: Scalars['String']
   principalParts?: Maybe<Array<PrincipalPart>>
   pronunciation?: Maybe<Pronunciation>
@@ -362,6 +362,7 @@ export type Query = {
   listCustomTexts: Array<CustomText>
   login: User
   logout: Scalars['Boolean']
+  search: Array<Entry>
   searchAuthors: Array<Author>
   searchBooks: Array<Book>
   searchEnglish: Array<Entry>
@@ -416,6 +417,10 @@ export type QueryGoogleArgs = {
 export type QueryLoginArgs = {
   email: Scalars['String']
   password: Scalars['String']
+}
+
+export type QuerySearchArgs = {
+  search: Scalars['String']
 }
 
 export type QuerySearchAuthorsArgs = {
@@ -575,6 +580,7 @@ export type BookmarksQuery = {
     partOfSpeech: string
     identifiers?: Maybe<Array<string>>
     bookmarked?: Maybe<boolean>
+    isLatinSearchResult?: Maybe<boolean>
     principalParts?: Maybe<Array<{ name: string; text: Array<string> }>>
     inflection?: Maybe<
       | { declension: string; degree: string; other: string }
@@ -1048,6 +1054,7 @@ export type EntriesQuery = {
     partOfSpeech: string
     identifiers?: Maybe<Array<string>>
     bookmarked?: Maybe<boolean>
+    isLatinSearchResult?: Maybe<boolean>
     principalParts?: Maybe<Array<{ name: string; text: Array<string> }>>
     inflection?: Maybe<
       | { declension: string; degree: string; other: string }
@@ -1619,6 +1626,480 @@ export type GetTextsQuery = {
   }>
 }
 
+export type SearchQueryVariables = Exact<{
+  search: Scalars['String']
+}>
+
+export type SearchQuery = {
+  search: Array<{
+    id: string
+    partOfSpeech: string
+    identifiers?: Maybe<Array<string>>
+    bookmarked?: Maybe<boolean>
+    isLatinSearchResult?: Maybe<boolean>
+    principalParts?: Maybe<Array<{ name: string; text: Array<string> }>>
+    inflection?: Maybe<
+      | { declension: string; degree: string; other: string }
+      | { type: string; degree: string }
+      | { declension: string; gender: string; other: string }
+      | { case: string; other: string }
+      | { other: string }
+      | { conjugation: string; other: string }
+    >
+    translations?: Maybe<Array<{ id: string; translation: string }>>
+    forms?: Maybe<
+      | {
+          masculine?: Maybe<{
+            nominative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            genitive?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            dative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            accusative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            ablative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            vocative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            locative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+          }>
+          feminine?: Maybe<{
+            nominative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            genitive?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            dative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            accusative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            ablative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            vocative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            locative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+          }>
+          neuter?: Maybe<{
+            nominative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            genitive?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            dative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            accusative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            ablative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            vocative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+            locative?: Maybe<{
+              singular?: Maybe<Array<string>>
+              plural?: Maybe<Array<string>>
+            }>
+          }>
+        }
+      | {
+          positive?: Maybe<Array<string>>
+          comparative?: Maybe<Array<string>>
+          superlative?: Maybe<Array<string>>
+        }
+      | {
+          nominative?: Maybe<{
+            singular?: Maybe<Array<string>>
+            plural?: Maybe<Array<string>>
+          }>
+          genitive?: Maybe<{
+            singular?: Maybe<Array<string>>
+            plural?: Maybe<Array<string>>
+          }>
+          dative?: Maybe<{
+            singular?: Maybe<Array<string>>
+            plural?: Maybe<Array<string>>
+          }>
+          accusative?: Maybe<{
+            singular?: Maybe<Array<string>>
+            plural?: Maybe<Array<string>>
+          }>
+          ablative?: Maybe<{
+            singular?: Maybe<Array<string>>
+            plural?: Maybe<Array<string>>
+          }>
+          vocative?: Maybe<{
+            singular?: Maybe<Array<string>>
+            plural?: Maybe<Array<string>>
+          }>
+          locative?: Maybe<{
+            singular?: Maybe<Array<string>>
+            plural?: Maybe<Array<string>>
+          }>
+        }
+      | {
+          indicative?: Maybe<{
+            active?: Maybe<{
+              present?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              imperfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              future?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              perfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              pluperfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              futurePerfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+            }>
+            passive?: Maybe<{
+              present?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              imperfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              future?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              perfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              pluperfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              futurePerfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+            }>
+          }>
+          subjunctive?: Maybe<{
+            active?: Maybe<{
+              present?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              imperfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              perfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              pluperfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+            }>
+            passive?: Maybe<{
+              present?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              imperfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              perfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+              pluperfect?: Maybe<{
+                singular?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  first?: Maybe<Array<string>>
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+            }>
+          }>
+          imperative?: Maybe<{
+            active?: Maybe<{
+              present?: Maybe<{
+                singular?: Maybe<{ second?: Maybe<Array<string>> }>
+                plural?: Maybe<{ second?: Maybe<Array<string>> }>
+              }>
+              future?: Maybe<{
+                singular?: Maybe<{
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+              }>
+            }>
+            passive?: Maybe<{
+              present?: Maybe<{
+                singular?: Maybe<{ second?: Maybe<Array<string>> }>
+                plural?: Maybe<{ second?: Maybe<Array<string>> }>
+              }>
+              future?: Maybe<{
+                singular?: Maybe<{
+                  second?: Maybe<Array<string>>
+                  third?: Maybe<Array<string>>
+                }>
+                plural?: Maybe<{ third?: Maybe<Array<string>> }>
+              }>
+            }>
+          }>
+          nonFinite?: Maybe<{
+            infinitive?: Maybe<{
+              active?: Maybe<{
+                present?: Maybe<Array<string>>
+                perfect?: Maybe<Array<string>>
+                future?: Maybe<Array<string>>
+              }>
+              passive?: Maybe<{
+                present?: Maybe<Array<string>>
+                perfect?: Maybe<Array<string>>
+                future?: Maybe<Array<string>>
+              }>
+            }>
+            participle?: Maybe<{
+              active?: Maybe<{
+                present?: Maybe<Array<string>>
+                future?: Maybe<Array<string>>
+              }>
+              passive?: Maybe<{
+                perfect?: Maybe<Array<string>>
+                future?: Maybe<Array<string>>
+              }>
+            }>
+          }>
+          verbalNoun?: Maybe<{
+            gerund?: Maybe<{
+              genitive?: Maybe<Array<string>>
+              dative?: Maybe<Array<string>>
+              accusative?: Maybe<Array<string>>
+              ablative?: Maybe<Array<string>>
+            }>
+            supine?: Maybe<{
+              accusative?: Maybe<Array<string>>
+              ablative?: Maybe<Array<string>>
+            }>
+          }>
+        }
+    >
+  }>
+}
+
 export type SearchEnglishQueryVariables = Exact<{
   search: Scalars['String']
 }>
@@ -1629,6 +2110,7 @@ export type SearchEnglishQuery = {
     partOfSpeech: string
     identifiers?: Maybe<Array<string>>
     bookmarked?: Maybe<boolean>
+    isLatinSearchResult?: Maybe<boolean>
     principalParts?: Maybe<Array<{ name: string; text: Array<string> }>>
     inflection?: Maybe<
       | { declension: string; degree: string; other: string }
@@ -2102,6 +2584,7 @@ export type SearchLatinQuery = {
     partOfSpeech: string
     identifiers?: Maybe<Array<string>>
     bookmarked?: Maybe<boolean>
+    isLatinSearchResult?: Maybe<boolean>
     principalParts?: Maybe<Array<{ name: string; text: Array<string> }>>
     inflection?: Maybe<
       | { declension: string; degree: string; other: string }
@@ -3137,6 +3620,7 @@ export const AllEntry = gql`
     }
     identifiers
     bookmarked
+    isLatinSearchResult
   }
   ${AllPrincipalParts}
   ${AllInflections}
@@ -3387,6 +3871,57 @@ export const GetTexts = gql`
       }
     }
   }
+`
+export const Search = gql`
+  query Search($search: String!) {
+    search(search: $search) {
+      ...allEntry
+    }
+  }
+  ${AllEntry}
+  ${AllPrincipalParts}
+  ${AllInflections}
+  ${AllNounInflections}
+  ${AllVerbInflections}
+  ${AllAdjectiveInflections}
+  ${AllAdverbInflections}
+  ${AllPrepositionInflections}
+  ${AllUninflected}
+  ${AllTranslations}
+  ${AllForms}
+  ${AllNounForms}
+  ${AllNounNumbers}
+  ${AllVerbForms}
+  ${AllIndicative}
+  ${AllIndicativeTense}
+  ${AllIndicativeNumber}
+  ${AllIndicativePerson}
+  ${AllSubjunctive}
+  ${AllSubjunctiveTense}
+  ${AllSubjunctiveNumber}
+  ${AllSubjunctivePerson}
+  ${AllImperative}
+  ${AllImperativeActive}
+  ${AllImperativePresent}
+  ${AllImperativeSecond}
+  ${AllImperativeActiveFuture}
+  ${AllImperativeSecondThird}
+  ${AllImperativePassive}
+  ${AllImperativePassiveFuture}
+  ${AllImperativeThird}
+  ${AllNonFinite}
+  ${AllNonFiniteInfinitive}
+  ${AllNonFinitePresentPerfectFuture}
+  ${AllNonFiniteParticiple}
+  ${AllNonFinitePresentFuture}
+  ${AllNonFinitePerfectFuture}
+  ${AllVerbalNoun}
+  ${AllGerund}
+  ${AllSupine}
+  ${AllAdjectiveForms}
+  ${AllAdjectiveCase}
+  ${AllAdjectiveNumber}
+  ${AllAdverbForms}
 `
 export const SearchEnglish = gql`
   query SearchEnglish($search: String!) {
@@ -4015,6 +4550,7 @@ export const AllEntryFragmentDoc = `
   }
   identifiers
   bookmarked
+  isLatinSearchResult
 }
     `
 export const AllSettingsFragmentDoc = `
@@ -4531,6 +5067,72 @@ useGetTextsQuery.getKey = (variables?: GetTextsQueryVariables) => [
 
 useGetTextsQuery.fetcher = (variables?: GetTextsQueryVariables) =>
   fetcher<GetTextsQuery, GetTextsQueryVariables>(GetTextsDocument, variables)
+export const SearchDocument = `
+    query Search($search: String!) {
+  search(search: $search) {
+    ...allEntry
+  }
+}
+    ${AllEntryFragmentDoc}
+${AllPrincipalPartsFragmentDoc}
+${AllInflectionsFragmentDoc}
+${AllNounInflectionsFragmentDoc}
+${AllVerbInflectionsFragmentDoc}
+${AllAdjectiveInflectionsFragmentDoc}
+${AllAdverbInflectionsFragmentDoc}
+${AllPrepositionInflectionsFragmentDoc}
+${AllUninflectedFragmentDoc}
+${AllTranslationsFragmentDoc}
+${AllFormsFragmentDoc}
+${AllNounFormsFragmentDoc}
+${AllNounNumbersFragmentDoc}
+${AllVerbFormsFragmentDoc}
+${AllIndicativeFragmentDoc}
+${AllIndicativeTenseFragmentDoc}
+${AllIndicativeNumberFragmentDoc}
+${AllIndicativePersonFragmentDoc}
+${AllSubjunctiveFragmentDoc}
+${AllSubjunctiveTenseFragmentDoc}
+${AllSubjunctiveNumberFragmentDoc}
+${AllSubjunctivePersonFragmentDoc}
+${AllImperativeFragmentDoc}
+${AllImperativeActiveFragmentDoc}
+${AllImperativePresentFragmentDoc}
+${AllImperativeSecondFragmentDoc}
+${AllImperativeActiveFutureFragmentDoc}
+${AllImperativeSecondThirdFragmentDoc}
+${AllImperativePassiveFragmentDoc}
+${AllImperativePassiveFutureFragmentDoc}
+${AllImperativeThirdFragmentDoc}
+${AllNonFiniteFragmentDoc}
+${AllNonFiniteInfinitiveFragmentDoc}
+${AllNonFinitePresentPerfectFutureFragmentDoc}
+${AllNonFiniteParticipleFragmentDoc}
+${AllNonFinitePresentFutureFragmentDoc}
+${AllNonFinitePerfectFutureFragmentDoc}
+${AllVerbalNounFragmentDoc}
+${AllGerundFragmentDoc}
+${AllSupineFragmentDoc}
+${AllAdjectiveFormsFragmentDoc}
+${AllAdjectiveCaseFragmentDoc}
+${AllAdjectiveNumberFragmentDoc}
+${AllAdverbFormsFragmentDoc}`
+export const useSearchQuery = <TData = SearchQuery, TError = unknown>(
+  variables: SearchQueryVariables,
+  options?: UseQueryOptions<SearchQuery, TError, TData>,
+) =>
+  useQuery<SearchQuery, TError, TData>(
+    ['Search', variables],
+    fetcher<SearchQuery, SearchQueryVariables>(SearchDocument, variables),
+    options,
+  )
+useSearchQuery.getKey = (variables: SearchQueryVariables) => [
+  'Search',
+  variables,
+]
+
+useSearchQuery.fetcher = (variables: SearchQueryVariables) =>
+  fetcher<SearchQuery, SearchQueryVariables>(SearchDocument, variables)
 export const SearchEnglishDocument = `
     query SearchEnglish($search: String!) {
   searchEnglish(search: $search) {

@@ -8,13 +8,14 @@ import {
   useTheme,
 } from '@mui/material'
 
-import { Translation } from '../../../graphql/generated'
+
 import { getSettingsLocal } from '../../../utils/settingsLocal'
 import ExpandIcon from '../../accessories/ExpandIcon'
+import { Entry } from 'src/hooks/search/useSearch'
 import { Context } from '../../layout/Context'
 import TranslationBullet from './TranslationBullet'
 
-type Props = { translations: Translation[] }
+type Props = { translations: Entry['translations'] }
 
 export default function TranslationsRow({ translations }: Props) {
   const theme = useTheme()
@@ -24,9 +25,9 @@ export default function TranslationsRow({ translations }: Props) {
       getSettingsLocal().translationsExpandedDefault ||
       false,
   )
-  const expandable = translations.length > 2
+  const expandable = translations?.length! > 2
 
-  return (
+  return !translations?.length ? null : (
     <CardContent>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}

@@ -1,9 +1,9 @@
 import { Box, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { Translation } from '../../../graphql/generated'
+import { Entry } from '../../../hooks/search/useSearch'
 
-type Props = { translation: Translation }
+type Props = { translation: NonNullable<Entry['translations']>[0] }
 
 export default function TranslationBullet({ translation }: Props) {
   const theme = useTheme()

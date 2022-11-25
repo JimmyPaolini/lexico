@@ -15,4 +15,5 @@ fragment allEntry on Entry {
   }
   identifiers
   bookmarked
+  isLatinSearchResult
 }

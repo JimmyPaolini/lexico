@@ -11,9 +11,9 @@ import FormTabs from '../../FormTabs'
 import FormsTable from '../../FormsTable'
 import { verbFormsRestructure } from './verbFormsRestructure'
 
-type Props = { forms: VerbForms }
+type Props = { forms: VerbForms; searched: string }
 
-export default function VerbFormsTable({ forms }: Props) {
+export default function VerbFormsTable({ forms, searched }: Props) {
   const theme = useTheme()
   const [topTab, setTopTabState] = useState(0)
   const [midTab, setMidTabState] = useState(0)
@@ -85,7 +85,7 @@ export default function VerbFormsTable({ forms }: Props) {
             activeTab={bottomTab}
             setActiveTab={setBottomTab}
           >
-            <FormsTable forms={formsStructure} />
+            <FormsTable forms={formsStructure} searched={searched} />
           </FormTabs>
         </FormTabs>
       </FormTabs>

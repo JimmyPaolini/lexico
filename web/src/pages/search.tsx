@@ -11,49 +11,40 @@ import Logo from '../components/accessories/Logo'
 import EntryCard from '../components/entry/EntryCard'
 import SearchBarLayout from '../components/layout/SearchBarLayout'
 import getSearchPageMetadata from '../components/search/getSearchPageMetadata'
-import { Entry } from '../graphql/generated'
-import useSearch from '../hooks/search/useSearch'
+import { useSearch } from '../hooks/search/useSearch'
 import { googleAnalyticsEvent } from '../utils/googleAnalytics'
 
-type Props = {
-  initialSearch: string
-  initialIsLatin: boolean
-}
+type Props = { initialSearch: string }
 
-export default function Search({ initialSearch, initialIsLatin }: Props) {
+export default function Search({ initialSearch }: Props) {
   const router = useRouter()
 
-  const [isLatin, setLatin] = useState<boolean>(initialIsLatin)
   const [search, setSearch] = useState<string>(initialSearch)
   const [searched, setSearched] = useState<string>(initialSearch)
 
-  const { entries, isLoading } = useSearch(isLatin, searched)
+  const { entries, isLoading } = useSearch(searched)
 
-  useEffect(() => setSearched(search), [isLatin])
   useEffect(() => {
     if (!search) setSearched('')
   }, [search])
   useEffect(() => {
     if (!searched) return
-    const hash = (isLatin ? '?latin=' : '?english=') + searched
+    const hash = '?search=' + searched
     router.push(router.pathname + hash)
     googleAnalyticsEvent('search', {
       category: 'search',
-      label: isLatin ? 'latin' : 'english',
+      label: '',
       value: searched,
     })
-  }, [searched, isLatin])
+  }, [searched])
 
   const cards =
-    entries?.map((entry: Entry) => {
+    entries?.map((entry) => {
       const Card = <EntryCard {...{ entry, searched }} />
       return { key: entry.id, Card }
     }) || []
 
-  const { title, description, keywords } = getSearchPageMetadata(
-    searched,
-    isLatin,
-  )
+  const { title, description, keywords } = getSearchPageMetadata(searched)
 
   return (
     <>
@@ -69,8 +60,6 @@ export default function Search({ initialSearch, initialIsLatin }: Props) {
           isLoading: isLoading && !!search,
           handleSearchExecute: () => setSearched(search),
           target: 'lexico',
-          isLatin,
-          setLatin,
         }}
       >
         {!searched ? (
@@ -86,11 +75,7 @@ export default function Search({ initialSearch, initialIsLatin }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({
-  query: { latin, english },
+  query: { search },
 }) => {
-  const initialIsLatin = !english
-  const initialSearch = latin || english || ''
-  return {
-    props: { initialSearch, initialIsLatin },
-  }
+  return { props: { initialSearch: search ?? '' } }
 }

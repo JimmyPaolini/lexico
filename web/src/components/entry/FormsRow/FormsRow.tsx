@@ -68,9 +68,9 @@ export default function FormsRow({
         >
           <Grid container wrap="nowrap">
             <Grid container item direction="column">
-              <Grid item>
-                <Typography variant="body1">{searched}</Typography>
-              </Grid>
+              <Typography variant="body1" sx={{ textDecoration: 'underline' }}>
+                {searched}
+              </Typography>
               {identifiersList.map((identifiers) => (
                 <Grid
                   container
@@ -102,7 +102,10 @@ export default function FormsRow({
       {expandable && (
         <Collapse in={expanded}>
           <Divider variant="middle" />
-          <FormsTable forms={forms as VerbForms | NounForms | AdjectiveForms} />
+          <FormsTable
+            forms={forms as VerbForms | NounForms | AdjectiveForms}
+            searched={searched}
+          />
         </Collapse>
       )}
     </>
