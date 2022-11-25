@@ -8,10 +8,10 @@ import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
 import { Entry } from '../components/Entry/Entry'
-import CardDeck from '../components/accessories/CardDeck'
 import BookmarkInstructionsCard from '../components/bookmarks/BookmarkInstructionsCard'
 import filterBookmarks from '../components/bookmarks/filterBookmarks'
 import { Context } from '../components/layout/Context'
+import { Deck } from '../components/layout/Deck'
 import SearchBarLayout from '../components/layout/SearchBarLayout'
 import {
   Entry as EntryType,
@@ -70,20 +70,12 @@ export default function Bookmarks() {
     return filteredEntries.length
       ? filteredEntries.map((entry) => {
           entry = identifyEntryWord(searched, entry)
-          return {
-            key: entry.id,
-            Card: <Entry {...{ entry, searched }} />,
-          }
+          return <Entry {...{ entry, searched }} />
         })
       : [
-          {
-            key: 'no results',
-            Card: (
-              <Typography variant="h4" align="center">
-                Not Found
-              </Typography>
-            ),
-          },
+          <Typography variant="h4" align="center">
+            Not Found
+          </Typography>,
         ]
   }, [user, bookmarks, searched])
 
@@ -108,7 +100,7 @@ export default function Bookmarks() {
           !bookmarks.length ? (
           <BookmarkInstructionsCard />
         ) : (
-          <CardDeck cards={cards} />
+          <Deck cards={cards} />
         )}
       </SearchBarLayout>
     </>

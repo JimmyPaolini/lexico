@@ -8,7 +8,7 @@ import { useSwipeable } from 'react-swipeable'
 import { Entry as EntryType, useSearchQuery } from '../../graphql/generated'
 import useEventListener from '../../hooks/useEventListener'
 import { Entry } from '../Entry/Entry'
-import CardDeck from '../accessories/CardDeck'
+import { Deck } from '../layout/Deck'
 
 type Props = {
   searched: string
@@ -34,10 +34,7 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
   })
 
   const cards =
-    entries?.map((entry) => {
-      const Card = <Entry {...{ entry, searched }} />
-      return { key: entry.id, Card }
-    }) || []
+    entries?.map((entry) => <Entry {...{ entry, searched }} />) || []
 
   return (
     <Modal
@@ -68,7 +65,7 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
             <Typography variant="h5">No Results</Typography>
           </Paper>
         ) : isSuccess && !!entries ? (
-          <CardDeck {...{ cards }} />
+          <Deck {...{ cards }} />
         ) : null}
       </Box>
     </Modal>

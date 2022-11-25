@@ -10,8 +10,8 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import NounForms from '../Entry/Forms/PartsOfSpeech/NounFormsTable'
-import PrincipalPartsRow from '../Entry/PrincipalParts/PrincipalParts'
+import { NounFormsTable } from '../Entry/Forms/PartsOfSpeech/NounFormsTable'
+import { PrincipalParts } from '../Entry/PrincipalParts/PrincipalParts'
 import nounDeclensions from './nounDeclensions'
 
 type Props = {
@@ -27,15 +27,15 @@ export default forwardRef(function NounDeclensionCard(
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
-    <Card ref={ref}>
+    <Card sx={{ ...theme.custom.card }} ref={ref}>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
         disableTouchRipple
       >
-        <PrincipalPartsRow {...{ ...declension, expanded }} />
+        <PrincipalParts {...{ ...declension, expanded }} />
       </CardActionArea>
-      <Collapse in={expanded} mountOnEnter>
+      <Collapse in={expanded}>
         <CardContent
           sx={{
             padding: 0,
@@ -49,7 +49,7 @@ export default forwardRef(function NounDeclensionCard(
             {declension.info}
           </Typography>
           <Divider variant="middle" />
-          <NounForms {...declension} />
+          <NounFormsTable {...declension} />
         </CardContent>
       </Collapse>
     </Card>

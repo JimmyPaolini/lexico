@@ -26,7 +26,7 @@ export default forwardRef(function AdjectiveDeclensionCard(
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
-    <Card ref={ref}>
+    <Card sx={{ ...theme.custom.card }} ref={ref}>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
@@ -34,7 +34,7 @@ export default forwardRef(function AdjectiveDeclensionCard(
       >
         <PrincipalParts {...{ ...declension, expanded }} />
       </CardActionArea>
-      <Collapse in={expanded} mountOnEnter>
+      <Collapse in={expanded}>
         <CardContent
           sx={{
             padding: 0,

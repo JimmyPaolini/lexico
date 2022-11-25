@@ -7,51 +7,54 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 
 import LazyLoad from 'react-lazyload'
 
-type Card = {
-  key: string | number
-  Card: JSX.Element
-}
-
+type Card = JSX.Element
 type Props = { cards: Card[] }
 
-export default function CardDeck({ cards }: Props) {
+export const getCardKey = (Card: JSX.Element) =>
+  Card.props?.entry?.id ?? JSON.stringify(Card.props)
+
+export const Deck = ({ cards }: Props) => {
   const theme = useTheme()
   const isXl = useMediaQuery(theme.breakpoints.up('xl'))
   const isLg = useMediaQuery(theme.breakpoints.up('lg'))
   const isMd = useMediaQuery(theme.breakpoints.up('md'))
   const numCols = isXl ? 4 : isLg ? 3 : isMd ? 2 : 1
 
-  const cardMatrix = useMemo<Card[][]>(
+  const cardCols = useMemo<Card[][]>(
     () => arrangeCards(cards, numCols),
     [cards, numCols],
   )
 
-  if (!cards.every((card) => card.key && card.Card)) {
-    console.error('Invalid card structure passed into CardDeck')
-    return <></>
-  }
-  if (!cardMatrix.length || !cardMatrix[0].length) return <></>
-  return (
-    <Grid container justifyContent="center" wrap="nowrap">
-      {cardMatrix.map((cardColumn, col) => {
-        if (!cardColumn.length) return null
-        return (
+  return !cardCols?.[0]?.length ? null : (
+    <Grid
+      container
+      justifyContent="center"
+      wrap="nowrap"
+      gap={theme.spacing(2)}
+      sx={{ width: '100%', outline: 'none' }}
+    >
+      {cardCols.map((cardCol, colNum) => {
+        return !cardCol.length ? null : (
           <Grid
             item
-            flexBasis={0}
             container
+            flexBasis={0}
             direction="column"
             alignItems="center"
-            sx={{ margin: theme.spacing(2), outline: 'none' }}
-            key={cardColumn.map((card) => card.key).join()}
+            gap={theme.spacing(2)}
+            sx={{ width: '100%', outline: 'none' }}
+            key={cardCol.map((Card) => getCardKey(Card)).join()}
           >
-            {cardColumn.map((card, row) => {
-              const timeout = Math.min(400 * Math.pow(col + row, 1 / 2), 1000)
+            {cardCol.map((Card, rowNum) => {
+              const timeout = Math.min(
+                400 * Math.pow(colNum + rowNum, 1 / 2),
+                1000,
+              )
               return (
                 <Grow in timeout={timeout}>
-                  <Grid item key={card.key}>
+                  <Grid item key={getCardKey(Card)}>
                     <LazyLoad offset={100} throttle={50} height={28} once>
-                      {card.Card}
+                      {Card}
                     </LazyLoad>
                   </Grid>
                 </Grow>
@@ -64,12 +67,12 @@ export default function CardDeck({ cards }: Props) {
   )
 }
 
-function arrangeCards(cards: Card[], numCols: number): any {
+function arrangeCards(cards: Card[], numCols: number): Card[][] {
   if (!Array.isArray(cards) || numCols <= 0) {
     return [[]]
   } else {
-    return [...Array(numCols).keys()].map((_, col) =>
-      cards.filter((_, row) => row % numCols === col),
+    return [...Array(numCols).keys()].map((_, colNum) =>
+      cards.filter((_, rowNum) => rowNum % numCols === colNum),
     )
   }
 }

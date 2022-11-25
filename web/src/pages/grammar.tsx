@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import Head from 'next/head'
 
-import CardDeck from '../components/accessories/CardDeck'
 import useGrammarCards from '../components/grammar/grammarCards'
+import { Deck } from '../components/layout/Deck'
 import SearchBarLayout from '../components/layout/SearchBarLayout'
 import { getMacronOptionRegex } from '../utils/string'
 
@@ -22,13 +22,9 @@ export default function Grammar() {
     setCards(
       grammarCards.filter(
         (card) =>
-          card.Card.props.declension
-            ? JSON.stringify(Object.values(card.Card.props.declension))?.match(
-                re,
-              )
-            : JSON.stringify(Object.values(card.Card.props.conjugation))?.match(
-                re,
-              ),
+          card.props.declension
+            ? JSON.stringify(Object.values(card.props.declension))?.match(re)
+            : JSON.stringify(Object.values(card.props.conjugation))?.match(re),
         // card.ref.current?.innerText?.match(re)
       ),
     )
@@ -48,7 +44,7 @@ export default function Grammar() {
           target: 'grammar',
         }}
       >
-        <CardDeck cards={cards} />
+        <Deck cards={cards} />
       </SearchBarLayout>
     </>
   )

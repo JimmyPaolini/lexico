@@ -5,7 +5,7 @@ import theme from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {
-  title: 'Cards/EntryCard/Translations',
+  title: 'Cards/Entry/Translations',
   component: Translations,
   decorators: [
     (Story) => (

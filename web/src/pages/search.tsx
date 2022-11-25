@@ -7,8 +7,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { Entry } from '../components/Entry/Entry'
-import CardDeck from '../components/accessories/CardDeck'
 import Logo from '../components/accessories/Logo'
+import { Deck } from '../components/layout/Deck'
 import SearchBarLayout from '../components/layout/SearchBarLayout'
 import getSearchPageMetadata from '../components/search/getSearchPageMetadata'
 import { useSearch } from '../hooks/search/useSearch'
@@ -39,10 +39,7 @@ export default function Search({ initialSearch }: Props) {
   }, [searched])
 
   const cards =
-    entries?.map((entry) => {
-      const Card = <Entry {...{ entry, searched }} />
-      return { key: entry.id, Card }
-    }) || []
+    entries?.map((entry) => <Entry {...{ entry, searched }} />) || []
 
   const { title, description, keywords } = getSearchPageMetadata(searched)
 
@@ -67,7 +64,7 @@ export default function Search({ initialSearch }: Props) {
         ) : !entries?.length && !isLoading ? (
           <Typography variant="h4">No Results</Typography>
         ) : (
-          <CardDeck cards={cards} />
+          <Deck cards={cards} />
         )}
       </SearchBarLayout>
     </>

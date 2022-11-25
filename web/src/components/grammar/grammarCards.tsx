@@ -11,36 +11,33 @@ export default function useGrammarCards() {
   return [
     ...verbConjugations.map((conjugation) => {
       const ref = useRef<HTMLDivElement>()
-      const Card = (
+      return (
         <VerbConjugationCard
           conjugation={conjugation}
           ref={ref}
           expandedInitial={conjugation.id === 'first'}
         />
       )
-      return { key: 'verb' + conjugation.id, ref, Card }
     }),
     ...Object.values(nounDeclensions).map((declension) => {
       const ref = useRef<HTMLDivElement>()
-      const Card = (
+      return (
         <NounDeclensionCard
           declension={declension}
           ref={ref}
           expandedInitial={declension.id === 'first'}
         />
       )
-      return { key: 'noun' + declension.id, ref, Card }
     }),
     ...adjectiveDeclensions.map((declension) => {
       const ref = useRef<HTMLDivElement>()
-      const Card = (
+      return (
         <AdjectiveDeclensionCard
           declension={declension}
           ref={ref}
           expandedInitial={declension.id === 'third'}
         />
       )
-      return { key: 'adjective' + declension.id, ref, Card }
     }),
   ]
 }

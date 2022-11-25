@@ -5,7 +5,7 @@ import { Typography } from '@mui/material'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
-import CardDeck from '../components/accessories/CardDeck'
+import { Deck } from '../components/layout/Deck'
 import SearchBarLayout from '../components/layout/SearchBarLayout'
 import LiteratureCard from '../components/literature/LiteratureCard'
 import CustomLiteratureCard from '../components/literature/custom/CustomLiteratureCard'
@@ -27,15 +27,14 @@ export default function Literature({ authors }: Props) {
 
   const authorsCopy = JSON.parse(JSON.stringify(authors))
   const cards = useMemo(
-    () =>
-      filterLiterature(authorsCopy, searched).map((author) => {
-        const Card = <LiteratureCard {...{ author }} />
-        return { key: author.name, Card }
+    () => [
+      <CustomLiteratureCard />,
+      ...filterLiterature(authorsCopy, searched).map((author) => {
+        return <LiteratureCard {...{ author }} />
       }),
+    ],
     [searched],
   )
-  if (cards[0].key !== 'custom')
-    cards.unshift({ key: 'custom', Card: <CustomLiteratureCard /> })
 
   return (
     <>
@@ -64,7 +63,7 @@ export default function Literature({ authors }: Props) {
         {!cards.length ? (
           <Typography variant="h4">No Results</Typography>
         ) : (
-          <CardDeck cards={cards} />
+          <Deck cards={cards} />
         )}
       </SearchBarLayout>
     </>

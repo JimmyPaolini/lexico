@@ -6,10 +6,11 @@ import {
   CardContent,
   Collapse,
   Divider,
+  useTheme,
 } from '@mui/material'
 
-import VerbForms from '../Entry/Forms/PartsOfSpeech/VerbFormsTable'
-import PrincipalPartsRow from '../Entry/PrincipalParts/PrincipalParts'
+import { VerbFormsTable } from '../Entry/Forms/PartsOfSpeech/VerbFormsTable'
+import { PrincipalParts } from '../Entry/PrincipalParts/PrincipalParts'
 import verbConjugations from './verbConjugations'
 
 type Props = {
@@ -21,18 +22,19 @@ export default forwardRef(function VerbConjugationCard(
   { conjugation, expandedInitial = false }: Props,
   ref,
 ) {
+  const theme = useTheme()
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
-    <Card ref={ref}>
+    <Card sx={{ ...theme.custom.card }} ref={ref}>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
         disableTouchRipple
       >
-        <PrincipalPartsRow {...{ ...conjugation, expanded }} />
+        <PrincipalParts {...{ ...conjugation, expanded }} />
       </CardActionArea>
-      <Collapse in={expanded} mountOnEnter>
+      <Collapse in={expanded}>
         <CardContent
           sx={{
             padding: 0,
@@ -42,7 +44,7 @@ export default forwardRef(function VerbConjugationCard(
           }}
         >
           <Divider variant="middle" />
-          <VerbForms {...conjugation} />
+          <VerbFormsTable {...conjugation} />
         </CardContent>
       </Collapse>
     </Card>

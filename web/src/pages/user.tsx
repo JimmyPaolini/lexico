@@ -9,8 +9,8 @@ import Head from 'next/head'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
-import CardDeck from '../components/accessories/CardDeck'
 import { Context } from '../components/layout/Context'
+import { Deck } from '../components/layout/Deck'
 import SingleCardLayout from '../components/layout/SingleCardLayout'
 import LoginCard from '../components/user/login/LoginCard'
 import SettingsCard from '../components/user/settings/SettingsCard'
@@ -42,18 +42,7 @@ export default function User() {
           justifyContent="center"
           sx={{ marginTop: theme.spacing(4) }}
         >
-          <CardDeck
-            cards={[
-              {
-                key: 'LoginCard',
-                Card: <LoginCard />,
-              },
-              {
-                key: 'SettingsCard',
-                Card: <SettingsCard />,
-              },
-            ]}
-          />
+          <Deck cards={[<LoginCard />, <SettingsCard />]} />
         </Grid>
       ) : (
         <SingleCardLayout>
