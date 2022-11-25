@@ -1,8 +1,9 @@
 import { ReactNode } from 'react'
 
 import { Close } from '@mui/icons-material'
-import { IconButton } from '@mui/material'
+import { Button, IconButton } from '@mui/material'
 
+import { useRouter } from 'next/router'
 import {
   OptionsObject,
   ProviderContext,
@@ -11,29 +12,45 @@ import {
   useSnackbar,
 } from 'notistack'
 
-export default function useSnackbarEnhanced(): ProviderContext {
+export default function useSnackbarEnhanced(
+  closeButton?: boolean,
+  loginButton?: boolean,
+): ProviderContext {
+  const router = useRouter()
   const snackbar = useSnackbar()
   const { enqueueSnackbar, closeSnackbar } = snackbar
 
   const enqueueSnackbarEnhanced = (
     message: SnackbarMessage,
-    options?: OptionsObject | undefined,
+    options?: OptionsObject,
   ): SnackbarKey => {
     const SnackbarAction = (key: SnackbarKey) => (
       <>
-        {options?.action
-          ? (options.action as (key: SnackbarKey) => ReactNode)(key)
-          : null}
-        <IconButton onClick={() => closeSnackbar(key)} size="small">
-          <Close />
-        </IconButton>
+        {options?.action &&
+          (options.action as (key: SnackbarKey) => ReactNode)(key)}
+        {loginButton && (
+          <Button
+            onClick={() => {
+              closeSnackbar(key)
+              router.push('/user')
+            }}
+            color="secondary"
+          >
+            Sign in
+          </Button>
+        )}
+        {closeButton && (
+          <IconButton onClick={() => closeSnackbar(key)} size="small">
+            <Close />
+          </IconButton>
+        )}
       </>
     )
     return enqueueSnackbar(message, {
-      ...(options || {}),
       variant: 'info',
       autoHideDuration: 8000,
       action: SnackbarAction,
+      ...(options ?? {}),
     })
   }
 

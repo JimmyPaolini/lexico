@@ -27,7 +27,6 @@ export default function User() {
     if (!user && showSettingsInstructions()) {
       enqueueSnackbar(
         `Your settings are saved locally, sign in to save them across devices/browsers`,
-        { autoHideDuration: 10000 },
       )
     }
   }, [])

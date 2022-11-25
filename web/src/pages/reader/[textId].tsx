@@ -48,7 +48,6 @@ export default function Reader({ text }: Props) {
     if (showReaderInstructions()) {
       enqueueSnackbar(
         `Click a word to see its dictionary entry, then click elsewhere or swipe it away to keep reading`,
-        { variant: 'info' },
       )
     }
   }, [])
