@@ -4,7 +4,7 @@ import { Grid, Grow, useTheme } from '@mui/material'
 
 type Props = PropsWithChildren<{}>
 
-export default function SingleCardLayout({ children }: Props) {
+export const SingleCardLayout = ({ children }: Props) => {
   const theme = useTheme()
   return (
     <Grid container justifyContent="center" alignItems="center">

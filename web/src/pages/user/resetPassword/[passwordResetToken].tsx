@@ -2,7 +2,7 @@ import React from 'react'
 
 import { GetServerSideProps } from 'next'
 
-import SingleCardLayout from '../../../components/layout/SingleCardLayout'
+import { SingleCardLayout } from '../../../components/layout/SingleCardLayout'
 import ResetPasswordCard from '../../../components/user/login/ResetPasswordCard'
 import { useValidatePasswordResetTokenQuery } from '../../../graphql/generated'
 

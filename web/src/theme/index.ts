@@ -24,6 +24,7 @@ let theme = createTheme({
       // allow for 8px margin on each side
       maxWidth: 398,
       minWidth: 304,
+      width: '100%',
     },
     literature: {
       fontFamily: 'Serif',
@@ -85,6 +86,7 @@ declare module '@mui/material/styles' {
       card: {
         maxWidth: number
         minWidth: number
+        width: string
       }
       literature: {
         fontFamily: string

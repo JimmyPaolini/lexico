@@ -2,10 +2,12 @@ import { ComponentProps, MutableRefObject, forwardRef } from 'react'
 
 import { TextField } from '@mui/material'
 
+import { FormikValues } from 'formik'
+
 import { sentenceCase } from '../../utils/string'
 
 type Props = {
-  formik: any
+  formik: FormikValues
   name: string
 } & ComponentProps<typeof TextField>
 

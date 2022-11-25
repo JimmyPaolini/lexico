@@ -8,11 +8,11 @@ import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
 import { Entry } from '../components/Entry/Entry'
-import BookmarkInstructionsCard from '../components/bookmarks/BookmarkInstructionsCard'
+import { BookmarkInstructionsCard } from '../components/bookmarks/BookmarkInstructionsCard'
 import filterBookmarks from '../components/bookmarks/filterBookmarks'
 import { Context } from '../components/layout/Context'
 import { Deck } from '../components/layout/Deck'
-import SearchBarLayout from '../components/layout/SearchBarLayout'
+import { SearchBarLayout } from '../components/layout/SearchBarLayout'
 import {
   Entry as EntryType,
   useBookmarksQuery,

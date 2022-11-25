@@ -18,18 +18,15 @@ type Props = {
   handleSearchExecute: any
   isLoading?: boolean
   target: string
-  isLatin?: boolean
-  setLatin?: Dispatch<SetStateAction<boolean>>
 }
 
-export default function SearchBar({
+export const SearchBar = ({
   search,
   setSearch,
   handleSearchExecute,
   isLoading = false,
   target = '',
-  isLatin = true,
-}: Props) {
+}: Props) => {
   const theme = useTheme()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
   const input = useRef<any>()
@@ -97,7 +94,7 @@ export default function SearchBar({
               <CircularProgress
                 size={theme.spacing(3)}
                 thickness={5.4}
-                color={isLatin ? 'secondary' : 'primary'}
+                color="secondary"
               />
             )}
           </IconButton>

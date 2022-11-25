@@ -6,7 +6,7 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
 import { Deck } from '../components/layout/Deck'
-import SearchBarLayout from '../components/layout/SearchBarLayout'
+import { SearchBarLayout } from '../components/layout/SearchBarLayout'
 import LiteratureCard from '../components/literature/LiteratureCard'
 import CustomLiteratureCard from '../components/literature/custom/CustomLiteratureCard'
 import filterLiterature from '../components/literature/filterLiterature'

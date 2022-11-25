@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-export default function BookmarkInstructionsCard() {
+export const BookmarkInstructionsCard = () => {
   const theme = useTheme()
   return (
     <Grow in>

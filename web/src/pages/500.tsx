@@ -4,7 +4,7 @@ import { Card, CardContent } from '@mui/material'
 
 import CardHeader from '../components/accessories/CardHeader'
 import SubmitButton from '../components/accessories/SubmitButton'
-import SingleCardLayout from '../components/layout/SingleCardLayout'
+import { SingleCardLayout } from '../components/layout/SingleCardLayout'
 
 export default function Error500() {
   return (

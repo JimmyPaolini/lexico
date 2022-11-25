@@ -12,7 +12,7 @@ type Props = {
   formik: FormikProps<Settings>
 }
 
-export default function SettingsSwitch({ field, label, formik }: Props) {
+export const SettingsSwitch = ({ field, label, formik }: Props) => {
   return (
     <Grid container justifyContent="space-between" alignItems="center">
       <Typography>{label}:</Typography>

@@ -9,7 +9,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { Hydrate } from 'react-query/hydration'
 
 import { ContextProvider } from '../components/layout/Context'
-import Layout from '../components/layout/Layout'
+import { Layout } from '../components/layout/Layout'
 import useGoogleAnalytics from '../hooks/useGoogleAnalytics'
 import theme from '../theme'
 import { createEmotionCache } from '../theme/createEmotionCache'

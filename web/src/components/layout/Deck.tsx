@@ -30,7 +30,7 @@ export const Deck = ({ cards }: Props) => {
       container
       justifyContent="center"
       wrap="nowrap"
-      gap={theme.spacing(2)}
+      gap={theme.spacing(4)}
       sx={{ width: '100%', outline: 'none' }}
     >
       {cardCols.map((cardCol, colNum) => {

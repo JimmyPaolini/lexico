@@ -4,7 +4,7 @@ import Head from 'next/head'
 
 import useGrammarCards from '../components/grammar/grammarCards'
 import { Deck } from '../components/layout/Deck'
-import SearchBarLayout from '../components/layout/SearchBarLayout'
+import { SearchBarLayout } from '../components/layout/SearchBarLayout'
 import { getMacronOptionRegex } from '../utils/string'
 
 export default function Grammar() {

@@ -24,7 +24,7 @@ export const Context = createContext({} as ReactContext)
 
 type Props = PropsWithChildren<{ queryClient: QueryClient }>
 
-export function ContextProvider({ children, queryClient }: Props) {
+export const ContextProvider = ({ children, queryClient }: Props) => {
   const { data } = useUserQuery(
     {},
     { staleTime: 1000 * 60 * 5 /* 5 minutes */ },

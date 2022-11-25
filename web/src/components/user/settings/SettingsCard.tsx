@@ -11,9 +11,9 @@ import CardHeader from '../../accessories/CardHeader'
 import SubmitButton from '../../accessories/SubmitButton'
 import { Context } from '../../layout/Context'
 import { Identity } from './Identity'
-import SettingsForm from './SettingsForm'
+import { SettingsForm } from './SettingsForm'
 
-export default function SettingsCard() {
+export const SettingsCard = () => {
   const theme = useTheme()
   const { user, queryClient } = useContext(Context)
 

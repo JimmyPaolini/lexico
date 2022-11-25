@@ -8,7 +8,7 @@ import { Settings } from '../../../graphql/generated'
 
 type Props = { formik: FormikProps<Settings> }
 
-export default function SettingsSlider({ formik }: Props) {
+export const SettingsSlider = ({ formik }: Props) => {
   const min = 16
   const max = 32
   const marks = new Array((max - min) / 2 + 1)

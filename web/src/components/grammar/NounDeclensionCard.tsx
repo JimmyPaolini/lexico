@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react'
+import { useState } from 'react'
 
 import {
   Card,
@@ -19,15 +19,15 @@ type Props = {
   expandedInitial: boolean
 }
 
-export default forwardRef(function NounDeclensionCard(
-  { declension, expandedInitial = false }: Props,
-  ref,
-) {
+export const NounDeclensionCard = ({
+  declension,
+  expandedInitial = false,
+}: Props) => {
   const theme = useTheme()
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
-    <Card sx={{ ...theme.custom.card }} ref={ref}>
+    <Card sx={{ ...theme.custom.card }}>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
@@ -54,4 +54,4 @@ export default forwardRef(function NounDeclensionCard(
       </Collapse>
     </Card>
   )
-})
+}

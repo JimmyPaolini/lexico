@@ -12,10 +12,10 @@ import {
   showSettingsInstructions,
 } from '../../../utils/settingsLocal'
 import { Context } from '../../layout/Context'
-import SettingsSlider from './SettingsSlider'
-import SettingsSwitch from './SettingsSwitch'
+import { SettingsSlider } from './SettingsSlider'
+import { SettingsSwitch } from './SettingsSwitch'
 
-export default function SettingsForm() {
+export const SettingsForm = () => {
   const { user } = useContext(Context)
 
   const { enqueueSnackbar } = useSnackbarEnhanced()

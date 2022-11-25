@@ -19,7 +19,8 @@ import { Context } from './Context'
 import { pages } from './pages'
 
 type Props = { page?: string }
-export default function Navigation({ page: initialPage }: Props) {
+
+export const Navigation = ({ page: initialPage }: Props) => {
   const theme = useTheme()
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
   const [selectedPage, setSelectedPage] = useState(initialPage || 'search')

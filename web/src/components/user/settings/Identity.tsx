@@ -4,7 +4,7 @@ import { Typography } from '@mui/material'
 
 import { Context } from '../../layout/Context'
 
-export function Identity() {
+export const Identity = () => {
   const { user } = useContext(Context)
   const provider = user?.googleId
     ? 'Google'

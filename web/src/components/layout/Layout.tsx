@@ -2,13 +2,14 @@ import React, { PropsWithChildren } from 'react'
 
 import { Grid } from '@mui/material'
 
-import Navigation from './Navigation'
+import { useRouter } from 'next/router'
+
+import { Navigation } from './Navigation'
 import Snackbar from './Snackbar'
-import {useRouter} from 'next/router';
 
 type Props = PropsWithChildren<{}>
 
-export default function Layout({ children }: Props) {
+export const Layout = ({ children }: Props) => {
   const router = useRouter()
   const page = router.pathname.split('/')[1]
 
