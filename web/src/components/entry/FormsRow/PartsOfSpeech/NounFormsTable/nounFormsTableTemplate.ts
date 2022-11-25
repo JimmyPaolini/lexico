@@ -1,31 +1,12 @@
 export const nounFormsTableTemplate = [
-  {
-    topLeftText: 'nominative',
-    topRightText: 'singular',
-    centerText: '-',
-  },
-  {
-    topRightText: 'plural',
-    centerText: '-',
-  },
-  {
-    topLeftText: 'genitive',
-    centerText: '-',
-  },
-  { centerText: '-' },
-  {
-    topLeftText: 'dative',
-    centerText: '-',
-  },
-  { centerText: '-' },
-  {
-    topLeftText: 'accusative',
-    centerText: '-',
-  },
-  { centerText: '-' },
-  {
-    topLeftText: 'ablative',
-    centerText: '-',
-  },
-  { centerText: '-' },
+  { topLeftText: 'nominative', topRightText: 'singular', centerText: '-' },
+  { topLeftText: 'nominative', topRightText: 'plural', centerText: '-' },
+  { topLeftText: 'genitive', topRightText: 'singular', centerText: '-' },
+  { topLeftText: 'genitive', topRightText: 'plural', centerText: '-' },
+  { topLeftText: 'dative', topRightText: 'singular', centerText: '-' },
+  { topLeftText: 'dative', topRightText: 'plural', centerText: '-' },
+  { topLeftText: 'accusative', topRightText: 'singular', centerText: '-' },
+  { topLeftText: 'accusative', topRightText: 'plural', centerText: '-' },
+  { topLeftText: 'ablative', topRightText: 'singular', centerText: '-' },
+  { topLeftText: 'ablative', topRightText: 'plural', centerText: '-' },
 ]

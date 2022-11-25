@@ -36,9 +36,13 @@ export const adjectiveFormsRestructure = (forms: AdjectiveForms) => {
         0,
         {
           topLeftText: 'vocative',
+          topRightText: 'singular',
+
           centerText: forms?.[gender]?.vocative?.singular?.join(',\n') ?? '-',
         },
         {
+          topLeftText: 'vocative',
+          topRightText: 'plural',
           centerText: forms?.[gender]?.vocative?.plural?.join(',\n') ?? '-',
         },
       )
@@ -50,9 +54,12 @@ export const adjectiveFormsRestructure = (forms: AdjectiveForms) => {
         0,
         {
           topLeftText: 'locative',
+          topRightText: 'singular',
           centerText: forms?.[gender]?.locative?.singular?.join(',\n') ?? '-',
         },
         {
+          topLeftText: 'locative',
+          topRightText: 'plural',
           centerText: forms?.[gender]?.locative?.plural?.join(',\n') ?? '-',
         },
       )

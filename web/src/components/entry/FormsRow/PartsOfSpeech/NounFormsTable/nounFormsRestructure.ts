@@ -21,9 +21,12 @@ export const nounFormsRestructure = (declensions: NounForms) => {
       0,
       {
         topLeftText: 'vocative',
+        topRightText: 'singular',
         centerText: declensions?.vocative?.singular?.join(',\n') ?? '-',
       },
       {
+        topLeftText: 'vocative',
+        topRightText: 'plural',
         centerText: declensions?.vocative?.plural?.join(',\n') ?? '-',
       },
     )
@@ -35,9 +38,12 @@ export const nounFormsRestructure = (declensions: NounForms) => {
       0,
       {
         topLeftText: 'locative',
+        topRightText: 'singular',
         centerText: declensions?.locative?.singular?.join(',\n') ?? '-',
       },
       {
+        topLeftText: 'locative',
+        topRightText: 'plural',
         centerText: declensions?.locative?.plural?.join(',\n') ?? '-',
       },
     )

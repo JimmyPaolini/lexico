@@ -17,7 +17,7 @@ export default function AdjectiveFormsTable({ forms, searched }: Props) {
   const [activeTab, setActiveTab] = useState(0)
   const structure = adjectiveFormsRestructure(forms)
   const tabs = Object.keys(structure) as Gender[]
-  const formsStructure = structure[tabs[activeTab]]
+  const formsStructure = structure[tabs[activeTab]] as any
   return (
     <Paper
       sx={{ maxWidth: theme.custom.card.maxWidth, borderRadius: 0 }}
