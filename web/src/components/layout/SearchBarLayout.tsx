@@ -14,18 +14,16 @@ export const SearchBarLayout = ({ searchBarProps, children }: Props) => {
   return (
     <Grid container direction="column" alignItems="stretch">
       <Grid
-        item
         container
         justifyContent="center"
-        sx={{ marginTop: theme.spacing(4), marginBottom: theme.spacing(4) }}
+        sx={{ margin: `${theme.spacing(4)} 0px` }}
       >
         <SearchBar {...searchBarProps} />
       </Grid>
       <Grid
-        item
         container
         justifyContent="center"
-        sx={{ marginTop: theme.spacing(4) }}
+        sx={{ margin: `${theme.spacing(4)} 0px` }}
       >
         {children}
       </Grid>

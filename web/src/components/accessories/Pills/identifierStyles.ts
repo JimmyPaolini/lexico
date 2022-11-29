@@ -3,6 +3,16 @@ import { Identifier } from 'src/utils/identifiers'
 // https://www.w3schools.com/css/css_colors_hsl.asp
 // https://htmlcolorcodes.com/color-names/
 
+// const GRADIENT_ANGLE = '45deg'
+// const GRADIENT_WIDTH = 8
+// const gradient = (color1: string, color2: string) =>
+//   `repeating-linear-gradient(
+//     ${GRADIENT_ANGLE},
+//     ${color1},
+//     ${color1} ${GRADIENT_WIDTH}px,
+//     ${color2} ${GRADIENT_WIDTH}px,
+//     ${color2} ${GRADIENT_WIDTH * 2}px);`
+
 export const identifierStyles = {
   nominative: { background: 'royalblue', color: 'white' },
   genitive: { background: 'forestgreen', color: 'white' },
@@ -40,9 +50,9 @@ export const identifierStyles = {
   active: { background: '#555', color: 'white', border: '1px dotted white' },
   passive: { background: '#999', color: 'black', border: '1px dotted black' },
 
-  first: { background: 'blue', color: 'white' },
-  second: { background: 'red', color: 'white' },
-  third: { background: 'yellow', color: 'black' },
+  first: { background: 'blue', color: 'white', border: '1px dashed white' },
+  second: { background: 'red', color: 'white', border: '1px dashed white' },
+  third: { background: 'yellow', color: 'black', border: '1px dashed black' },
 } as { [key in Identifier]: IdentifierStyles }
 
 export type IdentifierStyles = {
