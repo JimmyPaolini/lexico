@@ -45,8 +45,8 @@ export default function About() {
             <Divider sx={{ margin: theme.spacing(1) }} />
             <ToolIconGrid />
             <Divider sx={{ margin: theme.spacing(1) }} />
-            <CommentBox />
-            <Divider sx={{ margin: theme.spacing(1) }} />
+            {/* <CommentBox />
+            <Divider sx={{ margin: theme.spacing(1) }} /> */}
             <UpcommingFeatures />
             <Divider sx={{ margin: theme.spacing(1) }} />
             <Typography variant="h6" align="center">
