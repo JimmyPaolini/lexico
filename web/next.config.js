@@ -1,8 +1,4 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: false,
-})
-
-module.exports = withBundleAnalyzer({
+module.exports = {
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
@@ -32,7 +28,6 @@ module.exports = withBundleAnalyzer({
   //   // this also causes webpack ModuleNotFoundError instead of a typescript TypeError
   //   ignoreBuildErrors: true,
   // },
-  images: {
-    imageSizes: [512],
-  },
-})
+  images: { imageSizes: [512] },
+  // experimental: { appDir: true },
+}
