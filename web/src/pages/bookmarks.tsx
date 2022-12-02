@@ -7,13 +7,9 @@ import Head from 'next/head'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
-import {
-  Entry as EntryType,
-  useBookmarksQuery,
-  useEntriesQuery,
-} from 'src/graphql/generated'
+import { useBookmarksQuery } from 'src/graphql/generated'
 import { useBookmarkInstructions } from 'src/hooks/bookmarks/useBookmarkInstructions'
-import { getBookmarksLocal } from 'src/utils/bookmarksLocal'
+import { useBookmarks } from 'src/hooks/bookmarks/useBookmarks'
 import { identifyEntryWord } from 'src/utils/identifiers'
 
 import { Entry } from '../components/Entry/Entry'
@@ -32,38 +28,7 @@ export default function Bookmarks() {
     if (!search) setSearched('')
   }, [search])
 
-  const {
-    data: dataBookmarks,
-    isLoading: isLoadingBookmarks,
-    isSuccess: isSuccessBookmarks,
-  } = useBookmarksQuery(
-    {},
-    {
-      enabled: !!user,
-      retryDelay: 0,
-      cacheTime: 1000 * 60 * 5,
-      staleTime: 1000 * 60 * 5,
-    },
-  )
-
-  const {
-    data: dataEntries,
-    isLoading: isLoadingEntries,
-    isSuccess: isSuccessEntries,
-  } = useEntriesQuery(
-    { ids: getBookmarksLocal() },
-    {
-      enabled: !user,
-      retryDelay: 0,
-      cacheTime: 1000 * 60 * 5,
-      staleTime: 1000 * 60 * 5,
-    },
-  )
-  const bookmarks = (
-    user ? dataBookmarks?.bookmarks : dataEntries?.entries
-  ) as EntryType[]
-  const isLoading = user ? isLoadingBookmarks : isLoadingEntries
-  const isSuccess = user ? isSuccessBookmarks : isSuccessEntries
+  const { bookmarks, isLoading, isSuccess } = useBookmarks()
 
   const cards = useMemo(() => {
     const filteredEntries = filterBookmarks(bookmarks, searched) || []
@@ -88,13 +53,9 @@ export default function Bookmarks() {
         <title>Lexico - Bookmarks</title>
       </Head>
       <SearchBarLayout
-        searchBarProps={{
-          search,
-          setSearch,
-          isLoading,
-          handleSearchExecute: () => setSearched(search),
-          target: 'bookmarks',
-        }}
+        handleSearch={() => setSearched(search)}
+        isLoading={isLoading}
+        placeholder="Search Bookmarks"
       >
         {isLoading ? null : isSuccess &&
           Array.isArray(bookmarks) &&

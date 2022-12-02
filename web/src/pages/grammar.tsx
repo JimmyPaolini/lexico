@@ -17,8 +17,9 @@ export default function Grammar() {
     if (!search) setCards(grammarCards)
   }, [search])
 
-  const handleSearchExecute = () => {
+  const handleSearch = (search: string) => {
     if (!search) return
+    setSearch(search)
     const re = new RegExp(getMacronOptionRegex(search), 'i')
     setCards(
       grammarCards.filter(
@@ -37,13 +38,9 @@ export default function Grammar() {
         <title>Lexico - Grammar</title>
       </Head>
       <SearchBarLayout
-        searchBarProps={{
-          search,
-          setSearch,
-          isLoading: false,
-          handleSearchExecute,
-          target: 'grammar',
-        }}
+        handleSearch={handleSearch}
+        isLoading={false}
+        placeholder="Search Grammar"
       >
         <Deck cards={cards} />
       </SearchBarLayout>

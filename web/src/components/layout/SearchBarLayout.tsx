@@ -5,11 +5,9 @@ import { useTheme } from '@mui/material/styles'
 
 import { SearchBar } from '../search/SearchBar'
 
-type Props = PropsWithChildren<{
-  searchBarProps: ComponentProps<typeof SearchBar>
-}>
+type Props = PropsWithChildren<ComponentProps<typeof SearchBar>>
 
-export const SearchBarLayout = ({ searchBarProps, children }: Props) => {
+export const SearchBarLayout = ({ children, ...props }: Props) => {
   const theme = useTheme()
   return (
     <Grid container direction="column" alignItems="stretch">
@@ -18,7 +16,7 @@ export const SearchBarLayout = ({ searchBarProps, children }: Props) => {
         justifyContent="center"
         sx={{ margin: `${theme.spacing(4)} 0px` }}
       >
-        <SearchBar {...searchBarProps} />
+        <SearchBar {...props} />
       </Grid>
       <Grid
         container

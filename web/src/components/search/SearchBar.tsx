@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext, useRef } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
@@ -9,38 +9,28 @@ import InputBase from '@mui/material/InputBase'
 import Paper from '@mui/material/Paper'
 import { useTheme } from '@mui/material/styles'
 
-import { pascalCase } from 'src/utils/string'
-
 import { Context } from '../layout/Context'
 
 type Props = {
-  search: string
-  setSearch: Dispatch<SetStateAction<string>>
-  handleSearchExecute: any
+  initialSearch?: string
+  handleSearch: (search: string) => unknown
   isLoading?: boolean
-  target: string
+  placeholder: string
 }
 
 export const SearchBar = ({
-  search,
-  setSearch,
-  handleSearchExecute,
+  initialSearch = '',
+  handleSearch,
   isLoading = false,
-  target = '',
+  placeholder = 'Search',
 }: Props) => {
   const theme = useTheme()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
-  const input = useRef<any>()
+  const [search, setSearch] = useState(initialSearch)
 
-  // useEventListener("keypress", (e: any) => {
-  //   if (e.key === "Escape") return input.current.blur()
-  //   if (e.key !== "Enter") return
-  //   if (input.current === document.activeElement) input.current.blur()
-  //   else {
-  //     input.current.focus()
-  //     input.current.select()
-  //   }
-  // })
+  useEffect(() => {
+    if (search === '') handleSearch('')
+  }, [search])
 
   return (
     <Paper
@@ -56,50 +46,42 @@ export const SearchBar = ({
       }}
     >
       <Grid container alignItems="center">
-        <Grid item>
-          {isMobile && (
-            <IconButton
-              onClick={() => setNavOpen(!isNavOpen)}
-              sx={{ padding: theme.spacing(1) }}
-              aria-label="menu"
-              size="large"
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
-        </Grid>
-        <Grid item xs>
-          <InputBase
-            id="searchBar"
-            sx={{ marginLeft: theme.spacing(1), fontSize: 20 }}
-            placeholder={'Search ' + pascalCase(target)}
-            inputProps={{ 'aria-label': 'search', ref: input }}
-            value={search}
-            autoFocus
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.keyCode === 13) handleSearchExecute()
-            }}
-          />
-        </Grid>
-        <Grid item>
+        {isMobile && (
           <IconButton
-            onClick={() => handleSearchExecute()}
+            onClick={() => setNavOpen(!isNavOpen)}
             sx={{ padding: theme.spacing(1) }}
-            aria-label="search"
+            aria-label="menu"
             size="large"
           >
-            {!isLoading ? (
-              <SearchIcon />
-            ) : (
-              <CircularProgress
-                size={theme.spacing(3)}
-                thickness={5.4}
-                color="secondary"
-              />
-            )}
+            <MenuIcon />
           </IconButton>
-        </Grid>
+        )}
+        <InputBase
+          id="searchBar"
+          sx={{ marginLeft: theme.spacing(1), fontSize: 20, flexGrow: 1 }}
+          placeholder={placeholder}
+          inputProps={{ 'aria-label': 'search' }}
+          value={search}
+          autoFocus
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearch(search)}
+        />
+        <IconButton
+          onClick={() => handleSearch(search)}
+          sx={{ padding: theme.spacing(1) }}
+          aria-label="search"
+          size="large"
+        >
+          {!isLoading ? (
+            <SearchIcon />
+          ) : (
+            <CircularProgress
+              size={theme.spacing(3)}
+              thickness={5.4}
+              color="secondary"
+            />
+          )}
+        </IconButton>
       </Grid>
     </Paper>
   )

@@ -32,8 +32,9 @@ export default class DictionaryResolver {
     ])
     const entries = [
       ...latinEntries,
-      ...englishEntries.filter((englishEntry) =>
-        !latinEntries.some((latinEntry) => latinEntry.id !== englishEntry.id),
+      ...englishEntries.filter(
+        (englishEntry) =>
+          !latinEntries.some((latinEntry) => latinEntry.id !== englishEntry.id),
       ),
     ]
 
@@ -126,7 +127,7 @@ export default class DictionaryResolver {
 
     const entries = translations
       .map((t) => t.entry)
-      .filter((entry) => entry.partOfSpeech !== 'properNoun')
+      // .filter((entry) => entry.partOfSpeech !== 'properNoun')
       .map((entry) => {
         if (entry.partOfSpeech === 'verb' && entry.forms) {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
@@ -137,6 +138,10 @@ export default class DictionaryResolver {
         entry.isLatinSearchResult = false
         return entry
       })
+      .filter(
+        (entry, index, self) =>
+          index === self.findIndex((duplicate) => duplicate.id === entry.id),
+      )
 
     log.info('searchEnglish', {
       search,

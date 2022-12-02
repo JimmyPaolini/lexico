@@ -34,9 +34,10 @@ export const Entry = ({ entry, searched = '' }: Props) => {
         minWidth: theme.custom.card.minWidth,
         width: '100%',
         paddingBottom: 0,
-        border: isLatinSearchResult
-          ? undefined
-          : `2px solid ${theme.palette.secondary.main}`,
+        border:
+          isLatinSearchResult === false
+            ? `2px solid ${theme.palette.secondary.main}`
+            : undefined,
       }}
     >
       <PrincipalParts

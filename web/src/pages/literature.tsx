@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { Typography } from '@mui/material'
 
@@ -13,26 +13,18 @@ import { LiteratureCard } from '../components/literature/LiteratureCard'
 import { CustomLiteratureCard } from '../components/literature/custom/CustomLiteratureCard'
 import { filterLiterature } from '../components/literature/filterLiterature'
 
-type Props = {
-  authors: Author[]
-}
+type Props = { authors: Author[] }
 
 export default function Literature({ authors }: Props) {
-  const [search, setSearch] = useState<string>('')
-  const [searched, setSearched] = useState<string>(search)
-  useEffect(() => {
-    if (!search) setSearched('')
-  }, [search])
-
-  const handleSearchExecute = () => setSearched(search)
+  const [searched, setSearched] = useState<string>('')
 
   const authorsCopy = JSON.parse(JSON.stringify(authors))
   const cards = useMemo(
     () => [
       <CustomLiteratureCard />,
-      ...filterLiterature(authorsCopy, searched).map((author) => {
-        return <LiteratureCard {...{ author }} />
-      }),
+      ...filterLiterature(authorsCopy, searched).map((author) => (
+        <LiteratureCard {...{ author }} />
+      )),
     ],
     [searched],
   )
@@ -53,13 +45,9 @@ export default function Literature({ authors }: Props) {
         />
       </Head>
       <SearchBarLayout
-        searchBarProps={{
-          search,
-          setSearch,
-          isLoading: false,
-          handleSearchExecute,
-          target: 'literature',
-        }}
+        handleSearch={(search) => setSearched(search)}
+        isLoading={false}
+        placeholder="Search Literature"
       >
         {!cards.length ? (
           <Typography variant="h4">No Results</Typography>

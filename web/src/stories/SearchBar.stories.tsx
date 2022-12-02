@@ -18,6 +18,6 @@ const Template: ComponentStory<typeof SearchBar> = (args) => {
 export const Default = Template.bind({})
 Default.args = {
   isLoading: false,
-  target: 'lexico',
-  handleSearchExecute: () => null,
+  placeholder: 'Search Lexico',
+  handleSearch: () => null,
 }

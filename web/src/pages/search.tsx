@@ -9,11 +9,11 @@ import { useRouter } from 'next/router'
 import { useSearch } from 'src/hooks/search/useSearch'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 
-import { Entry } from '../../components/Entry/Entry'
-import { Logo } from '../../components/accessories/Logo'
-import { Deck } from '../../components/layout/Deck'
-import { SearchBarLayout } from '../../components/layout/SearchBarLayout'
-import { getSearchPageMetadata } from '../../components/search/getSearchPageMetadata'
+import { Entry } from '../components/Entry/Entry'
+import { Logo } from '../components/accessories/Logo'
+import { Deck } from '../components/layout/Deck'
+import { SearchBarLayout } from '../components/layout/SearchBarLayout'
+import { getSearchPageMetadata } from '../components/search/getSearchPageMetadata'
 
 type Props = { initialSearch: string }
 
@@ -48,6 +48,7 @@ export default function Search({ initialSearch }: Props) {
         <meta name="keywords" content={keywords} />
       </Head>
       <SearchBarLayout
+        initialSearch={search}
         handleSearch={handleSearch}
         isLoading={isLoading && !!search}
         placeholder="Search Lexico"
