@@ -50,9 +50,9 @@ export const identifierStyles = {
   active: { background: '#555', color: 'white', border: '1px dotted white' },
   passive: { background: '#999', color: 'black', border: '1px dotted black' },
 
-  first: { background: 'blue', color: 'white', border: '1px dashed white' },
-  second: { background: 'red', color: 'white', border: '1px dashed white' },
-  third: { background: 'yellow', color: 'black', border: '1px dashed black' },
+  first: { background: 'blue', color: 'white' },
+  second: { background: 'red', color: 'white' },
+  third: { background: 'yellow', color: 'black' },
 } as { [key in Identifier]: IdentifierStyles }
 
 export type IdentifierStyles = {
