@@ -42,10 +42,10 @@ export const identifierStyles = {
   pluperfect: { background: 'indigo', color: 'white' },
   'future perfect': { background: 'seagreen', color: 'black' },
 
-  participle: { background: 'black', color: 'white' },
-  'gerund/supine': { background: 'black', color: 'white' },
-  gerund: { background: 'black', color: 'white' },
-  supine: { background: 'black', color: 'white' },
+  participle: { background: 'deepskyblue', color: 'black' },
+  'gerund/supine': { background: 'orange', color: 'black' },
+  gerund: { background: 'goldenrod', color: 'black' },
+  supine: { background: 'deeppink', color: 'white' },
 
   active: { background: '#555', color: 'white', border: '1px dotted white' },
   passive: { background: '#999', color: 'black', border: '1px dotted black' },

@@ -4,7 +4,7 @@ import Head from 'next/head'
 
 import { getMacronOptionRegex } from 'src/utils/string'
 
-import { useGrammarCards } from '../components/grammar/grammarCards'
+import { useGrammarCards } from '../components/grammar/useGrammarCards'
 import { Deck } from '../components/layout/Deck'
 import { SearchBarLayout } from '../components/layout/SearchBarLayout'
 

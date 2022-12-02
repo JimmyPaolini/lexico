@@ -1,11 +1,10 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { FormsTable } from 'src/components/Entry/Forms/FormsTable'
+import { verbFormsRestructure } from 'src/components/Entry/Forms/PartsOfSpeech/VerbFormsTable/verbFormsRestructure'
 import { VerbForms } from 'src/graphql/generated'
 import { theme } from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
-
-import { verbFormsRestructure } from '../../../../components/Entry/Forms/PartsOfSpeech/VerbFormsTable/verbFormsRestructure'
 
 export default {
   title: 'Cards/Entry/Forms/FormsTable',

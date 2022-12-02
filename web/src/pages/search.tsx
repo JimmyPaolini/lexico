@@ -26,7 +26,7 @@ export default function Search({ initialSearch }: Props) {
 
   const handleSearch = (search: string) => {
     setSearch(search)
-    const hash = '?search=' + search
+    const hash = search ? '?search=' + search : ''
     router.push(router.pathname + hash)
     googleAnalyticsEvent('search', {
       category: 'search',

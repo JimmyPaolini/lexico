@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 
 import { Typography } from '@mui/material'
 
@@ -21,29 +21,25 @@ import { SearchBarLayout } from '../components/layout/SearchBarLayout'
 
 export default function Bookmarks() {
   const { user } = useContext(Context)
-  const [search, setSearch] = useState<string>('')
-  const [searched, setSearched] = useState<string>(search)
 
-  useEffect(() => {
-    if (!search) setSearched('')
-  }, [search])
+  const [search, setSearch] = useState<string>('')
 
   const { bookmarks, isLoading, isSuccess } = useBookmarks()
 
   const cards = useMemo(() => {
-    const filteredEntries = filterBookmarks(bookmarks, searched) || []
+    const filteredEntries = filterBookmarks(bookmarks, search) || []
 
     return filteredEntries.length
       ? filteredEntries.map((entry) => {
-          entry = identifyEntryWord(searched, entry)
-          return <Entry {...{ entry, searched }} />
+          entry = identifyEntryWord(search, entry)
+          return <Entry {...{ entry, searched: search }} />
         })
       : [
           <Typography variant="h4" align="center">
             Not Found
           </Typography>,
         ]
-  }, [user, bookmarks, searched])
+  }, [user, bookmarks, search])
 
   useBookmarkInstructions(user)
 
@@ -53,7 +49,7 @@ export default function Bookmarks() {
         <title>Lexico - Bookmarks</title>
       </Head>
       <SearchBarLayout
-        handleSearch={() => setSearched(search)}
+        handleSearch={(search) => setSearch(search)}
         isLoading={isLoading}
         placeholder="Search Bookmarks"
       >
