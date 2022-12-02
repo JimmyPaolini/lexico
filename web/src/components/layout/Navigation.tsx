@@ -84,6 +84,10 @@ export const Navigation = ({ page: initialPage }: Props) => {
               prefetch={false}
               key={page.name}
               passHref
+              style={{
+                textDecoration: 'none',
+                color: theme.palette.text.primary,
+              }}
             >
               <ListItem
                 button
