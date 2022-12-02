@@ -1,6 +1,6 @@
 import { AdjectiveForms } from 'src/graphql/generated'
+import { Gender } from 'src/utils/identifiers'
 
-import { Gender } from '../../../../../utils/identifiers'
 import { adjectiveFormsTableTemplate } from './adjectiveFormsTableTemplate'
 
 export const adjectiveFormsRestructure = (forms: AdjectiveForms) => {

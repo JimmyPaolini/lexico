@@ -4,8 +4,9 @@ import { AccountCircle, MoreHoriz } from '@mui/icons-material'
 import { IconButton, ListItemSecondaryAction } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
-import { CustomText } from '../../../utils/literatureLocal'
-import CustomLiteratureMenu from './CustomLiteratureOptions/CustomLiteratureMenu'
+import { CustomText } from 'src/utils/literatureLocal'
+
+import { CustomLiteratureMenu } from './CustomLiteratureOptions/CustomLiteratureMenu'
 
 const PREFIX = 'CustomLiteratureOptions'
 
@@ -34,10 +35,10 @@ type Props = {
   refreshCustomTexts: () => Promise<void>
 }
 
-export default function CustomLiteratureOptions({
+export const CustomLiteratureOptions = ({
   text,
   refreshCustomTexts,
-}: Props) {
+}: Props) => {
   const [anchor, setAnchor] = useState<null | HTMLElement>(null)
   const openMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchor(event.currentTarget)

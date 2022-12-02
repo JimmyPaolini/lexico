@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Head from 'next/head'
 
-import useGrammarCards from '../components/grammar/grammarCards'
+import { getMacronOptionRegex } from 'src/utils/string'
+
+import { useGrammarCards } from '../components/grammar/grammarCards'
 import { Deck } from '../components/layout/Deck'
 import { SearchBarLayout } from '../components/layout/SearchBarLayout'
-import { getMacronOptionRegex } from '../utils/string'
 
 export default function Grammar() {
   const [search, setSearch] = useState<string>('')

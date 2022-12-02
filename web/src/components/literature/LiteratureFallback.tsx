@@ -22,7 +22,7 @@ const Root = styled('div')(() => ({
   },
 }))
 
-export default function LiteratureFallback() {
+export const LiteratureFallback = () => {
   return (
     <Root>
       <Head>

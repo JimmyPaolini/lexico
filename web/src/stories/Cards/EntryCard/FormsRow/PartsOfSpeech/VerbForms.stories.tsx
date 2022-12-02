@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { VerbFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/VerbFormsTable'
-import theme from 'src/theme'
+import { theme } from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {

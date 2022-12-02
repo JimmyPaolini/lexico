@@ -38,7 +38,7 @@ import typescript from 'public/icon/tool/typescript.png'
 import vscode from 'public/icon/tool/vscode.png'
 import wikipedia from 'public/icon/tool/wikipedia.png'
 
-export default [
+export const tools = [
   {
     icon: typescript,
     name: 'typescript',

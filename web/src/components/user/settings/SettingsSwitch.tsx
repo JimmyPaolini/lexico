@@ -1,10 +1,8 @@
-import React from 'react'
-
 import { Grid, Switch, Typography } from '@mui/material'
 
 import { FormikProps } from 'formik'
 
-import { Settings } from '../../../graphql/generated'
+import { Settings } from 'src/graphql/generated'
 
 type Props = {
   field: keyof Settings

@@ -1,4 +1,4 @@
-import { useSearchQuery } from '../../graphql/generated'
+import { useSearchQuery } from 'src/graphql/generated'
 
 export function useSearch(searched: string) {
   const { data, isLoading } = useSearchQuery(

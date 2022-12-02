@@ -11,11 +11,7 @@ export enum PillVariant {
 
 type Props = PropsWithChildren<IdentifierStyles & { variant?: PillVariant }>
 
-export default function Pill({
-  variant,
-  children,
-  ...identifierStyles
-}: Props) {
+export const Pill = ({ variant, children, ...identifierStyles }: Props) => {
   return (
     <Typography
       variant="caption"

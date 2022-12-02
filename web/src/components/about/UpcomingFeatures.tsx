@@ -1,12 +1,10 @@
-import React from 'react'
-
 import { Launch } from '@mui/icons-material'
 import { CardActionArea, CardHeader } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import packageJson from '../../../../package.json'
 
-export default function ToolIconGrid() {
+export const UpcomingFeatures = () => {
   const theme = useTheme()
   return (
     <CardActionArea

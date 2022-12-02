@@ -1,9 +1,9 @@
-import { Author, Book, Text } from '../../graphql/generated'
+import { Author, Book, Text } from 'src/graphql/generated'
 
-export default function filterLiterature(
+export const filterLiterature = (
   authors: Author[],
   searched: string,
-): Author[] {
+): Author[] => {
   if (!searched) return authors
   const re = new RegExp(searched, 'i')
   return authors

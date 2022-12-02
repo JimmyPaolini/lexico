@@ -13,14 +13,15 @@ import { useTheme } from '@mui/material/styles'
 import { useFormik } from 'formik'
 import Link from 'next/link'
 
-import { useLoginQuery, useRegisterMutation } from '../../../graphql/generated'
-import { googleAnalyticsEvent } from '../../../utils/googleAnalytics'
-import { capitalizeFirstLetter, validateEmail } from '../../../utils/string'
-import SubmitButton from '../../accessories/SubmitButton'
-import TextBox from '../../accessories/TextBox'
+import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
+import { capitalizeFirstLetter, validateEmail } from 'src/utils/string'
+
+import { useLoginQuery, useRegisterMutation } from 'src/graphql/generated'
+import { SubmitButton } from '../../accessories/SubmitButton'
+import { TextBox } from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
 
-export default function BasicLogin() {
+export const BasicLogin = () => {
   const theme = useTheme()
   const { queryClient } = useContext(Context)
   const [submit, setSubmit] = useState<'sign up' | 'sign in'>('sign in')

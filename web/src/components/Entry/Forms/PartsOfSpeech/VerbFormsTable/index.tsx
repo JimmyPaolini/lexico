@@ -1,12 +1,12 @@
 /* spellchecker: disable */
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Paper } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
+import { VerbForms } from 'src/graphql/generated'
 import { Identifier } from 'src/utils/identifiers'
 
-import { VerbForms } from '../../../../../graphql/generated'
 import { FormTabs } from '../../FormTabs'
 import { FormsTable } from '../../FormsTable'
 import { verbFormsRestructure } from './verbFormsRestructure'

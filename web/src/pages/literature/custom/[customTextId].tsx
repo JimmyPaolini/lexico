@@ -2,8 +2,9 @@ import { memo } from 'react'
 
 import { GetServerSideProps } from 'next'
 
-import { useGetCustomTextQuery } from '../../../graphql/generated'
-import { CustomText, getCustomTextLocal } from '../../../utils/literatureLocal'
+import { useGetCustomTextQuery } from 'src/graphql/generated'
+import { CustomText, getCustomTextLocal } from 'src/utils/literatureLocal'
+
 import CustomReaderNew from '../custom'
 
 type Props = { id: string }

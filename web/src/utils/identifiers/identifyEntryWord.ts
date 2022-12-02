@@ -1,4 +1,5 @@
-import { Entry, Forms, Maybe } from '../../graphql/generated'
+import { Entry, Forms, Maybe } from 'src/graphql/generated'
+
 import { hasSuffix, normalize } from '../string'
 
 const identifiablePartsOfSpeech = [

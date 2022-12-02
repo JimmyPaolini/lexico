@@ -1,12 +1,13 @@
-import React, { Dispatch, SetStateAction, useRef } from 'react'
+import { Dispatch, SetStateAction, useRef } from 'react'
 
 import { Box, Modal, Paper, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { useSwipeable } from 'react-swipeable'
 
-import { Entry as EntryType, useSearchQuery } from '../../graphql/generated'
-import useEventListener from '../../hooks/useEventListener'
+import { Entry as EntryType, useSearchQuery } from 'src/graphql/generated'
+import { useEventListener } from 'src/hooks/useEventListener'
+
 import { Entry } from '../Entry/Entry'
 import { Deck } from '../layout/Deck'
 

@@ -2,17 +2,18 @@ import { Dispatch, SetStateAction } from 'react'
 
 import { QueryClient } from 'react-query'
 
-import { User } from '../../graphql/generated'
-import useToggleBookmarkLocal from './useToggleBookmarkLocal'
-import useToggleBookmarkRemote from './useToggleBookmarkRemote'
+import { User } from 'src/graphql/generated'
 
-export default function useToggleBookmark(
+import { useToggleBookmarkLocal } from './useToggleBookmarkLocal'
+import { useToggleBookmarkRemote } from './useToggleBookmarkRemote'
+
+export const useToggleBookmark = (
   id: string,
   bookmarked: boolean,
   setBookmarked: Dispatch<SetStateAction<boolean>>,
   queryClient: QueryClient,
   user: User,
-) {
+) => {
   const toggleBookmarkRemote = useToggleBookmarkRemote(
     id,
     bookmarked,

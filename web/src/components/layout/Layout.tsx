@@ -1,11 +1,11 @@
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
 import { Grid } from '@mui/material'
 
 import { useRouter } from 'next/router'
 
 import { Navigation } from './Navigation'
-import Snackbar from './Snackbar'
+import { Snackbar } from './Snackbar'
 
 type Props = PropsWithChildren<{}>
 

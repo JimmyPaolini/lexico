@@ -10,7 +10,7 @@ import { useMediaQuery, useTheme } from '@mui/material'
 
 import { QueryClient } from 'react-query'
 
-import { User, useUserQuery } from '../../graphql/generated'
+import { User, useUserQuery } from 'src/graphql/generated'
 
 export interface ReactContext {
   isNavOpen: boolean

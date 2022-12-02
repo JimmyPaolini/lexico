@@ -11,7 +11,7 @@ import {
 
 import { VerbFormsTable } from '../Entry/Forms/PartsOfSpeech/VerbFormsTable'
 import { PrincipalParts } from '../Entry/PrincipalParts/PrincipalParts'
-import verbConjugations from './verbConjugations'
+import { verbConjugations } from './verbConjugations'
 
 type Props = {
   conjugation: typeof verbConjugations[0]

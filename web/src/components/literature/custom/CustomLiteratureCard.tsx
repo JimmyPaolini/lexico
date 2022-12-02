@@ -1,5 +1,3 @@
-import React, { memo } from 'react'
-
 import { Add } from '@mui/icons-material'
 import {
   Card,
@@ -9,7 +7,7 @@ import {
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
-import CustomLiteratureRows from './CustomLiteratureRows'
+import { CustomLiteratureRows } from './CustomLiteratureRows'
 
 const PREFIX = 'CustomLiteratureCard'
 
@@ -48,7 +46,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   },
 }))
 
-export default memo(function LiteratureCustomCard() {
+export const CustomLiteratureCard = () => {
   return (
     <StyledCard elevation={4} className={classes.literatureCustomCard}>
       <CardActionArea href="/literature/custom">
@@ -63,4 +61,4 @@ export default memo(function LiteratureCustomCard() {
       </CardContent>
     </StyledCard>
   )
-})
+}

@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import { CircularProgress, Divider, ListItem } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
@@ -22,7 +20,7 @@ const Root = styled('div')(({ theme }) => ({
   },
 }))
 
-export default memo(function CustomLiteratureLoading() {
+export const CustomLiteratureLoading = () => {
   return (
     <Root>
       <Divider className={classes.divider} />
@@ -31,4 +29,4 @@ export default memo(function CustomLiteratureLoading() {
       </ListItem>
     </Root>
   )
-})
+}

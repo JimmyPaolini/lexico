@@ -1,10 +1,10 @@
-import { Entry } from '../../graphql/generated'
-import { normalize } from '../../utils/string'
+import { Entry } from 'src/graphql/generated'
+import { normalize } from 'src/utils/string'
 
-export default function filterBookmarks(
+export const filterBookmarks = (
   entries: Entry[] | undefined,
   search: string,
-): Entry[] {
+): Entry[] => {
   if (!entries) return []
   const re = new RegExp(search, 'i')
   return (

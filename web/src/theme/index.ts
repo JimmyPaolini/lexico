@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles'
 
-let theme = createTheme({
+let themeInitial = createTheme({
   palette: {
     mode: 'dark',
     primary: {
@@ -35,8 +35,8 @@ let theme = createTheme({
   },
 })
 
-export default createTheme({
-  ...theme,
+export const theme = createTheme({
+  ...themeInitial,
   components: {
     MuiCard: {
       defaultProps: {
@@ -44,28 +44,28 @@ export default createTheme({
       },
       styleOverrides: {
         root: {
-          margin: theme.spacing(1),
-          maxWidth: theme.custom.card.maxWidth,
-          mixWidth: theme.custom.card.minWidth,
+          margin: themeInitial.spacing(1),
+          maxWidth: themeInitial.custom.card.maxWidth,
+          mixWidth: themeInitial.custom.card.minWidth,
         },
       },
     },
     MuiCardHeader: {
       styleOverrides: {
         root: {
-          background: theme.palette.background.paper,
-          paddingTop: theme.spacing(1),
-          paddingBottom: theme.spacing(1),
+          background: themeInitial.palette.background.paper,
+          paddingTop: themeInitial.spacing(1),
+          paddingBottom: themeInitial.spacing(1),
         },
       },
     },
     MuiCardContent: {
       styleOverrides: {
         root: {
-          background: theme.palette.background.paper,
-          padding: theme.spacing(1),
+          background: themeInitial.palette.background.paper,
+          padding: themeInitial.spacing(1),
           '&:last-child': {
-            padding: theme.spacing(1),
+            padding: themeInitial.spacing(1),
           },
         },
       },

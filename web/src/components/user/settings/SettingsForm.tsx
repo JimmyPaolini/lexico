@@ -1,16 +1,17 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 import { Divider, Typography } from '@mui/material'
 
 import { useFormik } from 'formik'
 
-import { Settings, useSetSettingsMutation } from '../../../graphql/generated'
-import useSnackbarEnhanced from '../../../hooks/useSnackbarEnhanced'
+import { Settings, useSetSettingsMutation } from 'src/graphql/generated'
+import { useSnackbarEnhanced } from 'src/hooks/useSnackbarEnhanced'
 import {
   getSettingsLocal,
   setSettingsLocal,
   showSettingsInstructions,
-} from '../../../utils/settingsLocal'
+} from 'src/utils/settingsLocal'
+
 import { Context } from '../../layout/Context'
 import { SettingsSlider } from './SettingsSlider'
 import { SettingsSwitch } from './SettingsSwitch'

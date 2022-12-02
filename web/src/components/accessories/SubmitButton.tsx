@@ -1,15 +1,15 @@
-import React, { ComponentProps } from 'react'
+import { ComponentProps } from 'react'
 
 import { Button } from '@mui/material'
 
-import { sentenceCase } from '../../utils/string'
+import { sentenceCase } from 'src/utils/string'
 
 type Props = {
   name: string
   onClick?: () => any
 } & ComponentProps<typeof Button>
 
-export default function SubmitButton({ name, onClick, ...props }: Props) {
+export const SubmitButton = ({ name, onClick, ...props }: Props) => {
   return (
     <Button
       color="primary"

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { Translation } from 'src/components/Entry/Translations/Translation'
-import theme from 'src/theme'
+import { theme } from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {

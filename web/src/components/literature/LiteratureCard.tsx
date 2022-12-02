@@ -3,10 +3,11 @@ import { memo, useState } from 'react'
 import { Card, CardContent, Collapse, Divider, Grid, List } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
-import { Author, Book } from '../../graphql/generated'
-import LiteratureAuthor from './LiteratureAuthor'
-import LiteratureBook from './LiteratureBook'
-import LiteratureText from './LiteratureText'
+import { Author, Book } from 'src/graphql/generated'
+
+import { LiteratureAuthor } from './LiteratureAuthor'
+import { LiteratureBook } from './LiteratureBook'
+import { LiteratureText } from './LiteratureText'
 
 const PREFIX = 'LiteratureCard'
 
@@ -41,7 +42,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
 interface Props {
   author: Author
 }
-export default memo(function LiteratureCard({ author }: Props) {
+export const LiteratureCard = memo(function LiteratureCard({ author }: Props) {
   const books = author.books || ([] as Book[])
   const nonBookTexts = author.texts.filter(
     (text) =>

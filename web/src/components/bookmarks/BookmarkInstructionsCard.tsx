@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Bookmark, BookmarkBorder } from '@mui/icons-material'
 import {
   Card,

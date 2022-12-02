@@ -1,14 +1,12 @@
-import React from 'react'
-
 import { Button } from '@mui/material'
 
 import Image from 'next/image'
 
-import { sentenceCase } from '../../../utils/string'
+import { sentenceCase } from 'src/utils/string'
 
 type Props = { provider: string }
 
-export default function OAuthLogin({ provider }: Props) {
+export const OAuthLogin = ({ provider }: Props) => {
   const href = provider === 'google' ? useGoogleUrl() : useFacebookUrl()
   return (
     <Button

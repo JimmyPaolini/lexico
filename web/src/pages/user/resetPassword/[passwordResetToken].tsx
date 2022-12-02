@@ -2,9 +2,10 @@ import React from 'react'
 
 import { GetServerSideProps } from 'next'
 
+import { useValidatePasswordResetTokenQuery } from 'src/graphql/generated'
+
 import { SingleCardLayout } from '../../../components/layout/SingleCardLayout'
-import ResetPasswordCard from '../../../components/user/login/ResetPasswordCard'
-import { useValidatePasswordResetTokenQuery } from '../../../graphql/generated'
+import { ResetPasswordCard } from '../../../components/user/login/ResetPasswordCard'
 
 type Props = { passwordResetToken: string }
 

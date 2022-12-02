@@ -2,9 +2,9 @@ import { Grid } from '@mui/material'
 
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import Pill from 'src/components/accessories/Pills/Pill'
+import { Pill } from 'src/components/accessories/Pills/Pill'
 
-import IdentifierPill from '../components/accessories/Pills/IdentifierPill'
+import { IdentifierPill } from '../components/accessories/Pills/IdentifierPill'
 
 // Red: red, crimson, tomato
 // Blue: blue, cadetblue, cornflowerblue

@@ -12,7 +12,7 @@ import { useTheme } from '@mui/material/styles'
 
 import { NounFormsTable } from '../Entry/Forms/PartsOfSpeech/NounFormsTable'
 import { PrincipalParts } from '../Entry/PrincipalParts/PrincipalParts'
-import nounDeclensions from './nounDeclensions'
+import { nounDeclensions } from './nounDeclensions'
 
 type Props = {
   declension: typeof nounDeclensions[0]

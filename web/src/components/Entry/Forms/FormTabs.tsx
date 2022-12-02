@@ -1,12 +1,13 @@
-import React, { Dispatch, ReactNode, SetStateAction } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
 
 import { Box, Tab, Tabs } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { ClassNames } from '@emotion/react'
 
-import { Identifier } from '../../../utils/identifiers'
-import IdentifierPill from '../../accessories/Pills/IdentifierPill'
+import { Identifier } from 'src/utils/identifiers'
+
+import { IdentifierPill } from '../../accessories/Pills/IdentifierPill'
 import { identifierStyles } from '../../accessories/Pills/identifierStyles'
 
 type Props = {

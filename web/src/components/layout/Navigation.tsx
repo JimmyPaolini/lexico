@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { ChevronLeft, Menu } from '@mui/icons-material'
 import {
@@ -14,7 +14,8 @@ import { useTheme } from '@mui/material/styles'
 
 import Link from 'next/link'
 
-import { capitalizeFirstLetter } from '../../utils/string'
+import { capitalizeFirstLetter } from 'src/utils/string'
+
 import { Context } from './Context'
 import { pages } from './pages'
 

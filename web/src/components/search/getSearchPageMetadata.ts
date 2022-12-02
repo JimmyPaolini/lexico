@@ -1,8 +1,10 @@
-export default function getPageMetadata(searched: string): {
+export const getSearchPageMetadata = (
+  searched: string,
+): {
   title: string
   description: string
   keywords: string
-} {
+} => {
   return {
     title: `Lexico - Search${searched ? `: "${searched}"` : ''}`,
     description: `${

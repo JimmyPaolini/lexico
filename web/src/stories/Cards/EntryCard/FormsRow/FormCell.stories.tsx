@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { Form } from 'src/components/Entry/Forms/Form/Form'
-import theme from 'src/theme'
+import { theme } from 'src/theme'
 
 export default {
   title: 'Cards/Entry/Forms/Form',

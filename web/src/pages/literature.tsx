@@ -1,16 +1,17 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { Typography } from '@mui/material'
 
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
+import { Author, useGetAuthorsQuery } from 'src/graphql/generated'
+
 import { Deck } from '../components/layout/Deck'
 import { SearchBarLayout } from '../components/layout/SearchBarLayout'
-import LiteratureCard from '../components/literature/LiteratureCard'
-import CustomLiteratureCard from '../components/literature/custom/CustomLiteratureCard'
-import filterLiterature from '../components/literature/filterLiterature'
-import { Author, useGetAuthorsQuery } from '../graphql/generated'
+import { LiteratureCard } from '../components/literature/LiteratureCard'
+import { CustomLiteratureCard } from '../components/literature/custom/CustomLiteratureCard'
+import { filterLiterature } from '../components/literature/filterLiterature'
 
 type Props = {
   authors: Author[]

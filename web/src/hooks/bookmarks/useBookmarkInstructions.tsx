@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 
-import { User } from '../../graphql/generated'
-import { showBookmarkInstructions } from '../../utils/bookmarkInstructions'
-import useSnackbarEnhanced from '../useSnackbarEnhanced'
+import { User } from 'src/graphql/generated'
+import { showBookmarkInstructions } from 'src/utils/bookmarkInstructions'
 
-export default function useBookmarkInstructions(user?: User): void {
+import { useSnackbarEnhanced } from '../useSnackbarEnhanced'
+
+export const useBookmarkInstructions = (user?: User): void => {
   const { enqueueSnackbar } = useSnackbarEnhanced(true, true)
   useEffect(() => {
     if (!user && showBookmarkInstructions()) {

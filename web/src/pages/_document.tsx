@@ -3,8 +3,8 @@ import React from 'react'
 import createEmotionServer from '@emotion/server/create-instance'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
 
-import theme from '../theme'
-import { createEmotionCache } from '../theme/createEmotionCache'
+import { theme } from 'src/theme'
+import { createEmotionCache } from 'src/theme/createEmotionCache'
 
 export default class MyDocument extends Document {
   render() {
@@ -68,8 +68,6 @@ export default class MyDocument extends Document {
 // 4% slower but 12% smaller output than doing it in a single step.
 //
 // It's using .browserslistrc
-let prefixer: any
-let cleanCSS: any
 if (process.env.NODE_ENV === 'production') {
   /* eslint-disable global-require */
   const postcss = require('postcss')
@@ -77,8 +75,8 @@ if (process.env.NODE_ENV === 'production') {
   const CleanCSS = require('clean-css')
   /* eslint-enable global-require */
 
-  prefixer = postcss([autoprefixer])
-  cleanCSS = new CleanCSS()
+  postcss([autoprefixer])
+  new CleanCSS()
 }
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),

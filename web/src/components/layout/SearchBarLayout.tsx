@@ -1,4 +1,4 @@
-import React, { ComponentProps, PropsWithChildren } from 'react'
+import { ComponentProps, PropsWithChildren } from 'react'
 
 import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'

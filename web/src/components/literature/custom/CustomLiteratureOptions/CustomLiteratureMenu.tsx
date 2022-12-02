@@ -2,12 +2,13 @@ import { Dispatch, SetStateAction, useContext } from 'react'
 
 import { Menu } from '@mui/material'
 
-import { CustomText } from '../../../../utils/literatureLocal'
+import { CustomText } from 'src/utils/literatureLocal'
+
 import { Context } from '../../../layout/Context'
-import CustomLiteratureDelete from './CustomLiteratureDelete'
-import CustomLiteratureEdit from './CustomLiteratureEdit'
-import CustomLiteratureMoveToLocal from './CustomLiteratureMoveToLocal'
-import CustomLiteratureMoveToUser from './CustomLiteratureMoveToUser'
+import { CustomLiteratureDelete } from './CustomLiteratureDelete'
+import { CustomLiteratureEdit } from './CustomLiteratureEdit'
+import { CustomLiteratureMoveToLocal } from './CustomLiteratureMoveToLocal'
+import { CustomLiteratureMoveToUser } from './CustomLiteratureMoveToUser'
 
 type Props = {
   text: CustomText
@@ -16,12 +17,12 @@ type Props = {
   setAnchor: Dispatch<SetStateAction<HTMLElement | null>>
 }
 
-export default function CustomLiteratureMenu({
+export const CustomLiteratureMenu = ({
   text,
   refreshCustomTexts,
   anchor,
   setAnchor,
-}: Props) {
+}: Props) => {
   const { user } = useContext(Context)
   const closeMenu = () => {
     setAnchor(null)
@@ -35,7 +36,6 @@ export default function CustomLiteratureMenu({
       onClose={closeMenu}
       elevation={4}
       MenuListProps={{ style: { padding: 0 }, onMouseLeave: closeMenu }}
-      getContentAnchorEl={null}
       anchorOrigin={{
         vertical: 'bottom',
         horizontal: 'right',

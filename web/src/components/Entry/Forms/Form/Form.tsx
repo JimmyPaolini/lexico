@@ -2,8 +2,9 @@ import Grid from '@mui/material/Grid'
 import Tooltip from '@mui/material/Tooltip'
 import { useTheme } from '@mui/material/styles'
 
-import { Identifier } from '../../../../utils/identifiers'
-import { normalize } from '../../../../utils/string'
+import { Identifier } from 'src/utils/identifiers'
+import { normalize } from 'src/utils/string'
+
 import { CenterText } from './CenterText'
 import { Sidebar } from './Sidebar'
 

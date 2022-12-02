@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useContext, useRef } from 'react'
+import { Dispatch, SetStateAction, useContext, useRef } from 'react'
 
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
@@ -9,7 +9,8 @@ import InputBase from '@mui/material/InputBase'
 import Paper from '@mui/material/Paper'
 import { useTheme } from '@mui/material/styles'
 
-import { pascalCase } from '../../utils/string'
+import { pascalCase } from 'src/utils/string'
+
 import { Context } from '../layout/Context'
 
 type Props = {

@@ -9,14 +9,15 @@ import Head from 'next/head'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
+import { UserDocument, useUserQuery } from 'src/graphql/generated'
+import { useSnackbarEnhanced } from 'src/hooks/useSnackbarEnhanced'
+import { showSettingsInstructions } from 'src/utils/settingsLocal'
+
 import { Context } from '../components/layout/Context'
 import { Deck } from '../components/layout/Deck'
 import { SingleCardLayout } from '../components/layout/SingleCardLayout'
-import LoginCard from '../components/user/login/LoginCard'
+import { LoginCard } from '../components/user/login/LoginCard'
 import { SettingsCard } from '../components/user/settings/SettingsCard'
-import { UserDocument, useUserQuery } from '../graphql/generated'
-import useSnackbarEnhanced from '../hooks/useSnackbarEnhanced'
-import { showSettingsInstructions } from '../utils/settingsLocal'
 import { serverEndpoint } from './api'
 
 export default function User() {

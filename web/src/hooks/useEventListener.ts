@@ -3,10 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef } from 'react'
 
-export default function useEventListener(
-  eventName: string,
-  handler: any,
-): void {
+export const useEventListener = (eventName: string, handler: any): void => {
   // Create a ref that stores handler
   const savedHandler = useRef()
 

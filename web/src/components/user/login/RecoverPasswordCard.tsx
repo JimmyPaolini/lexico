@@ -1,18 +1,17 @@
-import React from 'react'
-
 import { Card, CardContent, Divider, Grid } from '@mui/material'
 
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 
-import { useRecoverPasswordMutation } from '../../../graphql/generated'
-import useSnackbarEnhanced from '../../../hooks/useSnackbarEnhanced'
-import { validateEmail } from '../../../utils/string'
-import CardHeader from '../../accessories/CardHeader'
-import SubmitButton from '../../accessories/SubmitButton'
-import TextBox from '../../accessories/TextBox'
+import { useRecoverPasswordMutation } from 'src/graphql/generated'
+import { useSnackbarEnhanced } from 'src/hooks/useSnackbarEnhanced'
+import { validateEmail } from 'src/utils/string'
 
-export default function RecoverPasswordCard() {
+import { CardHeader } from '../../accessories/CardHeader'
+import { SubmitButton } from '../../accessories/SubmitButton'
+import { TextBox } from '../../accessories/TextBox'
+
+export const RecoverPasswordCard = () => {
   const router = useRouter()
   const { enqueueSnackbar } = useSnackbarEnhanced()
 

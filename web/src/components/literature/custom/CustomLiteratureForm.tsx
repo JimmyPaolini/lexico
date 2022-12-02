@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react'
+import { useContext } from 'react'
 
 import Menu from '@mui/icons-material/Menu'
 import { Grid, IconButton, Typography } from '@mui/material'
@@ -8,13 +8,11 @@ import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 import { v4 as uuid } from 'uuid'
 
-import { useCreateCustomTextMutation } from '../../../graphql/generated'
-import {
-  CustomText,
-  createCustomTextLocal,
-} from '../../../utils/literatureLocal'
-import SubmitButton from '../../accessories/SubmitButton'
-import TextBox from '../../accessories/TextBox'
+import { useCreateCustomTextMutation } from 'src/graphql/generated'
+import { CustomText, createCustomTextLocal } from 'src/utils/literatureLocal'
+
+import { SubmitButton } from '../../accessories/SubmitButton'
+import { TextBox } from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
 
 const PREFIX = 'CustomLiteratureForm'
@@ -43,7 +41,7 @@ const Root = styled('form')(({ theme }) => ({
 type Props = {
   text?: CustomText
 }
-export default memo(function CustomLiteratureForm({ text }: Props) {
+export const CustomLiteratureForm = ({ text }: Props) => {
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
 
   const router = useRouter()
@@ -110,7 +108,7 @@ export default memo(function CustomLiteratureForm({ text }: Props) {
       </Grid>
     </Root>
   )
-})
+}
 
 export function validate({ title, text }: CustomText): CustomText {
   const errors = {} as CustomText

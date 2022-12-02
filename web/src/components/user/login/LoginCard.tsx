@@ -1,13 +1,11 @@
-import React from 'react'
-
 import { Card, CardContent, Divider, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import CardHeader from '../../accessories/CardHeader'
-import BasicLogin from './BasicLoginForm'
-import OAuthLogin from './OAuthLogin'
+import { CardHeader } from '../../accessories/CardHeader'
+import { BasicLogin } from './BasicLoginForm'
+import { OAuthLogin } from './OAuthLogin'
 
-export default function LoginCard() {
+export const LoginCard = () => {
   const theme = useTheme()
   return (
     <Card

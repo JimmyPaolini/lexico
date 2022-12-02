@@ -1,10 +1,10 @@
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
 import { useTheme } from '@mui/material/styles'
 
 import { SnackbarProvider } from 'notistack'
 
-export default function Snackbar({ children }: PropsWithChildren<{}>) {
+export const Snackbar = ({ children }: PropsWithChildren<{}>) => {
   const theme = useTheme()
   return (
     <SnackbarProvider
@@ -19,6 +19,7 @@ export default function Snackbar({ children }: PropsWithChildren<{}>) {
       }}
       hideIconVariant
       preventDuplicate
+      maxSnack={1}
     >
       {children}
     </SnackbarProvider>

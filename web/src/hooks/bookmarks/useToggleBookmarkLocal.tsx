@@ -1,14 +1,15 @@
 import { Dispatch, SetStateAction } from 'react'
 
-import { showBookmarkInstructions } from '../../utils/bookmarkInstructions'
-import { bookmarkLocal, unbookmarkLocal } from '../../utils/bookmarksLocal'
-import useSnackbarEnhanced from '../useSnackbarEnhanced'
+import { showBookmarkInstructions } from 'src/utils/bookmarkInstructions'
+import { bookmarkLocal, unbookmarkLocal } from 'src/utils/bookmarksLocal'
 
-export default function useToggleBookmarkLocal(
+import { useSnackbarEnhanced } from '../useSnackbarEnhanced'
+
+export const useToggleBookmarkLocal = (
   id: string,
   bookmarked: boolean,
   setBookmarked: Dispatch<SetStateAction<boolean>>,
-) {
+) => {
   const { enqueueSnackbar } = useSnackbarEnhanced(true, true)
   const toggleBookmark = async () => {
     if (!bookmarked) {

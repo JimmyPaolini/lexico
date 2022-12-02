@@ -2,8 +2,9 @@ import { memo } from 'react'
 
 import Head from 'next/head'
 
-import CustomLiteratureForm from '../../components/literature/custom/CustomLiteratureForm'
-import { CustomText } from '../../utils/literatureLocal'
+import { CustomText } from 'src/utils/literatureLocal'
+
+import { CustomLiteratureForm } from '../../components/literature/custom/CustomLiteratureForm'
 
 type Props = { text?: CustomText }
 

@@ -15,11 +15,12 @@ import {
   Forms as FormsType,
   NounForms,
   VerbForms,
-} from '../../../graphql/generated'
-import { Identifier } from '../../../utils/identifiers'
-import { getSettingsLocal } from '../../../utils/settingsLocal'
-import ExpandIcon from '../../accessories/ExpandIcon'
-import IdentifierPill from '../../accessories/Pills/IdentifierPill'
+} from 'src/graphql/generated'
+import { Identifier } from 'src/utils/identifiers'
+import { getSettingsLocal } from 'src/utils/settingsLocal'
+
+import { ExpandIcon } from '../../accessories/ExpandIcon'
+import { IdentifierPill } from '../../accessories/Pills/IdentifierPill'
 import { Context } from '../../layout/Context'
 import { AdjectiveFormsTable } from './PartsOfSpeech/AdjectiveFormsTable'
 import { NounFormsTable } from './PartsOfSpeech/NounFormsTable'
@@ -50,18 +51,14 @@ export const Forms = ({
     searched =
       partOfSpeech === 'verb' ? 'Conjugation Table' : 'Declension Table'
 
-  const FormsTable = !forms ? null : partOfSpeechToFormsTable[partOfSpeech]
-
-  const expandable = forms && FormsTable
-
-  if (searched.match(/Table/i) && !expandable) return <></>
+  if (searched.match(/Table/i) && !forms) return <></>
 
   return (
     <>
       <CardContent>
         <CardActionArea
           onClick={() => setExpanded((expanded) => !expanded)}
-          disabled={!expandable}
+          disabled={!forms}
           disableRipple
           disableTouchRipple
           sx={{ paddingLeft: theme.spacing(1), paddingRight: theme.spacing(1) }}
@@ -85,9 +82,19 @@ export const Forms = ({
                 </Grid>
               ))}
             </Grid>
-            {FormsTable && (
+            {[
+              'verb',
+              'noun',
+              'properNoun',
+              'adjective',
+              'participle',
+              'suffix',
+              'numeral',
+              'pronoun',
+              'determiner',
+            ].includes(partOfSpeech) && (
               <ExpandIcon
-                {...{ expanded }}
+                {...{ expanded: Boolean(forms) }}
                 sx={{
                   marginTop: theme.spacing(0.5),
                   marginRight: theme.spacing(0.5),
@@ -97,32 +104,28 @@ export const Forms = ({
           </Grid>
         </CardActionArea>
       </CardContent>
-      {expandable && (
+      {forms && (
         <Collapse in={expanded}>
           <Divider variant="middle" />
-          <FormsTable
-            forms={forms as VerbForms | NounForms | AdjectiveForms}
-            searched={searched}
-          />
+          {['verb'].includes(partOfSpeech) ? (
+            <VerbFormsTable forms={forms as VerbForms} searched={searched} />
+          ) : ['noun', 'properNoun'].includes(partOfSpeech) ? (
+            <NounFormsTable forms={forms as NounForms} searched={searched} />
+          ) : [
+              'adjective',
+              'participle',
+              'suffix',
+              'numeral',
+              'pronoun',
+              'determiner',
+            ].includes(partOfSpeech) ? (
+            <AdjectiveFormsTable
+              forms={forms as AdjectiveForms}
+              searched={searched}
+            />
+          ) : null}
         </Collapse>
       )}
     </>
   )
-}
-
-const partOfSpeechToFormsTable = {
-  verb: VerbFormsTable,
-  noun: NounFormsTable,
-  properNoun: NounFormsTable,
-  adjective: AdjectiveFormsTable,
-  participle: AdjectiveFormsTable,
-  suffix: AdjectiveFormsTable,
-  numeral: AdjectiveFormsTable,
-  pronoun: AdjectiveFormsTable,
-  determiner: AdjectiveFormsTable,
-} as {
-  [key: string]:
-    | typeof VerbFormsTable
-    | typeof NounFormsTable
-    | typeof AdjectiveFormsTable
 }

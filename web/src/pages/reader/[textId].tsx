@@ -7,20 +7,21 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { Context } from '../../components/layout/Context'
-import LiteratureFallback from '../../components/literature/LiteratureFallback'
-import { SearchModal } from '../../components/reader/SearchModal'
-import { Text } from '../../components/reader/Text'
 import {
   Text as ReaderText,
   useGetTextIdsQuery,
   useGetTextQuery,
-} from '../../graphql/generated'
-import useSnackbarEnhanced from '../../hooks/useSnackbarEnhanced'
-import { googleAnalyticsEvent } from '../../utils/googleAnalytics'
-import { showReaderInstructions } from '../../utils/readerInstructions'
-import { getSettingsLocal } from '../../utils/settingsLocal'
-import { sentenceCase } from '../../utils/string'
+} from 'src/graphql/generated'
+import { useSnackbarEnhanced } from 'src/hooks/useSnackbarEnhanced'
+import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
+import { showReaderInstructions } from 'src/utils/readerInstructions'
+import { getSettingsLocal } from 'src/utils/settingsLocal'
+import { sentenceCase } from 'src/utils/string'
+
+import { Context } from '../../components/layout/Context'
+import { LiteratureFallback } from '../../components/literature/LiteratureFallback'
+import { SearchModal } from '../../components/reader/SearchModal'
+import { Text } from '../../components/reader/Text'
 
 type Props = { text: ReaderText }
 

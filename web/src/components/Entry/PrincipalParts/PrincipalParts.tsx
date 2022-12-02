@@ -1,14 +1,12 @@
-import React from 'react'
-
 import { Box, CardHeader } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { Inflection, Maybe, PrincipalPart } from 'src/graphql/generated'
 import { unCamelCase } from 'src/utils/string'
 
-import ExpandIcon from '../../accessories/ExpandIcon'
+import { ExpandIcon } from '../../accessories/ExpandIcon'
 import { BookmarkButton } from './BookmarkButton'
-import inflectionToString from './inflectionToString'
+import { inflectionToString } from './inflectionToString'
 
 type Props = {
   id: string

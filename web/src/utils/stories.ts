@@ -1,7 +1,7 @@
 import { print } from 'graphql'
 import { rawRequest } from 'graphql-request'
 
-import { SearchLatin, SearchLatinQuery } from '../graphql/generated'
+import { SearchLatin, SearchLatinQuery } from 'src/graphql/generated'
 
 export async function searchEntry(search: string) {
   const response = await rawRequest<SearchLatinQuery>(

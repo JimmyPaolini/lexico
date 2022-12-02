@@ -1,6 +1,6 @@
-import { Inflection, PrincipalPart } from '../../graphql/generated'
+import { Inflection, PrincipalPart } from 'src/graphql/generated'
 
-export default [
+export const nounDeclensions = [
   {
     id: 'first',
     partOfSpeech: '',

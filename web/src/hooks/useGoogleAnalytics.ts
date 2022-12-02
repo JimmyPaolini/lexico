@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { googleAnalyticsPageView } from '../utils/googleAnalytics'
+import { googleAnalyticsPageView } from 'src/utils/googleAnalytics'
 
-export default function useGoogleAnalytics(): void {
+export const useGoogleAnalytics = (): void => {
   const router = useRouter()
   const handleRouteChange = (url: URL) => {
     googleAnalyticsPageView(url)

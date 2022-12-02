@@ -1,21 +1,16 @@
 import { Delete } from '@mui/icons-material'
 
-import { useDeleteCustomTextMutation } from '../../../../graphql/generated'
-import {
-  CustomText,
-  deleteCustomTextLocal,
-} from '../../../../utils/literatureLocal'
-import CustomLiteratureMenuItem from './CustomLiteratureMenuItem'
+import { useDeleteCustomTextMutation } from 'src/graphql/generated'
+import { CustomText, deleteCustomTextLocal } from 'src/utils/literatureLocal'
+
+import { CustomLiteratureMenuItem } from './CustomLiteratureMenuItem'
 
 type Props = {
   text: CustomText
   refreshCustomTexts: () => Promise<void>
 }
 
-export default function CustomLiteratureDelete({
-  text,
-  refreshCustomTexts,
-}: Props) {
+export const CustomLiteratureDelete = ({ text, refreshCustomTexts }: Props) => {
   const { mutate: deleteCustomTextUser } = useDeleteCustomTextMutation({
     onSuccess: () => refreshCustomTexts(),
   })

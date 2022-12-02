@@ -1,5 +1,3 @@
-import React from 'react'
-
 import AccountBalance from '@mui/icons-material/AccountBalance'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import Bookmark from '@mui/icons-material/Bookmark'

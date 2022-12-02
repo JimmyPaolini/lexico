@@ -1,15 +1,16 @@
+import { Inflection } from 'src/graphql/generated'
+
 import AdjectiveInflection from '../../../../../entity/dictionary/word/inflection/AdjectiveInflection'
 import AdverbInflection from '../../../../../entity/dictionary/word/inflection/AdverbInflection'
 import NounInflection from '../../../../../entity/dictionary/word/inflection/NounInflection'
 import PrepositionInflection from '../../../../../entity/dictionary/word/inflection/PrepositionInflection'
 import Uninflected from '../../../../../entity/dictionary/word/inflection/Uninflected'
 import VerbInflection from '../../../../../entity/dictionary/word/inflection/VerbInflection'
-import { Inflection } from '../../../graphql/generated'
 
-export default function inflectionToString(
+export const inflectionToString = (
   inflection: Inflection | null | undefined,
   partOfSpeech: string,
-): string {
+): string => {
   const isNoun = ['noun', 'properNoun'].includes(partOfSpeech)
   const isAdjective = ['adjective', 'participle', 'numeral', 'suffix'].includes(
     partOfSpeech,

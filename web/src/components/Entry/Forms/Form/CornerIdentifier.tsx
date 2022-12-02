@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography'
 
 import { Identifier } from 'src/utils/identifiers/types'
 
-import IdentifierPill from '../../../accessories/Pills/IdentifierPill'
+import { IdentifierPill } from '../../../accessories/Pills/IdentifierPill'
 import { PillVariant } from '../../../accessories/Pills/Pill'
 
 type Props = { identifier?: Identifier }

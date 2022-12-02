@@ -11,7 +11,7 @@ import {
 import { Entry } from 'src/hooks/search/useSearch'
 import { getSettingsLocal } from 'src/utils/settingsLocal'
 
-import ExpandIcon from '../../accessories/ExpandIcon'
+import { ExpandIcon } from '../../accessories/ExpandIcon'
 import { Context } from '../../layout/Context'
 import { Translation } from './Translation'
 

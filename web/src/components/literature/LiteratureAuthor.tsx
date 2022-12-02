@@ -9,9 +9,10 @@ import {
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
-import { Author } from '../../graphql/generated'
-import { sentenceCase } from '../../utils/string'
-import ExpandIcon from '../accessories/ExpandIcon'
+import { Author } from 'src/graphql/generated'
+import { sentenceCase } from 'src/utils/string'
+
+import { ExpandIcon } from '../accessories/ExpandIcon'
 
 const PREFIX = 'LiteratureAuthor'
 
@@ -37,7 +38,7 @@ type Props = {
   expanded: boolean
   setExpanded: Dispatch<SetStateAction<boolean>>
 }
-export default memo(function LiteratureAuthor({
+export const LiteratureAuthor = memo(function LiteratureAuthor({
   author,
   expanded,
   setExpanded,

@@ -1,14 +1,12 @@
-import React, { memo } from 'react'
-
 import { Avatar, CardActionArea, Grid, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 import { useRouter } from 'next/router'
 import LinesEllipsis from 'react-lines-ellipsis'
 
-import { Text } from '../../graphql/generated'
-import { romanNumeralize } from '../../utils/romanNumeral'
-import { sentenceCase } from '../../utils/string'
+import { Text } from 'src/graphql/generated'
+import { romanNumeralize } from 'src/utils/romanNumeral'
+import { sentenceCase } from 'src/utils/string'
 
 const PREFIX = 'LiteratureText'
 
@@ -54,7 +52,7 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
 type Props = {
   text: Text
 }
-export default memo(function LiteratureText({ text }: Props) {
+export const LiteratureText = ({ text }: Props) => {
   const router = useRouter()
 
   const isTitleBook = text.title.match(/book \d+/i)
@@ -82,4 +80,4 @@ export default memo(function LiteratureText({ text }: Props) {
       </CardActionArea>
     </StyledGrid>
   )
-})
+}

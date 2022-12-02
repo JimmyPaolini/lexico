@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import { memo, useState } from 'react'
 
 import {
   Box,
@@ -10,10 +10,11 @@ import {
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
-import { Author, Book } from '../../graphql/generated'
-import { sentenceCase } from '../../utils/string'
-import ExpandIcon from '../accessories/ExpandIcon'
-import LiteratureText from './LiteratureText'
+import { Author, Book } from 'src/graphql/generated'
+import { sentenceCase } from 'src/utils/string'
+
+import { ExpandIcon } from '../accessories/ExpandIcon'
+import { LiteratureText } from './LiteratureText'
 
 const PREFIX = 'LiteratureBook'
 
@@ -41,7 +42,10 @@ type Props = {
   isLast: boolean
 }
 
-export default memo(function LiteratureBook({ book, isLast }: Props) {
+export const LiteratureBook = memo(function LiteratureBook({
+  book,
+  isLast,
+}: Props) {
   const [expanded, setExpanded] = useState<boolean>(false)
 
   return (

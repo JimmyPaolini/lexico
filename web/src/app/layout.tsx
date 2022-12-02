@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { CssBaseline, ThemeProvider } from '@mui/material'
 
@@ -8,12 +8,13 @@ import Head from 'next/head'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Hydrate } from 'react-query/hydration'
 
+import { useGoogleAnalytics } from 'src/hooks/useGoogleAnalytics'
+import { theme } from 'src/theme'
+import { createEmotionCache } from 'src/theme/createEmotionCache'
+import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
+
 import { ContextProvider } from '../components/layout/Context'
 import { Layout } from '../components/layout/Layout'
-import useGoogleAnalytics from '../hooks/useGoogleAnalytics'
-import theme from '../theme'
-import { createEmotionCache } from '../theme/createEmotionCache'
-import { googleAnalyticsEvent } from '../utils/googleAnalytics'
 
 export const clientEndpoint =
   process.env.NEXT_ENV === 'build'

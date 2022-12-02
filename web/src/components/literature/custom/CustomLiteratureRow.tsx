@@ -1,12 +1,11 @@
-import { memo } from 'react'
-
 import { Divider, ListItem, ListItemText } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 import { useRouter } from 'next/router'
 
-import { CustomText } from '../../../utils/literatureLocal'
-import CustomLiteratureOptions from './CustomLiteratureOptions'
+import { CustomText } from 'src/utils/literatureLocal'
+
+import { CustomLiteratureOptions } from './CustomLiteratureOptions'
 
 const PREFIX = 'CustomLiteratureRow'
 
@@ -25,10 +24,7 @@ type Props = {
   text: CustomText
   refreshCustomTexts: () => Promise<void>
 }
-export default memo(function CustomLiteratureRow({
-  text,
-  refreshCustomTexts,
-}: Props) {
+export const CustomLiteratureRow = ({ text, refreshCustomTexts }: Props) => {
   const router = useRouter()
 
   return (
@@ -43,4 +39,4 @@ export default memo(function CustomLiteratureRow({
       </ListItem>
     </Root>
   )
-})
+}

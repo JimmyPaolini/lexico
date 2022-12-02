@@ -1,4 +1,4 @@
-import React, { ComponentProps, useContext } from 'react'
+import { ComponentProps, useContext } from 'react'
 
 import { Menu } from '@mui/icons-material'
 import { CardHeader as CardHeaderMui, IconButton } from '@mui/material'
@@ -7,7 +7,7 @@ import { Context } from '../layout/Context'
 
 type Props = { title: string } & ComponentProps<typeof CardHeaderMui>
 
-export default function CardHeader({ title, ...props }: Props) {
+export const CardHeader = ({ title, ...props }: Props) => {
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
 
   return (

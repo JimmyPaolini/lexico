@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Paper } from '@mui/material'
 import { useTheme } from '@mui/material/styles'

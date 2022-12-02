@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import {Forms} from 'src/components/Entry/Forms/Forms'
-import theme from 'src/theme'
+import { Forms } from 'src/components/Entry/Forms/Forms'
+import { theme } from 'src/theme'
 import { searchEntry } from 'src/utils/stories'
 
 export default {

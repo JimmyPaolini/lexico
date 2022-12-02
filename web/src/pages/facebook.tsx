@@ -2,8 +2,9 @@ import { print } from 'graphql'
 import { rawRequest } from 'graphql-request'
 import { GetServerSideProps } from 'next'
 
-import facebookQuery from '../graphql/user/login/facebook.graphql'
-import { googleAnalyticsEvent } from '../utils/googleAnalytics'
+import facebookQuery from 'src/graphql/user/login/facebook.graphql'
+import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
+
 import { serverEndpoint } from './api'
 
 export default function facebook() {

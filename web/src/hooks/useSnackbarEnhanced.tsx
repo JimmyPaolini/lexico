@@ -12,10 +12,10 @@ import {
   useSnackbar,
 } from 'notistack'
 
-export default function useSnackbarEnhanced(
+export const useSnackbarEnhanced = (
   closeButton?: boolean,
   loginButton?: boolean,
-): ProviderContext {
+): ProviderContext => {
   const router = useRouter()
   const snackbar = useSnackbar()
   const { enqueueSnackbar, closeSnackbar } = snackbar

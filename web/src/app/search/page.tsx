@@ -1,5 +1,4 @@
-'use client';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Typography } from '@mui/material'
 
@@ -7,13 +6,16 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
+import { useSearch } from 'src/hooks/search/useSearch'
+import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
+
 import { Entry } from '../../components/Entry/Entry'
-import Logo from '../../components/accessories/Logo'
+import { Logo } from '../../components/accessories/Logo'
 import { Deck } from '../../components/layout/Deck'
 import { SearchBarLayout } from '../../components/layout/SearchBarLayout'
-import getSearchPageMetadata from '../../components/search/getSearchPageMetadata'
-import { useSearch } from '../../hooks/search/useSearch'
-import { googleAnalyticsEvent } from '../../utils/googleAnalytics'
+import { getSearchPageMetadata } from '../../components/search/getSearchPageMetadata'
+
+;('use client')
 
 type Props = { initialSearch: string }
 

@@ -2,13 +2,11 @@ import { useEffect } from 'react'
 
 import { AccountCircle } from '@mui/icons-material'
 
-import { useCreateCustomTextMutation } from '../../../../graphql/generated'
-import useSnackbarEnhanced from '../../../../hooks/useSnackbarEnhanced'
-import {
-  CustomText,
-  deleteCustomTextLocal,
-} from '../../../../utils/literatureLocal'
-import CustomLiteratureMenuItem from './CustomLiteratureMenuItem'
+import { useCreateCustomTextMutation } from 'src/graphql/generated'
+import { useSnackbarEnhanced } from 'src/hooks/useSnackbarEnhanced'
+import { CustomText, deleteCustomTextLocal } from 'src/utils/literatureLocal'
+
+import { CustomLiteratureMenuItem } from './CustomLiteratureMenuItem'
 
 type Props = {
   text: CustomText
@@ -16,11 +14,11 @@ type Props = {
   closeMenu: () => void
 }
 
-export default function CustomLiteratureMoveToUser({
+export const CustomLiteratureMoveToUser = ({
   text,
   refreshCustomTexts,
   closeMenu,
-}: Props) {
+}: Props) => {
   const { enqueueSnackbar } = useSnackbarEnhanced()
 
   const { mutate: createCustomTextUser, error } = useCreateCustomTextMutation({

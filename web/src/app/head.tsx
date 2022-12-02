@@ -1,6 +1,6 @@
 import React from 'react'
 
-import theme from '../theme'
+import { theme } from 'src/theme'
 
 export default function Head() {
   return (

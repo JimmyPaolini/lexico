@@ -2,12 +2,12 @@ import { Dispatch, SetStateAction } from 'react'
 
 import { QueryClient } from 'react-query'
 
-import { useBookmarkMutation } from '../../graphql/generated'
+import { useBookmarkMutation } from 'src/graphql/generated'
 
-export default function useBookmarkRemote(
+export const useBookmarkRemote = (
   queryClient: QueryClient,
   setBookmarked: Dispatch<SetStateAction<boolean>>,
-) {
+) => {
   const { mutateAsync: bookmarkRemote } = useBookmarkMutation({
     onMutate: async () => {
       await queryClient.cancelMutations()

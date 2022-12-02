@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import {
   Box,
@@ -13,14 +13,15 @@ import { useTheme } from '@mui/material/styles'
 
 import { useFormik } from 'formik'
 
-import { useCommentMutation } from '../../graphql/generated'
-import { capitalizeFirstLetter } from '../../utils/string'
-import ExpandIcon from '../accessories/ExpandIcon'
-import SubmitButton from '../accessories/SubmitButton'
-import TextBox from '../accessories/TextBox'
+import { useCommentMutation } from 'src/graphql/generated'
+import { capitalizeFirstLetter } from 'src/utils/string'
+
+import { ExpandIcon } from '../accessories/ExpandIcon'
+import { SubmitButton } from '../accessories/SubmitButton'
+import { TextBox } from '../accessories/TextBox'
 import { Context } from '../layout/Context'
 
-export default function CommentBox() {
+export const CommentBox = () => {
   const { user } = useContext(Context)
   const theme = useTheme()
   const [expanded, setExpanded] = useState<boolean>(false)

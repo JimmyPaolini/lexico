@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import {
   Box,
@@ -12,10 +12,11 @@ import { useTheme } from '@mui/material/styles'
 
 import Image from 'next/image'
 
-import tools from '../../utils/tools'
-import ExpandIcon from '../accessories/ExpandIcon'
+import { tools } from 'src/utils/tools'
 
-export default function ToolIconGrid() {
+import { ExpandIcon } from '../accessories/ExpandIcon'
+
+export const ToolIconGrid = () => {
   const theme = useTheme()
   const [expanded, setExpanded] = useState<boolean>(false)
 

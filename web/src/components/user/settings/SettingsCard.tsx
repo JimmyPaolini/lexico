@@ -1,14 +1,12 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 import { Card, CardContent, Divider, Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import {
-  useLogoutQuery,
-  useUnregisterMutation,
-} from '../../../graphql/generated'
-import CardHeader from '../../accessories/CardHeader'
-import SubmitButton from '../../accessories/SubmitButton'
+import { useLogoutQuery, useUnregisterMutation } from 'src/graphql/generated'
+
+import { CardHeader } from '../../accessories/CardHeader'
+import { SubmitButton } from '../../accessories/SubmitButton'
 import { Context } from '../../layout/Context'
 import { Identity } from './Identity'
 import { SettingsForm } from './SettingsForm'

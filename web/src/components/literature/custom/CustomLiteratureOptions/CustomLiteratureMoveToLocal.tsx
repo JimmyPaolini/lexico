@@ -1,11 +1,9 @@
 import { Home } from '@mui/icons-material'
 
-import { useDeleteCustomTextMutation } from '../../../../graphql/generated'
-import {
-  CustomText,
-  createCustomTextLocal,
-} from '../../../../utils/literatureLocal'
-import CustomLiteratureMenuItem from './CustomLiteratureMenuItem'
+import { useDeleteCustomTextMutation } from 'src/graphql/generated'
+import { CustomText, createCustomTextLocal } from 'src/utils/literatureLocal'
+
+import { CustomLiteratureMenuItem } from './CustomLiteratureMenuItem'
 
 type Props = {
   text: CustomText
@@ -13,11 +11,11 @@ type Props = {
   closeMenu: () => void
 }
 
-export default function CustomLiteratureMoveToLocal({
+export const CustomLiteratureMoveToLocal = ({
   text,
   refreshCustomTexts,
   closeMenu,
-}: Props) {
+}: Props) => {
   const { mutate: deleteCustomTextUser } = useDeleteCustomTextMutation({
     onMutate: closeMenu,
     onSettled: () => refreshCustomTexts(),

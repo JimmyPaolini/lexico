@@ -19,11 +19,7 @@ type Props = {
   text: string
 }
 
-export default function CustomLiteratureMenuItem({
-  action,
-  icon,
-  text,
-}: Props) {
+export const CustomLiteratureMenuItem = ({ action, icon, text }: Props) => {
   return (
     <StyledMenuItem onClick={action}>
       <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>

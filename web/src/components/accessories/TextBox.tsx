@@ -4,7 +4,7 @@ import { TextField } from '@mui/material'
 
 import { FormikValues } from 'formik'
 
-import { sentenceCase } from '../../utils/string'
+import { sentenceCase } from 'src/utils/string'
 
 type Props = {
   formik: FormikValues
@@ -38,4 +38,4 @@ const TextBox = forwardRef(
 )
 TextBox.displayName = 'TextBox'
 
-export default TextBox
+export { TextBox }

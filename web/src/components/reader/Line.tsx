@@ -1,13 +1,14 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 import { Divider, Grid, Skeleton, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import LazyLoad from 'react-lazyload'
 
-import { Line as ReaderLine } from '../../graphql/generated'
-import { getSettingsLocal } from '../../utils/settingsLocal'
-import { normalize } from '../../utils/string'
+import { Line as ReaderLine } from 'src/graphql/generated'
+import { getSettingsLocal } from 'src/utils/settingsLocal'
+import { normalize } from 'src/utils/string'
+
 import { Context } from '../layout/Context'
 import { Word } from './Word'
 

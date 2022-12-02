@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { Bookmark, BookmarkBorder } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 
 import { Maybe } from 'src/graphql/generated'
-import useToggleBookmark from 'src/hooks/bookmarks/useToggleBookmark'
+import { useToggleBookmark } from 'src/hooks/bookmarks/useToggleBookmark'
 import { isBookmarkedLocal } from 'src/utils/bookmarksLocal'
 
 import { Context } from '../../layout/Context'

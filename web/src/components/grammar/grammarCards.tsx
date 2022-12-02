@@ -1,11 +1,11 @@
 import { AdjectiveDeclensionCard } from './AdjectiveDeclensionCard'
 import { NounDeclensionCard } from './NounDeclensionCard'
 import { VerbConjugationCard } from './VerbConjugationCard'
-import adjectiveDeclensions from './adjectiveDeclensions'
-import nounDeclensions from './nounDeclensions'
-import verbConjugations from './verbConjugations'
+import { adjectiveDeclensions } from './adjectiveDeclensions'
+import { nounDeclensions } from './nounDeclensions'
+import { verbConjugations } from './verbConjugations'
 
-export default function useGrammarCards() {
+export const useGrammarCards = () => {
   return [
     ...verbConjugations.map((conjugation) => (
       <VerbConjugationCard
