@@ -10,7 +10,7 @@ import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
 import { UserDocument, useUserQuery } from 'src/graphql/generated'
-import { useSnackbarEnhanced } from 'src/hooks/useSnackbarEnhanced'
+import { useSnackbar } from 'src/hooks/useSnackbar'
 import { showSettingsInstructions } from 'src/utils/settingsLocal'
 
 import { Context } from '../components/layout/Context'
@@ -23,7 +23,7 @@ import { serverEndpoint } from './api'
 export default function User() {
   const theme = useTheme()
   const { user } = useContext(Context)
-  const { enqueueSnackbar } = useSnackbarEnhanced()
+  const enqueueSnackbar = useSnackbar()
   useEffect(() => {
     if (!user && showSettingsInstructions()) {
       enqueueSnackbar(

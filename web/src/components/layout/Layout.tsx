@@ -5,7 +5,7 @@ import { Grid } from '@mui/material'
 import { useRouter } from 'next/router'
 
 import { Navigation } from './Navigation'
-import { Snackbar } from './Snackbar'
+import { SnackbarProvider } from './SnackbarProvider'
 
 type Props = PropsWithChildren<{}>
 
@@ -14,7 +14,7 @@ export const Layout = ({ children }: Props) => {
   const page = router.pathname.split('/')[1]
 
   return (
-    <Snackbar>
+    <SnackbarProvider>
       <Grid container>
         <Grid item>
           <Navigation page={page} />
@@ -23,6 +23,6 @@ export const Layout = ({ children }: Props) => {
           {children}
         </Grid>
       </Grid>
-    </Snackbar>
+    </SnackbarProvider>
   )
 }

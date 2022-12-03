@@ -3,10 +3,10 @@ import { useEffect } from 'react'
 import { User } from 'src/graphql/generated'
 import { showBookmarkInstructions } from 'src/utils/bookmarkInstructions'
 
-import { useSnackbarEnhanced } from '../useSnackbarEnhanced'
+import { useSnackbar } from '../useSnackbar'
 
 export const useBookmarkInstructions = (user?: User): void => {
-  const { enqueueSnackbar } = useSnackbarEnhanced(true, true)
+  const enqueueSnackbar = useSnackbar(true, true)
   useEffect(() => {
     if (!user && showBookmarkInstructions()) {
       enqueueSnackbar(

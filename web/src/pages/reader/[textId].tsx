@@ -12,7 +12,7 @@ import {
   useGetTextIdsQuery,
   useGetTextQuery,
 } from 'src/graphql/generated'
-import { useSnackbarEnhanced } from 'src/hooks/useSnackbarEnhanced'
+import { useSnackbar } from 'src/hooks/useSnackbar'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 import { showReaderInstructions } from 'src/utils/readerInstructions'
 import { getSettingsLocal } from 'src/utils/settingsLocal'
@@ -44,7 +44,7 @@ export default function Reader({ text }: Props) {
     })
   }
 
-  const { enqueueSnackbar } = useSnackbarEnhanced()
+  const enqueueSnackbar = useSnackbar()
   useEffect(() => {
     if (showReaderInstructions()) {
       enqueueSnackbar(

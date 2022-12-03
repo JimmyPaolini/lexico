@@ -23,7 +23,7 @@ export function showBookmarkInstructions(): boolean {
     )
     return true
   } else {
-    return false
+    return true
   }
 }
 

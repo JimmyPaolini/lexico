@@ -14,7 +14,7 @@ import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 
 import { useResetPasswordMutation } from 'src/graphql/generated'
-import { useSnackbarEnhanced } from 'src/hooks/useSnackbarEnhanced'
+import { useSnackbar } from 'src/hooks/useSnackbar'
 
 import { CardHeader } from '../../accessories/CardHeader'
 import { SubmitButton } from '../../accessories/SubmitButton'
@@ -28,7 +28,7 @@ export const ResetPasswordCard = ({ passwordResetToken }: Props) => {
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const passwordTextBoxRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
-  const { enqueueSnackbar } = useSnackbarEnhanced()
+  const enqueueSnackbar = useSnackbar()
 
   const formik = useFormik({
     initialValues: {

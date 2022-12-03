@@ -4,7 +4,7 @@ import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 
 import { useRecoverPasswordMutation } from 'src/graphql/generated'
-import { useSnackbarEnhanced } from 'src/hooks/useSnackbarEnhanced'
+import { useSnackbar } from 'src/hooks/useSnackbar'
 import { validateEmail } from 'src/utils/string'
 
 import { CardHeader } from '../../accessories/CardHeader'
@@ -13,7 +13,7 @@ import { TextBox } from '../../accessories/TextBox'
 
 export const RecoverPasswordCard = () => {
   const router = useRouter()
-  const { enqueueSnackbar } = useSnackbarEnhanced()
+  const enqueueSnackbar = useSnackbar()
 
   const formik = useFormik({
     initialValues: {
