@@ -3,7 +3,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { ContextProvider } from '../src/components/layout/Context'
-import SnackbarProvider from '../src/components/layout/Snackbar'
+import { SnackbarProvider } from '../src/components/layout/Snackbar'
 import theme from '../src/theme'
 
 export const parameters = {
