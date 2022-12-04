@@ -6,7 +6,7 @@ module.exports = {
     '@storybook/addon-interactions',
   ],
   framework: '@storybook/react',
-  core: { builder: 'webpack5' },
+  core: { builder: '@storybook/builder-webpack5' },
   features: { previewMdx2: true },
   webpackFinal: async (config) => {
     config.module.rules.push({

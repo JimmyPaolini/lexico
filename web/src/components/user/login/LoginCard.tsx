@@ -44,8 +44,8 @@ export const LoginCard = () => {
             <OAuthLogin provider="facebook" />
           </Grid>
         </Grid>
-        <Divider sx={{ marginBottom: theme.spacing(2) }} />
-        <BasicLogin />
+        {/* <Divider sx={{ marginBottom: theme.spacing(2) }} />
+        <BasicLogin /> */}
       </CardContent>
     </Card>
   )

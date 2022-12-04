@@ -1,9 +1,9 @@
 import AccountBalance from '@mui/icons-material/AccountBalance'
-import AccountCircle from '@mui/icons-material/AccountCircle'
 import Bookmark from '@mui/icons-material/Bookmark'
 import Edit from '@mui/icons-material/Edit'
 import MenuBook from '@mui/icons-material/MenuBook'
 import Search from '@mui/icons-material/Search'
+import Settings from '@mui/icons-material/Settings'
 
 export const pages = [
   {
@@ -28,7 +28,7 @@ export const pages = [
   },
   {
     name: 'user',
-    icon: <AccountCircle />,
+    icon: <Settings />,
     keybind: 'u',
   },
   {
