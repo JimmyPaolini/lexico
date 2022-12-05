@@ -172,13 +172,10 @@ type Line {
 
 type Mutation {
   bookmark(entryId: String!): Boolean!
-  comment(comment: String!): Boolean!
   createCustomText(id: String!, text: String!, title: String!): CustomText!
   deleteCustomText(id: String!): Boolean!
-  recoverPassword(email: String!): Boolean!
-  register(email: String!, password: String!): User!
-  resetPassword(password: String!, passwordResetToken: String!): Boolean!
-  setSettings(settings: SettingsInput!): Boolean!
+  setSettings(settings: SettingsInput!): Settings!
+  signIn(email: String!, provider: String!, providerId: String!): User!
   unbookmark(entryId: String!): Boolean!
   unregister: Boolean!
 }
@@ -261,7 +258,6 @@ type Query {
   bookmarks: [Entry!]!
   entries(ids: [String!]!): [Entry!]!
   entry(id: String!): Entry!
-  facebook(code: String!): User!
   findText(author: String!, book: String, title: String!): Text!
   getAuthor(id: String!): Author!
   getAuthors: [Author!]!
@@ -271,10 +267,7 @@ type Query {
   getText(id: String!): Text!
   getTextIds: [Text!]!
   getTexts: [Text!]!
-  google(code: String!): User!
   listCustomTexts: [CustomText!]!
-  login(email: String!, password: String!): User!
-  logout: Boolean!
   search(search: String!): [Entry!]!
   searchAuthors(search: String!): [Author!]!
   searchBooks(search: String!): [Book!]!
@@ -284,9 +277,8 @@ type Query {
   searchLiterature(search: String!): [Author!]!
   searchTexts(search: String!): [Text!]!
   settings: Settings!
+  signOut: Boolean!
   user: User
-  users: [User!]!
-  validatePasswordResetToken(passwordResetToken: String!): Boolean!
 }
 
 type Settings {
@@ -359,9 +351,9 @@ type User {
   createdAt: DateTime!
   customTexts: [CustomText!]
   email: String!
-  facebookId: String
-  googleId: String
   id: ID!
+  provider: String
+  providerId: String
   settings: Settings
   updatedAt: DateTime!
 }

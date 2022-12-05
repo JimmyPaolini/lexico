@@ -1,5 +1,4 @@
-import { Length } from "class-validator"
-import { Field, ID, ObjectType } from "type-graphql"
+import { Field, ID, ObjectType } from 'type-graphql'
 import {
   Column,
   CreateDateColumn,
@@ -9,15 +8,16 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from "typeorm"
-import Entry from "../dictionary/Entry"
-import CustomText from "../literature/CustomText"
-import Settings from "./Settings"
+} from 'typeorm'
+
+import Entry from '../dictionary/Entry'
+import CustomText from '../literature/CustomText'
+import Settings from './Settings'
 
 @Entity()
 @ObjectType()
 export default class User {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   @Field(() => ID)
   id: string
 
@@ -35,17 +35,13 @@ export default class User {
   @Field()
   email: string
 
+  @Column({ nullable: true, enum: ['google', 'facebook'] })
+  @Field({ nullable: true })
+  provider: string
+
   @Column({ nullable: true })
-  @Length(8, 64)
-  password?: string
-
-  @Column({ unique: true, nullable: true })
   @Field({ nullable: true })
-  googleId?: string
-
-  @Column({ unique: true, nullable: true })
-  @Field({ nullable: true })
-  facebookId?: string
+  providerId?: string
 
   @ManyToMany(() => Entry, (entry) => entry.users, { nullable: true })
   @JoinTable()
@@ -59,10 +55,7 @@ export default class User {
   @Field(() => [CustomText], { nullable: true })
   customTexts?: CustomText[]
 
-  @Column("json", { default: new Settings() })
+  @Column('json', { default: new Settings() })
   @Field(() => Settings, { defaultValue: new Settings() })
   settings: Settings = new Settings()
-
-  @Column({ nullable: true })
-  passwordResetToken?: string
 }

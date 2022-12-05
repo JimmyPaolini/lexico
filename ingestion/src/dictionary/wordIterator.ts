@@ -3,7 +3,7 @@ import fs from 'fs'
 import Text from '../../../entity/literature/Text'
 import DictionaryResolver from '../../../server/src/resolver/dictionary'
 import { ResolverContext } from '../../../server/src/utils/ResolverContext'
-import { connectDatabase } from '../../../utils/database'
+import { connectDatabase } from '../../../server/src/utils/database'
 import {
   getLineGeneratorByText,
   getWordGenerator,

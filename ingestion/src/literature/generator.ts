@@ -4,7 +4,7 @@ import Author from '../../../entity/literature/Author'
 import Book from '../../../entity/literature/Book'
 import Line from '../../../entity/literature/Line'
 import Text from '../../../entity/literature/Text'
-import { connectDatabase } from '../../../utils/database'
+import { connectDatabase } from '../../../server/src/utils/database'
 import { normalize } from '../../../web/src/utils/string'
 
 async function* getLineGeneratorSearch(

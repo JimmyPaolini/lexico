@@ -1,6 +1,6 @@
 import omnis from '../../data/dictionary/omnis.json'
 import Entry from '../../entity/dictionary/Entry'
-import { connectDatabase } from '../../utils/database'
+import { connectDatabase } from '../../server/src/utils/database'
 import { createManual, deleteManual } from './dictionary/ingestManual'
 
 async function main() {

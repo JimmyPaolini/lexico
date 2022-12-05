@@ -8,7 +8,7 @@ import Book from '../../entity/literature/Book'
 import Line from '../../entity/literature/Line'
 import Text from '../../entity/literature/Text'
 import User from '../../entity/user/User'
-import { connectDatabase } from '../../utils/database'
+import { connectDatabase } from '../../server/src/utils/database'
 import {
   clearAll,
   clearDictionary,

@@ -1,11 +1,6 @@
 import { exec } from 'child_process'
 import { readdirSync } from 'fs'
 
-import {
-  POSTGRES_DB,
-  POSTGRES_PASSWORD,
-  POSTGRES_USER,
-} from '../../../utils/env'
 import log from '../../../utils/log'
 import {
   clearAll,
@@ -31,18 +26,26 @@ const literatureTables = ['author', 'book', 'text', 'line']
 
 const userTables = ['user', 'user_bookmarks_entry', 'custom_texts']
 
-const createCommand = (isBackup: boolean, fileKey: string, tables: string[]) =>
-  `PGPASSWORD=${POSTGRES_PASSWORD} ` +
-  `${isBackup ? 'pg_dump --compress 9' : 'pg_restore'} ` +
-  `--dbname ${POSTGRES_DB} ` +
-  tables.map((table) => `-t ${table} `).join('') +
-  `--username ${POSTGRES_USER} ` +
-  `--host ${
-    process.env.NODE_ENV === 'production' ? 'database' : 'localhost'
-  } ` +
-  `--port 5432 --format c ` +
-  (fileKey.match(/all$/) ? '' : `--data-only `) +
-  `${isBackup ? '>' : '<'} "${fileKey}${backupFileNameExtension}"`
+const createCommand = (
+  isBackup: boolean,
+  fileKey: string,
+  tables: string[],
+) => {
+  const command =
+    `PGPASSWORD=${process.env.POSTGRES_PASSWORD} ` +
+    `${isBackup ? 'pg_dump --compress 9' : 'pg_restore'} ` +
+    `--dbname ${process.env.POSTGRES_DB} ` +
+    tables.map((table) => `-t ${table} `).join('') +
+    `--username ${process.env.POSTGRES_USER} ` +
+    `--host ${
+      process.env.NODE_ENV === 'production' ? 'database' : 'localhost'
+    } ` +
+    `--port 5432 --format c ` +
+    (fileKey.match(/all$/) ? '' : `--data-only `) +
+    `${isBackup ? '>' : '<'} "${fileKey}${backupFileNameExtension}"`
+  log.info(command)
+  return command
+}
 
 export async function backupDatabase(
   type: string,

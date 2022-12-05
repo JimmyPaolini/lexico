@@ -1,4 +1,4 @@
-import { connectDatabase } from '../../utils/database'
+import { connectDatabase } from '../../server/src/utils/database'
 import log from '../../utils/log'
 import {
   backupAll,

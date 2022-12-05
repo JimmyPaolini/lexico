@@ -1,7 +1,11 @@
 import { ConnectionOptions } from 'typeorm'
+import {
+  POSTGRES_DB,
+  POSTGRES_PASSWORD,
+  POSTGRES_USER,
+} from '../../../utils/env'
 
-import { POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER } from './env'
-import { DatabaseLogger } from './log'
+import { DatabaseLogger } from '../../../utils/log'
 
 export default {
   type: 'postgres',
@@ -15,8 +19,5 @@ export default {
   migrationsRun: true,
   logger: new DatabaseLogger(),
   maxQueryExecutionTime: 1000,
-  cli: {
-    entitiesDir: '../entity',
-    migrationsDir: 'src/migration',
-  },
+  cli: { entitiesDir: '../entity', migrationsDir: 'src/migration' },
 } as ConnectionOptions

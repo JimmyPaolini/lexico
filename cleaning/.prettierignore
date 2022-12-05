@@ -18,3 +18,4 @@ infra
 **/package.json
 
 server/**/schema.graphql
+**/migration

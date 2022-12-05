@@ -1,7 +1,7 @@
 import { getConnection } from 'typeorm'
 
 import Entry from '../../entity/dictionary/Entry'
-import { connectDatabase } from '../../utils/database'
+import { connectDatabase } from '../../server/src/utils/database'
 import { escapeCapitals } from '../../utils/string'
 import ingestEntries from './dictionary/ingestEntries'
 import ingestEntryWord from './dictionary/ingestEntry'

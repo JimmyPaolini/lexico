@@ -1,8 +1,6 @@
 import { Logger } from 'typeorm'
 import { createLogger, format, transports } from 'winston'
 
-import { LOG_SQL } from './env'
-
 export const circularReplacer: () =>
   | ((this: any, key: string, value: any) => any)
   | undefined = () => {
@@ -63,7 +61,7 @@ export class DatabaseLogger implements Logger {
    * Logs query and parameters used in it.
    */
   logQuery(query: string, parameters?: any[]): void {
-    if (LOG_SQL === 'true')
+    if (process.env.LOG_SQL === 'true')
       log.info(`database query: ${query} ${JSON.stringify(parameters || '')}`, {
         label: 'database query',
       })

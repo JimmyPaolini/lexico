@@ -5,7 +5,6 @@ import { useTheme } from '@mui/material/styles'
 
 import Head from 'next/head'
 
-// import { CommentBox } from '../components/about/CommentBox'
 import { ToolIconGrid } from '../components/about/ToolIconGrid'
 import { UpcomingFeatures } from '../components/about/UpcomingFeatures'
 import { CardHeader } from '../components/accessories/CardHeader'
@@ -45,8 +44,6 @@ export default function About() {
             <Divider sx={{ margin: theme.spacing(1) }} />
             <ToolIconGrid />
             <Divider sx={{ margin: theme.spacing(1) }} />
-            {/* <CommentBox />
-            <Divider sx={{ margin: theme.spacing(1) }} /> */}
             <UpcomingFeatures />
             <Divider sx={{ margin: theme.spacing(1) }} />
             <Typography variant="h6" align="center">
