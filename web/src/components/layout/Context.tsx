@@ -8,18 +8,15 @@ import {
 
 import { useMediaQuery, useTheme } from '@mui/material'
 
-import { Session } from 'next-auth'
-import { useSession } from 'next-auth/react'
 import { QueryClient } from 'react-query'
 
 import { User, useUserQuery } from 'src/graphql/generated'
 
 type LexicoContext = {
-  user: User
-  session: Session | null
   isNavOpen: boolean
   setNavOpen: Dispatch<SetStateAction<boolean>>
   isMobile: boolean
+  user: User
   queryClient: QueryClient
 }
 
@@ -28,7 +25,6 @@ export const Context = createContext({} as LexicoContext)
 type Props = PropsWithChildren<{ queryClient: QueryClient }>
 
 export const ContextProvider = ({ children, queryClient }: Props) => {
-  const { data: session } = useSession()
   const { data } = useUserQuery(
     {},
     { staleTime: 1000 * 60 * 5 /* 5 minutes */ },
@@ -43,10 +39,9 @@ export const ContextProvider = ({ children, queryClient }: Props) => {
       value={
         {
           user,
-          session,
+          isMobile,
           isNavOpen,
           setNavOpen,
-          isMobile,
           queryClient,
         } as LexicoContext
       }

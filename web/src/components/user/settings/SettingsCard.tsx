@@ -3,9 +3,7 @@ import { useContext } from 'react'
 import { Card, CardContent, Divider, Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { signOut } from 'next-auth/react'
-
-import { useUnregisterMutation } from 'src/graphql/generated'
+import { useLogoutQuery, useUnregisterMutation } from 'src/graphql/generated'
 
 import { CardHeader } from '../../accessories/CardHeader'
 import { SubmitButton } from '../../accessories/SubmitButton'
@@ -17,15 +15,15 @@ export const SettingsCard = () => {
   const theme = useTheme()
   const { user, queryClient } = useContext(Context)
 
-  // const { refetch: logout } = useLogoutQuery(
-  //   {},
-  //   {
-  //     enabled: false,
-  //     onSuccess: async () => {
-  //       await queryClient.invalidateQueries('User')
-  //     },
-  //   },
-  // )
+  const { refetch: logout } = useLogoutQuery(
+    {},
+    {
+      enabled: false,
+      onSuccess: async () => {
+        await queryClient.invalidateQueries('User')
+      },
+    },
+  )
   const { mutateAsync: unregister } = useUnregisterMutation({
     retry: false,
     onSuccess: async () => {
@@ -61,7 +59,7 @@ export const SettingsCard = () => {
           {user ? (
             <>
               <Grid item>
-                <SubmitButton name="Sign Out" onClick={() => signOut()} />
+                <SubmitButton name="Sign Out" onClick={() => logout()} />
               </Grid>
               <Grid item>
                 <SubmitButton
