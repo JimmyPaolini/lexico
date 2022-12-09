@@ -2,6 +2,7 @@ import { ApolloServer, CorsOptions } from 'apollo-server-express'
 import { Express } from 'express'
 import path from 'path'
 import { buildSchema } from 'type-graphql'
+
 import AuthenticationResolver from '../resolver/authentication'
 import BookmarkResolver from '../resolver/bookmark'
 import CustomTextResolver from '../resolver/customText'
@@ -23,7 +24,7 @@ export default async function buildAPI(
         LiteratureResolver,
         UserResolver,
       ],
-      emitSchemaFile: path.join(process.cwd(), './src/utils/schema.graphql'),
+      emitSchemaFile: path.join(process.cwd(), './src/graphql/schema.graphql'),
     }),
     context: ({ req, res }) => ({ req, res }),
     introspection: true,
