@@ -2,7 +2,6 @@ import { Avatar, CardActionArea, Grid, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 import { useRouter } from 'next/router'
-import LinesEllipsis from 'react-lines-ellipsis'
 
 import { Text } from 'src/graphql/generated'
 import { romanNumeralize } from 'src/utils/romanNumeral'
@@ -66,14 +65,16 @@ export const LiteratureText = ({ text }: Props) => {
           </Avatar>
         ) : (
           <Grid className={classes.standaloneTextContainer}>
-            <Typography className={classes.standaloneText}>
-              <LinesEllipsis
-                text={romanNumeralize(sentenceCase(text.title))}
-                maxLine="3"
-                ellipsis="..."
-                trimRight
-                basedOn="letters"
-              />
+            <Typography
+            className={classes.standaloneText}
+            sx={{
+              display: '-webkit-box',
+              '-webkit-line-clamp': '3',
+              '-webkit-box-orient': 'vertical',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}>
+              {romanNumeralize(sentenceCase(text.title))}
             </Typography>
           </Grid>
         )}
