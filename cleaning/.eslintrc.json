@@ -30,11 +30,11 @@
   ],
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
     "plugin:@next/next/recommended"
   ],
-  "plugins": ["react", "@typescript-eslint", "unused-imports"],
+  "plugins": ["@typescript-eslint", "react", "unused-imports"],
   "settings": { "react": { "version": "17" } },
   "env": { "browser": true, "es2021": true, "node": true },
   "parser": "@typescript-eslint/parser",

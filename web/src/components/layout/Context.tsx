@@ -26,7 +26,7 @@ type Props = PropsWithChildren<{ queryClient: QueryClient }>
 
 export const ContextProvider = ({ children, queryClient }: Props) => {
   const { data } = useUserQuery(
-    {},
+    undefined,
     { staleTime: 1000 * 60 * 5 /* 5 minutes */ },
   )
   const user = data?.user

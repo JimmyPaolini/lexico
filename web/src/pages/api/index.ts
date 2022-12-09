@@ -27,12 +27,13 @@ export default async (
     url: serverEndpoint,
     data: req.body,
     withCredentials: true,
+    headers: req?.headers?.cookie ? { cookie: req.headers.cookie } : undefined,
   }
-  console.log(req.cookies)
 
   try {
     const response = await axios(request)
-    res.setHeader('set-cookie', response?.headers?.['set-cookie'] ?? '')
+    if (response.headers['set-cookie'])
+      res.setHeader('set-cookie', response.headers['set-cookie'])
     res.send(response.data)
   } catch (error: unknown) {
     console.log(

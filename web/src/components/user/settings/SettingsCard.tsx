@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { Card, CardContent, Divider, Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { useLogoutQuery, useUnregisterMutation } from 'src/graphql/generated'
+import { useLogoutQuery, useUnregisterMutation, useUserQuery } from 'src/graphql/generated'
 
 import { CardHeader } from '../../accessories/CardHeader'
 import { SubmitButton } from '../../accessories/SubmitButton'
@@ -14,21 +14,23 @@ import { SettingsForm } from './SettingsForm'
 export const SettingsCard = () => {
   const theme = useTheme()
   const { user, queryClient } = useContext(Context)
+  console.log('cache', queryClient.getQueryCache())
+  console.log("user", user)
 
   const { refetch: logout } = useLogoutQuery(
     {},
     {
       enabled: false,
-      onSuccess: async () => {
-        await queryClient.invalidateQueries('User')
+      onSuccess:  () => {
+        queryClient.setQueryData(useUserQuery.getKey(), undefined)
       },
     },
   )
   const { mutateAsync: unregister } = useUnregisterMutation({
     retry: false,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries('User')
-    },
+    onSuccess:  () => {
+      queryClient.setQueryData(useUserQuery.getKey(), undefined)
+  },
   })
 
   const confirmUnregister = async () => {

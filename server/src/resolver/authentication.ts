@@ -12,7 +12,7 @@ import User from '../../../entity/user/User'
 import log from '../../../utils/log'
 import fetchFacebookUser from '../authentication/facebook'
 import fetchGoogleUser from '../authentication/google'
-import { Authenticate, IsAuthenticated } from '../authentication/middleware'
+import { Authenticate } from '../authentication/middleware'
 
 import { createAccessToken } from '../authentication/token'
 import { ResolverContext } from '../utils/ResolverContext'
@@ -34,7 +34,7 @@ export default class AuthenticationResolver {
         email: profile.email,
       })
     }
-    log.info('login google user', { id: user.id, email: user.email })
+    log.info('login google user', user)
     res.cookie('accessToken', createAccessToken(user), { httpOnly: true })
     return user
   }
@@ -52,14 +52,15 @@ export default class AuthenticationResolver {
         email: profile.email,
       })
     }
-    log.info('login facebook user', { id: user.id, email: user.email })
+    log.info('login facebook user', user)
     res.cookie('accessToken', createAccessToken(user), { httpOnly: true })
     return user
   }
 
   @Query(() => Boolean)
-  @UseMiddleware(IsAuthenticated)
-  logout(@Ctx() { res }: ResolverContext): boolean {
+  @UseMiddleware(Authenticate)
+  logout(@Ctx() { user, res }: ResolverContext): boolean {
+    log.info('logout user', user)
     res.clearCookie('accessToken')
     return true
   }
