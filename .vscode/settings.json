@@ -71,5 +71,10 @@
     "cleaning": "coverage",
     "migration": "scripts"
   },
-  "prettier.configPath": "./cleaning/.prettierrc.json"
+  "prettier.configPath": "./cleaning/.prettierrc.js",
+  "prettier.ignorePath": "./cleaning/.prettierignore",
+  "eslint.nodePath": "./.eslintrc.js",
+  "eslint.lintTask.options": "--config ./.eslintrc.js --ignore-path ./.eslintignore .",
+  "eslint.options": { "overrideConfigFile": "./cleaning/.eslintrc.js" },
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }

@@ -23,6 +23,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
     flexDirection: 'column',
     maxWidth: theme.custom.card.maxWidth,
     minWidth: theme.custom.card.minWidth,
+    width: "100%",
     paddingBottom: 0,
     margin: theme.spacing(1),
   },

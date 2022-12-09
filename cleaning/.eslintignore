@@ -10,8 +10,8 @@
 
 **/database_volume
 
-data
-assets
+**/data
+**/assets
 
 **/ingestion/src/dictionary
 **/README.md
