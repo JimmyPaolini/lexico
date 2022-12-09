@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export const serverEndpoint = `http://${
@@ -28,15 +28,16 @@ export default async (
     data: req.body,
     withCredentials: true,
   }
+  console.log(req.cookies)
 
-  // eslint-disable-next-line no-useless-catch
   try {
     const response = await axios(request)
-    if (response.headers['set-cookie'])
-      res.setHeader('set-cookie', response.headers['set-cookie'])
+    res.setHeader('set-cookie', response?.headers?.['set-cookie'] ?? '')
     res.send(response.data)
-  } catch (error) {
-    console.log(JSON.stringify((error as any)?.response, circularReplacer()))
+  } catch (error: unknown) {
+    console.log(
+      JSON.stringify((error as AxiosError).response, circularReplacer()),
+    )
     throw error
   }
 }

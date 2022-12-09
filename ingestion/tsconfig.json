@@ -7,5 +7,10 @@
     "outDir": "dist",
     "baseUrl": "."
   },
-  "exclude": ["../data", "../web"]
+  "exclude": [
+    "../data",
+    "../server/src/authentication",
+    "../server/src/resolver",
+    "../web"
+  ]
 }

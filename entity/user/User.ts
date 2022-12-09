@@ -1,3 +1,4 @@
+import { Length } from 'class-validator'
 import { Field, ID, ObjectType } from 'type-graphql'
 import {
   Column,
@@ -35,13 +36,17 @@ export default class User {
   @Field()
   email: string
 
-  @Column({ nullable: true, enum: ['google', 'facebook'] })
-  @Field({ nullable: true })
-  provider: string
-
   @Column({ nullable: true })
+  @Length(8, 64)
+  password?: string
+
+  @Column({ unique: true, nullable: true })
   @Field({ nullable: true })
-  providerId?: string
+  googleId?: string
+
+  @Column({ unique: true, nullable: true })
+  @Field({ nullable: true })
+  facebookId?: string
 
   @ManyToMany(() => Entry, (entry) => entry.users, { nullable: true })
   @JoinTable()
@@ -58,4 +63,7 @@ export default class User {
   @Column('json', { default: new Settings() })
   @Field(() => Settings, { defaultValue: new Settings() })
   settings: Settings = new Settings()
+
+  @Column({ nullable: true })
+  passwordResetToken?: string
 }

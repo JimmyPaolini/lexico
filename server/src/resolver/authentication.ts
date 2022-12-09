@@ -57,22 +57,9 @@ export default class AuthenticationResolver {
     return user
   }
 
-  @Mutation(() => User)
-  async signIn(
-    @Arg('email') email: string,
-    @Arg('provider') provider: string,
-    @Arg('providerId') providerId: string,
-    @Ctx() { res }: ResolverContext,
-  ): Promise<User> {
-    const user = await this.Users.save({ email, provider, providerId })
-    res.cookie('accessToken', createAccessToken(user), { httpOnly: true })
-    log.info('signIn user', user)
-    return user
-  }
-
   @Query(() => Boolean)
   @UseMiddleware(IsAuthenticated)
-  signOut(@Ctx() { res }: ResolverContext): boolean {
+  logout(@Ctx() { res }: ResolverContext): boolean {
     res.clearCookie('accessToken')
     return true
   }

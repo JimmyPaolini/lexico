@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 
 import { CacheProvider, EmotionCache } from '@emotion/react'
-import { SessionProvider } from 'next-auth/react'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import Head from 'next/head'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -41,21 +40,19 @@ export default function App({
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
-        <SessionProvider session={pageProps.session}>
-          <QueryClientProvider client={queryClient}>
-            <Hydrate state={pageProps.dehydratedState}>
-              <ContextProvider queryClient={queryClient}>
-                <Head>
-                  <title>Lexico</title>
-                </Head>
-                <CssBaseline />
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              </ContextProvider>
-            </Hydrate>
-          </QueryClientProvider>
-        </SessionProvider>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <ContextProvider queryClient={queryClient}>
+              <Head>
+                <title>Lexico</title>
+              </Head>
+              <CssBaseline />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ContextProvider>
+          </Hydrate>
+        </QueryClientProvider>
       </ThemeProvider>
     </CacheProvider>
   )

@@ -3,35 +3,9 @@
     "no-extra-parens": ["off"],
     "react/react-in-jsx-scope": ["off"],
     "react/prop-types": ["off"],
-    // "@typescript-eslint/no-non-null-assertion": ["off"],
     "@typescript-eslint/no-explicit-any": ["off"],
-    "@typescript-eslint/no-var-requires": ["off"]
-  },
-  "settings": {
-    "react": {
-      "version": "17"
-    }
-  },
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "node": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@next/next/recommended",
-    "plugin:cypress/recommended"
-  ],
-  "plugins": ["react", "@typescript-eslint"],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "sourceType": "module"
+    "@typescript-eslint/no-var-requires": ["off"],
+    "no-unused-vars": ["error"]
   },
   "overrides": [
     {
@@ -42,5 +16,22 @@
         "schema": "server/src/utils/schema.graphql"
       }
     }
-  ]
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@next/next/recommended"
+  ],
+  "plugins": ["react", "@typescript-eslint", "unused-imports"],
+  "settings": { "react": { "version": "17" } },
+  "env": { "browser": true, "es2021": true, "node": true },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  }
 }

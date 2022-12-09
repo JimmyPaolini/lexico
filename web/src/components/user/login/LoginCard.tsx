@@ -2,7 +2,6 @@ import { Card, CardContent, Divider, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { CardHeader } from '../../accessories/CardHeader'
-import { BasicLogin } from './BasicLoginForm'
 import { OAuthLogin } from './OAuthLogin'
 
 export const LoginCard = () => {
@@ -37,15 +36,13 @@ export const LoginCard = () => {
       <Divider variant="middle" />
       <CardContent>
         <Grid container direction="column" alignItems="center">
-          <Grid item sx={{ marginBottom: theme.spacing(2) }}>
+          <Grid item sx={{ marginBottom: theme.spacing(2), marginTop: theme.spacing(2) }}>
             <OAuthLogin provider="google" />
           </Grid>
           <Grid item sx={{ marginBottom: theme.spacing(2) }}>
             <OAuthLogin provider="facebook" />
           </Grid>
         </Grid>
-        <Divider sx={{ marginBottom: theme.spacing(2) }} />
-        <BasicLogin />
       </CardContent>
     </Card>
   )
