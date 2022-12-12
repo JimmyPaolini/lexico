@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { List } from '@mui/material'
+import { List, CardContent } from '@mui/material'
 
 import { useCustomTexts } from 'src/hooks/literature/useCustomTexts'
 
@@ -14,11 +14,23 @@ export const CustomLiteratureRows = () => {
 
   if (!customTexts.length) return <></>
   return (
-    <List style={{ padding: 0 }}>
-      {user && isLoading ? <CustomLiteratureLoading /> : null}{' '}
-      {customTexts.map((text) => (
-        <CustomLiteratureRow {...{ text, refreshCustomTexts }} key={text.id} />
-      ))}
-    </List>
+    <CardContent
+      sx={{
+        padding: 0,
+        '&:last-child': {
+          paddingBottom: 0,
+        },
+      }}
+    >
+      <List style={{ padding: 0 }}>
+        {user && isLoading ? <CustomLiteratureLoading /> : null}{' '}
+        {customTexts.map((text) => (
+          <CustomLiteratureRow
+            {...{ text, refreshCustomTexts }}
+            key={text.id}
+          />
+        ))}
+      </List>
+    </CardContent>
   )
 }

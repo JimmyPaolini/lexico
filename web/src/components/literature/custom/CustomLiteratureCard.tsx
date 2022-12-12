@@ -12,15 +12,7 @@ import { CustomLiteratureRows } from './CustomLiteratureRows'
 export const CustomLiteratureCard = () => {
   const theme = useTheme()
   return (
-    <Card
-      elevation={4}
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        paddingBottom: 0,
-        margin: theme.spacing(1),
-      }}
-    >
+    <Card>
       <CardActionArea href="/literature/custom">
         <CardHeaderMui
           title="Your Literature"
@@ -28,7 +20,7 @@ export const CustomLiteratureCard = () => {
             <Add
               sx={{
                 margin: theme.spacing(1),
-                marginRight: 12,
+                marginRight: '12px',
               }}
             />
           }
@@ -40,16 +32,7 @@ export const CustomLiteratureCard = () => {
           }}
         />
       </CardActionArea>
-      <CardContent
-        sx={{
-          padding: 0,
-          '&:last-child': {
-            paddingBottom: 0,
-          },
-        }}
-      >
-        <CustomLiteratureRows />
-      </CardContent>
+      <CustomLiteratureRows />
     </Card>
   )
 }

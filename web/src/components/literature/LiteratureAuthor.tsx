@@ -62,7 +62,7 @@ export const LiteratureAuthor = memo(function LiteratureAuthor({
                 sx={{
                   display: 'block',
                   lineHeight: 1.3,
-                  marginTop: 4,
+                  marginTop: '4px',
                 }}
               >
                 {summary}
