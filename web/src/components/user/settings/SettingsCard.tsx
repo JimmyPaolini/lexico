@@ -18,8 +18,6 @@ import { SettingsForm } from './SettingsForm'
 export const SettingsCard = () => {
   const theme = useTheme()
   const { user, queryClient } = useContext(Context)
-  console.log('cache', queryClient.getQueryCache())
-  console.log('user', user)
 
   const { refetch: logout } = useLogoutQuery(
     {},
