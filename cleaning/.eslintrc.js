@@ -7,16 +7,16 @@ module.exports = {
     '@typescript-eslint/no-var-requires': ['off'],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['off'],
-    'unused-imports/no-unused-imports': 'error',
-    'unused-imports/no-unused-vars': [
-      'warn',
-      {
-        vars: 'all',
-        varsIgnorePattern: '^_',
-        args: 'after-used',
-        argsIgnorePattern: '^_',
-      },
-    ],
+    // 'unused-imports/no-unused-imports': 'error',
+    // 'unused-imports/no-unused-vars': [
+    //   'warn',
+    //   {
+    //     vars: 'all',
+    //     varsIgnorePattern: '^_',
+    //     args: 'after-used',
+    //     argsIgnorePattern: '^_',
+    //   },
+    // ],
   },
   overrides: [
     {
@@ -34,15 +34,15 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:@next/next/recommended',
   ],
-  plugins: ['react', '@typescript-eslint', 'unused-imports'],
+  plugins: ['react', '@typescript-eslint'],
   settings: { react: { version: '17' } },
   env: { browser: true, es2021: true, node: true },
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 12,
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
-    sourceType: 'module',
   },
 }
