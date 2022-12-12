@@ -2,7 +2,6 @@ import { Add } from '@mui/icons-material'
 import {
   Card,
   CardActionArea,
-  CardContent,
   CardHeader as CardHeaderMui,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
@@ -20,16 +19,11 @@ export const CustomLiteratureCard = () => {
             <Add
               sx={{
                 margin: theme.spacing(1),
-                marginRight: '12px',
+                marginRight: theme.spacing(1.5),
+                marginTop: theme.spacing(1.5),
               }}
             />
           }
-          sx={{
-            '&.MuiCardHeader-action': {
-              marginTop: 'auto',
-              marginBottom: 'auto',
-            },
-          }}
         />
       </CardActionArea>
       <CustomLiteratureRows />
