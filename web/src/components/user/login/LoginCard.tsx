@@ -7,14 +7,7 @@ import { OAuthLogin } from './OAuthLogin'
 export const LoginCard = () => {
   const theme = useTheme()
   return (
-    <Card
-      sx={{
-        background: theme.palette.background.paper,
-        minWidth: theme.custom.card.minWidth,
-        maxWidth: theme.custom.card.maxWidth,
-        width: '100%',
-      }}
-    >
+    <Card>
       <CardHeader
         title="Sign In"
         sx={{
@@ -36,7 +29,10 @@ export const LoginCard = () => {
       <Divider variant="middle" />
       <CardContent>
         <Grid container direction="column" alignItems="center">
-          <Grid item sx={{ marginBottom: theme.spacing(2), marginTop: theme.spacing(2) }}>
+          <Grid
+            item
+            sx={{ marginBottom: theme.spacing(2), marginTop: theme.spacing(2) }}
+          >
             <OAuthLogin provider="google" />
           </Grid>
           <Grid item sx={{ marginBottom: theme.spacing(2) }}>

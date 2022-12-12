@@ -5,60 +5,51 @@ import {
   CardContent,
   CardHeader as CardHeaderMui,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { CustomLiteratureRows } from './CustomLiteratureRows'
 
-const PREFIX = 'CustomLiteratureCard'
-
-const classes = {
-  literatureCustomCard: `${PREFIX}-literatureCustomCard`,
-  noPadding: `${PREFIX}-noPadding`,
-  add: `${PREFIX}-add`,
-  action: `${PREFIX}-action`,
-}
-
-const StyledCard = styled(Card)(({ theme }) => ({
-  [`&.${classes.literatureCustomCard}`]: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: theme.custom.card.maxWidth,
-    minWidth: theme.custom.card.minWidth,
-    paddingBottom: 0,
-    margin: theme.spacing(1),
-  },
-
-  [`& .${classes.noPadding}`]: {
-    padding: 0,
-    '&:last-child': {
-      paddingBottom: 0,
-    },
-  },
-
-  [`& .${classes.add}`]: {
-    margin: theme.spacing(1),
-    marginRight: 12,
-  },
-
-  [`& .${classes.action}`]: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
-  },
-}))
-
 export const CustomLiteratureCard = () => {
+  const theme = useTheme()
   return (
-    <StyledCard elevation={4} className={classes.literatureCustomCard}>
+    <Card
+      elevation={4}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        paddingBottom: 0,
+        margin: theme.spacing(1),
+      }}
+    >
       <CardActionArea href="/literature/custom">
         <CardHeaderMui
           title="Your Literature"
-          action={<Add className={classes.add} />}
-          classes={{ action: classes.action }}
+          action={
+            <Add
+              sx={{
+                margin: theme.spacing(1),
+                marginRight: 12,
+              }}
+            />
+          }
+          sx={{
+            '&.MuiCardHeader-action': {
+              marginTop: 'auto',
+              marginBottom: 'auto',
+            },
+          }}
         />
       </CardActionArea>
-      <CardContent className={classes.noPadding}>
+      <CardContent
+        sx={{
+          padding: 0,
+          '&:last-child': {
+            paddingBottom: 0,
+          },
+        }}
+      >
         <CustomLiteratureRows />
       </CardContent>
-    </StyledCard>
+    </Card>
   )
 }

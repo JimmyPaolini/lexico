@@ -27,13 +27,6 @@ export const Entry = ({ entry, searched = '' }: Props) => {
   return (
     <Card
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        background: theme.palette.background.paper,
-        maxWidth: theme.custom.card.maxWidth,
-        minWidth: theme.custom.card.minWidth,
-        width: '100%',
-        paddingBottom: 0,
         border:
           isLatinSearchResult === false
             ? `2px solid ${theme.palette.secondary.main}`

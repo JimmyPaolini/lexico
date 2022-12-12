@@ -6,7 +6,6 @@ import {
   CardContent,
   Collapse,
   Divider,
-  useTheme,
 } from '@mui/material'
 
 import { VerbFormsTable } from '../Entry/Forms/PartsOfSpeech/VerbFormsTable'
@@ -22,11 +21,10 @@ export const VerbConjugationCard = ({
   conjugation,
   expandedInitial = false,
 }: Props) => {
-  const theme = useTheme()
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
-    <Card sx={{ ...theme.custom.card }}>
+    <Card>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple

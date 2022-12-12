@@ -7,31 +7,11 @@ import {
   Collapse,
   Typography,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
 
 import { Author } from 'src/graphql/generated'
 import { sentenceCase } from 'src/utils/string'
 
 import { ExpandIcon } from '../accessories/ExpandIcon'
-
-const PREFIX = 'LiteratureAuthor'
-
-const classes = {
-  summary: `${PREFIX}-summary`,
-  none: `${PREFIX}-none`,
-}
-
-const StyledCardActionArea = styled(CardActionArea)(() => ({
-  [`& .${classes.summary}`]: {
-    display: 'block',
-    lineHeight: 1.3,
-    marginTop: 4,
-  },
-
-  [`& .${classes.none}`]: {
-    display: 'none',
-  },
-}))
 
 type Props = {
   author: Author
@@ -58,9 +38,13 @@ export const LiteratureAuthor = memo(function LiteratureAuthor({
   if (author.id === 'catullus') summary = 'Carmina 1-116'
 
   return (
-    <StyledCardActionArea
+    <CardActionArea
       onClick={() => setExpanded((expanded) => !expanded)}
-      classes={{ focusHighlight: classes.none }}
+      sx={{
+        '&.MuiFocusHighlight': {
+          display: 'none',
+        },
+      }}
       disableRipple
       disableTouchRipple
     >
@@ -75,7 +59,11 @@ export const LiteratureAuthor = memo(function LiteratureAuthor({
               <Typography
                 variant="caption"
                 color="textPrimary"
-                className={classes.summary}
+                sx={{
+                  display: 'block',
+                  lineHeight: 1.3,
+                  marginTop: 4,
+                }}
               >
                 {summary}
               </Typography>
@@ -88,6 +76,6 @@ export const LiteratureAuthor = memo(function LiteratureAuthor({
           </Box>
         }
       />
-    </StyledCardActionArea>
+    </CardActionArea>
   )
 })

@@ -30,29 +30,25 @@ export const Deck = ({ cards }: Props) => {
       container
       justifyContent="center"
       wrap="nowrap"
-      sx={{  outline: 'none' }}
+      sx={{ outline: 'none' }}
     >
       {cardCols.map((cardCol, colNum) => {
         return !cardCol.length ? null : (
           <Grid
             item
             container
-            // flexGrow={1}
             direction="column"
             alignItems="center"
             sx={{ width: 'auto', outline: 'none' }}
             key={cardCol.map((Card) => getCardKey(Card)).join()}
           >
-            {cardCol.map((Card, rowNum) =>(
+            {cardCol.map((Card, rowNum) => (
               <Grow
                 in
                 key={getCardKey(Card)}
-                timeout={Math.min(
-                  400 * Math.pow(colNum + rowNum, 1 / 2),
-                  1000,
-                )}
+                timeout={Math.min(400 * Math.pow(colNum + rowNum, 1 / 2), 1000)}
               >
-                <Grid item>
+                <Grid item sx={{ width: '100%' }}>
                   <LazyLoad offset={100} throttle={50} height={28} once>
                     {Card}
                   </LazyLoad>

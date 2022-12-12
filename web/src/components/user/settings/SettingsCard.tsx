@@ -3,7 +3,11 @@ import { useContext } from 'react'
 import { Card, CardContent, Divider, Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { useLogoutQuery, useUnregisterMutation, useUserQuery } from 'src/graphql/generated'
+import {
+  useLogoutQuery,
+  useUnregisterMutation,
+  useUserQuery,
+} from 'src/graphql/generated'
 
 import { CardHeader } from '../../accessories/CardHeader'
 import { SubmitButton } from '../../accessories/SubmitButton'
@@ -15,22 +19,22 @@ export const SettingsCard = () => {
   const theme = useTheme()
   const { user, queryClient } = useContext(Context)
   console.log('cache', queryClient.getQueryCache())
-  console.log("user", user)
+  console.log('user', user)
 
   const { refetch: logout } = useLogoutQuery(
     {},
     {
       enabled: false,
-      onSuccess:  () => {
+      onSuccess: () => {
         queryClient.setQueryData(useUserQuery.getKey(), undefined)
       },
     },
   )
   const { mutateAsync: unregister } = useUnregisterMutation({
     retry: false,
-    onSuccess:  () => {
+    onSuccess: () => {
       queryClient.setQueryData(useUserQuery.getKey(), undefined)
-  },
+    },
   })
 
   const confirmUnregister = async () => {
@@ -40,14 +44,7 @@ export const SettingsCard = () => {
   }
 
   return (
-    <Card
-      sx={{
-        background: theme.palette.background.paper,
-        minWidth: theme.custom.card.minWidth,
-        maxWidth: theme.custom.card.maxWidth,
-        width: '100%',
-      }}
-    >
+    <Card>
       <CardHeader title="Settings" />
       <Divider variant="middle" />
       <CardContent>

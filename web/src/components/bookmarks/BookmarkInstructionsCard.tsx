@@ -15,11 +15,7 @@ export const BookmarkInstructionsCard = () => {
   const theme = useTheme()
   return (
     <Grow in>
-      <Card
-        sx={{
-          maxWidth: theme.custom.card.maxWidth,
-        }}
-      >
+      <Card>
         <CardContent>
           <List sx={{ padding: 0 }}>
             <ListItem sx={{ padding: 0 }}>

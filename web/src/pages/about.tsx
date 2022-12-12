@@ -22,14 +22,13 @@ export default function About() {
         alignItems="center"
         style={{ overflowX: 'hidden' }}
       >
-        <Grow in={true}>
+        <Grow in>
           <Card
             sx={{
               padding: theme.spacing(1),
               margin: theme.spacing(2),
               marginTop: theme.spacing(4),
               maxWidth: theme.custom.card.maxWidth * 2,
-              background: theme.palette.background.paper,
             }}
           >
             <CardHeader title="About" />

@@ -1,7 +1,5 @@
-import { memo, useState } from 'react'
-
+import { useState } from 'react'
 import { Card, CardContent, Collapse, Divider, Grid, List } from '@mui/material'
-import { styled } from '@mui/material/styles'
 
 import { Author, Book } from 'src/graphql/generated'
 
@@ -9,41 +7,9 @@ import { LiteratureAuthor } from './LiteratureAuthor'
 import { LiteratureBook } from './LiteratureBook'
 import { LiteratureText } from './LiteratureText'
 
-const PREFIX = 'LiteratureCard'
+type Props = { author: Author }
 
-const classes = {
-  literatureCard: `${PREFIX}-literatureCard`,
-  noPadding: `${PREFIX}-noPadding`,
-  inset1: `${PREFIX}-inset1`,
-}
-
-const StyledCard = styled(Card)(({ theme }) => ({
-  [`&.${classes.literatureCard}`]: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: theme.custom.card.maxWidth,
-    minWidth: theme.custom.card.minWidth,
-    width: "100%",
-    paddingBottom: 0,
-    margin: theme.spacing(1),
-  },
-
-  [`& .${classes.noPadding}`]: {
-    padding: 0,
-    '&:last-child': {
-      paddingBottom: 0,
-    },
-  },
-
-  [`& .${classes.inset1}`]: {
-    marginLeft: theme.spacing(1),
-  },
-}))
-
-interface Props {
-  author: Author
-}
-export const LiteratureCard = memo(function LiteratureCard({ author }: Props) {
+export const LiteratureCard = ({ author }: Props) => {
   const books = author.books || ([] as Book[])
   const nonBookTexts = author.texts.filter(
     (text) =>
@@ -54,12 +20,27 @@ export const LiteratureCard = memo(function LiteratureCard({ author }: Props) {
   const [expanded, setExpanded] = useState<boolean>(false)
 
   return (
-    <StyledCard elevation={4} className={classes.literatureCard}>
+    <Card>
       <LiteratureAuthor {...{ author, expanded, setExpanded }} />
       <Collapse in={expanded} mountOnEnter>
         <Divider style={{ marginRight: 8 }} />
-        <CardContent className={classes.noPadding}>
-          <List className={classes.noPadding} dense>
+        <CardContent
+          sx={{
+            padding: 0,
+            '&:last-child': {
+              paddingBottom: 0,
+            },
+          }}
+        >
+          <List
+            sx={{
+              padding: 0,
+              '&:last-child': {
+                paddingBottom: 0,
+              },
+            }}
+            dense
+          >
             {books.map((book, i) => {
               const isLast = i === books.length - 1 && !nonBookTexts.length
               return (
@@ -74,6 +55,6 @@ export const LiteratureCard = memo(function LiteratureCard({ author }: Props) {
           </List>
         </CardContent>
       </Collapse>
-    </StyledCard>
+    </Card>
   )
-})
+}

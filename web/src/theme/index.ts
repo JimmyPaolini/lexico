@@ -44,9 +44,12 @@ export const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          margin: themeInitial.spacing(1),
+          display: 'flex',
+          flexDirection: 'column',
           maxWidth: themeInitial.custom.card.maxWidth,
           mixWidth: themeInitial.custom.card.minWidth,
+          paddingBottom: 0,
+          margin: themeInitial.spacing(1),
         },
       },
     },

@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { useState } from 'react'
 
 import {
   Box,
@@ -8,7 +8,7 @@ import {
   ListItem,
   ListItemText,
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { useTheme } from '@mui/material/styles'
 
 import { Author, Book } from 'src/graphql/generated'
 import { sentenceCase } from 'src/utils/string'
@@ -16,45 +16,23 @@ import { sentenceCase } from 'src/utils/string'
 import { ExpandIcon } from '../accessories/ExpandIcon'
 import { LiteratureText } from './LiteratureText'
 
-const PREFIX = 'LiteratureBook'
+type Props = { author: Author; book: Book; isLast: boolean }
 
-const classes = {
-  hideHoverHighlight: `${PREFIX}-hideHoverHighlight`,
-  inset1: `${PREFIX}-inset1`,
-}
-
-// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
-const Root = styled('div')(({ theme }) => ({
-  [`& .${classes.hideHoverHighlight}`]: {
-    '&:hover': {
-      background: 'inherit',
-    },
-  },
-
-  [`& .${classes.inset1}`]: {
-    marginLeft: theme.spacing(1),
-  },
-}))
-
-type Props = {
-  author: Author
-  book: Book
-  isLast: boolean
-}
-
-export const LiteratureBook = memo(function LiteratureBook({
-  book,
-  isLast,
-}: Props) {
+export const LiteratureBook = ({ book, isLast }: Props) => {
+  const theme = useTheme()
   const [expanded, setExpanded] = useState<boolean>(false)
 
   return (
-    <Root>
+    <>
       <ListItem
         button
         onClick={() => setExpanded((expanded) => !expanded)}
         key={book.id}
-        classes={{ button: classes.hideHoverHighlight }}
+        sx={{
+          '&.MuiButtonBase-root-MuiListItem-root:hover': {
+            background: 'inherit',
+          },
+        }}
         disableRipple
         disableTouchRipple
       >
@@ -73,7 +51,13 @@ export const LiteratureBook = memo(function LiteratureBook({
           ))}
         </Grid>
       </Collapse>
-      {!isLast ? <Divider className={classes.inset1} /> : null}
-    </Root>
+      {!isLast ? (
+        <Divider
+          sx={{
+            marginLeft: theme.spacing(1),
+          }}
+        />
+      ) : null}
+    </>
   )
-})
+}

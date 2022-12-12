@@ -27,7 +27,7 @@ export const NounDeclensionCard = ({
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
   return (
-    <Card sx={{ ...theme.custom.card }}>
+    <Card>
       <CardActionArea
         onClick={() => setExpanded((expanded) => !expanded)}
         disableRipple
