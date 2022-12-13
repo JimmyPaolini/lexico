@@ -17,7 +17,7 @@ export const pages = [
     keybind: 'b',
   },
   {
-    name: 'literature',
+    name: 'library',
     icon: <MenuBook />,
     keybind: 'l',
   },

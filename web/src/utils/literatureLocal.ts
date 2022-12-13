@@ -1,4 +1,4 @@
-import { validate } from '../components/literature/custom/CustomLiteratureForm'
+import { validate } from '../components/library/custom/CustomLiteratureForm'
 
 export interface CustomText {
   id: string

@@ -12,7 +12,7 @@ export const CustomLiteratureCard = () => {
   const theme = useTheme()
   return (
     <Card>
-      <CardActionArea href="/literature/custom">
+      <CardActionArea href="/library/custom">
         <CardHeaderMui
           title="Your Literature"
           action={

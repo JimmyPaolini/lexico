@@ -27,8 +27,7 @@ export const Text = ({ text, openModal }: Props) => {
     <IconButton
       onClick={() =>
         router.push(
-          window?.location.pathname.replace('reader', 'literature') ||
-            '/literature',
+          window?.location.pathname.replace('reader', 'library') || '/library',
         )
       }
       aria-label="edit"

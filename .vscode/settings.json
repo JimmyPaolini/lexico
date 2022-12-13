@@ -63,7 +63,7 @@
     "entity": "class",
     "ingestion": "scripts",
     "resolver": "routes",
-    "literature": "lib",
+    "library": "lib",
     "dictionary": "app",
     "wiktionary": "content",
     ".next": "vercel",

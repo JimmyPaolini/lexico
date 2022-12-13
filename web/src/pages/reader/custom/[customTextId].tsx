@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import { GetServerSideProps } from 'next'
 
 import {
@@ -14,12 +12,12 @@ import Reader from '../[textId]'
 
 type Props = { id: string }
 
-export default memo(function CustomReader({ id }: Props) {
+export default function CustomReader({ id }: Props) {
   const { data, isSuccess } = useGetCustomTextQuery({ id })
   const localText = getCustomTextLocal(id)
   const text = (isSuccess ? data?.getCustomText : localText) as CustomText
   return !text ? <></> : <Reader text={customTextToText(text)} />
-})
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   return { props: { id: params?.customTextId } }

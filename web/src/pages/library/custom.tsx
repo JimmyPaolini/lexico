@@ -1,14 +1,12 @@
-import { memo } from 'react'
-
 import Head from 'next/head'
 
 import { CustomText } from 'src/utils/literatureLocal'
 
-import { CustomLiteratureForm } from '../../components/literature/custom/CustomLiteratureForm'
+import { CustomLiteratureForm } from '../../components/library/custom/CustomLiteratureForm'
 
 type Props = { text?: CustomText }
 
-export default memo(function CustomReaderNew({ text }: Props) {
+export default function CustomReaderNew({ text }: Props) {
   return (
     <>
       <Head>
@@ -30,4 +28,4 @@ export default memo(function CustomReaderNew({ text }: Props) {
       <CustomLiteratureForm text={text} />
     </>
   )
-})
+}

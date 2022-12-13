@@ -19,7 +19,7 @@ import { getSettingsLocal } from 'src/utils/settingsLocal'
 import { sentenceCase } from 'src/utils/string'
 
 import { Context } from '../../components/layout/Context'
-import { LiteratureFallback } from '../../components/literature/LiteratureFallback'
+import { ReaderLoading } from '../../components/reader/ReaderLoading'
 import { SearchModal } from '../../components/reader/SearchModal'
 import { Text } from '../../components/reader/Text'
 
@@ -28,7 +28,7 @@ type Props = { text: ReaderText }
 export default function Reader({ text }: Props) {
   const theme = useTheme()
   const router = useRouter()
-  if (router.isFallback) return <LiteratureFallback />
+  if (router.isFallback) return <ReaderLoading />
 
   const { user } = useContext(Context)
 

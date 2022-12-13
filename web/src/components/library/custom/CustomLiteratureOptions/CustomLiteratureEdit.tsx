@@ -6,15 +6,13 @@ import { CustomText } from 'src/utils/literatureLocal'
 
 import { CustomLiteratureMenuItem } from './CustomLiteratureMenuItem'
 
-type Props = {
-  text: CustomText
-}
+type Props = { text: CustomText }
 
 export const CustomLiteratureEdit = ({ text }: Props) => {
   const router = useRouter()
 
   const editText = () => {
-    router.push('literature/custom/' + text.id)
+    router.push('library/custom/' + text.id)
   }
 
   return (

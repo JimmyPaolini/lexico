@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, memo } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 import {
   Box,
@@ -18,11 +18,7 @@ type Props = {
   expanded: boolean
   setExpanded: Dispatch<SetStateAction<boolean>>
 }
-export const LiteratureAuthor = memo(function LiteratureAuthor({
-  author,
-  expanded,
-  setExpanded,
-}: Props) {
+export const LibraryAuthor = ({ author, expanded, setExpanded }: Props) => {
   let summary = [
     ...(author.books || []),
     ...author.texts.filter(
@@ -78,4 +74,4 @@ export const LiteratureAuthor = memo(function LiteratureAuthor({
       />
     </CardActionArea>
   )
-})
+}

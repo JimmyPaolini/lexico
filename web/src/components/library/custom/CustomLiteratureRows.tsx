@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import { List, CardContent } from '@mui/material'
 
-import { useCustomTexts } from 'src/hooks/literature/useCustomTexts'
+import { useCustomTexts } from 'src/hooks/library/useCustomTexts'
 
 import { Context } from '../../layout/Context'
 import { CustomLiteratureLoading } from './CustomLiteratureLoading'

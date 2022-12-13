@@ -2,7 +2,7 @@ import { CircularProgress, Paper } from '@mui/material'
 
 import Head from 'next/head'
 
-export const LiteratureFallback = () => {
+export const ReaderLoading = () => {
   return (
     <>
       <Head>

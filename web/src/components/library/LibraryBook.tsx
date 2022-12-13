@@ -15,11 +15,11 @@ import { Author, Book } from 'src/graphql/generated'
 import { sentenceCase } from 'src/utils/string'
 
 import { ExpandIcon } from '../accessories/ExpandIcon'
-import { LiteratureText } from './LiteratureText'
+import { LibraryText } from './LibraryText'
 
 type Props = { author: Author; book: Book; isLast: boolean }
 
-export const LiteratureBook = ({ book, isLast }: Props) => {
+export const LibraryBook = ({ book, isLast }: Props) => {
   const theme = useTheme()
   const [expanded, setExpanded] = useState<boolean>(false)
 
@@ -42,7 +42,7 @@ export const LiteratureBook = ({ book, isLast }: Props) => {
       <Collapse in={expanded} mountOnEnter>
         <Grid container justifyContent="center" alignItems="stretch">
           {book.texts.map((text) => (
-            <LiteratureText {...{ text }} key={text.id} />
+            <LibraryText {...{ text }} key={text.id} />
           ))}
         </Grid>
       </Collapse>

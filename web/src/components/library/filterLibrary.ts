@@ -1,6 +1,6 @@
 import { Author, Book, Text } from 'src/graphql/generated'
 
-export const filterLiterature = (
+export const filterLibrary = (
   authors: Author[],
   searched: string,
 ): Author[] => {

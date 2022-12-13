@@ -9,19 +9,19 @@ import { Author, useGetAuthorsQuery } from 'src/graphql/generated'
 
 import { Deck } from '../components/layout/Deck'
 import { SearchBarLayout } from '../components/layout/SearchBarLayout'
-import { LiteratureCard } from '../components/literature/LiteratureCard'
-import { CustomLiteratureCard } from '../components/literature/custom/CustomLiteratureCard'
-import { filterLiterature } from '../components/literature/filterLiterature'
+import { LibraryCard } from '../components/library/LibraryCard'
+import { CustomLiteratureCard } from '../components/library/custom/CustomLiteratureCard'
+import { filterLibrary } from '../components/library/filterLibrary'
 
 type Props = { authors: Author[] }
 
-export default function Literature({ authors }: Props) {
+export default function Library({ authors }: Props) {
   const [searched, setSearched] = useState<string>('')
 
   const authorsCopy = JSON.parse(JSON.stringify(authors))
   const Cards = useMemo(() => {
-    const Cards = filterLiterature(authorsCopy, searched).map((author) => (
-      <LiteratureCard {...{ author }} />
+    const Cards = filterLibrary(authorsCopy, searched).map((author) => (
+      <LibraryCard {...{ author }} />
     ))
     Cards.unshift(<CustomLiteratureCard />)
     return Cards
@@ -30,14 +30,14 @@ export default function Literature({ authors }: Props) {
   return (
     <>
       <Head>
-        <title>Lexico - Literature</title>
+        <title>Lexico - Library</title>
         <meta
           name="description"
           content="Read and translate Latin literature from authors like Caesar and Virgil, or input your own Latin text"
         />
         <meta
           name="keywords"
-          content={`Latin, Literature, Read, English, Translation, ${authors
+          content={`Latin, Library, Literature, Read, English, Translation, ${authors
             .map((author) => author.name)
             .join(', ')}`}
         />
@@ -45,7 +45,7 @@ export default function Literature({ authors }: Props) {
       <SearchBarLayout
         handleSearch={(search) => setSearched(search)}
         isLoading={false}
-        placeholder="Search Literature"
+        placeholder="Search Library"
       >
         {!Cards.length ? (
           <Typography variant="h4">No Results</Typography>
