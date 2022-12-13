@@ -54,20 +54,8 @@ export const theme = createTheme({
     MuiCardHeader: {
       styleOverrides: {
         root: {
-          background: themeInitial.palette.background.paper,
           paddingTop: themeInitial.spacing(1),
           paddingBottom: themeInitial.spacing(1),
-        },
-      },
-    },
-    MuiCardContent: {
-      styleOverrides: {
-        root: {
-          background: themeInitial.palette.background.paper,
-          padding: themeInitial.spacing(1),
-          '&:last-child': {
-            padding: themeInitial.spacing(1),
-          },
         },
       },
     },

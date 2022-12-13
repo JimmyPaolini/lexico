@@ -2,10 +2,11 @@ import { useState } from 'react'
 
 import {
   Box,
+  Button,
   Collapse,
   Divider,
   Grid,
-  ListItem,
+  ListItemButton,
   ListItemText,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
@@ -24,15 +25,9 @@ export const LiteratureBook = ({ book, isLast }: Props) => {
 
   return (
     <>
-      <ListItem
-        button
+      <ListItemButton
         onClick={() => setExpanded((expanded) => !expanded)}
-        key={book.id}
-        sx={{
-          '&.MuiButtonBase-root-MuiListItem-root:hover': {
-            background: 'inherit',
-          },
-        }}
+        sx={{ '&:hover': { background: 'inherit' } }}
         disableRipple
         disableTouchRipple
       >
@@ -43,7 +38,7 @@ export const LiteratureBook = ({ book, isLast }: Props) => {
         <Box py="auto" mr={0.5} display="flex">
           <ExpandIcon expanded={expanded} />
         </Box>
-      </ListItem>
+      </ListItemButton>
       <Collapse in={expanded} mountOnEnter>
         <Grid container justifyContent="center" alignItems="stretch">
           {book.texts.map((text) => (
