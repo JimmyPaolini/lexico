@@ -8,10 +8,14 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import LazyLoad from 'react-lazyload'
 
 type Card = JSX.Element
+
 type Props = { Cards: Card[] }
 
-export const getCardKey = (Card: Card) =>
+const getCardKey = (Card: Card): string =>
   Card.props?.entry?.id ?? JSON.stringify(Card.props)
+
+const getCardsKey = (Cards: Card[]): string =>
+  Cards.map((Card) => getCardKey(Card)).join()
 
 export const Deck = ({ Cards }: Props) => {
   const theme = useTheme()
@@ -33,8 +37,8 @@ export const Deck = ({ Cards }: Props) => {
       gap={2}
       sx={{ margin: `0px ${theme.spacing(2)}` }}
     >
-      {CardMatrix.map((CardCol, colNum) => {
-        return !CardCol.length ? null : (
+      {CardMatrix.map((CardArray, colNum) => {
+        return !CardArray.length ? null : (
           <Grid
             item
             container
@@ -42,13 +46,17 @@ export const Deck = ({ Cards }: Props) => {
             alignItems="center"
             gap={2}
             sx={{ width: 'auto' }}
-            key={CardCol.map((Card) => getCardKey(Card)).join()}
+            key={getCardsKey(CardArray)}
           >
-            {CardCol.map((Card, rowNum) => (
+            {CardArray.map((Card, rowNum) => (
               <Grow
                 in
                 key={getCardKey(Card)}
-                timeout={Math.min(400 * Math.pow(colNum + rowNum, 1 / 2), 1000)}
+                timeout={Math.min(
+                  theme.transitions.duration.shortest *
+                    Math.pow(colNum + rowNum, 1 / 2),
+                  theme.transitions.duration.standard,
+                )}
               >
                 <Grid item sx={{ width: '100%' }}>
                   <LazyLoad offset={100} throttle={50} height={28} once>
