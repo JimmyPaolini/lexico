@@ -35,7 +35,7 @@ export default function Search({ initialSearch }: Props) {
     })
   }
 
-  const cards =
+  const Cards =
     entries?.map((entry) => <Entry {...{ entry, searched: search }} />) || []
 
   const { title, description, keywords } = getSearchPageMetadata(search)
@@ -57,7 +57,7 @@ export default function Search({ initialSearch }: Props) {
         ) : !entries?.length && !isLoading ? (
           <Typography variant="h4">No Results</Typography>
         ) : (
-          <Deck cards={cards} />
+          <Deck Cards={Cards} />
         )}
       </SearchBarLayout>
     </>

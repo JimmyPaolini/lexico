@@ -8,12 +8,12 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import LazyLoad from 'react-lazyload'
 
 type Card = JSX.Element
-type Props = { cards: Card[] }
+type Props = { Cards: Card[] }
 
-export const getCardKey = (Card: JSX.Element) =>
+export const getCardKey = (Card: Card) =>
   Card.props?.entry?.id ?? JSON.stringify(Card.props)
 
-export const Deck = ({ cards }: Props) => {
+export const Deck = ({ Cards }: Props) => {
   const theme = useTheme()
   const isXl = useMediaQuery(theme.breakpoints.up('xl'))
   const isLg = useMediaQuery(theme.breakpoints.up('lg'))
@@ -21,17 +21,12 @@ export const Deck = ({ cards }: Props) => {
   const numCols = isXl ? 4 : isLg ? 3 : isMd ? 2 : 1
 
   const cardCols = useMemo<Card[][]>(
-    () => arrangeCards(cards, numCols),
-    [cards, numCols],
+    () => arrangeCards(Cards, numCols),
+    [Cards, numCols],
   )
 
   return !cardCols?.[0]?.length ? null : (
-    <Grid
-      container
-      justifyContent="center"
-      wrap="nowrap"
-      sx={{ outline: 'none' }}
-    >
+    <Grid container justifyContent="center" wrap="nowrap" gap={1}>
       {cardCols.map((cardCol, colNum) => {
         return !cardCol.length ? null : (
           <Grid
@@ -39,7 +34,12 @@ export const Deck = ({ cards }: Props) => {
             container
             direction="column"
             alignItems="center"
-            sx={{ width: 'auto', outline: 'none' }}
+            gap={1}
+            // sx={{
+            //   width: 'auto',
+            //   maxWidth: `calc(398px + ${theme.spacing(2)}`,
+            //   minWidth: `calc(320px + ${theme.spacing(2)}`,
+            // }}
             key={cardCol.map((Card) => getCardKey(Card)).join()}
           >
             {cardCol.map((Card, rowNum) => (
@@ -48,7 +48,14 @@ export const Deck = ({ cards }: Props) => {
                 key={getCardKey(Card)}
                 timeout={Math.min(400 * Math.pow(colNum + rowNum, 1 / 2), 1000)}
               >
-                <Grid item sx={{ width: '100%' }}>
+                <Grid
+                  item
+                  // sx={{
+                  //   width: '100%',
+                  //   maxWidth: `calc(398px + ${theme.spacing(2)}`,
+                  //   minWidth: `calc(320px + ${theme.spacing(2)}`,
+                  // }}
+                >
                   <LazyLoad offset={100} throttle={50} height={28} once>
                     {Card}
                   </LazyLoad>
@@ -62,12 +69,12 @@ export const Deck = ({ cards }: Props) => {
   )
 }
 
-function arrangeCards(cards: Card[], numCols: number): Card[][] {
-  if (!Array.isArray(cards) || numCols <= 0) {
+function arrangeCards(Cards: Card[], numCols: number): Card[][] {
+  if (!Array.isArray(Cards) || numCols <= 0) {
     return [[]]
   } else {
     return [...Array(numCols).keys()].map((_, colNum) =>
-      cards.filter((_, rowNum) => rowNum % numCols === colNum),
+      Cards.filter((_, rowNum) => rowNum % numCols === colNum),
     )
   }
 }

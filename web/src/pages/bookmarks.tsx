@@ -26,7 +26,7 @@ export default function Bookmarks() {
 
   const { bookmarks, isLoading, isSuccess } = useBookmarks()
 
-  const cards = useMemo(() => {
+  const Cards = useMemo(() => {
     const filteredEntries = filterBookmarks(bookmarks, search) || []
 
     return filteredEntries.length
@@ -58,7 +58,7 @@ export default function Bookmarks() {
           !bookmarks.length ? (
           <BookmarkInstructionsCard />
         ) : (
-          <Deck cards={cards} />
+          <Deck Cards={Cards} />
         )}
       </SearchBarLayout>
     </>

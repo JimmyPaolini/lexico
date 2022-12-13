@@ -34,7 +34,7 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
     if (e.key === 'Escape') setOpen(false)
   })
 
-  const cards =
+  const Cards =
     entries?.map((entry) => <Entry {...{ entry, searched }} />) || []
 
   return (
@@ -66,7 +66,7 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
             <Typography variant="h5">No Results</Typography>
           </Paper>
         ) : isSuccess && !!entries ? (
-          <Deck {...{ cards }} />
+          <Deck Cards={Cards} />
         ) : null}
       </Box>
     </Modal>

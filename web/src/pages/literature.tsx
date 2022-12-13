@@ -19,15 +19,13 @@ export default function Literature({ authors }: Props) {
   const [searched, setSearched] = useState<string>('')
 
   const authorsCopy = JSON.parse(JSON.stringify(authors))
-  const cards = useMemo(
-    () => [
-      <CustomLiteratureCard />,
-      ...filterLiterature(authorsCopy, searched).map((author) => (
-        <LiteratureCard {...{ author }} />
-      )),
-    ],
-    [searched],
-  )
+  const Cards = useMemo(() => {
+    const Cards = filterLiterature(authorsCopy, searched).map((author) => (
+      <LiteratureCard {...{ author }} />
+    ))
+    Cards.unshift(<CustomLiteratureCard />)
+    return Cards
+  }, [searched])
 
   return (
     <>
@@ -49,10 +47,10 @@ export default function Literature({ authors }: Props) {
         isLoading={false}
         placeholder="Search Literature"
       >
-        {!cards.length ? (
+        {!Cards.length ? (
           <Typography variant="h4">No Results</Typography>
         ) : (
-          <Deck cards={cards} />
+          <Deck Cards={Cards} />
         )}
       </SearchBarLayout>
     </>

@@ -48,8 +48,8 @@ export const theme = createTheme({
           flexDirection: 'column',
           maxWidth: themeInitial.custom.card.maxWidth,
           minWidth: themeInitial.custom.card.minWidth,
-          paddingBottom: 0,
-          margin: themeInitial.spacing(1),
+          width: '100%',
+          // margin: themeInitial.spacing(1),
           background: themeInitial.palette.background.paper,
         },
       },
@@ -78,6 +78,13 @@ export const theme = createTheme({
       styleOverrides: {
         focusHighlight: {
           display: 'none',
+        },
+      },
+    },
+    MuiGrid: {
+      styleOverrides: {
+        root: {
+          outline: 'none',
         },
       },
     },

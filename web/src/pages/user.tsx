@@ -43,7 +43,7 @@ export default function User() {
           justifyContent="center"
           sx={{ marginTop: theme.spacing(4) }}
         >
-          <Deck cards={[<LoginCard />, <SettingsCard />]} />
+          <Deck Cards={[<LoginCard />, <SettingsCard />]} />
         </Grid>
       ) : (
         <SingleCardLayout>

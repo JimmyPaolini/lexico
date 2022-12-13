@@ -35,7 +35,7 @@ export default function Search({ initialSearch }: Props) {
     })
   }
 
-  const cards = entries.map((entry) => (
+  const Cards = entries.map((entry) => (
     <Entry {...{ entry, searched: search }} />
   ))
 
@@ -59,7 +59,7 @@ export default function Search({ initialSearch }: Props) {
         ) : !entries?.length && !isLoading ? (
           <Typography variant="h4">No Results</Typography>
         ) : (
-          <Deck cards={cards} />
+          <Deck Cards={Cards} />
         )}
       </SearchBarLayout>
     </>

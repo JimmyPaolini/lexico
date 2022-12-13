@@ -11,7 +11,7 @@ import { SearchBarLayout } from '../components/layout/SearchBarLayout'
 export default function Grammar() {
   const [search, setSearch] = useState<string>('')
   const grammarCards = useGrammarCards()
-  const [cards, setCards] = useState(grammarCards)
+  const [Cards, setCards] = useState(grammarCards)
 
   useEffect(() => {
     if (!search) setCards(grammarCards)
@@ -42,7 +42,7 @@ export default function Grammar() {
         isLoading={false}
         placeholder="Search Grammar"
       >
-        <Deck cards={cards} />
+        <Deck Cards={Cards} />
       </SearchBarLayout>
     </>
   )

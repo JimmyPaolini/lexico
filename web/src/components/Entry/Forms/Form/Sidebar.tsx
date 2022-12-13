@@ -13,6 +13,7 @@ type Props = {
 export const Sidebar = ({ top, bottom, side }: Props) => {
   return (
     <Grid
+      item
       container
       direction="column"
       xs="auto"
