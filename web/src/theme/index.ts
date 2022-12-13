@@ -19,11 +19,8 @@ let themeInitial = createTheme({
   },
   custom: {
     card: {
-      // Largest iPhone screen width is 414px
-      // Smallest reasonable smartphone screen width is 320px
-      // allow for 8px margin on each side
-      maxWidth: 398,
-      minWidth: 304,
+      maxWidth: 400,
+      minWidth: 300,
       width: '100%',
     },
     literature: {

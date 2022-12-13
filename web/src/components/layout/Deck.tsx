@@ -20,42 +20,37 @@ export const Deck = ({ Cards }: Props) => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'))
   const numCols = isXl ? 4 : isLg ? 3 : isMd ? 2 : 1
 
-  const cardCols = useMemo<Card[][]>(
+  const CardMatrix = useMemo<Card[][]>(
     () => arrangeCards(Cards, numCols),
     [Cards, numCols],
   )
 
-  return !cardCols?.[0]?.length ? null : (
-    <Grid container justifyContent="center" wrap="nowrap" gap={1}>
-      {cardCols.map((cardCol, colNum) => {
-        return !cardCol.length ? null : (
+  return !CardMatrix?.[0]?.length ? null : (
+    <Grid
+      container
+      justifyContent="center"
+      wrap="nowrap"
+      gap={2}
+      sx={{ margin: `0px ${theme.spacing(2)}` }}
+    >
+      {CardMatrix.map((CardCol, colNum) => {
+        return !CardCol.length ? null : (
           <Grid
             item
             container
             direction="column"
             alignItems="center"
-            gap={1}
-            // sx={{
-            //   width: 'auto',
-            //   maxWidth: `calc(398px + ${theme.spacing(2)}`,
-            //   minWidth: `calc(320px + ${theme.spacing(2)}`,
-            // }}
-            key={cardCol.map((Card) => getCardKey(Card)).join()}
+            gap={2}
+            sx={{ width: 'auto' }}
+            key={CardCol.map((Card) => getCardKey(Card)).join()}
           >
-            {cardCol.map((Card, rowNum) => (
+            {CardCol.map((Card, rowNum) => (
               <Grow
                 in
                 key={getCardKey(Card)}
                 timeout={Math.min(400 * Math.pow(colNum + rowNum, 1 / 2), 1000)}
               >
-                <Grid
-                  item
-                  // sx={{
-                  //   width: '100%',
-                  //   maxWidth: `calc(398px + ${theme.spacing(2)}`,
-                  //   minWidth: `calc(320px + ${theme.spacing(2)}`,
-                  // }}
-                >
+                <Grid item sx={{ width: '100%' }}>
                   <LazyLoad offset={100} throttle={50} height={28} once>
                     {Card}
                   </LazyLoad>
