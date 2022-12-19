@@ -20,17 +20,19 @@ export default class UserResolver {
 
   @Query(() => User, { nullable: true })
   async user(@Ctx() context: ResolverContext): Promise<User | null> {
-    const claims = verify(
-      context.req.cookies.accessToken ?? '',
-      process.env.JWT_SECRET!,
-    ) as JwtPayload
-    return (await this.Users.findOne(claims.sub)) ?? null
+    try {
+      if (!context?.req?.cookies?.accessToken) return null
+      const claims = verify(
+        context.req.cookies.accessToken ?? '',
+        process.env.JWT_SECRET!,
+      ) as JwtPayload
+      if (!claims?.sub) return null
+      const user = await this.Users.findOne(claims.sub)
+      return user ?? null
+    } catch {
+      return null
+    }
   }
-
-  // @Query(() => [User])
-  // async users(): Promise<User[]> {
-  //   return await this.Users.find()
-  // }
 
   @Query(() => Settings)
   @UseMiddleware(Authenticate)

@@ -24,6 +24,7 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
   const { data, isFetched, isSuccess, isError } = useSearchQuery(
     { search: searched },
     {
+      enabled: Boolean(searched),
       retryDelay: 0,
       staleTime: 1000 * 60 * 5,
     },

@@ -7,7 +7,7 @@ import User from '../../../entity/user/User'
 import { ResolverContext } from '../utils/ResolverContext'
 
 const getUserIdFromContext = (context: ResolverContext) => {
-  if (!context.req.cookies.accessToken) throw new Error('no user signed in')
+  if (!context?.req?.cookies?.accessToken) throw new Error('no user signed in')
   const claims = verify(
     context.req.cookies.accessToken,
     process.env.JWT_SECRET as string,

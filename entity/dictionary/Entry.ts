@@ -12,7 +12,7 @@ import { Pronunciation } from "./word/Pronunciation"
 @Entity()
 @ObjectType()
 export default class Entry {
-  @PrimaryColumn("varchar", { length: 127 })
+  @PrimaryColumn("varchar", { length: 127, unique: true })
   @Field(() => ID)
   id: string // = word + ":" + number
 
