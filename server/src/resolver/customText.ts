@@ -7,7 +7,7 @@ import {
   UseMiddleware,
 } from 'type-graphql'
 import { getConnection } from 'typeorm'
-import CustomText from '../entity/literature/CustomText'
+import CustomText from '../entity/library/CustomText'
 import log from '../../../utils/log'
 import { Authenticate } from '../authentication/middleware'
 import { ResolverContext } from '../utils/ResolverContext'

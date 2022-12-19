@@ -12,7 +12,7 @@ import {
 } from 'typeorm'
 
 import Entry from '../dictionary/Entry'
-import CustomText from '../literature/CustomText'
+import CustomText from '../library/CustomText'
 import Settings from './Settings'
 
 @Entity()
