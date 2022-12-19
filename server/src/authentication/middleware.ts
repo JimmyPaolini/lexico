@@ -2,7 +2,7 @@ import { JwtPayload, verify } from 'jsonwebtoken'
 import { MiddlewareFn } from 'type-graphql'
 import { getConnection } from 'typeorm'
 
-import User from '../../entity/user/User'
+import User from '../entity/user/User'
 
 import { ResolverContext } from '../utils/ResolverContext'
 

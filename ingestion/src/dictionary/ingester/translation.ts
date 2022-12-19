@@ -1,5 +1,5 @@
-import Entry from '../../../../server/entity/dictionary/Entry'
-import Translation from '../../../../server/entity/dictionary/Translation'
+import Entry from '../../../../server/src/entity/dictionary/Entry'
+import Translation from '../../../../server/src/entity/dictionary/Translation'
 import { capitalizeFirstLetter, normalize } from '../../../../utils/string'
 
 const translationSkipRegex = new RegExp(

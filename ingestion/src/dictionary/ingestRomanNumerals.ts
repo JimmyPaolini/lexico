@@ -1,9 +1,9 @@
 import { toWords } from 'number-to-words'
 
 import romanNumeralTemplate from '../../../data/dictionary/template/romanNumeral.json'
-import Entry from '../../../server/entity/dictionary/Entry'
-import Translation from '../../../server/entity/dictionary/Translation'
-import PrincipalPart from '../../../server/entity/dictionary/word/PrincipalPart'
+import Entry from '../../../server/src/entity/dictionary/Entry'
+import Translation from '../../../server/src/entity/dictionary/Translation'
+import PrincipalPart from '../../../server/src/entity/dictionary/word/PrincipalPart'
 import log from '../../../utils/log'
 import { decimalToRoman } from '../../../web/src/utils/romanNumeral'
 import { createManual } from './ingestManual'

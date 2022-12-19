@@ -1,7 +1,7 @@
 import { getConnection } from 'typeorm'
 
-import Entry from '../../../server/entity/dictionary/Entry'
-import Word from '../../../server/entity/dictionary/Word'
+import Entry from '../../../server/src/entity/dictionary/Entry'
+import Word from '../../../server/src/entity/dictionary/Word'
 import { escapeCapitals, normalize } from '../../../utils/string'
 import { flattenForms } from '../utils/forms'
 

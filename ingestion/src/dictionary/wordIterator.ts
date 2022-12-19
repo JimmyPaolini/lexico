@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-import Text from '../../../server/entity/literature/Text'
+import Text from '../../../server/src/entity/literature/Text'
 import DictionaryResolver from '../../../server/src/resolver/dictionary'
 import { ResolverContext } from '../../../server/src/utils/ResolverContext'
 import { connectDatabase } from '../../../server/src/utils/database'

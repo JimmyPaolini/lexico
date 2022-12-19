@@ -1,4 +1,4 @@
-import VerbForms from '../../entity/dictionary/word/forms/VerbForms'
+import VerbForms from '../entity/dictionary/word/forms/VerbForms'
 
 export function camelCaseFuturePerfect(forms: VerbForms): VerbForms {
   const futp =

@@ -1,8 +1,8 @@
 import fs from 'fs-extra'
 import { getConnection } from 'typeorm'
 
-import Line from '../../../server/entity/literature/Line'
-import Text from '../../../server/entity/literature/Text'
+import Line from '../../../server/src/entity/literature/Line'
+import Text from '../../../server/src/entity/literature/Text'
 import log from '../../../utils/log'
 import { romanToDecimal } from '../../../web/src/utils/romanNumeral'
 

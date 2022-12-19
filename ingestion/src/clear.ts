@@ -1,13 +1,13 @@
 import { getConnection } from 'typeorm'
 
-import Entry from '../../server/entity/dictionary/Entry'
-import Translation from '../../server/entity/dictionary/Translation'
-import Word from '../../server/entity/dictionary/Word'
-import Author from '../../server/entity/literature/Author'
-import Book from '../../server/entity/literature/Book'
-import Line from '../../server/entity/literature/Line'
-import Text from '../../server/entity/literature/Text'
-import User from '../../server/entity/user/User'
+import Entry from '../../server/src/entity/dictionary/Entry'
+import Translation from '../../server/src/entity/dictionary/Translation'
+import Word from '../../server/src/entity/dictionary/Word'
+import Author from '../../server/src/entity/literature/Author'
+import Book from '../../server/src/entity/literature/Book'
+import Line from '../../server/src/entity/literature/Line'
+import Text from '../../server/src/entity/literature/Text'
+import User from '../../server/src/entity/user/User'
 import { connectDatabase } from '../../server/src/utils/database'
 import {
   clearAll,

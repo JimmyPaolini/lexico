@@ -1,9 +1,9 @@
-import { Forms } from '../../../../../server/entity/dictionary/word/Forms'
-import { Inflection } from '../../../../../server/entity/dictionary/word/Inflection'
+import { Forms } from '../../../../../server/src/entity/dictionary/word/Forms'
+import { Inflection } from '../../../../../server/src/entity/dictionary/word/Inflection'
 import PrepositionInflection, {
   PrepositionCase,
   prepositionCaseRegex,
-} from '../../../../../server/entity/dictionary/word/inflection/PrepositionInflection'
+} from '../../../../../server/src/entity/dictionary/word/inflection/PrepositionInflection'
 import Ingester from '../../Ingester'
 
 export default class Preposition extends Ingester {

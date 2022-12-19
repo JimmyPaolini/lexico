@@ -1,11 +1,11 @@
-import { Inflection } from '../../../../../server/entity/dictionary/word/Inflection'
+import { Inflection } from '../../../../../server/src/entity/dictionary/word/Inflection'
 import NounInflection, {
   NounDeclension,
   NounGender,
   genderRegex,
   nounDeclensionRegex,
-} from '../../../../../server/entity/dictionary/word/inflection/NounInflection'
-import Uninflected from '../../../../../server/entity/dictionary/word/inflection/Uninflected'
+} from '../../../../../server/src/entity/dictionary/word/inflection/NounInflection'
+import Uninflected from '../../../../../server/src/entity/dictionary/word/inflection/Uninflected'
 import Ingester from '../../Ingester'
 
 export default class Noun extends Ingester {

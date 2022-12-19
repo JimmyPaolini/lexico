@@ -1,4 +1,4 @@
-import PrincipalPart from '../../../../server/entity/dictionary/word/PrincipalPart'
+import PrincipalPart from '../../../../server/src/entity/dictionary/word/PrincipalPart'
 import Ingester from '../Ingester'
 
 export default async function parsePrincipalParts(
