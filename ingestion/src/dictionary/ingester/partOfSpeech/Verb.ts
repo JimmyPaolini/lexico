@@ -1,12 +1,12 @@
 import cheerio from 'cheerio'
 
-import { Forms } from '../../../../../entity/dictionary/word/Forms'
-import { Inflection } from '../../../../../entity/dictionary/word/Inflection'
-import Uninflected from '../../../../../entity/dictionary/word/inflection/Uninflected'
+import { Forms } from '../../../../../server/entity/dictionary/word/Forms'
+import { Inflection } from '../../../../../server/entity/dictionary/word/Inflection'
+import Uninflected from '../../../../../server/entity/dictionary/word/inflection/Uninflected'
 import VerbInflection, {
   VerbConjugation,
   verbConjugationRegex,
-} from '../../../../../entity/dictionary/word/inflection/VerbInflection'
+} from '../../../../../server/entity/dictionary/word/inflection/VerbInflection'
 import Ingester from '../../Ingester'
 import { parseFormTable, sortIdentifiers } from '../form'
 

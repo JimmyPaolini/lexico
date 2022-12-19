@@ -1,4 +1,4 @@
-import { PronunciationParts } from '../../../../../entity/dictionary/word/Pronunciation'
+import { PronunciationParts } from '../../../../../server/entity/dictionary/word/Pronunciation'
 import getEcclesiasticalPhonemes from './ecclesiastical'
 
 function phonemesToPronunciations(

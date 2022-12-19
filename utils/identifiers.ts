@@ -1,4 +1,4 @@
-import Entry from '../entity/dictionary/Entry'
+import Entry from '../server/entity/dictionary/Entry'
 import { hasSuffix, normalize } from './string'
 
 const identifiablePartsOfSpeech = [

@@ -1,4 +1,4 @@
-import { Pronunciation } from '../../../../entity/dictionary/word/Pronunciation'
+import { Pronunciation } from '../../../../server/entity/dictionary/word/Pronunciation'
 import Ingester from '../Ingester'
 import getClassicalPhonemes from './pronunciation/classical'
 import {

@@ -1,6 +1,6 @@
 import { FindManyOptions, Like, getConnection } from 'typeorm'
 
-import Translation from '../../../entity/dictionary/Translation'
+import Translation from '../../../server/entity/dictionary/Translation'
 import log from '../../../utils/log'
 import { ingestTranslationReference } from './ingestTranslationReference'
 

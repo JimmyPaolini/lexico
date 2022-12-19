@@ -1,8 +1,8 @@
 import { getConnection } from 'typeorm'
 
-import Author from '../../../entity/literature/Author'
-import Book from '../../../entity/literature/Book'
-import Text from '../../../entity/literature/Text'
+import Author from '../../../server/entity/literature/Author'
+import Book from '../../../server/entity/literature/Book'
+import Text from '../../../server/entity/literature/Text'
 import ingestLines from './ingestLines'
 
 export default async function ingestText(

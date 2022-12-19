@@ -1,11 +1,11 @@
-import { Inflection } from '../../../../../entity/dictionary/word/Inflection'
+import { Inflection } from '../../../../../server/entity/dictionary/word/Inflection'
 import AdjectiveInflection, {
   AdjectiveDeclension,
   AdjectiveDegree,
   adjectiveDegreeRegex,
   adjectiveDelensionRegex,
-} from '../../../../../entity/dictionary/word/inflection/AdjectiveInflection'
-import Uninflected from '../../../../../entity/dictionary/word/inflection/Uninflected'
+} from '../../../../../server/entity/dictionary/word/inflection/AdjectiveInflection'
+import Uninflected from '../../../../../server/entity/dictionary/word/inflection/Uninflected'
 import Ingester from '../../Ingester'
 
 export default class Adjective extends Ingester {

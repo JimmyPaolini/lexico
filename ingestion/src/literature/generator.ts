@@ -1,9 +1,9 @@
 import { ObjectLiteral, getConnection } from 'typeorm'
 
-import Author from '../../../entity/literature/Author'
-import Book from '../../../entity/literature/Book'
-import Line from '../../../entity/literature/Line'
-import Text from '../../../entity/literature/Text'
+import Author from '../../../server/entity/literature/Author'
+import Book from '../../../server/entity/literature/Book'
+import Line from '../../../server/entity/literature/Line'
+import Text from '../../../server/entity/literature/Text'
 import { connectDatabase } from '../../../server/src/utils/database'
 import { normalize } from '../../../web/src/utils/string'
 

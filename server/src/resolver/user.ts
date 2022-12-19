@@ -8,8 +8,8 @@ import {
   UseMiddleware,
 } from 'type-graphql'
 import { getConnection } from 'typeorm'
-import Settings from '../../../entity/user/Settings'
-import User from '../../../entity/user/User'
+import Settings from '../../entity/user/Settings'
+import User from '../../entity/user/User'
 
 import { Authenticate } from '../authentication/middleware'
 import { ResolverContext } from '../utils/ResolverContext'

@@ -1,9 +1,9 @@
 import { Arg, Query, Resolver } from 'type-graphql'
 import { getConnection, Like } from 'typeorm'
-import Author from '../../../entity/literature/Author'
-import Book from '../../../entity/literature/Book'
-import Line from '../../../entity/literature/Line'
-import Text from '../../../entity/literature/Text'
+import Author from '../../entity/literature/Author'
+import Book from '../../entity/literature/Book'
+import Line from '../../entity/literature/Line'
+import Text from '../../entity/literature/Text'
 import log from '../../../utils/log'
 
 const compareIds = (a: { id: string }, b: { id: string }) =>

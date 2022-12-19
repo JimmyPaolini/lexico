@@ -1,4 +1,4 @@
-import Uninflected from '../../../../../entity/dictionary/word/inflection/Uninflected'
+import Uninflected from '../../../../../server/entity/dictionary/word/inflection/Uninflected'
 import Adjective from './Adjective'
 
 export default class Prefix extends Adjective {

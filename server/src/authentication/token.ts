@@ -1,6 +1,6 @@
 import { sign } from 'jsonwebtoken'
 
-import User from '../../../entity/user/User'
+import User from '../../entity/user/User'
 
 export function createAccessToken(user: User): string {
   return sign(

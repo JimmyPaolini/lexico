@@ -1,4 +1,4 @@
-import Translation from '../../../../entity/dictionary/Translation'
+import Translation from '../../../../server/entity/dictionary/Translation'
 import { capitalizeFirstLetter } from '../../../../utils/string'
 import Ingester from '../Ingester'
 

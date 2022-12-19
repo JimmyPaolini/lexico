@@ -7,7 +7,7 @@ import {
   UseMiddleware,
 } from 'type-graphql'
 import { getConnection } from 'typeorm'
-import User from '../../../entity/user/User'
+import User from '../../entity/user/User'
 
 import log from '../../../utils/log'
 import fetchFacebookUser from '../authentication/facebook'

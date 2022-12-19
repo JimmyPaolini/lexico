@@ -1,7 +1,7 @@
 import { getConnection } from 'typeorm'
 
-import Entry from '../../../entity/dictionary/Entry'
-import Translation from '../../../entity/dictionary/Translation'
+import Entry from '../../../server/entity/dictionary/Entry'
+import Translation from '../../../server/entity/dictionary/Translation'
 import log from '../../../utils/log'
 import { escapeCapitals } from '../../../utils/string'
 
