@@ -14,7 +14,7 @@ export default {
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
-  entities: ['dist/entity/*/*.js'],
+  entities: ['dist/server/src/entity/*/*.js'],
   migrations: ['dist/server/src/migration/*.js'],
   migrationsRun: true,
   logger: new DatabaseLogger(),
