@@ -25,7 +25,7 @@
   "terminals.terminals": [
     {
       "name": "lexico",
-      "icon": "bookmark",
+      "icon": "keyboard",
       "cwd": "./"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "name": "database",
-      "icon": "globe",
+      "icon": "database",
       "cwd": "./"
     }
   ],
