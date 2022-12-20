@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles'
 
-let themeInitial = createTheme({
+const themeInitial = createTheme({
   palette: {
     mode: 'dark',
     primary: {
@@ -77,6 +77,7 @@ export const theme = createTheme({
 })
 
 declare module '@mui/material/styles' {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Theme {
     custom: {
       card: {
@@ -92,6 +93,7 @@ declare module '@mui/material/styles' {
       }
     }
   }
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface ThemeOptions {
     custom?: Partial<Theme['custom']>
   }

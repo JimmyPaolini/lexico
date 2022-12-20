@@ -27,7 +27,7 @@ export default function User() {
   useEffect(() => {
     if (!user && showSettingsInstructions()) {
       enqueueSnackbar(
-        `Your settings are saved locally, sign in to save them across devices/browsers`,
+        'Your settings are saved locally, sign in to save them across devices/browsers',
       )
     }
   }, [])
@@ -37,19 +37,24 @@ export default function User() {
       <Head>
         <title>Lexico - User</title>
       </Head>
-      {!user ? (
+      {!user
+        ? (
         <Grid
           container
           justifyContent="center"
           sx={{ marginTop: theme.spacing(4) }}
         >
-          <Deck Cards={[<LoginCard />, <SettingsCard />]} />
+          <Deck Cards={[
+            <LoginCard key="LoginCard" />,
+            <SettingsCard key="SettingsCard" />
+          ]} />
         </Grid>
-      ) : (
+          )
+        : (
         <SingleCardLayout>
           <SettingsCard />
         </SingleCardLayout>
-      )}
+          )}
     </>
   )
 }
@@ -67,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }
 
 const getUserFetcher = (headers: IncomingHttpHeaders) => async () => {
-  const res = await fetch(serverEndpoint as string, {
+  const res = await fetch(serverEndpoint, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',

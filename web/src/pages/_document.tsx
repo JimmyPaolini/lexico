@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-new */
 import React from 'react'
 
 import createEmotionServer from '@emotion/server/create-instance'
@@ -34,7 +36,7 @@ export default class MyDocument extends Document {
           />
           <script
             async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${String(process.env.GOOGLE_ANALYTICS_ID)}`}
           />
           <script
             dangerouslySetInnerHTML={{
@@ -42,7 +44,7 @@ export default class MyDocument extends Document {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}', {
+                gtag('config', '${String(process.env.GOOGLE_ANALYTICS_ID)}', {
                   page_path: window.location.pathname,
                 });
               `,

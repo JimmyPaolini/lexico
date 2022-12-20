@@ -20,10 +20,10 @@ async function main() {
   await connectDatabase()
 
   const instructions = {
-    wiktionary: () => ingestWiktionary(),
-    entries: () => ingestEntries(),
-    words: () => ingestWords(),
-    translationReferences: () => ingestTranslationReferences(),
+    wiktionary: async () => await ingestWiktionary(),
+    entries: async () => await ingestEntries(),
+    words: async () => await ingestWords(),
+    translationReferences: async () => await ingestTranslationReferences(),
     dictionary: async () => {
       await ingestEntries()
       await Promise.all([ingestTranslationReferences(), ingestWords()])
@@ -32,26 +32,26 @@ async function main() {
       const Entries = getConnection().getRepository(Entry)
       const word = process.argv[3]
       if (!word) throw new Error('no word')
-      ingestEntryWord(escapeCapitals(word))
+      await ingestEntryWord(escapeCapitals(word))
       const entries = await Entries.find({
         where: `entry.id ~* '${escapeCapitals(word) + ':\\d'}'`,
       })
       for (const entry of entries) await ingestEntryWords(entry)
     },
-    literature: () => ingestLiterature(),
-    manual: () => ingestManual(),
-    bible: () =>
-      Promise.all([
+    literature: async () => await ingestLiterature(),
+    manual: async () => await ingestManual(),
+    bible: async () =>
+      await Promise.all([
         ingestBible('https://vulgate.org/', 'https://vulgate.org/'),
         ingestBible(
           'https://vulgate.org/nt/gospel/',
           'https://vulgate.org/nt/gospel/matthew_1.htm',
         ),
       ]),
-  } as { [key: string]: () => any }
+  } as Record<string, () => any>
 
   if (!(command in instructions)) throw new Error('unknown command')
   await instructions[command]()
   process.exit()
 }
-main()
+void main()

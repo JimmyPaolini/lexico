@@ -47,7 +47,7 @@ export const Form = ({
       arrow
       aria-label={centerText}
       sx={{
-        ['&.MuiTooltip-tooltip']: {
+        '&.MuiTooltip-tooltip': {
           maxWidth: theme.custom.card.maxWidth / 2,
           fontSize: 14,
           textAlign: 'center',

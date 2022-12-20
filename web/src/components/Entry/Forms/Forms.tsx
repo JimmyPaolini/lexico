@@ -47,9 +47,10 @@ export const Forms = ({
     false
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
-  if (!searched)
+  if (!searched) {
     searched =
       partOfSpeech === 'verb' ? 'Conjugation Table' : 'Declension Table'
+  }
 
   if (searched.match(/Table/i) && !forms) return <></>
 

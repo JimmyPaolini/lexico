@@ -71,10 +71,18 @@
     "cleaning": "coverage",
     "migration": "scripts"
   },
-  "prettier.configPath": "./cleaning/.prettierrc.js",
-  "prettier.ignorePath": "./cleaning/.prettierignore",
-  "eslint.nodePath": "./.eslintrc.js",
-  "eslint.lintTask.options": "--config ./.eslintrc.js --ignore-path ./.eslintignore .",
-  "eslint.options": { "overrideConfigFile": "./cleaning/.eslintrc.js" },
-  "eslint.workingDirectories": [{ "mode": "auto" }]
+  "prettier.configPath": "cleaning/.prettierrc.js",
+  "prettier.ignorePath": "cleaning/.prettierignore",
+  "eslint.options": { "overrideConfigFile": "cleaning/.eslintrc.js" },
+  "eslint.workingDirectories": ["./"],
+  "eslint.lintTask.options": "--config cleaning/.eslintrc.js --ignore-file cleaning/.eslintignore .",
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "graphql",
+    "html",
+    "markdown"
+  ]
 }

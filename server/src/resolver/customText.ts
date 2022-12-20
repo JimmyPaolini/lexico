@@ -51,10 +51,11 @@ export default class CustomTextResolver {
     if (
       customTexts.length >= this.CUSTOM_TEXT_COUNT_LIMIT &&
       !customTexts.some((customText) => customText.id === id)
-    )
+    ) {
       throw new Error(
         `user cannot have more than ${this.CUSTOM_TEXT_COUNT_LIMIT} custom texts`,
       )
+    }
     const customText = await this.CustomTexts.save({ id, title, text, user })
     log.info('createCustomText', {
       id: customText.id,

@@ -9,9 +9,8 @@ import logo from 'public/lexico_logo.svg'
 export const Logo = () => {
   const theme = useTheme()
   const ref = useRef<any>()
-  const announcement = `Announcement, not always present, this day in latin history, roman holiday, link to <a href="https://www.wikipedia.org/">wikipedia</a>, medieval scientific research, featured content, contains emojis🐋😤💯👀`
-  if (ref && ref.current && ref.current.innerHTML)
-    ref.current.innerHTML = announcement
+  const announcement = 'Announcement, not always present, this day in latin history, roman holiday, link to <a href="https://www.wikipedia.org/">wikipedia</a>, medieval scientific research, featured content, contains emojis🐋😤💯👀'
+  if (ref?.current?.innerHTML) { ref.current.innerHTML = announcement }
 
   return (
     <Fade in>

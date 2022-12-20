@@ -54,7 +54,7 @@ export default class DictionaryResolver {
     @Ctx() { bookmarks }: ResolverContext,
   ): Promise<Entry[]> {
     const t0 = performance.now()
-    if (!search || !search.match(/^-?(\w| )+\.?$/)) return []
+    if (!search?.match(/^-?(\w| )+\.?$/)) return []
 
     search = search.toLowerCase().trim()
 

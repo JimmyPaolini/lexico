@@ -1,4 +1,4 @@
-import { Arg, Field, ID, ObjectType } from "type-graphql"
+import { Arg, Field, ID, ObjectType } from 'type-graphql'
 import {
   Column,
   Entity,
@@ -6,10 +6,10 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryColumn,
-} from "typeorm"
-import Author from "./Author"
-import Book from "./Book"
-import Line from "./Line"
+} from 'typeorm'
+import Author from './Author'
+import Book from './Book'
+import Line from './Line'
 
 @Entity()
 @ObjectType()
@@ -18,7 +18,7 @@ export default class Text {
   @Field(() => ID)
   id!: string
 
-  @Column("varchar", { length: 64 })
+  @Column('varchar', { length: 64 })
   @Field()
   title!: string
 
@@ -42,8 +42,8 @@ export default class Text {
   @Field(() => [Line], { nullable: true })
   linesSlice?(
     // eslint-disable-next-line @typescript-eslint/no-inferrable-types
-    @Arg("start", { defaultValue: 0 }) start: number = 0,
-    @Arg("end", { defaultValue: Number.MAX_VALUE })
+    @Arg('start', { defaultValue: 0 }) start: number = 0,
+    @Arg('end', { defaultValue: Number.MAX_VALUE })
     end: number = Number.MAX_VALUE,
   ): Line[] {
     return this.lines

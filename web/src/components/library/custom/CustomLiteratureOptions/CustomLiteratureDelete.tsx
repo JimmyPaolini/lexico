@@ -12,7 +12,7 @@ type Props = {
 
 export const CustomLiteratureDelete = ({ text, refreshCustomTexts }: Props) => {
   const { mutate: deleteCustomTextUser } = useDeleteCustomTextMutation({
-    onSuccess: () => refreshCustomTexts(),
+    onSuccess: async () => await refreshCustomTexts(),
   })
   const deleteText = async () => {
     if (text.local) {

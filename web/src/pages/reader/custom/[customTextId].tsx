@@ -36,7 +36,7 @@ function customTextToText({ id, title, text, local }: CustomText): Text {
   customText.author.texts = [customText as never]
   customText.book.author = customText.author
   customText.book.texts = [customText as never]
-  customText.lines = text.split('\n').map((line, i) => {
+  customText.lines = text.split('\n').map((line, i: number) => {
     return {
       id: `${i}`,
       line: line.replace(/^#\S+ ?/, ''),

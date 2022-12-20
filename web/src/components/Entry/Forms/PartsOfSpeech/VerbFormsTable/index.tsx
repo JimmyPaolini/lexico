@@ -11,7 +11,7 @@ import { FormTabs } from '../../FormTabs'
 import { FormsTable } from '../../FormsTable'
 import { verbFormsRestructure } from './verbFormsRestructure'
 
-type Props = { forms: VerbForms; searched?: string }
+type Props = { forms: VerbForms, searched?: string }
 
 export const VerbFormsTable = ({ forms, searched }: Props) => {
   const theme = useTheme()
@@ -32,16 +32,16 @@ export const VerbFormsTable = ({ forms, searched }: Props) => {
 
     midTabs = Object.keys(structure?.[topTabs[newTopTab]] || { '-': '' })
     const newMidTab =
-      midTabs.indexOf(oldMidTab) !== -1 ? midTabs.indexOf(oldMidTab) : 0
+      midTabs.includes(oldMidTab) ? midTabs.indexOf(oldMidTab) : 0
     setMidTabState(
-      midTabs.indexOf(oldMidTab) !== -1 ? midTabs.indexOf(oldMidTab) : 0,
+      midTabs.includes(oldMidTab) ? midTabs.indexOf(oldMidTab) : 0,
     )
 
     bottomTabs = Object.keys(
       structure?.[topTabs[newTopTab]]?.[midTabs[newMidTab]] || { '-': '' },
     )
     setBottomTab(
-      bottomTabs.indexOf(oldBottomTab) !== -1
+      bottomTabs.includes(oldBottomTab)
         ? bottomTabs.indexOf(oldBottomTab)
         : 0,
     )
@@ -56,7 +56,7 @@ export const VerbFormsTable = ({ forms, searched }: Props) => {
       structure?.[topTabs[topTab]]?.[midTabs[newMidTab]] || { '-': '' },
     )
     setBottomTab(
-      bottomTabs.indexOf(oldBottomTab) !== -1
+      bottomTabs.includes(oldBottomTab)
         ? bottomTabs.indexOf(oldBottomTab)
         : 0,
     )

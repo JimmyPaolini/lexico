@@ -1,6 +1,6 @@
 import { validate } from '../components/library/custom/CustomLiteratureForm'
 
-export interface CustomText {
+export type CustomText = {
   id: string
   title: string
   text: string

@@ -14,7 +14,7 @@ export function pascalCase(str: string): string {
   if (!str) return ''
   return str.replace(
     /(\w)(\w*)/g,
-    (_, g1, g2) => g1.toUpperCase() + g2.toLowerCase(),
+    (_, g1: string, g2: string) => g1.toUpperCase() + g2.toLowerCase(),
   )
 }
 
@@ -59,9 +59,8 @@ export function hasSuffix(
   return str.match(new RegExp(suffix + '$', 'i'))
 }
 
-export const translationSkipRegex = new RegExp(
-  /(alternative)|(alternate)|(abbreviation)|(initialism)|(archaic)|(synonym)|(clipping)|(spelling)/gi,
-)
+export const translationSkipRegex =
+  /(alternative)|(alternate)|(abbreviation)|(initialism)|(archaic)|(synonym)|(clipping)|(spelling)/gi
 
 export function getMacronOptionRegex(str: string): string {
   return str

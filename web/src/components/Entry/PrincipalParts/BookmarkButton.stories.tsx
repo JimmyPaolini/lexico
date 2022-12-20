@@ -24,9 +24,7 @@ export default {
   ],
 } as ComponentMeta<typeof BookmarkButton>
 
-export const Default: ComponentStory<typeof BookmarkButton> & {
-  loaders: any[]
-} = (args, { loaded }) => (
+export const Default: ComponentStory<typeof BookmarkButton> = (args, { loaded }) => (
   <>
     <BookmarkButton {...args} {...loaded} />
     <div>localStorage.bookmarks = {window.localStorage.bookmarks}</div>
@@ -39,7 +37,7 @@ export const Default: ComponentStory<typeof BookmarkButton> & {
       onClick={() => {
         delete window.localStorage.bookmarks
         delete window.localStorage.showBookmarkInstructions
-        forceReRender
+        forceReRender()
       }}
     >
       Click here to reset localStorage

@@ -10,7 +10,7 @@ import { sentenceCase } from 'src/utils/string'
 import { CardHeader } from '../accessories/CardHeader'
 import { Line } from './Line'
 
-type Props = { text: ReaderText; openModal: (word: string) => void }
+type Props = { text: ReaderText, openModal: (word: string) => void }
 
 export const Text = ({ text, openModal }: Props) => {
   const router = useRouter()
@@ -23,10 +23,12 @@ export const Text = ({ text, openModal }: Props) => {
       ? ' - ' + sentenceCase(text.book.title).replace(/^\d+ /, '')
       : '')
 
-  const action = !router.pathname.match(/\/reader\/custom/) ? undefined : (
+  const action = !router.pathname.match(/\/reader\/custom/)
+    ? undefined
+    : (
     <IconButton
-      onClick={() =>
-        router.push(
+      onClick={async () =>
+        await router.push(
           window?.location.pathname.replace('reader', 'library') || '/library',
         )
       }
@@ -35,7 +37,7 @@ export const Text = ({ text, openModal }: Props) => {
     >
       <Edit />
     </IconButton>
-  )
+      )
 
   return (
     <Box
@@ -75,7 +77,7 @@ export const Text = ({ text, openModal }: Props) => {
         sx={{
           background: 'black',
           width: '100%',
-          [`&.MuiCardHeader-action`]: {
+          '&.MuiCardHeader-action': {
             marginTop: 'auto',
             marginBottom: 'auto',
             marginLeft: theme.spacing(2),

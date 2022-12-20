@@ -48,7 +48,7 @@ export default function Reader({ text }: Props) {
   useEffect(() => {
     if (showReaderInstructions()) {
       enqueueSnackbar(
-        `Click a word to see its dictionary entry, then click elsewhere or swipe it away to keep reading`,
+        'Click a word to see its dictionary entry, then click elsewhere or swipe it away to keep reading',
       )
     }
   }, [])
@@ -62,8 +62,7 @@ export default function Reader({ text }: Props) {
   }, [])
 
   let title = 'Lexico - Literature: ' + sentenceCase(text.author.id)
-  if (text.book)
-    title += ' ' + sentenceCase(text.book.title).replace(/^\d+ /, '')
+  if (text.book) { title += ' ' + sentenceCase(text.book.title).replace(/^\d+ /, '') }
   title += ' ' + sentenceCase(text.title)
 
   const fontSize = (user?.settings?.fontSize ||
@@ -81,7 +80,7 @@ export default function Reader({ text }: Props) {
           }, ${text.title}, Literature, Read, English, Translation`}
         />
       </Head>
-      <style jsx global>{`
+      <style>{`
         body#body {
           background-color: black;
         }
@@ -98,9 +97,11 @@ export default function Reader({ text }: Props) {
         style={{ fontSize }}
       >
         <Grid container justifyContent="center">
-          {!!text && user !== undefined ? (
+          {!!text && user !== undefined
+            ? (
             <Text {...{ text, openModal }} />
-          ) : null}
+              )
+            : null}
         </Grid>
         <SearchModal {...{ searched, open, setOpen }} />
       </Paper>

@@ -6,13 +6,14 @@ export const serverEndpoint = `http://${
 }:3001/graphql`
 
 export const circularReplacer: () =>
-  | ((this: any, key: string, value: any) => any)
-  | undefined = () => {
+| ((this: any, key: string, value: any) => any)
+| undefined = () => {
   const seen = new WeakSet()
   return (_: any, value: any) => {
-    if (typeof value === 'object' && value !== null)
+    if (typeof value === 'object' && value !== null) {
       if (seen.has(value)) return
       else seen.add(value)
+    }
     return value
   }
 }
@@ -32,8 +33,7 @@ export default async (
 
   try {
     const response = await axios(request)
-    if (response.headers['set-cookie'])
-      res.setHeader('set-cookie', response.headers['set-cookie'])
+    if (response.headers['set-cookie']) { res.setHeader('set-cookie', response.headers['set-cookie']) }
     res.send(response.data)
   } catch (error: unknown) {
     console.log(

@@ -15,11 +15,13 @@ export const LibraryText = ({ text }: Props) => {
     <Grid item xs={isNumberedText ? 2 : 4} container justifyContent="center">
       <Link href={`reader/${text.id}`} style={{ textDecoration: 'none' }}>
         <CardActionArea>
-          {isNumberedText ? (
+          {isNumberedText
+            ? (
             <LibraryNumberedText text={text} />
-          ) : (
+              )
+            : (
             <LibraryNamedText text={text} />
-          )}
+              )}
         </CardActionArea>
       </Link>
     </Grid>

@@ -7,13 +7,13 @@ export const ReaderLoading = () => {
     <>
       <Head>
         <title>Lexico - Literature...</title>
-        <meta name="description" content={`Read and translate literature`} />
+        <meta name="description" content={'Read and translate literature'} />
         <meta
           name="keywords"
-          content={`Latin, Literature, Read, English, Translation,`}
+          content={'Latin, Literature, Read, English, Translation,'}
         />
       </Head>
-      <style jsx global>{`
+      <style>{`
         body#body {
           background-color: black;
         }

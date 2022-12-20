@@ -25,7 +25,7 @@ export const Translations = ({ translations }: Props) => {
       getSettingsLocal().translationsExpandedDefault ||
       false,
   )
-  const expandable = translations?.length! > 2
+  const expandable = (translations?.length ?? 0) > 2
 
   return !translations?.length ? null : (
     <CardContent>

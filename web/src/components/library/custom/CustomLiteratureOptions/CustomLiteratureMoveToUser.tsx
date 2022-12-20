@@ -24,7 +24,7 @@ export const CustomLiteratureMoveToUser = ({
   const { mutate: createCustomTextUser, error } = useCreateCustomTextMutation({
     onMutate: closeMenu,
     onSuccess: () => deleteCustomTextLocal(text.id),
-    onSettled: () => refreshCustomTexts(),
+    onSettled: async () => await refreshCustomTexts(),
   })
   const moveToUser = () => createCustomTextUser(text)
 
@@ -34,7 +34,7 @@ export const CustomLiteratureMoveToUser = ({
       error && errorMessage.match(/user cannot have more than 3 custom texts/)
     if (userHasMoreThan3Texts) {
       enqueueSnackbar(
-        `You cannot have more than 3 custom texts saved to your user at once. Move one to local in order to move another to the user`,
+        'You cannot have more than 3 custom texts saved to your user at once. Move one to local in order to move another to the user',
       )
     }
   }, [error])

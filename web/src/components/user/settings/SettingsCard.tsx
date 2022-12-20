@@ -53,7 +53,8 @@ export const SettingsCard = () => {
           <Grid item>
             <SettingsForm />
           </Grid>
-          {user ? (
+          {user
+            ? (
             <>
               <Grid item>
                 <SubmitButton name="Sign Out" onClick={() => logout()} />
@@ -71,7 +72,8 @@ export const SettingsCard = () => {
                 />
               </Grid>
             </>
-          ) : null}
+              )
+            : null}
         </Grid>
       </CardContent>
     </Card>

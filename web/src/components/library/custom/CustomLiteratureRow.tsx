@@ -1,4 +1,4 @@
-import { Divider, ListItem, ListItemText } from '@mui/material'
+import { Divider, ListItemButton, ListItemText } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 import { useRouter } from 'next/router'
@@ -30,13 +30,13 @@ export const CustomLiteratureRow = ({ text, refreshCustomTexts }: Props) => {
   return (
     <Root>
       <Divider className={classes.divider} />
-      <ListItem button onClick={() => router.push(`/reader/custom/` + text.id)}>
+      <ListItemButton onClick={async () => await router.push('/reader/custom/' + text.id)}>
         <ListItemText
           primary={text.title}
           primaryTypographyProps={{ variant: 'body1' }}
         />
         <CustomLiteratureOptions {...{ text, refreshCustomTexts }} />
-      </ListItem>
+      </ListItemButton>
     </Root>
   )
 }

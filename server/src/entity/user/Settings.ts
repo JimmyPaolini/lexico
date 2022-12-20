@@ -1,10 +1,10 @@
-import { Field, InputType, ObjectType } from "type-graphql"
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType()
-@InputType("SettingsInput")
+@InputType('SettingsInput')
 export default class Settings {
-  @Field({ defaultValue: "dark" })
-  theme: "dark" | "light" = "dark"
+  @Field({ defaultValue: 'dark' })
+  theme: 'dark' | 'light' = 'dark'
 
   @Field(() => Number, { defaultValue: 24 })
   fontSize = 24

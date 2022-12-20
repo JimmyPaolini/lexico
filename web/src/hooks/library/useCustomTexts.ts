@@ -7,7 +7,7 @@ import {
   listCustomTextsLocal,
 } from 'src/utils/literatureLocal'
 
-interface useCustomTextsReturn {
+type useCustomTextsReturn = {
   customTexts: CustomText[]
   refreshCustomTexts: () => Promise<void>
   isLoading: boolean
@@ -44,8 +44,7 @@ export const useCustomTexts = (): useCustomTextsReturn => {
     const customTextsCopy = [...customTexts]
     while (customTextsCopy.length) {
       const customText = customTextsCopy.pop() as CustomText
-      if (customTextsCopy.some((duplicate) => duplicate.id === customText.id))
-        deleteCustomTextLocal(customText.id)
+      if (customTextsCopy.some((duplicate) => duplicate.id === customText.id)) { deleteCustomTextLocal(customText.id) }
     }
   }, [customTexts])
 

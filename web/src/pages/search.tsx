@@ -24,19 +24,19 @@ export default function Search({ initialSearch }: Props) {
 
   const { entries, isLoading } = useSearch(search)
 
-  const handleSearch = (search: string) => {
+  const handleSearch = async (search: string) => {
     setSearch(search)
     const hash = search ? '?search=' + search : ''
-    router.push(router.pathname + hash)
     googleAnalyticsEvent('search', {
       category: 'search',
       label: '',
       value: search,
     })
+    await router.push(router.pathname + hash)
   }
 
   const Cards = entries.map((entry) => (
-    <Entry {...{ entry, searched: search }} />
+    <Entry {...{ entry, searched: search }} key={entry.id} />
   ))
 
   const { title, description, keywords } = getSearchPageMetadata(search)

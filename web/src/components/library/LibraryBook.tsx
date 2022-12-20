@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import {
   Box,
-  Button,
   Collapse,
   Divider,
   Grid,
@@ -17,7 +16,7 @@ import { sentenceCase } from 'src/utils/string'
 import { ExpandIcon } from '../accessories/ExpandIcon'
 import { LibraryText } from './LibraryText'
 
-type Props = { author: Author; book: Book; isLast: boolean }
+type Props = { author: Author, book: Book, isLast: boolean }
 
 export const LibraryBook = ({ book, isLast }: Props) => {
   const theme = useTheme()
@@ -46,13 +45,15 @@ export const LibraryBook = ({ book, isLast }: Props) => {
           ))}
         </Grid>
       </Collapse>
-      {!isLast ? (
+      {!isLast
+        ? (
         <Divider
           sx={{
             marginLeft: theme.spacing(1),
           }}
         />
-      ) : null}
+          )
+        : null}
     </>
   )
 }

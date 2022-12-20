@@ -18,8 +18,7 @@ export const useEventListener = (eventName: string, handler: any): void => {
   useEffect(
     () => {
       // Make sure window supports addEventListener
-      const isSupported = window && window.addEventListener
-      if (!isSupported) return
+      if (!window?.addEventListener) return
 
       // Create event listener that calls handler function stored in ref
       const eventListener = (event: any) => (savedHandler.current as any)(event)

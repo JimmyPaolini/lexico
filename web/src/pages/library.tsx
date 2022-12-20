@@ -21,7 +21,7 @@ export default function Library({ authors }: Props) {
   const authorsCopy = JSON.parse(JSON.stringify(authors))
   const Cards = useMemo(() => {
     const Cards = filterLibrary(authorsCopy, searched).map((author) => (
-      <LibraryCard {...{ author }} />
+      <LibraryCard {...{ author }} key={author.id} />
     ))
     Cards.unshift(<CustomLiteratureCard />)
     return Cards
@@ -47,11 +47,13 @@ export default function Library({ authors }: Props) {
         isLoading={false}
         placeholder="Search Library"
       >
-        {!Cards.length ? (
+        {!Cards.length
+          ? (
           <Typography variant="h4">No Results</Typography>
-        ) : (
+            )
+          : (
           <Deck Cards={Cards} />
-        )}
+            )}
       </SearchBarLayout>
     </>
   )

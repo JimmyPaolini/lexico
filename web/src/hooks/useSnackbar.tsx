@@ -13,12 +13,12 @@ export const useSnackbar = (closeButton?: boolean, loginButton?: boolean) => {
 
   const LoginButton = () => (
     <Button
-      onClick={() => {
+      onClick={async () => {
         setSnackbarProps((snackbarProps) => ({
           ...snackbarProps,
           open: false,
         }))
-        router.push('/user')
+        await router.push('/user')
       }}
       color="secondary"
     >

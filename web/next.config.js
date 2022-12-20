@@ -3,7 +3,7 @@ module.exports = {
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
-      loader: 'graphql-tag/loader',
+      loader: 'graphql-tag/loader'
     })
     // config.module.rules.push({
     //   test: /\.\.\/.*\/\.ts$/,
@@ -28,6 +28,6 @@ module.exports = {
   //   // this also causes webpack ModuleNotFoundError instead of a typescript TypeError
   //   ignoreBuildErrors: true,
   // },
-  images: { imageSizes: [512] },
+  images: { imageSizes: [512] }
   // experimental: { appDir: true },
 }

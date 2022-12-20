@@ -9,20 +9,22 @@ export const Identity = () => {
   const provider = user?.googleId
     ? 'Google'
     : user?.facebookId
-    ? 'Facebook'
-    : 'email/password'
+      ? 'Facebook'
+      : 'email/password'
 
-  return user ? (
+  return user
+    ? (
     <Typography gutterBottom align="center">
       Signed in with {provider} as:
       <br />
       {user.email}
     </Typography>
-  ) : (
+      )
+    : (
     <Typography gutterBottom align="center">
       No user signed in:
       <br />
       Settings saved locally on device/browser
     </Typography>
-  )
+      )
 }

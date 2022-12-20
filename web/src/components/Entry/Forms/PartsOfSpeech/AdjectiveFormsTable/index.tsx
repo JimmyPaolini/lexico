@@ -10,7 +10,7 @@ import { FormTabs } from '../../FormTabs'
 import { FormsTable } from '../../FormsTable'
 import { adjectiveFormsRestructure } from './adjectiveFormsRestructure'
 
-type Props = { forms: AdjectiveForms; searched?: string }
+type Props = { forms: AdjectiveForms, searched?: string }
 
 export const AdjectiveFormsTable = ({ forms, searched }: Props) => {
   const theme = useTheme()

@@ -12,10 +12,11 @@ export const filterLibrary = (
 
   function filterAuthor(author: Author) {
     if (author.name.match(re)) return author
-    if (author.books)
+    if (author.books) {
       author.books = author.books
         ?.map((book) => filterBook(book))
         .filter((x) => x) as Book[]
+    }
     author.texts = author.texts
       .map((text) => filterText(text))
       .filter((x) => x) as Text[]

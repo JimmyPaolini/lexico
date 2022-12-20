@@ -29,7 +29,9 @@ export const Deck = ({ Cards }: Props) => {
     [Cards, numCols],
   )
 
-  return !CardMatrix?.[0]?.length ? null : (
+  return !CardMatrix?.[0]?.length
+    ? null
+    : (
     <Grid
       container
       justifyContent="center"
@@ -38,7 +40,9 @@ export const Deck = ({ Cards }: Props) => {
       sx={{ margin: `0px ${theme.spacing(2)}` }}
     >
       {CardMatrix.map((CardArray, colNum) => {
-        return !CardArray.length ? null : (
+        return !CardArray.length
+          ? null
+          : (
           <Grid
             item
             container
@@ -66,10 +70,10 @@ export const Deck = ({ Cards }: Props) => {
               </Grow>
             ))}
           </Grid>
-        )
+            )
       })}
     </Grid>
-  )
+      )
 }
 
 function arrangeCards(Cards: Card[], numCols: number): Card[][] {

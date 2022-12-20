@@ -24,7 +24,7 @@ type Props = { page?: string }
 export const Navigation = ({ page: initialPage }: Props) => {
   const theme = useTheme()
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
-  const [selectedPage, setSelectedPage] = useState(initialPage || 'search')
+  const [selectedPage, setSelectedPage] = useState(initialPage ?? 'search')
 
   const handleSelection = (page: string) => {
     setSelectedPage(page)

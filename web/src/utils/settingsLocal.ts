@@ -17,7 +17,7 @@ export function getSettingsLocal(): Settings {
 }
 
 export function setSettingsLocal(settings: Settings): Settings | void {
-  if (typeof window === 'undefined') return
+  if (typeof window === 'undefined') return undefined
   window.localStorage.settings = JSON.stringify(settings)
 }
 

@@ -13,14 +13,14 @@ export default function CustomReaderNew({ text }: Props) {
         <title>Lexico - Literature: Custom</title>
         <meta
           name="description"
-          content={`Read and translate your own literature with Lexico for better flow`}
+          content={'Read and translate your own literature with Lexico for better flow'}
         />
         <meta
           name="keywords"
-          content={`Latin, Literature, Read, English, Translation, Custom`}
+          content={'Latin, Literature, Read, English, Translation, Custom'}
         />
       </Head>
-      <style jsx global>{`
+      <style>{`
         body#body {
           background-color: black;
         }

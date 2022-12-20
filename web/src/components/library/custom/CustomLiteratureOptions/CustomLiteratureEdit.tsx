@@ -11,9 +11,7 @@ type Props = { text: CustomText }
 export const CustomLiteratureEdit = ({ text }: Props) => {
   const router = useRouter()
 
-  const editText = () => {
-    router.push('library/custom/' + text.id)
-  }
+  const editText = async () => await router.push('library/custom/' + text.id)
 
   return (
     <CustomLiteratureMenuItem action={editText} icon={<Edit />} text="Edit" />

@@ -18,7 +18,7 @@ export const CustomLiteratureMoveToLocal = ({
 }: Props) => {
   const { mutate: deleteCustomTextUser } = useDeleteCustomTextMutation({
     onMutate: closeMenu,
-    onSettled: () => refreshCustomTexts(),
+    onSettled: async () => await refreshCustomTexts(),
   })
   const moveToLocal = () => {
     createCustomTextLocal(text)

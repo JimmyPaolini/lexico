@@ -40,7 +40,7 @@ function identifyWordRecursive(
     for (const key in forms) {
       identifiers = identifyWordRecursive(
         word,
-        forms[key as keyof Forms] as Maybe<Forms> | undefined,
+        forms[key as keyof Forms],
         [...current, key],
         identifiers,
       )

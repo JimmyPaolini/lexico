@@ -5,7 +5,7 @@ export function googleAnalyticsPageView(url: URL): void {
   })
 }
 
-interface GoogleAnalyticsEventParams {
+type GoogleAnalyticsEventParams = {
   category: string
   label: string
   value: any

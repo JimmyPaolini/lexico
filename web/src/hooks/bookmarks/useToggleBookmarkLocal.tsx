@@ -11,7 +11,7 @@ export const useToggleBookmarkLocal = (
   setBookmarked: Dispatch<SetStateAction<boolean>>,
 ) => {
   const enqueueSnackbar = useSnackbar(true, true)
-  const toggleBookmark = async () => {
+  const toggleBookmark = () => {
     if (!bookmarked) {
       bookmarkLocal(id)
       setBookmarked(true)
@@ -21,7 +21,7 @@ export const useToggleBookmarkLocal = (
     }
     if (showBookmarkInstructions()) {
       enqueueSnackbar(
-        `Your bookmarks are saved locally, sign in to save them across devices/browsers`,
+        'Your bookmarks are saved locally, sign in to save them across devices/browsers',
       )
     }
   }

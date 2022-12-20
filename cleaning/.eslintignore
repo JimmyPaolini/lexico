@@ -16,3 +16,6 @@
 **/ingestion/src/dictionary
 **/README.md
 **/LICENSE.md
+
+web/src/graphql/generated.ts
+**/migration
