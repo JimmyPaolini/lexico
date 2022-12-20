@@ -6,6 +6,7 @@ import {
   Grid,
   List,
   ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   SwipeableDrawer,
@@ -62,9 +63,8 @@ export const Navigation = ({ page: initialPage }: Props) => {
       sx={{ ...drawerStyles, '& .MuiDrawer-paper': drawerStyles }}
     >
       <Grid item>
-        <List>
-          <ListItem
-            button
+        <List sx={{ paddingTop: 0 }}>
+          <ListItemButton
             onClick={() => setOpen(!open)}
             sx={{ display: 'flex', justifyContent: 'flex-end' }}
           >
@@ -76,7 +76,7 @@ export const Navigation = ({ page: initialPage }: Props) => {
             <ListItemIcon sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               {open ? <ChevronLeft /> : <Menu />}
             </ListItemIcon>
-          </ListItem>
+          </ListItemButton>
           <Divider />
           {pages.map((page) => (
             <Link

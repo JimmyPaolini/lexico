@@ -1,5 +1,5 @@
 import { Arg, Query, Resolver } from 'type-graphql'
-import { Like, getConnection } from 'typeorm'
+import { Like } from 'typeorm'
 
 import log from '../../../utils/log'
 import Author from '../entity/library/Author'
@@ -14,12 +14,7 @@ const compareIds = (a: { id: string }, b: { id: string }) =>
   })
 
 @Resolver(Text)
-export default class LiteratureResolver {
-  Authors = getConnection().getRepository(Author)
-  Books = getConnection().getRepository(Book)
-  Texts = getConnection().getRepository(Text)
-  Lines = getConnection().getRepository(Line)
-
+export class LibraryResolver {
   // LIST
 
   @Query(() => [Author])
@@ -82,7 +77,7 @@ export default class LiteratureResolver {
   async getAuthor(@Arg('id') id: string): Promise<Author> {
     const author = await Author.findOneOrFail({
       where: { id },
-      relations: { books: { texts: true }, texts: true }
+      relations: { books: { texts: true }, texts: true },
     })
     author.books?.sort((a, b) => compareIds(a, b))
     author.books?.map((book) => book.texts.sort((a, b) => compareIds(a, b)))
@@ -92,7 +87,10 @@ export default class LiteratureResolver {
 
   @Query(() => Book)
   async getBook(@Arg('id') id: string): Promise<Book> {
-    const book = await Book.findOneOrFail({ where: { id }, relations: { texts: true } })
+    const book = await Book.findOneOrFail({
+      where: { id },
+      relations: { texts: true },
+    })
     book.texts.sort((a, b) => compareIds(a, b))
     return book
   }

@@ -8,7 +8,7 @@ export type FacebookProfile = {
   email: string
 }
 
-export default async function fetchFacebookUser(
+export async function fetchFacebookUser(
   code: string,
   hostname: string,
 ): Promise<FacebookProfile> {

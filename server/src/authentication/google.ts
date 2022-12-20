@@ -8,7 +8,7 @@ export type GoogleProfile = {
   email: string
 }
 
-export default async function fetchGoogleUser(
+export async function fetchGoogleUser(
   code: string,
   hostname: string,
 ): Promise<GoogleProfile> {

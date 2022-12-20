@@ -13,7 +13,7 @@ import CustomText from '../entity/library/CustomText'
 import { ResolverContext } from '../utils/ResolverContext'
 
 @Resolver(CustomText)
-export default class CustomTextResolver {
+export class CustomTextResolver {
   CUSTOM_TEXT_COUNT_LIMIT = 3
 
   @Query(() => [CustomText])
@@ -21,8 +21,12 @@ export default class CustomTextResolver {
   async listCustomTexts(
     @Ctx() { user }: ResolverContext,
   ): Promise<CustomText[]> {
-    const customTexts = await CustomText.find({ where: { user: { id: user.id } } })
-    customTexts.sort((customText1, customText2) => customText1.title.localeCompare(customText2.title),)
+    const customTexts = await CustomText.find({
+      where: { user: { id: user.id } },
+    })
+    customTexts.sort((customText1, customText2) =>
+      customText1.title.localeCompare(customText2.title),
+    )
     return customTexts
   }
 
@@ -33,7 +37,9 @@ export default class CustomTextResolver {
     @Ctx() { user }: ResolverContext,
   ): Promise<CustomText> {
     log.info('getCustomText', { id, user: user.email })
-    return await CustomText.findOneOrFail({ where: { id, user: { id: user.id } } })
+    return await CustomText.findOneOrFail({
+      where: { id, user: { id: user.id } },
+    })
   }
 
   @Mutation(() => CustomText)
@@ -44,7 +50,9 @@ export default class CustomTextResolver {
     @Arg('text') text: string,
     @Ctx() { user }: ResolverContext,
   ): Promise<CustomText> {
-    const customTexts = await CustomText.find({ where: { user: { id: user.id } } })
+    const customTexts = await CustomText.find({
+      where: { user: { id: user.id } },
+    })
     if (
       customTexts.length >= this.CUSTOM_TEXT_COUNT_LIMIT &&
       !customTexts.some((customText) => customText.id === id)
@@ -68,7 +76,9 @@ export default class CustomTextResolver {
     @Arg('id') id: string,
     @Ctx() { user }: ResolverContext,
   ): Promise<boolean> {
-    const customText = await CustomText.findOneOrFail({ where: { id, user: { id: user.id } } })
+    const customText = await CustomText.findOneOrFail({
+      where: { id, user: { id: user.id } },
+    })
     await CustomText.delete(customText.id)
     log.info('deleteCustomText', { id, user: user.email })
     return true

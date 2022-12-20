@@ -27,9 +27,9 @@ export const Entry = ({ entry, searched = '' }: Props) => {
   return (
     <Card
       sx={{
-        border:
+        borderTop:
           isLatinSearchResult === false
-            ? `2px solid ${theme.palette.secondary.main}`
+            ? `4px solid ${theme.palette.secondary.main}`
             : undefined,
       }}
     >

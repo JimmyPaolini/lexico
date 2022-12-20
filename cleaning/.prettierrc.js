@@ -6,6 +6,7 @@ module.exports = {
   tabWidth: 2,
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-  importOrderParserPlugins: ['typescript'],
   importOrder: ['^react$', '^@mui', '<THIRD_PARTY_MODULES>', '^src/', '^[./]'],
+  importOrderParserPlugins: ['typescript', 'decorators-legacy'],
+  parser: 'typescript',
 }

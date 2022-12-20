@@ -8,15 +8,15 @@ import {
 } from 'type-graphql'
 
 import log from '../../../utils/log'
-import fetchFacebookUser from '../authentication/facebook'
-import fetchGoogleUser from '../authentication/google'
+import { fetchFacebookUser } from '../authentication/facebook'
+import { fetchGoogleUser } from '../authentication/google'
 import { Authenticate } from '../authentication/middleware'
 import { createAccessToken } from '../authentication/token'
 import User from '../entity/user/User'
 import { ResolverContext } from '../utils/ResolverContext'
 
 @Resolver(User)
-export default class AuthenticationResolver {
+export class AuthenticationResolver {
   @Query(() => User)
   async google(
     @Arg('code') code: string,

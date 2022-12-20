@@ -1,5 +1,6 @@
 import { performance } from 'perf_hooks'
 import { Arg, Ctx, Query, Resolver, UseMiddleware } from 'type-graphql'
+import { In } from 'typeorm'
 
 import identifyEntryWord from '../../../utils/identifiers'
 import log from '../../../utils/log'
@@ -10,12 +11,11 @@ import Translation from '../entity/dictionary/Translation'
 import Word from '../entity/dictionary/Word'
 import VerbForms from '../entity/dictionary/word/forms/VerbForms'
 import { ResolverContext } from '../utils/ResolverContext'
-import { camelCaseFuturePerfect } from '../utils/forms'
-import { In } from 'typeorm'
 import { Database } from '../utils/database'
+import { camelCaseFuturePerfect } from '../utils/forms'
 
 @Resolver(Entry)
-export default class DictionaryResolver {
+export class DictionaryResolver {
   @Query(() => [Entry])
   @UseMiddleware(GetBookmarks)
   async search(
@@ -86,7 +86,9 @@ export default class DictionaryResolver {
   async searchSuffix(search: string, suffix: string): Promise<Entry[]> {
     if (!hasSuffix(search, suffix)) return []
     const [nonSuffixWord, suffixEntry] = await Promise.all([
-      Word.findOne({ where: { word: search.replace(new RegExp(suffix + '$', 'i'), '') } }),
+      Word.findOne({
+        where: { word: search.replace(new RegExp(suffix + '$', 'i'), '') },
+      }),
       Entry.findOne({ where: { id: `-${suffix}:0` } }),
     ])
     return [
@@ -115,8 +117,7 @@ export default class DictionaryResolver {
     if (!search) return []
     search = search.trim()
 
-    const translations = await Database
-      .getRepository(Translation)
+    const translations = await Database.getRepository(Translation)
       .createQueryBuilder('translation')
       .where(`translation.translation ~* '(^| )${search}( |$)'`)
       .leftJoinAndSelect('translation.entry', 'entry')
@@ -125,7 +126,7 @@ export default class DictionaryResolver {
 
     const entries = translations
       .map((t) => t.entry)
-      // .filter((entry) => entry.partOfSpeech !== 'properNoun')
+      .filter((entry) => entry.partOfSpeech !== 'properNoun')
       .map((entry) => {
         if (entry.partOfSpeech === 'verb' && entry.forms) {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)

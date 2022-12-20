@@ -13,7 +13,7 @@ import User from '../entity/user/User'
 import { ResolverContext } from '../utils/ResolverContext'
 
 @Resolver(Entry)
-export default class BookmarkResolver {
+export class BookmarkResolver {
   @Query(() => [Entry])
   @UseMiddleware(Authenticate)
   async bookmarks(@Ctx() { user: { id } }: ResolverContext): Promise<Entry[]> {

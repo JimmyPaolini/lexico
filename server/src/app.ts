@@ -4,7 +4,7 @@ import express from 'express'
 import 'reflect-metadata'
 
 import log from '../../utils/log'
-import buildAPI from './utils/api'
+import { buildAPI } from './utils/api'
 import { corsOptions } from './utils/cors'
 import { Database } from './utils/database'
 
