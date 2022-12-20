@@ -11,7 +11,7 @@ import { FormTabs } from '../../FormTabs'
 import { FormsTable } from '../../FormsTable'
 import { verbFormsRestructure } from './verbFormsRestructure'
 
-type Props = { forms: VerbForms, searched?: string }
+type Props = { forms: VerbForms; searched?: string }
 
 export const VerbFormsTable = ({ forms, searched }: Props) => {
   const theme = useTheme()

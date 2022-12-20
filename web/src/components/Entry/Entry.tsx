@@ -8,7 +8,7 @@ import { Forms } from './Forms/Forms'
 import { PrincipalParts } from './PrincipalParts/PrincipalParts'
 import { Translations } from './Translations/Translations'
 
-type Props = { entry: EntryType, searched: string }
+type Props = { entry: EntryType; searched: string }
 
 export const Entry = ({ entry, searched = '' }: Props) => {
   const theme = useTheme()

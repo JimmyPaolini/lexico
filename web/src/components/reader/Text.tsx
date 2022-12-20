@@ -10,7 +10,7 @@ import { sentenceCase } from 'src/utils/string'
 import { CardHeader } from '../accessories/CardHeader'
 import { Line } from './Line'
 
-type Props = { text: ReaderText, openModal: (word: string) => void }
+type Props = { text: ReaderText; openModal: (word: string) => void }
 
 export const Text = ({ text, openModal }: Props) => {
   const router = useRouter()

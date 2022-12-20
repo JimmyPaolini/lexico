@@ -1,7 +1,7 @@
 {
   "scripts": {
     "lint-check": "eslint --no-ignore --no-error-on-unmatched-pattern --config cleaning/.eslintrc.js --ignore-path cleaning/.eslintignore .",
-    "format-check": "prettier --config cleaning/.prettierrc.js --ignore-path cleaning/.prettierignore .",
+    "format-check": "prettier --config cleaning/.prettierrc.js --ignore-path cleaning/.prettierignore --check .",
     "lint": "eslint --no-ignore --no-error-on-unmatched-pattern --config cleaning/.eslintrc.js --ignore-path cleaning/.eslintignore --fix .",
     "format": "prettier --config cleaning/.prettierrc.js --ignore-path cleaning/.prettierignore --write .",
     "clean-check": "npm run format-check; npm run lint-check",

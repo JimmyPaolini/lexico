@@ -16,7 +16,7 @@ import { sentenceCase } from 'src/utils/string'
 import { ExpandIcon } from '../accessories/ExpandIcon'
 import { LibraryText } from './LibraryText'
 
-type Props = { author: Author, book: Book, isLast: boolean }
+type Props = { author: Author; book: Book; isLast: boolean }
 
 export const LibraryBook = ({ book, isLast }: Props) => {
   const theme = useTheme()

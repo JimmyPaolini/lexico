@@ -1,13 +1,13 @@
 module.exports = {
   env: { browser: true, es2021: true, node: true },
   extends: ['plugin:react/recommended', 'standard-with-typescript'],
-  overrides: [],
+  plugins: ['react'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: 'tsconfig.json',
   },
-  plugins: ['react'],
+  ignorePatterns: ['**/dist'],
   rules: {
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
 
@@ -17,6 +17,7 @@ module.exports = {
 
     'multiline-ternary': 'off',
     'comma-dangle': 'off',
+    'generator-star-spacing': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/comma-dangle': 'off',
@@ -30,4 +31,5 @@ module.exports = {
     '@typescript-eslint/no-misused-promises': 'off',
     '@typescript-eslint/require-array-sort-compare': 'off',
   },
+  overrides: [],
 }

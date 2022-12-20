@@ -3,8 +3,6 @@
 
 **/node_modules
 **/dist
-dist/
-server/dist
 
 **/.next
 **/out
@@ -18,5 +16,5 @@ server/dist
 **/README.md
 **/LICENSE.md
 
-web/src/graphql/generated.ts
+**/generated.ts
 **/migration

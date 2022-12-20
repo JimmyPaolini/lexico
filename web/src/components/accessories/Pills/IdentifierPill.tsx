@@ -3,7 +3,7 @@ import { Identifier, abbreviateIdentifier } from 'src/utils/identifiers'
 import { Pill, PillVariant } from './Pill'
 import { identifierStyles } from './identifierStyles'
 
-type Props = { identifier: Identifier, variant?: PillVariant }
+type Props = { identifier: Identifier; variant?: PillVariant }
 
 export const IdentifierPill = ({ identifier, variant }: Props) => {
   return (

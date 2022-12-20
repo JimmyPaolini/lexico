@@ -1,13 +1,13 @@
 import { ObjectLiteral, getConnection } from 'typeorm'
 
-import Author from '../../../server/src/entity/literature/Author'
-import Book from '../../../server/src/entity/literature/Book'
-import Line from '../../../server/src/entity/literature/Line'
-import Text from '../../../server/src/entity/literature/Text'
+import Author from '../../../server/src/entity/library/Author'
+import Book from '../../../server/src/entity/library/Book'
+import Line from '../../../server/src/entity/library/Line'
+import Text from '../../../server/src/entity/library/Text'
 import { connectDatabase } from '../../../server/src/utils/database'
 import { normalize } from '../../../web/src/utils/string'
 
-async function * getLineGeneratorSearch(
+async function* getLineGeneratorSearch(
   where: ObjectLiteral,
 ): AsyncGenerator<Line> {
   let connection
@@ -57,7 +57,7 @@ export function getLineGeneratorByAuthor(author: Author): AsyncGenerator<Line> {
   return getLineGeneratorSearch({ author })
 }
 
-export function * getWordGenerator(text: string): Generator<string> {
+export function* getWordGenerator(text: string): Generator<string> {
   const words = normalize(text).match(/\w+/gi)
   if (!words) return
   for (const word of words) yield word

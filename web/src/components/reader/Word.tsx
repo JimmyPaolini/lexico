@@ -1,6 +1,6 @@
 import { CardActionArea } from '@mui/material'
 
-type Props = { word: string, openModal: (word: string) => void }
+type Props = { word: string; openModal: (word: string) => void }
 
 export const Word = ({ word, openModal }: Props) => {
   const isWord = word.match(/\w+/i)

@@ -7,5 +7,5 @@ module.exports = {
   importOrder: ['^react$', '^@mui', '<THIRD_PARTY_MODULES>', '^src/', '^[./]'],
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-  importOrderParserPlugins: ['typescript', 'decorators-legacy'],
+  // importOrderParserPlugins: ['typescript', 'decorators-legacy'],
 }

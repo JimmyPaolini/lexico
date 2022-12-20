@@ -3,6 +3,7 @@ import { CardActionArea, Grid } from '@mui/material'
 import Link from 'next/link'
 
 import { Text } from 'src/graphql/generated'
+
 import { LibraryNamedText } from './LibraryNamedText'
 import { LibraryNumberedText } from './LibraryNumberedText'
 

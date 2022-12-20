@@ -12,7 +12,7 @@ import { normalize } from 'src/utils/string'
 import { Context } from '../layout/Context'
 import { Word } from './Word'
 
-type Props = { line: ReaderLine, openModal: (word: string) => void }
+type Props = { line: ReaderLine; openModal: (word: string) => void }
 
 export const Line = ({ line, openModal }: Props) => {
   const theme = useTheme()

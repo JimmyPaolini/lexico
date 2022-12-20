@@ -9,7 +9,7 @@ import { isBookmarkedLocal } from 'src/utils/bookmarksLocal'
 
 import { Context } from '../../layout/Context'
 
-type Props = { id: string, bookmarked?: Maybe<boolean> }
+type Props = { id: string; bookmarked?: Maybe<boolean> }
 
 export const BookmarkButton = ({ id, bookmarked: bookmarkedRemote }: Props) => {
   const { user, queryClient } = useContext(Context)

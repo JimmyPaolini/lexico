@@ -8,13 +8,14 @@ export default {
   component: AdjectiveDeclensionCard,
 } as ComponentMeta<typeof AdjectiveDeclensionCard>
 
-export const FirstSecond: ComponentStory<typeof AdjectiveDeclensionCard> =
-  () => (
-    <AdjectiveDeclensionCard
-      declension={adjectiveDeclensions[0]}
-      expandedInitial
-    />
-  )
+export const FirstSecond: ComponentStory<
+  typeof AdjectiveDeclensionCard
+> = () => (
+  <AdjectiveDeclensionCard
+    declension={adjectiveDeclensions[0]}
+    expandedInitial
+  />
+)
 
 export const Third: ComponentStory<typeof AdjectiveDeclensionCard> = () => (
   <AdjectiveDeclensionCard
@@ -23,10 +24,11 @@ export const Third: ComponentStory<typeof AdjectiveDeclensionCard> = () => (
   />
 )
 
-export const Comparative: ComponentStory<typeof AdjectiveDeclensionCard> =
-  () => (
-    <AdjectiveDeclensionCard
-      declension={adjectiveDeclensions[2]}
-      expandedInitial
-    />
-  )
+export const Comparative: ComponentStory<
+  typeof AdjectiveDeclensionCard
+> = () => (
+  <AdjectiveDeclensionCard
+    declension={adjectiveDeclensions[2]}
+    expandedInitial
+  />
+)

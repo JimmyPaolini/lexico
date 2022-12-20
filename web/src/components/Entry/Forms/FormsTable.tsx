@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles'
 
 import { Form, FormCellPosition } from './Form/Form'
 
-type Props = { forms: Array<ComponentProps<typeof Form>>, searched?: string }
+type Props = { forms: Array<ComponentProps<typeof Form>>; searched?: string }
 
 export const FormsTable = ({ forms, searched }: Props) => {
   const theme = useTheme()
