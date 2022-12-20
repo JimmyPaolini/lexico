@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export const serverEndpoint = `http://${
@@ -31,16 +31,9 @@ export default async (
     headers: req?.headers?.cookie ? { cookie: req.headers.cookie } : undefined,
   }
 
-  try {
-    const response = await axios(request)
-    if (response.headers['set-cookie']) {
-      res.setHeader('set-cookie', response.headers['set-cookie'])
-    }
-    res.send(response.data)
-  } catch (error: unknown) {
-    console.log(
-      JSON.stringify((error as AxiosError).response, circularReplacer()),
-    )
-    throw error
+  const response = await axios(request)
+  if (response.headers['set-cookie']) {
+    res.setHeader('set-cookie', response.headers['set-cookie'])
   }
+  res.send(response.data)
 }

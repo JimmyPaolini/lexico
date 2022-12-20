@@ -30,7 +30,7 @@ generates:
     plugins:
       - introspection
 hooks:
-  afterOneFileWrite:
+  afterAllFileWrite:
     - sed -r -i '' -e '1h;2,$H;$!d;g' -e 's/FragmentDoc = `([^$]+)[^`]+`/FragmentDoc = `\1`/g' src/graphql/generated.ts
-    - eslint --fix --config ../cleaning/.eslintrc.js --ignore-path ../cleaning/.eslintignore
-    - prettier --write --config ../cleaning/.prettierrc.js --ignore-path ../cleaning/.prettierignore
+    # - eslint --no-ignore --no-error-on-unmatched-pattern --config ../cleaning/.eslintrc.js --ignore-path ../cleaning/.eslintignore --fix
+    # - prettier --config ../cleaning/.prettierrc.js --ignore-path ../cleaning/.prettierignore --write

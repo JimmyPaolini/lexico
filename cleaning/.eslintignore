@@ -16,5 +16,5 @@
 **/README.md
 **/LICENSE.md
 
-**/generated.ts
 **/migration
+.next-env.d.ts
