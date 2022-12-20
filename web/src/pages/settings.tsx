@@ -20,7 +20,7 @@ import { LoginCard } from '../components/user/login/LoginCard'
 import { SettingsCard } from '../components/user/settings/SettingsCard'
 import { serverEndpoint } from './api'
 
-export default function User() {
+export default function Settings() {
   const theme = useTheme()
   const { user } = useContext(Context)
   const enqueueSnackbar = useSnackbar()

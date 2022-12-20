@@ -27,7 +27,7 @@ export const pages = [
     keybind: 'g',
   },
   {
-    name: 'user',
+    name: 'settings',
     icon: <Settings />,
     keybind: 'u',
   },
