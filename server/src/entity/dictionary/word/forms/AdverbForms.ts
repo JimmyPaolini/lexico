@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "type-graphql"
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export default class AdverbForms {
@@ -22,6 +22,6 @@ export default class AdverbForms {
   }
 
   get __typename(): string {
-    return "AdverbForms"
+    return 'AdverbForms'
   }
 }

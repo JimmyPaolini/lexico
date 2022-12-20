@@ -13,6 +13,7 @@ export default async function fetchGoogleUser(
   hostname: string,
 ): Promise<GoogleProfile> {
   const {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     data: { access_token },
   } = await axios
     .post('https://oauth2.googleapis.com/token', null, {

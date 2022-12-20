@@ -49,8 +49,7 @@ export const CustomLiteratureOptions = ({
       onClick={(event) => event.stopPropagation()}
       className={classes.iconButtons}
     >
-      {!text?.local
-        ? (
+      {!text?.local ? (
         <IconButton
           disabled
           aria-label="on user"
@@ -59,8 +58,7 @@ export const CustomLiteratureOptions = ({
         >
           <AccountCircle />
         </IconButton>
-          )
-        : null}
+      ) : null}
       <IconButton
         aria-label="options"
         className={classes.options}

@@ -1,10 +1,10 @@
 import { ConnectionOptions } from 'typeorm'
+
 import {
   POSTGRES_DB,
   POSTGRES_PASSWORD,
   POSTGRES_USER,
 } from '../../../utils/env'
-
 import { DatabaseLogger } from '../../../utils/log'
 
 export default {

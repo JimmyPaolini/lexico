@@ -14,8 +14,9 @@ export default function parseEtymology(
     $(etymologyHeader).length <= 0 ||
     ($(etymologyHeader).next()[0] as any).name !== 'p' ||
     !$(etymologyHeader).next().text().trim().length
-  )
+  ) {
     return ''
+  }
   const etymology: string = $(etymologyHeader).next().text().trim()
 
   const participleMatch = etymology.match(

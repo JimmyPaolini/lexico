@@ -83,4 +83,4 @@ const praenomenAbbreviations = {
   v: { masculine: 'vibius', feminine: 'vibia' },
   vol: { masculine: 'volesus', feminine: 'volusa' },
   vop: { masculine: 'vopiscus', feminine: 'vopisca' },
-} as { [key: string]: { masculine?: string; feminine?: string } }
+} as Record<string, { masculine?: string; feminine?: string }>

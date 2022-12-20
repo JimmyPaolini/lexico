@@ -18,10 +18,12 @@ export default async function ingestBible(
       href: origin + $(link).attr('href'),
     })) as Chapter[]
 
-  await Promise.all(chapters.map((chapter) => ingestChapter(chapter)))
+  await Promise.all(
+    chapters.map(async (chapter) => await ingestChapter(chapter)),
+  )
 }
 
-interface Chapter {
+type Chapter = {
   name: string
   href: string
 }

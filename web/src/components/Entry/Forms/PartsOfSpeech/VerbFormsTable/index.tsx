@@ -31,19 +31,16 @@ export const VerbFormsTable = ({ forms, searched }: Props) => {
     setTopTabState(newTopTab)
 
     midTabs = Object.keys(structure?.[topTabs[newTopTab]] || { '-': '' })
-    const newMidTab =
-      midTabs.includes(oldMidTab) ? midTabs.indexOf(oldMidTab) : 0
-    setMidTabState(
-      midTabs.includes(oldMidTab) ? midTabs.indexOf(oldMidTab) : 0,
-    )
+    const newMidTab = midTabs.includes(oldMidTab)
+      ? midTabs.indexOf(oldMidTab)
+      : 0
+    setMidTabState(midTabs.includes(oldMidTab) ? midTabs.indexOf(oldMidTab) : 0)
 
     bottomTabs = Object.keys(
       structure?.[topTabs[newTopTab]]?.[midTabs[newMidTab]] || { '-': '' },
     )
     setBottomTab(
-      bottomTabs.includes(oldBottomTab)
-        ? bottomTabs.indexOf(oldBottomTab)
-        : 0,
+      bottomTabs.includes(oldBottomTab) ? bottomTabs.indexOf(oldBottomTab) : 0,
     )
   }
 
@@ -56,9 +53,7 @@ export const VerbFormsTable = ({ forms, searched }: Props) => {
       structure?.[topTabs[topTab]]?.[midTabs[newMidTab]] || { '-': '' },
     )
     setBottomTab(
-      bottomTabs.includes(oldBottomTab)
-        ? bottomTabs.indexOf(oldBottomTab)
-        : 0,
+      bottomTabs.includes(oldBottomTab) ? bottomTabs.indexOf(oldBottomTab) : 0,
     )
   }
 

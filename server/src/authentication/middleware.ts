@@ -3,7 +3,6 @@ import { MiddlewareFn } from 'type-graphql'
 import { getConnection } from 'typeorm'
 
 import User from '../entity/user/User'
-
 import { ResolverContext } from '../utils/ResolverContext'
 
 const getUserIdFromContext = (context: ResolverContext) => {
@@ -24,15 +23,15 @@ export const Authenticate: MiddlewareFn<ResolverContext> = async (
   const user = await getConnection().getRepository(User).findOne(userId)
   if (!user) throw new Error('user does not exist')
   context.user = user
-  return next()
+  return await next()
 }
 
-export const IsAuthenticated: MiddlewareFn<ResolverContext> = (
+export const IsAuthenticated: MiddlewareFn<ResolverContext> = async (
   { context },
   next,
 ) => {
   getUserIdFromContext(context)
-  return next()
+  return await next()
 }
 
 export const GetBookmarks: MiddlewareFn<ResolverContext> = async (
@@ -43,12 +42,12 @@ export const GetBookmarks: MiddlewareFn<ResolverContext> = async (
   try {
     userId = getUserIdFromContext(context)
   } catch {
-    return next()
+    return await next()
   }
   const user = await getConnection()
     .getRepository(User)
     .findOne(userId, { relations: ['bookmarks'] })
-  if (!user) return next()
+  if (!user) return await next()
   context.bookmarks = user.bookmarks
-  return next()
+  return await next()
 }

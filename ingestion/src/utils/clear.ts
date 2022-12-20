@@ -17,39 +17,39 @@ export async function clearEntity(
 }
 
 export async function clearDictionary(): Promise<void> {
-  log.info(`clearing dictionary`)
+  log.info('clearing dictionary')
   await clearEntity(Word)
   await clearEntity(Translation)
   await clearEntity(Entry)
-  log.info(`cleared dictionary`)
+  log.info('cleared dictionary')
 }
 
 export async function clearLiterature(): Promise<void> {
-  log.info(`clearing library`)
+  log.info('clearing library')
   await clearEntity(Line)
   await clearEntity(Text)
   await clearEntity(Book)
   await clearEntity(Author)
-  log.info(`cleared library`)
+  log.info('cleared library')
 }
 
 export async function clearUsers(): Promise<void> {
-  log.info(`clearing users`)
+  log.info('clearing users')
   await clearEntity(User)
-  log.info(`cleared users`)
+  log.info('cleared users')
 }
 
 export async function clearIngested(): Promise<void> {
-  log.info(`clearing ingested`)
+  log.info('clearing ingested')
   await clearDictionary()
   await clearLiterature()
-  log.info(`cleared ingested`)
+  log.info('cleared ingested')
 }
 
 export async function clearAll(): Promise<void> {
-  log.info(`clearing all`)
+  log.info('clearing all')
   await clearDictionary()
   await clearLiterature()
   await clearUsers()
-  log.info(`cleared all`)
+  log.info('cleared all')
 }

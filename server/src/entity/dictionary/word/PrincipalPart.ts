@@ -1,9 +1,9 @@
-import { Field, ObjectType } from "type-graphql"
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export default class PrincipalPart {
   @Field(() => String)
-  name = ""
+  name = ''
 
   @Field(() => [String])
   text: string[] = []

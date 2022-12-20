@@ -23,9 +23,7 @@ export const Text = ({ text, openModal }: Props) => {
       ? ' - ' + sentenceCase(text.book.title).replace(/^\d+ /, '')
       : '')
 
-  const action = !router.pathname.match(/\/reader\/custom/)
-    ? undefined
-    : (
+  const action = !router.pathname.match(/\/reader\/custom/) ? undefined : (
     <IconButton
       onClick={async () =>
         await router.push(
@@ -37,7 +35,7 @@ export const Text = ({ text, openModal }: Props) => {
     >
       <Edit />
     </IconButton>
-      )
+  )
 
   return (
     <Box

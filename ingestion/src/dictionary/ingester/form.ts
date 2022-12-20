@@ -28,16 +28,19 @@ export default async function parseForms(
 
     let m = i
     while (isForm(table[m][j])) m--
-    while (m >= 0 && !isForm(table[m][j]))
+    while (m >= 0 && !isForm(table[m][j])) {
       identifiers.add(table[m--][j].replace(/\.|\//g, '').toLowerCase().trim())
+    }
 
     let n = j
     while (isForm(table[i][n])) n--
-    while (n >= 0 && !isForm(table[i][n]))
+    while (n >= 0 && !isForm(table[i][n])) {
       identifiers.add(table[i][n--].replace(/\.|\//g, '').toLowerCase().trim())
+    }
 
-    if (['Singular', 'Plural'].includes(table[++m][++n]))
+    if (['Singular', 'Plural'].includes(table[++m][++n])) {
       identifiers.add(table[m][n].toLowerCase().trim())
+    }
 
     if (
       ['adjective', 'participle', 'numeral', 'suffix'].includes(
@@ -47,7 +50,7 @@ export default async function parseForms(
       return [
         [...identifiers].find((identifier: string) => isNumber(identifier)),
         [...identifiers].find((identifier: string) => isCase(identifier)),
-        [...identifiers].find((identifier: string) => isGender(identifier)) ||
+        [...identifiers].find((identifier: string) => isGender(identifier)) ??
           'neuter',
       ]
     } else return [...identifiers]

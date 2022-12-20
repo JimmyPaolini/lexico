@@ -13,6 +13,7 @@ export default function parsePronunciation(
   macronizedWord: string,
 ): Pronunciation {
   if (!macronizedWord) {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     ingester.ingestPrincipalParts()
     return ingester.ingestPronunciation()
   }
@@ -32,8 +33,9 @@ export default function parsePronunciation(
       $(pr)
         .text()
         .match(/^audio/i)
-    )
+    ) {
       continue
+    }
     const pronunciations = $(pr).text().split('IPA(key):')[1]?.split(', ')
     if (!pronunciations) continue
     if ($(pr).find('a').text().includes('Classical')) {

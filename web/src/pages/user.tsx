@@ -33,29 +33,29 @@ export default function User() {
   }, [])
 
   return (
-    <>
+    <div>
       <Head>
         <title>Lexico - User</title>
       </Head>
-      {!user
-        ? (
+      {!user ? (
         <Grid
           container
           justifyContent="center"
           sx={{ marginTop: theme.spacing(4) }}
         >
-          <Deck Cards={[
-            <LoginCard key="LoginCard" />,
-            <SettingsCard key="SettingsCard" />
-          ]} />
+          <Deck
+            Cards={[
+              <LoginCard key="LoginCard" />,
+              <SettingsCard key="SettingsCard" />,
+            ]}
+          />
         </Grid>
-          )
-        : (
+      ) : (
         <SingleCardLayout>
           <SettingsCard />
         </SingleCardLayout>
-          )}
-    </>
+      )}
+    </div>
   )
 }
 

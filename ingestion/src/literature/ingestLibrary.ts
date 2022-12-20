@@ -30,8 +30,9 @@ export default async function ingestLibrary(): Promise<void> {
     const $ = cheerio.load((await axios.get(host + author.path)).data)
     for (const a of $('a').get()) {
       const href = $(a).attr('href')
-      if (!href || href.match(/index.html/) || href.match(/classics.html/))
+      if ((!href || href.match(/index.html/)) ?? href.match(/classics.html/)) {
         continue
+      }
       const book = $(a).closest('div').prev(':header').text().toLowerCase()
       const title = $(a).text().toLowerCase()
       author.works.push({ title, book, path: href })
@@ -43,7 +44,7 @@ export default async function ingestLibrary(): Promise<void> {
   }
 
   fs.writeFileSync(
-    `./src/ingestion/literature/library.json`,
+    './src/ingestion/literature/library.json',
     JSON.stringify(authors, null, 2),
   )
 }

@@ -25,10 +25,9 @@ export const Context = createContext({} as LexicoContext)
 type Props = PropsWithChildren<{ queryClient: QueryClient }>
 
 export const ContextProvider = ({ children, queryClient }: Props) => {
-  const { data } = useUserQuery(
-    undefined,
-    { staleTime: 1000 * 60 * 5 /* 5 minutes */ },
-  )
+  const { data } = useUserQuery(undefined, {
+    staleTime: 1000 * 60 * 5 /* 5 minutes */,
+  })
   const user = data?.user
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))

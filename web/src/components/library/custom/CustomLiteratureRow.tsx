@@ -30,7 +30,9 @@ export const CustomLiteratureRow = ({ text, refreshCustomTexts }: Props) => {
   return (
     <Root>
       <Divider className={classes.divider} />
-      <ListItemButton onClick={async () => await router.push('/reader/custom/' + text.id)}>
+      <ListItemButton
+        onClick={async () => await router.push('/reader/custom/' + text.id)}
+      >
         <ListItemText
           primary={text.title}
           primaryTypographyProps={{ variant: 'body1' }}

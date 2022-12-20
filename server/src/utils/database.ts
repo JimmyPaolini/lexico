@@ -1,7 +1,7 @@
 import { Connection, createConnection } from 'typeorm'
 
-import ormconfig from './ormconfig'
 import log from '../../../utils/log'
+import ormconfig from './ormconfig'
 
 export async function connectDatabase(): Promise<Connection> {
   const connection = await createConnection(ormconfig)

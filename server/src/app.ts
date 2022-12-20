@@ -3,10 +3,10 @@ import cors from 'cors'
 import express from 'express'
 import 'reflect-metadata'
 
-import { connectDatabase } from './utils/database'
 import log from '../../utils/log'
 import buildAPI from './utils/api'
 import { corsOptions } from './utils/cors'
+import { connectDatabase } from './utils/database'
 
 async function main() {
   await connectDatabase()
@@ -26,4 +26,4 @@ async function main() {
     ),
   )
 }
-main()
+void main()

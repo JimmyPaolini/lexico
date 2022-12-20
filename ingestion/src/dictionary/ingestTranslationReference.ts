@@ -11,6 +11,7 @@ export async function ingestTranslationReference(
   const Translations = getConnection().getRepository(Translation)
   const Entries = getConnection().getRepository(Entry)
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   let reference = translation.translation.match(/\{\*.+\*\}/)![0].slice(2, -2)
   if (reference.match(/\(.*\)/)) reference = reference.replace(/ ?\(.*\)/, '')
 
@@ -20,11 +21,11 @@ export async function ingestTranslationReference(
   const entry =
     entries.find(
       (entry) => entry.partOfSpeech === translation.entry.partOfSpeech,
-    ) || entries[0]
+    ) ?? entries[0]
   if (!entry) log.info(translation)
 
   await Translations.save(
-    (entry?.translations || []).map(
+    (entry?.translations ?? []).map(
       (referencedTranslation) =>
         new Translation(referencedTranslation.translation, translation.entry),
     ),

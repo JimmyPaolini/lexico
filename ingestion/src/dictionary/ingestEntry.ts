@@ -21,6 +21,7 @@ export default async function ingestEntryWord(
   entryWord: string,
 ): Promise<void> {
   // log.info("ingesting entry", entryWord)
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const data = require(path.join(
     process.cwd(),
     `./data/wiktionary/${entryWord}.json`,
@@ -78,10 +79,11 @@ async function ingestEntry(
     }
     const IngesterConstructor = ingestersMap[entry.partOfSpeech]
     if (!IngesterConstructor) {
-      if ((entry.partOfSpeech as PartOfSpeech | '') === '')
+      if ((entry.partOfSpeech as PartOfSpeech | '') === '') {
         log.info('No partOfSpeech:', entry.id)
-      else if ((entry.partOfSpeech as PartOfSpeech | 'letter') !== 'letter')
+      } else if ((entry.partOfSpeech as PartOfSpeech | 'letter') !== 'letter') {
         log.info('skipping entry', entry)
+      }
       await Entries.delete(entry.id)
       return
     }

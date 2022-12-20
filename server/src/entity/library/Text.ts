@@ -7,6 +7,7 @@ import {
   OneToMany,
   PrimaryColumn,
 } from 'typeorm'
+
 import Author from './Author'
 import Book from './Book'
 import Line from './Line'

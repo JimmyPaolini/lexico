@@ -20,18 +20,18 @@ export const clientEndpoint =
   process.env.NEXT_ENV === 'build'
     ? 'https://lexicolatin.com/api'
     : typeof window === 'undefined'
-      ? 'http://localhost:3001/graphql'
-      : window.location.origin + '/api'
+    ? 'http://localhost:3001/graphql'
+    : window.location.origin + '/api'
 
 const clientSideEmotionCache = createEmotionCache()
 
 type Props = AppProps & {
   emotionCache?: EmotionCache
 }
-export default function App ({
+export default function App({
   Component,
   pageProps,
-  emotionCache = clientSideEmotionCache
+  emotionCache = clientSideEmotionCache,
 }: Props) {
   const [queryClient] = useState(() => new QueryClient())
 
@@ -58,13 +58,13 @@ export default function App ({
   )
 }
 
-export function reportWebVitals (metric: NextWebVitalsMetric): void {
+export function reportWebVitals(metric: NextWebVitalsMetric): void {
   const { id, name, label, value } = metric
   googleAnalyticsEvent(name, {
     category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
     label: id,
     value: Math.round(name === 'CLS' ? value * 1000 : value),
-    non_interaction: true
+    non_interaction: true,
   })
 }
 

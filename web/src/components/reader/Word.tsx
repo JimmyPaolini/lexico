@@ -5,8 +5,7 @@ type Props = { word: string, openModal: (word: string) => void }
 export const Word = ({ word, openModal }: Props) => {
   const isWord = word.match(/\w+/i)
 
-  return isWord
-    ? (
+  return isWord ? (
     <CardActionArea
       sx={{
         display: 'inline',
@@ -19,6 +18,7 @@ export const Word = ({ word, openModal }: Props) => {
     >
       {word}
     </CardActionArea>
-      )
-    : (<>{word}</>)
+  ) : (
+    <>{word}</>
+  )
 }

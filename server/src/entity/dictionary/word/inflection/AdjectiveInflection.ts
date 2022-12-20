@@ -1,20 +1,20 @@
-import { Field, ObjectType } from "type-graphql"
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export default class AdjectiveInflection {
   @Field(() => String)
-  declension: AdjectiveDeclension = ""
+  declension: AdjectiveDeclension = ''
 
   @Field(() => String)
-  degree: AdjectiveDegree = "positive"
+  degree: AdjectiveDegree = 'positive'
 
   @Field()
-  other?: string = ""
+  other?: string = ''
 
   constructor(
-    declension: AdjectiveDeclension = "",
-    degree: AdjectiveDegree = "positive",
-    other = "",
+    declension: AdjectiveDeclension = '',
+    degree: AdjectiveDegree = 'positive',
+    other = '',
   ) {
     this.declension = declension
     this.degree = degree
@@ -22,9 +22,7 @@ export default class AdjectiveInflection {
   }
 }
 
-export type AdjectiveDeclension = "first/second" | "third" | ""
-export const adjectiveDelensionRegex = new RegExp(/(first\/second)|(third)/)
-export type AdjectiveDegree = "positive" | "comparative" | "superlative"
-export const adjectiveDegreeRegex = new RegExp(
-  /(positive)|(comparative)|(superlative)/,
-)
+export type AdjectiveDeclension = 'first/second' | 'third' | ''
+export const adjectiveDelensionRegex = /(first\/second)|(third)/
+export type AdjectiveDegree = 'positive' | 'comparative' | 'superlative'
+export const adjectiveDegreeRegex = /(positive)|(comparative)|(superlative)/

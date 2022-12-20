@@ -72,15 +72,15 @@ export const SearchBar = ({
           aria-label="search"
           size="large"
         >
-          {!isLoading
-            ? <SearchIcon />
-            : (
+          {!isLoading ? (
+            <SearchIcon />
+          ) : (
             <CircularProgress
               size={theme.spacing(3)}
               thickness={5.4}
               color="secondary"
             />
-              )}
+          )}
         </IconButton>
       </Grid>
     </Paper>

@@ -45,21 +45,17 @@ export const CustomLiteratureMenu = ({
         horizontal: 'right',
       }}
     >
-      {user
-        ? (
-            text.local
-              ? (
+      {user ? (
+        text.local ? (
           <CustomLiteratureMoveToUser
             {...{ text, refreshCustomTexts, closeMenu }}
           />
-                )
-              : (
+        ) : (
           <CustomLiteratureMoveToLocal
             {...{ text, refreshCustomTexts, closeMenu }}
           />
-                )
-          )
-        : null}
+        )
+      ) : null}
       <CustomLiteratureEdit {...{ text }} />
       <CustomLiteratureDelete {...{ text, refreshCustomTexts }} />
     </Menu>

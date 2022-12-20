@@ -1,4 +1,4 @@
-export const authorIdToName: { [key: string]: string } = {
+export const authorIdToName: Record<string, string> = {
   ammianus: 'ammianus marcellinus',
   apuleius: 'lucius apuleius madaurensis',
   augustus: 'caesar divi filius augustus',
@@ -53,14 +53,14 @@ export const authorIdToName: { [key: string]: string } = {
   'vulgate bible new testament': 'biblia sacra vulgata testamentum novum',
 }
 
-export const bookNameMap: { [key: string]: string } = {
+export const bookNameMap: Record<string, string> = {
   'commentariorum libri vii de bello gallicocum a. hirti supplemento':
     'de bello gallico',
   'commentariorum libri iii de bello civili': 'de bello civili',
   'libri incertorum auctorum': '',
 }
 
-export const worksMap: { [key: string]: string } = {
+export const worksMap: Record<string, string> = {
   aen: 'aeneid',
   ec: 'eclogues',
   geo: 'georgicon',

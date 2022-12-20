@@ -24,7 +24,10 @@ export default {
   ],
 } as ComponentMeta<typeof BookmarkButton>
 
-export const Default: ComponentStory<typeof BookmarkButton> = (args, { loaded }) => (
+export const Default: ComponentStory<typeof BookmarkButton> = (
+  args,
+  { loaded },
+) => (
   <>
     <BookmarkButton {...args} {...loaded} />
     <div>localStorage.bookmarks = {window.localStorage.bookmarks}</div>

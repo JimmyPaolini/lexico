@@ -24,7 +24,9 @@ export function romanToDecimal(roman: string): number {
 
 export function decimalToRoman(decimal: number): string {
   let roman = ''
-  if (decimal > 3999) { throw new Error('Decimal number too large (>3999) for roman numerals') }
+  if (decimal > 3999) {
+    throw new Error('Decimal number too large (>3999) for roman numerals')
+  }
   function convertDigit(digit: number, low: string, mid: string, top: string) {
     if (digit < 4) roman += new Array(digit).fill(low).join('')
     else if (digit === 4) roman += low + mid

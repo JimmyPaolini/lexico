@@ -1,10 +1,11 @@
 import { Arg, Query, Resolver } from 'type-graphql'
-import { getConnection, Like } from 'typeorm'
+import { Like, getConnection } from 'typeorm'
+
+import log from '../../../utils/log'
 import Author from '../entity/library/Author'
 import Book from '../entity/library/Book'
 import Line from '../entity/library/Line'
 import Text from '../entity/library/Text'
-import log from '../../../utils/log'
 
 const compareIds = (a: { id: string }, b: { id: string }) =>
   a.id.localeCompare(b.id, undefined, {
@@ -124,13 +125,14 @@ export default class LiteratureResolver {
         author,
       },
     )
-    if (book)
+    if (book) {
       query = query.innerJoinAndSelect(
         'text.book',
         'book',
         'book.title = :book',
         { book },
       )
+    }
     query = query
       .where('text.title = :title', { title })
       .innerJoinAndSelect('text.lines', 'lines')

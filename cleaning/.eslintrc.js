@@ -20,6 +20,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/indent': 'off',
     '@typescript-eslint/comma-dangle': 'off',
+    '@typescript-eslint/member-delimiter-style': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/space-before-function-paren': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',

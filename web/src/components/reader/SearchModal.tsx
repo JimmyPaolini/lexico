@@ -36,7 +36,9 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
   })
 
   const Cards =
-    entries?.map((entry) => <Entry {...{ entry, searched }} key={entry.id} />) || []
+    entries?.map((entry) => (
+      <Entry {...{ entry, searched }} key={entry.id} />
+    )) || []
 
   return (
     <Modal
@@ -62,17 +64,13 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
         sx={{ maxHeight: '100%', overflow: 'scroll', outline: 'none' }}
         tabIndex={-1}
       >
-        {isError || !entries?.length
-          ? (
+        {isError || !entries?.length ? (
           <Paper sx={{ padding: theme.spacing(2) }}>
             <Typography variant="h5">No Results</Typography>
           </Paper>
-            )
-          : isSuccess && !!entries
-            ? (
+        ) : isSuccess && !!entries ? (
           <Deck Cards={Cards} />
-              )
-            : null}
+        ) : null}
       </Box>
     </Modal>
   )

@@ -1,9 +1,10 @@
-import { Field, ObjectType } from "type-graphql"
-import Imperative from "./verbForms/Imperative"
-import Indicative from "./verbForms/Indicative"
-import NonFinite from "./verbForms/NonFinite"
-import Subjunctive from "./verbForms/Subjunctive"
-import VerbalNoun from "./verbForms/VerbalNoun"
+import { Field, ObjectType } from 'type-graphql'
+
+import Imperative from './verbForms/Imperative'
+import Indicative from './verbForms/Indicative'
+import NonFinite from './verbForms/NonFinite'
+import Subjunctive from './verbForms/Subjunctive'
+import VerbalNoun from './verbForms/VerbalNoun'
 
 @ObjectType()
 export default class VerbForms {

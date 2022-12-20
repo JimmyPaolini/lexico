@@ -45,15 +45,13 @@ export const LibraryBook = ({ book, isLast }: Props) => {
           ))}
         </Grid>
       </Collapse>
-      {!isLast
-        ? (
+      {!isLast ? (
         <Divider
           sx={{
             marginLeft: theme.spacing(1),
           }}
         />
-          )
-        : null}
+      ) : null}
     </>
   )
 }

@@ -11,15 +11,17 @@ function phonemesToPronunciations(
   ): any {
     if (next.length === 0) return pronunciations.push(prev.join(' '))
     const phoneme = next.shift()
-    if (Array.isArray(phoneme))
-      for (const option of phoneme)
-        if (Array.isArray(option))
+    if (Array.isArray(phoneme)) {
+      for (const option of phoneme) {
+        if (Array.isArray(option)) {
           buildPronunciations([...prev, ...option], [...next])
-        else buildPronunciations([...prev, option], [...next])
-    else
+        } else buildPronunciations([...prev, option], [...next])
+      }
+    } else {
       buildPronunciations([...prev, phoneme] as Array<string | string[][]>, [
         ...next,
       ])
+    }
   }
   buildPronunciations([], phonemes)
   return pronunciations

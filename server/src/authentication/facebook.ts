@@ -13,11 +13,12 @@ export default async function fetchFacebookUser(
   hostname: string,
 ): Promise<FacebookProfile> {
   const {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     data: { access_token },
   } = await axios
     .get('https://graph.facebook.com/v10.0/oauth/access_token', {
       params: {
-        code: code,
+        code,
         client_id: FACEBOOK_ID,
         client_secret: FACEBOOK_SECRET,
         redirect_uri: hostname.match(/lexicolatin/i)

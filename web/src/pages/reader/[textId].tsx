@@ -62,7 +62,9 @@ export default function Reader({ text }: Props) {
   }, [])
 
   let title = 'Lexico - Literature: ' + sentenceCase(text.author.id)
-  if (text.book) { title += ' ' + sentenceCase(text.book.title).replace(/^\d+ /, '') }
+  if (text.book) {
+    title += ' ' + sentenceCase(text.book.title).replace(/^\d+ /, '')
+  }
   title += ' ' + sentenceCase(text.title)
 
   const fontSize = (user?.settings?.fontSize ||
@@ -97,11 +99,9 @@ export default function Reader({ text }: Props) {
         style={{ fontSize }}
       >
         <Grid container justifyContent="center">
-          {!!text && user !== undefined
-            ? (
+          {!!text && user !== undefined ? (
             <Text {...{ text, openModal }} />
-              )
-            : null}
+          ) : null}
         </Grid>
         <SearchModal {...{ searched, open, setOpen }} />
       </Paper>

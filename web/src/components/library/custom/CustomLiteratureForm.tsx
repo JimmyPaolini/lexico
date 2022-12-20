@@ -75,8 +75,7 @@ export const CustomLiteratureForm = ({ text }: Props) => {
           alignItems="center"
           className={classes.item}
         >
-          {isMobile
-            ? (
+          {isMobile ? (
             <IconButton
               onClick={() => setNavOpen(!isNavOpen)}
               style={{ marginRight: 8 }}
@@ -85,8 +84,7 @@ export const CustomLiteratureForm = ({ text }: Props) => {
             >
               <Menu />
             </IconButton>
-              )
-            : null}
+          ) : null}
           <TextBox name="title" formik={formik} color="secondary" autoFocus />
         </Grid>
         <Typography align="center" className={classes.item}>
@@ -104,7 +102,9 @@ export const CustomLiteratureForm = ({ text }: Props) => {
           style={{ flexGrow: 1 }}
           InputProps={{ style: { height: '100%', alignItems: 'flex-start' } }}
           inputProps={{ style: { height: '100%', overflow: 'inherit' } }}
-          placeholder={'automatically numbered line\n#LBL manually labelled line'}
+          placeholder={
+            'automatically numbered line\n#LBL manually labelled line'
+          }
         />
         <SubmitButton name="Save" className={classes.item} />
       </Grid>
@@ -116,7 +116,11 @@ export function validate({ title, text }: CustomText): CustomText {
   const errors = {} as CustomText
   if (!title) errors.title = 'Title cannot be empty'
   if (!text) errors.text = 'Text cannot be empty'
-  if (title.length >= 100) { errors.title = 'Title must be less than 100 characters' }
-  if (text.length >= 100000) { errors.text = 'Text must be less than 100,000 characters' }
+  if (title.length >= 100) {
+    errors.title = 'Title must be less than 100 characters'
+  }
+  if (text.length >= 100000) {
+    errors.text = 'Text must be less than 100,000 characters'
+  }
   return errors
 }

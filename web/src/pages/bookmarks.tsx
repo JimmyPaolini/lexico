@@ -31,11 +31,11 @@ export default function Bookmarks() {
 
     return filteredEntries.length
       ? filteredEntries.map((entry) => {
-        entry = identifyEntryWord(search, entry)
-        return <Entry {...{ entry, searched: search }} key={entry.id} />
-      })
+          entry = identifyEntryWord(search, entry)
+          return <Entry {...{ entry, searched: search }} key={entry.id} />
+        })
       : [
-          <Typography variant="h4" align="center" key='NotFound'>
+          <Typography variant="h4" align="center" key="NotFound">
             Not Found
           </Typography>,
         ]
@@ -53,17 +53,13 @@ export default function Bookmarks() {
         isLoading={isLoading}
         placeholder="Search Bookmarks"
       >
-        {isLoading
-          ? null
-          : isSuccess &&
+        {isLoading ? null : isSuccess &&
           Array.isArray(bookmarks) &&
-          !bookmarks.length
-            ? (
+          !bookmarks.length ? (
           <BookmarkInstructionsCard />
-              )
-            : (
+        ) : (
           <Deck Cards={Cards} />
-              )}
+        )}
       </SearchBarLayout>
     </>
   )

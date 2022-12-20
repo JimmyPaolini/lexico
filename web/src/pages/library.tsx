@@ -47,13 +47,11 @@ export default function Library({ authors }: Props) {
         isLoading={false}
         placeholder="Search Library"
       >
-        {!Cards.length
-          ? (
+        {!Cards.length ? (
           <Typography variant="h4">No Results</Typography>
-            )
-          : (
+        ) : (
           <Deck Cards={Cards} />
-            )}
+        )}
       </SearchBarLayout>
     </>
   )

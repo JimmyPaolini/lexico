@@ -25,8 +25,9 @@ export default async function ingestLines(text: Text): Promise<void> {
       const lineLabelHashtag = line.match(/^#\S+/)
       if (lineLabelHashtag) {
         lineLabel = lineLabelHashtag[0].slice(1)
-        if (lineLabel.match(/[IVXLCDM]+/))
+        if (lineLabel.match(/[IVXLCDM]+/)) {
           lineLabel = '' + romanToDecimal(lineLabel)
+        }
         line = line.replace(/^#\S+ ?/, '')
       }
       const id = text.id + '_' + lineNumber

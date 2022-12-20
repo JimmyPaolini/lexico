@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from "type-graphql"
+import { Field, ID, ObjectType } from 'type-graphql'
 import {
   Column,
   Entity,
@@ -6,9 +6,10 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryColumn,
-} from "typeorm"
-import Author from "./Author"
-import Text from "./Text"
+} from 'typeorm'
+
+import Author from './Author'
+import Text from './Text'
 
 @Entity()
 @ObjectType()
@@ -17,7 +18,7 @@ export default class Book {
   @Field(() => ID)
   id!: string
 
-  @Column("varchar", { length: 64 })
+  @Column('varchar', { length: 64 })
   @Field()
   title!: string
 

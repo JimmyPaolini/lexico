@@ -43,9 +43,7 @@ export const LibraryCard = ({ author }: Props) => {
           >
             {books.map((book, i) => {
               const isLast = i === books.length - 1 && !nonBookTexts.length
-              return (
-                <LibraryBook {...{ author, book, isLast }} key={book.id} />
-              )
+              return <LibraryBook {...{ author, book, isLast }} key={book.id} />
             })}
             <Grid container justifyContent="center" alignItems="stretch">
               {nonBookTexts.map((text) => (

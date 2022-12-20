@@ -1,6 +1,7 @@
-import { Field, ObjectType } from "type-graphql"
-import { Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm"
-import Entry from "./Entry"
+import { Field, ObjectType } from 'type-graphql'
+import { Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm'
+
+import Entry from './Entry'
 
 @Entity()
 @ObjectType()

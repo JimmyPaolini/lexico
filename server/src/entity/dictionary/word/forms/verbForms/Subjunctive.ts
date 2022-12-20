@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "type-graphql"
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export class SubjunctivePerson {
@@ -24,16 +24,16 @@ export class SubjunctiveNumber {
 @ObjectType()
 export class SubjunctiveTense {
   @Field(() => SubjunctiveNumber, { nullable: true })
-  "present": SubjunctiveNumber = new SubjunctiveNumber()
+  'present': SubjunctiveNumber = new SubjunctiveNumber()
 
   @Field(() => SubjunctiveNumber, { nullable: true })
-  "imperfect": SubjunctiveNumber = new SubjunctiveNumber()
+  'imperfect': SubjunctiveNumber = new SubjunctiveNumber()
 
   @Field(() => SubjunctiveNumber, { nullable: true })
-  "perfect": SubjunctiveNumber = new SubjunctiveNumber()
+  'perfect': SubjunctiveNumber = new SubjunctiveNumber()
 
   @Field(() => SubjunctiveNumber, { nullable: true })
-  "pluperfect": SubjunctiveNumber = new SubjunctiveNumber()
+  'pluperfect': SubjunctiveNumber = new SubjunctiveNumber()
 }
 
 @ObjectType()

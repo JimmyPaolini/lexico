@@ -1,6 +1,7 @@
-import { Field, ID, ObjectType } from "type-graphql"
-import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm"
-import Text from "./Text"
+import { Field, ID, ObjectType } from 'type-graphql'
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm'
+
+import Text from './Text'
 
 @Entity()
 @ObjectType()
@@ -9,7 +10,7 @@ export default class Line {
   @Field(() => ID)
   id!: string
 
-  @Column("varchar")
+  @Column('varchar')
   @Field()
   line!: string
 
@@ -17,7 +18,7 @@ export default class Line {
   @Field()
   lineNumber!: number
 
-  @Column("varchar", { length: 16 })
+  @Column('varchar', { length: 16 })
   @Field()
   lineLabel!: string
 

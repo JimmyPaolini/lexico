@@ -1,16 +1,17 @@
 import { performance } from 'perf_hooks'
 import { Arg, Ctx, Query, Resolver, UseMiddleware } from 'type-graphql'
 import { getConnection } from 'typeorm'
-import Entry from '../entity/dictionary/Entry'
-import Translation from '../entity/dictionary/Translation'
-import Word from '../entity/dictionary/Word'
-import VerbForms from '../entity/dictionary/word/forms/VerbForms'
+
 import identifyEntryWord from '../../../utils/identifiers'
 import log from '../../../utils/log'
 import { hasSuffix } from '../../../utils/string'
 import { GetBookmarks } from '../authentication/middleware'
-import { camelCaseFuturePerfect } from '../utils/forms'
+import Entry from '../entity/dictionary/Entry'
+import Translation from '../entity/dictionary/Translation'
+import Word from '../entity/dictionary/Word'
+import VerbForms from '../entity/dictionary/word/forms/VerbForms'
 import { ResolverContext } from '../utils/ResolverContext'
+import { camelCaseFuturePerfect } from '../utils/forms'
 
 @Resolver(Entry)
 export default class DictionaryResolver {

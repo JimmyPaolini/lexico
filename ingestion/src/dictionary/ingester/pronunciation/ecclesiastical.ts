@@ -10,9 +10,9 @@ export default function getEcclesiasticalPhonemes(
         (i + 1 < word.length && ['e', 'i', 'y'].includes(word[i + 1])) ||
         (i + 2 < word.length &&
           ['ae', 'oe'].includes(word[i + 1] + word[i + 2]))
-      )
+      ) {
         phonemes.push('ch')
-      else if (i + 1 < word.length && word[i + 1] === 'c') {
+      } else if (i + 1 < word.length && word[i + 1] === 'c') {
         phonemes.push('ch')
         i++
       } else phonemes.push('k')
@@ -21,9 +21,9 @@ export default function getEcclesiasticalPhonemes(
         (i + 2 < word.length &&
           ['ae', 'oe'].includes(word[i + 1] + word[i + 2])) ||
         ['e', 'i', 'y'].includes(word[i + 1])
-      )
+      ) {
         phonemes.push('dg')
-      else if (i + 1 < word.length && word[i + 1] === 'g') {
+      } else if (i + 1 < word.length && word[i + 1] === 'g') {
         phonemes.push('dg')
         i++
       } else phonemes.push('g')
@@ -35,23 +35,24 @@ export default function getEcclesiasticalPhonemes(
         (i - 2 >= 0 &&
           i + 2 < word.length &&
           wordString.slice(i - 2, i + 3) === 'nihil')
-      )
+      ) {
         phonemes.push('k')
+      }
     } else if (word[i] === 'i') {
-      if (i === 0 && i + 1 < word.length && isVowel(word[i + 1]))
+      if (i === 0 && i + 1 < word.length && isVowel(word[i + 1])) {
         phonemes.push('j')
-      else if (
+      } else if (
         i - 1 > 0 &&
         i + 1 < word.length &&
         isVowel(word[i - 1]) &&
         isVowel(word[i + 1])
-      )
+      ) {
         phonemes.push('j')
-      else phonemes.push(ecclesiasticalPhonemes['i'])
+      } else phonemes.push(ecclesiasticalPhonemes.i)
     } else if (word[i] === 's') {
-      if (i > 0 && isVowel(word[i - 1]) && isVowel(word[i + 1]))
+      if (i > 0 && isVowel(word[i - 1]) && isVowel(word[i + 1])) {
         phonemes.push('z')
-      else if (
+      } else if (
         i + 2 < word.length &&
         ['ce', 'ci'].includes(word[i + 1] + word[i + 2])
       ) {
@@ -63,23 +64,23 @@ export default function getEcclesiasticalPhonemes(
       if (word[i + 1] === 'i') phonemes.push('ts')
       else phonemes.push('t')
     } else if (word[i] === 'x') {
-      if (i > 0 && isVowel(word[i - 1]) && isVowel(word[i + 1]))
+      if (i > 0 && isVowel(word[i - 1]) && isVowel(word[i + 1])) {
         phonemes.push('gz')
-      else if (
+      } else if (
         i + 2 < word.length &&
         ['ce', 'ci'].includes(word[i + 1] + word[i + 2])
       ) {
         phonemes.push('ksh')
         i++
       } else phonemes.push('ks')
-    } else if (ecclesiasticalPhonemes[word[i] + word[i + 1]])
+    } else if (ecclesiasticalPhonemes[word[i] + word[i + 1]]) {
       phonemes.push(ecclesiasticalPhonemes[word[i] + word[++i]])
-    else phonemes.push(ecclesiasticalPhonemes[word[i]])
+    } else phonemes.push(ecclesiasticalPhonemes[word[i]])
   }
   return phonemes
 }
 
-const ecclesiasticalPhonemes: { [key: string]: string | string[][] } = {
+const ecclesiasticalPhonemes: Record<string, string | string[][]> = {
   // first array lists possibilities, nested array lists sequence of phonemes
   b: 'b',
   // c is sometimes softened to ch

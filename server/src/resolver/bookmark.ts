@@ -7,9 +7,10 @@ import {
   UseMiddleware,
 } from 'type-graphql'
 import { getConnection } from 'typeorm'
+
+import { Authenticate } from '../authentication/middleware'
 import Entry from '../entity/dictionary/Entry'
 import User from '../entity/user/User'
-import { Authenticate } from '../authentication/middleware'
 import { ResolverContext } from '../utils/ResolverContext'
 
 @Resolver(Entry)
@@ -37,10 +38,12 @@ export default class BookmarkResolver {
     @Ctx() { user }: ResolverContext,
   ): Promise<boolean> {
     const bookmarks = await this.bookmarks({ user } as ResolverContext)
-    if (bookmarks.some((entry) => entry.id == entryId))
+    if (bookmarks.some((entry) => entry.id === entryId)) {
       throw new Error('user already has entry bookmarked')
-    if (bookmarks.length > 1000)
+    }
+    if (bookmarks.length > 1000) {
       throw new Error('user cannot have over 1000 bookmarks')
+    }
     await this.Users.createQueryBuilder()
       .relation(User, 'bookmarks')
       .of(user)
@@ -55,8 +58,9 @@ export default class BookmarkResolver {
     @Ctx() { user }: ResolverContext,
   ): Promise<boolean> {
     const bookmarks = await this.bookmarks({ user } as ResolverContext)
-    if (!bookmarks.some((entry) => entry.id == entryId))
+    if (!bookmarks.some((entry) => entry.id === entryId)) {
       throw new Error('user does not have entry bookmarked')
+    }
     await this.Users.createQueryBuilder()
       .relation(User, 'bookmarks')
       .of(user)

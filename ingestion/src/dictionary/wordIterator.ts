@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-import Text from '../../../server/src/entity/literature/Text'
+import Text from '../../../server/src/entity/library/Text'
 import DictionaryResolver from '../../../server/src/resolver/dictionary'
 import { ResolverContext } from '../../../server/src/utils/ResolverContext'
 import { connectDatabase } from '../../../server/src/utils/database'
@@ -9,7 +9,7 @@ import {
   getWordGenerator,
 } from '../literature/generator'
 
-main()
+void main()
 async function main() {
   const connection = await connectDatabase()
   const Texts = connection.getRepository(Text)
@@ -20,7 +20,7 @@ async function main() {
   if (!text) return
   const lines = getLineGeneratorByText(text)
   const wordsWithNoResults = [] as string[]
-  const entryCounts = {} as { [word: string]: number }
+  const entryCounts = {} as Record<string, number>
   let lineCount = 0
 
   for await (const line of lines) {

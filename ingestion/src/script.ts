@@ -8,4 +8,4 @@ async function main() {
   await deleteManual('omnis:0')
   await createManual(omnis as Entry)
 }
-main()
+void main()

@@ -2,8 +2,8 @@ import { Logger } from 'typeorm'
 import { createLogger, format, transports } from 'winston'
 
 export const circularReplacer: () =>
-| ((this: any, key: string, value: any) => any)
-| undefined = () => {
+  | ((this: any, key: string, value: any) => any)
+  | undefined = () => {
   const seen = new WeakSet()
   return (_: any, value: any) => {
     if (typeof value === 'object' && value !== null) {
@@ -18,34 +18,36 @@ const consoleTransport = new transports.Console({
   format:
     process.env.NODE_ENV === 'production'
       ? format.combine(
-        format.timestamp(),
-        format((info) => {
-          if (typeof info.message !== 'object') return { ...info }
-          return {
-            ...info,
-            ...(info.message as Record<string, unknown>),
-            message: 'meta',
-          }
-        })(),
-        format.json({ replacer: circularReplacer() }),
-      )
+          format.timestamp(),
+          format((info) => {
+            if (typeof info.message !== 'object') return { ...info }
+            return {
+              ...info,
+              ...(info.message as Record<string, unknown>),
+              message: 'meta',
+            }
+          })(),
+          format.json({ replacer: circularReplacer() }),
+        )
       : format.combine(
-        format.timestamp(),
-        format.colorize(),
-        format.printf(({ timestamp, level, label, message, ...meta }) => {
-          label = label ? ` [${label}]` : ''
-          if (typeof message === 'string') {
-            if (Object.keys(meta).length) { message += ' ' + JSON.stringify(meta, circularReplacer(), 2) }
-          } else {
-            message = JSON.stringify(
-              { ...(message as Record<string, unknown>), ...meta },
-              circularReplacer(),
-              2,
-            )
-          }
-          return `${timestamp} ${level}${label}: ${message}`.trim()
-        }),
-      ),
+          format.timestamp(),
+          format.colorize(),
+          format.printf(({ timestamp, level, label, message, ...meta }) => {
+            label = label ? ` [${label}]` : ''
+            if (typeof message === 'string') {
+              if (Object.keys(meta).length) {
+                message += ' ' + JSON.stringify(meta, circularReplacer(), 2)
+              }
+            } else {
+              message = JSON.stringify(
+                { ...(message as Record<string, unknown>), ...meta },
+                circularReplacer(),
+                2,
+              )
+            }
+            return `${timestamp} ${level}${label}: ${message}`.trim()
+          }),
+        ),
 })
 
 const log = createLogger({

@@ -15,9 +15,9 @@ const TextBox = forwardRef(
   (
     { formik, name, ...props }: Props,
     ref:
-    | ((instance: HTMLDivElement | null) => void)
-    | MutableRefObject<HTMLDivElement | null>
-    | null,
+      | ((instance: HTMLDivElement | null) => void)
+      | MutableRefObject<HTMLDivElement | null>
+      | null,
   ) => {
     return (
       <TextField

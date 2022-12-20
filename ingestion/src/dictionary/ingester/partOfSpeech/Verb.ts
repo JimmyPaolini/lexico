@@ -67,11 +67,12 @@ export default class Verb extends Ingester {
         let mood = ''
         let voice = ''
         let tense = ''
-        for (const identifier of identifiers)
+        for (const identifier of identifiers) {
           if (isMood(identifier)) mood = identifier
           else if (isVoice(identifier)) voice = identifier
           else if (isTense(identifier)) tense = identifier
-        return sum_esse_fui[mood][voice][tense][number][person].map(
+        }
+        return SumEsseFui[mood][voice][tense][number][person].map(
           (ext: string) => identifiers[0] + ' ' + ext,
         )
       } else return [cell]
@@ -111,8 +112,9 @@ export default class Verb extends Ingester {
           if (cell.includes('<span ') || cell.includes(' + ')) {
             const c = cheerio.load(cell)
             const identifiers = findIdentifiers(i, j, table)
-            if (!(c as any).text().match(/[A-Za-zāēīōūȳ\-\s]+/))
+            if (!(c as any).text().match(/[A-Za-zāēīōūȳ\-\s]+/)) {
               return disorganizedForms
+            }
             disorganizedForms.push({
               word: parseWords(
                 (c as any).text(),
@@ -134,7 +136,7 @@ export default class Verb extends Ingester {
   }
 }
 
-const sum_esse_fui: { [key: string]: any } = {
+const SumEsseFui: Record<string, any> = {
   indicative: {
     active: {
       present: {
