@@ -16,7 +16,7 @@ export const CenterText = ({ centerText }: Props) => {
           textOverflow: 'ellipsis',
         }}
       >
-        {centerText}
+        {centerText ?? '-'}
       </Typography>
     </Grid>
   )
