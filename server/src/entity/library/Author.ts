@@ -1,12 +1,12 @@
 import { Field, ObjectType } from 'type-graphql'
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 
 import Book from './Book'
 import Text from './Text'
 
 @Entity()
 @ObjectType()
-export default class Author {
+export default class Author extends BaseEntity {
   @PrimaryColumn()
   @Field()
   id!: string

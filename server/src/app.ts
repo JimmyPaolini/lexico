@@ -6,10 +6,10 @@ import 'reflect-metadata'
 import log from '../../utils/log'
 import buildAPI from './utils/api'
 import { corsOptions } from './utils/cors'
-import { connectDatabase } from './utils/database'
+import { Database } from './utils/database'
 
 async function main() {
-  await connectDatabase()
+  await Database.initialize()
 
   const app = express()
   app.use(cors(corsOptions))

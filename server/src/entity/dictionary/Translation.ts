@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from 'type-graphql'
 import {
+  BaseEntity,
   Column,
   Entity,
   JoinColumn,
@@ -11,7 +12,7 @@ import Entry from './Entry'
 
 @Entity()
 @ObjectType()
-export default class Translation {
+export default class Translation extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => ID)
   id: string
@@ -29,6 +30,7 @@ export default class Translation {
   entry: Entry
 
   constructor(translation: string, entry: Entry) {
+    super()
     this.translation = translation
     this.entry = entry
   }

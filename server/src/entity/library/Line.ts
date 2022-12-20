@@ -1,11 +1,11 @@
 import { Field, ID, ObjectType } from 'type-graphql'
-import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm'
 
 import Text from './Text'
 
 @Entity()
 @ObjectType()
-export default class Line {
+export default class Line extends BaseEntity {
   @PrimaryColumn()
   @Field(() => ID)
   id!: string

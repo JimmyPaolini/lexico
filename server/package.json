@@ -16,7 +16,7 @@
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
-    "typeorm": "^0.2.45"
+    "typeorm": "^0.3.11"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",

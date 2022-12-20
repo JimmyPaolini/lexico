@@ -1,4 +1,4 @@
-import { ConnectionOptions } from 'typeorm'
+import { DataSourceOptions } from 'typeorm'
 
 import {
   POSTGRES_DB,
@@ -20,4 +20,4 @@ export default {
   logger: new DatabaseLogger(),
   maxQueryExecutionTime: 1000,
   cli: { entitiesDir: '../entity', migrationsDir: 'src/migration' },
-} as ConnectionOptions
+} as DataSourceOptions

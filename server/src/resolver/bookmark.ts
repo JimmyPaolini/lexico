@@ -6,7 +6,6 @@ import {
   Resolver,
   UseMiddleware,
 } from 'type-graphql'
-import { getConnection } from 'typeorm'
 
 import { Authenticate } from '../authentication/middleware'
 import Entry from '../entity/dictionary/Entry'
@@ -15,14 +14,14 @@ import { ResolverContext } from '../utils/ResolverContext'
 
 @Resolver(Entry)
 export default class BookmarkResolver {
-  Users = getConnection().getRepository(User)
-
   @Query(() => [Entry])
   @UseMiddleware(Authenticate)
   async bookmarks(@Ctx() { user: { id } }: ResolverContext): Promise<Entry[]> {
-    const user = await this.Users.findOneOrFail(id, {
-      relations: ['bookmarks'],
+    const user = await User.findOneOrFail({
+      where: { id },
+      relations: { bookmarks: true },
     })
+
     return (
       user.bookmarks?.map((entry) => {
         entry.bookmarked = true
@@ -44,7 +43,7 @@ export default class BookmarkResolver {
     if (bookmarks.length > 1000) {
       throw new Error('user cannot have over 1000 bookmarks')
     }
-    await this.Users.createQueryBuilder()
+    await User.createQueryBuilder()
       .relation(User, 'bookmarks')
       .of(user)
       .add(entryId)
@@ -61,7 +60,7 @@ export default class BookmarkResolver {
     if (!bookmarks.some((entry) => entry.id === entryId)) {
       throw new Error('user does not have entry bookmarked')
     }
-    await this.Users.createQueryBuilder()
+    await User.createQueryBuilder()
       .relation(User, 'bookmarks')
       .of(user)
       .remove(entryId)

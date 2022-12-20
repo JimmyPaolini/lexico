@@ -1,11 +1,11 @@
 import { Field, ObjectType } from 'type-graphql'
-import { Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm'
+import { BaseEntity, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm'
 
 import Entry from './Entry'
 
 @Entity()
 @ObjectType()
-export default class Word {
+export default class Word extends BaseEntity {
   @PrimaryColumn()
   @Field()
   word: string

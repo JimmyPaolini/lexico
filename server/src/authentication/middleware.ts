@@ -1,6 +1,5 @@
 import { JwtPayload, verify } from 'jsonwebtoken'
 import { MiddlewareFn } from 'type-graphql'
-import { getConnection } from 'typeorm'
 
 import User from '../entity/user/User'
 import { ResolverContext } from '../utils/ResolverContext'
@@ -20,7 +19,7 @@ export const Authenticate: MiddlewareFn<ResolverContext> = async (
   next,
 ) => {
   const userId = getUserIdFromContext(context)
-  const user = await getConnection().getRepository(User).findOne(userId)
+  const user = await User.findOne({ where: { id: userId } })
   if (!user) throw new Error('user does not exist')
   context.user = user
   return await next()
@@ -44,9 +43,10 @@ export const GetBookmarks: MiddlewareFn<ResolverContext> = async (
   } catch {
     return await next()
   }
-  const user = await getConnection()
-    .getRepository(User)
-    .findOne(userId, { relations: ['bookmarks'] })
+  const user = await User.findOne({
+    where: { id: userId },
+    relations: { bookmarks: true },
+  })
   if (!user) return await next()
   context.bookmarks = user.bookmarks
   return await next()

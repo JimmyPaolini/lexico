@@ -1,11 +1,11 @@
 import { Field, ID, ObjectType } from 'type-graphql'
-import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm'
 
 import User from '../user/User'
 
 @Entity()
 @ObjectType()
-export default class CustomText {
+export default class CustomText extends BaseEntity {
   @PrimaryColumn('uuid')
   @Field(() => ID)
   id!: string

@@ -6,7 +6,6 @@ import {
   Resolver,
   UseMiddleware,
 } from 'type-graphql'
-import { getConnection } from 'typeorm'
 
 import log from '../../../utils/log'
 import { Authenticate } from '../authentication/middleware'
@@ -15,7 +14,6 @@ import { ResolverContext } from '../utils/ResolverContext'
 
 @Resolver(CustomText)
 export default class CustomTextResolver {
-  CustomTexts = getConnection().getRepository(CustomText)
   CUSTOM_TEXT_COUNT_LIMIT = 3
 
   @Query(() => [CustomText])
@@ -23,10 +21,8 @@ export default class CustomTextResolver {
   async listCustomTexts(
     @Ctx() { user }: ResolverContext,
   ): Promise<CustomText[]> {
-    const customTexts = await this.CustomTexts.find({ user })
-    customTexts.sort((customText1, customText2) =>
-      customText1.title.localeCompare(customText2.title),
-    )
+    const customTexts = await CustomText.find({ where: { user: { id: user.id } } })
+    customTexts.sort((customText1, customText2) => customText1.title.localeCompare(customText2.title),)
     return customTexts
   }
 
@@ -37,7 +33,7 @@ export default class CustomTextResolver {
     @Ctx() { user }: ResolverContext,
   ): Promise<CustomText> {
     log.info('getCustomText', { id, user: user.email })
-    return await this.CustomTexts.findOneOrFail({ id, user })
+    return await CustomText.findOneOrFail({ where: { id, user: { id: user.id } } })
   }
 
   @Mutation(() => CustomText)
@@ -48,7 +44,7 @@ export default class CustomTextResolver {
     @Arg('text') text: string,
     @Ctx() { user }: ResolverContext,
   ): Promise<CustomText> {
-    const customTexts = await this.CustomTexts.find({ user })
+    const customTexts = await CustomText.find({ where: { user: { id: user.id } } })
     if (
       customTexts.length >= this.CUSTOM_TEXT_COUNT_LIMIT &&
       !customTexts.some((customText) => customText.id === id)
@@ -57,7 +53,7 @@ export default class CustomTextResolver {
         `user cannot have more than ${this.CUSTOM_TEXT_COUNT_LIMIT} custom texts`,
       )
     }
-    const customText = await this.CustomTexts.save({ id, title, text, user })
+    const customText = await CustomText.save({ id, title, text, user })
     log.info('createCustomText', {
       id: customText.id,
       title: customText.title,
@@ -72,7 +68,8 @@ export default class CustomTextResolver {
     @Arg('id') id: string,
     @Ctx() { user }: ResolverContext,
   ): Promise<boolean> {
-    await this.CustomTexts.delete({ id, user })
+    const customText = await CustomText.findOneOrFail({ where: { id, user: { id: user.id } } })
+    await CustomText.delete(customText.id)
     log.info('deleteCustomText', { id, user: user.email })
     return true
   }

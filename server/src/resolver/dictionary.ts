@@ -1,6 +1,5 @@
 import { performance } from 'perf_hooks'
 import { Arg, Ctx, Query, Resolver, UseMiddleware } from 'type-graphql'
-import { getConnection } from 'typeorm'
 
 import identifyEntryWord from '../../../utils/identifiers'
 import log from '../../../utils/log'
@@ -12,13 +11,11 @@ import Word from '../entity/dictionary/Word'
 import VerbForms from '../entity/dictionary/word/forms/VerbForms'
 import { ResolverContext } from '../utils/ResolverContext'
 import { camelCaseFuturePerfect } from '../utils/forms'
+import { In } from 'typeorm'
+import { Database } from '../utils/database'
 
 @Resolver(Entry)
 export default class DictionaryResolver {
-  Entries = getConnection().getRepository(Entry)
-  Translations = getConnection().getRepository(Translation)
-  Words = getConnection().getRepository(Word)
-
   @Query(() => [Entry])
   @UseMiddleware(GetBookmarks)
   async search(
@@ -59,7 +56,7 @@ export default class DictionaryResolver {
 
     search = search.toLowerCase().trim()
 
-    const word = await this.Words.findOne(search)
+    const word = await Word.findOne({ where: { word: search } })
     const entries = word?.entries ?? []
     entries.concat(await this.searchSuffixes(search))
 
@@ -89,8 +86,8 @@ export default class DictionaryResolver {
   async searchSuffix(search: string, suffix: string): Promise<Entry[]> {
     if (!hasSuffix(search, suffix)) return []
     const [nonSuffixWord, suffixEntry] = await Promise.all([
-      this.Words.findOne(search.replace(new RegExp(suffix + '$', 'i'), '')),
-      this.Entries.findOne(`-${suffix}:0`),
+      Word.findOne({ where: { word: search.replace(new RegExp(suffix + '$', 'i'), '') } }),
+      Entry.findOne({ where: { id: `-${suffix}:0` } }),
     ])
     return [
       ...(nonSuffixWord ? nonSuffixWord.entries : []),
@@ -118,9 +115,9 @@ export default class DictionaryResolver {
     if (!search) return []
     search = search.trim()
 
-    const translations = await this.Translations.createQueryBuilder(
-      'translation',
-    )
+    const translations = await Database
+      .getRepository(Translation)
+      .createQueryBuilder('translation')
       .where(`translation.translation ~* '(^| )${search}( |$)'`)
       .leftJoinAndSelect('translation.entry', 'entry')
       .leftJoinAndSelect('entry.translations', 'entryTranslations')
@@ -155,11 +152,11 @@ export default class DictionaryResolver {
 
   @Query(() => Entry)
   async entry(@Arg('id') id: string): Promise<Entry> {
-    return await this.Entries.findOneOrFail(id)
+    return await Entry.findOneOrFail({ where: { id } })
   }
 
   @Query(() => [Entry])
   async entries(@Arg('ids', () => [String]) ids: string[]): Promise<Entry[]> {
-    return await this.Entries.findByIds(ids, { order: { id: 'ASC' } })
+    return await Entry.find({ where: { id: In(ids) }, order: { id: 'ASC' } })
   }
 }

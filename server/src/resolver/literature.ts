@@ -24,17 +24,17 @@ export default class LiteratureResolver {
 
   @Query(() => [Author])
   async getAuthors(): Promise<Author[]> {
-    const authors = await this.Authors.find()
+    const authors = await Author.find()
     await Promise.all(
       authors.map(async (author) => {
-        author.texts = await this.Texts.createQueryBuilder()
+        author.texts = await Text.createQueryBuilder()
           .select()
           .where({ author })
           .getMany()
-        author.books = await this.Books.find({ author })
+        author.books = await Book.find({ where: { author: { id: author.id } } })
         await Promise.all(
           author.books.map(async (book) => {
-            book.texts = await this.Texts.createQueryBuilder()
+            book.texts = await Text.createQueryBuilder()
               .select()
               .where({ author, book })
               .getMany()
@@ -54,7 +54,7 @@ export default class LiteratureResolver {
 
   @Query(() => [Book])
   async getBooks(): Promise<Book[]> {
-    const books = await this.Books.find({
+    const books = await Book.find({
       relations: ['texts'],
       order: { title: 'ASC' },
     })
@@ -66,22 +66,23 @@ export default class LiteratureResolver {
 
   @Query(() => [Text])
   async getTexts(): Promise<Text[]> {
-    return await this.Texts.find({
+    return await Text.find({
       order: { title: 'ASC' },
     })
   }
 
   @Query(() => [Text])
   async getTextIds(): Promise<Text[]> {
-    return await this.Texts.createQueryBuilder().getMany()
+    return await Text.createQueryBuilder().getMany()
   }
 
   // GET
 
   @Query(() => Author)
   async getAuthor(@Arg('id') id: string): Promise<Author> {
-    const author = await this.Authors.findOneOrFail(id, {
-      relations: ['books', 'books.texts', 'texts'],
+    const author = await Author.findOneOrFail({
+      where: { id },
+      relations: { books: { texts: true }, texts: true }
     })
     author.books?.sort((a, b) => compareIds(a, b))
     author.books?.map((book) => book.texts.sort((a, b) => compareIds(a, b)))
@@ -91,14 +92,14 @@ export default class LiteratureResolver {
 
   @Query(() => Book)
   async getBook(@Arg('id') id: string): Promise<Book> {
-    const book = await this.Books.findOneOrFail(id, { relations: ['texts'] })
+    const book = await Book.findOneOrFail({ where: { id }, relations: { texts: true } })
     book.texts.sort((a, b) => compareIds(a, b))
     return book
   }
 
   @Query(() => Text)
   async getText(@Arg('id') id: string): Promise<Text> {
-    const text = await this.Texts.createQueryBuilder('text')
+    const text = await Text.createQueryBuilder('text')
       .where('text.id = :id', { id })
       .leftJoinAndSelect('text.author', 'author')
       .leftJoinAndSelect('text.book', 'book')
@@ -117,7 +118,7 @@ export default class LiteratureResolver {
     @Arg('title') title: string,
     @Arg('book', { nullable: true }) book?: string,
   ): Promise<Text> {
-    let query = this.Texts.createQueryBuilder('text').innerJoinAndSelect(
+    let query = Text.createQueryBuilder('text').innerJoinAndSelect(
       'text.author',
       'author',
       'author.name = :author',
@@ -147,7 +148,7 @@ export default class LiteratureResolver {
 
   @Query(() => [Author])
   async searchLiterature(@Arg('search') search: string): Promise<Author[]> {
-    const authors = await this.Authors.createQueryBuilder('author')
+    const authors = await Author.createQueryBuilder('author')
       .innerJoinAndSelect('author.books', 'book', 'book.title = :search', {
         search,
       })
@@ -175,7 +176,7 @@ export default class LiteratureResolver {
 
   @Query(() => [Author])
   async searchAuthors(@Arg('search') search: string): Promise<Author[]> {
-    return await this.Authors.find({
+    return await Author.find({
       where: [{ id: Like(`%${search}%`) }, { name: Like(`%${search}%`) }],
       relations: ['texts'],
       order: { id: 'ASC' },
@@ -184,7 +185,7 @@ export default class LiteratureResolver {
 
   @Query(() => [Book])
   async searchBooks(@Arg('search') search: string): Promise<Book[]> {
-    return await this.Books.find({
+    return await Book.find({
       where: { title: Like(`%${search}%`) },
       relations: ['texts'],
       order: { title: 'ASC' },
@@ -193,7 +194,7 @@ export default class LiteratureResolver {
 
   @Query(() => [Text])
   async searchTexts(@Arg('search') search: string): Promise<Text[]> {
-    return await this.Texts.find({
+    return await Text.find({
       where: { title: Like(`%${search}%`) },
       relations: ['lines'],
       order: { title: 'ASC' },
@@ -202,7 +203,7 @@ export default class LiteratureResolver {
 
   @Query(() => [Line])
   async searchLines(@Arg('search') search: string): Promise<Line[]> {
-    return await this.Lines.find({
+    return await Line.find({
       where: [{ line: Like(`%${search}%`) }],
       order: { lineNumber: 'ASC' },
     })

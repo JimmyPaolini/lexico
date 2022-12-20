@@ -1,5 +1,6 @@
 import { Arg, Field, ID, ObjectType } from 'type-graphql'
 import {
+  BaseEntity,
   Column,
   Entity,
   JoinColumn,
@@ -14,7 +15,7 @@ import Line from './Line'
 
 @Entity()
 @ObjectType()
-export default class Text {
+export default class Text extends BaseEntity {
   @PrimaryColumn()
   @Field(() => ID)
   id!: string

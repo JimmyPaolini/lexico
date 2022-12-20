@@ -27,7 +27,7 @@ export default class UserResolver {
         process.env.JWT_SECRET!,
       ) as JwtPayload
       if (!claims?.sub) return null
-      const user = await this.Users.findOne(claims.sub)
+      const user = await this.Users.findOne({ where: { id: claims.sub } })
       return user ?? null
     } catch {
       return null
