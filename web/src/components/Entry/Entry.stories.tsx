@@ -8,7 +8,7 @@ export default {
   component: Entry,
 } as ComponentMeta<typeof Entry>
 
-export const Verb: ComponentStory<typeof Entry> & { loaders: any[] } = (
+export const Verb: ComponentStory<typeof Entry> = (
   args,
   { loaded },
 ) => <Entry {...args} {...loaded} />
@@ -20,7 +20,7 @@ Verb.loaders = [
   },
 ]
 
-export const Adjective: ComponentStory<typeof Entry> & { loaders: any[] } = (
+export const Adjective: ComponentStory<typeof Entry> = (
   args,
   { loaded },
 ) => <Entry {...args} {...loaded} />
@@ -32,7 +32,7 @@ Adjective.loaders = [
   },
 ]
 
-export const Noun: ComponentStory<typeof Entry> & { loaders: any[] } = (
+export const Noun: ComponentStory<typeof Entry> = (
   args,
   { loaded },
 ) => <Entry {...args} {...loaded} />
