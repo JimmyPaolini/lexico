@@ -27,7 +27,7 @@ export default function Settings() {
   useEffect(() => {
     if (!user && showSettingsInstructions()) {
       enqueueSnackbar(
-        'Your settings are saved locally, sign in to save them across devices/browsers',
+        'Your settings are saved locally, sign in to save them across devices/browsers'
       )
     }
   }, [])
@@ -66,7 +66,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   await queryClient.prefetchQuery(
     useUserQuery.getKey({}),
     getUserFetcher(headers),
-    { staleTime: 1000 * 60 * 5 }, // 5 minutes
+    { staleTime: 1000 * 60 * 5 } // 5 minutes
   )
   return { props: { dehydratedState: dehydrate(queryClient) } }
 }

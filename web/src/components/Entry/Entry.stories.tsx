@@ -8,10 +8,9 @@ export default {
   component: Entry,
 } as ComponentMeta<typeof Entry>
 
-export const Verb: ComponentStory<typeof Entry> = (
-  args,
-  { loaded },
-) => <Entry {...args} {...loaded} />
+export const Verb: ComponentStory<typeof Entry> = (args, { loaded }) => (
+  <Entry {...args} {...loaded} />
+)
 Verb.args = { searched: 'amat' }
 Verb.loaders = [
   async () => {
@@ -20,10 +19,9 @@ Verb.loaders = [
   },
 ]
 
-export const Adjective: ComponentStory<typeof Entry> = (
-  args,
-  { loaded },
-) => <Entry {...args} {...loaded} />
+export const Adjective: ComponentStory<typeof Entry> = (args, { loaded }) => (
+  <Entry {...args} {...loaded} />
+)
 Adjective.args = { searched: 'amoeni' }
 Adjective.loaders = [
   async () => {
@@ -32,10 +30,9 @@ Adjective.loaders = [
   },
 ]
 
-export const Noun: ComponentStory<typeof Entry> = (
-  args,
-  { loaded },
-) => <Entry {...args} {...loaded} />
+export const Noun: ComponentStory<typeof Entry> = (args, { loaded }) => (
+  <Entry {...args} {...loaded} />
+)
 Noun.args = { searched: 'pater' }
 Noun.loaders = [
   async () => {

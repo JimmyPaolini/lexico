@@ -8,7 +8,7 @@ import { connectDatabase } from '../../../server/src/utils/database'
 import { normalize } from '../../../web/src/utils/string'
 
 async function* getLineGeneratorSearch(
-  where: ObjectLiteral,
+  where: ObjectLiteral
 ): AsyncGenerator<Line> {
   let connection
   try {

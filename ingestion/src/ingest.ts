@@ -45,7 +45,7 @@ async function main() {
         ingestBible('https://vulgate.org/', 'https://vulgate.org/'),
         ingestBible(
           'https://vulgate.org/nt/gospel/',
-          'https://vulgate.org/nt/gospel/matthew_1.htm',
+          'https://vulgate.org/nt/gospel/matthew_1.htm'
         ),
       ]),
   } as Record<string, () => any>

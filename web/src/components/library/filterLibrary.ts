@@ -2,7 +2,7 @@ import { Author, Book, Text } from 'src/graphql/generated'
 
 export const filterLibrary = (
   authors: Author[],
-  searched: string,
+  searched: string
 ): Author[] => {
   if (!searched) return authors
   const re = new RegExp(searched, 'i')

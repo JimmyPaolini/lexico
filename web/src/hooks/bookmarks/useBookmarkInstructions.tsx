@@ -10,7 +10,7 @@ export const useBookmarkInstructions = (user?: User): void => {
   useEffect(() => {
     if (!user && showBookmarkInstructions()) {
       enqueueSnackbar(
-        'Your bookmarks are saved locally, sign in to save them across devices/browsers',
+        'Your bookmarks are saved locally, sign in to save them across devices/browsers'
       )
     }
   }, [])

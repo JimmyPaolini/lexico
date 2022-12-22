@@ -6,19 +6,19 @@ class ShowReaderInstructions {
 export function showReaderInstructions(): boolean {
   if (typeof window === 'undefined') return false
   const showReaderInstructions = JSON.parse(
-    window.localStorage.showReaderInstructions || 'null',
+    window.localStorage.showReaderInstructions || 'null'
   ) as ShowReaderInstructions
 
   if (!showReaderInstructions) {
     window.localStorage.showReaderInstructions = JSON.stringify(
-      new ShowReaderInstructions(),
+      new ShowReaderInstructions()
     )
     return true
   }
 
   if (new Date() >= new Date(showReaderInstructions.showAfter)) {
     window.localStorage.showReaderInstructions = JSON.stringify(
-      updateShowReaderInstructions(showReaderInstructions),
+      updateShowReaderInstructions(showReaderInstructions)
     )
     return true
   } else {
@@ -27,7 +27,7 @@ export function showReaderInstructions(): boolean {
 }
 
 function updateShowReaderInstructions(
-  showReaderInstructions: ShowReaderInstructions,
+  showReaderInstructions: ShowReaderInstructions
 ) {
   if (showReaderInstructions.seenCount < 3) {
     const immediately = new Date()

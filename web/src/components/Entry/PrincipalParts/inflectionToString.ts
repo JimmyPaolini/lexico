@@ -9,11 +9,11 @@ import VerbInflection from '../../../../../entity/dictionary/word/inflection/Ver
 
 export const inflectionToString = (
   inflection: Inflection | null | undefined,
-  partOfSpeech: string,
+  partOfSpeech: string
 ): string => {
   const isNoun = ['noun', 'properNoun'].includes(partOfSpeech)
   const isAdjective = ['adjective', 'participle', 'numeral', 'suffix'].includes(
-    partOfSpeech,
+    partOfSpeech
   )
   if (isNoun) {
     const declension = (inflection as NounInflection)?.declension

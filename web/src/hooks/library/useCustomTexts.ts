@@ -15,7 +15,7 @@ type useCustomTextsReturn = {
 
 export const useCustomTexts = (): useCustomTextsReturn => {
   const [customTextsLocal, setCustomTextsLocal] = useState<CustomText[]>(
-    listCustomTextsLocal(),
+    listCustomTextsLocal()
   )
 
   const {

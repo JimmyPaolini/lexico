@@ -48,7 +48,7 @@ export default function Reader({ text }: Props) {
   useEffect(() => {
     if (showReaderInstructions()) {
       enqueueSnackbar(
-        'Click a word to see its dictionary entry, then click elsewhere or swipe it away to keep reading',
+        'Click a word to see its dictionary entry, then click elsewhere or swipe it away to keep reading'
       )
     }
   }, [])

@@ -7,19 +7,19 @@ class ShowBookmarkInstructions {
 export function showBookmarkInstructions(): boolean {
   if (typeof window === 'undefined') return false
   const showBookmarkInstructions = JSON.parse(
-    window.localStorage.showBookmarkInstructions || 'null',
+    window.localStorage.showBookmarkInstructions || 'null'
   ) as ShowBookmarkInstructions
 
   if (!showBookmarkInstructions) {
     window.localStorage.showBookmarkInstructions = JSON.stringify(
-      new ShowBookmarkInstructions(),
+      new ShowBookmarkInstructions()
     )
     return true
   }
 
   if (new Date() >= new Date(showBookmarkInstructions.showAfter)) {
     window.localStorage.showBookmarkInstructions = JSON.stringify(
-      updateShowBookmarkInstructions(showBookmarkInstructions),
+      updateShowBookmarkInstructions(showBookmarkInstructions)
     )
     return true
   } else {
@@ -28,7 +28,7 @@ export function showBookmarkInstructions(): boolean {
 }
 
 function updateShowBookmarkInstructions(
-  showBookmarkInstructions: ShowBookmarkInstructions,
+  showBookmarkInstructions: ShowBookmarkInstructions
 ) {
   if (showBookmarkInstructions.seenCount < 10) {
     const nextHour = new Date(Date.now() + 1 * 60 * 60 * 1000)

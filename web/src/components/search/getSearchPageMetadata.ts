@@ -1,5 +1,5 @@
 export const getSearchPageMetadata = (
-  searched: string,
+  searched: string
 ): {
   title: string
   description: string

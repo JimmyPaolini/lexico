@@ -8,7 +8,7 @@ const translationSkipRegex =
 export default async function parseTranslations(
   $: cheerio.Root,
   elt: any,
-  entry: Entry,
+  entry: Entry
 ): Promise<Translation[]> {
   const translationsHeader = $(elt).nextAll('ol').first()
   if (translationsHeader.length <= 0) return []

@@ -5,7 +5,7 @@ import { adjectiveFormsTableTemplate } from './adjectiveFormsTableTemplate'
 
 export const adjectiveFormsRestructure = (forms: AdjectiveForms) => {
   const structure = JSON.parse(
-    JSON.stringify(adjectiveFormsTableTemplate),
+    JSON.stringify(adjectiveFormsTableTemplate)
   ) as typeof adjectiveFormsTableTemplate
 
   function structureGender(struc: typeof structure, gender: Gender) {
@@ -44,7 +44,7 @@ export const adjectiveFormsRestructure = (forms: AdjectiveForms) => {
           topLeftText: 'vocative',
           topRightText: 'plural',
           centerText: forms?.[gender]?.vocative?.plural?.join(',\n') ?? '-',
-        },
+        }
       )
     }
 
@@ -61,7 +61,7 @@ export const adjectiveFormsRestructure = (forms: AdjectiveForms) => {
           topLeftText: 'locative',
           topRightText: 'plural',
           centerText: forms?.[gender]?.locative?.plural?.join(',\n') ?? '-',
-        },
+        }
       )
     }
   }

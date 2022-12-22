@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const { headers, errors } = await rawRequest(
     serverEndpoint,
     print(facebookQuery),
-    { code },
+    { code }
   )
   const cookieHeader = headers.get('set-cookie')
   if (!errors && cookieHeader) res.setHeader('set-cookie', cookieHeader)

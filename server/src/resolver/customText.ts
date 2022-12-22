@@ -19,13 +19,13 @@ export class CustomTextResolver {
   @Query(() => [CustomText])
   @UseMiddleware(Authenticate)
   async listCustomTexts(
-    @Ctx() { user }: ResolverContext,
+    @Ctx() { user }: ResolverContext
   ): Promise<CustomText[]> {
     const customTexts = await CustomText.find({
       where: { user: { id: user.id } },
     })
     customTexts.sort((customText1, customText2) =>
-      customText1.title.localeCompare(customText2.title),
+      customText1.title.localeCompare(customText2.title)
     )
     return customTexts
   }
@@ -34,7 +34,7 @@ export class CustomTextResolver {
   @UseMiddleware(Authenticate)
   async getCustomText(
     @Arg('id') id: string,
-    @Ctx() { user }: ResolverContext,
+    @Ctx() { user }: ResolverContext
   ): Promise<CustomText> {
     log.info('getCustomText', { id, user: user.email })
     return await CustomText.findOneOrFail({
@@ -48,7 +48,7 @@ export class CustomTextResolver {
     @Arg('id') id: string,
     @Arg('title') title: string,
     @Arg('text') text: string,
-    @Ctx() { user }: ResolverContext,
+    @Ctx() { user }: ResolverContext
   ): Promise<CustomText> {
     const customTexts = await CustomText.find({
       where: { user: { id: user.id } },
@@ -58,7 +58,7 @@ export class CustomTextResolver {
       !customTexts.some((customText) => customText.id === id)
     ) {
       throw new Error(
-        `user cannot have more than ${this.CUSTOM_TEXT_COUNT_LIMIT} custom texts`,
+        `user cannot have more than ${this.CUSTOM_TEXT_COUNT_LIMIT} custom texts`
       )
     }
     const customText = await CustomText.save({ id, title, text, user })
@@ -74,7 +74,7 @@ export class CustomTextResolver {
   @UseMiddleware(Authenticate)
   async deleteCustomText(
     @Arg('id') id: string,
-    @Ctx() { user }: ResolverContext,
+    @Ctx() { user }: ResolverContext
   ): Promise<boolean> {
     const customText = await CustomText.findOneOrFail({
       where: { id, user: { id: user.id } },

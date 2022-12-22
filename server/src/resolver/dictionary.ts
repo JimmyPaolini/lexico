@@ -20,7 +20,7 @@ export class DictionaryResolver {
   @UseMiddleware(GetBookmarks)
   async search(
     @Arg('search') search: string,
-    @Ctx() context: ResolverContext,
+    @Ctx() context: ResolverContext
   ): Promise<Entry[]> {
     const t0 = performance.now()
 
@@ -32,7 +32,7 @@ export class DictionaryResolver {
       ...latinEntries,
       ...englishEntries.filter(
         (englishEntry) =>
-          !latinEntries.some((latinEntry) => latinEntry.id !== englishEntry.id),
+          !latinEntries.some((latinEntry) => latinEntry.id !== englishEntry.id)
       ),
     ]
 
@@ -49,7 +49,7 @@ export class DictionaryResolver {
   @UseMiddleware(GetBookmarks)
   async searchLatin(
     @Arg('search') search: string,
-    @Ctx() { bookmarks }: ResolverContext,
+    @Ctx() { bookmarks }: ResolverContext
   ): Promise<Entry[]> {
     const t0 = performance.now()
     if (!search?.match(/^-?(\w| )+\.?$/)) return []
@@ -68,7 +68,7 @@ export class DictionaryResolver {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
         }
         entry.bookmarked = bookmarks?.some(
-          (bookmark) => bookmark.id === entry.id,
+          (bookmark) => bookmark.id === entry.id
         )
         entry.isLatinSearchResult = true
         return entry
@@ -111,7 +111,7 @@ export class DictionaryResolver {
   @UseMiddleware(GetBookmarks)
   async searchEnglish(
     @Arg('search') search: string,
-    @Ctx() { bookmarks }: ResolverContext,
+    @Ctx() { bookmarks }: ResolverContext
   ): Promise<Entry[]> {
     const t0 = performance.now()
     if (!search) return []
@@ -132,14 +132,14 @@ export class DictionaryResolver {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
         }
         entry.bookmarked = bookmarks?.some(
-          (bookmark) => bookmark.id === entry.id,
+          (bookmark) => bookmark.id === entry.id
         )
         entry.isLatinSearchResult = false
         return entry
       })
       .filter(
         (entry, index, self) =>
-          index === self.findIndex((duplicate) => duplicate.id === entry.id),
+          index === self.findIndex((duplicate) => duplicate.id === entry.id)
       )
 
     log.info('searchEnglish', {

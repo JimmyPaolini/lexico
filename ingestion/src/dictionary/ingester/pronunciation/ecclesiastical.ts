@@ -1,5 +1,5 @@
 export default function getEcclesiasticalPhonemes(
-  wordString: string,
+  wordString: string
 ): Array<string | string[][]> {
   const phonemes: Array<string | string[][]> = []
   const isVowel = (letter: string) => ['a', 'e', 'i', 'o', 'u'].includes(letter)

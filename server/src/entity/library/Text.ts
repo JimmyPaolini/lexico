@@ -46,7 +46,7 @@ export default class Text extends BaseEntity {
     // eslint-disable-next-line @typescript-eslint/no-inferrable-types
     @Arg('start', { defaultValue: 0 }) start: number = 0,
     @Arg('end', { defaultValue: Number.MAX_VALUE })
-    end: number = Number.MAX_VALUE,
+    end: number = Number.MAX_VALUE
   ): Line[] {
     return this.lines
       .sort((l1, l2) => l1.lineNumber - l2.lineNumber)

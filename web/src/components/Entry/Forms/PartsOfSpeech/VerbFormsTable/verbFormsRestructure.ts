@@ -15,89 +15,89 @@ export const verbFormsRestructure = (conjugations: VerbForms) => {
 
   toFormsTable(
     conjugations?.indicative?.active?.present,
-    structure.indicative.present.active,
+    structure.indicative.present.active
   )
   toFormsTable(
     conjugations?.indicative?.passive?.present,
-    structure.indicative.present.passive,
+    structure.indicative.present.passive
   )
   toFormsTable(
     conjugations?.indicative?.active?.imperfect,
-    structure.indicative.imperfect.active,
+    structure.indicative.imperfect.active
   )
   toFormsTable(
     conjugations?.indicative?.passive?.imperfect,
-    structure.indicative.imperfect.passive,
+    structure.indicative.imperfect.passive
   )
   toFormsTable(
     conjugations?.indicative?.active?.future,
-    structure.indicative.future.active,
+    structure.indicative.future.active
   )
   toFormsTable(
     conjugations?.indicative?.passive?.future,
-    structure.indicative.future.passive,
+    structure.indicative.future.passive
   )
   toFormsTable(
     conjugations?.indicative?.active?.perfect,
-    structure.indicative.perfect.active,
+    structure.indicative.perfect.active
   )
   toFormsTable(
     conjugations?.indicative?.passive?.perfect,
-    structure.indicative.perfect.passive,
+    structure.indicative.perfect.passive
   )
   toFormsTable(
     conjugations?.indicative?.active?.pluperfect,
-    structure.indicative.pluperfect.active,
+    structure.indicative.pluperfect.active
   )
   toFormsTable(
     conjugations?.indicative?.passive?.pluperfect,
-    structure.indicative.pluperfect.passive,
+    structure.indicative.pluperfect.passive
   )
   toFormsTable(
     conjugations?.indicative?.active?.futurePerfect,
-    structure.indicative['future perfect'].active,
+    structure.indicative['future perfect'].active
   )
   toFormsTable(
     conjugations?.indicative?.passive?.futurePerfect,
-    structure.indicative['future perfect'].passive,
+    structure.indicative['future perfect'].passive
   )
 
   toFormsTable(
     conjugations?.subjunctive?.active?.present,
-    structure.subjunctive.present.active,
+    structure.subjunctive.present.active
   )
   toFormsTable(
     conjugations?.subjunctive?.passive?.present,
-    structure.subjunctive.present.passive,
+    structure.subjunctive.present.passive
   )
   toFormsTable(
     conjugations?.subjunctive?.active?.imperfect,
-    structure.subjunctive.imperfect.active,
+    structure.subjunctive.imperfect.active
   )
   toFormsTable(
     conjugations?.subjunctive?.passive?.imperfect,
-    structure.subjunctive.imperfect.passive,
+    structure.subjunctive.imperfect.passive
   )
   toFormsTable(
     conjugations?.subjunctive?.active?.perfect,
-    structure.subjunctive.perfect.active,
+    structure.subjunctive.perfect.active
   )
   toFormsTable(
     conjugations?.subjunctive?.passive?.perfect,
-    structure.subjunctive.perfect.passive,
+    structure.subjunctive.perfect.passive
   )
   toFormsTable(
     conjugations?.subjunctive?.active?.pluperfect,
-    structure.subjunctive.pluperfect.active,
+    structure.subjunctive.pluperfect.active
   )
   toFormsTable(
     conjugations?.subjunctive?.passive?.pluperfect,
-    structure.subjunctive.pluperfect.passive,
+    structure.subjunctive.pluperfect.passive
   )
 
   structure.imperative.imperative.active[0].centerText =
     conjugations?.imperative?.active?.present?.singular?.second?.join?.(
-      ',\n',
+      ',\n'
     ) ?? '-'
   structure.imperative.imperative.active[2].centerText =
     conjugations?.imperative?.active?.future?.singular?.second?.join?.(',\n') ??
@@ -116,11 +116,11 @@ export const verbFormsRestructure = (conjugations: VerbForms) => {
     '-'
   structure.imperative.imperative.passive[0].centerText =
     conjugations?.imperative?.passive?.present?.singular?.second?.join?.(
-      ',\n',
+      ',\n'
     ) ?? '-'
   structure.imperative.imperative.passive[2].centerText =
     conjugations?.imperative?.passive?.future?.singular?.second?.join?.(
-      ',\n',
+      ',\n'
     ) ?? '-'
   structure.imperative.imperative.passive[4].centerText =
     conjugations?.imperative?.passive?.future?.singular?.third?.join?.(',\n') ??

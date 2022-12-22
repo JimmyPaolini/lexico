@@ -1,12 +1,12 @@
 import { CssBaseline, ThemeProvider } from '@mui/material'
 
+import '@fontsource/material-icons'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import '@fontsource/material-icons';
 import { ContextProvider } from 'src/components/layout/Context'
 import { SnackbarProvider } from 'src/components/layout/SnackbarProvider'
 import theme from 'src/theme'

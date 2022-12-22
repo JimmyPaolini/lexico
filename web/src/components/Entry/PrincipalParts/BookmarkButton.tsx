@@ -21,7 +21,7 @@ export const BookmarkButton = ({ id, bookmarked: bookmarkedRemote }: Props) => {
     bookmarked,
     setBookmarked,
     queryClient,
-    user,
+    user
   )
 
   if (bookmarkedRemote === undefined) return <></>

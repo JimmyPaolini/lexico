@@ -6,7 +6,7 @@ import log from '../../../utils/log'
 import { escapeCapitals } from '../../../utils/string'
 
 export async function ingestTranslationReference(
-  translation: Translation,
+  translation: Translation
 ): Promise<void> {
   const Translations = getConnection().getRepository(Translation)
   const Entries = getConnection().getRepository(Entry)
@@ -20,15 +20,15 @@ export async function ingestTranslationReference(
     .getMany()
   const entry =
     entries.find(
-      (entry) => entry.partOfSpeech === translation.entry.partOfSpeech,
+      (entry) => entry.partOfSpeech === translation.entry.partOfSpeech
     ) ?? entries[0]
   if (!entry) log.info(translation)
 
   await Translations.save(
     (entry?.translations ?? []).map(
       (referencedTranslation) =>
-        new Translation(referencedTranslation.translation, translation.entry),
-    ),
+        new Translation(referencedTranslation.translation, translation.entry)
+    )
   )
 
   translation.translation = translation.translation

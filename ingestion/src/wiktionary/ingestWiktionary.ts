@@ -10,9 +10,9 @@ const putItemHtml = (entry: any) =>
   fs.writeFileSync(
     fp.join(
       process.cwd(),
-      `./data/wiktionary/${escapeCapitals(entry.word)}.json`,
+      `./data/wiktionary/${escapeCapitals(entry.word)}.json`
     ),
-    JSON.stringify(entry),
+    JSON.stringify(entry)
   )
 
 export const categories: Record<string, string> = {
@@ -39,7 +39,7 @@ async function ingestCategory(category = 'lemma'): Promise<void> {
       log.info(host + path)
       const $ = cheerio.load((await axios.get(host + path)).data)
       for (const a of $(
-        '#mw-pages div.mw-category > div.mw-category-group > ul > li a',
+        '#mw-pages div.mw-category > div.mw-category-group > ul > li a'
       ).get()) {
         const word = $(a).text()
         const href = $(a).attr('href') ?? ''
@@ -50,7 +50,7 @@ async function ingestCategory(category = 'lemma'): Promise<void> {
     }
   } catch (e: any) {
     log.error(
-      `Error on url "https://en.wiktionary.org${path}" - ${e.toString()}`,
+      `Error on url "https://en.wiktionary.org${path}" - ${e.toString()}`
     )
     return await ingestCategory(path)
   }
@@ -59,7 +59,7 @@ async function ingestCategory(category = 'lemma'): Promise<void> {
 async function ingestWord(
   word: string,
   path: string,
-  category: string,
+  category: string
 ): Promise<any> {
   // if (!word.match(/^[A-Za-z-.`,!; ]*\$/)) return log.info(chalk.error(`Error "${entry.word}" - contains special characters`));
   if (!path.match(/.*#Latin/)) path += '#Latin'

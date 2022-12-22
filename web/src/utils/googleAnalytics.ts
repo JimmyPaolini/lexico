@@ -13,7 +13,7 @@ type GoogleAnalyticsEventParams = {
 }
 export function googleAnalyticsEvent(
   action: string,
-  { category, label, value, ...params }: GoogleAnalyticsEventParams,
+  { category, label, value, ...params }: GoogleAnalyticsEventParams
 ): void {
   if (typeof window === 'undefined') return
   const gtag = (window as any)?.gtag

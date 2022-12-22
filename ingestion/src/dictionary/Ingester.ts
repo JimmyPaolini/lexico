@@ -42,7 +42,7 @@ export default abstract class Ingester {
       this,
       this.$,
       this.elt,
-      this.firstPrincipalPartName,
+      this.firstPrincipalPartName
     )
     return this.principalParts
   }

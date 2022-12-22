@@ -31,6 +31,6 @@ export const useEventListener = (eventName: string, handler: any): void => {
         window.removeEventListener(eventName, eventListener)
       }
     },
-    [eventName], // Re-run if eventName changes
+    [eventName] // Re-run if eventName changes
   )
 }

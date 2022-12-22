@@ -29,7 +29,7 @@ async function main() {
       Array.from(words).map(async (word) => {
         const entries = await dictionaryResolver.searchLatin(
           word,
-          {} as ResolverContext,
+          {} as ResolverContext
         )
         if (!entries.length) wordsWithNoResults.push(word)
         else {
@@ -38,7 +38,7 @@ async function main() {
             entryCounts[entry.id]++
           }
         }
-      }),
+      })
     )
     lineCount++
   }
@@ -56,7 +56,7 @@ async function main() {
         wordsWithNoResults,
       },
       null,
-      2,
-    ),
+      2
+    )
   )
 }

@@ -26,7 +26,7 @@ export const Deck = ({ Cards }: Props) => {
 
   const CardMatrix = useMemo<Card[][]>(
     () => arrangeCards(Cards, numCols),
-    [Cards, numCols],
+    [Cards, numCols]
   )
 
   return !CardMatrix?.[0]?.length ? null : (
@@ -55,7 +55,7 @@ export const Deck = ({ Cards }: Props) => {
                 timeout={Math.min(
                   theme.transitions.duration.shortest *
                     Math.pow(colNum + rowNum, 1 / 2),
-                  theme.transitions.duration.standard,
+                  theme.transitions.duration.standard
                 )}
               >
                 <Grid item sx={{ width: '100%' }}>
@@ -77,7 +77,7 @@ function arrangeCards(Cards: Card[], numCols: number): Card[][] {
     return [[]]
   } else {
     return [...Array(numCols).keys()].map((_, colNum) =>
-      Cards.filter((_, rowNum) => rowNum % numCols === colNum),
+      Cards.filter((_, rowNum) => rowNum % numCols === colNum)
     )
   }
 }

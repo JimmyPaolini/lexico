@@ -14,7 +14,7 @@ import {
 
 export async function buildAPI(
   app: Express,
-  cors: CorsOptions,
+  cors: CorsOptions
 ): Promise<ApolloServer> {
   const api = new ApolloServer({
     schema: await buildSchema({

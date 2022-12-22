@@ -73,7 +73,7 @@ export default class Verb extends Ingester {
           else if (isTense(identifier)) tense = identifier
         }
         return SumEsseFui[mood][voice][tense][number][person].map(
-          (ext: string) => identifiers[0] + ' ' + ext,
+          (ext: string) => identifiers[0] + ' ' + ext
         )
       } else return [cell]
     }
@@ -101,7 +101,7 @@ export default class Verb extends Ingester {
           .replace(/future\s?perfect/i, 'futurePerfect')
           .replace('non-finite forms', 'nonFinite')
           .replace('verbal nouns', 'verbalNouns')
-          .replace(/s$/, ''),
+          .replace(/s$/, '')
       )
     }
 
@@ -119,7 +119,7 @@ export default class Verb extends Ingester {
               word: parseWords(
                 (c as any).text(),
                 identifiers[1],
-                identifiers[0],
+                identifiers[0]
               ),
               identifiers,
             })
@@ -127,7 +127,7 @@ export default class Verb extends Ingester {
           return disorganizedForms
         })
       },
-      [],
+      []
     )
     for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
       sortIdentifiers(inflection, forms)

@@ -20,7 +20,7 @@ export const circularReplacer: () =>
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ): Promise<void> => {
   const request: AxiosRequestConfig = {
     ...req,

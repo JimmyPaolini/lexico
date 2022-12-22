@@ -13,7 +13,7 @@ export const SnackbarContext = createContext(
   {} as {
     snackbarProps: SnackbarProps
     setSnackbarProps: Dispatch<SetStateAction<SnackbarProps>>
-  },
+  }
 )
 
 type Props = PropsWithChildren<Record<string, unknown>>

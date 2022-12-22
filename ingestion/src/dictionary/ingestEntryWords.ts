@@ -19,7 +19,7 @@ export function getEntryWords(entry: Entry): string[] {
 
 export async function ingestEntryWord(
   word: string,
-  entry: Entry,
+  entry: Entry
 ): Promise<void> {
   const Words = getConnection().getRepository(Word)
   word = escapeCapitals(normalize(word))

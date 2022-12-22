@@ -22,8 +22,8 @@ async function main() {
     log.info(
       `listening at http://${
         process.env.NODE_ENV === 'production' ? 'server' : 'localhost'
-      }:3001/`,
-    ),
+      }:3001/`
+    )
   )
 }
 void main()

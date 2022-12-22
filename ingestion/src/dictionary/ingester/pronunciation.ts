@@ -10,7 +10,7 @@ export default function parsePronunciation(
   ingester: Ingester,
   $: cheerio.Root,
   elt: any,
-  macronizedWord: string,
+  macronizedWord: string
 ): Pronunciation {
   if (!macronizedWord) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises

@@ -28,7 +28,7 @@ export const nounFormsRestructure = (declensions: NounForms) => {
         topLeftText: 'vocative',
         topRightText: 'plural',
         centerText: declensions?.vocative?.plural?.join(',\n') ?? '-',
-      },
+      }
     )
   }
 
@@ -45,7 +45,7 @@ export const nounFormsRestructure = (declensions: NounForms) => {
         topLeftText: 'locative',
         topRightText: 'plural',
         centerText: declensions?.locative?.plural?.join(',\n') ?? '-',
-      },
+      }
     )
   }
 

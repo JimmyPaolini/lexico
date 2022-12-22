@@ -21,7 +21,7 @@ export default async function ingestTranslationReferences(): Promise<void> {
     translations = await Translations.find(params)
   ) {
     log.info(
-      `selected ${translations.length} from translation ${translations[0].translation}`,
+      `selected ${translations.length} from translation ${translations[0].translation}`
     )
     for (const translation of translations) {
       await ingestTranslationReference(translation)

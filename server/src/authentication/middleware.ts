@@ -8,7 +8,7 @@ const getUserIdFromContext = (context: ResolverContext) => {
   if (!context?.req?.cookies?.accessToken) throw new Error('no user signed in')
   const claims = verify(
     context.req.cookies.accessToken,
-    process.env.JWT_SECRET as string,
+    process.env.JWT_SECRET as string
   ) as JwtPayload
   if (!claims?.sub) throw new Error('invalid access token')
   return claims.sub
@@ -16,7 +16,7 @@ const getUserIdFromContext = (context: ResolverContext) => {
 
 export const Authenticate: MiddlewareFn<ResolverContext> = async (
   { context },
-  next,
+  next
 ) => {
   const userId = getUserIdFromContext(context)
   const user = await User.findOne({ where: { id: userId } })
@@ -27,7 +27,7 @@ export const Authenticate: MiddlewareFn<ResolverContext> = async (
 
 export const IsAuthenticated: MiddlewareFn<ResolverContext> = async (
   { context },
-  next,
+  next
 ) => {
   getUserIdFromContext(context)
   return await next()
@@ -35,7 +35,7 @@ export const IsAuthenticated: MiddlewareFn<ResolverContext> = async (
 
 export const GetBookmarks: MiddlewareFn<ResolverContext> = async (
   { context },
-  next,
+  next
 ) => {
   let userId
   try {

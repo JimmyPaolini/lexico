@@ -6,7 +6,7 @@ import { romanToDecimal } from '../../../web/src/utils/romanNumeral'
 
 export default async function ingestBible(
   origin: string,
-  request: string,
+  request: string
 ): Promise<void> {
   const response = await axios.get(request)
   const $ = cheerio.load(response.data)
@@ -19,7 +19,7 @@ export default async function ingestBible(
     })) as Chapter[]
 
   await Promise.all(
-    chapters.map(async (chapter) => await ingestChapter(chapter)),
+    chapters.map(async (chapter) => await ingestChapter(chapter))
   )
 }
 
@@ -41,7 +41,7 @@ async function ingestChapter(chapter: Chapter) {
     bookTitle = bookTitle.replace(
       /^([IVXLCDM]+) (.*)/i,
       (_: any, roman: string, title: string) =>
-        title + ' ' + romanToDecimal(roman),
+        title + ' ' + romanToDecimal(roman)
     )
   }
   if (bookTitle === 'abdias -') bookTitle = 'abdias'

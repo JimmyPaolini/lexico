@@ -6,7 +6,7 @@ import { useUnbookmarkMutation } from 'src/graphql/generated'
 
 export const useUnbookmarkRemote = (
   queryClient: QueryClient,
-  setBookmarked: Dispatch<SetStateAction<boolean>>,
+  setBookmarked: Dispatch<SetStateAction<boolean>>
 ) => {
   const { mutateAsync: unbookmarkRemote } = useUnbookmarkMutation({
     onMutate: async () => {

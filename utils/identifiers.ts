@@ -25,12 +25,12 @@ function identifyWordRecursive(
   word: string,
   forms: any,
   current: string[],
-  identifiers: string[],
+  identifiers: string[]
 ) {
   if (Array.isArray(forms)) {
     if (
       forms.some((form) =>
-        normalize(form).match(new RegExp('^' + word + '$', 'i')),
+        normalize(form).match(new RegExp('^' + word + '$', 'i'))
       )
     ) {
       return [...identifiers, current.join(' ')]
@@ -41,7 +41,7 @@ function identifyWordRecursive(
         word,
         forms[key],
         [...current, key],
-        identifiers,
+        identifiers
       )
     }
   }

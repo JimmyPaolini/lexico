@@ -8,7 +8,7 @@ import { useSnackbar } from '../useSnackbar'
 export const useToggleBookmarkLocal = (
   id: string,
   bookmarked: boolean,
-  setBookmarked: Dispatch<SetStateAction<boolean>>,
+  setBookmarked: Dispatch<SetStateAction<boolean>>
 ) => {
   const enqueueSnackbar = useSnackbar(true, true)
   const toggleBookmark = () => {
@@ -21,7 +21,7 @@ export const useToggleBookmarkLocal = (
     }
     if (showBookmarkInstructions()) {
       enqueueSnackbar(
-        'Your bookmarks are saved locally, sign in to save them across devices/browsers',
+        'Your bookmarks are saved locally, sign in to save them across devices/browsers'
       )
     }
   }

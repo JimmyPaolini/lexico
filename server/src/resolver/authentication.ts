@@ -20,7 +20,7 @@ export class AuthenticationResolver {
   @Query(() => User)
   async google(
     @Arg('code') code: string,
-    @Ctx() { req, res }: ResolverContext,
+    @Ctx() { req, res }: ResolverContext
   ): Promise<User> {
     const profile = await fetchGoogleUser(code, req.hostname)
     let user = await User.findOne({ where: { googleId: profile.id } })
@@ -38,7 +38,7 @@ export class AuthenticationResolver {
   @Query(() => User)
   async facebook(
     @Arg('code') code: string,
-    @Ctx() { req, res }: ResolverContext,
+    @Ctx() { req, res }: ResolverContext
   ): Promise<User> {
     const profile = await fetchFacebookUser(code, req.hostname)
     let user = await User.findOne({ where: { facebookId: profile.id } })

@@ -2,12 +2,12 @@ import { PronunciationParts } from '../../../../../server/src/entity/dictionary/
 import getEcclesiasticalPhonemes from './ecclesiastical'
 
 function phonemesToPronunciations(
-  phonemes: Array<string | string[][]>,
+  phonemes: Array<string | string[][]>
 ): string[] {
   const pronunciations: string[] = []
   function buildPronunciations(
     prev: Array<string | string[][]>,
-    next: Array<string | string[][]>,
+    next: Array<string | string[][]>
   ): any {
     if (next.length === 0) return pronunciations.push(prev.join(' '))
     const phoneme = next.shift()

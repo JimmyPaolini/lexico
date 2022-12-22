@@ -3,7 +3,7 @@ import log from '../../../utils/log'
 export function LogRuntime(
   _: unknown,
   functionName: string,
-  descriptor: PropertyDescriptor,
+  descriptor: PropertyDescriptor
 ): void {
   const fn = descriptor.value
   descriptor.value = async function (...args: any[]) {
@@ -18,7 +18,7 @@ export function LogRuntime(
 export function LogResult(
   _: unknown,
   functionName: string,
-  descriptor: PropertyDescriptor,
+  descriptor: PropertyDescriptor
 ): void {
   const fn = descriptor.value
   descriptor.value = async function (...args: any[]) {

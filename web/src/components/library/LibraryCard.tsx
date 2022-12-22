@@ -15,8 +15,8 @@ export const LibraryCard = ({ author }: Props) => {
   const nonBookTexts = author.texts.filter(
     (text) =>
       !books.some((book) =>
-        book.texts.some((bookText) => bookText.id === text.id),
-      ),
+        book.texts.some((bookText) => bookText.id === text.id)
+      )
   )
   const [expanded, setExpanded] = useState<boolean>(false)
 

@@ -32,6 +32,6 @@ export default async function ingestLines(text: Text): Promise<void> {
       }
       const id = text.id + '_' + lineNumber
       return { id, line, lineNumber, lineLabel, text } as Line
-    }),
+    })
   )
 }

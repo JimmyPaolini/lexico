@@ -33,9 +33,9 @@ export class LibraryResolver {
               .select()
               .where({ author, book })
               .getMany()
-          }),
+          })
         )
-      }),
+      })
     )
     return authors
       .sort((a, b) => compareIds(a, b))
@@ -114,7 +114,7 @@ export class LibraryResolver {
   async findText(
     @Arg('author') author: string,
     @Arg('title') title: string,
-    @Arg('book', { nullable: true }) book?: string,
+    @Arg('book', { nullable: true }) book?: string
   ): Promise<Text> {
     let query = Text.createQueryBuilder('text').innerJoinAndSelect(
       'text.author',
@@ -122,14 +122,14 @@ export class LibraryResolver {
       'author.name = :author',
       {
         author,
-      },
+      }
     )
     if (book) {
       query = query.innerJoinAndSelect(
         'text.book',
         'book',
         'book.title = :book',
-        { book },
+        { book }
       )
     }
     query = query
@@ -154,7 +154,7 @@ export class LibraryResolver {
         'book.texts',
         'bookText',
         'bookText.title = :search',
-        { search },
+        { search }
       )
       .innerJoinAndSelect('author.texts', 'text', 'text.title = :search', {
         search,

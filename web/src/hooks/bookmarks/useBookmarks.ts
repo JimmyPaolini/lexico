@@ -23,7 +23,7 @@ export const useBookmarks = () => {
       retryDelay: 0,
       cacheTime: 1000 * 60 * 5,
       staleTime: 1000 * 60 * 5,
-    },
+    }
   )
 
   const {
@@ -37,7 +37,7 @@ export const useBookmarks = () => {
       retryDelay: 0,
       cacheTime: 1000 * 60 * 5,
       staleTime: 1000 * 60 * 5,
-    },
+    }
   )
 
   return {

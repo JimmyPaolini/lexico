@@ -3,7 +3,7 @@ import { normalize } from 'src/utils/string'
 
 export const filterBookmarks = (
   entries: Entry[] | undefined,
-  search: string,
+  search: string
 ): Entry[] => {
   if (!entries) return []
   const re = new RegExp(search, 'i')
@@ -12,11 +12,11 @@ export const filterBookmarks = (
       return (
         entry.principalParts?.some((principalPart) =>
           principalPart.text.some((principalPartText) =>
-            normalize(principalPartText).match(re),
-          ),
+            normalize(principalPartText).match(re)
+          )
         ) ||
         entry.translations?.some((translation) =>
-          translation.translation.match(re),
+          translation.translation.match(re)
         ) ||
         entry.partOfSpeech.match(re) ||
         normalize(JSON.stringify(entry?.forms || 'false')).match(re)

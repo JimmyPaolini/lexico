@@ -12,18 +12,18 @@ export const useToggleBookmark = (
   bookmarked: boolean,
   setBookmarked: Dispatch<SetStateAction<boolean>>,
   queryClient: QueryClient,
-  user: User,
+  user: User
 ) => {
   const toggleBookmarkRemote = useToggleBookmarkRemote(
     id,
     bookmarked,
     setBookmarked,
-    queryClient,
+    queryClient
   )
   const toggleBookmarkLocal = useToggleBookmarkLocal(
     id,
     bookmarked,
-    setBookmarked,
+    setBookmarked
   )
   const toggleBookmark = async () => {
     if (user) await toggleBookmarkRemote()

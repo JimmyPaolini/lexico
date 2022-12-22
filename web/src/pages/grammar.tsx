@@ -26,9 +26,9 @@ export default function Grammar() {
         (card) =>
           card.props.declension
             ? JSON.stringify(Object.values(card.props.declension))?.match(re)
-            : JSON.stringify(Object.values(card.props.conjugation))?.match(re),
+            : JSON.stringify(Object.values(card.props.conjugation))?.match(re)
         // card.ref.current?.innerText?.match(re)
-      ),
+      )
     )
   }
 

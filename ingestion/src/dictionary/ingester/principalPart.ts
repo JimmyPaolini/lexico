@@ -5,7 +5,7 @@ export default async function parsePrincipalParts(
   ingester: Ingester,
   $: cheerio.Root,
   elt: any,
-  firstPrincipalPartName: string,
+  firstPrincipalPartName: string
 ): Promise<PrincipalPart[]> {
   const principalParts: PrincipalPart[] = []
 

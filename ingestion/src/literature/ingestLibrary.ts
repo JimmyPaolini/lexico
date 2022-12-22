@@ -45,6 +45,6 @@ export default async function ingestLibrary(): Promise<void> {
 
   fs.writeFileSync(
     './src/ingestion/literature/library.json',
-    JSON.stringify(authors, null, 2),
+    JSON.stringify(authors, null, 2)
   )
 }

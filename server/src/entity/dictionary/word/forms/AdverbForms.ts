@@ -14,7 +14,7 @@ export default class AdverbForms {
   constructor(
     positive: string[] = [],
     comparative?: string[],
-    superlative?: string[],
+    superlative?: string[]
   ) {
     this.positive = positive
     if (comparative) this.comparative = comparative

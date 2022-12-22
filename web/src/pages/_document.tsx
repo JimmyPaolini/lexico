@@ -38,7 +38,7 @@ export default class MyDocument extends Document {
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${String(
-              process.env.GOOGLE_ANALYTICS_ID,
+              process.env.GOOGLE_ANALYTICS_ID
             )}`}
           />
           <script

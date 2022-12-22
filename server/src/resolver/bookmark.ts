@@ -34,7 +34,7 @@ export class BookmarkResolver {
   @UseMiddleware(Authenticate)
   async bookmark(
     @Arg('entryId') entryId: string,
-    @Ctx() { user }: ResolverContext,
+    @Ctx() { user }: ResolverContext
   ): Promise<boolean> {
     const bookmarks = await this.bookmarks({ user } as ResolverContext)
     if (bookmarks.some((entry) => entry.id === entryId)) {
@@ -54,7 +54,7 @@ export class BookmarkResolver {
   @UseMiddleware(Authenticate)
   async unbookmark(
     @Arg('entryId') entryId: string,
-    @Ctx() { user }: ResolverContext,
+    @Ctx() { user }: ResolverContext
   ): Promise<boolean> {
     const bookmarks = await this.bookmarks({ user } as ResolverContext)
     if (!bookmarks.some((entry) => entry.id === entryId)) {

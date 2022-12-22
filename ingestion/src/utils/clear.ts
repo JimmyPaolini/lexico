@@ -11,7 +11,7 @@ import User from '../../../server/src/entity/user/User'
 import log from '../../../utils/log'
 
 export async function clearEntity(
-  Entity: EntityTarget<unknown>,
+  Entity: EntityTarget<unknown>
 ): Promise<void> {
   await getConnection().getRepository(Entity).delete({})
 }

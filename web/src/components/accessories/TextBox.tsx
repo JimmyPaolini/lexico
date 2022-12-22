@@ -17,7 +17,7 @@ const TextBox = forwardRef(
     ref:
       | ((instance: HTMLDivElement | null) => void)
       | MutableRefObject<HTMLDivElement | null>
-      | null,
+      | null
   ) => {
     return (
       <TextField
@@ -34,7 +34,7 @@ const TextBox = forwardRef(
         helperText={formik.touched[name] && formik.errors[name]}
       />
     )
-  },
+  }
 )
 TextBox.displayName = 'TextBox'
 

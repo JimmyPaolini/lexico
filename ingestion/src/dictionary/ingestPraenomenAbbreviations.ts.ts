@@ -22,14 +22,14 @@ export default async function ingestPraenomenAbbreviations(): Promise<void> {
     if (praenomen.masculine) {
       entry.translations.push({
         translation: `Praenomen abbreviation: ${sentenceCase(
-          praenomen.masculine,
+          praenomen.masculine
         )} (male)`,
       } as Translation)
     }
     if (praenomen.feminine) {
       entry.translations.push({
         translation: `Praenomen abbreviation: ${sentenceCase(
-          praenomen.feminine,
+          praenomen.feminine
         )} (female)`,
       } as Translation)
     }

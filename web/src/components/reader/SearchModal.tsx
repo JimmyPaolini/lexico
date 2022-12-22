@@ -27,7 +27,7 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
       enabled: Boolean(searched),
       retryDelay: 0,
       staleTime: 1000 * 60 * 5,
-    },
+    }
   )
   const entries = data?.search as EntryType[]
 

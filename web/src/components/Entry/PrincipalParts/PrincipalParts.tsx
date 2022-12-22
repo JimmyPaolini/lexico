@@ -32,7 +32,7 @@ export const PrincipalParts = ({
 
   const subheader = `${unCamelCase(partOfSpeech)}, ${inflectionToString(
     inflection,
-    partOfSpeech,
+    partOfSpeech
   )}`.replace(/, ?$|^, ?/, '')
 
   return (

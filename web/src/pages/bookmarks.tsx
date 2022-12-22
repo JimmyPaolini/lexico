@@ -69,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery(
     useBookmarksQuery.getKey({}),
-    useBookmarksQuery.fetcher(),
+    useBookmarksQuery.fetcher()
   )
   return { props: { dehydratedState: dehydrate(queryClient) } }
 }

@@ -26,7 +26,7 @@ export default {
 
 export const Default: ComponentStory<typeof BookmarkButton> = (
   args,
-  { loaded },
+  { loaded }
 ) => (
   <>
     <BookmarkButton {...args} {...loaded} />

@@ -30,19 +30,19 @@ class ShowSettingsInstructions {
 export function showSettingsInstructions(): boolean {
   if (typeof window === 'undefined') return false
   const showSettingsInstructions = JSON.parse(
-    window.localStorage.showSettingsInstructions || 'null',
+    window.localStorage.showSettingsInstructions || 'null'
   ) as ShowSettingsInstructions
 
   if (!showSettingsInstructions) {
     window.localStorage.showSettingsInstructions = JSON.stringify(
-      new ShowSettingsInstructions(),
+      new ShowSettingsInstructions()
     )
     return true
   }
 
   if (new Date() >= new Date(showSettingsInstructions.showAfter)) {
     window.localStorage.showSettingsInstructions = JSON.stringify(
-      updateShowSettingsInstructions(showSettingsInstructions),
+      updateShowSettingsInstructions(showSettingsInstructions)
     )
     return true
   } else {
@@ -51,7 +51,7 @@ export function showSettingsInstructions(): boolean {
 }
 
 function updateShowSettingsInstructions(
-  showSettingsInstructions: ShowSettingsInstructions,
+  showSettingsInstructions: ShowSettingsInstructions
 ) {
   if (showSettingsInstructions.seenCount < 10) {
     const nextHour = new Date(Date.now() + 1 * 60 * 60 * 1000)

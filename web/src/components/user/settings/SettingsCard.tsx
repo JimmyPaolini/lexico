@@ -26,7 +26,7 @@ export const SettingsCard = () => {
       onSuccess: () => {
         queryClient.setQueryData(useUserQuery.getKey(), undefined)
       },
-    },
+    }
   )
   const { mutateAsync: unregister } = useUnregisterMutation({
     retry: false,

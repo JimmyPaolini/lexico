@@ -18,13 +18,13 @@ import Pronoun from './ingester/partOfSpeech/Pronoun'
 import Verb from './ingester/partOfSpeech/Verb'
 
 export default async function ingestEntryWord(
-  entryWord: string,
+  entryWord: string
 ): Promise<void> {
   // log.info("ingesting entry", entryWord)
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const data = require(path.join(
     process.cwd(),
-    `./data/wiktionary/${entryWord}.json`,
+    `./data/wiktionary/${entryWord}.json`
   ))
   const $ = cheerio.load(data.html)
 
@@ -32,7 +32,7 @@ export default async function ingestEntryWord(
   await Promise.all(
     $('p:has(strong.Latn.headword)')
       .get()
-      .map(async (elt, i) => await ingestEntry(entryWord, $, elt, i)),
+      .map(async (elt, i) => await ingestEntry(entryWord, $, elt, i))
   )
   // for (const elt of $("p:has(strong.Latn.headword)").get()) {
   //   await ingestEntry(entryWord, $, elt)
@@ -43,7 +43,7 @@ async function ingestEntry(
   word: string,
   $: cheerio.Root,
   elt: any,
-  i: number,
+  i: number
 ): Promise<void> {
   const Entries = getConnection().getRepository(Entry)
   const Translations = getConnection().getRepository(Translation)

@@ -23,7 +23,7 @@ export const InflectionUnion: UnionFromClasses<
     AdjectiveInflection,
     AdverbInflection,
     PrepositionInflection,
-    Uninflected,
+    Uninflected
   ]
 > = createUnionType({
   name: 'Inflection',

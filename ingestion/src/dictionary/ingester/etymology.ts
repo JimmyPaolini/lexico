@@ -5,7 +5,7 @@ import Ingester from '../Ingester'
 export default function parseEtymology(
   ingester: Ingester,
   $: cheerio.Root,
-  elt: any,
+  elt: any
 ): string {
   const etymologyHeader = $(elt)
     .prevAll(':header:contains("Etymology")')
@@ -20,7 +20,7 @@ export default function parseEtymology(
   const etymology: string = $(etymologyHeader).next().text().trim()
 
   const participleMatch = etymology.match(
-    /((present)|(perfect)|(future)) ((active)|(passive) )?participle (\(gerundive\) )?of [A-Za-z\u00C0-\u017F]+/i,
+    /((present)|(perfect)|(future)) ((active)|(passive) )?participle (\(gerundive\) )?of [A-Za-z\u00C0-\u017F]+/i
   )
   if (participleMatch) {
     const text = capitalizeFirstLetter(participleMatch[0].trim())

@@ -24,8 +24,8 @@ export const LibraryAuthor = ({ author, expanded, setExpanded }: Props) => {
     ...author.texts.filter(
       (text) =>
         !(author.books || []).some((book) =>
-          book.texts.some((bookText) => bookText.id === text.id),
-        ),
+          book.texts.some((bookText) => bookText.id === text.id)
+        )
     ),
   ]
     .sort()

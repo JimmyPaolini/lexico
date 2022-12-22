@@ -8,7 +8,7 @@ import ingestLines from './ingestLines'
 export default async function ingestText(
   author: Author,
   book: Book | undefined,
-  title: string,
+  title: string
 ): Promise<void> {
   const Texts = getConnection().getRepository(Text)
   title = title.replace(/\.txt$/, '')

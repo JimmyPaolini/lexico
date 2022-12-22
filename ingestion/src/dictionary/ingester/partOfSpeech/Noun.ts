@@ -41,7 +41,7 @@ export default class Noun extends Ingester {
     return new NounInflection(
       declension as NounDeclension,
       gender as NounGender,
-      other,
+      other
     )
   }
 }

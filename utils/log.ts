@@ -27,7 +27,7 @@ const consoleTransport = new transports.Console({
               message: 'meta',
             }
           })(),
-          format.json({ replacer: circularReplacer() }),
+          format.json({ replacer: circularReplacer() })
         )
       : format.combine(
           format.timestamp(),
@@ -42,11 +42,11 @@ const consoleTransport = new transports.Console({
               message = JSON.stringify(
                 { ...(message as Record<string, unknown>), ...meta },
                 circularReplacer(),
-                2,
+                2
               )
             }
             return `${timestamp} ${level}${label}: ${message}`.trim()
-          }),
+          })
         ),
 })
 
@@ -76,16 +76,16 @@ export class DatabaseLogger implements Logger {
   logQueryError(
     error: string | Error,
     query: string,
-    parameters?: any[],
+    parameters?: any[]
   ): void {
     error = typeof error === 'string' ? error : error.message
     log.error(
       `database query error: ${error}: ${query} ${JSON.stringify(
-        parameters ?? '',
+        parameters ?? ''
       )}`,
       {
         label: 'database query error',
-      },
+      }
     )
   }
 
@@ -95,11 +95,11 @@ export class DatabaseLogger implements Logger {
   logQuerySlow(time: number, query: string, parameters?: any[]): void {
     log.warn(
       `database query slow ${time}ms: ${query} ${JSON.stringify(
-        parameters ?? '',
+        parameters ?? ''
       )}`,
       {
         label: 'database query slow',
-      },
+      }
     )
   }
 

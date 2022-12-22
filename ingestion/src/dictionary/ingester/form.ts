@@ -9,7 +9,7 @@ import { isCase, isGender, isNumber } from '../../utils/forms'
 export default async function parseForms(
   $: cheerio.Root,
   elt: any,
-  entry: Entry,
+  entry: Entry
 ): Promise<Forms | null> {
   const table = parseFormTable($, elt)
   if (!table) return null
@@ -44,7 +44,7 @@ export default async function parseForms(
 
     if (
       ['adjective', 'participle', 'numeral', 'suffix'].includes(
-        entry.partOfSpeech,
+        entry.partOfSpeech
       )
     ) {
       return [
@@ -75,7 +75,7 @@ export default async function parseForms(
         return disorganizedForms
       })
     },
-    [],
+    []
   )
   for (const inflection of JSON.parse(JSON.stringify(disorganizedForms))) {
     sortIdentifiers(inflection, forms)

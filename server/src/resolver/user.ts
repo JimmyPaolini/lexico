@@ -23,7 +23,7 @@ export class UserResolver {
       }
       const claims = verify(
         context.req.cookies.accessToken,
-        process.env.JWT_SECRET,
+        process.env.JWT_SECRET
       ) as JwtPayload
       if (!claims?.sub) return null
       const user = await User.findOne({ where: { id: claims.sub } })
@@ -43,7 +43,7 @@ export class UserResolver {
   @UseMiddleware(Authenticate)
   async setSettings(
     @Arg('settings') settings: Settings,
-    @Ctx() { user }: ResolverContext,
+    @Ctx() { user }: ResolverContext
   ): Promise<Settings> {
     user = await User.save({ ...user, settings })
     return user.settings

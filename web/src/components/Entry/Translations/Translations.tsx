@@ -23,7 +23,7 @@ export const Translations = ({ translations }: Props) => {
   const [expanded, setExpanded] = useState<boolean>(
     user?.settings?.translationsExpandedDefault ||
       getSettingsLocal().translationsExpandedDefault ||
-      false,
+      false
   )
   const expandable = (translations?.length ?? 0) > 2
 

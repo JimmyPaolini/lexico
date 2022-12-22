@@ -23,7 +23,7 @@ export default class Adjective extends Ingester {
       .text()
       .replace(
         /(-declension)|(declension)|(adjective)|(participle)|(numeral)|[.\d[\]]/gi,
-        '',
+        ''
       )
       .replace(/\s+/g, ' ')
       .toLowerCase()
@@ -36,7 +36,7 @@ export default class Adjective extends Ingester {
     return new AdjectiveInflection(
       declension as AdjectiveDeclension,
       degree as AdjectiveDegree,
-      other,
+      other
     )
   }
 }

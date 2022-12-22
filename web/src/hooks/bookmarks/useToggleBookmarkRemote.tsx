@@ -9,7 +9,7 @@ export const useToggleBookmarkRemote = (
   id: string,
   bookmarked: boolean,
   setBookmarked: Dispatch<SetStateAction<boolean>>,
-  queryClient: QueryClient,
+  queryClient: QueryClient
 ) => {
   const bookmarkRemote = useBookmarkRemote(queryClient, setBookmarked)
   const unbookmarkRemote = useUnbookmarkRemote(queryClient, setBookmarked)

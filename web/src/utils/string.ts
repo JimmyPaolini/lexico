@@ -14,7 +14,7 @@ export function pascalCase(str: string): string {
   if (!str) return ''
   return str.replace(
     /(\w)(\w*)/g,
-    (_, g1: string, g2: string) => g1.toUpperCase() + g2.toLowerCase(),
+    (_, g1: string, g2: string) => g1.toUpperCase() + g2.toLowerCase()
   )
 }
 
@@ -30,7 +30,7 @@ export function unCamelCase(str: string): string {
   if (!str) return ''
   return str.replace(
     /[A-Z]/g,
-    (upperCaseLetter) => ' ' + upperCaseLetter.toLowerCase(),
+    (upperCaseLetter) => ' ' + upperCaseLetter.toLowerCase()
   )
 }
 
@@ -54,7 +54,7 @@ export function unescapeCapitals(str: string): string {
 
 export function hasSuffix(
   str: string,
-  suffix: string,
+  suffix: string
 ): RegExpMatchArray | null {
   return str.match(new RegExp(suffix + '$', 'i'))
 }
@@ -117,7 +117,7 @@ export function unabbreviateText(text: string): string {
 
 export function validateEmail(email: string): RegExpMatchArray | null {
   return email.match(
-    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+    /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   )
 }
 

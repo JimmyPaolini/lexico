@@ -10,7 +10,7 @@ export type GoogleProfile = {
 
 export async function fetchGoogleUser(
   code: string,
-  hostname: string,
+  hostname: string
 ): Promise<GoogleProfile> {
   const {
     // eslint-disable-next-line @typescript-eslint/naming-convention

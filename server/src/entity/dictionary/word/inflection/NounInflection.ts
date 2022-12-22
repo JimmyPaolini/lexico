@@ -14,7 +14,7 @@ export default class NounInflection {
   constructor(
     declension: NounDeclension = '',
     gender: NounGender = '',
-    other = '',
+    other = ''
   ) {
     this.declension = declension
     this.gender = gender

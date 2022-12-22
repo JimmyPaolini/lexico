@@ -10,7 +10,7 @@ export type FacebookProfile = {
 
 export async function fetchFacebookUser(
   code: string,
-  hostname: string,
+  hostname: string
 ): Promise<FacebookProfile> {
   const {
     // eslint-disable-next-line @typescript-eslint/naming-convention

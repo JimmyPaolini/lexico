@@ -58,6 +58,6 @@ export function decimalize(str: string | undefined): string {
   if (!str) return ''
   return str.replace(
     /(^| )([IVXLCDM]+)( |$)/gi,
-    (_, s: string, r: string, e: string) => s + String(romanToDecimal(r)) + e,
+    (_, s: string, r: string, e: string) => s + String(romanToDecimal(r)) + e
   )
 }

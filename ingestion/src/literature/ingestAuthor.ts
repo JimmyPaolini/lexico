@@ -13,7 +13,7 @@ export default async function ingestAuthor(id: string): Promise<void> {
     name: authorIdToName[id],
   })
   const bookOrTextTitles = fs.readdirSync(
-    `../data/literature/${author.id}`,
+    `../data/literature/${author.id}`
   ) as string[]
   for (const title of bookOrTextTitles) {
     const isBook = fs

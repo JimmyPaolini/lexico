@@ -3446,15 +3446,15 @@ export const useBookmarkMutation = <TError = unknown, TContext = unknown>(
     TError,
     BookmarkMutationVariables,
     TContext
-  >,
+  >
 ) =>
   useMutation<BookmarkMutation, TError, BookmarkMutationVariables, TContext>(
     (variables?: BookmarkMutationVariables) =>
       fetcher<BookmarkMutation, BookmarkMutationVariables>(
         BookmarkDocument,
-        variables,
+        variables
       )(),
-    options,
+    options
   )
 export const BookmarksDocument = `
     query Bookmarks {
@@ -3465,15 +3465,15 @@ export const BookmarksDocument = `
     `
 export const useBookmarksQuery = <TData = BookmarksQuery, TError = unknown>(
   variables?: BookmarksQueryVariables,
-  options?: UseQueryOptions<BookmarksQuery, TError, TData>,
+  options?: UseQueryOptions<BookmarksQuery, TError, TData>
 ) =>
   useQuery<BookmarksQuery, TError, TData>(
     ['Bookmarks', variables],
     fetcher<BookmarksQuery, BookmarksQueryVariables>(
       BookmarksDocument,
-      variables,
+      variables
     ),
-    options,
+    options
   )
 useBookmarksQuery.getKey = (variables?: BookmarksQueryVariables) => [
   'Bookmarks',
@@ -3534,12 +3534,12 @@ ${AllAdjectiveNumberFragmentDoc}
 ${AllAdverbFormsFragmentDoc}`
 export const useEntriesQuery = <TData = EntriesQuery, TError = unknown>(
   variables: EntriesQueryVariables,
-  options?: UseQueryOptions<EntriesQuery, TError, TData>,
+  options?: UseQueryOptions<EntriesQuery, TError, TData>
 ) =>
   useQuery<EntriesQuery, TError, TData>(
     ['Entries', variables],
     fetcher<EntriesQuery, EntriesQueryVariables>(EntriesDocument, variables),
-    options,
+    options
   )
 useEntriesQuery.getKey = (variables: EntriesQueryVariables) => [
   'Entries',
@@ -3559,7 +3559,7 @@ export const useUnbookmarkMutation = <TError = unknown, TContext = unknown>(
     TError,
     UnbookmarkMutationVariables,
     TContext
-  >,
+  >
 ) =>
   useMutation<
     UnbookmarkMutation,
@@ -3570,9 +3570,9 @@ export const useUnbookmarkMutation = <TError = unknown, TContext = unknown>(
     (variables?: UnbookmarkMutationVariables) =>
       fetcher<UnbookmarkMutation, UnbookmarkMutationVariables>(
         UnbookmarkDocument,
-        variables,
+        variables
       )(),
-    options,
+    options
   )
 export const CreateCustomTextDocument = `
     mutation CreateCustomText($id: String!, $title: String!, $text: String!) {
@@ -3585,14 +3585,14 @@ export const CreateCustomTextDocument = `
     `
 export const useCreateCustomTextMutation = <
   TError = unknown,
-  TContext = unknown,
+  TContext = unknown
 >(
   options?: UseMutationOptions<
     CreateCustomTextMutation,
     TError,
     CreateCustomTextMutationVariables,
     TContext
-  >,
+  >
 ) =>
   useMutation<
     CreateCustomTextMutation,
@@ -3603,9 +3603,9 @@ export const useCreateCustomTextMutation = <
     (variables?: CreateCustomTextMutationVariables) =>
       fetcher<CreateCustomTextMutation, CreateCustomTextMutationVariables>(
         CreateCustomTextDocument,
-        variables,
+        variables
       )(),
-    options,
+    options
   )
 export const DeleteCustomTextDocument = `
     mutation DeleteCustomText($id: String!) {
@@ -3614,14 +3614,14 @@ export const DeleteCustomTextDocument = `
     `
 export const useDeleteCustomTextMutation = <
   TError = unknown,
-  TContext = unknown,
+  TContext = unknown
 >(
   options?: UseMutationOptions<
     DeleteCustomTextMutation,
     TError,
     DeleteCustomTextMutationVariables,
     TContext
-  >,
+  >
 ) =>
   useMutation<
     DeleteCustomTextMutation,
@@ -3632,9 +3632,9 @@ export const useDeleteCustomTextMutation = <
     (variables?: DeleteCustomTextMutationVariables) =>
       fetcher<DeleteCustomTextMutation, DeleteCustomTextMutationVariables>(
         DeleteCustomTextDocument,
-        variables,
+        variables
       )(),
-    options,
+    options
   )
 export const GetCustomTextDocument = `
     query GetCustomText($id: String!) {
@@ -3647,18 +3647,18 @@ export const GetCustomTextDocument = `
     `
 export const useGetCustomTextQuery = <
   TData = GetCustomTextQuery,
-  TError = unknown,
+  TError = unknown
 >(
   variables: GetCustomTextQueryVariables,
-  options?: UseQueryOptions<GetCustomTextQuery, TError, TData>,
+  options?: UseQueryOptions<GetCustomTextQuery, TError, TData>
 ) =>
   useQuery<GetCustomTextQuery, TError, TData>(
     ['GetCustomText', variables],
     fetcher<GetCustomTextQuery, GetCustomTextQueryVariables>(
       GetCustomTextDocument,
-      variables,
+      variables
     ),
-    options,
+    options
   )
 useGetCustomTextQuery.getKey = (variables: GetCustomTextQueryVariables) => [
   'GetCustomText',
@@ -3668,7 +3668,7 @@ useGetCustomTextQuery.getKey = (variables: GetCustomTextQueryVariables) => [
 useGetCustomTextQuery.fetcher = (variables: GetCustomTextQueryVariables) =>
   fetcher<GetCustomTextQuery, GetCustomTextQueryVariables>(
     GetCustomTextDocument,
-    variables,
+    variables
   )
 export const ListCustomTextsDocument = `
     query ListCustomTexts {
@@ -3681,27 +3681,27 @@ export const ListCustomTextsDocument = `
     `
 export const useListCustomTextsQuery = <
   TData = ListCustomTextsQuery,
-  TError = unknown,
+  TError = unknown
 >(
   variables?: ListCustomTextsQueryVariables,
-  options?: UseQueryOptions<ListCustomTextsQuery, TError, TData>,
+  options?: UseQueryOptions<ListCustomTextsQuery, TError, TData>
 ) =>
   useQuery<ListCustomTextsQuery, TError, TData>(
     ['ListCustomTexts', variables],
     fetcher<ListCustomTextsQuery, ListCustomTextsQueryVariables>(
       ListCustomTextsDocument,
-      variables,
+      variables
     ),
-    options,
+    options
   )
 useListCustomTextsQuery.getKey = (
-  variables?: ListCustomTextsQueryVariables,
+  variables?: ListCustomTextsQueryVariables
 ) => ['ListCustomTexts', variables]
 
 useListCustomTextsQuery.fetcher = (variables?: ListCustomTextsQueryVariables) =>
   fetcher<ListCustomTextsQuery, ListCustomTextsQueryVariables>(
     ListCustomTextsDocument,
-    variables,
+    variables
   )
 export const FindTextDocument = `
     query FindText($author: String!, $book: String, $title: String!) {
@@ -3727,12 +3727,12 @@ export const FindTextDocument = `
     `
 export const useFindTextQuery = <TData = FindTextQuery, TError = unknown>(
   variables: FindTextQueryVariables,
-  options?: UseQueryOptions<FindTextQuery, TError, TData>,
+  options?: UseQueryOptions<FindTextQuery, TError, TData>
 ) =>
   useQuery<FindTextQuery, TError, TData>(
     ['FindText', variables],
     fetcher<FindTextQuery, FindTextQueryVariables>(FindTextDocument, variables),
-    options,
+    options
   )
 useFindTextQuery.getKey = (variables: FindTextQueryVariables) => [
   'FindText',
@@ -3763,15 +3763,15 @@ export const GetAuthorsDocument = `
     `
 export const useGetAuthorsQuery = <TData = GetAuthorsQuery, TError = unknown>(
   variables?: GetAuthorsQueryVariables,
-  options?: UseQueryOptions<GetAuthorsQuery, TError, TData>,
+  options?: UseQueryOptions<GetAuthorsQuery, TError, TData>
 ) =>
   useQuery<GetAuthorsQuery, TError, TData>(
     ['GetAuthors', variables],
     fetcher<GetAuthorsQuery, GetAuthorsQueryVariables>(
       GetAuthorsDocument,
-      variables,
+      variables
     ),
-    options,
+    options
   )
 useGetAuthorsQuery.getKey = (variables?: GetAuthorsQueryVariables) => [
   'GetAuthors',
@@ -3781,7 +3781,7 @@ useGetAuthorsQuery.getKey = (variables?: GetAuthorsQueryVariables) => [
 useGetAuthorsQuery.fetcher = (variables?: GetAuthorsQueryVariables) =>
   fetcher<GetAuthorsQuery, GetAuthorsQueryVariables>(
     GetAuthorsDocument,
-    variables,
+    variables
   )
 export const GetTextDocument = `
     query GetText($id: String!) {
@@ -3807,12 +3807,12 @@ export const GetTextDocument = `
     `
 export const useGetTextQuery = <TData = GetTextQuery, TError = unknown>(
   variables: GetTextQueryVariables,
-  options?: UseQueryOptions<GetTextQuery, TError, TData>,
+  options?: UseQueryOptions<GetTextQuery, TError, TData>
 ) =>
   useQuery<GetTextQuery, TError, TData>(
     ['GetText', variables],
     fetcher<GetTextQuery, GetTextQueryVariables>(GetTextDocument, variables),
-    options,
+    options
   )
 useGetTextQuery.getKey = (variables: GetTextQueryVariables) => [
   'GetText',
@@ -3830,15 +3830,15 @@ export const GetTextIdsDocument = `
     `
 export const useGetTextIdsQuery = <TData = GetTextIdsQuery, TError = unknown>(
   variables?: GetTextIdsQueryVariables,
-  options?: UseQueryOptions<GetTextIdsQuery, TError, TData>,
+  options?: UseQueryOptions<GetTextIdsQuery, TError, TData>
 ) =>
   useQuery<GetTextIdsQuery, TError, TData>(
     ['GetTextIds', variables],
     fetcher<GetTextIdsQuery, GetTextIdsQueryVariables>(
       GetTextIdsDocument,
-      variables,
+      variables
     ),
-    options,
+    options
   )
 useGetTextIdsQuery.getKey = (variables?: GetTextIdsQueryVariables) => [
   'GetTextIds',
@@ -3848,7 +3848,7 @@ useGetTextIdsQuery.getKey = (variables?: GetTextIdsQueryVariables) => [
 useGetTextIdsQuery.fetcher = (variables?: GetTextIdsQueryVariables) =>
   fetcher<GetTextIdsQuery, GetTextIdsQueryVariables>(
     GetTextIdsDocument,
-    variables,
+    variables
   )
 export const GetTextsDocument = `
     query GetTexts {
@@ -3867,12 +3867,12 @@ export const GetTextsDocument = `
     `
 export const useGetTextsQuery = <TData = GetTextsQuery, TError = unknown>(
   variables?: GetTextsQueryVariables,
-  options?: UseQueryOptions<GetTextsQuery, TError, TData>,
+  options?: UseQueryOptions<GetTextsQuery, TError, TData>
 ) =>
   useQuery<GetTextsQuery, TError, TData>(
     ['GetTexts', variables],
     fetcher<GetTextsQuery, GetTextsQueryVariables>(GetTextsDocument, variables),
-    options,
+    options
   )
 useGetTextsQuery.getKey = (variables?: GetTextsQueryVariables) => [
   'GetTexts',
@@ -3933,12 +3933,12 @@ ${AllAdjectiveNumberFragmentDoc}
 ${AllAdverbFormsFragmentDoc}`
 export const useSearchQuery = <TData = SearchQuery, TError = unknown>(
   variables: SearchQueryVariables,
-  options?: UseQueryOptions<SearchQuery, TError, TData>,
+  options?: UseQueryOptions<SearchQuery, TError, TData>
 ) =>
   useQuery<SearchQuery, TError, TData>(
     ['Search', variables],
     fetcher<SearchQuery, SearchQueryVariables>(SearchDocument, variables),
-    options,
+    options
   )
 useSearchQuery.getKey = (variables: SearchQueryVariables) => [
   'Search',
@@ -3958,12 +3958,12 @@ export const FacebookDocument = `
     `
 export const useFacebookQuery = <TData = FacebookQuery, TError = unknown>(
   variables: FacebookQueryVariables,
-  options?: UseQueryOptions<FacebookQuery, TError, TData>,
+  options?: UseQueryOptions<FacebookQuery, TError, TData>
 ) =>
   useQuery<FacebookQuery, TError, TData>(
     ['Facebook', variables],
     fetcher<FacebookQuery, FacebookQueryVariables>(FacebookDocument, variables),
-    options,
+    options
   )
 useFacebookQuery.getKey = (variables: FacebookQueryVariables) => [
   'Facebook',
@@ -3983,12 +3983,12 @@ export const GoogleDocument = `
     `
 export const useGoogleQuery = <TData = GoogleQuery, TError = unknown>(
   variables: GoogleQueryVariables,
-  options?: UseQueryOptions<GoogleQuery, TError, TData>,
+  options?: UseQueryOptions<GoogleQuery, TError, TData>
 ) =>
   useQuery<GoogleQuery, TError, TData>(
     ['Google', variables],
     fetcher<GoogleQuery, GoogleQueryVariables>(GoogleDocument, variables),
-    options,
+    options
   )
 useGoogleQuery.getKey = (variables: GoogleQueryVariables) => [
   'Google',
@@ -4004,12 +4004,12 @@ export const LogoutDocument = `
     `
 export const useLogoutQuery = <TData = LogoutQuery, TError = unknown>(
   variables?: LogoutQueryVariables,
-  options?: UseQueryOptions<LogoutQuery, TError, TData>,
+  options?: UseQueryOptions<LogoutQuery, TError, TData>
 ) =>
   useQuery<LogoutQuery, TError, TData>(
     ['Logout', variables],
     fetcher<LogoutQuery, LogoutQueryVariables>(LogoutDocument, variables),
-    options,
+    options
   )
 useLogoutQuery.getKey = (variables?: LogoutQueryVariables) => [
   'Logout',
@@ -4029,7 +4029,7 @@ export const useUnregisterMutation = <TError = unknown, TContext = unknown>(
     TError,
     UnregisterMutationVariables,
     TContext
-  >,
+  >
 ) =>
   useMutation<
     UnregisterMutation,
@@ -4040,9 +4040,9 @@ export const useUnregisterMutation = <TError = unknown, TContext = unknown>(
     (variables?: UnregisterMutationVariables) =>
       fetcher<UnregisterMutation, UnregisterMutationVariables>(
         UnregisterDocument,
-        variables,
+        variables
       )(),
-    options,
+    options
   )
 export const UserDocument = `
     query User {
@@ -4059,12 +4059,12 @@ export const UserDocument = `
     ${AllSettingsFragmentDoc}`
 export const useUserQuery = <TData = UserQuery, TError = unknown>(
   variables?: UserQueryVariables,
-  options?: UseQueryOptions<UserQuery, TError, TData>,
+  options?: UseQueryOptions<UserQuery, TError, TData>
 ) =>
   useQuery<UserQuery, TError, TData>(
     ['User', variables],
     fetcher<UserQuery, UserQueryVariables>(UserDocument, variables),
-    options,
+    options
   )
 useUserQuery.getKey = (variables?: UserQueryVariables) => ['User', variables]
 
@@ -4083,7 +4083,7 @@ export const useSetSettingsMutation = <TError = unknown, TContext = unknown>(
     TError,
     SetSettingsMutationVariables,
     TContext
-  >,
+  >
 ) =>
   useMutation<
     SetSettingsMutation,
@@ -4094,9 +4094,9 @@ export const useSetSettingsMutation = <TError = unknown, TContext = unknown>(
     (variables?: SetSettingsMutationVariables) =>
       fetcher<SetSettingsMutation, SetSettingsMutationVariables>(
         SetSettingsDocument,
-        variables,
+        variables
       )(),
-    options,
+    options
   )
 export const SettingsDocument = `
     query Settings {
@@ -4107,12 +4107,12 @@ export const SettingsDocument = `
     ${AllSettingsFragmentDoc}`
 export const useSettingsQuery = <TData = SettingsQuery, TError = unknown>(
   variables?: SettingsQueryVariables,
-  options?: UseQueryOptions<SettingsQuery, TError, TData>,
+  options?: UseQueryOptions<SettingsQuery, TError, TData>
 ) =>
   useQuery<SettingsQuery, TError, TData>(
     ['Settings', variables],
     fetcher<SettingsQuery, SettingsQueryVariables>(SettingsDocument, variables),
-    options,
+    options
   )
 useSettingsQuery.getKey = (variables?: SettingsQueryVariables) => [
   'Settings',
