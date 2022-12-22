@@ -28,6 +28,7 @@ export type Person = 'first' | 'second' | 'third'
 export type Identifier =
   | Case
   | Gender
+  // eslint-disable-next-line @typescript-eslint/ban-types
   | Number
   | Mood
   | Tense

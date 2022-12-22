@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 
 import { SnackbarContext } from '../components/layout/SnackbarProvider'
 
-export const useSnackbar = (closeButton: boolean = true, loginButton?: boolean) => {
+export const useSnackbar = (closeButton = true, loginButton?: boolean) => {
   const { setSnackbarProps } = useContext(SnackbarContext)
   const router = useRouter()
 

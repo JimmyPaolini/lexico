@@ -16,7 +16,9 @@ export const SnackbarContext = createContext(
   },
 )
 
-export const SnackbarProvider = ({ children }: PropsWithChildren<{}>) => {
+type Props = PropsWithChildren<Record<string, unknown>>
+
+export const SnackbarProvider = ({ children }: Props) => {
   const theme = useTheme()
 
   const [snackbarProps, setSnackbarProps] = useState<SnackbarProps>({

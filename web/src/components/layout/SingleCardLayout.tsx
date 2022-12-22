@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react'
 
 import { Grid, Grow, useTheme } from '@mui/material'
 
-type Props = PropsWithChildren<{}>
+type Props = PropsWithChildren<Record<string, unknown>>
 
 export const SingleCardLayout = ({ children }: Props) => {
   const theme = useTheme()

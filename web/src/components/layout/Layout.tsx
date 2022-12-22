@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import { Navigation } from './Navigation'
 import { SnackbarProvider } from './SnackbarProvider'
 
-type Props = PropsWithChildren<{}>
+type Props = PropsWithChildren<Record<string, unknown>>
 
 export const Layout = ({ children }: Props) => {
   const router = useRouter()

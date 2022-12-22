@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "lint-check": "eslint --no-ignore --no-error-on-unmatched-pattern --config cleaning/.eslintrc.js --ignore-path cleaning/.eslintignore .",
+    "lint-check": "eslint --no-error-on-unmatched-pattern --config cleaning/.eslintrc.js --ignore-path cleaning/.eslintignore .",
     "format-check": "prettier --config cleaning/.prettierrc.js --ignore-path cleaning/.prettierignore --check .",
-    "lint": "eslint --no-ignore --no-error-on-unmatched-pattern --config cleaning/.eslintrc.js --ignore-path cleaning/.eslintignore --fix .",
+    "lint": "eslint --no-error-on-unmatched-pattern --config cleaning/.eslintrc.js --ignore-path cleaning/.eslintignore --fix .",
     "format": "prettier --config cleaning/.prettierrc.js --ignore-path cleaning/.prettierignore --write .",
     "clean-check": "npm run format-check; npm run lint-check",
     "clean": "npm run format; npm run lint",
@@ -31,6 +31,7 @@
     "@types/node": "^14.14.11",
     "@types/number-to-words": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
     "class-validator": "^0.12.2",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.1.0",
