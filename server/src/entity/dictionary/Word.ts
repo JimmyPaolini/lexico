@@ -1,5 +1,11 @@
 import { Field, ObjectType } from 'type-graphql'
-import { BaseEntity, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm'
+import {
+  BaseEntity,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryColumn,
+} from 'typeorm'
 
 import Entry from './Entry'
 
