@@ -1,9 +1,9 @@
 import React from 'react'
 
+import Head from 'next/head'
+
 import { Card, Divider, Grid, Grow, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-
-import Head from 'next/head'
 
 import { ToolIconGrid } from '../components/about/ToolIconGrid'
 import { UpcomingFeatures } from '../components/about/UpcomingFeatures'

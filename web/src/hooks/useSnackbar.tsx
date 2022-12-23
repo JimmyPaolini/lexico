@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { Close } from '@mui/icons-material'
 import { Button, IconButton } from '@mui/material'
-
-import { useRouter } from 'next/router'
 
 import { SnackbarContext } from '../components/layout/SnackbarProvider'
 

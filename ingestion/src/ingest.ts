@@ -1,7 +1,7 @@
 import { getConnection } from 'typeorm'
 
 import Entry from '../../server/src/entity/dictionary/Entry'
-import { connectDatabase } from '../../server/src/utils/database'
+import { Database } from '../../server/src/utils/database'
 import { escapeCapitals } from '../../utils/string'
 import ingestEntries from './dictionary/ingestEntries'
 import ingestEntryWord from './dictionary/ingestEntry'
@@ -17,7 +17,7 @@ async function main() {
   const command = process.argv[2]
   if (!command) throw new Error('no command')
 
-  await connectDatabase()
+  await Database.initialize()
 
   const instructions = {
     wiktionary: async () => await ingestWiktionary(),
@@ -48,7 +48,7 @@ async function main() {
           'https://vulgate.org/nt/gospel/matthew_1.htm'
         ),
       ]),
-  } as Record<string, () => any>
+  } as Record<string, () => unknown>
 
   if (!(command in instructions)) throw new Error('unknown command')
   await instructions[command]()

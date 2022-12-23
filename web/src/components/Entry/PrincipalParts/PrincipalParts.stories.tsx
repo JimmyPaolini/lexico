@@ -18,9 +18,10 @@ export default {
   ],
 } as ComponentMeta<typeof PrincipalParts>
 
-export const Default: ComponentStory<typeof PrincipalParts> & {
-  loaders: any[]
-} = (args, { loaded }) => <PrincipalParts {...args} {...loaded} />
+export const Default: ComponentStory<typeof PrincipalParts> = (
+  args,
+  { loaded }
+) => <PrincipalParts {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { id, partOfSpeech, principalParts, inflection, bookmarked } =

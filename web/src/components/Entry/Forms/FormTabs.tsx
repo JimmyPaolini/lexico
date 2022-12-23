@@ -1,9 +1,8 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 
+import { ClassNames } from '@emotion/react'
 import { Box, Tab, Tabs } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-
-import { ClassNames } from '@emotion/react'
 
 import { Identifier } from 'src/utils/identifiers'
 
@@ -26,7 +25,7 @@ export const FormTabs = ({
   const theme = useTheme()
   const minWidth = `${100 / tabs.length}%`
 
-  const changeActiveTab = (_: any, selectedTab: number) => {
+  const changeActiveTab = (_: unknown, selectedTab: number) => {
     setActiveTab(selectedTab)
   }
 

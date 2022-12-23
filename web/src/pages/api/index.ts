@@ -6,10 +6,10 @@ export const serverEndpoint = `http://${
 }:3001/graphql`
 
 export const circularReplacer: () =>
-  | ((this: any, key: string, value: any) => any)
+  | ((this: unknown, key: string, value: unknown) => unknown)
   | undefined = () => {
   const seen = new WeakSet()
-  return (_: any, value: any) => {
+  return (_: unknown, value: unknown) => {
     if (typeof value === 'object' && value !== null) {
       if (seen.has(value)) return
       else seen.add(value)

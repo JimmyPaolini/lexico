@@ -1,6 +1,6 @@
-import { CircularProgress, Paper } from '@mui/material'
-
 import Head from 'next/head'
+
+import { CircularProgress, Paper } from '@mui/material'
 
 export const ReaderLoading = () => {
   return (

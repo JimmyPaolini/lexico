@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
-import { CssBaseline, ThemeProvider } from '@mui/material'
-
-import { CacheProvider, EmotionCache } from '@emotion/react'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import Head from 'next/head'
+
+import { CacheProvider, EmotionCache } from '@emotion/react'
+import { CssBaseline, ThemeProvider } from '@mui/material'
+
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Hydrate } from 'react-query/hydration'
 

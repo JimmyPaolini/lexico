@@ -18,9 +18,10 @@ export default {
   ],
 } as ComponentMeta<typeof NounFormsTable>
 
-export const Default: ComponentStory<typeof NounFormsTable> & {
-  loaders: any[]
-} = (args, { loaded }) => <NounFormsTable {...args} {...loaded} />
+export const Default: ComponentStory<typeof NounFormsTable> = (
+  args,
+  { loaded }
+) => <NounFormsTable {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { forms } = await searchEntry('hortus')

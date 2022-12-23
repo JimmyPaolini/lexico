@@ -1,9 +1,12 @@
+import { ComponentProps } from 'react'
+
 import { NounForms } from 'src/graphql/generated'
 
+import { Form } from '../../Form/Form'
 import { nounFormsTableTemplate } from './nounFormsTableTemplate'
 
 export const nounFormsRestructure = (declensions: NounForms) => {
-  const forms = [...nounFormsTableTemplate]
+  const forms = [...nounFormsTableTemplate] as ComponentProps<typeof Form>[]
   forms[0].centerText = declensions?.nominative?.singular?.join?.(',\n') ?? '-'
   forms[1].centerText = declensions?.nominative?.plural?.join?.(',\n') ?? '-'
   forms[2].centerText = declensions?.genitive?.singular?.join?.(',\n') ?? '-'

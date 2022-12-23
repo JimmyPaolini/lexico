@@ -10,7 +10,7 @@ type Props = { forms: NounForms; searched?: string }
 
 export const NounFormsTable = ({ forms, searched }: Props) => {
   const theme = useTheme()
-  const formsStructure = nounFormsRestructure(forms) as any
+  const formsStructure = nounFormsRestructure(forms)
   return (
     <Paper
       sx={{ maxWidth: theme.custom.card.maxWidth, borderRadius: 0 }}

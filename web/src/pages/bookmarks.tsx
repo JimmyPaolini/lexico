@@ -1,9 +1,10 @@
 import { useContext, useMemo, useState } from 'react'
 
+import Head from 'next/head'
+
 import { Typography } from '@mui/material'
 
 import { GetServerSideProps } from 'next'
-import Head from 'next/head'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 

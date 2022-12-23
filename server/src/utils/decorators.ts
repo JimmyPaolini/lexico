@@ -6,7 +6,7 @@ export function LogRuntime(
   descriptor: PropertyDescriptor
 ): void {
   const fn = descriptor.value
-  descriptor.value = async function (...args: any[]) {
+  descriptor.value = async function (...args: unknown[]) {
     const start = process.hrtime()
     const result = await fn.apply(this, args)
     const runtimeInMs = process.hrtime(start)[1] / 1000000
@@ -21,7 +21,7 @@ export function LogResult(
   descriptor: PropertyDescriptor
 ): void {
   const fn = descriptor.value
-  descriptor.value = async function (...args: any[]) {
+  descriptor.value = async function (...args: unknown[]) {
     const result = await fn.apply(this, args)
     log.debug({ functionName, args, result })
     return result

@@ -10,6 +10,7 @@ export async function searchEntry(search: string) {
     { search }
   )
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  const entry = response.data!.search[0]
+  if (!response.data) throw new Error(`Error searchEntry("${search}")`)
+  const entry = response.data.search[0]
   return entry
 }

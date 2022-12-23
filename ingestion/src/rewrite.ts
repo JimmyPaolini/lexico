@@ -26,7 +26,10 @@ class Writing {
     this.text = this.text
       .replace(/\n/gim, '')
       .replace(/\[(\D+)\] ?/gim, '')
-      .replace(/\[(\d+)\]/gim, (_: any, lineLabel: string) => `\n#${lineLabel}`)
+      .replace(
+        /\[(\d+)\]/gim,
+        (_: unknown, lineLabel: string) => `\n#${lineLabel}`
+      )
       .trim()
     return this
   }
@@ -35,7 +38,7 @@ class Writing {
     this.text = this.text
       .replace(
         /\n?\[(\d+)\]/gim,
-        (_: any, lineLabel: string) => `\n#${lineLabel}`
+        (_: unknown, lineLabel: string) => `\n#${lineLabel}`
       )
       .trim()
     return this
@@ -45,7 +48,7 @@ class Writing {
     this.text = this.text
       .replace(
         /\n?\[([IVXLCDM]+)\]/gm,
-        (_: any, roman: string) => `\n\n#${romanToDecimal(roman)}`
+        (_: unknown, roman: string) => `\n\n#${romanToDecimal(roman)}`
       )
       .trim()
     return this
@@ -56,7 +59,7 @@ class Writing {
       .replace(/\((\D+)\) ?/gim, '')
       .replace(
         /\n?\((\d+)\)/gim,
-        (_: any, lineLabel: string) => `\n#${lineLabel}`
+        (_: unknown, lineLabel: string) => `\n#${lineLabel}`
       )
       .trim()
     return this
@@ -64,7 +67,10 @@ class Writing {
 
   splitLinesOnNakedDecimals() {
     this.text = this.text
-      .replace(/\n?(\d+)/gim, (_: any, lineLabel: string) => `\n#${lineLabel}`)
+      .replace(
+        /\n?(\d+)/gim,
+        (_: unknown, lineLabel: string) => `\n#${lineLabel}`
+      )
       .trim()
     return this
   }
@@ -73,7 +79,7 @@ class Writing {
     this.text = this.text
       .replace(
         /\n?16\.(\d+)/gim,
-        (_: any, lineLabel: string) => `\n\n#${lineLabel}`
+        (_: unknown, lineLabel: string) => `\n\n#${lineLabel}`
       )
       .replace(/^\s+/, '')
       .trim()
@@ -82,7 +88,7 @@ class Writing {
 
   lineStarterDecimalsToLineLabels() {
     this.text = this.text
-      .replace(/^(\d+)/gim, (_: any, lineLabel: string) => `#${lineLabel}`)
+      .replace(/^(\d+)/gim, (_: unknown, lineLabel: string) => `#${lineLabel}`)
       .trim()
     return this
   }
@@ -96,7 +102,7 @@ class Writing {
     this.text = this.text
       .replace(
         /\n?(\d+)\. ?/gim,
-        (_: any, lineLabel: string) => `\n#${lineLabel} `
+        (_: unknown, lineLabel: string) => `\n#${lineLabel} `
       )
       .trim()
     return this
@@ -105,7 +111,7 @@ class Writing {
   lineLabelBracketsToHashtags() {
     this.text = this.text.replace(
       /^\[([^\]]+)\]( +)?/gim,
-      (_: any, lineLabel: string) => `#${lineLabel} `
+      (_: unknown, lineLabel: string) => `#${lineLabel} `
     )
     return this
   }
@@ -113,7 +119,7 @@ class Writing {
   lineLabelDecimalDotsToHashtags() {
     this.text = this.text.replace(
       /^(\d+)\. ?/gim,
-      (_: any, lineLabel: string) => `#${lineLabel} `
+      (_: unknown, lineLabel: string) => `#${lineLabel} `
     )
     return this
   }
@@ -121,7 +127,7 @@ class Writing {
   lineLabelRomanToDecimal() {
     this.text = this.text.replace(
       /^#([IVXLCDM]+)\.?( +)?/gim,
-      (_: any, roman: string) => `#${romanToDecimal(roman)} `
+      (_: unknown, roman: string) => `#${romanToDecimal(roman)} `
     )
     return this
   }
@@ -130,7 +136,7 @@ class Writing {
     this.text = this.text
       .replace(
         /^([IVXLCDM]+)\.?\W/gim,
-        (_: any, roman: string) => `\n#${romanToDecimal(roman)} `
+        (_: unknown, roman: string) => `\n#${romanToDecimal(roman)} `
       )
       .trim()
     return this
@@ -147,7 +153,7 @@ class Writing {
   }
 
   removeTagsOnWords() {
-    this.text = this.text.replace(/<([^>]+)>/gim, (_: any, w: string) => w)
+    this.text = this.text.replace(/<([^>]+)>/gim, (_: unknown, w: string) => w)
     return this
   }
 

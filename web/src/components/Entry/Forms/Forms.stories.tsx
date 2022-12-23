@@ -18,9 +18,9 @@ export default {
   ],
 } as ComponentMeta<typeof Forms>
 
-export const Default: ComponentStory<typeof Forms> & {
-  loaders: any[]
-} = (args, { loaded }) => <Forms {...args} {...loaded} />
+export const Default: ComponentStory<typeof Forms> = (args, { loaded }) => (
+  <Forms {...args} {...loaded} />
+)
 Default.loaders = [
   async () => {
     const searched = 'amat'
@@ -29,9 +29,9 @@ Default.loaders = [
   },
 ]
 
-export const TwoRows: ComponentStory<typeof Forms> & {
-  loaders: any[]
-} = (args, { loaded }) => <Forms {...args} {...loaded} />
+export const TwoRows: ComponentStory<typeof Forms> = (args, { loaded }) => (
+  <Forms {...args} {...loaded} />
+)
 TwoRows.loaders = [
   async () => {
     const searched = 'credam'

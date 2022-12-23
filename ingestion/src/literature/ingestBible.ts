@@ -13,7 +13,7 @@ export default async function ingestBible(
 
   const chapters = $('#masterdiv a')
     .get()
-    .map((link: any) => ({
+    .map((link) => ({
       name: $(link).text().replace(/\s+/, ' '),
       href: origin + $(link).attr('href'),
     })) as Chapter[]
@@ -33,14 +33,14 @@ async function ingestChapter(chapter: Chapter) {
 
   const text = $('span.Latin')
     .get()
-    .map((node: any) => $(node).text())
+    .map((node) => $(node).text())
     .join('\n')
 
   let bookTitle = chapter.name.replace(/\s?\d/g, '').toLowerCase()
   if (bookTitle.match(/^([IVXLCDM]+) /i)) {
     bookTitle = bookTitle.replace(
       /^([IVXLCDM]+) (.*)/i,
-      (_: any, roman: string, title: string) =>
+      (_: unknown, roman: string, title: string) =>
         title + ' ' + romanToDecimal(roman)
     )
   }

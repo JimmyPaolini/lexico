@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
 
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+
 import { Grid, Paper } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
 
 import {
   Text as ReaderText,

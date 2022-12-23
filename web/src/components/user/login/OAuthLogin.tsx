@@ -1,6 +1,6 @@
-import { Button } from '@mui/material'
-
 import Image from 'next/image'
+
+import { Button } from '@mui/material'
 
 import { sentenceCase } from 'src/utils/string'
 

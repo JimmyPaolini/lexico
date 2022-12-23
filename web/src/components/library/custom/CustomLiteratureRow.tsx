@@ -1,7 +1,7 @@
+import { useRouter } from 'next/router'
+
 import { Divider, ListItemButton, ListItemText } from '@mui/material'
 import { styled } from '@mui/material/styles'
-
-import { useRouter } from 'next/router'
 
 import { CustomText } from 'src/utils/literatureLocal'
 

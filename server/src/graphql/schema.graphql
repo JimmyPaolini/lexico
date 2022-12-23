@@ -160,7 +160,13 @@ type IndicativeTense {
   present: IndicativeNumber
 }
 
-union Inflection = AdjectiveInflection | AdverbInflection | NounInflection | PrepositionInflection | Uninflected | VerbInflection
+union Inflection =
+    AdjectiveInflection
+  | AdverbInflection
+  | NounInflection
+  | PrepositionInflection
+  | Uninflected
+  | VerbInflection
 
 type Line {
   id: ID!

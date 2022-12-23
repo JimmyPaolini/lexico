@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react'
 
-import { Grid } from '@mui/material'
-
 import { useRouter } from 'next/router'
+
+import { Grid } from '@mui/material'
 
 import { Navigation } from './Navigation'
 import { SnackbarProvider } from './SnackbarProvider'

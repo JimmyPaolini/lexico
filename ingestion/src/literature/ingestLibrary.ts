@@ -8,20 +8,35 @@ import { authorIdToName } from './literatureMaps'
 
 const host = 'https://www.thelatinlibrary.com/'
 
+type AuthorIngestionDTO = {
+  nickname: string
+  name: string
+  path: string
+  works: TextIngestionDTO[]
+}
+
+type TextIngestionDTO = {
+  title: string
+  book?: string
+  path: string
+}
+
 export default async function ingestLibrary(): Promise<void> {
   const tableHtml = cheerio.load((await axios.get(host)).data)
   cheerioTableParser(tableHtml)
   const authors = (tableHtml('p>table').first() as any)
     .parsetable(true, true, false)
-    .reduce((table: any, row: any) => [...table, ...row], [])
-    .map((elt: any) => {
+    .reduce((table: unknown[], row: unknown[]) => [...table, ...row], [])
+    .map((elt: string) => {
       const a = cheerio.load(elt.trim())('a')
       const nickname = a.text().replace(/\s/, ' ').trim().toLowerCase()
       const name = authorIdToName[nickname] || nickname
       const path = a.attr('href')
-      return { nickname, name, path, works: [] }
+      return { nickname, name, path, works: [] } as AuthorIngestionDTO
     })
-    .sort((a: any, b: any) => a.nickname.localeCompare(b.nickname))
+    .sort((a: AuthorIngestionDTO, b: AuthorIngestionDTO) =>
+      a.nickname.localeCompare(b.nickname)
+    ) as AuthorIngestionDTO[]
 
   for (const i in authors) {
     const author = authors[i]
@@ -38,7 +53,7 @@ export default async function ingestLibrary(): Promise<void> {
       author.works.push({ title, book, path: href })
     }
 
-    if (!author.works.every((work: any) => work.path.match(/.*.s?html/))) {
+    if (!author.works.every((work) => work.path.match(/.*.s?html/))) {
       author.works = [{ title: author.nickname, path: author.path }]
     }
   }

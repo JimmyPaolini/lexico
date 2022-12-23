@@ -2,10 +2,10 @@ import { Logger } from 'typeorm'
 import { createLogger, format, transports } from 'winston'
 
 export const circularReplacer: () =>
-  | ((this: any, key: string, value: any) => any)
+  | ((this: unknown, key: string, value: unknown) => unknown)
   | undefined = () => {
   const seen = new WeakSet()
-  return (_: any, value: any) => {
+  return (_: unknown, value: unknown) => {
     if (typeof value === 'object' && value !== null) {
       if (seen.has(value)) return
       else seen.add(value)
@@ -62,7 +62,7 @@ export class DatabaseLogger implements Logger {
   /**
    * Logs query and parameters used in it.
    */
-  logQuery(query: string, parameters?: any[]): void {
+  logQuery(query: string, parameters?: unknown[]): void {
     if (process.env.LOG_SQL === 'true') {
       log.info(`database query: ${query} ${JSON.stringify(parameters ?? '')}`, {
         label: 'database query',
@@ -76,7 +76,7 @@ export class DatabaseLogger implements Logger {
   logQueryError(
     error: string | Error,
     query: string,
-    parameters?: any[]
+    parameters?: unknown[]
   ): void {
     error = typeof error === 'string' ? error : error.message
     log.error(
@@ -92,7 +92,7 @@ export class DatabaseLogger implements Logger {
   /**
    * Logs query that is slow.
    */
-  logQuerySlow(time: number, query: string, parameters?: any[]): void {
+  logQuerySlow(time: number, query: string, parameters?: unknown[]): void {
     log.warn(
       `database query slow ${time}ms: ${query} ${JSON.stringify(
         parameters ?? ''

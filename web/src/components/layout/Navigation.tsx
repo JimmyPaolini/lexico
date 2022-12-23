@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react'
 
+import Link from 'next/link'
+
 import { ChevronLeft, Menu } from '@mui/icons-material'
 import {
   Divider,
@@ -12,8 +14,6 @@ import {
   SwipeableDrawer,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-
-import Link from 'next/link'
 
 import { capitalizeFirstLetter } from 'src/utils/string'
 

@@ -1,16 +1,22 @@
-import { VerbForms } from 'src/graphql/generated'
+import { ComponentProps } from 'react'
 
+import { IndicativeNumber, VerbForms } from 'src/graphql/generated'
+
+import { Form } from '../../Form/Form'
 import { verbFormsTableTemplate } from './verbFormsTableTemplate'
 
 export const verbFormsRestructure = (conjugations: VerbForms) => {
   const structure = { ...verbFormsTableTemplate }
-  function toFormsTable(conj: any, struc: any) {
-    struc[0].centerText = conj?.singular?.first?.join?.(',\n')
-    struc[2].centerText = conj?.singular?.second?.join?.(',\n')
-    struc[4].centerText = conj?.singular?.third?.join?.(',\n')
-    struc[1].centerText = conj?.plural?.first?.join?.(',\n')
-    struc[3].centerText = conj?.plural?.second?.join?.(',\n')
-    struc[5].centerText = conj?.plural?.third?.join?.(',\n')
+  function toFormsTable(
+    conj: IndicativeNumber | null | undefined,
+    struc: ComponentProps<typeof Form>[]
+  ) {
+    struc[0].centerText = conj?.singular?.first?.join?.(',\n') ?? '-'
+    struc[2].centerText = conj?.singular?.second?.join?.(',\n') ?? '-'
+    struc[4].centerText = conj?.singular?.third?.join?.(',\n') ?? '-'
+    struc[1].centerText = conj?.plural?.first?.join?.(',\n') ?? '-'
+    struc[3].centerText = conj?.plural?.second?.join?.(',\n') ?? '-'
+    struc[5].centerText = conj?.plural?.third?.join?.(',\n') ?? '-'
   }
 
   toFormsTable(

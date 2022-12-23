@@ -1,8 +1,8 @@
+import { useRouter } from 'next/router'
+
 import { Edit } from '@mui/icons-material'
 import { Box, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-
-import { useRouter } from 'next/router'
 
 import { Text as ReaderText } from 'src/graphql/generated'
 import { sentenceCase } from 'src/utils/string'

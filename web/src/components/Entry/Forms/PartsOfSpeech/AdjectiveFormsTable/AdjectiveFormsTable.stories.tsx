@@ -18,9 +18,10 @@ export default {
   ],
 } as ComponentMeta<typeof AdjectiveFormsTable>
 
-export const Default: ComponentStory<typeof AdjectiveFormsTable> & {
-  loaders: any[]
-} = (args, { loaded }) => <AdjectiveFormsTable {...args} {...loaded} />
+export const Default: ComponentStory<typeof AdjectiveFormsTable> = (
+  args,
+  { loaded }
+) => <AdjectiveFormsTable {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { forms } = await searchEntry('amoenus')

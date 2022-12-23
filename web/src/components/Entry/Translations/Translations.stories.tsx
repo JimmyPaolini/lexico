@@ -18,9 +18,10 @@ export default {
   ],
 } as ComponentMeta<typeof Translations>
 
-export const Default: ComponentStory<typeof Translations> & {
-  loaders: any[]
-} = (args, { loaded }) => <Translations {...args} {...loaded} />
+export const Default: ComponentStory<typeof Translations> = (
+  args,
+  { loaded }
+) => <Translations {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { translations } = await searchEntry('amat')

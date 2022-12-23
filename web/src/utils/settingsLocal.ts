@@ -1,6 +1,6 @@
 import { Settings } from 'src/graphql/generated'
 
-export const settingsDefault = (): Settings => ({
+export const settingsDefault = (): Required<Settings> => ({
   theme: 'dark',
   fontSize: 24,
   formsExpandedDefault: false,

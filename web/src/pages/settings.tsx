@@ -1,11 +1,12 @@
 import { useContext, useEffect } from 'react'
 
+import Head from 'next/head'
+
 import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { IncomingHttpHeaders } from 'http2'
 import { GetServerSideProps } from 'next'
-import Head from 'next/head'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 

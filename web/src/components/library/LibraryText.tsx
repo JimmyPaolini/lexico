@@ -1,6 +1,6 @@
-import { CardActionArea, Grid } from '@mui/material'
-
 import Link from 'next/link'
+
+import { CardActionArea, Grid } from '@mui/material'
 
 import { Text } from 'src/graphql/generated'
 

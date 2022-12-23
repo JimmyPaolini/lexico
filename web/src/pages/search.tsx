@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+
 import { Typography } from '@mui/material'
 
 import { GetServerSideProps } from 'next'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
 
 import { useSearch } from 'src/hooks/search/useSearch'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'

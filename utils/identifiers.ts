@@ -17,13 +17,18 @@ export default function identifyEntryWord(word: string, entry: Entry): Entry {
   if (hasSuffix(word, 'que')) word = word.replace(/que$/i, '')
   else if (hasSuffix(word, 've')) word = word.replace(/ve$/i, '')
   else if (hasSuffix(word, 'ne')) word = word.replace(/ne$/i, '')
-  entry.identifiers = identifyWordRecursive(word, entry.forms, [], [])
+  entry.identifiers = identifyWordRecursive(
+    word,
+    entry.forms as Record<string, unknown>,
+    [],
+    []
+  )
   return entry
 }
 
 function identifyWordRecursive(
   word: string,
-  forms: any,
+  forms: Record<string, unknown> | null | undefined,
   current: string[],
   identifiers: string[]
 ) {
@@ -39,7 +44,7 @@ function identifyWordRecursive(
     for (const key in forms) {
       identifiers = identifyWordRecursive(
         word,
-        forms[key],
+        forms[key] as Record<string, unknown>,
         [...current, key],
         identifiers
       )

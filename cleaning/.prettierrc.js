@@ -5,6 +5,7 @@ module.exports = {
   importOrderSortSpecifiers: true,
   importOrder: [
     '^react$',
+    '^next/',
     '^(@mui|@emotion)',
     '<THIRD_PARTY_MODULES>',
     '^src/',

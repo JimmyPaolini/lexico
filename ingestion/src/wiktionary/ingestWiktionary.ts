@@ -6,7 +6,7 @@ import fp from 'path'
 import log from '../../../utils/log'
 import { escapeCapitals } from '../../../utils/string'
 
-const putItemHtml = (entry: any) =>
+const putItemHtml = (entry: Record<string, string>) =>
   fs.writeFileSync(
     fp.join(
       process.cwd(),
@@ -48,9 +48,9 @@ async function ingestCategory(category = 'lemma'): Promise<void> {
       }
       path = $('a:contains("next page")').eq(0).attr('href') ?? ''
     }
-  } catch (e: any) {
+  } catch (e) {
     log.error(
-      `Error on url "https://en.wiktionary.org${path}" - ${e.toString()}`
+      `Error on url "https://en.wiktionary.org${path}" - ${e?.toString()}`
     )
     return await ingestCategory(path)
   }
@@ -60,10 +60,10 @@ async function ingestWord(
   word: string,
   path: string,
   category: string
-): Promise<any> {
+): Promise<unknown> {
   // if (!word.match(/^[A-Za-z-.`,!; ]*\$/)) return log.info(chalk.error(`Error "${entry.word}" - contains special characters`));
   if (!path.match(/.*#Latin/)) path += '#Latin'
-  const entry: Record<string, any> = {
+  const entry: Record<string, string> = {
     word,
     category,
     href: `https://en.wiktionary.org${path}`,
@@ -80,4 +80,5 @@ async function ingestWord(
   entry.html = `<div class="${entry.word}">${$.html(section)}</div>`
   // log.info(`ingesting raw "${entry.word}"`)
   putItemHtml(entry)
+  return
 }

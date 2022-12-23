@@ -31,7 +31,7 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
   )
   const entries = data?.search as EntryType[]
 
-  useEventListener('keydown', (e: any) => {
+  useEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key === 'Escape') setOpen(false)
   })
 

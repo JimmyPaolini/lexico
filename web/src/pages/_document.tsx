@@ -3,13 +3,16 @@
 /* eslint-disable no-new */
 import React from 'react'
 
-import createEmotionServer from '@emotion/server/create-instance'
 import Document, { Head, Html, Main, NextScript } from 'next/document'
+
+import createEmotionServer from '@emotion/server/create-instance'
 
 import { theme } from 'src/theme'
 import { createEmotionCache } from 'src/theme/createEmotionCache'
 
-export default class MyDocument extends Document {
+export default class MyDocument extends Document<{
+  emotionStyleTags: unknown
+}> {
   render() {
     return (
       <Html lang="en">
@@ -54,7 +57,7 @@ export default class MyDocument extends Document {
             }}
           />
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
-          {(this.props as any).emotionStyleTags}
+          {this.props.emotionStyleTags}
         </Head>
         <body id="body">
           <noscript>You need to enable JavaScript to run this app.</noscript>

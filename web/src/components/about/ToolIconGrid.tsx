@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import Image from 'next/image'
+
 import {
   Box,
   CardActionArea,
@@ -9,8 +11,6 @@ import {
   Link,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-
-import Image from 'next/image'
 
 import { tools } from 'src/utils/tools'
 
@@ -50,7 +50,7 @@ export const ToolIconGrid = () => {
               <Link
                 href={tool.url}
                 target="_blank"
-                onClick={(e: any) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
               >
                 <Image
                   src={tool.icon}

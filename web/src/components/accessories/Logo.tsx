@@ -1,19 +1,14 @@
-import { useRef } from 'react'
+import Image from 'next/image'
 
 import { Box, Fade } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import Image from 'next/image'
 import logo from 'public/lexico_logo.svg'
+
+const LOGO_DIMENTIONS = 4 / 3
 
 export const Logo = () => {
   const theme = useTheme()
-  const ref = useRef<any>()
-  const announcement =
-    'Announcement, not always present, this day in latin history, roman holiday, link to <a href="https://www.wikipedia.org/">wikipedia</a>, medieval scientific research, featured content, contains emojis🐋😤💯👀'
-  if (ref?.current?.innerHTML) {
-    ref.current.innerHTML = announcement
-  }
 
   return (
     <Fade in>
@@ -29,9 +24,8 @@ export const Logo = () => {
         <Image
           src={logo}
           alt="lexico logo"
-          // layout="fill"
           width={theme.custom.card.maxWidth}
-          height={(theme.custom.card.maxWidth * 4) / 3}
+          height={theme.custom.card.maxWidth * LOGO_DIMENTIONS}
           priority
           loading="eager"
         />
