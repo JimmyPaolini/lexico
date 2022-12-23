@@ -1,5 +1,5 @@
-query GetText($id: String!) {
-  getText(id: $id) {
+query Text($id: String!) {
+  text(id: $id) {
     id
     title
     lines {

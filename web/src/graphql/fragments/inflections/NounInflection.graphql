@@ -1,4 +1,4 @@
-fragment allNounInflections on NounInflection {
+fragment AllNounInflections on NounInflection {
   declension
   gender
   other

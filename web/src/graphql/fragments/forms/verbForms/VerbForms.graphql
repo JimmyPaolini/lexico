@@ -1,17 +1,17 @@
-fragment allVerbForms on VerbForms {
+fragment AllVerbForms on VerbForms {
   indicative {
-    ...allIndicative
+    ...AllIndicative
   }
   subjunctive {
-    ...allSubjunctive
+    ...AllSubjunctive
   }
   imperative {
-    ...allImperative
+    ...AllImperative
   }
   nonFinite {
-    ...allNonFinite
+    ...AllNonFinite
   }
   verbalNoun {
-    ...allVerbalNoun
+    ...AllVerbalNoun
   }
 }

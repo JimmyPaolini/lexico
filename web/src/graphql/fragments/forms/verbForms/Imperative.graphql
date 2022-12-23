@@ -1,66 +1,66 @@
-fragment allImperative on Imperative {
+fragment AllImperative on Imperative {
   active {
-    ...allImperativeActive
+    ...AllImperativeActive
   }
   passive {
-    ...allImperativePassive
+    ...AllImperativePassive
   }
 }
 
-fragment allImperativeActive on ImperativeActive {
+fragment AllImperativeActive on ImperativeActive {
   present {
-    ...allImperativePresent
+    ...AllImperativePresent
   }
   future {
-    ...allImperativeActiveFuture
+    ...AllImperativeActiveFuture
   }
 }
 
-fragment allImperativePassive on ImperativePassive {
+fragment AllImperativePassive on ImperativePassive {
   present {
-    ...allImperativePresent
+    ...AllImperativePresent
   }
   future {
-    ...allImperativePassiveFuture
+    ...AllImperativePassiveFuture
   }
 }
 
-fragment allImperativePresent on ImperativePresent {
+fragment AllImperativePresent on ImperativePresent {
   singular {
-    ...allImperativeSecond
+    ...AllImperativeSecond
   }
   plural {
-    ...allImperativeSecond
+    ...AllImperativeSecond
   }
 }
 
-fragment allImperativeActiveFuture on ImperativeActiveFuture {
+fragment AllImperativeActiveFuture on ImperativeActiveFuture {
   singular {
-    ...allImperativeSecondThird
+    ...AllImperativeSecondThird
   }
   plural {
-    ...allImperativeSecondThird
+    ...AllImperativeSecondThird
   }
 }
 
-fragment allImperativePassiveFuture on ImperativePassiveFuture {
+fragment AllImperativePassiveFuture on ImperativePassiveFuture {
   singular {
-    ...allImperativeSecondThird
+    ...AllImperativeSecondThird
   }
   plural {
-    ...allImperativeThird
+    ...AllImperativeThird
   }
 }
 
-fragment allImperativeSecondThird on ImperativeSecondThird {
+fragment AllImperativeSecondThird on ImperativeSecondThird {
   second
   third
 }
 
-fragment allImperativeSecond on ImperativeSecond {
+fragment AllImperativeSecond on ImperativeSecond {
   second
 }
 
-fragment allImperativeThird on ImperativeThird {
+fragment AllImperativeThird on ImperativeThird {
   third
 }

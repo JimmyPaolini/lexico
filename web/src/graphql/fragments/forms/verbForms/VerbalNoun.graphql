@@ -1,20 +1,20 @@
-fragment allVerbalNoun on VerbalNoun {
+fragment AllVerbalNoun on VerbalNoun {
   gerund {
-    ...allGerund
+    ...AllGerund
   }
   supine {
-    ...allSupine
+    ...AllSupine
   }
 }
 
-fragment allGerund on Gerund {
+fragment AllGerund on Gerund {
   genitive
   dative
   accusative
   ablative
 }
 
-fragment allSupine on Supine {
+fragment AllSupine on Supine {
   accusative
   ablative
 }

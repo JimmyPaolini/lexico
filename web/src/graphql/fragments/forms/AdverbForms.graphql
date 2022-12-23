@@ -1,4 +1,4 @@
-fragment allAdverbForms on AdverbForms {
+fragment AllAdverbForms on AdverbForms {
   positive
   comparative
   superlative

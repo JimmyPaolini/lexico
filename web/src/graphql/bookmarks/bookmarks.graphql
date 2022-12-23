@@ -1,5 +1,5 @@
 query Bookmarks {
   bookmarks {
-    ...allEntry
+    ...AllEntry
   }
 }

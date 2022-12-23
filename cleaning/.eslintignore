@@ -18,3 +18,4 @@
 
 **/migration
 .next-env.d.ts
+**/schema.graphql

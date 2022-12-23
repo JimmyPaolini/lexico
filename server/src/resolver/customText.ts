@@ -18,9 +18,7 @@ export class CustomTextResolver {
 
   @Query(() => [CustomText])
   @UseMiddleware(Authenticate)
-  async listCustomTexts(
-    @Ctx() { user }: ResolverContext
-  ): Promise<CustomText[]> {
+  async customTexts(@Ctx() { user }: ResolverContext): Promise<CustomText[]> {
     const customTexts = await CustomText.find({
       where: { user: { id: user.id } },
     })
@@ -32,7 +30,7 @@ export class CustomTextResolver {
 
   @Query(() => CustomText)
   @UseMiddleware(Authenticate)
-  async getCustomText(
+  async customText(
     @Arg('id') id: string,
     @Ctx() { user }: ResolverContext
   ): Promise<CustomText> {

@@ -1,4 +1,4 @@
-fragment allPrincipalParts on PrincipalPart {
+fragment AllPrincipalParts on PrincipalPart {
   name
   text
 }

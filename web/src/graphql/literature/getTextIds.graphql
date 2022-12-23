@@ -1,5 +1,3 @@
-query GetTextIds {
-  getTextIds {
-    id
-  }
+query TextIds {
+  textIds
 }

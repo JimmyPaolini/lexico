@@ -1,5 +1,5 @@
 query Settings {
   settings {
-    ...allSettings
+    ...AllSettings
   }
 }

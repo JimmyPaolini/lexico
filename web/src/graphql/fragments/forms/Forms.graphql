@@ -1,14 +1,14 @@
-fragment allForms on Forms {
+fragment AllForms on Forms {
   ... on NounForms {
-    ...allNounForms
+    ...AllNounForms
   }
   ... on VerbForms {
-    ...allVerbForms
+    ...AllVerbForms
   }
   ... on AdjectiveForms {
-    ...allAdjectiveForms
+    ...AllAdjectiveForms
   }
   ... on AdverbForms {
-    ...allAdverbForms
+    ...AllAdverbForms
   }
 }

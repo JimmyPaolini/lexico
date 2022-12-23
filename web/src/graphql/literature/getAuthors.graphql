@@ -1,5 +1,5 @@
-query GetAuthors {
-  getAuthors {
+query Authors {
+  authors {
     id
     name
     books {

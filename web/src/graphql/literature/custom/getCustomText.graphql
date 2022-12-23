@@ -1,5 +1,5 @@
-query GetCustomText($id: String!) {
-  getCustomText(id: $id) {
+query CustomText($id: String!) {
+  customText(id: $id) {
     id
     title
     text

@@ -1,37 +1,37 @@
-fragment allSubjunctive on Subjunctive {
+fragment AllSubjunctive on Subjunctive {
   active {
-    ...allSubjunctiveTense
+    ...AllSubjunctiveTense
   }
   passive {
-    ...allSubjunctiveTense
+    ...AllSubjunctiveTense
   }
 }
 
-fragment allSubjunctiveTense on SubjunctiveTense {
+fragment AllSubjunctiveTense on SubjunctiveTense {
   present {
-    ...allSubjunctiveNumber
+    ...AllSubjunctiveNumber
   }
   imperfect {
-    ...allSubjunctiveNumber
+    ...AllSubjunctiveNumber
   }
   perfect {
-    ...allSubjunctiveNumber
+    ...AllSubjunctiveNumber
   }
   pluperfect {
-    ...allSubjunctiveNumber
+    ...AllSubjunctiveNumber
   }
 }
 
-fragment allSubjunctiveNumber on SubjunctiveNumber {
+fragment AllSubjunctiveNumber on SubjunctiveNumber {
   singular {
-    ...allSubjunctivePerson
+    ...AllSubjunctivePerson
   }
   plural {
-    ...allSubjunctivePerson
+    ...AllSubjunctivePerson
   }
 }
 
-fragment allSubjunctivePerson on SubjunctivePerson {
+fragment AllSubjunctivePerson on SubjunctivePerson {
   first
   second
   third

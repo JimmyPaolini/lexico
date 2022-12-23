@@ -1,8 +1,9 @@
-query GetTexts {
-  getTexts {
+query Texts {
+  texts {
     id
     title
     author {
+      id
       name
     }
     book {

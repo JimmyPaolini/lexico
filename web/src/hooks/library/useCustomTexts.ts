@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useListCustomTextsQuery } from 'src/graphql/generated'
+import { useCustomTextsQuery } from 'src/graphql/generated'
 import {
   CustomText,
   deleteCustomTextLocal,
@@ -22,8 +22,8 @@ export const useCustomTexts = (): useCustomTextsReturn => {
     data,
     isLoading,
     refetch: refreshCustomTextsUser,
-  } = useListCustomTextsQuery()
-  const customTextsUser = data?.listCustomTexts
+  } = useCustomTextsQuery()
+  const customTextsUser = data?.customTexts
 
   const [customTexts, setCustomTexts] = useState<CustomText[]>([
     ...(customTextsUser || []),

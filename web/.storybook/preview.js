@@ -1,15 +1,11 @@
+import { CacheProvider } from '@emotion/react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 
-import '@fontsource/material-icons'
-import '@fontsource/roboto/300.css'
-import '@fontsource/roboto/400.css'
-import '@fontsource/roboto/500.css'
-import '@fontsource/roboto/700.css'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import { ContextProvider } from 'src/components/layout/Context'
 import { SnackbarProvider } from 'src/components/layout/SnackbarProvider'
-import theme from 'src/theme'
+import { createEmotionCache, theme } from 'src/theme'
 
 export const parameters = {
   layout: 'centered',
@@ -24,15 +20,17 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={theme}>
-      <QueryClientProvider client={new QueryClient()}>
-        <ContextProvider>
-          <SnackbarProvider>
-            <CssBaseline />
-            <Story />
-          </SnackbarProvider>
-        </ContextProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <CacheProvider value={createEmotionCache()}>
+      <ThemeProvider theme={theme}>
+        <QueryClientProvider client={new QueryClient()}>
+          <ContextProvider>
+            <SnackbarProvider>
+              <CssBaseline />
+              <Story />
+            </SnackbarProvider>
+          </ContextProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </CacheProvider>
   ),
 ]

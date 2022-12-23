@@ -1,4 +1,4 @@
-fragment allAdverbInflections on AdverbInflection {
+fragment AllAdverbInflections on AdverbInflection {
   type
   degree
 }

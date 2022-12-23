@@ -1,20 +1,20 @@
-fragment allInflections on Inflection {
+fragment AllInflections on Inflection {
   ... on NounInflection {
-    ...allNounInflections
+    ...AllNounInflections
   }
   ... on VerbInflection {
-    ...allVerbInflections
+    ...AllVerbInflections
   }
   ... on AdjectiveInflection {
-    ...allAdjectiveInflections
+    ...AllAdjectiveInflections
   }
   ... on AdverbInflection {
-    ...allAdverbInflections
+    ...AllAdverbInflections
   }
   ... on PrepositionInflection {
-    ...allPrepositionInflections
+    ...AllPrepositionInflections
   }
   ... on Uninflected {
-    ...allUninflected
+    ...AllUninflected
   }
 }

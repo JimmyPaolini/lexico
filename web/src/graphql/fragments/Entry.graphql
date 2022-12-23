@@ -1,17 +1,17 @@
-fragment allEntry on Entry {
+fragment AllEntry on Entry {
   id
   partOfSpeech
   principalParts {
-    ...allPrincipalParts
+    ...AllPrincipalParts
   }
   inflection {
-    ...allInflections
+    ...AllInflections
   }
   translations {
-    ...allTranslations
+    ...AllTranslations
   }
   forms {
-    ...allForms
+    ...AllForms
   }
   identifiers
   bookmarked

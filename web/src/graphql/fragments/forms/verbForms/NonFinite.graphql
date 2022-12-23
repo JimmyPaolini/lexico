@@ -1,41 +1,41 @@
-fragment allNonFinite on NonFinite {
+fragment AllNonFinite on NonFinite {
   infinitive {
-    ...allNonFiniteInfinitive
+    ...AllNonFiniteInfinitive
   }
   participle {
-    ...allNonFiniteParticiple
+    ...AllNonFiniteParticiple
   }
 }
 
-fragment allNonFiniteInfinitive on NonFiniteInfinitive {
+fragment AllNonFiniteInfinitive on NonFiniteInfinitive {
   active {
-    ...allNonFinitePresentPerfectFuture
+    ...AllNonFinitePresentPerfectFuture
   }
   passive {
-    ...allNonFinitePresentPerfectFuture
+    ...AllNonFinitePresentPerfectFuture
   }
 }
 
-fragment allNonFiniteParticiple on NonFiniteParticiple {
+fragment AllNonFiniteParticiple on NonFiniteParticiple {
   active {
-    ...allNonFinitePresentFuture
+    ...AllNonFinitePresentFuture
   }
   passive {
-    ...allNonFinitePerfectFuture
+    ...AllNonFinitePerfectFuture
   }
 }
 
-fragment allNonFinitePresentFuture on NonFinitePresentFuture {
+fragment AllNonFinitePresentFuture on NonFinitePresentFuture {
   present
   future
 }
 
-fragment allNonFinitePerfectFuture on NonFinitePerfectFuture {
+fragment AllNonFinitePerfectFuture on NonFinitePerfectFuture {
   perfect
   future
 }
 
-fragment allNonFinitePresentPerfectFuture on NonFinitePresentPerfectFuture {
+fragment AllNonFinitePresentPerfectFuture on NonFinitePresentPerfectFuture {
   present
   perfect
   future

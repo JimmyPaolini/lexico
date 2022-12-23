@@ -160,13 +160,7 @@ type IndicativeTense {
   present: IndicativeNumber
 }
 
-union Inflection =
-    AdjectiveInflection
-  | AdverbInflection
-  | NounInflection
-  | PrepositionInflection
-  | Uninflected
-  | VerbInflection
+union Inflection = AdjectiveInflection | AdverbInflection | NounInflection | PrepositionInflection | Uninflected | VerbInflection
 
 type Line {
   id: ID!
@@ -260,21 +254,18 @@ type PronunciationParts {
 }
 
 type Query {
+  author(id: String!): Author!
+  authors: [Author!]!
+  book(id: String!): Book!
   bookmarks: [Entry!]!
+  books: [Book!]!
+  customText(id: String!): CustomText!
+  customTexts: [CustomText!]!
   entries(ids: [String!]!): [Entry!]!
   entry(id: String!): Entry!
   facebook(code: String!): User!
   findText(author: String!, book: String, title: String!): Text!
-  getAuthor(id: String!): Author!
-  getAuthors: [Author!]!
-  getBook(id: String!): Book!
-  getBooks: [Book!]!
-  getCustomText(id: String!): CustomText!
-  getText(id: String!): Text!
-  getTextIds: [Text!]!
-  getTexts: [Text!]!
   google(code: String!): User!
-  listCustomTexts: [CustomText!]!
   logout: Boolean!
   search(search: String!): [Entry!]!
   searchAuthors(search: String!): [Author!]!
@@ -285,6 +276,9 @@ type Query {
   searchLiterature(search: String!): [Author!]!
   searchTexts(search: String!): [Text!]!
   settings: Settings!
+  text(id: String!): Text!
+  textIds: [ID!]!
+  texts: [Text!]!
   user: User
 }
 

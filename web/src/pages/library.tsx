@@ -5,7 +5,7 @@ import { Typography } from '@mui/material'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 
-import { Author, useGetAuthorsQuery } from 'src/graphql/generated'
+import { Author, useAuthorsQuery } from 'src/graphql/generated'
 
 import { Deck } from '../components/layout/Deck'
 import { SearchBarLayout } from '../components/layout/SearchBarLayout'
@@ -58,6 +58,6 @@ export default function Library({ authors }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { getAuthors: authors } = await useGetAuthorsQuery.fetcher()()
+  const { authors } = await useAuthorsQuery.fetcher()()
   return { props: { authors } }
 }

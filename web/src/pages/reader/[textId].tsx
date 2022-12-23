@@ -9,8 +9,8 @@ import { useRouter } from 'next/router'
 
 import {
   Text as ReaderText,
-  useGetTextIdsQuery,
-  useGetTextQuery,
+  useTextIdsQuery,
+  useTextQuery,
 } from 'src/graphql/generated'
 import { useSnackbar } from 'src/hooks/useSnackbar'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
@@ -110,10 +110,10 @@ export default function Reader({ text }: Props) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { getTextIds: texts } = await useGetTextIdsQuery.fetcher()()
+  const { textIds } = await useTextIdsQuery.fetcher()()
   return {
     fallback: true,
-    paths: texts.map((text) => ({ params: { textId: text.id } })),
+    paths: textIds.map((textId) => ({ params: { textId } })),
   }
 }
 
@@ -121,7 +121,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const textId = params?.textId as string
   if (!textId) return { notFound: true }
   try {
-    const { getText: text } = await useGetTextQuery.fetcher({ id: textId })()
+    const { text } = await useTextQuery.fetcher({ id: textId })()
     if (!text) return { notFound: true }
     console.log(text)
     return { props: { text } }

@@ -1,4 +1,4 @@
-fragment allAdjectiveInflections on AdjectiveInflection {
+fragment AllAdjectiveInflections on AdjectiveInflection {
   declension
   degree
   other

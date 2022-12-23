@@ -3,7 +3,13 @@ module.exports = {
   singleQuote: true,
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
-  importOrder: ['^react$', '^@mui', '<THIRD_PARTY_MODULES>', '^src/', '^[./]'],
+  importOrder: [
+    '^react$',
+    '^(@mui|@emotion)',
+    '<THIRD_PARTY_MODULES>',
+    '^src/',
+    '^[./]',
+  ],
   importOrderParserPlugins: [
     'typescript',
     'jsx',

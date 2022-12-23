@@ -1,4 +1,4 @@
-fragment allTranslations on Translation {
+fragment AllTranslations on Translation {
   id
   translation
 }

@@ -98,3 +98,5 @@ declare module '@mui/material/styles' {
     custom?: Partial<Theme['custom']>
   }
 }
+
+export * from './createEmotionCache'

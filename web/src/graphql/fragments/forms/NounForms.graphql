@@ -1,28 +1,28 @@
-fragment allNounForms on NounForms {
+fragment AllNounForms on NounForms {
   nominative {
-    ...allNounNumbers
+    ...AllNounNumbers
   }
   genitive {
-    ...allNounNumbers
+    ...AllNounNumbers
   }
   dative {
-    ...allNounNumbers
+    ...AllNounNumbers
   }
   accusative {
-    ...allNounNumbers
+    ...AllNounNumbers
   }
   ablative {
-    ...allNounNumbers
+    ...AllNounNumbers
   }
   vocative {
-    ...allNounNumbers
+    ...AllNounNumbers
   }
   locative {
-    ...allNounNumbers
+    ...AllNounNumbers
   }
 }
 
-fragment allNounNumbers on NounNumber {
+fragment AllNounNumbers on NounNumber {
   singular
   plural
 }

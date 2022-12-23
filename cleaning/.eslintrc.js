@@ -6,7 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['unused-imports', 'react', '@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -14,6 +14,37 @@ module.exports = {
   },
   rules: {
     'react/react-in-jsx-scope': 'off',
+
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
   },
-  overrides: [],
+  overrides: [
+    {
+      files: ['*.graphql'],
+      excludedFiles: ['**/schema.graphql'],
+      parser: '@graphql-eslint/eslint-plugin',
+      plugins: ['@graphql-eslint'],
+      parserOptions: {
+        schema: 'web/src/graphql/schema.json',
+        operations: 'web/src/**/*.graphql',
+      },
+      extends: [
+        'plugin:@graphql-eslint/schema-recommended',
+        'plugin:@graphql-eslint/operations-recommended',
+      ],
+      rules: {
+        'require-id-when-available': 'off',
+      },
+    },
+  ],
 }

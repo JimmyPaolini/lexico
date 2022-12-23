@@ -18,22 +18,24 @@ export default {
   ],
 } as ComponentMeta<typeof Translation>
 
-export const Default: ComponentStory<typeof Translation> & {
-  loaders: any[]
-} = (args, { loaded }) => <Translation {...args} {...loaded} />
+export const Default: ComponentStory<typeof Translation> = (
+  args,
+  { loaded }
+) => <Translation {...args} {...loaded} />
 Default.loaders = [
   async () => {
     const { translations } = await searchEntry('amat')
-    return { translation: translations[0] }
+    return { translation: translations![0] }
   },
 ]
 
-export const TwoLines: ComponentStory<typeof Translation> & {
-  loaders: any[]
-} = (args, { loaded }) => <Translation {...args} {...loaded} />
+export const TwoLines: ComponentStory<typeof Translation> = (
+  args,
+  { loaded }
+) => <Translation {...args} {...loaded} />
 TwoLines.loaders = [
   async () => {
     const { translations } = await searchEntry('amat')
-    return { translation: translations[2] }
+    return { translation: translations![2] }
   },
 ]

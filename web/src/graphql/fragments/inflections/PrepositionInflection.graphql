@@ -1,4 +1,4 @@
-fragment allPrepositionInflections on PrepositionInflection {
+fragment AllPrepositionInflections on PrepositionInflection {
   case
   other
 }

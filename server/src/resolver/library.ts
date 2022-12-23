@@ -1,4 +1,4 @@
-import { Arg, Query, Resolver } from 'type-graphql'
+import { Arg, ID, Query, Resolver } from 'type-graphql'
 import { Like } from 'typeorm'
 
 import log from '../../../utils/log'
@@ -18,7 +18,7 @@ export class LibraryResolver {
   // LIST
 
   @Query(() => [Author])
-  async getAuthors(): Promise<Author[]> {
+  async authors(): Promise<Author[]> {
     const authors = await Author.find()
     await Promise.all(
       authors.map(async (author) => {
@@ -48,7 +48,7 @@ export class LibraryResolver {
   }
 
   @Query(() => [Book])
-  async getBooks(): Promise<Book[]> {
+  async books(): Promise<Book[]> {
     const books = await Book.find({
       relations: ['texts'],
       order: { title: 'ASC' },
@@ -60,21 +60,22 @@ export class LibraryResolver {
   }
 
   @Query(() => [Text])
-  async getTexts(): Promise<Text[]> {
+  async texts(): Promise<Text[]> {
     return await Text.find({
       order: { title: 'ASC' },
     })
   }
 
-  @Query(() => [Text])
-  async getTextIds(): Promise<Text[]> {
-    return await Text.createQueryBuilder().getMany()
+  @Query(() => [ID])
+  async textIds(): Promise<string[]> {
+    const texts = await Text.createQueryBuilder().getMany()
+    return texts.map(({ id }) => id)
   }
 
   // GET
 
   @Query(() => Author)
-  async getAuthor(@Arg('id') id: string): Promise<Author> {
+  async author(@Arg('id') id: string): Promise<Author> {
     const author = await Author.findOneOrFail({
       where: { id },
       relations: { books: { texts: true }, texts: true },
@@ -86,7 +87,7 @@ export class LibraryResolver {
   }
 
   @Query(() => Book)
-  async getBook(@Arg('id') id: string): Promise<Book> {
+  async book(@Arg('id') id: string): Promise<Book> {
     const book = await Book.findOneOrFail({
       where: { id },
       relations: { texts: true },
@@ -96,7 +97,7 @@ export class LibraryResolver {
   }
 
   @Query(() => Text)
-  async getText(@Arg('id') id: string): Promise<Text> {
+  async text(@Arg('id') id: string): Promise<Text> {
     const text = await Text.createQueryBuilder('text')
       .where('text.id = :id', { id })
       .leftJoinAndSelect('text.author', 'author')

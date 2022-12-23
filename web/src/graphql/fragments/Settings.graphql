@@ -1,4 +1,4 @@
-fragment allSettings on Settings {
+fragment AllSettings on Settings {
   theme
   fontSize
   formsExpandedDefault

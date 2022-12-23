@@ -1,11 +1,6 @@
 import { GetServerSideProps } from 'next'
 
-import {
-  Author,
-  Book,
-  Text,
-  useGetCustomTextQuery,
-} from 'src/graphql/generated'
+import { Author, Book, Text, useCustomTextQuery } from 'src/graphql/generated'
 import { CustomText, getCustomTextLocal } from 'src/utils/literatureLocal'
 
 import Reader from '../[textId]'
@@ -13,9 +8,9 @@ import Reader from '../[textId]'
 type Props = { id: string }
 
 export default function CustomReader({ id }: Props) {
-  const { data, isSuccess } = useGetCustomTextQuery({ id })
+  const { data, isSuccess } = useCustomTextQuery({ id })
   const localText = getCustomTextLocal(id)
-  const text = (isSuccess ? data?.getCustomText : localText) as CustomText
+  const text = (isSuccess ? data?.customText : localText) as CustomText
   return !text ? <></> : <Reader text={customTextToText(text)} />
 }
 

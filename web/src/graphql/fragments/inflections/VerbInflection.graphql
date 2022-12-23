@@ -1,4 +1,4 @@
-fragment allVerbInflections on VerbInflection {
+fragment AllVerbInflections on VerbInflection {
   conjugation
   other
 }

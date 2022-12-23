@@ -5,7 +5,7 @@ query User {
     googleId
     facebookId
     settings {
-      ...allSettings
+      ...AllSettings
     }
   }
 }

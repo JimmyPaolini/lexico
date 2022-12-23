@@ -1,43 +1,43 @@
-fragment allIndicative on Indicative {
+fragment AllIndicative on Indicative {
   active {
-    ...allIndicativeTense
+    ...AllIndicativeTense
   }
   passive {
-    ...allIndicativeTense
+    ...AllIndicativeTense
   }
 }
 
-fragment allIndicativeTense on IndicativeTense {
+fragment AllIndicativeTense on IndicativeTense {
   present {
-    ...allIndicativeNumber
+    ...AllIndicativeNumber
   }
   imperfect {
-    ...allIndicativeNumber
+    ...AllIndicativeNumber
   }
   future {
-    ...allIndicativeNumber
+    ...AllIndicativeNumber
   }
   perfect {
-    ...allIndicativeNumber
+    ...AllIndicativeNumber
   }
   pluperfect {
-    ...allIndicativeNumber
+    ...AllIndicativeNumber
   }
   futurePerfect {
-    ...allIndicativeNumber
+    ...AllIndicativeNumber
   }
 }
 
-fragment allIndicativeNumber on IndicativeNumber {
+fragment AllIndicativeNumber on IndicativeNumber {
   singular {
-    ...allIndicativePerson
+    ...AllIndicativePerson
   }
   plural {
-    ...allIndicativePerson
+    ...AllIndicativePerson
   }
 }
 
-fragment allIndicativePerson on IndicativePerson {
+fragment AllIndicativePerson on IndicativePerson {
   first
   second
   third

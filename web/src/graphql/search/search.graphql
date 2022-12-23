@@ -1,5 +1,5 @@
 query Search($search: String!) {
   search(search: $search) {
-    ...allEntry
+    ...AllEntry
   }
 }

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
+import { CacheProvider, EmotionCache } from '@emotion/react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 
-import { CacheProvider, EmotionCache } from '@emotion/react'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import Head from 'next/head'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -10,7 +10,7 @@ import { Hydrate } from 'react-query/hydration'
 
 import { useGoogleAnalytics } from 'src/hooks/useGoogleAnalytics'
 import { theme } from 'src/theme'
-import { createEmotionCache } from 'src/theme/createEmotionCache'
+import { createEmotionCache } from 'src/theme'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 
 import { ContextProvider } from '../components/layout/Context'

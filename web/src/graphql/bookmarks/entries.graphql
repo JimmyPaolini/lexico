@@ -1,5 +1,5 @@
 query Entries($ids: [String!]!) {
   entries(ids: $ids) {
-    ...allEntry
+    ...AllEntry
   }
 }

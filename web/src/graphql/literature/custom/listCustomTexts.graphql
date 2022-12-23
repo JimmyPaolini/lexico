@@ -1,5 +1,5 @@
-query ListCustomTexts {
-  listCustomTexts {
+query CustomTexts {
+  customTexts {
     id
     title
     text
