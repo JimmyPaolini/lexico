@@ -1,4 +1,4 @@
-import { validate } from '../components/library/custom/CustomLiteratureForm'
+import { validate } from './CustomLiteratureForm'
 
 export type CustomText = {
   id: string

@@ -4,7 +4,7 @@ import { AccountCircle, MoreHoriz } from '@mui/icons-material'
 import { IconButton, ListItemSecondaryAction } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
-import { CustomText } from 'src/utils/literatureLocal'
+import { CustomText } from 'src/components/library/custom/customTextsLocal'
 
 import { CustomLiteratureMenu } from './CustomLiteratureOptions/CustomLiteratureMenu'
 

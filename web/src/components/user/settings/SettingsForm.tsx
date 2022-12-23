@@ -4,13 +4,13 @@ import { Divider, Typography } from '@mui/material'
 
 import { useFormik } from 'formik'
 
-import { Settings, useSetSettingsMutation } from 'src/graphql/generated'
-import { useSnackbar } from 'src/hooks/useSnackbar'
 import {
   getSettingsLocal,
   setSettingsLocal,
-  showSettingsInstructions,
-} from 'src/utils/settingsLocal'
+  shouldShowSettingsInstructions,
+} from 'src/components/user/settings/settingsLocal'
+import { Settings, useSetSettingsMutation } from 'src/graphql/generated'
+import { useSnackbar } from 'src/hooks/useSnackbar'
 
 import { Context } from '../../layout/Context'
 import { SettingsSlider } from './SettingsSlider'
@@ -27,7 +27,7 @@ export const SettingsForm = () => {
         await setSettingsUser({ settings: formik.values })
       } else {
         setSettingsLocal(formik.values)
-        if (showSettingsInstructions()) {
+        if (shouldShowSettingsInstructions()) {
           enqueueSnackbar(
             'Your settings are saved locally, sign in to save them across devices/browsers'
           )

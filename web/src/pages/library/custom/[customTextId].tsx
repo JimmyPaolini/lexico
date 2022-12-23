@@ -1,7 +1,10 @@
 import { GetServerSideProps } from 'next'
 
+import {
+  CustomText,
+  getCustomTextLocal,
+} from 'src/components/library/custom/customTextsLocal'
 import { useCustomTextQuery } from 'src/graphql/generated'
-import { CustomText, getCustomTextLocal } from 'src/utils/literatureLocal'
 
 import CustomReaderNew from '../custom'
 

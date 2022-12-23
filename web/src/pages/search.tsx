@@ -7,7 +7,7 @@ import { Typography } from '@mui/material'
 
 import { GetServerSideProps } from 'next'
 
-import { useSearch } from 'src/hooks/search/useSearch'
+import { useSearch } from 'src/components/search/useSearch'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 
 import { Entry } from '../components/Entry/Entry'

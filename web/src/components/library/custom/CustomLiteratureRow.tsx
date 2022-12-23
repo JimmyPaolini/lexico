@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Divider, ListItemButton, ListItemText } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
-import { CustomText } from 'src/utils/literatureLocal'
+import { CustomText } from 'src/components/library/custom/customTextsLocal'
 
 import { CustomLiteratureOptions } from './CustomLiteratureOptions'
 

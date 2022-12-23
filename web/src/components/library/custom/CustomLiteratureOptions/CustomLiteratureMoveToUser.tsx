@@ -2,9 +2,12 @@ import { useEffect } from 'react'
 
 import { AccountCircle } from '@mui/icons-material'
 
+import {
+  CustomText,
+  deleteCustomTextLocal,
+} from 'src/components/library/custom/customTextsLocal'
 import { useCreateCustomTextMutation } from 'src/graphql/generated'
 import { useSnackbar } from 'src/hooks/useSnackbar'
-import { CustomText, deleteCustomTextLocal } from 'src/utils/literatureLocal'
 
 import { GraphqlError } from '../../../../utils/graphqlError.type'
 import { CustomLiteratureMenuItem } from './CustomLiteratureMenuItem'

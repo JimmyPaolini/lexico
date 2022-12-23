@@ -8,14 +8,16 @@ import { GetServerSideProps } from 'next'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
+import { useBookmarks } from 'src/components/bookmarks'
+import {
+  BookmarkInstructions,
+  useBookmarkInstructions,
+} from 'src/components/bookmarks/BookmarkInstructions'
 import { useBookmarksQuery } from 'src/graphql/generated'
-import { useBookmarkInstructions } from 'src/hooks/bookmarks/useBookmarkInstructions'
-import { useBookmarks } from 'src/hooks/bookmarks/useBookmarks'
 import { identifyEntryWord } from 'src/utils/identifiers'
 
 import { Entry } from '../components/Entry/Entry'
-import { BookmarkInstructionsCard } from '../components/bookmarks/BookmarkInstructionsCard'
-import { filterBookmarks } from '../components/bookmarks/filterBookmarks'
+import { filterBookmarks } from '../components/bookmarks/BookmarkButton'
 import { Context } from '../components/layout/Context'
 import { Deck } from '../components/layout/Deck'
 import { SearchBarLayout } from '../components/layout/SearchBarLayout'
@@ -57,7 +59,7 @@ export default function Bookmarks() {
         {isLoading ? null : isSuccess &&
           Array.isArray(bookmarks) &&
           !bookmarks.length ? (
-          <BookmarkInstructionsCard />
+          <BookmarkInstructions />
         ) : (
           <Deck Cards={Cards} />
         )}

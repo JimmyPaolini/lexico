@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import { CustomText } from 'src/utils/literatureLocal'
+import { CustomText } from 'src/components/library/custom/customTextsLocal'
 
 import { CustomLiteratureForm } from '../../components/library/custom/CustomLiteratureForm'
 

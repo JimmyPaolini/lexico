@@ -10,6 +10,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
+import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
 import {
   AdjectiveForms,
   Forms as FormsType,
@@ -17,7 +18,6 @@ import {
   VerbForms,
 } from 'src/graphql/generated'
 import { Identifier } from 'src/utils/identifiers'
-import { getSettingsLocal } from 'src/utils/settingsLocal'
 
 import { ExpandIcon } from '../../accessories/ExpandIcon'
 import { IdentifierPill } from '../../accessories/Pills/IdentifierPill'

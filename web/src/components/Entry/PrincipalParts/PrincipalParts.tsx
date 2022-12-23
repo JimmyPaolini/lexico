@@ -5,7 +5,7 @@ import { Inflection, Maybe, PrincipalPart } from 'src/graphql/generated'
 import { unCamelCase } from 'src/utils/string'
 
 import { ExpandIcon } from '../../accessories/ExpandIcon'
-import { BookmarkButton } from './BookmarkButton'
+import { BookmarkButton } from '../../bookmarks/BookmarkButton'
 import { inflectionToString } from './inflectionToString'
 
 type Props = {
@@ -44,7 +44,7 @@ export const PrincipalParts = ({
       aria-label="Principal Parts, Inflection, and Bookmark toggle"
       action={
         expanded === undefined ? (
-          <BookmarkButton {...{ id, bookmarked }} />
+          <BookmarkButton {...{ id, bookmarked: Boolean(bookmarked) }} />
         ) : (
           <Box
             sx={{

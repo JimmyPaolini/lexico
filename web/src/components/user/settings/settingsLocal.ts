@@ -27,7 +27,7 @@ class ShowSettingsInstructions {
 }
 
 // only called when the user is not signed in
-export function showSettingsInstructions(): boolean {
+export function shouldShowSettingsInstructions(): boolean {
   if (typeof window === 'undefined') return false
   const showSettingsInstructions = JSON.parse(
     window.localStorage.showSettingsInstructions || 'null'

@@ -8,6 +8,7 @@ import { useTheme } from '@mui/material/styles'
 
 import { GetStaticPaths, GetStaticProps } from 'next'
 
+import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
 import {
   Text as ReaderText,
   useTextIdsQuery,
@@ -15,8 +16,7 @@ import {
 } from 'src/graphql/generated'
 import { useSnackbar } from 'src/hooks/useSnackbar'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
-import { showReaderInstructions } from 'src/utils/readerInstructions'
-import { getSettingsLocal } from 'src/utils/settingsLocal'
+import { shouldShowReaderInstructions } from 'src/components/reader/readerInstructions'
 import { sentenceCase } from 'src/utils/string'
 
 import { Context } from '../../components/layout/Context'
@@ -47,7 +47,7 @@ export default function Reader({ text }: Props) {
 
   const enqueueSnackbar = useSnackbar()
   useEffect(() => {
-    if (showReaderInstructions()) {
+    if (shouldShowReaderInstructions()) {
       enqueueSnackbar(
         'Click a word to see its dictionary entry, then click elsewhere or swipe it away to keep reading'
       )

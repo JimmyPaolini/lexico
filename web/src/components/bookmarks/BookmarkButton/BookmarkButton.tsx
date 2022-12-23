@@ -3,17 +3,19 @@ import { useContext, useState } from 'react'
 import { Bookmark, BookmarkBorder } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 
-import { Maybe } from 'src/graphql/generated'
-import { useToggleBookmark } from 'src/hooks/bookmarks/useToggleBookmark'
-import { isBookmarkedLocal } from 'src/utils/bookmarksLocal'
+import { Context } from 'src/components/layout/Context'
 
-import { Context } from '../../layout/Context'
+import { useIsBookmarkedLocal, useToggleBookmark } from '..'
 
-type Props = { id: string; bookmarked?: Maybe<boolean> }
+type Props = { id: string; bookmarked: boolean }
 
-export const BookmarkButton = ({ id, bookmarked: bookmarkedRemote }: Props) => {
+export const BookmarkButton = ({
+  id,
+  bookmarked: isBookmarkedRemote,
+}: Props) => {
   const { user, queryClient } = useContext(Context)
-  const bookmarkedInitial = user ? !!bookmarkedRemote : isBookmarkedLocal(id)
+  const isBookmarkedLocal = useIsBookmarkedLocal(id)
+  const bookmarkedInitial = user ? isBookmarkedRemote : isBookmarkedLocal
   const [bookmarked, setBookmarked] = useState<boolean>(bookmarkedInitial)
 
   const toggleBookmark = useToggleBookmark(
@@ -24,7 +26,7 @@ export const BookmarkButton = ({ id, bookmarked: bookmarkedRemote }: Props) => {
     user
   )
 
-  if (bookmarkedRemote === undefined) return <></>
+  if (isBookmarkedRemote === undefined) return <></>
   return (
     <IconButton onClick={toggleBookmark} aria-label="Bookmark" size="large">
       {bookmarked ? <Bookmark /> : <BookmarkBorder />}

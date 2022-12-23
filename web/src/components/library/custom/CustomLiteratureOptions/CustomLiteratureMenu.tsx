@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useContext } from 'react'
 
 import { Menu } from '@mui/material'
 
-import { CustomText } from 'src/utils/literatureLocal'
+import { CustomText } from 'src/components/library/custom/customTextsLocal'
 
 import { Context } from '../../../layout/Context'
 import { CustomLiteratureDelete } from './CustomLiteratureDelete'

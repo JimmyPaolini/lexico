@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction } from 'react'
 
-import { showBookmarkInstructions } from 'src/utils/bookmarkInstructions'
-import { bookmarkLocal, unbookmarkLocal } from 'src/utils/bookmarksLocal'
+import { useSnackbar } from 'src/hooks/useSnackbar'
 
-import { useSnackbar } from '../useSnackbar'
+import { shouldShowBookmarkInstructions } from '../../BookmarkInstructions'
+import { useBookmarkLocal } from './useBookmarkLocal'
+import { useUnbookmarkLocal } from './useUnbookmarkLocal'
 
 export const useToggleBookmarkLocal = (
   id: string,
@@ -11,6 +12,8 @@ export const useToggleBookmarkLocal = (
   setBookmarked: Dispatch<SetStateAction<boolean>>
 ) => {
   const enqueueSnackbar = useSnackbar(true, true)
+  const bookmarkLocal = useBookmarkLocal()
+  const unbookmarkLocal = useUnbookmarkLocal()
   const toggleBookmark = () => {
     if (!bookmarked) {
       bookmarkLocal(id)
@@ -19,7 +22,7 @@ export const useToggleBookmarkLocal = (
       unbookmarkLocal(id)
       setBookmarked(false)
     }
-    if (showBookmarkInstructions()) {
+    if (shouldShowBookmarkInstructions()) {
       enqueueSnackbar(
         'Your bookmarks are saved locally, sign in to save them across devices/browsers'
       )

@@ -2,7 +2,7 @@ import Card from '@mui/material/Card'
 import Divider from '@mui/material/Divider'
 import { useTheme } from '@mui/material/styles'
 
-import { Entry as EntryType } from 'src/hooks/search/useSearch'
+import { Entry as EntryType } from 'src/components/search/useSearch'
 
 import { Forms } from './Forms/Forms'
 import { PrincipalParts } from './PrincipalParts/PrincipalParts'

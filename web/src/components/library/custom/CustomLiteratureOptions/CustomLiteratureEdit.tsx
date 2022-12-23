@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import { Edit } from '@mui/icons-material'
 
-import { CustomText } from 'src/utils/literatureLocal'
+import { CustomText } from 'src/components/library/custom/customTextsLocal'
 
 import { CustomLiteratureMenuItem } from './CustomLiteratureMenuItem'
 

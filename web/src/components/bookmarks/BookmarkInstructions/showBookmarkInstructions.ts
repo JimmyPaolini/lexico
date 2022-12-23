@@ -4,7 +4,7 @@ class ShowBookmarkInstructions {
 }
 
 // only called when the user is not signed in
-export function showBookmarkInstructions(): boolean {
+export function shouldShowBookmarkInstructions(): boolean {
   if (typeof window === 'undefined') return false
   const showBookmarkInstructions = JSON.parse(
     window.localStorage.showBookmarkInstructions || 'null'

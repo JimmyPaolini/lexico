@@ -9,8 +9,11 @@ import { styled } from '@mui/material/styles'
 import { useFormik } from 'formik'
 import { v4 as uuid } from 'uuid'
 
+import {
+  CustomText,
+  createCustomTextLocal,
+} from 'src/components/library/custom/customTextsLocal'
 import { useCreateCustomTextMutation } from 'src/graphql/generated'
-import { CustomText, createCustomTextLocal } from 'src/utils/literatureLocal'
 
 import { SubmitButton } from '../../accessories/SubmitButton'
 import { TextBox } from '../../accessories/TextBox'

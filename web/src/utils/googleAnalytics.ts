@@ -1,7 +1,7 @@
 export function googleAnalyticsPageView(url: URL): void {
   if (typeof window === 'undefined') return
   const gtag = window?.gtag
-  gtag('consent', String(process.env.GOOGLE_ANALYTICS_ID), {
+  gtag('config', String(process.env.GOOGLE_ANALYTICS_ID), {
     page_path: url,
   })
 }

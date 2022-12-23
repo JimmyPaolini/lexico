@@ -3,7 +3,7 @@ class ShowReaderInstructions {
   seenCount = 0
 }
 
-export function showReaderInstructions(): boolean {
+export function shouldShowReaderInstructions(): boolean {
   if (typeof window === 'undefined') return false
   const showReaderInstructions = JSON.parse(
     window.localStorage.showReaderInstructions || 'null'

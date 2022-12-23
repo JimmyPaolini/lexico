@@ -5,8 +5,8 @@ import { useTheme } from '@mui/material/styles'
 
 import LazyLoad from 'react-lazyload'
 
+import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
 import { Line as ReaderLine } from 'src/graphql/generated'
-import { getSettingsLocal } from 'src/utils/settingsLocal'
 import { normalize } from 'src/utils/string'
 
 import { Context } from '../layout/Context'

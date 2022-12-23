@@ -1,7 +1,10 @@
 import { Home } from '@mui/icons-material'
 
+import {
+  CustomText,
+  createCustomTextLocal,
+} from 'src/components/library/custom/customTextsLocal'
 import { useDeleteCustomTextMutation } from 'src/graphql/generated'
-import { CustomText, createCustomTextLocal } from 'src/utils/literatureLocal'
 
 import { CustomLiteratureMenuItem } from './CustomLiteratureMenuItem'
 

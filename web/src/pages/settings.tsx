@@ -10,9 +10,9 @@ import { GetServerSideProps } from 'next'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
+import { shouldShowSettingsInstructions } from 'src/components/user/settings/settingsLocal'
 import { UserDocument, useUserQuery } from 'src/graphql/generated'
 import { useSnackbar } from 'src/hooks/useSnackbar'
-import { showSettingsInstructions } from 'src/utils/settingsLocal'
 
 import { Context } from '../components/layout/Context'
 import { Deck } from '../components/layout/Deck'
@@ -26,7 +26,7 @@ export default function Settings() {
   const { user } = useContext(Context)
   const enqueueSnackbar = useSnackbar()
   useEffect(() => {
-    if (!user && showSettingsInstructions()) {
+    if (!user && shouldShowSettingsInstructions()) {
       enqueueSnackbar(
         'Your settings are saved locally, sign in to save them across devices/browsers'
       )

@@ -8,8 +8,8 @@ import {
   useTheme,
 } from '@mui/material'
 
-import { Entry } from 'src/hooks/search/useSearch'
-import { getSettingsLocal } from 'src/utils/settingsLocal'
+import { Entry } from 'src/components/search/useSearch'
+import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
 
 import { ExpandIcon } from '../../accessories/ExpandIcon'
 import { Context } from '../../layout/Context'

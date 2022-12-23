@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory, forceReRender } from '@storybook/react'
 
-import { BookmarkButton } from 'src/components/Entry/PrincipalParts/BookmarkButton'
+import { BookmarkButton } from 'src/components/bookmarks/BookmarkButton/BookmarkButton'
 import { searchEntry } from 'src/utils/stories'
 
 export default {
@@ -32,7 +32,7 @@ export const Default: ComponentStory<typeof BookmarkButton> = (
     <BookmarkButton {...args} {...loaded} />
     <div>localStorage.bookmarks = {window.localStorage.bookmarks}</div>
     <div>
-      localStorage.showBookmarkInstructions ={' '}
+      localStorage.showBookmarkInstructions =
       {window.localStorage.showBookmarkInstructions}
     </div>
     <div

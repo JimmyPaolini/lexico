@@ -10,7 +10,7 @@ import {
   ListItemText,
 } from '@mui/material'
 
-export const BookmarkInstructionsCard = () => {
+export const BookmarkInstructions = () => {
   return (
     <Grow in>
       <Card>

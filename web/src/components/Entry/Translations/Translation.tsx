@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { Entry } from 'src/hooks/search/useSearch'
+import { Entry } from 'src/components/search/useSearch'
 
 type Props = { translation: NonNullable<Entry['translations']>[0] }
 
