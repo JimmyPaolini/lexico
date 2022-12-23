@@ -26,7 +26,7 @@ export const identifierStyles = {
   feminine: { background: 'green', color: 'white' },
   neuter: { background: 'purple', color: 'white' },
 
-  singular: { background: 'white', color: 'black', border: '1px solid black' },
+  singular: { background: 'white', color: 'black', border: '2px solid black' },
   plural: { background: 'black', color: 'white', border: '1px solid white' },
 
   indicative: { background: 'steelblue', color: 'white' },
@@ -48,7 +48,7 @@ export const identifierStyles = {
   supine: { background: 'deeppink', color: 'white' },
 
   active: { background: '#555', color: 'white', border: '1px dotted white' },
-  passive: { background: '#999', color: 'black', border: '1px dotted black' },
+  passive: { background: '#999', color: 'black', border: '2px dotted black' },
 
   first: { background: 'blue', color: 'white' },
   second: { background: 'red', color: 'white' },
