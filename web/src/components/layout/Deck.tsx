@@ -35,7 +35,7 @@ export const Deck = ({ Cards }: Props) => {
       justifyContent="center"
       wrap="nowrap"
       gap={2}
-      sx={{ margin: `0px ${theme.spacing(2)}` }}
+      sx={{ margin: `0px ${theme.spacing(2)}`, width: '100%' }}
     >
       {CardMatrix.map((CardArray, colNum) => {
         return !CardArray.length ? null : (
@@ -45,7 +45,11 @@ export const Deck = ({ Cards }: Props) => {
             direction="column"
             alignItems="center"
             gap={2}
-            sx={{ width: 'auto' }}
+            sx={{
+              width: '100%',
+              maxWidth: theme.custom.card.maxWidth,
+              minWidth: theme.custom.card.minWidth,
+            }}
             key={getCardsKey(CardArray)}
           >
             {CardArray.map((Card, rowNum) => (
