@@ -8,7 +8,7 @@ type Props = { texts: Text[] }
 
 export const LibraryTexts = ({ texts }: Props) => {
   return (
-    <Grid container justifyContent="center">
+    <Grid container justifyContent="space-evenly">
       {texts.map((text) => (
         <Grid item key={text.id}>
           <LibraryText {...{ text }} />

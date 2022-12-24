@@ -11,7 +11,8 @@ import {
 import { Author } from 'src/graphql/generated'
 import { sentenceCase } from 'src/utils/string'
 
-import { ExpandIcon } from '../accessories/ExpandIcon'
+import { ExpandIcon } from '../../accessories/ExpandIcon'
+import { useAuthorSummary } from './useAuthorSummary'
 
 type Props = {
   author: Author
@@ -19,28 +20,12 @@ type Props = {
   setExpanded: Dispatch<SetStateAction<boolean>>
 }
 export const LibraryAuthor = ({ author, expanded, setExpanded }: Props) => {
-  let summary = [
-    ...(author.books || []),
-    ...author.texts.filter(
-      (text) =>
-        !(author.books || []).some((book) =>
-          book.texts.some((bookText) => bookText.id === text.id)
-        )
-    ),
-  ]
-    .sort()
-    .map((item) => sentenceCase(item.title).replace(/^\d+ /, ''))
-    .join(' • ')
-  if (author.id === 'catullus') summary = 'Carmina 1-116'
+  const summary = useAuthorSummary(author)
 
   return (
     <CardActionArea
       onClick={() => setExpanded((expanded) => !expanded)}
-      sx={{
-        '&.MuiFocusHighlight': {
-          display: 'none',
-        },
-      }}
+      sx={{ '&.MuiFocusHighlight': { display: 'none' } }}
       disableRipple
       disableTouchRipple
     >

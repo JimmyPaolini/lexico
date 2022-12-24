@@ -1,0 +1,1 @@
+export { LibraryAuthor } from './LibraryAuthor'

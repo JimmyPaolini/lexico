@@ -5,7 +5,7 @@ import { getAuthor } from 'src/utils/stories'
 import { LibraryCard } from './LibraryCard'
 
 export default {
-  title: 'Cards/LibraryCard',
+  title: 'Cards/Library',
   component: LibraryCard,
 } as ComponentMeta<typeof LibraryCard>
 
@@ -31,13 +31,13 @@ Catullus.loaders = [
   },
 ]
 
-export const VulgateOld: ComponentStory<typeof LibraryCard> = (
+export const Cicero: ComponentStory<typeof LibraryCard> = (
   args,
   { loaded }
 ) => <LibraryCard {...args} {...loaded} />
-VulgateOld.loaders = [
+Cicero.loaders = [
   async () => {
-    const author = await getAuthor('vulgate bible old testament')
+    const author = await getAuthor('cicero')
     return { author }
   },
 ]

@@ -29,6 +29,13 @@ const themeInitial = createTheme({
       fontSize: '1.5rem',
       letterSpacing: '0.00938em',
     },
+    lineClamp: (numLines: number) => ({
+      display: '-webkit-box',
+      '-webkit-line-clamp': `${numLines}`,
+      '-webkit-box-orient': 'vertical',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+    }),
   },
 })
 
@@ -91,6 +98,7 @@ declare module '@mui/material/styles' {
         fontSize: string
         letterSpacing: string
       }
+      lineClamp: (numLines: number) => Record<string, string>
     }
   }
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions

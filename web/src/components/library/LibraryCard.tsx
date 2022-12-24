@@ -1,6 +1,13 @@
 import { useState } from 'react'
 
-import { Card, CardContent, Collapse, Divider, List } from '@mui/material'
+import {
+  Card,
+  CardContent,
+  Collapse,
+  Divider,
+  List,
+  useTheme,
+} from '@mui/material'
 
 import { Author, Book } from 'src/graphql/generated'
 
@@ -11,6 +18,8 @@ import { LibraryTexts } from './LibraryTexts'
 type Props = { author: Author }
 
 export const LibraryCard = ({ author }: Props) => {
+  const [expanded, setExpanded] = useState<boolean>(false)
+  const theme = useTheme()
   const books = author.books || ([] as Book[])
   const nonBookTexts = author.texts.filter(
     (text) =>
@@ -18,40 +27,26 @@ export const LibraryCard = ({ author }: Props) => {
         book.texts.some((bookText) => bookText.id === text.id)
       )
   )
-  const [expanded, setExpanded] = useState<boolean>(false)
 
   return (
     <Card>
       <LibraryAuthor {...{ author, expanded, setExpanded }} />
-      <Collapse in={expanded} mountOnEnter>
-        <Divider style={{ marginRight: 8 }} />
-        <CardContent
-          sx={{
-            padding: 0,
-            '&:last-child': {
-              paddingBottom: 0,
-            },
-          }}
-        >
-          <List
-            sx={{
-              padding: 0,
-              '&:last-child': {
-                paddingBottom: 0,
-              },
-            }}
-            dense
-          >
+      <Collapse in={expanded}>
+        <Divider sx={{ marginLeft: theme.spacing(1) }} />
+        <CardContent sx={{ padding: 0, '&:last-child': { paddingBottom: 0 } }}>
+          <List sx={{ padding: 0 }} dense>
             {books.map((book, i) => {
-              const isLast = i === books.length - 1 && !nonBookTexts.length
-              return <LibraryBook {...{ author, book, isLast }} key={book.id} />
+              const isLast = i === books.length - 1
+              return (
+                <>
+                  <LibraryBook {...{ author, book }} />
+                  {(!isLast || (isLast && nonBookTexts.length) > 0) && (
+                    <Divider sx={{ marginLeft: theme.spacing(1) }} />
+                  )}
+                </>
+              )
             })}
             <LibraryTexts texts={nonBookTexts} />
-            {/* <Grid container justifyContent="center" alignItems="stretch">
-              {nonBookTexts.map((text) => (
-                <LibraryText {...{ text }} key={text.id} />
-              ))}
-            </Grid> */}
           </List>
         </CardContent>
       </Collapse>
