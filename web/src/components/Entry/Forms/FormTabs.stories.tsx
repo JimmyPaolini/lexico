@@ -4,7 +4,7 @@ import { FormTabs } from 'src/components/Entry/Forms/FormTabs'
 import { verbFormsRestructure } from 'src/components/Entry/Forms/PartsOfSpeech/VerbFormsTable/verbFormsRestructure'
 import { VerbForms } from 'src/graphql/generated'
 import { theme } from 'src/theme'
-import { searchEntry } from 'src/utils/stories'
+import { getEntry } from 'src/utils/stories'
 
 export default {
   title: 'Cards/Entry/Forms/FormTabs',
@@ -25,7 +25,7 @@ export const Default: ComponentStory<typeof FormTabs> = (args, { loaded }) => (
 )
 Default.loaders = [
   async () => {
-    const { forms } = await searchEntry('amat')
+    const { forms } = await getEntry('amat:0')
     const structure = verbFormsRestructure(forms as VerbForms)
     return {
       tabs: Object.keys(structure),

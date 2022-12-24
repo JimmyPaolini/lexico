@@ -13,7 +13,7 @@ export const LibraryNamedText = ({ text }: Props) => {
   return (
     <Grid
       sx={{
-        height: 56,
+        height: 40,
         margin: theme.spacing(1),
         padding: theme.spacing(1),
         borderRadius: 16,
@@ -24,10 +24,11 @@ export const LibraryNamedText = ({ text }: Props) => {
     >
       <Typography
         sx={{
-          '-webkit-line-clamp': '3',
+          '-webkit-line-clamp': '2',
           '-webkit-box-orient': 'vertical',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
+
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

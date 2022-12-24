@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { Translation } from 'src/components/Entry/Translations/Translation'
 import { theme } from 'src/theme'
-import { searchEntry } from 'src/utils/stories'
+import { getEntry } from 'src/utils/stories'
 
 export default {
   title: 'Cards/Entry/Translations/Translation',
@@ -24,7 +24,7 @@ export const Default: ComponentStory<typeof Translation> = (
 ) => <Translation {...args} {...loaded} />
 Default.loaders = [
   async () => {
-    const { translations } = await searchEntry('amat')
+    const { translations } = await getEntry('amat:0')
     if (!translations?.length) throw new Error('translation not found')
     return { translation: translations[0] }
   },
@@ -36,7 +36,7 @@ export const TwoLines: ComponentStory<typeof Translation> = (
 ) => <Translation {...args} {...loaded} />
 TwoLines.loaders = [
   async () => {
-    const { translations } = await searchEntry('amat')
+    const { translations } = await getEntry('amat:0')
     if (!translations?.length) throw new Error('translation not found')
     if (translations?.length < 3) throw new Error('translation not found')
     return { translation: translations[2] }

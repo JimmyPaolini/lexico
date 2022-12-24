@@ -26,7 +26,7 @@ export const LibraryBook = ({ book, isLast }: Props) => {
     <>
       <ListItemButton
         onClick={() => setExpanded((expanded) => !expanded)}
-        sx={{ '&:hover': { background: 'inherit' } }}
+        // sx={{ '&:hover': { background: 'inherit' } }}
         disableRipple
         disableTouchRipple
       >

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory, forceReRender } from '@storybook/react'
 
 import { BookmarkButton } from 'src/components/bookmarks/BookmarkButton/BookmarkButton'
-import { searchEntry } from 'src/utils/stories'
+import { getEntry } from 'src/utils/stories'
 
 export default {
   title: 'Cards/Entry/PrincipalPartsRow/BookmarkButton',
@@ -50,7 +50,7 @@ export const Default: ComponentStory<typeof BookmarkButton> = (
 Default.args = { bookmarked: false }
 Default.loaders = [
   async () => {
-    const { id } = await searchEntry('amat')
+    const { id } = await getEntry('amat')
     return { id }
   },
 ]

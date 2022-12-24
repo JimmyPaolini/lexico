@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { VerbFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/VerbFormsTable'
 import { theme } from 'src/theme'
-import { searchEntry } from 'src/utils/stories'
+import { getEntry } from 'src/utils/stories'
 
 export default {
   title: 'Cards/Entry/Forms/PartsOfSpeech/VerbFormsTable',
@@ -24,7 +24,7 @@ export const Default: ComponentStory<typeof VerbFormsTable> = (
 ) => <VerbFormsTable {...args} {...loaded} />
 Default.loaders = [
   async () => {
-    const { forms } = await searchEntry('amat')
+    const { forms } = await getEntry('amat:0')
     return { forms }
   },
 ]

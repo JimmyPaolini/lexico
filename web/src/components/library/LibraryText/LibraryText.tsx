@@ -13,16 +13,16 @@ export const LibraryText = ({ text }: Props) => {
   const isNumberedText = text.title.match(/book \d+/i)
 
   return (
-    <Grid item xs={isNumberedText ? 2 : 4} container justifyContent="center">
+    <CardActionArea>
       <Link href={`reader/${text.id}`} style={{ textDecoration: 'none' }}>
-        <CardActionArea>
+        <Grid item xs container justifyContent="center">
           {isNumberedText ? (
             <LibraryNumberedText text={text} />
           ) : (
             <LibraryNamedText text={text} />
           )}
-        </CardActionArea>
+        </Grid>
       </Link>
-    </Grid>
+    </CardActionArea>
   )
 }

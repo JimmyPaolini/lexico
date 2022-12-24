@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { PrincipalParts } from 'src/components/Entry/PrincipalParts/PrincipalParts'
 import { theme } from 'src/theme'
-import { searchEntry } from 'src/utils/stories'
+import { getEntry } from 'src/utils/stories'
 
 export default {
   title: 'Cards/Entry/PrincipalParts',
@@ -25,7 +25,7 @@ export const Default: ComponentStory<typeof PrincipalParts> = (
 Default.loaders = [
   async () => {
     const { id, partOfSpeech, principalParts, inflection, bookmarked } =
-      await searchEntry('amat')
+      await getEntry('amat:0')
     return { id, partOfSpeech, principalParts, inflection, bookmarked }
   },
 ]

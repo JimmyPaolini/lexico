@@ -1,0 +1,18 @@
+query Author($id: String!) {
+  author(id: $id) {
+    id
+    name
+    books {
+      id
+      title
+      texts {
+        id
+        title
+      }
+    }
+    texts {
+      id
+      title
+    }
+  }
+}

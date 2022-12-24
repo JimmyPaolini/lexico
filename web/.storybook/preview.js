@@ -1,7 +1,7 @@
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 
 import { CacheProvider } from '@emotion/react'
-import { CssBaseline, ThemeProvider } from '@mui/material'
+import { CssBaseline, Grid, ThemeProvider } from '@mui/material'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 
@@ -31,7 +31,13 @@ export const decorators = [
           <ContextProvider>
             <SnackbarProvider>
               <CssBaseline />
-              <Story />
+              <Grid
+                container
+                justifyContent="center"
+                sx={{ minWidth: '500px' }}
+              >
+                <Story />
+              </Grid>
             </SnackbarProvider>
           </ContextProvider>
         </QueryClientProvider>

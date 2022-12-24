@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
-import { Card, CardContent, Collapse, Divider, Grid, List } from '@mui/material'
+import { Card, CardContent, Collapse, Divider, List } from '@mui/material'
 
 import { Author, Book } from 'src/graphql/generated'
 
 import { LibraryAuthor } from './LibraryAuthor'
 import { LibraryBook } from './LibraryBook'
-import { LibraryText } from './LibraryText'
+import { LibraryTexts } from './LibraryTexts'
 
 type Props = { author: Author }
 
@@ -46,11 +46,12 @@ export const LibraryCard = ({ author }: Props) => {
               const isLast = i === books.length - 1 && !nonBookTexts.length
               return <LibraryBook {...{ author, book, isLast }} key={book.id} />
             })}
-            <Grid container justifyContent="center" alignItems="stretch">
+            <LibraryTexts texts={nonBookTexts} />
+            {/* <Grid container justifyContent="center" alignItems="stretch">
               {nonBookTexts.map((text) => (
                 <LibraryText {...{ text }} key={text.id} />
               ))}
-            </Grid>
+            </Grid> */}
           </List>
         </CardContent>
       </Collapse>

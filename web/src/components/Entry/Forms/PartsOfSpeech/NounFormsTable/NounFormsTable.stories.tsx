@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { NounFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/NounFormsTable'
 import { theme } from 'src/theme'
-import { searchEntry } from 'src/utils/stories'
+import { getEntry } from 'src/utils/stories'
 
 export default {
   title: 'Cards/Entry/Forms/PartsOfSpeech/NounFormsTable',
@@ -24,7 +24,7 @@ export const Default: ComponentStory<typeof NounFormsTable> = (
 ) => <NounFormsTable {...args} {...loaded} />
 Default.loaders = [
   async () => {
-    const { forms } = await searchEntry('hortus')
+    const { forms } = await getEntry('hortus:0')
     return { forms }
   },
 ]

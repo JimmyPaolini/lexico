@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { Forms } from 'src/components/Entry/Forms/Forms'
 import { theme } from 'src/theme'
-import { searchEntry } from 'src/utils/stories'
+import { getEntry } from 'src/utils/stories'
 
 export default {
   title: 'Cards/Entry/Forms',
@@ -23,8 +23,8 @@ export const Default: ComponentStory<typeof Forms> = (args, { loaded }) => (
 )
 Default.loaders = [
   async () => {
-    const searched = 'amat'
-    const { forms, partOfSpeech, identifiers } = await searchEntry(searched)
+    const searched = 'amat:0'
+    const { forms, partOfSpeech, identifiers } = await getEntry(searched)
     return { searched, forms, partOfSpeech, identifiers }
   },
 ]
@@ -34,8 +34,8 @@ export const TwoRows: ComponentStory<typeof Forms> = (args, { loaded }) => (
 )
 TwoRows.loaders = [
   async () => {
-    const searched = 'credam'
-    const { forms, partOfSpeech, identifiers } = await searchEntry(searched)
+    const searched = 'credam:0'
+    const { forms, partOfSpeech, identifiers } = await getEntry(searched)
     return { searched, forms, partOfSpeech, identifiers }
   },
 ]

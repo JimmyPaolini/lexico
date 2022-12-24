@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { Deck } from 'src/components/layout/Deck'
-import { searchEntry } from 'src/utils/stories'
+import { getEntry } from 'src/utils/stories'
 
 import { Entry } from '../Entry/Entry'
 
@@ -15,8 +15,8 @@ export const Default: ComponentStory<typeof Deck> = (_, { loaded }) => (
 )
 Default.loaders = [
   async () => {
-    const amo = await searchEntry('amo')
-    const per = await searchEntry('per')
+    const amo = await getEntry('amo:0')
+    const per = await getEntry('per:0')
     return {
       Cards: [
         <Entry entry={amo} searched={'amo'} key={1} />,

@@ -4,13 +4,13 @@ import { Edit } from '@mui/icons-material'
 import { Box, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { Text as ReaderText } from 'src/graphql/generated'
+import { Text as TextGql } from 'src/graphql/generated'
 import { sentenceCase } from 'src/utils/string'
 
 import { CardHeader } from '../accessories/CardHeader'
 import { Line } from './Line'
 
-type Props = { text: ReaderText; openModal: (word: string) => void }
+type Props = { text: TextGql; openModal: (word: string) => void }
 
 export const Text = ({ text, openModal }: Props) => {
   const router = useRouter()

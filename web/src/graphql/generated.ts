@@ -535,6 +535,13 @@ export type Word = {
   word: Scalars['String'];
 };
 
+export type EntryQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type EntryQuery = { entry: { id: string, partOfSpeech: string, identifiers?: Maybe<Array<string>>, bookmarked?: Maybe<boolean>, isLatinSearchResult?: Maybe<boolean>, principalParts?: Maybe<Array<{ name: string, text: Array<string> }>>, inflection?: Maybe<{ declension: string, degree: string, other: string } | { type: string, degree: string } | { declension: string, gender: string, other: string } | { case: string, other: string } | { other: string } | { conjugation: string, other: string }>, translations?: Maybe<Array<{ id: string, translation: string }>>, forms?: Maybe<{ masculine?: Maybe<{ nominative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, genitive?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, dative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, accusative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, ablative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, vocative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, locative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }> }>, feminine?: Maybe<{ nominative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, genitive?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, dative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, accusative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, ablative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, vocative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, locative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }> }>, neuter?: Maybe<{ nominative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, genitive?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, dative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, accusative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, ablative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, vocative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, locative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }> }> } | { positive?: Maybe<Array<string>>, comparative?: Maybe<Array<string>>, superlative?: Maybe<Array<string>> } | { nominative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, genitive?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, dative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, accusative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, ablative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, vocative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, locative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }> } | { indicative?: Maybe<{ active?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, imperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, future?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, perfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, pluperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, futurePerfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }> }>, passive?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, imperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, future?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, perfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, pluperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, futurePerfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }> }> }>, subjunctive?: Maybe<{ active?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, imperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, perfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, pluperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }> }>, passive?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, imperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, perfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, pluperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }> }> }>, imperative?: Maybe<{ active?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ second?: Maybe<Array<string>> }>, plural?: Maybe<{ second?: Maybe<Array<string>> }> }>, future?: Maybe<{ singular?: Maybe<{ second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }> }>, passive?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ second?: Maybe<Array<string>> }>, plural?: Maybe<{ second?: Maybe<Array<string>> }> }>, future?: Maybe<{ singular?: Maybe<{ second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ third?: Maybe<Array<string>> }> }> }> }>, nonFinite?: Maybe<{ infinitive?: Maybe<{ active?: Maybe<{ present?: Maybe<Array<string>>, perfect?: Maybe<Array<string>>, future?: Maybe<Array<string>> }>, passive?: Maybe<{ present?: Maybe<Array<string>>, perfect?: Maybe<Array<string>>, future?: Maybe<Array<string>> }> }>, participle?: Maybe<{ active?: Maybe<{ present?: Maybe<Array<string>>, future?: Maybe<Array<string>> }>, passive?: Maybe<{ perfect?: Maybe<Array<string>>, future?: Maybe<Array<string>> }> }> }>, verbalNoun?: Maybe<{ gerund?: Maybe<{ genitive?: Maybe<Array<string>>, dative?: Maybe<Array<string>>, accusative?: Maybe<Array<string>>, ablative?: Maybe<Array<string>> }>, supine?: Maybe<{ accusative?: Maybe<Array<string>>, ablative?: Maybe<Array<string>> }> }> }> } };
+
 export type BookmarksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -560,6 +567,72 @@ export type UnbookmarkMutationVariables = Exact<{
 
 
 export type UnbookmarkMutation = { unbookmark: boolean };
+
+export type AuthorQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type AuthorQuery = { author: { id: string, name: string, books?: Maybe<Array<{ id: string, title: string, texts: Array<{ id: string, title: string }> }>>, texts: Array<{ id: string, title: string }> } };
+
+export type AuthorsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AuthorsQuery = { authors: Array<{ id: string, name: string, books?: Maybe<Array<{ id: string, title: string, texts: Array<{ id: string, title: string }> }>>, texts: Array<{ id: string, title: string }> }> };
+
+export type FindTextQueryVariables = Exact<{
+  author: Scalars['String'];
+  book?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+}>;
+
+
+export type FindTextQuery = { findText: { id: string, title: string, lines: Array<{ id: string, line: string, lineNumber: number, lineLabel: string }>, book?: Maybe<{ id: string, title: string }>, author: { id: string, name: string } } };
+
+export type TextQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type TextQuery = { text: { id: string, title: string, lines: Array<{ id: string, line: string, lineNumber: number, lineLabel: string }>, book?: Maybe<{ id: string, title: string }>, author: { id: string, name: string } } };
+
+export type TextIdsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TextIdsQuery = { textIds: Array<string> };
+
+export type TextsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TextsQuery = { texts: Array<{ id: string, title: string, author: { id: string, name: string }, book?: Maybe<{ id: string, title: string }> }> };
+
+export type CreateCustomTextMutationVariables = Exact<{
+  id: Scalars['String'];
+  title: Scalars['String'];
+  text: Scalars['String'];
+}>;
+
+
+export type CreateCustomTextMutation = { createCustomText: { id: string, title: string, text: string } };
+
+export type CustomTextQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type CustomTextQuery = { customText: { id: string, title: string, text: string } };
+
+export type CustomTextsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CustomTextsQuery = { customTexts: Array<{ id: string, title: string, text: string }> };
+
+export type DeleteCustomTextMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteCustomTextMutation = { deleteCustomText: boolean };
 
 export type SearchQueryVariables = Exact<{
   search: Scalars['String'];
@@ -608,65 +681,6 @@ export type SettingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SettingsQuery = { settings: { theme?: Maybe<string>, fontSize?: Maybe<number>, formsExpandedDefault?: Maybe<boolean>, translationsExpandedDefault?: Maybe<boolean>, dictionaryMacronized?: Maybe<boolean>, literatureMacronized?: Maybe<boolean> } };
-
-export type CreateCustomTextMutationVariables = Exact<{
-  id: Scalars['String'];
-  title: Scalars['String'];
-  text: Scalars['String'];
-}>;
-
-
-export type CreateCustomTextMutation = { createCustomText: { id: string, title: string, text: string } };
-
-export type DeleteCustomTextMutationVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type DeleteCustomTextMutation = { deleteCustomText: boolean };
-
-export type CustomTextQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type CustomTextQuery = { customText: { id: string, title: string, text: string } };
-
-export type CustomTextsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CustomTextsQuery = { customTexts: Array<{ id: string, title: string, text: string }> };
-
-export type FindTextQueryVariables = Exact<{
-  author: Scalars['String'];
-  book?: Maybe<Scalars['String']>;
-  title: Scalars['String'];
-}>;
-
-
-export type FindTextQuery = { findText: { id: string, title: string, lines: Array<{ id: string, line: string, lineNumber: number, lineLabel: string }>, book?: Maybe<{ id: string, title: string }>, author: { id: string, name: string } } };
-
-export type AuthorsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AuthorsQuery = { authors: Array<{ id: string, name: string, books?: Maybe<Array<{ id: string, title: string, texts: Array<{ id: string, title: string }> }>>, texts: Array<{ id: string, title: string }> }> };
-
-export type TextQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type TextQuery = { text: { id: string, title: string, lines: Array<{ id: string, line: string, lineNumber: number, lineLabel: string }>, book?: Maybe<{ id: string, title: string }>, author: { id: string, name: string } } };
-
-export type TextIdsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TextIdsQuery = { textIds: Array<string> };
-
-export type TextsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TextsQuery = { texts: Array<{ id: string, title: string, author: { id: string, name: string }, book?: Maybe<{ id: string, title: string }> }> };
 
 export const AllPrincipalParts = gql`
     fragment AllPrincipalParts on PrincipalPart {
@@ -1150,6 +1164,56 @@ export const AllSettings = gql`
   literatureMacronized
 }
     `;
+export const Entry = gql`
+    query Entry($id: String!) {
+  entry(id: $id) {
+    ...AllEntry
+  }
+}
+    ${AllEntry}
+${AllPrincipalParts}
+${AllInflections}
+${AllNounInflections}
+${AllVerbInflections}
+${AllAdjectiveInflections}
+${AllAdverbInflections}
+${AllPrepositionInflections}
+${AllUninflected}
+${AllTranslations}
+${AllForms}
+${AllNounForms}
+${AllNounNumbers}
+${AllVerbForms}
+${AllIndicative}
+${AllIndicativeTense}
+${AllIndicativeNumber}
+${AllIndicativePerson}
+${AllSubjunctive}
+${AllSubjunctiveTense}
+${AllSubjunctiveNumber}
+${AllSubjunctivePerson}
+${AllImperative}
+${AllImperativeActive}
+${AllImperativePresent}
+${AllImperativeSecond}
+${AllImperativeActiveFuture}
+${AllImperativeSecondThird}
+${AllImperativePassive}
+${AllImperativePassiveFuture}
+${AllImperativeThird}
+${AllNonFinite}
+${AllNonFiniteInfinitive}
+${AllNonFinitePresentPerfectFuture}
+${AllNonFiniteParticiple}
+${AllNonFinitePresentFuture}
+${AllNonFinitePerfectFuture}
+${AllVerbalNoun}
+${AllGerund}
+${AllSupine}
+${AllAdjectiveForms}
+${AllAdjectiveCase}
+${AllAdjectiveNumber}
+${AllAdverbForms}`;
 export const Bookmarks = gql`
     query Bookmarks {
   bookmarks {
@@ -1260,6 +1324,143 @@ export const Unbookmark = gql`
   unbookmark(entryId: $entryId)
 }
     `;
+export const Author = gql`
+    query Author($id: String!) {
+  author(id: $id) {
+    id
+    name
+    books {
+      id
+      title
+      texts {
+        id
+        title
+      }
+    }
+    texts {
+      id
+      title
+    }
+  }
+}
+    `;
+export const Authors = gql`
+    query Authors {
+  authors {
+    id
+    name
+    books {
+      id
+      title
+      texts {
+        id
+        title
+      }
+    }
+    texts {
+      id
+      title
+    }
+  }
+}
+    `;
+export const FindText = gql`
+    query FindText($author: String!, $book: String, $title: String!) {
+  findText(author: $author, book: $book, title: $title) {
+    id
+    title
+    lines {
+      id
+      line
+      lineNumber
+      lineLabel
+    }
+    book {
+      id
+      title
+    }
+    author {
+      id
+      name
+    }
+  }
+}
+    `;
+export const Text = gql`
+    query Text($id: String!) {
+  text(id: $id) {
+    id
+    title
+    lines {
+      id
+      line
+      lineNumber
+      lineLabel
+    }
+    book {
+      id
+      title
+    }
+    author {
+      id
+      name
+    }
+  }
+}
+    `;
+export const TextIds = gql`
+    query TextIds {
+  textIds
+}
+    `;
+export const Texts = gql`
+    query Texts {
+  texts {
+    id
+    title
+    author {
+      id
+      name
+    }
+    book {
+      id
+      title
+    }
+  }
+}
+    `;
+export const CreateCustomText = gql`
+    mutation CreateCustomText($id: String!, $title: String!, $text: String!) {
+  createCustomText(id: $id, title: $title, text: $text) {
+    id
+    title
+    text
+  }
+}
+    `;
+export const CustomText = gql`
+    query CustomText($id: String!) {
+  customText(id: $id) {
+    id
+    title
+    text
+  }
+}
+    `;
+export const CustomTexts = gql`
+    query CustomTexts {
+  customTexts {
+    id
+    title
+    text
+  }
+}
+    `;
+export const DeleteCustomText = gql`
+    mutation DeleteCustomText($id: String!) {
+  deleteCustomText(id: $id)
+}
+    `;
 export const Search = gql`
     query Search($search: String!) {
   search(search: $search) {
@@ -1365,123 +1566,6 @@ export const Settings = gql`
   }
 }
     ${AllSettings}`;
-export const CreateCustomText = gql`
-    mutation CreateCustomText($id: String!, $title: String!, $text: String!) {
-  createCustomText(id: $id, title: $title, text: $text) {
-    id
-    title
-    text
-  }
-}
-    `;
-export const DeleteCustomText = gql`
-    mutation DeleteCustomText($id: String!) {
-  deleteCustomText(id: $id)
-}
-    `;
-export const CustomText = gql`
-    query CustomText($id: String!) {
-  customText(id: $id) {
-    id
-    title
-    text
-  }
-}
-    `;
-export const CustomTexts = gql`
-    query CustomTexts {
-  customTexts {
-    id
-    title
-    text
-  }
-}
-    `;
-export const FindText = gql`
-    query FindText($author: String!, $book: String, $title: String!) {
-  findText(author: $author, book: $book, title: $title) {
-    id
-    title
-    lines {
-      id
-      line
-      lineNumber
-      lineLabel
-    }
-    book {
-      id
-      title
-    }
-    author {
-      id
-      name
-    }
-  }
-}
-    `;
-export const Authors = gql`
-    query Authors {
-  authors {
-    id
-    name
-    books {
-      id
-      title
-      texts {
-        id
-        title
-      }
-    }
-    texts {
-      id
-      title
-    }
-  }
-}
-    `;
-export const Text = gql`
-    query Text($id: String!) {
-  text(id: $id) {
-    id
-    title
-    lines {
-      id
-      line
-      lineNumber
-      lineLabel
-    }
-    book {
-      id
-      title
-    }
-    author {
-      id
-      name
-    }
-  }
-}
-    `;
-export const TextIds = gql`
-    query TextIds {
-  textIds
-}
-    `;
-export const Texts = gql`
-    query Texts {
-  texts {
-    id
-    title
-    author {
-      id
-      name
-    }
-    book {
-      id
-      title
-    }
-  }
-}
-    `;
 export const AllPrincipalPartsFragmentDoc = `
     fragment AllPrincipalParts on PrincipalPart {
   name
@@ -1942,6 +2026,23 @@ export const AllSettingsFragmentDoc = `
   literatureMacronized
 }
     `;
+export const EntryDocument = `
+    query Entry(`;
+export const useEntryQuery = <
+      TData = EntryQuery,
+      TError = unknown
+    >(
+      variables: EntryQueryVariables, 
+      options?: UseQueryOptions<EntryQuery, TError, TData>
+    ) => 
+    useQuery<EntryQuery, TError, TData>(
+      ['Entry', variables],
+      fetcher<EntryQuery, EntryQueryVariables>(EntryDocument, variables),
+      options
+    );
+useEntryQuery.getKey = (variables: EntryQueryVariables) => ['Entry', variables];
+
+useEntryQuery.fetcher = (variables: EntryQueryVariables) => fetcher<EntryQuery, EntryQueryVariables>(EntryDocument, variables);
 export const BookmarksDocument = `
     query Bookmarks {
   bookmarks {
@@ -1965,7 +2066,55 @@ useBookmarksQuery.getKey = (variables?: BookmarksQueryVariables) => ['Bookmarks'
 
 useBookmarksQuery.fetcher = (variables?: BookmarksQueryVariables) => fetcher<BookmarksQuery, BookmarksQueryVariables>(BookmarksDocument, variables);
 export const EntriesDocument = `
-    query Entries(`;
+    query Entries($ids: [String!]!) {
+  entries(ids: $ids) {
+    ...AllEntry
+  }
+}
+    ${AllEntryFragmentDoc}
+${AllPrincipalPartsFragmentDoc}
+${AllInflectionsFragmentDoc}
+${AllNounInflectionsFragmentDoc}
+${AllVerbInflectionsFragmentDoc}
+${AllAdjectiveInflectionsFragmentDoc}
+${AllAdverbInflectionsFragmentDoc}
+${AllPrepositionInflectionsFragmentDoc}
+${AllUninflectedFragmentDoc}
+${AllTranslationsFragmentDoc}
+${AllFormsFragmentDoc}
+${AllNounFormsFragmentDoc}
+${AllNounNumbersFragmentDoc}
+${AllVerbFormsFragmentDoc}
+${AllIndicativeFragmentDoc}
+${AllIndicativeTenseFragmentDoc}
+${AllIndicativeNumberFragmentDoc}
+${AllIndicativePersonFragmentDoc}
+${AllSubjunctiveFragmentDoc}
+${AllSubjunctiveTenseFragmentDoc}
+${AllSubjunctiveNumberFragmentDoc}
+${AllSubjunctivePersonFragmentDoc}
+${AllImperativeFragmentDoc}
+${AllImperativeActiveFragmentDoc}
+${AllImperativePresentFragmentDoc}
+${AllImperativeSecondFragmentDoc}
+${AllImperativeActiveFutureFragmentDoc}
+${AllImperativeSecondThirdFragmentDoc}
+${AllImperativePassiveFragmentDoc}
+${AllImperativePassiveFutureFragmentDoc}
+${AllImperativeThirdFragmentDoc}
+${AllNonFiniteFragmentDoc}
+${AllNonFiniteInfinitiveFragmentDoc}
+${AllNonFinitePresentPerfectFutureFragmentDoc}
+${AllNonFiniteParticipleFragmentDoc}
+${AllNonFinitePresentFutureFragmentDoc}
+${AllNonFinitePerfectFutureFragmentDoc}
+${AllVerbalNounFragmentDoc}
+${AllGerundFragmentDoc}
+${AllSupineFragmentDoc}
+${AllAdjectiveFormsFragmentDoc}
+${AllAdjectiveCaseFragmentDoc}
+${AllAdjectiveNumberFragmentDoc}
+${AllAdverbFormsFragmentDoc}`;
 export const useEntriesQuery = <
       TData = EntriesQuery,
       TError = unknown
@@ -2005,6 +2154,279 @@ export const useUnbookmarkMutation = <
     >(options?: UseMutationOptions<UnbookmarkMutation, TError, UnbookmarkMutationVariables, TContext>) => 
     useMutation<UnbookmarkMutation, TError, UnbookmarkMutationVariables, TContext>(
       (variables?: UnbookmarkMutationVariables) => fetcher<UnbookmarkMutation, UnbookmarkMutationVariables>(UnbookmarkDocument, variables)(),
+      options
+    );
+export const AuthorDocument = `
+    query Author($id: String!) {
+  author(id: $id) {
+    id
+    name
+    books {
+      id
+      title
+      texts {
+        id
+        title
+      }
+    }
+    texts {
+      id
+      title
+    }
+  }
+}
+    `;
+export const useAuthorQuery = <
+      TData = AuthorQuery,
+      TError = unknown
+    >(
+      variables: AuthorQueryVariables, 
+      options?: UseQueryOptions<AuthorQuery, TError, TData>
+    ) => 
+    useQuery<AuthorQuery, TError, TData>(
+      ['Author', variables],
+      fetcher<AuthorQuery, AuthorQueryVariables>(AuthorDocument, variables),
+      options
+    );
+useAuthorQuery.getKey = (variables: AuthorQueryVariables) => ['Author', variables];
+
+useAuthorQuery.fetcher = (variables: AuthorQueryVariables) => fetcher<AuthorQuery, AuthorQueryVariables>(AuthorDocument, variables);
+export const AuthorsDocument = `
+    query Authors {
+  authors {
+    id
+    name
+    books {
+      id
+      title
+      texts {
+        id
+        title
+      }
+    }
+    texts {
+      id
+      title
+    }
+  }
+}
+    `;
+export const useAuthorsQuery = <
+      TData = AuthorsQuery,
+      TError = unknown
+    >(
+      variables?: AuthorsQueryVariables, 
+      options?: UseQueryOptions<AuthorsQuery, TError, TData>
+    ) => 
+    useQuery<AuthorsQuery, TError, TData>(
+      ['Authors', variables],
+      fetcher<AuthorsQuery, AuthorsQueryVariables>(AuthorsDocument, variables),
+      options
+    );
+useAuthorsQuery.getKey = (variables?: AuthorsQueryVariables) => ['Authors', variables];
+
+useAuthorsQuery.fetcher = (variables?: AuthorsQueryVariables) => fetcher<AuthorsQuery, AuthorsQueryVariables>(AuthorsDocument, variables);
+export const FindTextDocument = `
+    query FindText($author: String!, $book: String, $title: String!) {
+  findText(author: $author, book: $book, title: $title) {
+    id
+    title
+    lines {
+      id
+      line
+      lineNumber
+      lineLabel
+    }
+    book {
+      id
+      title
+    }
+    author {
+      id
+      name
+    }
+  }
+}
+    `;
+export const useFindTextQuery = <
+      TData = FindTextQuery,
+      TError = unknown
+    >(
+      variables: FindTextQueryVariables, 
+      options?: UseQueryOptions<FindTextQuery, TError, TData>
+    ) => 
+    useQuery<FindTextQuery, TError, TData>(
+      ['FindText', variables],
+      fetcher<FindTextQuery, FindTextQueryVariables>(FindTextDocument, variables),
+      options
+    );
+useFindTextQuery.getKey = (variables: FindTextQueryVariables) => ['FindText', variables];
+
+useFindTextQuery.fetcher = (variables: FindTextQueryVariables) => fetcher<FindTextQuery, FindTextQueryVariables>(FindTextDocument, variables);
+export const TextDocument = `
+    query Text($id: String!) {
+  text(id: $id) {
+    id
+    title
+    lines {
+      id
+      line
+      lineNumber
+      lineLabel
+    }
+    book {
+      id
+      title
+    }
+    author {
+      id
+      name
+    }
+  }
+}
+    `;
+export const useTextQuery = <
+      TData = TextQuery,
+      TError = unknown
+    >(
+      variables: TextQueryVariables, 
+      options?: UseQueryOptions<TextQuery, TError, TData>
+    ) => 
+    useQuery<TextQuery, TError, TData>(
+      ['Text', variables],
+      fetcher<TextQuery, TextQueryVariables>(TextDocument, variables),
+      options
+    );
+useTextQuery.getKey = (variables: TextQueryVariables) => ['Text', variables];
+
+useTextQuery.fetcher = (variables: TextQueryVariables) => fetcher<TextQuery, TextQueryVariables>(TextDocument, variables);
+export const TextIdsDocument = `
+    query TextIds {
+  textIds
+}
+    `;
+export const useTextIdsQuery = <
+      TData = TextIdsQuery,
+      TError = unknown
+    >(
+      variables?: TextIdsQueryVariables, 
+      options?: UseQueryOptions<TextIdsQuery, TError, TData>
+    ) => 
+    useQuery<TextIdsQuery, TError, TData>(
+      ['TextIds', variables],
+      fetcher<TextIdsQuery, TextIdsQueryVariables>(TextIdsDocument, variables),
+      options
+    );
+useTextIdsQuery.getKey = (variables?: TextIdsQueryVariables) => ['TextIds', variables];
+
+useTextIdsQuery.fetcher = (variables?: TextIdsQueryVariables) => fetcher<TextIdsQuery, TextIdsQueryVariables>(TextIdsDocument, variables);
+export const TextsDocument = `
+    query Texts {
+  texts {
+    id
+    title
+    author {
+      id
+      name
+    }
+    book {
+      id
+      title
+    }
+  }
+}
+    `;
+export const useTextsQuery = <
+      TData = TextsQuery,
+      TError = unknown
+    >(
+      variables?: TextsQueryVariables, 
+      options?: UseQueryOptions<TextsQuery, TError, TData>
+    ) => 
+    useQuery<TextsQuery, TError, TData>(
+      ['Texts', variables],
+      fetcher<TextsQuery, TextsQueryVariables>(TextsDocument, variables),
+      options
+    );
+useTextsQuery.getKey = (variables?: TextsQueryVariables) => ['Texts', variables];
+
+useTextsQuery.fetcher = (variables?: TextsQueryVariables) => fetcher<TextsQuery, TextsQueryVariables>(TextsDocument, variables);
+export const CreateCustomTextDocument = `
+    mutation CreateCustomText($id: String!, $title: String!, $text: String!) {
+  createCustomText(id: $id, title: $title, text: $text) {
+    id
+    title
+    text
+  }
+}
+    `;
+export const useCreateCustomTextMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreateCustomTextMutation, TError, CreateCustomTextMutationVariables, TContext>) => 
+    useMutation<CreateCustomTextMutation, TError, CreateCustomTextMutationVariables, TContext>(
+      (variables?: CreateCustomTextMutationVariables) => fetcher<CreateCustomTextMutation, CreateCustomTextMutationVariables>(CreateCustomTextDocument, variables)(),
+      options
+    );
+export const CustomTextDocument = `
+    query CustomText($id: String!) {
+  customText(id: $id) {
+    id
+    title
+    text
+  }
+}
+    `;
+export const useCustomTextQuery = <
+      TData = CustomTextQuery,
+      TError = unknown
+    >(
+      variables: CustomTextQueryVariables, 
+      options?: UseQueryOptions<CustomTextQuery, TError, TData>
+    ) => 
+    useQuery<CustomTextQuery, TError, TData>(
+      ['CustomText', variables],
+      fetcher<CustomTextQuery, CustomTextQueryVariables>(CustomTextDocument, variables),
+      options
+    );
+useCustomTextQuery.getKey = (variables: CustomTextQueryVariables) => ['CustomText', variables];
+
+useCustomTextQuery.fetcher = (variables: CustomTextQueryVariables) => fetcher<CustomTextQuery, CustomTextQueryVariables>(CustomTextDocument, variables);
+export const CustomTextsDocument = `
+    query CustomTexts {
+  customTexts {
+    id
+    title
+    text
+  }
+}
+    `;
+export const useCustomTextsQuery = <
+      TData = CustomTextsQuery,
+      TError = unknown
+    >(
+      variables?: CustomTextsQueryVariables, 
+      options?: UseQueryOptions<CustomTextsQuery, TError, TData>
+    ) => 
+    useQuery<CustomTextsQuery, TError, TData>(
+      ['CustomTexts', variables],
+      fetcher<CustomTextsQuery, CustomTextsQueryVariables>(CustomTextsDocument, variables),
+      options
+    );
+useCustomTextsQuery.getKey = (variables?: CustomTextsQueryVariables) => ['CustomTexts', variables];
+
+useCustomTextsQuery.fetcher = (variables?: CustomTextsQueryVariables) => fetcher<CustomTextsQuery, CustomTextsQueryVariables>(CustomTextsDocument, variables);
+export const DeleteCustomTextDocument = `
+    mutation DeleteCustomText($id: String!) {
+  deleteCustomText(id: $id)
+}
+    `;
+export const useDeleteCustomTextMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<DeleteCustomTextMutation, TError, DeleteCustomTextMutationVariables, TContext>) => 
+    useMutation<DeleteCustomTextMutation, TError, DeleteCustomTextMutationVariables, TContext>(
+      (variables?: DeleteCustomTextMutationVariables) => fetcher<DeleteCustomTextMutation, DeleteCustomTextMutationVariables>(DeleteCustomTextDocument, variables)(),
       options
     );
 export const SearchDocument = `
@@ -2218,241 +2640,3 @@ export const useSettingsQuery = <
 useSettingsQuery.getKey = (variables?: SettingsQueryVariables) => ['Settings', variables];
 
 useSettingsQuery.fetcher = (variables?: SettingsQueryVariables) => fetcher<SettingsQuery, SettingsQueryVariables>(SettingsDocument, variables);
-export const CreateCustomTextDocument = `
-    mutation CreateCustomText($id: String!, $title: String!, $text: String!) {
-  createCustomText(id: $id, title: $title, text: $text) {
-    id
-    title
-    text
-  }
-}
-    `;
-export const useCreateCustomTextMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<CreateCustomTextMutation, TError, CreateCustomTextMutationVariables, TContext>) => 
-    useMutation<CreateCustomTextMutation, TError, CreateCustomTextMutationVariables, TContext>(
-      (variables?: CreateCustomTextMutationVariables) => fetcher<CreateCustomTextMutation, CreateCustomTextMutationVariables>(CreateCustomTextDocument, variables)(),
-      options
-    );
-export const DeleteCustomTextDocument = `
-    mutation DeleteCustomText($id: String!) {
-  deleteCustomText(id: $id)
-}
-    `;
-export const useDeleteCustomTextMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<DeleteCustomTextMutation, TError, DeleteCustomTextMutationVariables, TContext>) => 
-    useMutation<DeleteCustomTextMutation, TError, DeleteCustomTextMutationVariables, TContext>(
-      (variables?: DeleteCustomTextMutationVariables) => fetcher<DeleteCustomTextMutation, DeleteCustomTextMutationVariables>(DeleteCustomTextDocument, variables)(),
-      options
-    );
-export const CustomTextDocument = `
-    query CustomText($id: String!) {
-  customText(id: $id) {
-    id
-    title
-    text
-  }
-}
-    `;
-export const useCustomTextQuery = <
-      TData = CustomTextQuery,
-      TError = unknown
-    >(
-      variables: CustomTextQueryVariables, 
-      options?: UseQueryOptions<CustomTextQuery, TError, TData>
-    ) => 
-    useQuery<CustomTextQuery, TError, TData>(
-      ['CustomText', variables],
-      fetcher<CustomTextQuery, CustomTextQueryVariables>(CustomTextDocument, variables),
-      options
-    );
-useCustomTextQuery.getKey = (variables: CustomTextQueryVariables) => ['CustomText', variables];
-
-useCustomTextQuery.fetcher = (variables: CustomTextQueryVariables) => fetcher<CustomTextQuery, CustomTextQueryVariables>(CustomTextDocument, variables);
-export const CustomTextsDocument = `
-    query CustomTexts {
-  customTexts {
-    id
-    title
-    text
-  }
-}
-    `;
-export const useCustomTextsQuery = <
-      TData = CustomTextsQuery,
-      TError = unknown
-    >(
-      variables?: CustomTextsQueryVariables, 
-      options?: UseQueryOptions<CustomTextsQuery, TError, TData>
-    ) => 
-    useQuery<CustomTextsQuery, TError, TData>(
-      ['CustomTexts', variables],
-      fetcher<CustomTextsQuery, CustomTextsQueryVariables>(CustomTextsDocument, variables),
-      options
-    );
-useCustomTextsQuery.getKey = (variables?: CustomTextsQueryVariables) => ['CustomTexts', variables];
-
-useCustomTextsQuery.fetcher = (variables?: CustomTextsQueryVariables) => fetcher<CustomTextsQuery, CustomTextsQueryVariables>(CustomTextsDocument, variables);
-export const FindTextDocument = `
-    query FindText($author: String!, $book: String, $title: String!) {
-  findText(author: $author, book: $book, title: $title) {
-    id
-    title
-    lines {
-      id
-      line
-      lineNumber
-      lineLabel
-    }
-    book {
-      id
-      title
-    }
-    author {
-      id
-      name
-    }
-  }
-}
-    `;
-export const useFindTextQuery = <
-      TData = FindTextQuery,
-      TError = unknown
-    >(
-      variables: FindTextQueryVariables, 
-      options?: UseQueryOptions<FindTextQuery, TError, TData>
-    ) => 
-    useQuery<FindTextQuery, TError, TData>(
-      ['FindText', variables],
-      fetcher<FindTextQuery, FindTextQueryVariables>(FindTextDocument, variables),
-      options
-    );
-useFindTextQuery.getKey = (variables: FindTextQueryVariables) => ['FindText', variables];
-
-useFindTextQuery.fetcher = (variables: FindTextQueryVariables) => fetcher<FindTextQuery, FindTextQueryVariables>(FindTextDocument, variables);
-export const AuthorsDocument = `
-    query Authors {
-  authors {
-    id
-    name
-    books {
-      id
-      title
-      texts {
-        id
-        title
-      }
-    }
-    texts {
-      id
-      title
-    }
-  }
-}
-    `;
-export const useAuthorsQuery = <
-      TData = AuthorsQuery,
-      TError = unknown
-    >(
-      variables?: AuthorsQueryVariables, 
-      options?: UseQueryOptions<AuthorsQuery, TError, TData>
-    ) => 
-    useQuery<AuthorsQuery, TError, TData>(
-      ['Authors', variables],
-      fetcher<AuthorsQuery, AuthorsQueryVariables>(AuthorsDocument, variables),
-      options
-    );
-useAuthorsQuery.getKey = (variables?: AuthorsQueryVariables) => ['Authors', variables];
-
-useAuthorsQuery.fetcher = (variables?: AuthorsQueryVariables) => fetcher<AuthorsQuery, AuthorsQueryVariables>(AuthorsDocument, variables);
-export const TextDocument = `
-    query Text($id: String!) {
-  text(id: $id) {
-    id
-    title
-    lines {
-      id
-      line
-      lineNumber
-      lineLabel
-    }
-    book {
-      id
-      title
-    }
-    author {
-      id
-      name
-    }
-  }
-}
-    `;
-export const useTextQuery = <
-      TData = TextQuery,
-      TError = unknown
-    >(
-      variables: TextQueryVariables, 
-      options?: UseQueryOptions<TextQuery, TError, TData>
-    ) => 
-    useQuery<TextQuery, TError, TData>(
-      ['Text', variables],
-      fetcher<TextQuery, TextQueryVariables>(TextDocument, variables),
-      options
-    );
-useTextQuery.getKey = (variables: TextQueryVariables) => ['Text', variables];
-
-useTextQuery.fetcher = (variables: TextQueryVariables) => fetcher<TextQuery, TextQueryVariables>(TextDocument, variables);
-export const TextIdsDocument = `
-    query TextIds {
-  textIds
-}
-    `;
-export const useTextIdsQuery = <
-      TData = TextIdsQuery,
-      TError = unknown
-    >(
-      variables?: TextIdsQueryVariables, 
-      options?: UseQueryOptions<TextIdsQuery, TError, TData>
-    ) => 
-    useQuery<TextIdsQuery, TError, TData>(
-      ['TextIds', variables],
-      fetcher<TextIdsQuery, TextIdsQueryVariables>(TextIdsDocument, variables),
-      options
-    );
-useTextIdsQuery.getKey = (variables?: TextIdsQueryVariables) => ['TextIds', variables];
-
-useTextIdsQuery.fetcher = (variables?: TextIdsQueryVariables) => fetcher<TextIdsQuery, TextIdsQueryVariables>(TextIdsDocument, variables);
-export const TextsDocument = `
-    query Texts {
-  texts {
-    id
-    title
-    author {
-      id
-      name
-    }
-    book {
-      id
-      title
-    }
-  }
-}
-    `;
-export const useTextsQuery = <
-      TData = TextsQuery,
-      TError = unknown
-    >(
-      variables?: TextsQueryVariables, 
-      options?: UseQueryOptions<TextsQuery, TError, TData>
-    ) => 
-    useQuery<TextsQuery, TError, TData>(
-      ['Texts', variables],
-      fetcher<TextsQuery, TextsQueryVariables>(TextsDocument, variables),
-      options
-    );
-useTextsQuery.getKey = (variables?: TextsQueryVariables) => ['Texts', variables];
-
-useTextsQuery.fetcher = (variables?: TextsQueryVariables) => fetcher<TextsQuery, TextsQueryVariables>(TextsDocument, variables);

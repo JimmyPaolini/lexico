@@ -1,16 +1,30 @@
-import { print } from 'graphql'
 import { rawRequest } from 'graphql-request'
 
-import { Search, SearchQuery } from 'src/graphql/generated'
+import {
+  AuthorDocument,
+  AuthorQuery,
+  AuthorQueryVariables,
+  EntryDocument,
+  EntryQuery,
+  EntryQueryVariables,
+} from 'src/graphql/generated'
 
-export async function searchEntry(search: string) {
-  const response = await rawRequest<SearchQuery>(
+export async function getEntry(id: string) {
+  const response = await rawRequest<EntryQuery, EntryQueryVariables>(
     'http://localhost:3001/graphql',
-    print(Search),
-    { search }
+    EntryDocument,
+    { id }
   )
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  if (!response.data) throw new Error(`Error searchEntry("${search}")`)
-  const entry = response.data.search[0]
-  return entry
+  if (!response?.data?.entry) throw new Error(`Error getEntry("${id}")`)
+  return response.data.entry
+}
+
+export async function getAuthor(id: string) {
+  const response = await rawRequest<AuthorQuery, AuthorQueryVariables>(
+    'http://localhost:3001/graphql',
+    AuthorDocument,
+    { id }
+  )
+  if (!response?.data?.author) throw new Error(`Error getAuthor("${id}")`)
+  return response.data.author
 }

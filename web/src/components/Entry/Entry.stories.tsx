@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { searchEntry } from 'src/utils/stories'
+import { getEntry } from 'src/utils/stories'
 
 import { Entry } from './Entry'
 
@@ -15,7 +15,7 @@ export const Verb: ComponentStory<typeof Entry> = (args, { loaded }) => (
 Verb.args = { searched: 'amat' }
 Verb.loaders = [
   async () => {
-    const entry = await searchEntry('amat')
+    const entry = await getEntry('amat:0')
     return { entry }
   },
 ]
@@ -26,7 +26,7 @@ export const Adjective: ComponentStory<typeof Entry> = (args, { loaded }) => (
 Adjective.args = { searched: 'amoeni' }
 Adjective.loaders = [
   async () => {
-    const entry = await searchEntry('amoenus')
+    const entry = await getEntry('amoenus:0')
     return { entry }
   },
 ]
@@ -37,7 +37,7 @@ export const Noun: ComponentStory<typeof Entry> = (args, { loaded }) => (
 Noun.args = { searched: 'pater' }
 Noun.loaders = [
   async () => {
-    const entry = await searchEntry('pater')
+    const entry = await getEntry('pater:0')
     return { entry }
   },
 ]
