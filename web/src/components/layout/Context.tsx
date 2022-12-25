@@ -12,7 +12,7 @@ import { QueryClient } from 'react-query'
 
 import { User, useUserQuery } from 'src/graphql/generated'
 
-type LexicoContext = {
+export type LexicoContext = {
   isNavOpen: boolean
   setNavOpen: Dispatch<SetStateAction<boolean>>
   isMobile: boolean

@@ -10,8 +10,8 @@ import { Author, useAuthorsQuery } from 'src/graphql/generated'
 
 import { Deck } from '../components/layout/Deck'
 import { SearchBarLayout } from '../components/layout/SearchBarLayout'
+import { CustomTextsCard } from '../components/library/CustomTextsCard/CustomTextsCard'
 import { LibraryCard } from '../components/library/LibraryCard'
-import { CustomLiteratureCard } from '../components/library/custom/CustomLiteratureCard'
 import { filterLibrary } from '../components/library/filterLibrary'
 
 type Props = { authors: Author[] }
@@ -24,7 +24,7 @@ export default function Library({ authors }: Props) {
     const Cards = filterLibrary(authorsCopy, searched).map((author) => (
       <LibraryCard {...{ author }} key={author.id} />
     ))
-    Cards.unshift(<CustomLiteratureCard />)
+    Cards.unshift(<CustomTextsCard />)
     return Cards
   }, [searched])
 

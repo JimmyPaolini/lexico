@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction } from 'react'
 import { useSnackbar } from 'src/hooks/useSnackbar'
 
 import { shouldShowBookmarkInstructions } from '../../BookmarkInstructions'
-import { useBookmarkLocal } from './useBookmarkLocal'
-import { useUnbookmarkLocal } from './useUnbookmarkLocal'
+import { createBookmarkLocal } from './createBookmarkLocal'
+import { deleteBookmarkLocal } from './deleteBookmarkLocal'
 
 export const useToggleBookmarkLocal = (
   id: string,
@@ -12,14 +12,12 @@ export const useToggleBookmarkLocal = (
   setBookmarked: Dispatch<SetStateAction<boolean>>
 ) => {
   const enqueueSnackbar = useSnackbar(true, true)
-  const bookmarkLocal = useBookmarkLocal()
-  const unbookmarkLocal = useUnbookmarkLocal()
   const toggleBookmark = () => {
     if (!bookmarked) {
-      bookmarkLocal(id)
+      createBookmarkLocal(id)
       setBookmarked(true)
     } else {
-      unbookmarkLocal(id)
+      deleteBookmarkLocal(id)
       setBookmarked(false)
     }
     if (shouldShowBookmarkInstructions()) {

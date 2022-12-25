@@ -1,0 +1,10 @@
+query CustomTexts {
+  customTexts {
+    id
+    title
+    text
+    user {
+      id
+    }
+  }
+}

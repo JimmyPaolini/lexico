@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Edit } from '@mui/icons-material'
@@ -23,18 +24,14 @@ export const Text = ({ text, openModal }: Props) => {
       ? ' - ' + sentenceCase(text.book.title).replace(/^\d+ /, '')
       : '')
 
-  const action = !router.pathname.match(/\/reader\/custom/) ? undefined : (
-    <IconButton
-      onClick={async () =>
-        await router.push(
-          window?.location.pathname.replace('reader', 'library') || '/library'
-        )
-      }
-      aria-label="edit"
-      size="large"
-    >
-      <Edit />
-    </IconButton>
+  const action = !router.pathname.match(
+    /^\/reader\/customText/i
+  ) ? undefined : (
+    <Link href={`/library/customText/${text.id}`}>
+      <IconButton aria-label="edit" size="large">
+        <Edit />
+      </IconButton>
+    </Link>
   )
 
   return (
@@ -46,7 +43,9 @@ export const Text = ({ text, openModal }: Props) => {
       }}
     >
       <CardHeader
-        title={router.pathname.match(/\/reader\/custom/) ? text.title : title}
+        title={
+          router.pathname.match(/\/reader\/customText/i) ? text.title : title
+        }
         titleTypographyProps={{
           sx: {
             textAlign: 'center',

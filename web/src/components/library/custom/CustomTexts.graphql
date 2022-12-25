@@ -1,7 +1,0 @@
-query CustomTexts {
-  customTexts {
-    id
-    title
-    text
-  }
-}

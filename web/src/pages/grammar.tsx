@@ -2,34 +2,23 @@ import { useEffect, useState } from 'react'
 
 import Head from 'next/head'
 
-import { getMacronOptionRegex } from 'src/utils/string'
-
-import { useGrammarCards } from '../components/grammar/grammarCards'
+import { filterGrammarCards } from '../components/grammar/filterGrammarCards'
+import { GrammarCards } from '../components/grammar/useGrammarCards'
 import { Deck } from '../components/layout/Deck'
 import { SearchBarLayout } from '../components/layout/SearchBarLayout'
 
 export default function Grammar() {
   const [search, setSearch] = useState<string>('')
-  const grammarCards = useGrammarCards()
-  const [Cards, setCards] = useState(grammarCards)
+  const [Cards, setCards] = useState(GrammarCards)
 
   useEffect(() => {
-    if (!search) setCards(grammarCards)
+    if (!search) setCards(GrammarCards)
   }, [search])
 
   const handleSearch = (search: string) => {
     if (!search) return
     setSearch(search)
-    const re = new RegExp(getMacronOptionRegex(search), 'i')
-    setCards(
-      grammarCards.filter(
-        (card) =>
-          card.props.declension
-            ? JSON.stringify(Object.values(card.props.declension))?.match(re)
-            : JSON.stringify(Object.values(card.props.conjugation))?.match(re)
-        // card.ref.current?.innerText?.match(re)
-      )
-    )
+    setCards(filterGrammarCards(GrammarCards, search))
   }
 
   return (
