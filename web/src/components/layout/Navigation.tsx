@@ -1,13 +1,10 @@
 import { useContext, useState } from 'react'
 
-import Link from 'next/link'
-
 import { ChevronLeft, Menu } from '@mui/icons-material'
 import {
   Divider,
   Grid,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -15,6 +12,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
+import { Link } from 'src/components/accessories/Link'
 import { capitalizeFirstLetter } from 'src/utils/string'
 
 import { Context } from './Context'
@@ -81,22 +79,19 @@ export const Navigation = ({ page: initialPage }: Props) => {
           {pages.map((page) => (
             <Link
               href={'/' + page.name}
-              prefetch={false}
               key={page.name}
-              passHref
-              style={{
+              sx={{
                 textDecoration: 'none',
                 color: theme.palette.text.primary,
               }}
             >
-              <ListItem
-                button
+              <ListItemButton
                 selected={selectedPage === page.name}
                 onClick={() => handleSelection(page.name)}
               >
                 <ListItemIcon>{page.icon}</ListItemIcon>
                 <ListItemText primary={capitalizeFirstLetter(page.name)} />
-              </ListItem>
+              </ListItemButton>
             </Link>
           ))}
         </List>

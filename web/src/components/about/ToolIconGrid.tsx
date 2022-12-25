@@ -8,10 +8,10 @@ import {
   CardHeader as CardHeaderMui,
   Collapse,
   Grid,
-  Link,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
+import { Link } from 'src/components/accessories/Link'
 import { tools } from 'src/utils/tools'
 
 import { ExpandIcon } from '../accessories/ExpandIcon'

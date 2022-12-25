@@ -16,7 +16,8 @@ type Props = { id: string }
 export default function CustomReader({ id }: Props) {
   const { data, isSuccess } = useCustomTextQuery({ id })
   const localText = getCustomTextLocal(id)
-  const text = (isSuccess ? data?.customText : localText) as CustomText
+  const remoteText = data?.customText
+  const text = (isSuccess ? remoteText : localText) as CustomText
   return !text ? <></> : <Reader text={customTextToText(text)} />
 }
 

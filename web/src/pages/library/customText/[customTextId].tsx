@@ -8,9 +8,10 @@ import CustomReaderNew from '../customText'
 type Props = { id: string }
 
 export default function CustomReaderEdit({ id }: Props) {
-  const { data: userText, isSuccess } = useCustomTextQuery({ id })
+  const { data, isSuccess } = useCustomTextQuery({ id })
   const localText = getCustomTextLocal(id)
-  const text = (isSuccess ? userText : localText) as CustomText
+  const remoteText = data?.customText
+  const text = (isSuccess ? remoteText : localText) as CustomText
   return !text ? <></> : <CustomReaderNew text={text} />
 }
 

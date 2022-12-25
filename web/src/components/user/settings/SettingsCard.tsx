@@ -37,7 +37,7 @@ export const SettingsCard = () => {
 
   const confirmUnregister = async () => {
     const unregisterDialog =
-      'Are you sure you want to delete your account? All your Bookmarks, Literature, and Settings will be lost.'
+      'Are you sure you want to delete your account? All your Bookmarks, Texts, and Settings will be lost.'
     if (window.confirm(unregisterDialog)) await unregister({})
   }
 

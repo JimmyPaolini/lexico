@@ -30,7 +30,7 @@ export const Menu = ({
       onClose={closeMenu}
       elevation={4}
       MenuListProps={{ style: { padding: 0 }, onMouseLeave: closeMenu }}
-      onClick={(event) => event.stopPropagation()}
+      onClick={(e) => e.stopPropagation()}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       transformOrigin={{ vertical: 'bottom', horizontal: 'right' }}
     >

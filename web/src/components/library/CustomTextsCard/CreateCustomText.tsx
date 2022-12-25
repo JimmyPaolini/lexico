@@ -1,36 +1,29 @@
-import Link from 'next/link'
-
 import { Add } from '@mui/icons-material'
-import {
-  CardActionArea,
-  CardHeader as CardHeaderMui,
-  ListItemButton,
-} from '@mui/material'
+import { CardActionArea, CardHeader as CardHeaderMui } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+
+import { Link } from 'src/components/accessories/Link'
 
 export const CreateCustomText = () => {
   const theme = useTheme()
   return (
-    <ListItemButton sx={{ padding: 0 }}>
-      <CardActionArea>
-        <Link
-          href="/library/customText"
-          style={{ textDecoration: 'none', color: 'inherit' }}
-        >
-          <CardHeaderMui
-            title="Your Literature"
-            action={
-              <Add
-                sx={{
-                  margin: theme.spacing(1),
-                  marginRight: theme.spacing(1.5),
-                  marginTop: theme.spacing(1.5),
-                }}
-              />
-            }
-          />
-        </Link>
-      </CardActionArea>
-    </ListItemButton>
+    <CardActionArea
+      sx={{ '& .MuiCardActionArea-focusHighlight': { display: 'block' } }}
+    >
+      <Link href="/library/customText">
+        <CardHeaderMui
+          title="User Texts"
+          action={
+            <Add
+              sx={{
+                margin: theme.spacing(1),
+                marginRight: theme.spacing(1.5),
+                marginTop: theme.spacing(1.5),
+              }}
+            />
+          }
+        />
+      </Link>
+    </CardActionArea>
   )
 }

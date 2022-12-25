@@ -50,9 +50,9 @@ export const theme = createTheme({
         root: {
           display: 'flex',
           flexDirection: 'column',
+          width: '100%',
           maxWidth: themeInitial.custom.card.maxWidth,
           minWidth: themeInitial.custom.card.minWidth,
-          width: '100%',
           // margin: themeInitial.spacing(1),
           background: themeInitial.palette.background.paper,
         },

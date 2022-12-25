@@ -54,7 +54,7 @@ export const SettingsForm = () => {
       />
       <Divider />
       <Typography align="center" style={{ marginTop: 10, marginBottom: 4 }}>
-        Literature Reader font size:
+        Text font size:
       </Typography>
       <SettingsSlider formik={formik} />
     </form>

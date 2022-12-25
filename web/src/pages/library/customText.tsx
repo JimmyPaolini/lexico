@@ -10,7 +10,7 @@ export default function CustomReaderNew({ text }: Props) {
   return (
     <>
       <Head>
-        <title>Lexico - Literature: Custom</title>
+        <title>Lexico - Library: Custom</title>
         <meta
           name="description"
           content={
@@ -19,7 +19,9 @@ export default function CustomReaderNew({ text }: Props) {
         />
         <meta
           name="keywords"
-          content={'Latin, Literature, Read, English, Translation, Custom'}
+          content={
+            'Latin, Library, Literature, Read, English, Translation, Custom'
+          }
         />
       </Head>
       <style>{`

@@ -13,15 +13,17 @@ type Props = {
 }
 
 export const Options = ({ text, refreshCustomTexts }: Props) => {
+  const theme = useTheme()
   const [anchor, setAnchor] = useState<null | HTMLElement>(null)
   const openMenu = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation()
+    event.nativeEvent.preventDefault()
+    event.nativeEvent.stopImmediatePropagation()
     setAnchor(event.currentTarget)
   }
-  const theme = useTheme()
 
   return (
-    <ListItemSecondaryAction onClick={(event) => event.stopPropagation()}>
+    <ListItemSecondaryAction>
       {Boolean(text?.user) && (
         <IconButton
           disabled

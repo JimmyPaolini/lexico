@@ -1,7 +1,6 @@
-import Link from 'next/link'
-
 import { Edit as EditIcon } from '@mui/icons-material'
 
+import { Link } from 'src/components/accessories/Link'
 import { CustomText } from 'src/graphql/generated'
 
 import { Action } from './Action'

@@ -24,10 +24,10 @@ export const useCustomTexts = (): useCustomTextsReturn => {
     isError,
     refetch: refreshCustomTextsUser,
   } = useCustomTextsQuery()
-  const customTextsUser = data?.customTexts as CustomText[]
+  const customTextsUser = (data?.customTexts || []) as CustomText[]
 
   const [customTexts, setCustomTexts] = useState([
-    ...(customTextsUser || []),
+    ...customTextsUser,
     ...customTextsLocal,
   ])
 

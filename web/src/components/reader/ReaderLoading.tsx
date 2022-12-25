@@ -6,7 +6,7 @@ export const ReaderLoading = () => {
   return (
     <>
       <Head>
-        <title>Lexico - Literature...</title>
+        <title>Lexico - Library...</title>
         <meta name="description" content={'Read and translate literature'} />
         <meta
           name="keywords"

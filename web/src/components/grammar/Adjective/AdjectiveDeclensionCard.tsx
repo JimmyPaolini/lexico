@@ -10,8 +10,9 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { AdjectiveFormsTable } from '../Entry/Forms/PartsOfSpeech/AdjectiveFormsTable'
-import { PrincipalParts } from '../Entry/PrincipalParts/PrincipalParts'
+import { AdjectiveFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/AdjectiveFormsTable'
+import { PrincipalParts } from 'src/components/Entry/PrincipalParts/PrincipalParts'
+
 import { adjectiveDeclensions } from './adjectiveDeclensions'
 
 type Props = {

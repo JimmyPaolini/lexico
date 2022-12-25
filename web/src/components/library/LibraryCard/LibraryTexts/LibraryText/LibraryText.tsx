@@ -1,7 +1,5 @@
 import { useMemo } from 'react'
 
-import Link from 'next/link'
-
 import {
   CardActionArea,
   ListItemButton,
@@ -9,6 +7,7 @@ import {
   useTheme,
 } from '@mui/material'
 
+import { Link } from 'src/components/accessories/Link'
 import { Text } from 'src/graphql/generated'
 import { romanNumeralize } from 'src/utils/romanNumeral'
 import { sentenceCase } from 'src/utils/string'
@@ -42,10 +41,7 @@ export const LibraryText = ({ text }: Props) => {
       }}
     >
       <CardActionArea disableRipple disableTouchRipple>
-        <Link
-          href={`reader/${text.id}`}
-          style={{ textDecoration: 'none', color: 'inherit' }}
-        >
+        <Link href={`reader/${text.id}`}>
           <Typography align="center" sx={{ ...theme.custom.lineClamp(2) }}>
             {title}
           </Typography>

@@ -1,10 +1,10 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Edit } from '@mui/icons-material'
 import { Box, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
+import { Link } from 'src/components/accessories/Link'
 import { Text as TextGql } from 'src/graphql/generated'
 import { sentenceCase } from 'src/utils/string'
 
@@ -74,10 +74,11 @@ export const Text = ({ text, openModal }: Props) => {
         sx={{
           background: 'black',
           width: '100%',
-          '&.MuiCardHeader-action': {
-            marginTop: 'auto',
-            marginBottom: 'auto',
-            marginLeft: theme.spacing(2),
+          '& .MuiCardHeader-avatar': {
+            margin: `auto ${theme.spacing(2)}`,
+          },
+          '& .MuiCardHeader-action': {
+            margin: `auto ${theme.spacing(2)}`,
           },
         }}
         action={action}

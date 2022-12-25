@@ -10,8 +10,9 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { NounFormsTable } from '../../Entry/Forms/PartsOfSpeech/NounFormsTable'
-import { PrincipalParts } from '../../Entry/PrincipalParts/PrincipalParts'
+import { NounFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/NounFormsTable'
+import { PrincipalParts } from 'src/components/Entry/PrincipalParts/PrincipalParts'
+
 import { nounDeclensions } from './nounDeclensions'
 
 type Props = {

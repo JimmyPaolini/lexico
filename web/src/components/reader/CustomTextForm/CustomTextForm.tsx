@@ -30,7 +30,7 @@ export const CustomTextForm = ({ text }: Props) => {
       try {
         if (!text || Boolean(text.user)) createCustomTextLocal(formik.values)
         else await createCustomText(formik.values)
-        await router.replace('/reader/customText/' + formik.values.id)
+        await router.push(`/reader/customText/${formik.values.id}`)
       } catch {
         formik.setStatus('Error creating custom text')
       }

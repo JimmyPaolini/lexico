@@ -8,6 +8,11 @@ import { useTheme } from '@mui/material/styles'
 
 import { GetStaticPaths, GetStaticProps } from 'next'
 
+import { Context } from 'src/components/layout/Context'
+import { ReaderLoading } from 'src/components/reader/ReaderLoading'
+import { SearchModal } from 'src/components/reader/SearchModal'
+import { Text } from 'src/components/reader/Text'
+import { shouldShowReaderInstructions } from 'src/components/reader/readerInstructions'
 import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
 import {
   Text as ReaderText,
@@ -16,13 +21,7 @@ import {
 } from 'src/graphql/generated'
 import { useSnackbar } from 'src/hooks/useSnackbar'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
-import { shouldShowReaderInstructions } from 'src/components/reader/readerInstructions'
 import { sentenceCase } from 'src/utils/string'
-
-import { Context } from '../../components/layout/Context'
-import { ReaderLoading } from '../../components/reader/ReaderLoading'
-import { SearchModal } from '../../components/reader/SearchModal'
-import { Text } from '../../components/reader/Text'
 
 type Props = { text: ReaderText }
 
@@ -80,7 +79,7 @@ export default function Reader({ text }: Props) {
           name="keywords"
           content={`Latin ${text.author.name}${
             text.book ? ', ' + text.book.title : ''
-          }, ${text.title}, Literature, Read, English, Translation`}
+          }, ${text.title}, Library, Literature, Read, English, Translation`}
         />
       </Head>
       <style>{`
