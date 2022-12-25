@@ -23,7 +23,7 @@ export const Navigation = ({ page: initialPage }: Props) => {
   const [selectedPage, setSelectedPage] = useState(initialPage ?? 'search')
 
   const drawerOpenStyles = {
-    width: theme.spacing(33),
+    width: theme.spacing(27),
     backgroundImage: 'none',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -32,7 +32,7 @@ export const Navigation = ({ page: initialPage }: Props) => {
   }
 
   const drawerClosedStyles = {
-    width: theme.spacing(8.5),
+    width: theme.spacing(8),
     [theme.breakpoints.down('md')]: { width: 0 },
     overflowX: 'hidden',
     transition: theme.transitions.create('width', {
@@ -58,7 +58,7 @@ export const Navigation = ({ page: initialPage }: Props) => {
           <ListItem sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <ListItemText
               primary="Lexico"
-              primaryTypographyProps={{ variant: 'h3' }}
+              primaryTypographyProps={{ variant: 'h4' }}
               sx={{ minWidth: 'auto' }}
             />
             <ListItemIcon sx={{ display: 'flex', justifyContent: 'flex-end' }}>

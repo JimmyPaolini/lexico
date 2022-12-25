@@ -21,7 +21,7 @@ type Props = {
 export const Pages = ({ selectedPage, setSelectedPage }: Props) => {
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
 
-  const handleSelection = (page: string) => {
+  const handleSelection = (page: string): void => {
     setSelectedPage(page)
     if (isMobile) setOpen(!open)
   }
@@ -38,7 +38,7 @@ export const Pages = ({ selectedPage, setSelectedPage }: Props) => {
               <ListItemIcon>{Icon}</ListItemIcon>
               <ListItemText
                 primary={capitalizeFirstLetter(name)}
-                primaryTypographyProps={{ variant: 'h4' }}
+                primaryTypographyProps={{ variant: 'h5' }}
               />
             </ListItemButton>
           </ListItem>

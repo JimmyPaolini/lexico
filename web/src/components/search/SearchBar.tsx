@@ -2,12 +2,14 @@ import { useContext, useEffect, useState } from 'react'
 
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
-import { Grid } from '@mui/material'
-import CircularProgress from '@mui/material/CircularProgress'
-import IconButton from '@mui/material/IconButton'
-import InputBase from '@mui/material/InputBase'
-import Paper from '@mui/material/Paper'
-import { useTheme } from '@mui/material/styles'
+import {
+  Card,
+  CircularProgress,
+  Grid,
+  IconButton,
+  InputBase,
+  useTheme,
+} from '@mui/material'
 
 import { Context } from '../layout/Context'
 
@@ -33,19 +35,14 @@ export const SearchBar = ({
   }, [search])
 
   return (
-    <Paper
-      elevation={4}
+    <Card
       sx={{
-        background: theme.palette.background.paper,
-        width: '100%',
-        maxWidth: theme.custom.card.maxWidth,
-        minWidth: theme.custom.card.minWidth,
         padding: theme.spacing(1 / 2),
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
       }}
     >
-      <Grid container alignItems="center">
+      <Grid container alignItems="center" wrap="nowrap">
         {isMobile && (
           <IconButton
             onClick={() => setNavOpen(!isNavOpen)}
@@ -53,27 +50,27 @@ export const SearchBar = ({
             aria-label="menu"
             size="large"
           >
-            <MenuIcon />
+            <MenuIcon fontSize="large" />
           </IconButton>
         )}
         <InputBase
           id="searchBar"
-          sx={{ marginLeft: theme.spacing(1), fontSize: 20, flexGrow: 1 }}
           placeholder={placeholder}
-          inputProps={{ 'aria-label': 'search' }}
           value={search}
           autoFocus
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSearch(search)}
+          sx={{ marginLeft: theme.spacing(1), fontSize: 24, flexGrow: 1 }}
+          inputProps={{ 'aria-label': 'search' }}
         />
         <IconButton
           onClick={() => handleSearch(search)}
           sx={{ padding: theme.spacing(1) }}
-          aria-label="search"
           size="large"
+          aria-label="search"
         >
           {!isLoading ? (
-            <SearchIcon />
+            <SearchIcon fontSize="large" />
           ) : (
             <CircularProgress
               size={theme.spacing(3)}
@@ -83,6 +80,6 @@ export const SearchBar = ({
           )}
         </IconButton>
       </Grid>
-    </Paper>
+    </Card>
   )
 }
