@@ -5,18 +5,15 @@ import {
   Divider,
   Grid,
   List,
-  ListItemButton,
+  ListItem,
   ListItemIcon,
   ListItemText,
   SwipeableDrawer,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { Link } from 'src/components/accessories/Link'
-import { capitalizeFirstLetter } from 'src/utils/string'
-
-import { Context } from './Context'
-import { pages } from './pages'
+import { Context } from '../Context'
+import { Pages } from './Pages'
 
 type Props = { page?: string }
 
@@ -25,13 +22,9 @@ export const Navigation = ({ page: initialPage }: Props) => {
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
   const [selectedPage, setSelectedPage] = useState(initialPage ?? 'search')
 
-  const handleSelection = (page: string) => {
-    setSelectedPage(page)
-    if (isMobile) setOpen(!open)
-  }
-
   const drawerOpenStyles = {
-    width: theme.spacing(24),
+    width: theme.spacing(33),
+    backgroundImage: 'none',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -39,15 +32,13 @@ export const Navigation = ({ page: initialPage }: Props) => {
   }
 
   const drawerClosedStyles = {
-    width: theme.spacing(7),
-    [theme.breakpoints.down('md')]: {
-      width: 0,
-    },
+    width: theme.spacing(8.5),
+    [theme.breakpoints.down('md')]: { width: 0 },
+    overflowX: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    overflowX: 'hidden',
   }
 
   const drawerStyles = open ? drawerOpenStyles : drawerClosedStyles
@@ -58,42 +49,28 @@ export const Navigation = ({ page: initialPage }: Props) => {
       open={open}
       onClose={() => setOpen(false)}
       onOpen={() => null}
+      onMouseOver={() => !isMobile && setOpen(true)}
+      onMouseOut={() => !isMobile && setOpen(false)}
       sx={{ ...drawerStyles, '& .MuiDrawer-paper': drawerStyles }}
     >
       <Grid item>
         <List sx={{ paddingTop: 0 }}>
-          <ListItemButton
-            onClick={() => setOpen(!open)}
-            sx={{ display: 'flex', justifyContent: 'flex-end' }}
-          >
+          <ListItem sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <ListItemText
               primary="Lexico"
-              primaryTypographyProps={{ variant: 'h4' }}
+              primaryTypographyProps={{ variant: 'h3' }}
               sx={{ minWidth: 'auto' }}
             />
             <ListItemIcon sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              {open ? <ChevronLeft /> : <Menu />}
+              {open ? (
+                <ChevronLeft fontSize="large" />
+              ) : (
+                <Menu fontSize="large" />
+              )}
             </ListItemIcon>
-          </ListItemButton>
+          </ListItem>
           <Divider />
-          {pages.map((page) => (
-            <Link
-              href={'/' + page.name}
-              key={page.name}
-              sx={{
-                textDecoration: 'none',
-                color: theme.palette.text.primary,
-              }}
-            >
-              <ListItemButton
-                selected={selectedPage === page.name}
-                onClick={() => handleSelection(page.name)}
-              >
-                <ListItemIcon>{page.icon}</ListItemIcon>
-                <ListItemText primary={capitalizeFirstLetter(page.name)} />
-              </ListItemButton>
-            </Link>
-          ))}
+          <Pages {...{ selectedPage, setSelectedPage }} />
         </List>
       </Grid>
     </SwipeableDrawer>

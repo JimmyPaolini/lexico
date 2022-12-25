@@ -10,10 +10,22 @@ export type LinkProps = Omit<LinkMUIProps, 'href' | 'classes'> &
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   ({ href, as, prefetch, ...props }, ref) => (
-    <NextLink href={href} as={as} prefetch={prefetch} passHref>
-      <LinkMUI ref={ref} {...props} />
+    <NextLink
+      href={href}
+      as={as}
+      prefetch={prefetch}
+      passHref
+      style={{ textDecoration: 'none', color: 'inherit' }}
+    >
+      <LinkMUI
+        ref={ref}
+        sx={{ textDecoration: 'none', color: 'inherit' }}
+        {...props}
+      />
     </NextLink>
   )
 )
+
 Link.displayName = 'Link'
+
 export { Link }
