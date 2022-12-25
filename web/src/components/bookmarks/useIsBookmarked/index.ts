@@ -1,2 +1,2 @@
 export { useIsBookmarked } from './useIsBookmarked'
-export { useIsBookmarkedLocal } from './useIsBookmarkedLocal'
+export { useIsBookmarkedLocal } from './isBookmarkedLocal'

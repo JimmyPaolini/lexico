@@ -1,6 +1,6 @@
 import { getBookmarksLocal } from '../useBookmarks/getBookmarksLocal'
 
-export function useIsBookmarkedLocal(id: string): boolean {
+export function isBookmarkedLocal(id: string): boolean {
   const bookmarks = getBookmarksLocal()
   return bookmarks.includes(id)
 }
