@@ -24,10 +24,8 @@ export const Text = ({ text, openModal }: Props) => {
       ? ' - ' + sentenceCase(text.book.title).replace(/^\d+ /, '')
       : '')
 
-  const action = !router.pathname.match(
-    /^\/reader\/customText/i
-  ) ? undefined : (
-    <Link href={`/library/customText/${text.id}`}>
+  const action = !router.pathname.match(/^\/userText/i) ? undefined : (
+    <Link href={`/userText/${text.id}`}>
       <IconButton aria-label="edit" size="large">
         <Edit />
       </IconButton>

@@ -16,7 +16,7 @@ import { TextBox } from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
 import { validateCustomText } from './validateCustomText'
 
-type Props = { text?: CustomText }
+type Props = { text: CustomText }
 
 export const CustomTextForm = ({ text }: Props) => {
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
@@ -24,13 +24,17 @@ export const CustomTextForm = ({ text }: Props) => {
 
   const router = useRouter()
   const formik = useFormik<CustomText>({
-    initialValues: text || ({ id: uuid(), title: '', text: '' } as CustomText),
+    initialValues: {
+      id: text.id ?? uuid(),
+      title: text.title ?? '',
+      text: text.text ?? '',
+    } as CustomText,
     validate: validateCustomText,
     onSubmit: async () => {
       try {
         if (!text || Boolean(text.user)) createCustomTextLocal(formik.values)
         else await createCustomText(formik.values)
-        await router.push(`/reader/customText/${formik.values.id}`)
+        await router.push(`/userText/${formik.values.id}`)
       } catch {
         formik.setStatus('Error creating custom text')
       }

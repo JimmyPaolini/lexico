@@ -9,23 +9,26 @@ import {
   useCustomTextQuery,
 } from 'src/graphql/generated'
 
-import Reader from '../[textId]'
+import Reader from '../text/[id]'
 
 type Props = { id: string }
 
-export default function CustomReader({ id }: Props) {
+export default function UserTextReader({ id }: Props) {
   const { data, isSuccess } = useCustomTextQuery({ id })
-  const localText = getCustomTextLocal(id)
   const remoteText = data?.customText
-  const text = (isSuccess ? remoteText : localText) as CustomText
-  return !text ? <></> : <Reader text={customTextToText(text)} />
+
+  const localText = getCustomTextLocal(id)
+
+  const userText = (isSuccess ? remoteText : localText) as CustomText
+
+  return !userText ? <></> : <Reader text={userTextToText(userText)} />
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  return { props: { id: params?.customTextId } }
+  return { props: { id: params?.id } }
 }
 
-function customTextToText({ id, title, text, user }: CustomText): Text {
+function userTextToText({ id, title, text, user }: CustomText): Text {
   const customText = {
     id,
     title,
@@ -35,9 +38,9 @@ function customTextToText({ id, title, text, user }: CustomText): Text {
       : { id: 'user', title: 'user' }) as Book,
     lines: [],
   }
-  customText.author.texts = [customText as never]
+  customText.author.texts = [customText as Text]
   customText.book.author = customText.author
-  customText.book.texts = [customText as never]
+  customText.book.texts = [customText as Text]
   customText.lines = text.split('\n').map((line, i: number) => {
     return {
       id: `${i}`,

@@ -41,7 +41,7 @@ export const LibraryText = ({ text }: Props) => {
       }}
     >
       <CardActionArea disableRipple disableTouchRipple>
-        <Link href={`reader/${text.id}`}>
+        <Link href={`text/${text.id}`}>
           <Typography align="center" sx={{ ...theme.custom.lineClamp(2) }}>
             {title}
           </Typography>

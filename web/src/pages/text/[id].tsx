@@ -113,7 +113,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { textIds } = await useTextIdsQuery.fetcher()()
   return {
     fallback: true,
-    paths: textIds.map((textId) => ({ params: { textId } })),
+    paths: textIds.map((id) => ({ params: { id } })),
   }
 }
 

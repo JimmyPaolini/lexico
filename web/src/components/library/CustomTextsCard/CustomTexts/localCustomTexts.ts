@@ -35,7 +35,7 @@ export function getCustomTextLocal(id: string): CustomText | undefined {
   try {
     return JSON.parse(window.localStorage[localLiteraturePrefix + id])
   } catch {
-    return undefined
+    return { id } as CustomText
   }
 }
 

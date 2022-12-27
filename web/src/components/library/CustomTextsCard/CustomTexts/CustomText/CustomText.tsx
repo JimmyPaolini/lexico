@@ -11,7 +11,7 @@ type Props = {
 }
 export const CustomText = ({ text, refreshCustomTexts }: Props) => {
   return (
-    <Link href={`/reader/customText/${text.id}`}>
+    <Link href={`/userText/${text.id}`}>
       <ListItem sx={{ padding: 0 }}>
         <ListItemButton>
           <ListItemText

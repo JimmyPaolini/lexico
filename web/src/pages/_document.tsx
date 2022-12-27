@@ -10,9 +10,7 @@ import createEmotionServer from '@emotion/server/create-instance'
 import { theme } from 'src/theme'
 import { createEmotionCache } from 'src/theme/createEmotionCache'
 
-export default class MyDocument extends Document<{
-  emotionStyleTags: unknown
-}> {
+export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
@@ -57,7 +55,7 @@ export default class MyDocument extends Document<{
             }}
           />
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
-          {this.props.emotionStyleTags}
+          {(this.props as any).emotionStyleTags}
         </Head>
         <body id="body">
           <noscript>You need to enable JavaScript to run this app.</noscript>

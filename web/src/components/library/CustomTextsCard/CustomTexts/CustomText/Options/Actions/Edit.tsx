@@ -9,7 +9,7 @@ type Props = { text: CustomText }
 
 export const Edit = ({ text }: Props) => {
   return (
-    <Link href={`library/customText/${text.id}`}>
+    <Link href={`userText/${text.id}`}>
       <Action
         onClick={(e) => {
           e.stopPropagation()
