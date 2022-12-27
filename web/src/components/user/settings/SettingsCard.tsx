@@ -43,7 +43,14 @@ export const SettingsCard = () => {
 
   return (
     <Card>
-      <CardHeader title="Settings" />
+      <CardHeader
+        title="Settings"
+        titleTypographyProps={{
+          align: 'center',
+          variant: 'h4',
+          gutterBottom: true,
+        }}
+      />
       <Divider variant="middle" />
       <CardContent>
         <Grid container direction="column" spacing={2}>

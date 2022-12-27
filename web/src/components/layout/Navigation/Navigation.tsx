@@ -48,7 +48,7 @@ export const Navigation = ({ page: initialPage }: Props) => {
       variant={isMobile ? 'temporary' : 'permanent'}
       open={open}
       onClose={() => setOpen(false)}
-      onOpen={() => null}
+      onOpen={() => setOpen(true)}
       onMouseOver={() => !isMobile && setOpen(true)}
       onMouseOut={() => !isMobile && setOpen(false)}
       sx={{ ...drawerStyles, '& .MuiDrawer-paper': drawerStyles }}

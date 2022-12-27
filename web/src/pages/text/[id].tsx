@@ -15,7 +15,7 @@ import { Text } from 'src/components/reader/Text'
 import { shouldShowReaderInstructions } from 'src/components/reader/readerInstructions'
 import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
 import {
-  Text as ReaderText,
+  Text as TextGql,
   useTextIdsQuery,
   useTextQuery,
 } from 'src/graphql/generated'
@@ -23,7 +23,7 @@ import { useSnackbar } from 'src/hooks/useSnackbar'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 import { sentenceCase } from 'src/utils/string'
 
-type Props = { text: ReaderText }
+type Props = { text: TextGql }
 
 export default function Reader({ text }: Props) {
   const theme = useTheme()
@@ -118,10 +118,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const textId = params?.textId as string
-  if (!textId) return { notFound: true }
+  const id = params?.id as string
+  if (!id) return { notFound: true }
   try {
-    const { text } = await useTextQuery.fetcher({ id: textId })()
+    const { text } = await useTextQuery.fetcher({ id })()
     if (!text) return { notFound: true }
     console.log(text)
     return { props: { text } }

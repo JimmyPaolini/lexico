@@ -16,7 +16,7 @@ import { TextBox } from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
 import { validateCustomText } from './validateCustomText'
 
-type Props = { text: CustomText }
+type Props = { text?: CustomText }
 
 export const CustomTextForm = ({ text }: Props) => {
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
@@ -25,9 +25,9 @@ export const CustomTextForm = ({ text }: Props) => {
   const router = useRouter()
   const formik = useFormik<CustomText>({
     initialValues: {
-      id: text.id ?? uuid(),
-      title: text.title ?? '',
-      text: text.text ?? '',
+      id: text?.id ?? uuid(),
+      title: text?.title ?? '',
+      text: text?.text ?? '',
     } as CustomText,
     validate: validateCustomText,
     onSubmit: async () => {

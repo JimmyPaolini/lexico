@@ -5,7 +5,7 @@ import { IconButton } from '@mui/material'
 
 import { Context } from 'src/components/layout/Context'
 
-import { useIsBookmarkedLocal, useToggleBookmark } from '..'
+import { isBookmarkedLocal, useToggleBookmark } from '..'
 
 type Props = { id: string; bookmarked: boolean }
 
@@ -14,8 +14,7 @@ export const BookmarkButton = ({
   bookmarked: isBookmarkedRemote,
 }: Props) => {
   const { user, queryClient } = useContext(Context)
-  const isBookmarkedLocal = useIsBookmarkedLocal(id)
-  const bookmarkedInitial = user ? isBookmarkedRemote : isBookmarkedLocal
+  const bookmarkedInitial = user ? isBookmarkedRemote : isBookmarkedLocal(id)
   const [bookmarked, setBookmarked] = useState<boolean>(bookmarkedInitial)
 
   const toggleBookmark = useToggleBookmark(

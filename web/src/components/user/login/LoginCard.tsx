@@ -1,4 +1,4 @@
-import { Card, CardContent, Divider, Grid, Typography } from '@mui/material'
+import { Card, CardContent, Divider, Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { CardHeader } from '../../accessories/CardHeader'
@@ -10,22 +10,19 @@ export const LoginCard = () => {
     <Card>
       <CardHeader
         title="Sign In"
-        sx={{
-          paddingBottom: 0,
-          minHeight: theme.spacing(8),
+        titleTypographyProps={{
+          align: 'center',
+          variant: 'h4',
+          gutterBottom: true,
         }}
+        subheader="Save your Bookmarks, Literature, and Settings across devices"
+        subheaderTypographyProps={{
+          align: 'center',
+          variant: 'body2',
+          gutterBottom: true,
+        }}
+        sx={{ paddingBottom: 0 }}
       />
-      <Typography align="center" variant="body2" color="textSecondary">
-        Save your Bookmarks, Literature,
-      </Typography>
-      <Typography
-        align="center"
-        variant="body2"
-        color="textSecondary"
-        gutterBottom
-      >
-        and Settings across devices
-      </Typography>
       <Divider variant="middle" />
       <CardContent>
         <Grid container direction="column" alignItems="center">
