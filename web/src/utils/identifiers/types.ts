@@ -45,7 +45,7 @@ export type CaseAbbreviation =
   | 'VOC'
   | 'LOC'
 export type GenderAbbreviation = 'MASC' | 'FEM' | 'NEU'
-export type NumberAbbreviation = 'SG' | 'PL'
+export type NumberAbbreviation = 'S' | 'P'
 export type MoodAbbreviation = 'IND' | 'SUB' | 'IMPV' | 'INF' | 'NONF'
 export type TenseAbbreviation =
   | 'PRES'
@@ -56,7 +56,7 @@ export type TenseAbbreviation =
   | 'FUTP'
 export type NonFiniteAbbreviation = 'PART' | 'GER/SUP' | 'GER' | 'SUP'
 export type VoiceAbbreviation = 'ACT' | 'PAS'
-export type PersonAbbreviation = '1ST' | '2ND' | '3RD'
+export type PersonAbbreviation = '1' | '2' | '3'
 
 export type IdentifierAbbreviation =
   | CaseAbbreviation

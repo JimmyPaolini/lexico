@@ -13,8 +13,8 @@ export const abbreviateIdentifier = {
   feminine: 'FEM',
   neuter: 'NEU',
 
-  singular: 'SG',
-  plural: 'PL',
+  singular: 'S',
+  plural: 'P',
 
   indicative: 'IND',
   subjunctive: 'SUB',
@@ -39,9 +39,9 @@ export const abbreviateIdentifier = {
   active: 'ACT',
   passive: 'PAS',
 
-  first: '1ST',
-  second: '2ND',
-  third: '3RD',
+  first: '1',
+  second: '2',
+  third: '3',
 } as { [key in Identifier]: IdentifierAbbreviation }
 
 export const unabbreviateIdentifier = {
@@ -57,8 +57,8 @@ export const unabbreviateIdentifier = {
   FEM: 'feminine',
   NEU: 'neuter',
 
-  SG: 'singular',
-  PL: 'plural',
+  S: 'singular',
+  P: 'plural',
 
   IND: 'indicative',
   SUB: 'subjunctive',
@@ -81,7 +81,7 @@ export const unabbreviateIdentifier = {
   ACT: 'active',
   PAS: 'passive',
 
-  '1ST': 'first',
-  '2ND': 'second',
-  '3RD': 'third',
+  '1': 'first',
+  '2': 'second',
+  '3': 'third',
 } as { [key in IdentifierAbbreviation]: Identifier }

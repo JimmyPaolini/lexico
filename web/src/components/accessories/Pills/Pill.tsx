@@ -25,15 +25,17 @@ export const Pill = ({ variant, children, ...identifierStyles }: Props) => {
         ...(variant === PillVariant.SMALL
           ? {
               height: '16px',
-              fontSize: '0.625rem',
+              minWidth: '16px',
               borderRadius: '8px',
-              margin: 'auto 0px',
+              fontSize: '0.625rem',
               padding: '0px 3px',
+              margin: 'auto 0px',
             }
           : {
               height: '20px',
-              fontSize: '0.875rem',
+              minWidth: '20px',
               borderRadius: '10px',
+              fontSize: '0.875rem',
               padding: '0px 6px',
               margin: 'auto 2px',
             }),
