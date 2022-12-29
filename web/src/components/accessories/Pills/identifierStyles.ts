@@ -47,8 +47,8 @@ export const identifierStyles = {
   gerund: { background: 'goldenrod', color: 'black' },
   supine: { background: 'deeppink', color: 'white' },
 
-  active: { background: '#555', color: 'white', border: '1px dotted white' },
-  passive: { background: '#999', color: 'black', border: '2px dotted black' },
+  active: { background: '#555', color: 'white', border: '1px dashed white' },
+  passive: { background: '#999', color: 'black', border: '1px dashed black' },
 
   first: { background: 'blue', color: 'white' },
   second: { background: 'red', color: 'white' },
