@@ -26,8 +26,8 @@ export const identifierStyles = {
   feminine: { background: 'green', color: 'white' },
   neuter: { background: 'purple', color: 'white' },
 
-  singular: { background: 'white', color: 'black', border: '2px solid black' },
-  plural: { background: 'black', color: 'white', border: '1px solid white' },
+  singular: { background: 'white', color: 'black' },
+  plural: { background: 'black', color: 'white' },
 
   indicative: { background: 'steelblue', color: 'white' },
   subjunctive: { background: 'fuchsia', color: 'white' },
@@ -47,8 +47,8 @@ export const identifierStyles = {
   gerund: { background: 'goldenrod', color: 'black' },
   supine: { background: 'deeppink', color: 'white' },
 
-  active: { background: '#555', color: 'white', border: '1px dashed white' },
-  passive: { background: '#999', color: 'black', border: '1px dashed black' },
+  active: { background: '#555', color: 'white', border: '1px solid white' },
+  passive: { background: '#999', color: 'black', border: '2px solid black' },
 
   first: { background: 'blue', color: 'white' },
   second: { background: 'red', color: 'white' },
