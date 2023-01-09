@@ -61,7 +61,14 @@ export const Navigation = ({ page: initialPage }: Props) => {
               primaryTypographyProps={{ variant: 'h4' }}
               sx={{ minWidth: 'auto' }}
             />
-            <ListItemIcon sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <ListItemIcon
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                position: 'relative',
+                left: '2px',
+              }}
+            >
               {open ? (
                 <ChevronLeft fontSize="large" />
               ) : (
