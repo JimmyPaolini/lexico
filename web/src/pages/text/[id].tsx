@@ -123,7 +123,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const { text } = await useTextQuery.fetcher({ id })()
     if (!text) return { notFound: true }
-    console.log(text)
     return { props: { text } }
   } catch {
     return { notFound: true }

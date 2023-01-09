@@ -20,9 +20,11 @@ export const Delete = ({ text, refreshCustomTexts }: Props) => {
       onClick={async (e) => {
         e.stopPropagation()
         if (text.user) {
+          deleteCustomTextUser(text)
+        } else {
           deleteCustomTextLocal(text.id)
-          await refreshCustomTexts()
-        } else deleteCustomTextUser(text)
+        }
+        await refreshCustomTexts()
       }}
       Icon={<DeleteIcon />}
       text="Delete"

@@ -36,8 +36,8 @@ export const useCustomTexts = (): useCustomTextsReturn => {
   }, [customTextsLocal, customTextsUser])
 
   const refreshCustomTexts = async () => {
-    await refreshCustomTextsUser()
     setCustomTextsLocal(listCustomTextsLocal())
+    await refreshCustomTextsUser()
   }
 
   // Deduplicate custom texts

@@ -25,7 +25,7 @@ export const Text = ({ text, openModal }: Props) => {
       : '')
 
   const action = !router.pathname.match(/^\/userText/i) ? undefined : (
-    <Link href={`/userText/${text.id}`}>
+    <Link href={`/userText/${text.id}/edit`}>
       <IconButton aria-label="edit" size="large">
         <Edit />
       </IconButton>

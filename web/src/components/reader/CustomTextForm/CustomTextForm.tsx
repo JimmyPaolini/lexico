@@ -1,7 +1,5 @@
 import { useContext } from 'react'
 
-import { useRouter } from 'next/router'
-
 import Menu from '@mui/icons-material/Menu'
 import { Grid, IconButton, Typography, useTheme } from '@mui/material'
 
@@ -11,6 +9,7 @@ import { v4 as uuid } from 'uuid'
 import { createCustomTextLocal } from 'src/components/library/CustomTextsCard/CustomTexts'
 import { CustomText, useCreateCustomTextMutation } from 'src/graphql/generated'
 
+import { Link } from '../../accessories/Link'
 import { SubmitButton } from '../../accessories/SubmitButton'
 import { TextBox } from '../../accessories/TextBox'
 import { Context } from '../../layout/Context'
@@ -22,7 +21,7 @@ export const CustomTextForm = ({ text }: Props) => {
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
   const theme = useTheme()
 
-  const router = useRouter()
+  // const router = useRouter()
   const formik = useFormik<CustomText>({
     initialValues: {
       id: text?.id ?? uuid(),
@@ -32,9 +31,12 @@ export const CustomTextForm = ({ text }: Props) => {
     validate: validateCustomText,
     onSubmit: async () => {
       try {
-        if (!text || Boolean(text.user)) createCustomTextLocal(formik.values)
-        else await createCustomText(formik.values)
-        await router.push(`/userText/${formik.values.id}`)
+        if (text?.user) {
+          await createCustomText(formik.values)
+        } else {
+          createCustomTextLocal(formik.values)
+        }
+        // await router.push(`/userText/${formik.values.id}`)
       } catch {
         formik.setStatus('Error creating custom text')
       }
@@ -96,7 +98,9 @@ export const CustomTextForm = ({ text }: Props) => {
             'automatically numbered line\n#LBL manually labelled line'
           }
         />
-        <SubmitButton name="Save" sx={{ marginBottom: theme.spacing(2) }} />
+        <Link href={`/userText/${formik.values.id}`}>
+          <SubmitButton name="Save" sx={{ marginBottom: theme.spacing(2) }} />
+        </Link>
       </Grid>
     </form>
   )

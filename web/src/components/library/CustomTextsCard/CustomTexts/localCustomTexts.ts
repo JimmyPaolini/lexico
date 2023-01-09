@@ -2,12 +2,12 @@ import { CustomText, User } from 'src/graphql/generated'
 
 import { validateCustomText } from '../../../reader/CustomTextForm/validateCustomText'
 
-const localLiteraturePrefix = 'customText-'
+const KEY_PREFIX = 'customText-'
 
 export function listCustomTextsLocal(): CustomText[] {
   if (typeof window === 'undefined') return []
   return Object.keys(window.localStorage)
-    .filter((key) => key.startsWith(localLiteraturePrefix))
+    .filter((key) => key.startsWith(KEY_PREFIX))
     .map((key) => {
       try {
         return JSON.parse(window.localStorage[key])
@@ -27,13 +27,13 @@ export function createCustomTextLocal(customText: CustomText): void {
   }
   customText.user = undefined as unknown as User
   const customTextString = JSON.stringify(customText)
-  window.localStorage[localLiteraturePrefix + customText.id] = customTextString
+  window.localStorage[KEY_PREFIX + customText.id] = customTextString
 }
 
 export function getCustomTextLocal(id: string): CustomText | undefined {
   if (typeof window === 'undefined') return undefined
   try {
-    return JSON.parse(window.localStorage[localLiteraturePrefix + id])
+    return JSON.parse(window.localStorage[KEY_PREFIX + id])
   } catch {
     return { id } as CustomText
   }
@@ -41,5 +41,5 @@ export function getCustomTextLocal(id: string): CustomText | undefined {
 
 export function deleteCustomTextLocal(id: string): void {
   if (typeof window === 'undefined') return
-  delete window.localStorage[localLiteraturePrefix + id]
+  delete window.localStorage[KEY_PREFIX + id]
 }
