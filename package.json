@@ -48,7 +48,7 @@
     "@types/number-to-words": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.14.0",
     "eslint": "^7.23.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-config-prettier": "^8.1.0",
