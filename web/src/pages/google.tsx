@@ -1,8 +1,7 @@
-import { print } from 'graphql'
 import { rawRequest } from 'graphql-request'
 import { GetServerSideProps } from 'next'
 
-import googleQuery from 'src/graphql/user/login/google.graphql'
+import { GoogleDocument } from 'src/graphql/generated'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 
 import { serverEndpoint } from './api'
@@ -15,15 +14,14 @@ export default function google() {
   })
   return <></>
 }
+
 export const getServerSideProps: GetServerSideProps = async ({
   query: { code },
   res,
 }) => {
-  const { headers, errors } = await rawRequest(
-    serverEndpoint,
-    print(googleQuery),
-    { code }
-  )
+  const { headers, errors } = await rawRequest(serverEndpoint, GoogleDocument, {
+    code,
+  })
   const cookieHeader = headers.get('set-cookie')
   if (!errors && cookieHeader) res.setHeader('set-cookie', cookieHeader)
 

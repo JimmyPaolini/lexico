@@ -22,15 +22,15 @@ export const LibraryText = ({ text }: Props) => {
 
   return (
     <Link
-      href={`text/${text.id}`}
+      href={`/text/${encodeURIComponent(text.id)}`}
       onMouseOver={() => setHovered(true)}
       onMouseOut={() => setHovered(false)}
     >
       <ListItemButton
         sx={{
-          height: 40,
-          minWidth: 40,
-          borderRadius: 16,
+          height: '40px',
+          minWidth: '40px',
+          borderRadius: '5px',
           margin: theme.spacing(1),
           padding: theme.spacing(1),
           flexGrow: 0,

@@ -95,13 +95,11 @@ export default function Reader({ text }: Props) {
           height: '100%',
           background: 'black',
           ...theme.custom.literature,
+          fontSize,
         }}
-        style={{ fontSize }}
       >
         <Grid container justifyContent="center">
-          {!!text && user !== undefined ? (
-            <Text {...{ text, openModal }} />
-          ) : null}
+          {text && <Text {...{ text, openModal }} />}
         </Grid>
         <SearchModal {...{ searched, open, setOpen }} />
       </Paper>

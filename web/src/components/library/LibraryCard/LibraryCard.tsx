@@ -38,12 +38,12 @@ export const LibraryCard = ({ author }: Props) => {
             {books.map((book, i) => {
               const isLast = i === books.length - 1
               return (
-                <>
+                <div key={book.id}>
                   <LibraryBook {...{ author, book }} />
                   {(!isLast || (isLast && nonBookTexts.length) > 0) && (
                     <Divider sx={{ marginLeft: theme.spacing(1) }} />
                   )}
-                </>
+                </div>
               )
             })}
             <LibraryTexts texts={nonBookTexts} />

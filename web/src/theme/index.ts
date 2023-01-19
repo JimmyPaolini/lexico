@@ -31,8 +31,8 @@ const themeInitial = createTheme({
     },
     lineClamp: (numLines: number) => ({
       display: '-webkit-box',
-      '-webkit-line-clamp': `${numLines}`,
-      '-webkit-box-orient': 'vertical',
+      WebkitLineClamp: `${numLines}`,
+      WebkitBoxOrient: 'vertical',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
     }),
@@ -77,6 +77,16 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           outline: 'none',
+        },
+      },
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          a: {
+            textDecoration: 'none',
+            color: 'inherit',
+          },
         },
       },
     },

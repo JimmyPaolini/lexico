@@ -21,10 +21,12 @@ export default function Library({ authors }: Props) {
 
   const authorsCopy = JSON.parse(JSON.stringify(authors))
   const Cards = useMemo(() => {
-    const Cards = filterLibrary(authorsCopy, searched).map((author) => (
-      <LibraryCard {...{ author }} key={author.id} />
-    ))
-    Cards.unshift(<CustomTextsCard />)
+    const Cards = [
+      <CustomTextsCard key="CustomTextsCard" />,
+      ...filterLibrary(authorsCopy, searched).map((author) => (
+        <LibraryCard {...{ author }} key={author.id} />
+      )),
+    ]
     return Cards
   }, [searched])
 
