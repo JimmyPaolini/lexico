@@ -15,7 +15,7 @@ export const CreateCustomText = () => {
     <CardActionArea
       sx={{ '& .MuiCardActionArea-focusHighlight': { display: 'block' } }}
     >
-      <Link href={`/userText/${newUserTextId}/edit`}>
+      <Link href={`/userText/${encodeURIComponent(newUserTextId)}/edit`}>
         <CardHeaderMui
           title="User Texts"
           action={

@@ -26,14 +26,7 @@ export const useCustomTexts = (): useCustomTextsReturn => {
   } = useCustomTextsQuery()
   const customTextsUser = (data?.customTexts || []) as CustomText[]
 
-  const [customTexts, setCustomTexts] = useState([
-    ...customTextsUser,
-    ...customTextsLocal,
-  ])
-
-  useEffect(() => {
-    setCustomTexts([...(customTextsUser || []), ...customTextsLocal])
-  }, [customTextsLocal, customTextsUser])
+  const customTexts = [...customTextsUser, ...customTextsLocal]
 
   const refreshCustomTexts = async () => {
     setCustomTextsLocal(listCustomTextsLocal())

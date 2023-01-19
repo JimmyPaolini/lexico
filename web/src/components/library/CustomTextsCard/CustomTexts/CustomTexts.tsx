@@ -15,9 +15,7 @@ export const CustomTexts = () => {
   const { customTexts, refreshCustomTexts, isLoading, isError } =
     useCustomTexts()
 
-  return !customTexts.length ? (
-    <></>
-  ) : (
+  return !customTexts.length ? null : (
     <CardContent
       sx={{
         padding: 0,

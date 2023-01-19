@@ -80,6 +80,14 @@ export const theme = createTheme({
         },
       },
     },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          color: 'inherit',
+        },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: {
         body: {
