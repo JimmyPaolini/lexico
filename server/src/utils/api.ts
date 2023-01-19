@@ -12,7 +12,7 @@ import {
   UserResolver,
 } from '../resolver'
 
-export async function buildAPI(
+export async function initializeGraphqlApi(
   app: Express,
   cors: CorsOptions
 ): Promise<ApolloServer> {

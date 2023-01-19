@@ -4,7 +4,7 @@ import express from 'express'
 import 'reflect-metadata'
 
 import log from '../../utils/log'
-import { buildAPI } from './utils/api'
+import { initializeGraphqlApi } from './utils/api'
 import { corsOptions } from './utils/cors'
 import { Database } from './utils/database'
 
@@ -16,7 +16,7 @@ async function main() {
   app.use(cookieParser())
   app.get('/health', (_, res) => res.send('check'))
 
-  await buildAPI(app, corsOptions)
+  await initializeGraphqlApi(app, corsOptions)
 
   app.listen('3001', () =>
     log.info(

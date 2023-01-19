@@ -26,20 +26,24 @@ export const Pages = ({ selectedPage, setSelectedPage }: Props) => {
     if (isMobile) setOpen(!open)
   }
 
-  return PAGES.map(({ name, Icon }) => (
-    <Link href={'/' + name} key={name} prefetch={false}>
-      <ListItem sx={{ padding: 0 }}>
-        <ListItemButton
-          selected={selectedPage === name}
-          onClick={() => handleSelection(name)}
-        >
-          <ListItemIcon>{Icon}</ListItemIcon>
-          <ListItemText
-            primary={capitalizeFirstLetter(name)}
-            primaryTypographyProps={{ variant: 'h5' }}
-          />
-        </ListItemButton>
-      </ListItem>
-    </Link>
-  ))
+  return (
+    <>
+      {PAGES.map(({ name, Icon }) => (
+        <Link href={'/' + name} key={name} prefetch={false}>
+          <ListItem sx={{ padding: 0 }}>
+            <ListItemButton
+              selected={selectedPage === name}
+              onClick={() => handleSelection(name)}
+            >
+              <ListItemIcon>{Icon}</ListItemIcon>
+              <ListItemText
+                primary={capitalizeFirstLetter(name)}
+                primaryTypographyProps={{ variant: 'h5' }}
+              />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      ))}
+    </>
+  )
 }

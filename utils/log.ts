@@ -64,7 +64,7 @@ export class DatabaseLogger implements Logger {
    */
   logQuery(query: string, parameters?: unknown[]): void {
     if (process.env.LOG_SQL === 'true') {
-      log.info(`database query: ${query} ${JSON.stringify(parameters ?? '')}`, {
+      log.info(`${query} ${JSON.stringify(parameters ?? '')}`, {
         label: 'database query',
       })
     }
@@ -79,46 +79,32 @@ export class DatabaseLogger implements Logger {
     parameters?: unknown[]
   ): void {
     error = typeof error === 'string' ? error : error.message
-    log.error(
-      `database query error: ${error}: ${query} ${JSON.stringify(
-        parameters ?? ''
-      )}`,
-      {
-        label: 'database query error',
-      }
-    )
+    log.error(`${error}: ${query} ${JSON.stringify(parameters ?? '')}`, {
+      label: 'database query error',
+    })
   }
 
   /**
    * Logs query that is slow.
    */
   logQuerySlow(time: number, query: string, parameters?: unknown[]): void {
-    log.warn(
-      `database query slow ${time}ms: ${query} ${JSON.stringify(
-        parameters ?? ''
-      )}`,
-      {
-        label: 'database query slow',
-      }
-    )
+    log.warn(`${time}ms: ${query} ${JSON.stringify(parameters ?? '')}`, {
+      label: 'database query slow',
+    })
   }
 
   /**
    * Logs events from the schema build process.
    */
   logSchemaBuild(message: string): void {
-    log.info(`database build schema: ${message}`, {
-      label: 'database build schema',
-    })
+    log.info(`${message}`, { label: 'database build schema' })
   }
 
   /**
    * Logs events from the migrations run process.
    */
   logMigration(message: string): void {
-    log.warn(`database migration: ${message}`, {
-      label: 'database migration',
-    })
+    log.warn(`${message}`, { label: 'database migration' })
   }
 
   /**
@@ -127,9 +113,7 @@ export class DatabaseLogger implements Logger {
    */
   log(_: 'log' | 'info' | 'warn', message: unknown): void {
     if (log.level === 'warn') log.warn(`database log: ${message}`)
-    log.info(`database log: ${message}`, {
-      label: 'database log',
-    })
+    log.info(`${message}`, { label: 'database log' })
   }
 }
 
