@@ -8,10 +8,10 @@ import {
   UseMiddleware,
 } from 'type-graphql'
 
-import { Authenticate } from '../authentication/middleware'
+import { ResolverContext } from '../config/ResolverContext'
 import Settings from '../entity/user/Settings'
 import User from '../entity/user/User'
-import { ResolverContext } from '../utils/ResolverContext'
+import { Authenticate } from '../services/authentication/middleware'
 
 @Resolver(User)
 export class UserResolver {

@@ -1,8 +1,8 @@
 import { JwtPayload, verify } from 'jsonwebtoken'
 import { MiddlewareFn } from 'type-graphql'
 
-import User from '../entity/user/User'
-import { ResolverContext } from '../utils/ResolverContext'
+import { ResolverContext } from '../../config/ResolverContext'
+import User from '../../entity/user/User'
 
 const getUserIdFromContext = (context: ResolverContext) => {
   if (!context?.req?.cookies?.accessToken) throw new Error('no user signed in')

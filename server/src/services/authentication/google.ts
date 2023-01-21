@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-import { GOOGLE_ID, GOOGLE_SECRET } from '../../../utils/env'
-import log from '../../../utils/log'
+import { GOOGLE_ID, GOOGLE_SECRET } from '../../../../utils/env'
+import log from '../../../../utils/log'
 
 export type GoogleProfile = {
   id: string

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 
-import MenuIcon from '@mui/icons-material/Menu'
-import SearchIcon from '@mui/icons-material/Search'
+import Menu from '@mui/icons-material/Menu'
+import Search from '@mui/icons-material/Search'
 import {
   Card,
   CircularProgress,
@@ -11,6 +11,7 @@ import {
   useTheme,
 } from '@mui/material'
 
+import { SpeakIconButton } from '../accessories/SpeakIconButton'
 import { Context } from '../layout/Context'
 
 type Props = {
@@ -18,6 +19,7 @@ type Props = {
   handleSearch: (search: string) => unknown
   isLoading?: boolean
   placeholder: string
+  audio?: boolean
 }
 
 export const SearchBar = ({
@@ -25,11 +27,11 @@ export const SearchBar = ({
   handleSearch,
   isLoading = false,
   placeholder = 'Search',
+  audio,
 }: Props) => {
   const theme = useTheme()
   const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
   const [search, setSearch] = useState(initialSearch)
-
   useEffect(() => {
     if (search === '') handleSearch('')
   }, [search])
@@ -50,7 +52,7 @@ export const SearchBar = ({
             aria-label="menu"
             size="large"
           >
-            <MenuIcon fontSize="large" />
+            <Menu fontSize="large" />
           </IconButton>
         )}
         <InputBase
@@ -70,7 +72,7 @@ export const SearchBar = ({
           aria-label="search"
         >
           {!isLoading ? (
-            <SearchIcon fontSize="large" />
+            <Search fontSize="large" />
           ) : (
             <CircularProgress
               size={theme.spacing(3)}
@@ -79,6 +81,7 @@ export const SearchBar = ({
             />
           )}
         </IconButton>
+        {audio && <SpeakIconButton text={search} />}
       </Grid>
     </Card>
   )

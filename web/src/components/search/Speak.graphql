@@ -1,0 +1,3 @@
+query Speak($text: String!) {
+  speak(text: $text)
+}

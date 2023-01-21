@@ -8,12 +8,12 @@ import {
 } from 'type-graphql'
 
 import log from '../../../utils/log'
-import { fetchFacebookUser } from '../authentication/facebook'
-import { fetchGoogleUser } from '../authentication/google'
-import { Authenticate } from '../authentication/middleware'
-import { createAccessToken } from '../authentication/token'
+import { ResolverContext } from '../config/ResolverContext'
 import User from '../entity/user/User'
-import { ResolverContext } from '../utils/ResolverContext'
+import { fetchFacebookUser } from '../services/authentication/facebook'
+import { fetchGoogleUser } from '../services/authentication/google'
+import { Authenticate } from '../services/authentication/middleware'
+import { createAccessToken } from '../services/authentication/token'
 
 @Resolver(User)
 export class AuthenticationResolver {

@@ -4,10 +4,10 @@ import { Button } from '@mui/material'
 
 import { sentenceCase } from 'src/utils/string'
 
-type Props = {
+type Props = ComponentProps<typeof Button> & {
   name: string
   onClick?: MouseEventHandler<HTMLButtonElement>
-} & ComponentProps<typeof Button>
+}
 
 export const SubmitButton = ({ name, onClick, ...props }: Props) => {
   return (

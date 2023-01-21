@@ -319,14 +319,19 @@ export type Query = {
   book: Book;
   bookmarks: Array<Entry>;
   books: Array<Book>;
+  capitalize: Scalars['String'];
   customText: CustomText;
   customTexts: Array<CustomText>;
+  demacronize: Scalars['String'];
   entries: Array<Entry>;
   entry: Entry;
   facebook: User;
   findText: Text;
   google: User;
+  i2j: Scalars['String'];
   logout: Scalars['Boolean'];
+  macronize: Scalars['String'];
+  phonemes: Scalars['String'];
   search: Array<Entry>;
   searchAuthors: Array<Author>;
   searchBooks: Array<Book>;
@@ -336,9 +341,11 @@ export type Query = {
   searchLiterature: Array<Author>;
   searchTexts: Array<Text>;
   settings: Settings;
+  speak: Scalars['String'];
   text: Text;
   textIds: Array<Scalars['ID']>;
   texts: Array<Text>;
+  u2v: Scalars['String'];
   user?: Maybe<User>;
 };
 
@@ -353,8 +360,18 @@ export type QueryBookArgs = {
 };
 
 
+export type QueryCapitalizeArgs = {
+  text: Scalars['String'];
+};
+
+
 export type QueryCustomTextArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryDemacronizeArgs = {
+  text: Scalars['String'];
 };
 
 
@@ -382,6 +399,21 @@ export type QueryFindTextArgs = {
 
 export type QueryGoogleArgs = {
   code: Scalars['String'];
+};
+
+
+export type QueryI2jArgs = {
+  text: Scalars['String'];
+};
+
+
+export type QueryMacronizeArgs = {
+  text: Scalars['String'];
+};
+
+
+export type QueryPhonemesArgs = {
+  text: Scalars['String'];
 };
 
 
@@ -425,8 +457,18 @@ export type QuerySearchTextsArgs = {
 };
 
 
+export type QuerySpeakArgs = {
+  text: Scalars['String'];
+};
+
+
 export type QueryTextArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryU2vArgs = {
+  text: Scalars['String'];
 };
 
 export type Settings = {
@@ -640,6 +682,27 @@ export type SearchQueryVariables = Exact<{
 
 
 export type SearchQuery = { search: Array<{ id: string, partOfSpeech: string, identifiers?: Maybe<Array<string>>, bookmarked?: Maybe<boolean>, isLatinSearchResult?: Maybe<boolean>, principalParts?: Maybe<Array<{ name: string, text: Array<string> }>>, inflection?: Maybe<{ declension: string, degree: string, other: string } | { type: string, degree: string } | { declension: string, gender: string, other: string } | { case: string, other: string } | { other: string } | { conjugation: string, other: string }>, translations?: Maybe<Array<{ id: string, translation: string }>>, forms?: Maybe<{ masculine?: Maybe<{ nominative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, genitive?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, dative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, accusative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, ablative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, vocative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, locative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }> }>, feminine?: Maybe<{ nominative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, genitive?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, dative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, accusative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, ablative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, vocative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, locative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }> }>, neuter?: Maybe<{ nominative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, genitive?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, dative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, accusative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, ablative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, vocative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, locative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }> }> } | { positive?: Maybe<Array<string>>, comparative?: Maybe<Array<string>>, superlative?: Maybe<Array<string>> } | { nominative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, genitive?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, dative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, accusative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, ablative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, vocative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }>, locative?: Maybe<{ singular?: Maybe<Array<string>>, plural?: Maybe<Array<string>> }> } | { indicative?: Maybe<{ active?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, imperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, future?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, perfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, pluperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, futurePerfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }> }>, passive?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, imperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, future?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, perfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, pluperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, futurePerfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }> }> }>, subjunctive?: Maybe<{ active?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, imperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, perfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, pluperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }> }>, passive?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, imperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, perfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }>, pluperfect?: Maybe<{ singular?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ first?: Maybe<Array<string>>, second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }> }> }>, imperative?: Maybe<{ active?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ second?: Maybe<Array<string>> }>, plural?: Maybe<{ second?: Maybe<Array<string>> }> }>, future?: Maybe<{ singular?: Maybe<{ second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }> }> }>, passive?: Maybe<{ present?: Maybe<{ singular?: Maybe<{ second?: Maybe<Array<string>> }>, plural?: Maybe<{ second?: Maybe<Array<string>> }> }>, future?: Maybe<{ singular?: Maybe<{ second?: Maybe<Array<string>>, third?: Maybe<Array<string>> }>, plural?: Maybe<{ third?: Maybe<Array<string>> }> }> }> }>, nonFinite?: Maybe<{ infinitive?: Maybe<{ active?: Maybe<{ present?: Maybe<Array<string>>, perfect?: Maybe<Array<string>>, future?: Maybe<Array<string>> }>, passive?: Maybe<{ present?: Maybe<Array<string>>, perfect?: Maybe<Array<string>>, future?: Maybe<Array<string>> }> }>, participle?: Maybe<{ active?: Maybe<{ present?: Maybe<Array<string>>, future?: Maybe<Array<string>> }>, passive?: Maybe<{ perfect?: Maybe<Array<string>>, future?: Maybe<Array<string>> }> }> }>, verbalNoun?: Maybe<{ gerund?: Maybe<{ genitive?: Maybe<Array<string>>, dative?: Maybe<Array<string>>, accusative?: Maybe<Array<string>>, ablative?: Maybe<Array<string>> }>, supine?: Maybe<{ accusative?: Maybe<Array<string>>, ablative?: Maybe<Array<string>> }> }> }> }> };
+
+export type SpeakQueryVariables = Exact<{
+  text: Scalars['String'];
+}>;
+
+
+export type SpeakQuery = { speak: string };
+
+export type DemacronizeQueryVariables = Exact<{
+  text: Scalars['String'];
+}>;
+
+
+export type DemacronizeQuery = { demacronize: string };
+
+export type MacronizeQueryVariables = Exact<{
+  text: Scalars['String'];
+}>;
+
+
+export type MacronizeQuery = { macronize: string };
 
 export type FacebookQueryVariables = Exact<{
   code: Scalars['String'];
@@ -1514,6 +1577,21 @@ ${AllAdjectiveForms}
 ${AllAdjectiveCase}
 ${AllAdjectiveNumber}
 ${AllAdverbForms}`;
+export const Speak = gql`
+    query Speak($text: String!) {
+  speak(text: $text)
+}
+    `;
+export const Demacronize = gql`
+    query Demacronize($text: String!) {
+  demacronize(text: $text)
+}
+    `;
+export const Macronize = gql`
+    query Macronize($text: String!) {
+  macronize(text: $text)
+}
+    `;
 export const Facebook = gql`
     query Facebook($code: String!) {
   facebook(code: $code) {
@@ -2500,6 +2578,66 @@ export const useSearchQuery = <
 useSearchQuery.getKey = (variables: SearchQueryVariables) => ['Search', variables];
 
 useSearchQuery.fetcher = (variables: SearchQueryVariables) => fetcher<SearchQuery, SearchQueryVariables>(SearchDocument, variables);
+export const SpeakDocument = `
+    query Speak($text: String!) {
+  speak(text: $text)
+}
+    `;
+export const useSpeakQuery = <
+      TData = SpeakQuery,
+      TError = unknown
+    >(
+      variables: SpeakQueryVariables, 
+      options?: UseQueryOptions<SpeakQuery, TError, TData>
+    ) => 
+    useQuery<SpeakQuery, TError, TData>(
+      ['Speak', variables],
+      fetcher<SpeakQuery, SpeakQueryVariables>(SpeakDocument, variables),
+      options
+    );
+useSpeakQuery.getKey = (variables: SpeakQueryVariables) => ['Speak', variables];
+
+useSpeakQuery.fetcher = (variables: SpeakQueryVariables) => fetcher<SpeakQuery, SpeakQueryVariables>(SpeakDocument, variables);
+export const DemacronizeDocument = `
+    query Demacronize($text: String!) {
+  demacronize(text: $text)
+}
+    `;
+export const useDemacronizeQuery = <
+      TData = DemacronizeQuery,
+      TError = unknown
+    >(
+      variables: DemacronizeQueryVariables, 
+      options?: UseQueryOptions<DemacronizeQuery, TError, TData>
+    ) => 
+    useQuery<DemacronizeQuery, TError, TData>(
+      ['Demacronize', variables],
+      fetcher<DemacronizeQuery, DemacronizeQueryVariables>(DemacronizeDocument, variables),
+      options
+    );
+useDemacronizeQuery.getKey = (variables: DemacronizeQueryVariables) => ['Demacronize', variables];
+
+useDemacronizeQuery.fetcher = (variables: DemacronizeQueryVariables) => fetcher<DemacronizeQuery, DemacronizeQueryVariables>(DemacronizeDocument, variables);
+export const MacronizeDocument = `
+    query Macronize($text: String!) {
+  macronize(text: $text)
+}
+    `;
+export const useMacronizeQuery = <
+      TData = MacronizeQuery,
+      TError = unknown
+    >(
+      variables: MacronizeQueryVariables, 
+      options?: UseQueryOptions<MacronizeQuery, TError, TData>
+    ) => 
+    useQuery<MacronizeQuery, TError, TData>(
+      ['Macronize', variables],
+      fetcher<MacronizeQuery, MacronizeQueryVariables>(MacronizeDocument, variables),
+      options
+    );
+useMacronizeQuery.getKey = (variables: MacronizeQueryVariables) => ['Macronize', variables];
+
+useMacronizeQuery.fetcher = (variables: MacronizeQueryVariables) => fetcher<MacronizeQuery, MacronizeQueryVariables>(MacronizeDocument, variables);
 export const FacebookDocument = `
     query Facebook($code: String!) {
   facebook(code: $code) {

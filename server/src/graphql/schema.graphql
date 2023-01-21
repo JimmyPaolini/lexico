@@ -259,14 +259,19 @@ type Query {
   book(id: String!): Book!
   bookmarks: [Entry!]!
   books: [Book!]!
+  capitalize(text: String!): String!
   customText(id: String!): CustomText!
   customTexts: [CustomText!]!
+  demacronize(text: String!): String!
   entries(ids: [String!]!): [Entry!]!
   entry(id: String!): Entry!
   facebook(code: String!): User!
   findText(author: String!, book: String, title: String!): Text!
   google(code: String!): User!
+  i2j(text: String!): String!
   logout: Boolean!
+  macronize(text: String!): String!
+  phonemes(text: String!): String!
   search(search: String!): [Entry!]!
   searchAuthors(search: String!): [Author!]!
   searchBooks(search: String!): [Book!]!
@@ -276,9 +281,11 @@ type Query {
   searchLiterature(search: String!): [Author!]!
   searchTexts(search: String!): [Text!]!
   settings: Settings!
+  speak(text: String!): String!
   text(id: String!): Text!
   textIds: [ID!]!
   texts: [Text!]!
+  u2v(text: String!): String!
   user: User
 }
 

@@ -6,10 +6,10 @@ import { FormikValues } from 'formik'
 
 import { sentenceCase } from 'src/utils/string'
 
-type Props = {
+type Props = ComponentProps<typeof TextField> & {
   formik: FormikValues
   name: string
-} & ComponentProps<typeof TextField>
+}
 
 const TextBox = forwardRef(
   (

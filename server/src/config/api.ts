@@ -11,6 +11,7 @@ import {
   LibraryResolver,
   UserResolver,
 } from '../resolver'
+import { WordResolver } from '../resolver/word'
 
 export async function initializeGraphqlApi(
   app: Express,
@@ -25,6 +26,7 @@ export async function initializeGraphqlApi(
         DictionaryResolver,
         LibraryResolver,
         UserResolver,
+        WordResolver,
       ],
       emitSchemaFile: path.join(process.cwd(), './src/graphql/schema.graphql'),
     }),

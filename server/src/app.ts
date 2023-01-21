@@ -4,9 +4,9 @@ import express from 'express'
 import 'reflect-metadata'
 
 import log from '../../utils/log'
-import { initializeGraphqlApi } from './utils/api'
-import { corsOptions } from './utils/cors'
-import { Database } from './utils/database'
+import { initializeGraphqlApi } from './config/api'
+import { corsOptions } from './config/cors'
+import { Database } from './config/database'
 
 async function main() {
   await Database.initialize()

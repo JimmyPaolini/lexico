@@ -8,9 +8,9 @@ import {
 } from 'type-graphql'
 
 import log from '../../../utils/log'
-import { Authenticate } from '../authentication/middleware'
+import { ResolverContext } from '../config/ResolverContext'
 import CustomText from '../entity/library/CustomText'
-import { ResolverContext } from '../utils/ResolverContext'
+import { Authenticate } from '../services/authentication/middleware'
 
 @Resolver(CustomText)
 export class CustomTextResolver {

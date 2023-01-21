@@ -7,10 +7,11 @@ import {
   UseMiddleware,
 } from 'type-graphql'
 
-import { Authenticate } from '../authentication/middleware'
+import { ResolverContext } from '../config/ResolverContext'
 import Entry from '../entity/dictionary/Entry'
 import User from '../entity/user/User'
-import { ResolverContext } from '../utils/ResolverContext'
+import { Authenticate } from '../services/authentication/middleware'
+import { Log } from '../services/log'
 
 @Resolver(Entry)
 export class BookmarkResolver {
@@ -32,6 +33,10 @@ export class BookmarkResolver {
 
   @Mutation(() => Boolean)
   @UseMiddleware(Authenticate)
+  @Log({
+    mapParams: (params) => params[0],
+    mapResult: (entries: Entry[]) => entries.map(({ id }) => id),
+  })
   async bookmark(
     @Arg('entryId') entryId: string,
     @Ctx() { user }: ResolverContext
@@ -52,6 +57,10 @@ export class BookmarkResolver {
 
   @Mutation(() => Boolean)
   @UseMiddleware(Authenticate)
+  @Log({
+    mapParams: (params) => params[0],
+    mapResult: (entries: Entry[]) => entries.map(({ id }) => id),
+  })
   async unbookmark(
     @Arg('entryId') entryId: string,
     @Ctx() { user }: ResolverContext

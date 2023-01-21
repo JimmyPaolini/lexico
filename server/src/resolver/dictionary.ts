@@ -1,29 +1,30 @@
-import { performance } from 'perf_hooks'
 import { Arg, Ctx, Query, Resolver, UseMiddleware } from 'type-graphql'
 import { In } from 'typeorm'
 
 import identifyEntryWord from '../../../utils/identifiers'
-import log from '../../../utils/log'
 import { hasSuffix } from '../../../utils/string'
-import { GetBookmarks } from '../authentication/middleware'
+import { ResolverContext } from '../config/ResolverContext'
+import { Database } from '../config/database'
 import Entry from '../entity/dictionary/Entry'
 import Translation from '../entity/dictionary/Translation'
 import Word from '../entity/dictionary/Word'
 import VerbForms from '../entity/dictionary/word/forms/VerbForms'
-import { ResolverContext } from '../utils/ResolverContext'
-import { Database } from '../utils/database'
-import { camelCaseFuturePerfect } from '../utils/forms'
+import { GetBookmarks } from '../services/authentication/middleware'
+import { camelCaseFuturePerfect } from '../services/forms'
+import { Log } from '../services/log'
 
 @Resolver(Entry)
 export class DictionaryResolver {
   @Query(() => [Entry])
   @UseMiddleware(GetBookmarks)
+  @Log({
+    mapParams: (params) => params[0],
+    mapResult: (entries: Entry[]) => entries.map(({ id }) => id),
+  })
   async search(
     @Arg('search') search: string,
     @Ctx() context: ResolverContext
   ): Promise<Entry[]> {
-    const t0 = performance.now()
-
     const [latinEntries, englishEntries] = await Promise.all([
       this.searchLatin(search, context),
       this.searchEnglish(search, context),
@@ -36,12 +37,6 @@ export class DictionaryResolver {
       ),
     ]
 
-    log.info('search', {
-      search,
-      responseTime: performance.now() - t0,
-      entries: entries.map(({ id }) => id),
-    })
-
     return entries
   }
 
@@ -51,7 +46,6 @@ export class DictionaryResolver {
     @Arg('search') search: string,
     @Ctx() { bookmarks }: ResolverContext
   ): Promise<Entry[]> {
-    const t0 = performance.now()
     if (!search?.match(/^-?(\w| )+\.?$/)) return []
 
     search = search.toLowerCase().trim()
@@ -73,12 +67,6 @@ export class DictionaryResolver {
         entry.isLatinSearchResult = true
         return entry
       })
-
-    log.info('searchLatin', {
-      search,
-      responseTime: performance.now() - t0,
-      entries: entriesProcessed.map(({ id }) => id),
-    })
 
     return entriesProcessed
   }
@@ -113,7 +101,6 @@ export class DictionaryResolver {
     @Arg('search') search: string,
     @Ctx() { bookmarks }: ResolverContext
   ): Promise<Entry[]> {
-    const t0 = performance.now()
     if (!search) return []
     search = search.trim()
 
@@ -142,21 +129,19 @@ export class DictionaryResolver {
           index === self.findIndex((duplicate) => duplicate.id === entry.id)
       )
 
-    log.info('searchEnglish', {
-      search,
-      responseTime: performance.now() - t0,
-      entries: entries.map(({ id }) => id),
-    })
-
     return entries
   }
 
   @Query(() => Entry)
+  @Log()
   async entry(@Arg('id') id: string): Promise<Entry> {
     return await Entry.findOneOrFail({ where: { id } })
   }
 
   @Query(() => [Entry])
+  @Log({
+    mapResult: (entries: Entry[]) => entries.map(({ id }) => id),
+  })
   async entries(@Arg('ids', () => [String]) ids: string[]): Promise<Entry[]> {
     return await Entry.find({ where: { id: In(ids) }, order: { id: 'ASC' } })
   }

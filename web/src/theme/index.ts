@@ -66,6 +66,16 @@ export const theme = createTheme({
         },
       },
     },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: themeInitial.spacing(2),
+          '&:last-child': {
+            paddingBottom: themeInitial.spacing(2),
+          },
+        },
+      },
+    },
     MuiCardActionArea: {
       styleOverrides: {
         focusHighlight: {
@@ -85,6 +95,20 @@ export const theme = createTheme({
         root: {
           textDecoration: 'none',
           color: 'inherit',
+        },
+      },
+    },
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        root: {
+          width: '100%',
+        },
+      },
+    },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          width: '100%',
         },
       },
     },

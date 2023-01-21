@@ -1,5 +1,7 @@
 import VerbForms from '../entity/dictionary/word/forms/VerbForms'
 import { IndicativeTense } from '../entity/dictionary/word/forms/verbForms/Indicative'
+import { dedupe } from './array'
+import { normalize } from './string'
 
 export function camelCaseFuturePerfect(forms: VerbForms): VerbForms {
   if (forms?.indicative?.active) {
@@ -23,4 +25,17 @@ export function camelCaseFuturePerfect(forms: VerbForms): VerbForms {
     }
   }
   return forms
+}
+
+export function getWordForms(word: string, forms: object | string[]): string[] {
+  if (Array.isArray(forms)) {
+    return forms.filter((form) => normalize(form) === normalize(word))
+  } else {
+    if (!forms || !Object.values(forms).length) return []
+    return dedupe(
+      Object.values(forms).flatMap((forms) =>
+        getWordForms(word, forms as object | string[])
+      )
+    )
+  }
 }

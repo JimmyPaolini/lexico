@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-import { FACEBOOK_ID, FACEBOOK_SECRET } from '../../../utils/env'
-import log from '../../../utils/log'
+import { FACEBOOK_ID, FACEBOOK_SECRET } from '../../../../utils/env'
+import log from '../../../../utils/log'
 
 export type FacebookProfile = {
   id: string

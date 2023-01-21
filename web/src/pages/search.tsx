@@ -27,13 +27,13 @@ export default function Search({ initialSearch }: Props) {
 
   const handleSearch = async (search: string) => {
     setSearch(search)
-    const hash = search ? '?search=' + search : ''
+    const queryString = search ? '?search=' + search : ''
     googleAnalyticsEvent('search', {
       category: 'search',
       label: '',
       value: search,
     })
-    await router.push(router.pathname + hash)
+    await router.push(router.pathname + queryString)
   }
 
   const Cards = entries.map((entry) => (
@@ -54,6 +54,7 @@ export default function Search({ initialSearch }: Props) {
         handleSearch={handleSearch}
         isLoading={isLoading && !!search}
         placeholder="Search Lexico"
+        audio
       >
         {!search ? (
           <Logo />

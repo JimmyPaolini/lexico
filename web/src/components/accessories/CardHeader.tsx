@@ -13,7 +13,11 @@ export const CardHeader = ({ title, ...props }: Props) => {
   return (
     <CardHeaderMui
       title={title}
-      titleTypographyProps={{ variant: 'h4', align: 'center' }}
+      titleTypographyProps={{
+        variant: 'h4',
+        align: 'center',
+        ...props.titleTypographyProps,
+      }}
       avatar={
         isMobile && (
           <IconButton
@@ -30,7 +34,7 @@ export const CardHeader = ({ title, ...props }: Props) => {
           <IconButton
             onClick={() => null}
             aria-label="empty space"
-            sx={{ marginTop: 8, marginRight: 8, visibility: 'hidden' }}
+            sx={{ visibility: 'hidden' }}
             size="large"
           >
             <Menu />
