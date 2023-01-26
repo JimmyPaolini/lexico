@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
 import { Bookmark, BookmarkBorder } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 
-import { Context } from 'src/components/layout/Context'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 
 import { isBookmarkedLocal, useToggleBookmark } from '..'
 
@@ -13,7 +13,7 @@ export const BookmarkButton = ({
   id,
   bookmarked: isBookmarkedRemote,
 }: Props) => {
-  const { user, queryClient } = useContext(Context)
+  const { user, queryClient } = useLexicoContext()
   const bookmarkedInitial = user ? isBookmarkedRemote : isBookmarkedLocal(id)
   const [bookmarked, setBookmarked] = useState<boolean>(bookmarkedInitial)
 

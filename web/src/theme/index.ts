@@ -60,10 +60,7 @@ export const theme = createTheme({
     },
     MuiCardHeader: {
       styleOverrides: {
-        root: {
-          paddingTop: themeInitial.spacing(1),
-          paddingBottom: themeInitial.spacing(1),
-        },
+        action: { margin: 'auto' },
       },
     },
     MuiCardContent: {

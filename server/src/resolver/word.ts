@@ -6,14 +6,12 @@ import { dedupe } from '../services/array'
 import { getWordForms } from '../services/forms'
 import { Log } from '../services/log'
 import { getClassicalPhonemes } from '../services/pronunciation/classical'
-import { speak } from '../services/pronunciation/polly'
+import { speech } from '../services/pronunciation/polly'
 import {
   combineMacronizedOptions,
-  i2j,
   normalize,
   textToTokens,
   textToWords,
-  u2v,
 } from '../services/string'
 
 @Resolver(Word)
@@ -52,7 +50,7 @@ export class WordResolver {
 
   /**
    *
-   * @param text macronized text
+   * @param text macronized
    * @returns text with words replaced by phonemes, ready to be spoken
    */
   @Query(() => String)
@@ -68,34 +66,15 @@ export class WordResolver {
     ).join('')
   }
 
+  /**
+   *
+   * @param text macronized
+   * @returns raw audio data, mp3 format and base64 encoded
+   */
   @Query(() => String)
   @Log({ logResult: false })
-  async speak(@Arg('text') text: string): Promise<string> {
+  async speech(@Arg('text') text: string): Promise<string> {
     const phonemes = await this.phonemes(text)
-    return await speak(phonemes)
-  }
-
-  @Query(() => String)
-  @Log()
-  demacronize(@Arg('text') text: string) {
-    return normalize(text)
-  }
-
-  @Query(() => String)
-  @Log()
-  async u2v(@Arg('text') text: string): Promise<string> {
-    return u2v(text)
-  }
-
-  @Query(() => String)
-  @Log()
-  async i2j(@Arg('text') text: string): Promise<string> {
-    return i2j(text)
-  }
-
-  @Query(() => String)
-  @Log()
-  async capitalize(@Arg('text') text: string): Promise<string> {
-    return text.toUpperCase()
+    return await speech(phonemes)
   }
 }

@@ -1,2 +1,2 @@
 export { AdjectiveDeclensionCard } from './AdjectiveDeclensionCard'
-export { adjectiveDeclensions } from './adjectiveDeclensions'
+export { adjectiveDeclensionCardsData } from './AdjectiveDeclensionCard.constants'

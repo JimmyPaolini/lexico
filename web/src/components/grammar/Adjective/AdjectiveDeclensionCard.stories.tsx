@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { AdjectiveDeclensionCard } from './AdjectiveDeclensionCard'
-import { adjectiveDeclensions } from './adjectiveDeclensions'
+import { adjectiveDeclensionCardsData } from './AdjectiveDeclensionCard.constants'
 
 export default {
   title: 'Cards/Grammar/AdjectiveDeclensionCard',
@@ -12,14 +12,14 @@ export const FirstSecond: ComponentStory<
   typeof AdjectiveDeclensionCard
 > = () => (
   <AdjectiveDeclensionCard
-    declension={adjectiveDeclensions[0]}
+    declension={adjectiveDeclensionCardsData[0]}
     expandedInitial
   />
 )
 
 export const Third: ComponentStory<typeof AdjectiveDeclensionCard> = () => (
   <AdjectiveDeclensionCard
-    declension={adjectiveDeclensions[1]}
+    declension={adjectiveDeclensionCardsData[1]}
     expandedInitial
   />
 )
@@ -28,7 +28,7 @@ export const Comparative: ComponentStory<
   typeof AdjectiveDeclensionCard
 > = () => (
   <AdjectiveDeclensionCard
-    declension={adjectiveDeclensions[2]}
+    declension={adjectiveDeclensionCardsData[2]}
     expandedInitial
   />
 )

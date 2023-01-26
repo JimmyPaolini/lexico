@@ -35,10 +35,10 @@ export default function About() {
             <Divider sx={{ margin: theme.spacing(1) }} />
             <Typography variant="body1" sx={{ padding: theme.spacing(1) }}>
               I love reading and writing Latin, so I built Lexico to help others
-              enjoy Latin through a user-friendly dictionary and literature
+              enjoy Latin through a user-friendly dictionary and reader
               interface. As with all things it is a work ever in progress, so as
-              long as folks use it I’ll be striving to improve it. Contact me
-              below if you&apos;d like to get involved!
+              long as folks use it I’ll be working to improve it. If you&apos;d
+              like to get involved, contact me on GitHub!
             </Typography>
             <Divider sx={{ margin: theme.spacing(1) }} />
             <ToolIconGrid />

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
 import { ChevronLeft, Menu } from '@mui/icons-material'
 import {
@@ -12,14 +12,15 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { Context } from '../Context'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
+
 import { Pages } from './Pages'
 
 type Props = { page?: string }
 
 export const Navigation = ({ page: initialPage }: Props) => {
   const theme = useTheme()
-  const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
+  const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useLexicoContext()
   const [selectedPage, setSelectedPage] = useState(initialPage ?? 'search')
 
   const drawerOpenStyles = {

@@ -1,13 +1,11 @@
-import { useContext } from 'react'
-
-import { Context } from 'src/components/layout/Context'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { Entry } from 'src/graphql/generated'
 
 import { useBookmarksLocal } from './useBookmarksLocal'
 import { useBookmarksRemote } from './useBookmarksRemote'
 
 export const useBookmarks = () => {
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
 
   const {
     bookmarks: remoteBookmarks,

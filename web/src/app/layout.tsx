@@ -14,8 +14,8 @@ import { theme } from 'src/theme'
 import { createEmotionCache } from 'src/theme/createEmotionCache'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 
-import { ContextProvider } from '../components/layout/Context'
 import { Layout } from '../components/layout/Layout'
+import { ContextProvider } from '../components/layout/LexicoContext'
 
 export const clientEndpoint =
   process.env.NEXT_ENV === 'build'

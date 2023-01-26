@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles'
 
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-import { Context } from 'src/components/layout/Context'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { ReaderLoading } from 'src/components/reader/ReaderLoading'
 import { SearchModal } from 'src/components/reader/SearchModal'
 import { Text } from 'src/components/reader/Text'
@@ -30,7 +30,7 @@ export default function Reader({ text }: Props) {
   const router = useRouter()
   if (router.isFallback) return <ReaderLoading />
 
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
 
   const [searched, setSearched] = useState<string>('')
   const [open, setOpen] = useState<boolean>(false)

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Menu from '@mui/icons-material/Menu'
 import Search from '@mui/icons-material/Search'
@@ -11,8 +11,7 @@ import {
   useTheme,
 } from '@mui/material'
 
-import { SpeakIconButton } from '../accessories/SpeakIconButton'
-import { Context } from '../layout/Context'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 
 type Props = {
   initialSearch?: string
@@ -27,10 +26,9 @@ export const SearchBar = ({
   handleSearch,
   isLoading = false,
   placeholder = 'Search',
-  audio,
 }: Props) => {
   const theme = useTheme()
-  const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
+  const { isMobile, isNavOpen, setNavOpen } = useLexicoContext()
   const [search, setSearch] = useState(initialSearch)
   useEffect(() => {
     if (search === '') handleSearch('')
@@ -81,7 +79,6 @@ export const SearchBar = ({
             />
           )}
         </IconButton>
-        {audio && <SpeakIconButton text={search} />}
       </Grid>
     </Card>
   )

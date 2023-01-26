@@ -1,10 +1,8 @@
-import { useContext } from 'react'
-
-import { Context } from 'src/components/layout/Context'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { Entry, useBookmarksQuery } from 'src/graphql/generated'
 
 export const useBookmarksRemote = () => {
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
 
   const { data, isLoading, isSuccess } = useBookmarksQuery(
     {},

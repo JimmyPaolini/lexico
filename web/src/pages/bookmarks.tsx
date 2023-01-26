@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import Head from 'next/head'
 
@@ -13,17 +13,17 @@ import {
   BookmarkInstructions,
   useBookmarkInstructions,
 } from 'src/components/bookmarks/BookmarkInstructions'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { useBookmarksQuery } from 'src/graphql/generated'
 import { identifyEntryWord } from 'src/utils/identifiers'
 
 import { Entry } from '../components/Entry/Entry'
 import { filterBookmarks } from '../components/bookmarks/BookmarkButton'
-import { Context } from '../components/layout/Context'
 import { Deck } from '../components/layout/Deck'
 import { SearchBarLayout } from '../components/layout/SearchBarLayout'
 
 export default function Bookmarks() {
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
 
   const [search, setSearch] = useState<string>('')
 

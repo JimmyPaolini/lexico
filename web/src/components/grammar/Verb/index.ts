@@ -1,2 +1,2 @@
 export { VerbConjugationCard } from './VerbConjugationCard'
-export { verbConjugations } from './verbConjugations'
+export { verbConjugationCardsData } from './VerbConjugationCard.constants'

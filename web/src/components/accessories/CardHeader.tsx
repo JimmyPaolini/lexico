@@ -1,14 +1,14 @@
-import { ComponentProps, useContext } from 'react'
+import { ComponentProps } from 'react'
 
 import { Menu } from '@mui/icons-material'
 import { CardHeader as CardHeaderMui, IconButton } from '@mui/material'
 
-import { Context } from '../layout/Context'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 
 type Props = { title: string } & ComponentProps<typeof CardHeaderMui>
 
 export const CardHeader = ({ title, ...props }: Props) => {
-  const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
+  const { isMobile, isNavOpen, setNavOpen } = useLexicoContext()
 
   return (
     <CardHeaderMui
@@ -17,6 +17,10 @@ export const CardHeader = ({ title, ...props }: Props) => {
         variant: 'h4',
         align: 'center',
         ...props.titleTypographyProps,
+      }}
+      subheaderTypographyProps={{
+        align: 'center',
+        ...props.subheaderTypographyProps,
       }}
       avatar={
         isMobile && (

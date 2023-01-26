@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
 import {
   CardActionArea,
@@ -10,6 +10,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
 import {
   AdjectiveForms,
@@ -21,7 +22,6 @@ import { Identifier } from 'src/utils/identifiers'
 
 import { ExpandIcon } from '../../accessories/ExpandIcon'
 import { IdentifierPill } from '../../accessories/Pills/IdentifierPill'
-import { Context } from '../../layout/Context'
 import { AdjectiveFormsTable } from './PartsOfSpeech/AdjectiveFormsTable'
 import { NounFormsTable } from './PartsOfSpeech/NounFormsTable'
 import { VerbFormsTable } from './PartsOfSpeech/VerbFormsTable'
@@ -40,7 +40,7 @@ export const Forms = ({
   identifiers: identifiersList = [],
 }: Props) => {
   const theme = useTheme()
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
   const expandedInitial =
     user?.settings?.formsExpandedDefault ||
     getSettingsLocal().formsExpandedDefault ||

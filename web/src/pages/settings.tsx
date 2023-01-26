@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import Head from 'next/head'
 
@@ -10,11 +10,11 @@ import { GetServerSideProps } from 'next'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
 
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { shouldShowSettingsInstructions } from 'src/components/user/settings/settingsLocal'
 import { UserDocument, useUserQuery } from 'src/graphql/generated'
 import { useSnackbar } from 'src/hooks/useSnackbar'
 
-import { Context } from '../components/layout/Context'
 import { Deck } from '../components/layout/Deck'
 import { SingleCardLayout } from '../components/layout/SingleCardLayout'
 import { LoginCard } from '../components/user/login/LoginCard'
@@ -23,7 +23,7 @@ import { serverEndpoint } from './api'
 
 export default function Settings() {
   const theme = useTheme()
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
   const enqueueSnackbar = useSnackbar()
   useEffect(() => {
     if (!user && shouldShowSettingsInstructions()) {
@@ -36,7 +36,7 @@ export default function Settings() {
   return (
     <div>
       <Head>
-        <title>Lexico - User</title>
+        <title>Lexico - Settings</title>
       </Head>
       {!user ? (
         <Grid

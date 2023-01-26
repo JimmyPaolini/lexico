@@ -1,12 +1,10 @@
-import { useContext } from 'react'
-
-import { Context } from 'src/components/layout/Context'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { Entry, useEntriesQuery } from 'src/graphql/generated'
 
 import { getBookmarksLocal } from './getBookmarksLocal'
 
 export const useBookmarksLocal = () => {
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
 
   const { data, isLoading, isSuccess } = useEntriesQuery(
     { ids: getBookmarksLocal() },

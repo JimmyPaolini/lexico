@@ -1,9 +1,8 @@
-import { useContext } from 'react'
-
 import { Divider, Typography } from '@mui/material'
 
 import { useFormik } from 'formik'
 
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import {
   getSettingsLocal,
   setSettingsLocal,
@@ -12,12 +11,11 @@ import {
 import { Settings, useSetSettingsMutation } from 'src/graphql/generated'
 import { useSnackbar } from 'src/hooks/useSnackbar'
 
-import { Context } from '../../layout/Context'
 import { SettingsSlider } from './SettingsSlider'
 import { SettingsSwitch } from './SettingsSwitch'
 
 export const SettingsForm = () => {
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
 
   const enqueueSnackbar = useSnackbar()
   const formik = useFormik({

@@ -1,17 +1,15 @@
-import { useContext } from 'react'
-
 import { CardContent, Divider, List, useTheme } from '@mui/material'
 
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { useCustomTexts } from 'src/components/library/CustomTextsCard/CustomTexts/useCustomTexts'
 
-import { Context } from '../../../layout/Context'
 import { CustomText } from './CustomText'
 import { CustomTextsError } from './CustomTextsError'
 import { CustomTextsLoading } from './CustomTextsLoading'
 
 export const CustomTexts = () => {
   const theme = useTheme()
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
   const { customTexts, refreshCustomTexts, isLoading, isError } =
     useCustomTexts()
 

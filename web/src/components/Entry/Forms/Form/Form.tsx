@@ -41,7 +41,7 @@ export const Form = ({
 
   return (
     <Tooltip
-      title={centerText?.length > 20 ? centerText : ''}
+      title={centerText?.length > 38 ? centerText : ''}
       placement="top"
       enterDelay={0}
       arrow

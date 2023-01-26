@@ -11,8 +11,7 @@ type Card = JSX.Element
 
 type Props = { Cards: Card[] }
 
-const getCardKey = (Card: Card): string =>
-  Card.props?.entry?.id ?? JSON.stringify(Card.props)
+const getCardKey = (Card: Card): string => Card.props?.entry?.id ?? Card.key
 
 const getCardsKey = (Cards: Card[]): string =>
   Cards.map((Card) => getCardKey(Card)).join()

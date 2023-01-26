@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-import { Context, LexicoContext } from 'src/components/layout/Context'
+import { LexicoContext } from 'src/components/layout/LexicoContext'
 import {
   CustomText,
   CustomTextsQuery,
@@ -71,13 +71,13 @@ User.decorators = [
     } as CustomTextsQuery)
     return (
       <QueryClientProvider client={queryClient}>
-        <Context.Provider
+        <LexicoContext.Provider
           value={
             { user: { id: 'a' } as UserGql, isMobile: false } as LexicoContext
           }
         >
           <Story />
-        </Context.Provider>
+        </LexicoContext.Provider>
       </QueryClientProvider>
     )
   },
@@ -89,13 +89,13 @@ export const Loading: ComponentStory<typeof CustomTextsCard> = () => (
 Loading.decorators = [
   (Story) => {
     return (
-      <Context.Provider
+      <LexicoContext.Provider
         value={
           { user: { id: 'a' } as UserGql, isMobile: false } as LexicoContext
         }
       >
         <Story />
-      </Context.Provider>
+      </LexicoContext.Provider>
     )
   },
 ]

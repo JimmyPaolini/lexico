@@ -1,58 +1,40 @@
-import { useState } from 'react'
-
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  Collapse,
-  Divider,
-  Typography,
-} from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { Card, Divider } from '@mui/material'
 
 import { NounFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/NounFormsTable'
-import { PrincipalParts } from 'src/components/Entry/PrincipalParts/PrincipalParts'
+import { NounForms } from 'src/graphql/generated'
 
-import { nounDeclensions } from './nounDeclensions'
+import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
+import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
 
 type Props = {
-  declension: typeof nounDeclensions[0]
-  expandedInitial: boolean
+  expandedInitial?: boolean
+  id: string
+  title: string
+  description: string
+  forms: NounForms
 }
 
 export const NounDeclensionCard = ({
-  declension,
-  expandedInitial = false,
+  expandedInitial,
+  id,
+  title,
+  description,
+  forms,
 }: Props) => {
-  const theme = useTheme()
-  const [expanded, setExpanded] = useState<boolean>(expandedInitial)
-
   return (
-    <Card>
-      <CardActionArea
-        onClick={() => setExpanded((expanded) => !expanded)}
-        disableRipple
-        disableTouchRipple
+    <Card key={id}>
+      <CollapsibleCardHeader
+        expandedInitial={expandedInitial}
+        title={title}
+        subheader={description}
+        avatar={<PartOfSpeech partOfSpeech="noun" />}
+        cardContentProps={{
+          sx: { padding: 0, '&:last-child': { padding: 0 } },
+        }}
       >
-        <PrincipalParts {...{ ...declension, expanded }} />
-      </CardActionArea>
-      <Collapse in={expanded}>
-        <CardContent
-          sx={{
-            padding: 0,
-            '&:last-child': {
-              padding: 0,
-            },
-          }}
-        >
-          <Divider variant="middle" />
-          <Typography align="center" sx={{ margin: theme.spacing(2) }}>
-            {declension.info}
-          </Typography>
-          <Divider variant="middle" />
-          <NounFormsTable {...declension} />
-        </CardContent>
-      </Collapse>
+        <Divider variant="middle" />
+        <NounFormsTable forms={forms} />
+      </CollapsibleCardHeader>
     </Card>
   )
 }

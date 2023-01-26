@@ -1,6 +1,6 @@
 import { getMacronOptionRegex } from 'src/utils/string'
 
-import { GrammarCards } from './useGrammarCards'
+import { GrammarCards } from './GrammarCards.constants'
 
 export const filterGrammarCards = (
   Cards: typeof GrammarCards,

@@ -2,7 +2,7 @@ import { Paper } from '@mui/material'
 
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { Context, LexicoContext } from 'src/components/layout/Context'
+import { LexicoContext, LexicoContext } from 'src/components/layout/LexicoContext'
 import { User as UserGql } from 'src/graphql/generated'
 
 import { CustomText } from './CustomText'
@@ -44,10 +44,10 @@ User.args = {
 }
 User.decorators = [
   (Story) => (
-    <Context.Provider
+    <LexicoContext.Provider
       value={{ user: {} as UserGql, isMobile: false } as LexicoContext}
     >
       <Story />
-    </Context.Provider>
+    </LexicoContext.Provider>
   ),
 ]

@@ -1,10 +1,9 @@
-import { Box, CardHeader } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { CardHeader } from '@mui/material'
 
 import { Inflection, Maybe, PrincipalPart } from 'src/graphql/generated'
 import { unCamelCase } from 'src/utils/string'
 
-import { ExpandIcon } from '../../accessories/ExpandIcon'
+import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
 import { BookmarkButton } from '../../bookmarks/BookmarkButton'
 import { inflectionToString } from './inflectionToString'
 
@@ -14,7 +13,6 @@ type Props = {
   principalParts: Maybe<PrincipalPart[]> | undefined
   inflection: Inflection | null | undefined
   bookmarked?: Maybe<boolean>
-  expanded?: boolean
 }
 
 export const PrincipalParts = ({
@@ -23,9 +21,7 @@ export const PrincipalParts = ({
   principalParts,
   inflection,
   bookmarked,
-  expanded,
 }: Props) => {
-  const theme = useTheme()
   const principalPartsFormatted = principalParts
     ?.map((principalPart) => principalPart.text.join('/'))
     .join(', ')
@@ -38,24 +34,11 @@ export const PrincipalParts = ({
   return (
     <CardHeader
       title={principalPartsFormatted}
-      titleTypographyProps={{ variant: 'subtitle1' }}
+      titleTypographyProps={{ variant: 'h5' }}
       subheader={subheader}
-      subheaderTypographyProps={{ variant: 'subtitle2' }}
-      aria-label="Principal Parts, Inflection, and Bookmark toggle"
-      action={
-        expanded === undefined ? (
-          <BookmarkButton {...{ id, bookmarked: Boolean(bookmarked) }} />
-        ) : (
-          <Box
-            sx={{
-              marginTop: theme.spacing(2.5),
-              marginRight: theme.spacing(1.5),
-            }}
-          >
-            <ExpandIcon expanded={expanded} />
-          </Box>
-        )
-      }
+      avatar={<PartOfSpeech partOfSpeech={partOfSpeech} />}
+      action={<BookmarkButton {...{ id, bookmarked: Boolean(bookmarked) }} />}
+      aria-label="Principal Parts and Inflection"
     />
   )
 }

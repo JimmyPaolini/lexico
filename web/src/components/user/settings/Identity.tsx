@@ -1,11 +1,9 @@
-import { useContext } from 'react'
-
 import { Typography } from '@mui/material'
 
-import { Context } from '../../layout/Context'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 
 export const Identity = () => {
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
   const provider = user?.googleId
     ? 'Google'
     : user?.facebookId

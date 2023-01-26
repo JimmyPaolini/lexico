@@ -1,8 +1,7 @@
-import { useContext } from 'react'
-
 import { Card, CardContent, Divider, Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import {
   useLogoutQuery,
   useUnregisterMutation,
@@ -11,13 +10,12 @@ import {
 
 import { CardHeader } from '../../accessories/CardHeader'
 import { SubmitButton } from '../../accessories/SubmitButton'
-import { Context } from '../../layout/Context'
 import { Identity } from './Identity'
 import { SettingsForm } from './SettingsForm'
 
 export const SettingsCard = () => {
   const theme = useTheme()
-  const { user, queryClient } = useContext(Context)
+  const { user, queryClient } = useLexicoContext()
 
   const { refetch: logout } = useLogoutQuery(
     {},

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { VerbConjugationCard } from './VerbConjugationCard'
-import { verbConjugations } from './verbConjugations'
+import { verbConjugationCardsData } from './VerbConjugationCard.constants'
 
 export default {
   title: 'Cards/Grammar/VerbConjugationCard',
@@ -9,21 +9,36 @@ export default {
 } as ComponentMeta<typeof VerbConjugationCard>
 
 export const First: ComponentStory<typeof VerbConjugationCard> = () => (
-  <VerbConjugationCard conjugation={verbConjugations[0]} expandedInitial />
+  <VerbConjugationCard
+    conjugation={verbConjugationCardsData[0]}
+    expandedInitial
+  />
 )
 
 export const Second: ComponentStory<typeof VerbConjugationCard> = () => (
-  <VerbConjugationCard conjugation={verbConjugations[2]} expandedInitial />
+  <VerbConjugationCard
+    conjugation={verbConjugationCardsData[2]}
+    expandedInitial
+  />
 )
 
 export const Third: ComponentStory<typeof VerbConjugationCard> = () => (
-  <VerbConjugationCard conjugation={verbConjugations[3]} expandedInitial />
+  <VerbConjugationCard
+    conjugation={verbConjugationCardsData[3]}
+    expandedInitial
+  />
 )
 
 export const ThirdIStem: ComponentStory<typeof VerbConjugationCard> = () => (
-  <VerbConjugationCard conjugation={verbConjugations[4]} expandedInitial />
+  <VerbConjugationCard
+    conjugation={verbConjugationCardsData[4]}
+    expandedInitial
+  />
 )
 
 export const Fourth: ComponentStory<typeof VerbConjugationCard> = () => (
-  <VerbConjugationCard conjugation={verbConjugations[5]} expandedInitial />
+  <VerbConjugationCard
+    conjugation={verbConjugationCardsData[5]}
+    expandedInitial
+  />
 )

@@ -1,24 +1,22 @@
-import { useContext } from 'react'
-
 import Menu from '@mui/icons-material/Menu'
 import { Grid, IconButton, Typography, useTheme } from '@mui/material'
 
 import { useFormik } from 'formik'
 import { v4 as uuid } from 'uuid'
 
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { createCustomTextLocal } from 'src/components/library/CustomTextsCard/CustomTexts'
 import { CustomText, useCreateCustomTextMutation } from 'src/graphql/generated'
 
 import { Link } from '../../accessories/Link'
 import { SubmitButton } from '../../accessories/SubmitButton'
 import { TextBox } from '../../accessories/TextBox'
-import { Context } from '../../layout/Context'
 import { validateCustomText } from './validateCustomText'
 
 type Props = { text?: CustomText }
 
 export const CustomTextForm = ({ text }: Props) => {
-  const { isMobile, isNavOpen, setNavOpen } = useContext(Context)
+  const { isMobile, isNavOpen, setNavOpen } = useLexicoContext()
   const theme = useTheme()
 
   // const router = useRouter()

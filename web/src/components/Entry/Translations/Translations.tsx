@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
 import {
   CardActionArea,
@@ -8,18 +8,18 @@ import {
   useTheme,
 } from '@mui/material'
 
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { Entry } from 'src/components/search/useSearch'
 import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
 
 import { ExpandIcon } from '../../accessories/ExpandIcon'
-import { Context } from '../../layout/Context'
 import { Translation } from './Translation'
 
 type Props = { translations: Entry['translations'] }
 
 export const Translations = ({ translations }: Props) => {
   const theme = useTheme()
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
   const [expanded, setExpanded] = useState<boolean>(
     user?.settings?.translationsExpandedDefault ||
       getSettingsLocal().translationsExpandedDefault ||

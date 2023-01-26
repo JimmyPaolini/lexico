@@ -1,51 +1,40 @@
-import { useState } from 'react'
-
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  Collapse,
-  Divider,
-} from '@mui/material'
+import { Card, Divider } from '@mui/material'
 
 import { VerbFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/VerbFormsTable'
-import { PrincipalParts } from 'src/components/Entry/PrincipalParts/PrincipalParts'
+import { VerbForms } from 'src/graphql/generated'
 
-import { verbConjugations } from './verbConjugations'
+import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
+import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
 
 type Props = {
-  conjugation: typeof verbConjugations[0]
   expandedInitial?: boolean
+  id: string
+  title: string
+  description: string
+  forms: VerbForms
 }
 
 export const VerbConjugationCard = ({
-  conjugation,
   expandedInitial = false,
+  id,
+  title,
+  description,
+  forms,
 }: Props) => {
-  const [expanded, setExpanded] = useState<boolean>(expandedInitial)
-
   return (
-    <Card>
-      <CardActionArea
-        onClick={() => setExpanded((expanded) => !expanded)}
-        disableRipple
-        disableTouchRipple
+    <Card key={id}>
+      <CollapsibleCardHeader
+        expandedInitial={expandedInitial}
+        title={title}
+        subheader={description}
+        avatar={<PartOfSpeech partOfSpeech="verb" />}
+        cardContentProps={{
+          sx: { padding: 0, '&:last-child': { padding: 0 } },
+        }}
       >
-        <PrincipalParts {...{ ...conjugation, expanded }} />
-      </CardActionArea>
-      <Collapse in={expanded}>
-        <CardContent
-          sx={{
-            padding: 0,
-            '&:last-child': {
-              padding: 0,
-            },
-          }}
-        >
-          <Divider variant="middle" />
-          <VerbFormsTable {...conjugation} />
-        </CardContent>
-      </Collapse>
+        <Divider variant="middle" />
+        <VerbFormsTable forms={forms} />
+      </CollapsibleCardHeader>
     </Card>
   )
 }

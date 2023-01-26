@@ -4,7 +4,7 @@ import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { Deck } from '../components/layout/Deck'
-import { Tools } from '../components/tools'
+import { Tools } from '../components/tools/Tools'
 
 export default function Settings() {
   const theme = useTheme()
@@ -19,7 +19,7 @@ export default function Settings() {
         justifyContent="center"
         sx={{ marginTop: theme.spacing(4) }}
       >
-        <Deck Cards={[<Tools key="Tools" />]} />
+        <Deck Cards={[<Tools key="tools" />]} />
       </Grid>
     </div>
   )

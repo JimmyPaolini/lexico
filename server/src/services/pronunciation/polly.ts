@@ -2,7 +2,7 @@ import { PollyClient, SynthesizeSpeechCommand } from '@aws-sdk/client-polly'
 
 export const polly = new PollyClient({ region: 'us-east-1' })
 
-export async function speak(phonemes: string) {
+export async function speech(phonemes: string) {
   console.log('🐋 ~ phonemes', phonemes)
   const synthesizeSpeechCommandOutput = await polly.send(
     new SynthesizeSpeechCommand({
@@ -11,7 +11,7 @@ export async function speak(phonemes: string) {
       VoiceId: 'Pedro',
       OutputFormat: 'mp3',
       TextType: 'ssml',
-      Text: `<phoneme alphabet="ipa" ph="${phonemes}"/>`,
+      Text: `<prosody rate="x-slow"><phoneme alphabet="ipa" ph="${phonemes}"/></prosody>`,
     })
   )
   const audioStream = synthesizeSpeechCommandOutput.AudioStream

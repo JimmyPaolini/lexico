@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 import {
   ListItem,
@@ -8,9 +8,9 @@ import {
 } from '@mui/material'
 
 import { Link } from 'src/components/accessories/Link'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { capitalizeFirstLetter } from 'src/utils/string'
 
-import { Context } from '../Context'
 import { PAGES } from './Pages.constants'
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 }
 
 export const Pages = ({ selectedPage, setSelectedPage }: Props) => {
-  const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useContext(Context)
+  const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useLexicoContext()
 
   const handleSelection = (page: string): void => {
     setSelectedPage(page)
@@ -30,7 +30,7 @@ export const Pages = ({ selectedPage, setSelectedPage }: Props) => {
     <>
       {PAGES.map(({ name, Icon }) => (
         <Link href={'/' + name} key={name} prefetch={false}>
-          <ListItem sx={{ padding: 0 }}>
+          <ListItem sx={{ padding: 0 }} key={name}>
             <ListItemButton
               selected={selectedPage === name}
               onClick={() => handleSelection(name)}

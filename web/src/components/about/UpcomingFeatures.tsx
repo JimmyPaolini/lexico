@@ -1,24 +1,19 @@
 import { Launch } from '@mui/icons-material'
-import { CardActionArea, CardHeader } from '@mui/material'
-import { useTheme } from '@mui/material/styles'
+import { CardHeader } from '@mui/material'
 
 import packageJson from '../../../../package.json'
+import { Link } from '../accessories/Link'
 
 export const UpcomingFeatures = () => {
-  const theme = useTheme()
+  const href = 'https://github.com/JimmyPaolini/Lexico/issues'
   return (
-    <CardActionArea
-      disableRipple
-      disableTouchRipple
-      href="https://github.com/JimmyPaolini/Lexico/issues"
-      target="_blank"
-    >
+    <Link href={href} target="_blank">
       <CardHeader
-        title={`Upcoming Releases (current v${packageJson.version})`}
-        titleTypographyProps={{ variant: 'body1' }}
-        sx={{ padding: `0px ${theme.spacing(1)} 0px ${theme.spacing(1)}` }}
-        action={<Launch sx={{ margin: '20px 20px 12px 12px' }} />}
+        title={`Releases (current v${packageJson.version})`}
+        titleTypographyProps={{ variant: 'h5' }}
+        action={<Launch />}
+        sx={{ '& .MuiCardHeader-action': { margin: 'auto' } }}
       />
-    </CardActionArea>
+    </Link>
   )
 }

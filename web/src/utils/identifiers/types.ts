@@ -24,7 +24,6 @@ export type Tense =
 export type NonFinite = 'participle' | 'gerund/supine' | 'gerund' | 'supine'
 export type Voice = 'active' | 'passive'
 export type Person = 'first' | 'second' | 'third'
-
 export type Identifier =
   | Case
   | Gender
@@ -57,7 +56,6 @@ export type TenseAbbreviation =
 export type NonFiniteAbbreviation = 'PART' | 'GER/SUP' | 'GER' | 'SUP'
 export type VoiceAbbreviation = 'ACT' | 'PAS'
 export type PersonAbbreviation = '1' | '2' | '3'
-
 export type IdentifierAbbreviation =
   | CaseAbbreviation
   | GenderAbbreviation

@@ -10,8 +10,8 @@ export const PAGES = [
   { name: 'search', Icon: <Search fontSize="large" /> },
   { name: 'bookmarks', Icon: <Bookmark fontSize="large" /> },
   { name: 'library', Icon: <MenuBook fontSize="large" /> },
-  { name: 'tools', Icon: <Construction fontSize="large" /> },
   { name: 'grammar', Icon: <Edit fontSize="large" /> },
+  { name: 'tools', Icon: <Construction fontSize="large" /> },
   { name: 'settings', Icon: <Settings fontSize="large" /> },
   { name: 'about', Icon: <AccountBalance fontSize="large" /> },
 ]

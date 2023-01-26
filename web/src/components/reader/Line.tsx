@@ -1,22 +1,20 @@
-import { useContext } from 'react'
-
 import { Divider, Grid, Skeleton, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import LazyLoad from 'react-lazyload'
 
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
 import { Line as ReaderLine } from 'src/graphql/generated'
 import { normalize } from 'src/utils/string'
 
-import { Context } from '../layout/Context'
 import { Word } from './Word'
 
 type Props = { line: ReaderLine; openModal: (word: string) => void }
 
 export const Line = ({ line, openModal }: Props) => {
   const theme = useTheme()
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
   const words = normalize(line.line).match(/\w+|\W+/gi)
   const lineLabelFontSize =
     ((user?.settings?.fontSize || getSettingsLocal().fontSize) as number) - 3

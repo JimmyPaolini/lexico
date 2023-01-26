@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction, useContext } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 import { Menu as MenuMui } from '@mui/material'
 
-import { Context } from 'src/components/layout/Context'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { CustomText } from 'src/graphql/generated'
 
 import { Delete, Edit, MoveToLocal, MoveToUser } from './Actions'
@@ -20,7 +20,7 @@ export const Menu = ({
   anchor,
   setAnchor,
 }: Props) => {
-  const { user } = useContext(Context)
+  const { user } = useLexicoContext()
   const closeMenu = () => setAnchor(null)
 
   return (
