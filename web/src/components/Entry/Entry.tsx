@@ -8,9 +8,9 @@ import { Forms } from './Forms/Forms'
 import { PrincipalParts } from './PrincipalParts/PrincipalParts'
 import { Translations } from './Translations/Translations'
 
-type Props = { entry: EntryType; searched: string }
+type Props = { entry: EntryType; search: string }
 
-export const Entry = ({ entry, searched = '' }: Props) => {
+export const Entry = ({ entry, search = '' }: Props) => {
   const theme = useTheme()
   const {
     id,
@@ -42,7 +42,7 @@ export const Entry = ({ entry, searched = '' }: Props) => {
       <Forms
         partOfSpeech={partOfSpeech}
         forms={forms}
-        searched={searched}
+        search={search}
         identifiers={identifiers || []}
       />
     </Card>

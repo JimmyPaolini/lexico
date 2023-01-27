@@ -23,7 +23,7 @@ type Props = {
   topRightText?: Identifier
   bottomLeftText?: Identifier
   bottomRightText?: Identifier
-  searched?: string
+  search?: string
 }
 
 export const Form = ({
@@ -33,11 +33,11 @@ export const Form = ({
   topRightText,
   bottomLeftText,
   bottomRightText,
-  searched,
+  search,
 }: Props) => {
   const theme = useTheme()
   const border = '0.5px solid rgba(255, 255, 255, 0.12)'
-  const isSearched = normalize(centerText) === searched
+  const isSearched = normalize(centerText) === search
 
   return (
     <Tooltip

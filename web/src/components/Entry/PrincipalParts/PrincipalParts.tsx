@@ -43,7 +43,7 @@ export const PrincipalParts = ({
   return (
     <CardHeader
       title={principalPartsFormatted}
-      titleTypographyProps={{ variant: 'h5' }}
+      titleTypographyProps={{ variant: 'body1' }}
       subheader={subheader}
       avatar={
         <>

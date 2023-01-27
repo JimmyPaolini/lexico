@@ -32,10 +32,10 @@ export default function Reader({ text }: Props) {
 
   const { user } = useLexicoContext()
 
-  const [searched, setSearched] = useState<string>('')
-  const [open, setOpen] = useState<boolean>(false)
+  const [search, setSearch] = useState('')
+  const [open, setOpen] = useState(false)
   const openModal = (word: string) => {
-    setSearched(word)
+    setSearch(word)
     setOpen(true)
     googleAnalyticsEvent('search', {
       category: 'literature',
@@ -101,7 +101,7 @@ export default function Reader({ text }: Props) {
         <Grid container justifyContent="center">
           {text && <Text {...{ text, openModal }} />}
         </Grid>
-        <SearchModal {...{ searched, open, setOpen }} />
+        <SearchModal {...{ search, open, setOpen }} />
       </Paper>
     </>
   )

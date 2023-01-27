@@ -6,6 +6,7 @@ import {
   CardHeader as CardHeaderMui,
   Collapse,
   Typography,
+  useTheme,
 } from '@mui/material'
 
 import { Author } from 'src/graphql/generated'
@@ -20,6 +21,7 @@ type Props = {
   setExpanded: Dispatch<SetStateAction<boolean>>
 }
 export const LibraryAuthor = ({ author, expanded, setExpanded }: Props) => {
+  const theme = useTheme()
   const summary = useAuthorSummary(author)
 
   return (
@@ -44,6 +46,7 @@ export const LibraryAuthor = ({ author, expanded, setExpanded }: Props) => {
                   display: 'block',
                   lineHeight: 1.3,
                   marginTop: '4px',
+                  ...theme.custom.lineClamp(2),
                 }}
               >
                 {summary}

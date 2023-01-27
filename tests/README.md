@@ -55,23 +55,36 @@ Clear all local storage and cache before starting.
 ## Library
 
 - [ ] Click through cards
-- [ ] Enter a literature
-- [ ] Add a custom text
-- [ ] Edit an existing custom text
-- [ ] Move a custom text between user and local
+- [ ] Enter a text
+- [ ] Add a user text
+- [ ] Edit an existing user text
+- [ ] Move a user text between remote and local
+- [ ] Search Literature
 
 ## Grammar
 
-Click through and eyeball all cards
+- [ ] Click through and eyeball all cards
+- [ ] Make sure animation is working correctly
+- [ ] Test search
+
+## Tools
+
+- [ ] Macronize something
+- [ ] Demacronize something
+- [ ] Uppercase something
+- [ ] Lowercase
+- [ ] i to j something
+- [ ] u to v something
+- [ ] Speak something
 
 ## Settings
 
-Local
+### Local
 
 - [ ] Check that Entry card section expansion settings work locally
 - [ ] Check that reader font size setting works
 
-User
+### User
 
 - [ ] Log in with Google
 - [ ] Log in with Facebook
@@ -80,4 +93,6 @@ User
 
 ## About page
 
-Check that Card and text is formatted correctly, icons appear, and link directs to GitHub Issues
+- [ ] Card and text is formatted correctly,
+- [ ] Icons appear
+- [ ] Link directs to GitHub Issues

@@ -6,9 +6,9 @@ import { NounForms } from 'src/graphql/generated'
 import { FormsTable } from '../../FormsTable'
 import { nounFormsRestructure } from './nounFormsRestructure'
 
-type Props = { forms: NounForms; searched?: string }
+type Props = { forms: NounForms; search?: string }
 
-export const NounFormsTable = ({ forms, searched }: Props) => {
+export const NounFormsTable = ({ forms, search }: Props) => {
   const theme = useTheme()
   const formsStructure = nounFormsRestructure(forms)
   return (
@@ -16,7 +16,7 @@ export const NounFormsTable = ({ forms, searched }: Props) => {
       sx={{ maxWidth: theme.custom.card.maxWidth, borderRadius: 0 }}
       elevation={0}
     >
-      <FormsTable forms={formsStructure} searched={searched} />
+      <FormsTable forms={formsStructure} search={search} />
     </Paper>
   )
 }

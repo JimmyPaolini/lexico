@@ -35,7 +35,7 @@ export default function Bookmarks() {
     return filteredEntries.length
       ? filteredEntries.map((entry) => {
           entry = identifyEntryWord(search, entry)
-          return <Entry {...{ entry, searched: search }} key={entry.id} />
+          return <Entry {...{ entry, search }} key={entry.id} />
         })
       : [
           <Typography variant="h4" align="center" key="NotFound">

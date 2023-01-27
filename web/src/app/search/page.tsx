@@ -37,9 +37,8 @@ export default function Search({ initialSearch }: Props) {
   }
 
   const Cards =
-    entries?.map((entry) => (
-      <Entry {...{ entry, searched: search }} key={entry.id} />
-    )) || []
+    entries?.map((entry) => <Entry {...{ entry, search }} key={entry.id} />) ||
+    []
 
   const { title, description, keywords } = getSearchPageMetadata(search)
 

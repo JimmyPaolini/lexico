@@ -12,19 +12,19 @@ import { Entry } from '../Entry/Entry'
 import { Deck } from '../layout/Deck'
 
 type Props = {
-  searched: string
+  search: string
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export const SearchModal = ({ searched, open, setOpen }: Props) => {
+export const SearchModal = ({ search, open, setOpen }: Props) => {
   const theme = useTheme()
   const ref = useRef<HTMLDivElement>(null)
 
   const { data, isFetched, isSuccess, isError } = useSearchQuery(
-    { search: searched },
+    { search: search },
     {
-      enabled: Boolean(searched),
+      enabled: Boolean(search),
       retryDelay: 0,
       staleTime: 1000 * 60 * 5,
     }
@@ -36,9 +36,8 @@ export const SearchModal = ({ searched, open, setOpen }: Props) => {
   })
 
   const Cards =
-    entries?.map((entry) => (
-      <Entry {...{ entry, searched }} key={entry.id} />
-    )) || []
+    entries?.map((entry) => <Entry {...{ entry, search }} key={entry.id} />) ||
+    []
 
   return (
     <Modal

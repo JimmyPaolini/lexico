@@ -11,9 +11,9 @@ import { FormTabs } from '../../FormTabs'
 import { FormsTable } from '../../FormsTable'
 import { adjectiveFormsRestructure } from './adjectiveFormsRestructure'
 
-type Props = { forms: AdjectiveForms; searched?: string }
+type Props = { forms: AdjectiveForms; search?: string }
 
-export const AdjectiveFormsTable = ({ forms, searched }: Props) => {
+export const AdjectiveFormsTable = ({ forms, search }: Props) => {
   const theme = useTheme()
   const [activeTab, setActiveTab] = useState(0)
   const structure = adjectiveFormsRestructure(forms)
@@ -27,7 +27,7 @@ export const AdjectiveFormsTable = ({ forms, searched }: Props) => {
       elevation={0}
     >
       <FormTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab}>
-        <FormsTable forms={formsStructure} searched={searched} />
+        <FormsTable forms={formsStructure} search={search} />
       </FormTabs>
     </Paper>
   )

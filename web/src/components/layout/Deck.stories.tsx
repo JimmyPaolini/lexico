@@ -19,9 +19,9 @@ Default.loaders = [
     const per = await getEntry('per:0')
     return {
       Cards: [
-        <Entry entry={amo} searched={'amo'} key={1} />,
-        <Entry entry={amo} searched={'amo'} key={2} />,
-        <Entry entry={per} searched={'per'} key={3} />,
+        <Entry entry={amo} search={'amo'} key={1} />,
+        <Entry entry={amo} search={'amo'} key={2} />,
+        <Entry entry={per} search={'per'} key={3} />,
       ],
     }
   },

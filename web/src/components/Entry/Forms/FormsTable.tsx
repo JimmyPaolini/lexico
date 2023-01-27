@@ -5,9 +5,9 @@ import { useTheme } from '@mui/material/styles'
 
 import { Form, FormCellPosition } from './Form/Form'
 
-type Props = { forms: ComponentProps<typeof Form>[]; searched?: string }
+type Props = { forms: ComponentProps<typeof Form>[]; search?: string }
 
-export const FormsTable = ({ forms, searched }: Props) => {
+export const FormsTable = ({ forms, search }: Props) => {
   const theme = useTheme()
   return (
     <Grid container sx={{ background: theme.palette.background.paper }}>
@@ -25,7 +25,7 @@ export const FormsTable = ({ forms, searched }: Props) => {
               topRightText={form.topRightText}
               bottomLeftText={form.bottomLeftText}
               bottomRightText={form.bottomRightText}
-              searched={searched}
+              search={search}
             />
           </Grid>
         )

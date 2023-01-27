@@ -27,14 +27,14 @@ import { NounFormsTable } from './PartsOfSpeech/NounFormsTable'
 import { VerbFormsTable } from './PartsOfSpeech/VerbFormsTable'
 
 type Props = {
-  searched: string
+  search: string
   forms?: FormsType | null
   partOfSpeech: string
   identifiers: string[]
 }
 
 export const Forms = ({
-  searched,
+  search,
   forms,
   partOfSpeech,
   identifiers: identifiersList = [],
@@ -47,13 +47,7 @@ export const Forms = ({
     false
   const [expanded, setExpanded] = useState<boolean>(expandedInitial)
 
-  if (!searched) {
-    searched =
-      partOfSpeech === 'verb' ? 'Conjugation Table' : 'Declension Table'
-  }
-
-  if (searched.match(/Table/i) && !forms) return <></>
-
+  if (!search && !forms) return <></>
   return (
     <>
       <CardContent>
@@ -66,7 +60,7 @@ export const Forms = ({
         >
           <Grid container wrap="nowrap">
             <Grid container item direction="column">
-              <Typography variant="body1">{searched}</Typography>
+              <Typography variant="body1">{search || 'Forms'}</Typography>
               {identifiersList.map((identifiers) => (
                 <Grid
                   container
@@ -96,7 +90,7 @@ export const Forms = ({
             ].includes(partOfSpeech) &&
               forms && (
                 <ExpandIcon
-                  {...{ expanded: Boolean(forms) }}
+                  {...{ expanded }}
                   sx={{
                     marginTop: theme.spacing(0.5),
                     marginRight: theme.spacing(0.5),
@@ -110,9 +104,9 @@ export const Forms = ({
         <Collapse in={expanded}>
           <Divider variant="middle" />
           {['verb'].includes(partOfSpeech) ? (
-            <VerbFormsTable forms={forms as VerbForms} searched={searched} />
+            <VerbFormsTable forms={forms as VerbForms} search={search} />
           ) : ['noun', 'properNoun'].includes(partOfSpeech) ? (
-            <NounFormsTable forms={forms as NounForms} searched={searched} />
+            <NounFormsTable forms={forms as NounForms} search={search} />
           ) : [
               'adjective',
               'participle',
@@ -123,7 +117,7 @@ export const Forms = ({
             ].includes(partOfSpeech) ? (
             <AdjectiveFormsTable
               forms={forms as AdjectiveForms}
-              searched={searched}
+              search={search}
             />
           ) : null}
         </Collapse>
