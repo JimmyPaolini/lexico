@@ -9,7 +9,15 @@ export const CenterText = ({ centerText }: Props) => {
   return (
     <Grid container justifyContent="center" alignItems="center">
       <Typography align="center" sx={{ ...theme.custom.lineClamp(2) }}>
-        {centerText ?? '-'}
+        {centerText.split(',\n').map((text, i) => {
+          if (i + 1 !== centerText.split(',\n').length) {
+            return (
+              <span key={text}>
+                {text}, <br />
+              </span>
+            )
+          } else return <span key={text}>{text}</span>
+        })}
       </Typography>
     </Grid>
   )

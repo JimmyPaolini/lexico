@@ -1,9 +1,18 @@
 import { CardHeader } from '@mui/material'
 
-import { Inflection, Maybe, PrincipalPart } from 'src/graphql/generated'
+import {
+  Inflection,
+  Maybe,
+  NounInflection,
+  PrepositionInflection,
+  PrincipalPart,
+} from 'src/graphql/generated'
 import { unCamelCase } from 'src/utils/string'
 
+import { Identifier } from '../../../utils/identifiers'
 import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
+import { IdentifierPill } from '../../accessories/Pills/IdentifierPill'
+import { PillVariant } from '../../accessories/Pills/Pill'
 import { BookmarkButton } from '../../bookmarks/BookmarkButton'
 import { inflectionToString } from './inflectionToString'
 
@@ -36,7 +45,31 @@ export const PrincipalParts = ({
       title={principalPartsFormatted}
       titleTypographyProps={{ variant: 'h5' }}
       subheader={subheader}
-      avatar={<PartOfSpeech partOfSpeech={partOfSpeech} />}
+      avatar={
+        <>
+          <PartOfSpeech partOfSpeech={partOfSpeech} />
+          {partOfSpeech === 'noun' && (
+            <IdentifierPill
+              identifier={(inflection as NounInflection).gender as Identifier}
+              variant={PillVariant.SMALL}
+            />
+          )}
+          {partOfSpeech === 'preposition' && (
+            <IdentifierPill
+              identifier={
+                (inflection as PrepositionInflection).case as Identifier
+              }
+              variant={PillVariant.SMALL}
+            />
+          )}
+        </>
+      }
+      sx={{
+        '& .MuiCardHeader-avatar': {
+          flexDirection: 'column',
+          alignItems: 'center',
+        },
+      }}
       action={<BookmarkButton {...{ id, bookmarked: Boolean(bookmarked) }} />}
       aria-label="Principal Parts and Inflection"
     />

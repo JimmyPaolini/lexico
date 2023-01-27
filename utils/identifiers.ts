@@ -41,11 +41,11 @@ function identifyWordRecursive(
       return [...identifiers, current.join(' ')]
     }
   } else {
-    for (const key in forms) {
+    for (const identifier in forms) {
       identifiers = identifyWordRecursive(
         word,
-        forms[key] as Record<string, unknown>,
-        [...current, key],
+        forms[identifier] as Record<string, unknown>,
+        [...current, identifier],
         identifiers
       )
     }

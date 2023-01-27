@@ -7,6 +7,11 @@ export class AdjectiveNumber {
 
   @Field(() => [String], { nullable: true })
   plural?: string[]
+
+  constructor() {
+    this.singular = []
+    this.plural = []
+  }
 }
 
 @ObjectType()
@@ -31,6 +36,16 @@ export class AdjectiveCase {
 
   @Field(() => AdjectiveNumber, { nullable: true })
   locative?: AdjectiveNumber
+
+  constructor() {
+    this.nominative = new AdjectiveNumber()
+    this.genitive = new AdjectiveNumber()
+    this.dative = new AdjectiveNumber()
+    this.accusative = new AdjectiveNumber()
+    this.ablative = new AdjectiveNumber()
+    this.vocative = new AdjectiveNumber()
+    this.locative = new AdjectiveNumber()
+  }
 }
 
 @ObjectType()
@@ -43,4 +58,10 @@ export default class AdjectiveForms {
 
   @Field(() => AdjectiveCase, { nullable: true })
   neuter?: AdjectiveCase
+
+  constructor() {
+    this.masculine = new AdjectiveCase()
+    this.feminine = new AdjectiveCase()
+    this.neuter = new AdjectiveCase()
+  }
 }

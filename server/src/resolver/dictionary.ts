@@ -10,7 +10,7 @@ import Translation from '../entity/dictionary/Translation'
 import Word from '../entity/dictionary/Word'
 import VerbForms from '../entity/dictionary/word/forms/VerbForms'
 import { GetBookmarks } from '../services/authentication/middleware'
-import { camelCaseFuturePerfect } from '../services/forms'
+import { camelCaseFuturePerfect, determinerFormsToAdjectiveForms } from '../services/forms'
 import { Log } from '../services/log'
 
 @Resolver(Entry)
@@ -18,7 +18,7 @@ export class DictionaryResolver {
   @Query(() => [Entry])
   @UseMiddleware(GetBookmarks)
   @Log({
-    mapParams: (params) => params[0],
+    mapParams: (params) => [params[0]],
     mapResult: (entries: Entry[]) => entries.map(({ id }) => id),
   })
   async search(
@@ -60,6 +60,9 @@ export class DictionaryResolver {
         entry = identifyEntryWord(search, entry)
         if (entry.partOfSpeech === 'verb' && entry.forms) {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
+        }
+        if (entry.partOfSpeech === 'determiner' && entry.forms) {
+          entry.forms = determinerFormsToAdjectiveForms(entry.forms)
         }
         entry.bookmarked = bookmarks?.some(
           (bookmark) => bookmark.id === entry.id
@@ -117,6 +120,9 @@ export class DictionaryResolver {
       .map((entry) => {
         if (entry.partOfSpeech === 'verb' && entry.forms) {
           entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
+        }
+        if (entry.partOfSpeech === 'determiner' && entry.forms) {
+          entry.forms = determinerFormsToAdjectiveForms(entry.forms)
         }
         entry.bookmarked = bookmarks?.some(
           (bookmark) => bookmark.id === entry.id

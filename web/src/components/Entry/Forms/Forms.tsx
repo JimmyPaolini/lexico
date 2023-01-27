@@ -93,15 +93,16 @@ export const Forms = ({
               'numeral',
               'pronoun',
               'determiner',
-            ].includes(partOfSpeech) && (
-              <ExpandIcon
-                {...{ expanded: Boolean(forms) }}
-                sx={{
-                  marginTop: theme.spacing(0.5),
-                  marginRight: theme.spacing(0.5),
-                }}
-              />
-            )}
+            ].includes(partOfSpeech) &&
+              forms && (
+                <ExpandIcon
+                  {...{ expanded: Boolean(forms) }}
+                  sx={{
+                    marginTop: theme.spacing(0.5),
+                    marginRight: theme.spacing(0.5),
+                  }}
+                />
+              )}
           </Grid>
         </CardActionArea>
       </CardContent>

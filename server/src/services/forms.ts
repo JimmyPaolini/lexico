@@ -1,3 +1,4 @@
+import AdjectiveForms from '../entity/dictionary/word/forms/AdjectiveForms'
 import VerbForms from '../entity/dictionary/word/forms/VerbForms'
 import { IndicativeTense } from '../entity/dictionary/word/forms/verbForms/Indicative'
 import { dedupe } from './array'
@@ -25,6 +26,31 @@ export function camelCaseFuturePerfect(forms: VerbForms): VerbForms {
     }
   }
   return forms
+}
+
+export function determinerFormsToAdjectiveForms(determinerForms: any) {
+  const adjectiveForms = new AdjectiveForms() as any
+  console.log('🐋 ~ adjectiveForms', adjectiveForms)
+  for (const gender of ['masculine', 'feminine', 'neuter']) {
+    for (const number of ['singular', 'plural']) {
+      for (const grammarCase of [
+        'nominative',
+        'genitive',
+        'dative',
+        'accusative',
+        'ablative',
+        'vocative',
+        'locative',
+      ]) {
+        if (!determinerForms?.[grammarCase])
+          adjectiveForms[gender][grammarCase] = null
+        else
+          adjectiveForms[gender][grammarCase][number] =
+            determinerForms?.[grammarCase]?.[number]?.[gender] ?? null
+      }
+    }
+  }
+  return adjectiveForms as AdjectiveForms
 }
 
 export function getWordForms(word: string, forms: object | string[]): string[] {
