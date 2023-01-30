@@ -13,7 +13,7 @@ import { QueryClient } from 'react-query'
 
 import { User, useUserQuery } from 'src/graphql/generated'
 
-export type LexicoContext = {
+type LexicoContext = {
   isNavOpen: boolean
   setNavOpen: Dispatch<SetStateAction<boolean>>
   isMobile: boolean
@@ -27,7 +27,7 @@ export const useLexicoContext = () => useContext(LexicoContext)
 
 type Props = PropsWithChildren<{ queryClient: QueryClient }>
 
-export const ContextProvider = ({ children, queryClient }: Props) => {
+export const LexicoContextProvider = ({ children, queryClient }: Props) => {
   const { data } = useUserQuery(undefined, {
     staleTime: 1000 * 60 * 5 /* 5 minutes */,
   })

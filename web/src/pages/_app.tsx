@@ -15,7 +15,7 @@ import { createEmotionCache } from 'src/theme'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 
 import { Layout } from '../components/layout/Layout'
-import { ContextProvider } from '../components/layout/LexicoContext'
+import { LexicoContextProvider } from '../components/layout/LexicoContext'
 
 export const clientEndpoint =
   process.env.NEXT_ENV === 'build'
@@ -43,7 +43,7 @@ export default function App({
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
-            <ContextProvider queryClient={queryClient}>
+            <LexicoContextProvider queryClient={queryClient}>
               <Head>
                 <title>Lexico</title>
               </Head>
@@ -51,7 +51,7 @@ export default function App({
               <Layout>
                 <Component {...pageProps} />
               </Layout>
-            </ContextProvider>
+            </LexicoContextProvider>
           </Hydrate>
         </QueryClientProvider>
       </ThemeProvider>

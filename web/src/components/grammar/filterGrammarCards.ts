@@ -1,9 +1,9 @@
 import { getMacronOptionRegex } from 'src/utils/string'
 
-import { GrammarCards } from './GrammarCards.constants'
+import { getGrammarCards } from './GrammarCards.constants'
 
 export const filterGrammarCards = (
-  Cards: typeof GrammarCards,
+  Cards: ReturnType<typeof getGrammarCards>,
   search: string
 ) => {
   const re = new RegExp(getMacronOptionRegex(search), 'i')

@@ -1,6 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 
-import { ClassNames } from '@emotion/react'
 import { Box, Tab, Tabs } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
@@ -23,41 +22,31 @@ export const FormTabs = ({
   children,
 }: Props) => {
   const theme = useTheme()
-  const minWidth = `${100 / tabs.length}%`
-
-  const changeActiveTab = (_: unknown, selectedTab: number) => {
-    setActiveTab(selectedTab)
-  }
 
   return (
     <Box>
-      <ClassNames>
-        {({ css }) => (
-          <Tabs
-            value={activeTab}
-            onChange={changeActiveTab}
-            onClick={(e) => e.stopPropagation()}
-            sx={{ background: theme.palette.background.paper }}
-            classes={{
-              indicator: css({
-                background:
-                  identifierStyles[tabs[activeTab]].background ?? 'white',
-              }),
-            }}
-            variant="fullWidth"
-            aria-label="inflection tabs"
-          >
-            {tabs.map((tab) => (
-              <Tab
-                icon={<IdentifierPill identifier={tab} />}
-                sx={{ minWidth, padding: '0px 0px' }}
-                aria-label={tab}
-                key={tab}
-              />
-            ))}
-          </Tabs>
-        )}
-      </ClassNames>
+      <Tabs
+        value={activeTab}
+        onChange={(_: unknown, tab: number) => setActiveTab(tab)}
+        onClick={(e) => e.stopPropagation()}
+        sx={{
+          background: theme.palette.background.paper,
+          '& .MuiTabs-indicator': {
+            background: identifierStyles[tabs[activeTab]].background ?? 'white',
+          },
+        }}
+        variant="fullWidth"
+        aria-label="inflection tabs"
+      >
+        {tabs.map((tab) => (
+          <Tab
+            icon={<IdentifierPill identifier={tab} />}
+            sx={{ minWidth: 0, padding: 0 }}
+            aria-label={tab}
+            key={tab}
+          />
+        ))}
+      </Tabs>
       {children}
     </Box>
   )

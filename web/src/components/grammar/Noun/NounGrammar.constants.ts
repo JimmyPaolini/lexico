@@ -1,11 +1,7 @@
-import { ComponentProps } from 'react'
-
-import { NounDeclensionCard } from './NounDeclensionCard'
-
-export const nounDeclensionCardsData = [
+export const nounGrammarData = [
   {
-    id: 'first',
-    title: 'Noun First Declension',
+    id: '1st',
+    title: 'First Declension',
     description: '-a, -ae, usually feminine',
     forms: {
       nominative: {
@@ -39,8 +35,8 @@ export const nounDeclensionCardsData = [
     },
   },
   {
-    id: 'second',
-    title: 'Noun Second Declension',
+    id: '2nd',
+    title: 'Second Declension',
     description: '-us, -i, always masculine',
     forms: {
       nominative: {
@@ -74,8 +70,8 @@ export const nounDeclensionCardsData = [
     },
   },
   {
-    id: 'second neuter',
-    title: 'Noun Second Declension Neuter',
+    id: '2nd neu',
+    title: 'Second Declension Neuter',
     description: '-um, -i, always neuter',
     forms: {
       nominative: {
@@ -109,12 +105,12 @@ export const nounDeclensionCardsData = [
     },
   },
   {
-    id: 'third masc/fem',
-    title: 'Noun Third Declension',
+    id: '3rd m/f',
+    title: 'Third Declension Masculine/Feminine',
     description: '-r/o/x/s, -is, masculine or feminine',
     forms: {
       nominative: {
-        singular: ['-r', '-o', '-x', '-s'],
+        singular: ['-r, -o, -x, -s'],
         plural: ['-ēs'],
       },
       genitive: {
@@ -134,7 +130,7 @@ export const nounDeclensionCardsData = [
         plural: ['-ibus'],
       },
       vocative: {
-        singular: ['-r', '-o', '-x', '-s'],
+        singular: ['-r, -o, -x, -s'],
         plural: ['a'],
       },
       locative: {
@@ -144,12 +140,12 @@ export const nounDeclensionCardsData = [
     },
   },
   {
-    id: 'third neuter',
-    title: 'Noun Third Declension Neuter',
+    id: '3rd neu',
+    title: 'Third Declension Neuter',
     description: '-r/o/x/s, -is, always neuter',
     forms: {
       nominative: {
-        singular: ['-r', '-o', '-x', '-s'],
+        singular: ['-r, -o, -x, -s'],
         plural: ['-a'],
       },
       genitive: {
@@ -161,7 +157,7 @@ export const nounDeclensionCardsData = [
         plural: ['-ibus'],
       },
       accusative: {
-        singular: ['-r', '-o', '-x', '-s'],
+        singular: ['-r, -o, -x, -s'],
         plural: ['-a'],
       },
       ablative: {
@@ -169,7 +165,7 @@ export const nounDeclensionCardsData = [
         plural: ['-ibus'],
       },
       vocative: {
-        singular: ['-r', '-o', '-x', '-s'],
+        singular: ['-r, -o, -x, -s'],
         plural: ['a'],
       },
       locative: {
@@ -179,8 +175,8 @@ export const nounDeclensionCardsData = [
     },
   },
   {
-    id: 'fourth',
-    title: 'Noun Fourth Declension',
+    id: '4th',
+    title: 'Fourth Declension',
     description: '-us, ūs, usually masculine, sometimes feminine/neuter',
     forms: {
       nominative: {
@@ -214,8 +210,8 @@ export const nounDeclensionCardsData = [
     },
   },
   {
-    id: 'fifth',
-    title: 'Noun Fifth Declension',
+    id: '5th',
+    title: 'Fifth Declension',
     description: '-ēs, -ēi, usually masculine, sometimes feminine',
     forms: {
       nominative: {
@@ -249,9 +245,9 @@ export const nounDeclensionCardsData = [
     },
   },
   {
-    id: 'translations',
-    title: 'Noun Translations',
-    description: '',
+    id: 'trans',
+    title: 'Translations',
+    description: 'Generalizations for each form',
     forms: {
       nominative: {
         singular: ['noun'],
@@ -283,4 +279,4 @@ export const nounDeclensionCardsData = [
       },
     },
   },
-] as ComponentProps<typeof NounDeclensionCard>[]
+]

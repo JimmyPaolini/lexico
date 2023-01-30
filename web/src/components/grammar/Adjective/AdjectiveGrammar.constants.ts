@@ -1,11 +1,7 @@
-import { ComponentProps } from 'react'
-
-import { AdjectiveDeclensionCard } from './AdjectiveDeclensionCard'
-
-export const adjectiveDeclensionCardsData = [
+export const adjectiveGrammarData = [
   {
-    id: 'first/second',
-    title: 'Adjective First/Second Declension',
+    id: '1st/2nd',
+    title: 'First/Second Declension',
     description: '-us, -a, -um, to adverb: -e',
     forms: {
       masculine: {
@@ -89,8 +85,8 @@ export const adjectiveDeclensionCardsData = [
     },
   },
   {
-    id: 'third',
-    title: 'Adjective Third Declension',
+    id: '3rd',
+    title: 'Third Declension',
     description: '-is, -e, to adverb: -ter',
     forms: {
       masculine: {
@@ -174,8 +170,8 @@ export const adjectiveDeclensionCardsData = [
     },
   },
   {
-    id: 'comparative',
-    title: 'Adjective Comparative',
+    id: 'comp',
+    title: 'Comparative',
     description: '-ior, -ius, to adverb: -iore, -iore',
     forms: {
       masculine: {
@@ -258,4 +254,89 @@ export const adjectiveDeclensionCardsData = [
       },
     },
   },
-] as ComponentProps<typeof AdjectiveDeclensionCard>[]
+  {
+    id: 'trans',
+    title: 'Translations',
+    description: 'Generalizations for each form',
+    forms: {
+      masculine: {
+        nominative: {
+          singular: ['adjective'],
+          plural: ['adjectives'],
+        },
+        genitive: {
+          singular: ["adjective's, of adjective"],
+          plural: ["adjectives', of adjectives"],
+        },
+        dative: {
+          singular: ['to/for adjective'],
+          plural: ['to/for adjectives'],
+        },
+        accusative: {
+          singular: ['adjective'],
+          plural: ['adjectives'],
+        },
+        ablative: {
+          singular: ['by/with adjective'],
+          plural: ['by/with adjectives'],
+        },
+        vocative: {
+          singular: ['adjective!'],
+          plural: ['adjective!'],
+        },
+      },
+      feminine: {
+        nominative: {
+          singular: ['adjective'],
+          plural: ['adjectives'],
+        },
+        genitive: {
+          singular: ["adjective's, of adjective"],
+          plural: ["adjectives', of adjectives"],
+        },
+        dative: {
+          singular: ['to/for adjective'],
+          plural: ['to/for adjectives'],
+        },
+        accusative: {
+          singular: ['adjective'],
+          plural: ['adjectives'],
+        },
+        ablative: {
+          singular: ['by/with adjective'],
+          plural: ['by/with adjectives'],
+        },
+        vocative: {
+          singular: ['adjective!'],
+          plural: ['adjective!'],
+        },
+      },
+      neuter: {
+        nominative: {
+          singular: ['adjective'],
+          plural: ['adjectives'],
+        },
+        genitive: {
+          singular: ["adjective's, of adjective"],
+          plural: ["adjectives', of adjectives"],
+        },
+        dative: {
+          singular: ['to/for adjective'],
+          plural: ['to/for adjectives'],
+        },
+        accusative: {
+          singular: ['adjective'],
+          plural: ['adjectives'],
+        },
+        ablative: {
+          singular: ['by/with adjective'],
+          plural: ['by/with adjectives'],
+        },
+        vocative: {
+          singular: ['adjective!'],
+          plural: ['adjective!'],
+        },
+      },
+    },
+  },
+]

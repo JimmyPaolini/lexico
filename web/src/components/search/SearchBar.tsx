@@ -73,7 +73,7 @@ export const SearchBar = ({
             <Search fontSize="large" />
           ) : (
             <CircularProgress
-              size={theme.spacing(3)}
+              size={theme.spacing(4)}
               thickness={5.4}
               color="secondary"
             />

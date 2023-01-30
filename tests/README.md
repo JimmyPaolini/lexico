@@ -43,6 +43,7 @@ Clear all local storage and cache before starting.
 - [ ] English
   - [ ] yellow
   - [ ] finger
+  - [ ] something
 
 ## Bookmarks
 

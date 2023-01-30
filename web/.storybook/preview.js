@@ -5,7 +5,7 @@ import { CssBaseline, Grid, ThemeProvider } from '@mui/material'
 
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-import { ContextProvider } from 'src/components/layout/Context'
+import { LexicoContextProvider } from 'src/components/layout/LexicoContext'
 import { SnackbarProvider } from 'src/components/layout/SnackbarProvider'
 import { createEmotionCache, theme } from 'src/theme'
 
@@ -18,9 +18,7 @@ export const parameters = {
       { name: 'Paper', value: theme.palette.background.paper },
     ],
   },
-  nextRouter: {
-    Provider: RouterContext.Provider,
-  },
+  nextRouter: { Provider: RouterContext.Provider },
 }
 
 export const decorators = [
@@ -28,7 +26,7 @@ export const decorators = [
     <CacheProvider value={createEmotionCache()}>
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={new QueryClient()}>
-          <ContextProvider>
+          <LexicoContextProvider>
             <SnackbarProvider>
               <CssBaseline />
               <Grid
@@ -39,7 +37,7 @@ export const decorators = [
                 <Story />
               </Grid>
             </SnackbarProvider>
-          </ContextProvider>
+          </LexicoContextProvider>
         </QueryClientProvider>
       </ThemeProvider>
     </CacheProvider>

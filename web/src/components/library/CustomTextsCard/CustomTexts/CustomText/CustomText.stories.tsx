@@ -2,7 +2,7 @@ import { Paper } from '@mui/material'
 
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { LexicoContext, LexicoContext } from 'src/components/layout/LexicoContext'
+import { LexicoContext } from 'src/components/layout/LexicoContext'
 import { User as UserGql } from 'src/graphql/generated'
 
 import { CustomText } from './CustomText'

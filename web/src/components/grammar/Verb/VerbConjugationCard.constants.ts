@@ -1,11 +1,7 @@
-import { ComponentProps } from 'react'
-
-import { VerbConjugationCard } from './VerbConjugationCard'
-
-export const verbConjugationCardsData = [
+export const verbGrammarData = [
   {
-    id: 'first',
-    title: 'Verb First Conjugation',
+    id: '1st',
+    title: 'First Conjugation',
     description: '-ō, -āre, -āvī, -atum',
     forms: {
       indicative: {
@@ -340,8 +336,8 @@ export const verbConjugationCardsData = [
     },
   },
   {
-    id: 'second',
-    title: 'Verb Second Conjugation',
+    id: '2nd',
+    title: 'Second Conjugation',
     description: '-eō, -ēre, -ī, -um',
     forms: {
       indicative: {
@@ -676,8 +672,8 @@ export const verbConjugationCardsData = [
     },
   },
   {
-    id: 'third',
-    title: 'Verb Third Conjugation',
+    id: '3rd',
+    title: 'Third Conjugation',
     description: '-ō, -ere, -ī, -um',
     forms: {
       indicative: {
@@ -1012,8 +1008,8 @@ export const verbConjugationCardsData = [
     },
   },
   {
-    id: 'third i-stem',
-    title: 'Verb Third i-stem Conjugation',
+    id: '3rd -io',
+    title: 'Third i-stem Conjugation',
     description: '-iō, -ere, -ī, -um',
     forms: {
       indicative: {
@@ -1348,8 +1344,8 @@ export const verbConjugationCardsData = [
     },
   },
   {
-    id: 'fourth',
-    title: 'Verb Fourth Conjugation',
+    id: '4th',
+    title: 'Fourth Conjugation',
     description: '-iō, -īre, -ī, -um',
     forms: {
       indicative: {
@@ -1684,9 +1680,9 @@ export const verbConjugationCardsData = [
     },
   },
   {
-    id: 'translations',
-    title: 'Verb Translations',
-    description: '',
+    id: 'trans',
+    title: 'Translations',
+    description: 'Generalizations for each form',
     forms: {
       indicative: {
         active: {
@@ -2025,4 +2021,4 @@ export const verbConjugationCardsData = [
       },
     },
   },
-] as ComponentProps<typeof VerbConjugationCard>[]
+]

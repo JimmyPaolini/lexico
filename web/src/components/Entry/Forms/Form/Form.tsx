@@ -41,7 +41,11 @@ export const Form = ({
 
   return (
     <Tooltip
-      title={centerText?.length > 38 ? centerText : ''}
+      title={
+        centerText?.length > 38 || centerText.split('\n').length > 2
+          ? centerText
+          : ''
+      }
       placement="top"
       enterDelay={0}
       arrow

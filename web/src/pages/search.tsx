@@ -54,7 +54,6 @@ export default function Search({ initialSearch }: Props) {
         handleSearch={handleSearch}
         isLoading={isLoading && !!search}
         placeholder="Search Lexico"
-        audio
       >
         {!search ? (
           <Logo />
