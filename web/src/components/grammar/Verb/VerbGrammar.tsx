@@ -15,7 +15,7 @@ export const VerbGrammar = ({ expandedInitial = false }: Props) => {
   const [tab, setTab] = useState(0)
 
   return (
-    <Card key="verb">
+    <Card>
       <CollapsibleCardHeader
         expandedInitial={expandedInitial}
         title={'Verbs'}

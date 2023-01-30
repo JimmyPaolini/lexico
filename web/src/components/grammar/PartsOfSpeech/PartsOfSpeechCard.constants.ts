@@ -10,12 +10,12 @@ export const partsOfSpeechCardData = {
     {
       id: 'noun',
       title: 'Noun',
-      description: 'Words expressing things',
+      description: 'Expresses things',
     },
     {
       id: 'verb',
       title: 'Verb',
-      description: 'Words expressing actions',
+      description: 'Expresses actions',
     },
     {
       id: 'adjective',

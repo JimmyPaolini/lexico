@@ -1,11 +1,11 @@
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 import { TOOLS } from './Tools.constants'
-import { useTextToolsForm } from './useToolsForm'
+import { useToolsForm } from './useToolsForm'
 
 type Props = {
   tools: (keyof typeof TOOLS)[]
-  formik: ReturnType<typeof useTextToolsForm>
+  formik: ReturnType<typeof useToolsForm>
 }
 export const ToolGroup = ({ tools, formik }: Props) => {
   return (

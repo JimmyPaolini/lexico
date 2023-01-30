@@ -1,11 +1,11 @@
 import { ToggleButton } from '@mui/material'
 
 import { TOOLS } from './Tools.constants'
-import { useTextToolsForm } from './useToolsForm'
+import { useToolsForm } from './useToolsForm'
 
 type Props = {
   tool: keyof typeof TOOLS
-  formik: ReturnType<typeof useTextToolsForm>
+  formik: ReturnType<typeof useToolsForm>
 }
 
 export const Tool = ({ tool, formik }: Props) => {

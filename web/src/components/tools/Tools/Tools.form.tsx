@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -20,14 +20,17 @@ export const ToolsForm = () => {
   const formik = useToolsForm()
 
   const audioRef = useRef<HTMLAudioElement>(null)
+  const [isLoadingSpeech, setLoadingSpeech] = useState(false)
 
   const handlePlay = async () => {
+    setLoadingSpeech(true)
     const source = audioRef.current?.querySelector('source')
     if (!audioRef.current || !source) return
     const data = await useSpeechQuery.fetcher({ text: formik.values.input })()
     source.src = `data:audio/mp3;base64,${data.speech}`
     audioRef.current.load()
     audioRef.current.play()
+    setLoadingSpeech(false)
     router.replace(
       { query: { ...router.query, input: formik.values.input } },
       undefined,
@@ -63,7 +66,7 @@ export const ToolsForm = () => {
         <Grid container gap={1} wrap="nowrap">
           <SubmitButton
             name="Transform"
-            disabled={formik.isSubmitting}
+            disabled={formik.isSubmitting || isLoadingSpeech}
             endIcon={<Transform />}
           />
           <audio ref={audioRef} autoPlay>
@@ -72,7 +75,7 @@ export const ToolsForm = () => {
           <SubmitButton
             type="button"
             name="Speak"
-            disabled={formik.isSubmitting}
+            disabled={formik.isSubmitting || isLoadingSpeech}
             onClick={handlePlay}
             endIcon={<VolumeUp />}
           />

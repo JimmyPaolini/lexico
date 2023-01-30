@@ -80,6 +80,15 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          '& .MuiTabScrollButton-root.Mui-disabled': {
+            opacity: 0.2,
+          },
+        },
+      },
+    },
     MuiGrid: {
       styleOverrides: {
         root: {

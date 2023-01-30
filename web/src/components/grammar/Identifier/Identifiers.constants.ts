@@ -1,10 +1,6 @@
-import { ComponentProps } from 'react'
-
-import { IdentifierCard } from './IdentifierCard'
-
-export const identifierCardsData = [
+export const identifiersData = [
   {
-    id: 'mood',
+    id: 'mod',
     title: 'Mood',
     description: "Expresses the speaker's attitude towards a verb",
     identifiers: [
@@ -35,7 +31,7 @@ export const identifierCardsData = [
     ],
   },
   {
-    id: 'tense',
+    id: 'tns',
     title: 'Tense',
     description: 'Expresses the reference time at which a verb occurs',
     identifiers: [
@@ -77,7 +73,7 @@ export const identifierCardsData = [
     ],
   },
   {
-    id: 'voice',
+    id: 'vce',
     title: 'Voice',
     description: 'Expresses the relationship of a verb to its participants',
     identifiers: [
@@ -94,7 +90,7 @@ export const identifierCardsData = [
     ],
   },
   {
-    id: 'person',
+    id: 'prs',
     title: 'Person',
     description: "Expresses a verb's participants",
     identifiers: [
@@ -118,7 +114,7 @@ export const identifierCardsData = [
     ],
   },
   {
-    id: 'number',
+    id: 'num',
     title: 'Number',
     description: 'How many nouns perform a verb',
     identifiers: [
@@ -135,7 +131,7 @@ export const identifierCardsData = [
     ],
   },
   {
-    id: 'case',
+    id: 'cse',
     title: 'Case',
     description: "Express a noun's relationships to entities",
     identifiers: [
@@ -177,9 +173,9 @@ export const identifierCardsData = [
     ],
   },
   {
-    id: 'gender',
+    id: 'gdr',
     title: 'Gender',
-    description: "Expresses a noun or adjective's somewhat arbitrary category",
+    description: "Expresses a noun or adjective's category",
     identifiers: [
       {
         id: 'masculine',
@@ -199,7 +195,7 @@ export const identifierCardsData = [
     ],
   },
   {
-    id: 'miscellaneous',
+    id: 'misc',
     title: 'Miscellaneous',
     description: 'Other verb identifiers',
     identifiers: [
@@ -231,4 +227,4 @@ export const identifierCardsData = [
       },
     ],
   },
-] as ComponentProps<typeof IdentifierCard>[]
+]

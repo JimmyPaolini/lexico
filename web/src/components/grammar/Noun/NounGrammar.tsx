@@ -13,7 +13,7 @@ export const NounGrammar = ({ expandedInitial = false }: Props) => {
   const [tab, setTab] = useState(0)
 
   return (
-    <Card key="noun">
+    <Card>
       <CollapsibleCardHeader
         expandedInitial={expandedInitial}
         title={'Nouns'}
@@ -34,8 +34,7 @@ export const NounGrammar = ({ expandedInitial = false }: Props) => {
             <Tab
               key={nounGrammarData.id}
               label={nounGrammarData.id}
-              sx={{ minWidth: 0, maxWidth: theme.spacing(7) }}
-              wrapped
+              sx={{ minWidth: 0, padding: 0, maxWidth: theme.spacing(7) }}
             />
           ))}
         </Tabs>

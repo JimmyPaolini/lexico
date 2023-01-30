@@ -666,6 +666,13 @@ export type MacronizeQueryVariables = Exact<{
 
 export type MacronizeQuery = { macronize: string };
 
+export type SpeechQueryVariables = Exact<{
+  text: Scalars['String'];
+}>;
+
+
+export type SpeechQuery = { speech: string };
+
 export type FacebookQueryVariables = Exact<{
   code: Scalars['String'];
 }>;
@@ -1542,6 +1549,11 @@ ${AllAdverbForms}`;
 export const Macronize = gql`
     query Macronize($text: String!) {
   macronize(text: $text)
+}
+    `;
+export const Speech = gql`
+    query Speech($text: String!) {
+  speech(text: $text)
 }
     `;
 export const Facebook = gql`
@@ -2550,6 +2562,26 @@ export const useMacronizeQuery = <
 useMacronizeQuery.getKey = (variables: MacronizeQueryVariables) => ['Macronize', variables];
 
 useMacronizeQuery.fetcher = (variables: MacronizeQueryVariables) => fetcher<MacronizeQuery, MacronizeQueryVariables>(MacronizeDocument, variables);
+export const SpeechDocument = `
+    query Speech($text: String!) {
+  speech(text: $text)
+}
+    `;
+export const useSpeechQuery = <
+      TData = SpeechQuery,
+      TError = unknown
+    >(
+      variables: SpeechQueryVariables, 
+      options?: UseQueryOptions<SpeechQuery, TError, TData>
+    ) => 
+    useQuery<SpeechQuery, TError, TData>(
+      ['Speech', variables],
+      fetcher<SpeechQuery, SpeechQueryVariables>(SpeechDocument, variables),
+      options
+    );
+useSpeechQuery.getKey = (variables: SpeechQueryVariables) => ['Speech', variables];
+
+useSpeechQuery.fetcher = (variables: SpeechQueryVariables) => fetcher<SpeechQuery, SpeechQueryVariables>(SpeechDocument, variables);
 export const FacebookDocument = `
     query Facebook($code: String!) {
   facebook(code: $code) {

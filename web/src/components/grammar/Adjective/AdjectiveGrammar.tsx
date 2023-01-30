@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Card, Divider, Tab, Tabs, Typography, useTheme } from '@mui/material'
+import { Card, Divider, Tab, Tabs, Typography } from '@mui/material'
 
 import { AdjectiveFormsTable } from '../../Entry/Forms/PartsOfSpeech/AdjectiveFormsTable'
 import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
@@ -9,11 +9,10 @@ import { adjectiveGrammarData } from './AdjectiveGrammar.constants'
 type Props = { expandedInitial?: boolean }
 
 export const AdjectiveGrammar = ({ expandedInitial = false }: Props) => {
-  const theme = useTheme()
   const [tab, setTab] = useState(0)
 
   return (
-    <Card key="adjective">
+    <Card>
       <CollapsibleCardHeader
         expandedInitial={expandedInitial}
         title={'Adjectives'}

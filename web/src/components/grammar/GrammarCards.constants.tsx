@@ -1,6 +1,5 @@
 import { AdjectiveGrammar } from './Adjective'
-import { IdentifierCard } from './Identifier/IdentifierCard'
-import { identifierCardsData } from './Identifier/IdentifierCard.constants'
+import { Identifiers } from './Identifier/Identifiers'
 import { NounGrammar } from './Noun/NounGrammar'
 import { PartsOfSpeechCard } from './PartsOfSpeech'
 import { partsOfSpeechCardData } from './PartsOfSpeech/PartsOfSpeechCard.constants'
@@ -12,29 +11,20 @@ export const getGrammarCards = (expandedInitialIndices: number[]) => [
     {...partsOfSpeechCardData}
     expandedInitial={expandedInitialIndices.includes(0)}
   />,
-  ...identifierCardsData.map((identifierCardData, i) => (
-    <IdentifierCard
-      key={'identifier-' + identifierCardData.id}
-      {...identifierCardData}
-      expandedInitial={expandedInitialIndices.includes(i + 1)}
-    />
-  )),
+  <Identifiers
+    key="identifiers"
+    expandedInitial={expandedInitialIndices.includes(1)}
+  />,
   <VerbGrammar
     key="verb"
-    expandedInitial={expandedInitialIndices.includes(
-      2 + identifierCardsData.length
-    )}
+    expandedInitial={expandedInitialIndices.includes(3)}
   />,
   <NounGrammar
     key="noun"
-    expandedInitial={expandedInitialIndices.includes(
-      3 + identifierCardsData.length
-    )}
+    expandedInitial={expandedInitialIndices.includes(4)}
   />,
   <AdjectiveGrammar
     key="adjective"
-    expandedInitial={expandedInitialIndices.includes(
-      4 + identifierCardsData.length
-    )}
+    expandedInitial={expandedInitialIndices.includes(5)}
   />,
 ]
