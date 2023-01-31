@@ -40,10 +40,10 @@ export const FormTabs = ({
       >
         {tabs.map((tab) => (
           <Tab
-            icon={<IdentifierPill identifier={tab} />}
-            sx={{ minWidth: 0, padding: 0 }}
-            aria-label={tab}
             key={tab}
+            icon={<IdentifierPill identifier={tab} />}
+            aria-label={tab}
+            sx={{ minWidth: 0, padding: 0 }}
           />
         ))}
       </Tabs>

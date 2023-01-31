@@ -7,22 +7,22 @@ import { VerbGrammar } from './Verb'
 export const getGrammarCards = (expandedInitialIndices: number[]) => [
   <VerbGrammar
     key="verb"
-    // expandedInitial={expandedInitialIndices.includes(0)}
+    expandedInitial={expandedInitialIndices.includes(0)}
   />,
   <NounGrammar
     key="noun"
-    // expandedInitial={expandedInitialIndices.includes(1)}
+    expandedInitial={expandedInitialIndices.includes(1)}
   />,
   <AdjectiveGrammar
     key="adjective"
-    // expandedInitial={expandedInitialIndices.includes(2)}
+    expandedInitial={expandedInitialIndices.includes(2)}
   />,
   <Identifiers
     key="identifiers"
-    // expandedInitial={expandedInitialIndices.includes(3)}
+    expandedInitial={expandedInitialIndices.includes(3)}
   />,
   <PartsOfSpeechCard
     key="partsOfSpeech"
-    // expandedInitial={expandedInitialIndices.includes(4)}
+    expandedInitial={expandedInitialIndices.includes(4)}
   />,
 ]

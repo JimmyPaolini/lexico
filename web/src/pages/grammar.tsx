@@ -9,7 +9,7 @@ import { DeckLayout } from '../components/layout/DeckLayout'
 
 export default function Grammar() {
   const { isMobile } = useLexicoContext()
-  const [Cards, setCards] = useState(getGrammarCards([]))
+  const [Cards, setCards] = useState(getGrammarCards([3, 4]))
   const [randomCardOpening, setRandomCardOpening] = useState(!isMobile)
 
   useEffect(() => {

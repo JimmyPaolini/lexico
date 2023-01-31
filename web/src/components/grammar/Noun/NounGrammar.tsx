@@ -16,9 +16,8 @@ export const NounGrammar = ({ expandedInitial = false }: Props) => {
     <Card>
       <CollapsibleCardHeader
         expandedInitial={expandedInitial}
-        title={'Nouns'}
-        subheader={'Declensions, Endings, Translations'}
-        subheaderTypographyProps={{ variant: 'subtitle1' }}
+        title="Nouns"
+        subheader="Declensions, Endings, Translations"
         avatar={<PartOfSpeech partOfSpeech="noun" />}
         cardContentProps={{
           sx: { padding: 0, '&:last-child': { padding: 0 } },
@@ -28,12 +27,16 @@ export const NounGrammar = ({ expandedInitial = false }: Props) => {
         <Tabs
           value={tab}
           onChange={(_: unknown, tab: number) => setTab(tab)}
-          textColor="secondary"
-          indicatorColor="secondary"
-          variant="scrollable"
+          variant="fullWidth"
+          aria-label="noun declensions"
         >
           {nounGrammarData.map((nounGrammarData) => (
-            <Tab key={nounGrammarData.id} label={nounGrammarData.id} />
+            <Tab
+              key={nounGrammarData.id}
+              label={nounGrammarData.id}
+              aria-label={nounGrammarData.id}
+              sx={{ minWidth: 0, padding: 0 }}
+            />
           ))}
         </Tabs>
         <Typography align="center" variant="h6">

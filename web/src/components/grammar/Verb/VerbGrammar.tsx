@@ -19,9 +19,8 @@ export const VerbGrammar = ({ expandedInitial = false }: Props) => {
     <Card>
       <CollapsibleCardHeader
         expandedInitial={expandedInitial}
-        title={'Verbs'}
-        subheader={'Conjugations, Endings, Translations'}
-        subheaderTypographyProps={{ variant: 'subtitle1' }}
+        title="Verbs"
+        subheader="Conjugations, Endings, Translations"
         avatar={<PartOfSpeech partOfSpeech="verb" />}
         cardContentProps={{
           sx: { padding: 0, '&:last-child': { padding: 0 } },
@@ -31,15 +30,15 @@ export const VerbGrammar = ({ expandedInitial = false }: Props) => {
         <Tabs
           value={tab}
           onChange={(_: unknown, tab: number) => setTab(tab)}
-          textColor="secondary"
-          indicatorColor="secondary"
-          variant="scrollable"
+          variant="fullWidth"
+          aria-label="verb conjugations"
         >
           {verbGrammarData.map((verbConjugationCardData) => (
             <Tab
               key={verbConjugationCardData.id}
               label={verbConjugationCardData.id}
-              sx={{ minWidth: 0 }}
+              aria-label={verbConjugationCardData.id}
+              sx={{ minWidth: 0, padding: 0 }}
             />
           ))}
         </Tabs>

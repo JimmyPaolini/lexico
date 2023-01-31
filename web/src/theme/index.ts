@@ -82,6 +82,8 @@ export const theme = createTheme({
     },
     MuiTabs: {
       defaultProps: {
+        textColor: 'secondary',
+        indicatorColor: 'secondary',
         TabScrollButtonProps: {
           sx: {
             '&.Mui-disabled': {

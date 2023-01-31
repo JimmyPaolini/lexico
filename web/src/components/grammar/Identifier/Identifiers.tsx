@@ -38,12 +38,20 @@ export const Identifiers = ({ expandedInitial = false }: Props) => {
         <Tabs
           value={tab}
           onChange={(_: unknown, tab: number) => setTab(tab)}
-          textColor="secondary"
-          indicatorColor="secondary"
-          variant="scrollable"
+          variant="fullWidth"
+          aria-label="identifiers"
         >
           {identifiersData.map((identifierData) => (
-            <Tab key={identifierData.id} label={identifierData.id} />
+            <Tab
+              key={identifierData.id}
+              label={
+                <IdentifierPill
+                  identifier={identifierData.identifiers[0].id as Identifier}
+                />
+              }
+              aria-label={identifierData.id}
+              sx={{ minWidth: 0, padding: 0, flexBasis: 'auto' }}
+            />
           ))}
         </Tabs>
         <Typography align="center" variant="h6">

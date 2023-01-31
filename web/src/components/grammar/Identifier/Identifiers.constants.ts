@@ -208,14 +208,14 @@ export const identifiersData = [
     height: '416px',
     identifiers: [
       {
-        id: 'infinitive',
-        title: 'Infinitive',
-        description: 'Expresses a basic form of a verb',
-      },
-      {
         id: 'non finite',
         title: 'Non Finite',
         description: 'Verbs conjugated without mood, person, or number',
+      },
+      {
+        id: 'infinitive',
+        title: 'Infinitive',
+        description: 'Expresses a basic form of a verb',
       },
       {
         id: 'participle',

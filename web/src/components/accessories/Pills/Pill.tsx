@@ -21,7 +21,6 @@ export const Pill = ({ variant, children, ...identifierStyles }: Props) => {
         justifyContent: 'center',
         alignItems: 'center',
         fontWeight: 500,
-        ...identifierStyles,
         ...(variant === PillVariant.SMALL
           ? {
               height: '16px',
@@ -39,6 +38,7 @@ export const Pill = ({ variant, children, ...identifierStyles }: Props) => {
               padding: '0px 6px',
               margin: 'auto 2px',
             }),
+        ...identifierStyles,
       }}
     >
       {children}

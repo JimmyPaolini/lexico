@@ -44,6 +44,10 @@ export const CollapsibleCardHeader = ({
             variant: 'h5',
             ...cardHeaderProps.titleTypographyProps,
           }}
+          subheaderTypographyProps={{
+            variant: 'subtitle1',
+            ...cardHeaderProps.subheaderTypographyProps,
+          }}
           action={<ExpandIcon expanded={expanded} />}
           {...cardHeaderProps}
         />

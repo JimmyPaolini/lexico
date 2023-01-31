@@ -18,7 +18,6 @@ export const AdjectiveGrammar = ({ expandedInitial = false }: Props) => {
         expandedInitial={expandedInitial}
         title={'Adjectives'}
         subheader={'Declensions, Endings, Translations'}
-        subheaderTypographyProps={{ variant: 'subtitle1' }}
         avatar={<PartOfSpeech partOfSpeech="adjective" />}
         cardContentProps={{
           sx: { padding: 0, '&:last-child': { padding: 0 } },
@@ -28,14 +27,15 @@ export const AdjectiveGrammar = ({ expandedInitial = false }: Props) => {
         <Tabs
           value={tab}
           onChange={(_: unknown, tab: number) => setTab(tab)}
-          textColor="secondary"
-          indicatorColor="secondary"
           variant="fullWidth"
+          aria-label="adjective declensions"
         >
           {adjectiveGrammarData.map((adjectiveGrammarData) => (
             <Tab
               key={adjectiveGrammarData.id}
               label={adjectiveGrammarData.id}
+              aria-label={adjectiveGrammarData.id}
+              sx={{ minWidth: 0, padding: 0 }}
             />
           ))}
         </Tabs>
