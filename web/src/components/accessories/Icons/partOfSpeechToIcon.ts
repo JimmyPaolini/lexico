@@ -21,20 +21,20 @@ export function partofSpeechToIcon(partOfSpeech: string) {
   if (['adverb'].includes(partOfSpeech)) {
     return adverbIcon
   }
+  if (['pronoun', 'determiner'].includes(partOfSpeech)) {
+    return pronounIcon
+  }
   if (['preposition'].includes(partOfSpeech)) {
     return prepositionIcon
   }
   if (['conjunction'].includes(partOfSpeech)) {
     return conjunctionIcon
   }
-  if (['abbreviation', 'numeral'].includes(partOfSpeech)) {
+  if (['numeral', 'abbreviation'].includes(partOfSpeech)) {
     return abbreviationIcon
   }
   if (['prefix', 'suffix', 'interfix', 'circumfix'].includes(partOfSpeech)) {
     return prefixIcon
-  }
-  if (['pronoun', 'determiner'].includes(partOfSpeech)) {
-    return pronounIcon
   }
   if (
     [

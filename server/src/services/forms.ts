@@ -1,4 +1,5 @@
 import AdjectiveForms from '../entity/dictionary/word/forms/AdjectiveForms'
+import { NounNumber } from '../entity/dictionary/word/forms/NounForms'
 import VerbForms from '../entity/dictionary/word/forms/VerbForms'
 import { IndicativeTense } from '../entity/dictionary/word/forms/verbForms/Indicative'
 import { dedupe } from './array'
@@ -30,7 +31,6 @@ export function camelCaseFuturePerfect(forms: VerbForms): VerbForms {
 
 export function determinerFormsToAdjectiveForms(determinerForms: any) {
   const adjectiveForms = new AdjectiveForms() as any
-  console.log('🐋 ~ adjectiveForms', adjectiveForms)
   for (const gender of ['masculine', 'feminine', 'neuter']) {
     for (const number of ['singular', 'plural']) {
       for (const grammarCase of [
@@ -64,4 +64,29 @@ export function getWordForms(word: string, forms: object | string[]): string[] {
       )
     )
   }
+}
+
+export function isDeterminerForms(forms: any) {
+  let isDeterminerForms = false
+  if (!forms) return isDeterminerForms
+  console.log('🐋 ~ isDeterminerForms', isDeterminerForms)
+  for (const case_ of Object.keys(forms)) {
+    if (
+      Object.getOwnPropertyNames(new NounNumber()).some(
+        (number) => number in forms[case_]
+      )
+    ) {
+      for (const number of Object.keys(forms[case_])) {
+        if (
+          Object.getOwnPropertyNames(new AdjectiveForms()).some(
+            (gender) => gender in forms[case_][number]
+          )
+        ) {
+          isDeterminerForms = true
+        }
+      }
+    }
+  }
+
+  return isDeterminerForms
 }

@@ -23,7 +23,7 @@ export const Default: ComponentStory<typeof Forms> = (args, { loaded }) => (
 )
 Default.loaders = [
   async () => {
-    const searched = 'amat:0'
+    const searched = 'amo:0'
     const { forms, partOfSpeech, identifiers } = await getEntry(searched)
     return { searched, forms, partOfSpeech, identifiers }
   },

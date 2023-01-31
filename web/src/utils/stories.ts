@@ -4,19 +4,19 @@ import {
   AuthorDocument,
   AuthorQuery,
   AuthorQueryVariables,
-  EntryDocument,
-  EntryQuery,
-  EntryQueryVariables,
+  EntriesDocument,
+  EntriesQuery,
+  EntriesQueryVariables,
 } from 'src/graphql/generated'
 
 export async function getEntry(id: string) {
-  const response = await rawRequest<EntryQuery, EntryQueryVariables>(
+  const response = await rawRequest<EntriesQuery, EntriesQueryVariables>(
     'http://localhost:3001/graphql',
-    EntryDocument,
-    { id }
+    EntriesDocument,
+    { ids: [id] }
   )
-  if (!response?.data?.entry) throw new Error(`Error getEntry("${id}")`)
-  return response.data.entry
+  if (!response?.data?.entries?.[0]) throw new Error(`Error getEntry("${id}")`)
+  return response.data.entries[0]
 }
 
 export async function getAuthor(id: string) {

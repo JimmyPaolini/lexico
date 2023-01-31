@@ -25,7 +25,7 @@ export const Default: ComponentStory<typeof FormTabs> = (args, { loaded }) => (
 )
 Default.loaders = [
   async () => {
-    const { forms } = await getEntry('amat:0')
+    const { forms } = await getEntry('amo:0')
     const structure = verbFormsRestructure(forms as VerbForms)
     return {
       tabs: Object.keys(structure),

@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles'
 
 import { Entry as EntryType } from 'src/components/search/useSearch'
 
+import { PartOfSpeech } from '../accessories/Pills/identifierTypes'
 import { Forms } from './Forms/Forms'
 import { PrincipalParts } from './PrincipalParts/PrincipalParts'
 import { Translations } from './Translations/Translations'
@@ -34,7 +35,11 @@ export const Entry = ({ entry, search = '' }: Props) => {
       }}
     >
       <PrincipalParts
-        {...{ id, partOfSpeech, principalParts, inflection, bookmarked }}
+        id={id}
+        partOfSpeech={partOfSpeech as PartOfSpeech}
+        principalParts={principalParts ?? []}
+        inflection={inflection}
+        bookmarked={bookmarked}
       />
       <Divider variant="middle" />
       <Translations translations={translations || []} />

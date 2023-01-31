@@ -10,7 +10,11 @@ import Translation from '../entity/dictionary/Translation'
 import Word from '../entity/dictionary/Word'
 import VerbForms from '../entity/dictionary/word/forms/VerbForms'
 import { GetBookmarks } from '../services/authentication/middleware'
-import { camelCaseFuturePerfect, determinerFormsToAdjectiveForms } from '../services/forms'
+import {
+  camelCaseFuturePerfect,
+  determinerFormsToAdjectiveForms,
+  isDeterminerForms,
+} from '../services/forms'
 import { Log } from '../services/log'
 
 @Resolver(Entry)
@@ -58,17 +62,10 @@ export class DictionaryResolver {
       .filter((entry) => !!entry.translations?.length)
       .map((entry) => {
         entry = identifyEntryWord(search, entry)
-        if (entry.partOfSpeech === 'verb' && entry.forms) {
-          entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
-        }
-        if (entry.partOfSpeech === 'determiner' && entry.forms) {
-          entry.forms = determinerFormsToAdjectiveForms(entry.forms)
-        }
         entry.bookmarked = bookmarks?.some(
           (bookmark) => bookmark.id === entry.id
         )
-        entry.isLatinSearchResult = true
-        return entry
+        return processEntry(entry)
       })
 
     return entriesProcessed
@@ -118,17 +115,11 @@ export class DictionaryResolver {
       .map((t) => t.entry)
       .filter((entry) => entry.partOfSpeech !== 'properNoun')
       .map((entry) => {
-        if (entry.partOfSpeech === 'verb' && entry.forms) {
-          entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
-        }
-        if (entry.partOfSpeech === 'determiner' && entry.forms) {
-          entry.forms = determinerFormsToAdjectiveForms(entry.forms)
-        }
         entry.bookmarked = bookmarks?.some(
           (bookmark) => bookmark.id === entry.id
         )
         entry.isLatinSearchResult = false
-        return entry
+        return processEntry(entry)
       })
       .filter(
         (entry, index, self) =>
@@ -139,9 +130,11 @@ export class DictionaryResolver {
   }
 
   @Query(() => Entry)
-  @Log()
+  @Log({ mapResult: ({ id }) => id })
   async entry(@Arg('id') id: string): Promise<Entry> {
-    return await Entry.findOneOrFail({ where: { id } })
+    const entry = await Entry.findOneOrFail({ where: { id } })
+    if (!entry.translations?.length) throw Error(`entry "${id}" not found`)
+    return processEntry(entry)
   }
 
   @Query(() => [Entry])
@@ -149,6 +142,27 @@ export class DictionaryResolver {
     mapResult: (entries: Entry[]) => entries.map(({ id }) => id),
   })
   async entries(@Arg('ids', () => [String]) ids: string[]): Promise<Entry[]> {
-    return await Entry.find({ where: { id: In(ids) }, order: { id: 'ASC' } })
+    const entries = await Entry.find({
+      where: { id: In(ids) },
+      order: { id: 'ASC' },
+    })
+    const entriesProcessed = entries
+      .filter((entry) => !!entry.translations?.length)
+      .map(processEntry)
+
+    return entriesProcessed
   }
+}
+
+function processEntry(entry: Entry) {
+  if (entry.partOfSpeech === 'verb' && entry.forms) {
+    entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
+  }
+  if (
+    ['pronoun', 'determiner'].includes(entry.partOfSpeech) &&
+    isDeterminerForms(entry.forms)
+  ) {
+    entry.forms = determinerFormsToAdjectiveForms(entry.forms)
+  }
+  return entry
 }

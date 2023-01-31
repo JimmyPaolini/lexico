@@ -24,7 +24,7 @@ export const Default: ComponentStory<typeof Translation> = (
 ) => <Translation {...args} {...loaded} />
 Default.loaders = [
   async () => {
-    const { translations } = await getEntry('amat:0')
+    const { translations } = await getEntry('amo:0')
     if (!translations?.length) throw new Error('translation not found')
     return { translation: translations[0] }
   },
@@ -36,7 +36,7 @@ export const TwoLines: ComponentStory<typeof Translation> = (
 ) => <Translation {...args} {...loaded} />
 TwoLines.loaders = [
   async () => {
-    const { translations } = await getEntry('amat:0')
+    const { translations } = await getEntry('amo:0')
     if (!translations?.length) throw new Error('translation not found')
     if (translations?.length < 3) throw new Error('translation not found')
     return { translation: translations[2] }

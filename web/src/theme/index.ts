@@ -60,12 +60,14 @@ export const theme = createTheme({
     },
     MuiCardHeader: {
       styleOverrides: {
+        root: { backgroundColor: themeInitial.palette.background.paper },
         action: { margin: 'auto' },
       },
     },
     MuiCardContent: {
       styleOverrides: {
         root: {
+          backgroundColor: themeInitial.palette.background.paper,
           padding: themeInitial.spacing(2),
           '&:last-child': {
             paddingBottom: themeInitial.spacing(2),

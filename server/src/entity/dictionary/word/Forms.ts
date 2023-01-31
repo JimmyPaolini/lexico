@@ -13,12 +13,29 @@ export const FormsUnion: UnionFromClasses<
 > = createUnionType({
   name: 'Forms',
   types: () => [NounForms, VerbForms, AdjectiveForms, AdverbForms] as const,
-  resolveType: (value) => {
-    if ('nominative' in value) return NounForms
-    if ('indicative' in value) return VerbForms
-    if ('positive' in value) return AdverbForms
-    if ('masculine' in value || 'feminine' in value || 'neuter' in value) {
+  resolveType: (forms) => {
+    if (
+      Object.getOwnPropertyNames(new NounForms()).some((key) => key in forms)
+    ) {
+      return NounForms
+    }
+    if (
+      Object.getOwnPropertyNames(new VerbForms()).some((key) => key in forms)
+    ) {
+      return VerbForms
+    }
+    if (
+      Object.getOwnPropertyNames(new AdjectiveForms()).some(
+        (key) => key in forms
+      )
+    ) {
       return AdjectiveForms
-    } else return undefined
+    }
+    if (
+      Object.getOwnPropertyNames(new AdverbForms()).some((key) => key in forms)
+    ) {
+      return AdverbForms
+    }
+    return undefined
   },
 })

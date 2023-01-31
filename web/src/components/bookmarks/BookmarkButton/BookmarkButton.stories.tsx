@@ -50,7 +50,7 @@ export const Default: ComponentStory<typeof BookmarkButton> = (
 Default.args = { bookmarked: false }
 Default.loaders = [
   async () => {
-    const { id } = await getEntry('amat')
+    const { id } = await getEntry('amo:0')
     return { id }
   },
 ]

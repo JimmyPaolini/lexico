@@ -26,7 +26,7 @@ export const Default: ComponentStory<typeof FormsTable> = (
 ) => <FormsTable {...args} {...loaded} />
 Default.loaders = [
   async () => {
-    const { forms } = await getEntry('amat:0')
+    const { forms } = await getEntry('amo:0')
     return {
       forms: verbFormsRestructure(forms as VerbForms).indicative.present.active,
     }

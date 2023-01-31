@@ -3,32 +3,32 @@ import { Field, ObjectType } from 'type-graphql'
 @ObjectType()
 export class NounNumber {
   @Field(() => [String], { nullable: true })
-  singular?: string[]
+  singular?: string[] = []
 
   @Field(() => [String], { nullable: true })
-  plural?: string[]
+  plural?: string[] = []
 }
 
 @ObjectType()
 export default class NounForms {
   @Field(() => NounNumber, { nullable: true })
-  nominative?: NounNumber
+  nominative?: NounNumber = new NounNumber()
 
   @Field(() => NounNumber, { nullable: true })
-  genitive?: NounNumber
+  genitive?: NounNumber = new NounNumber()
 
   @Field(() => NounNumber, { nullable: true })
-  dative?: NounNumber
+  dative?: NounNumber = new NounNumber()
 
   @Field(() => NounNumber, { nullable: true })
-  accusative?: NounNumber
+  accusative?: NounNumber = new NounNumber()
 
   @Field(() => NounNumber, { nullable: true })
-  ablative?: NounNumber
+  ablative?: NounNumber = new NounNumber()
 
   @Field(() => NounNumber, { nullable: true })
-  vocative?: NounNumber
+  vocative?: NounNumber = new NounNumber()
 
   @Field(() => NounNumber, { nullable: true })
-  locative?: NounNumber
+  locative?: NounNumber = new NounNumber()
 }

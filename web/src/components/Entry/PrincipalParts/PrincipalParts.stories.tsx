@@ -25,7 +25,7 @@ export const Default: ComponentStory<typeof PrincipalParts> = (
 Default.loaders = [
   async () => {
     const { id, partOfSpeech, principalParts, inflection, bookmarked } =
-      await getEntry('amat:0')
+      await getEntry('amo:0')
     return { id, partOfSpeech, principalParts, inflection, bookmarked }
   },
 ]

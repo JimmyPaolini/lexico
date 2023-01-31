@@ -13,7 +13,6 @@ generates:
             /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
             import { clientEndpoint as endpointUrl } from '../pages/_app'
     config:
-      dedupeFragments: true
       fetcher:
         endpoint: 'endpointUrl'
         fetchParams:
@@ -21,6 +20,7 @@ generates:
           mode: cors
           headers:
             content-type: application/json
+      dedupeFragments: true
       exposeQueryKeys: true
       exposeFetcher: true
       flattenGeneratedTypes: true
@@ -32,5 +32,5 @@ generates:
 hooks:
   afterAllFileWrite:
     - sed -r -i '' -e '1h;2,$H;$!d;g' -e 's/FragmentDoc = `([^$]+)[^`]+`/FragmentDoc = `\1`/g' src/graphql/generated.ts
-    # - eslint --no-ignore --no-error-on-unmatched-pattern --config ../cleaning/.eslintrc.js --ignore-path ../cleaning/.eslintignore --fix
-    # - prettier --config ../cleaning/.prettierrc.js --ignore-path ../cleaning/.prettierignore --write
+    - eslint --no-ignore --no-error-on-unmatched-pattern --config ../cleaning/.eslintrc.js --ignore-path ../cleaning/.eslintignore --fix
+    - prettier --config ../cleaning/.prettierrc.js --ignore-path ../cleaning/.prettierignore --write

@@ -24,7 +24,7 @@ export const Default: ComponentStory<typeof Translations> = (
 ) => <Translations {...args} {...loaded} />
 Default.loaders = [
   async () => {
-    const { translations } = await getEntry('amat:0')
+    const { translations } = await getEntry('amo:0')
     return { translations }
   },
 ]

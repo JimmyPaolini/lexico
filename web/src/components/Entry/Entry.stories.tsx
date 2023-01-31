@@ -12,10 +12,10 @@ export default {
 export const Verb: ComponentStory<typeof Entry> = (args, { loaded }) => (
   <Entry {...args} {...loaded} />
 )
-Verb.args = { search: 'amat' }
+Verb.args = { search: 'amo:0' }
 Verb.loaders = [
   async () => {
-    const entry = await getEntry('amat:0')
+    const entry = await getEntry('amo:0')
     return { entry }
   },
 ]
@@ -34,10 +34,10 @@ Adjective.loaders = [
 export const Noun: ComponentStory<typeof Entry> = (args, { loaded }) => (
   <Entry {...args} {...loaded} />
 )
-Noun.args = { search: 'pater' }
+Noun.args = { search: 'pax' }
 Noun.loaders = [
   async () => {
-    const entry = await getEntry('pater:0')
+    const entry = await getEntry('pax:1')
     return { entry }
   },
 ]
