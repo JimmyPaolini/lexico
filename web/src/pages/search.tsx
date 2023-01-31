@@ -13,7 +13,7 @@ import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 import { Entry } from '../components/Entry/Entry'
 import { Logo } from '../components/accessories/Logo'
 import { Deck } from '../components/layout/Deck'
-import { SearchBarLayout } from '../components/layout/SearchBarLayout'
+import { SearchDeckLayout } from '../components/layout/SearchDeckLayout'
 import { getSearchPageMetadata } from '../components/search/getSearchPageMetadata'
 
 type Props = { initialSearch: string }
@@ -49,7 +49,7 @@ export default function Search({ initialSearch }: Props) {
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
       </Head>
-      <SearchBarLayout
+      <SearchDeckLayout
         initialSearch={search}
         handleSearch={handleSearch}
         isLoading={isLoading && !!search}
@@ -62,7 +62,7 @@ export default function Search({ initialSearch }: Props) {
         ) : (
           <Deck Cards={Cards} />
         )}
-      </SearchBarLayout>
+      </SearchDeckLayout>
     </>
   )
 }

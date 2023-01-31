@@ -2,17 +2,19 @@ import { Card, CardContent } from '@mui/material'
 
 import { CardHeader } from '../components/accessories/CardHeader'
 import { SubmitButton } from '../components/accessories/SubmitButton'
-import { SingleCardLayout } from '../components/layout/SingleCardLayout'
+import { DeckLayout } from '../components/layout/DeckLayout'
 
 export default function Error500() {
   return (
-    <SingleCardLayout>
-      <Card>
-        <CardHeader title="Error: Server Issue" />
-        <CardContent>
-          <SubmitButton name="Return to Homepage" href="/search" />
-        </CardContent>
-      </Card>
-    </SingleCardLayout>
+    <DeckLayout
+      Cards={[
+        <Card key="500">
+          <CardHeader title="Error: Server Issue" />
+          <CardContent>
+            <SubmitButton name="Return to Homepage" href="/search" />
+          </CardContent>
+        </Card>,
+      ]}
+    />
   )
 }

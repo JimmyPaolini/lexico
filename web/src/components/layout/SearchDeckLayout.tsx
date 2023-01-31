@@ -7,7 +7,7 @@ import { SearchBar } from '../search/SearchBar'
 
 type Props = PropsWithChildren<ComponentProps<typeof SearchBar>>
 
-export const SearchBarLayout = ({ children, ...props }: Props) => {
+export const SearchDeckLayout = ({ children, ...props }: Props) => {
   const theme = useTheme()
   return (
     <Grid container direction="column" alignItems="stretch">

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { ChevronLeft, Menu } from '@mui/icons-material'
 import {
   Divider,
@@ -16,12 +18,13 @@ import { useLexicoContext } from 'src/components/layout/LexicoContext'
 
 import { Pages } from './Pages'
 
-type Props = { page?: string }
-
-export const Navigation = ({ page: initialPage }: Props) => {
+export const Navigation = () => {
   const theme = useTheme()
+  const router = useRouter()
   const { isMobile, isNavOpen: open, setNavOpen: setOpen } = useLexicoContext()
-  const [selectedPage, setSelectedPage] = useState(initialPage ?? 'search')
+  const [selectedPage, setSelectedPage] = useState(
+    router.pathname.split('/')?.[1] ?? 'search'
+  )
 
   const drawerOpenStyles = {
     width: theme.spacing(27),

@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 
 import Head from 'next/head'
 
-import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 import { IncomingHttpHeaders } from 'http2'
@@ -15,8 +14,7 @@ import { shouldShowSettingsInstructions } from 'src/components/user/settings/set
 import { UserDocument, useUserQuery } from 'src/graphql/generated'
 import { useSnackbar } from 'src/hooks/useSnackbar'
 
-import { Deck } from '../components/layout/Deck'
-import { SingleCardLayout } from '../components/layout/SingleCardLayout'
+import { DeckLayout } from '../components/layout/DeckLayout'
 import { LoginCard } from '../components/user/login/LoginCard'
 import { SettingsCard } from '../components/user/settings/SettingsCard'
 import { serverEndpoint } from './api'
@@ -34,29 +32,19 @@ export default function Settings() {
   }, [])
 
   return (
-    <div>
+    <>
       <Head>
         <title>Lexico - Settings</title>
       </Head>
-      {!user ? (
-        <Grid
-          container
-          justifyContent="center"
-          sx={{ marginTop: theme.spacing(4) }}
-        >
-          <Deck
-            Cards={[
-              <LoginCard key="LoginCard" />,
-              <SettingsCard key="SettingsCard" />,
-            ]}
-          />
-        </Grid>
-      ) : (
-        <SingleCardLayout>
-          <SettingsCard />
-        </SingleCardLayout>
-      )}
-    </div>
+      <DeckLayout
+        Cards={
+          [
+            !user ? <LoginCard key="LoginCard" /> : null,
+            <SettingsCard key="SettingsCard" />,
+          ].filter(Boolean) as JSX.Element[]
+        }
+      />
+    </>
   )
 }
 

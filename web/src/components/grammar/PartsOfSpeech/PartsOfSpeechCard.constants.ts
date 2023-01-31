@@ -1,7 +1,3 @@
-import { ComponentProps } from 'react'
-
-import { PartsOfSpeechCard } from './PartsOfSpeechCard'
-
 export const partsOfSpeechCardData = {
   id: 'partsOfSpeech',
   title: 'Parts of Speech',
@@ -53,4 +49,4 @@ export const partsOfSpeechCardData = {
       description: 'Expresses a noun in the feminine category',
     },
   ],
-} as ComponentProps<typeof PartsOfSpeechCard>
+}

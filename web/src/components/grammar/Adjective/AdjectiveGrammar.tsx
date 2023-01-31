@@ -4,6 +4,7 @@ import { Card, Divider, Tab, Tabs, Typography } from '@mui/material'
 
 import { AdjectiveFormsTable } from '../../Entry/Forms/PartsOfSpeech/AdjectiveFormsTable'
 import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
+import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
 import { adjectiveGrammarData } from './AdjectiveGrammar.constants'
 
 type Props = { expandedInitial?: boolean }
@@ -17,6 +18,8 @@ export const AdjectiveGrammar = ({ expandedInitial = false }: Props) => {
         expandedInitial={expandedInitial}
         title={'Adjectives'}
         subheader={'Declensions, Endings, Translations'}
+        subheaderTypographyProps={{ variant: 'subtitle1' }}
+        avatar={<PartOfSpeech partOfSpeech="adjective" />}
         cardContentProps={{
           sx: { padding: 0, '&:last-child': { padding: 0 } },
         }}

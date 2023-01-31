@@ -40,14 +40,10 @@ export const Identifiers = ({ expandedInitial = false }: Props) => {
           onChange={(_: unknown, tab: number) => setTab(tab)}
           textColor="secondary"
           indicatorColor="secondary"
-          variant="fullWidth"
+          variant="scrollable"
         >
           {identifiersData.map((identifierData) => (
-            <Tab
-              key={identifierData.id}
-              label={identifierData.id}
-              sx={{ minWidth: 0, padding: 0, maxWidth: theme.spacing(7) }}
-            />
+            <Tab key={identifierData.id} label={identifierData.id} />
           ))}
         </Tabs>
         <Typography align="center" variant="h6">
@@ -57,7 +53,12 @@ export const Identifiers = ({ expandedInitial = false }: Props) => {
           {identifiersData[tab].description}
         </Typography>
         <Divider variant="middle" />
-        <List sx={{ transition: theme.transitions.create(['all']) }}>
+        <List
+          sx={{
+            transition: theme.transitions.create(['all']),
+            height: identifiersData[tab].height,
+          }}
+        >
           {identifiersData[tab].identifiers.map((identifier) => (
             <ListItem key={identifier.id}>
               {identifier.id && (

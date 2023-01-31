@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography'
 
-import { Identifier } from 'src/utils/identifiers/types'
+import { Identifier } from 'src/components/accessories/Pills/identifierTypes'
 
 import { IdentifierPill } from '../../../accessories/Pills/IdentifierPill'
 import { PillVariant } from '../../../accessories/Pills/Pill'

@@ -13,7 +13,7 @@ import { QueryClient } from 'react-query'
 
 import { User, useUserQuery } from 'src/graphql/generated'
 
-type LexicoContext = {
+export type LexicoContextType = {
   isNavOpen: boolean
   setNavOpen: Dispatch<SetStateAction<boolean>>
   isMobile: boolean
@@ -21,7 +21,7 @@ type LexicoContext = {
   queryClient: QueryClient
 }
 
-export const LexicoContext = createContext({} as LexicoContext)
+export const LexicoContext = createContext({} as LexicoContextType)
 
 export const useLexicoContext = () => useContext(LexicoContext)
 
@@ -45,7 +45,7 @@ export const LexicoContextProvider = ({ children, queryClient }: Props) => {
           isNavOpen,
           setNavOpen,
           queryClient,
-        } as LexicoContext
+        } as LexicoContextType
       }
     >
       {children}

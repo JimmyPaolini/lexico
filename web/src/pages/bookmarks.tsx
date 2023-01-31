@@ -20,7 +20,7 @@ import { identifyEntryWord } from 'src/utils/identifiers'
 import { Entry } from '../components/Entry/Entry'
 import { filterBookmarks } from '../components/bookmarks/BookmarkButton'
 import { Deck } from '../components/layout/Deck'
-import { SearchBarLayout } from '../components/layout/SearchBarLayout'
+import { SearchDeckLayout } from '../components/layout/SearchDeckLayout'
 
 export default function Bookmarks() {
   const { user } = useLexicoContext()
@@ -51,7 +51,7 @@ export default function Bookmarks() {
       <Head>
         <title>Lexico - Bookmarks</title>
       </Head>
-      <SearchBarLayout
+      <SearchDeckLayout
         handleSearch={(search) => setSearch(search)}
         isLoading={isLoading}
         placeholder="Search Bookmarks"
@@ -63,7 +63,7 @@ export default function Bookmarks() {
         ) : (
           <Deck Cards={Cards} />
         )}
-      </SearchBarLayout>
+      </SearchDeckLayout>
     </>
   )
 }

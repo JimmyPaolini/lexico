@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid'
 
-import { Identifier } from 'src/utils/identifiers/types'
+import { Identifier } from 'src/components/accessories/Pills/identifierTypes'
 
 import { CornerIdentifier } from './CornerIdentifier'
 

@@ -81,11 +81,19 @@ export const theme = createTheme({
       },
     },
     MuiTabs: {
+      defaultProps: {
+        TabScrollButtonProps: {
+          sx: {
+            '&.Mui-disabled': {
+              opacity: 0.2,
+            },
+          },
+        },
+      },
       styleOverrides: {
         root: {
-          '& .MuiTabScrollButton-root.Mui-disabled': {
-            opacity: 0.2,
-          },
+          minWidth: 0,
+          padding: 0,
         },
       },
     },

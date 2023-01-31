@@ -1,8 +1,9 @@
 export const identifiersData = [
   {
-    id: 'mod',
+    id: 'mood',
     title: 'Mood',
     description: "Expresses the speaker's attitude towards a verb",
+    height: '336px',
     identifiers: [
       {
         id: 'indicative',
@@ -31,9 +32,10 @@ export const identifiersData = [
     ],
   },
   {
-    id: 'tns',
+    id: 'tense',
     title: 'Tense',
     description: 'Expresses the reference time at which a verb occurs',
+    height: '538px',
     identifiers: [
       {
         id: 'present',
@@ -73,9 +75,10 @@ export const identifiersData = [
     ],
   },
   {
-    id: 'vce',
+    id: 'voice',
     title: 'Voice',
     description: 'Expresses the relationship of a verb to its participants',
+    height: '200px',
     identifiers: [
       {
         id: 'active',
@@ -90,9 +93,10 @@ export const identifiersData = [
     ],
   },
   {
-    id: 'prs',
+    id: 'person',
     title: 'Person',
     description: "Expresses a verb's participants",
+    height: '292px',
     identifiers: [
       {
         id: 'first',
@@ -114,9 +118,10 @@ export const identifiersData = [
     ],
   },
   {
-    id: 'num',
+    id: 'number',
     title: 'Number',
     description: 'How many nouns perform a verb',
+    height: '160px',
     identifiers: [
       {
         id: 'singular',
@@ -131,9 +136,10 @@ export const identifiersData = [
     ],
   },
   {
-    id: 'cse',
+    id: 'case',
     title: 'Case',
     description: "Express a noun's relationships to entities",
+    height: '520px',
     identifiers: [
       {
         id: 'nominative',
@@ -173,9 +179,10 @@ export const identifiersData = [
     ],
   },
   {
-    id: 'gdr',
+    id: 'gender',
     title: 'Gender',
     description: "Expresses a noun or adjective's category",
+    height: '232px',
     identifiers: [
       {
         id: 'masculine',
@@ -198,6 +205,7 @@ export const identifiersData = [
     id: 'misc',
     title: 'Miscellaneous',
     description: 'Other verb identifiers',
+    height: '416px',
     identifiers: [
       {
         id: 'infinitive',

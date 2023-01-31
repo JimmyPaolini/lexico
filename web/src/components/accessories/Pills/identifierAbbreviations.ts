@@ -1,6 +1,28 @@
-import { Identifier, IdentifierAbbreviation } from './types'
+import { Identifier, IdentifierAbbreviation } from './identifierTypes'
 
 export const abbreviateIdentifier = {
+  noun: 'N',
+  properNoun: 'PN',
+  verb: 'VB',
+  adjective: 'ADJ',
+  adverb: 'ADV',
+  pronoun: 'PRO',
+  determiner: 'DET',
+  preposition: 'PREP',
+  conjunction: 'CNJ',
+  numeral: 'NUM',
+  abbreviation: 'ABV',
+  prefix: 'X-',
+  suffix: '-X',
+  interfix: '-X-',
+  circumfix: 'X-X',
+  inflection: '--',
+  particle: 'PTCL',
+  interjection: '!!',
+  phrase: 'PRSE',
+  proverb: 'PVB',
+  idiom: 'IDM',
+
   nominative: 'NOM',
   genitive: 'GEN',
   dative: 'DAT',
@@ -13,8 +35,8 @@ export const abbreviateIdentifier = {
   feminine: 'FEM',
   neuter: 'NEU',
 
-  singular: 'S',
-  plural: 'P',
+  singular: 'SG',
+  plural: 'PL',
 
   indicative: 'IND',
   subjunctive: 'SUB',
@@ -45,6 +67,28 @@ export const abbreviateIdentifier = {
 } as { [key in Identifier]: IdentifierAbbreviation }
 
 export const unabbreviateIdentifier = {
+  N: 'noun',
+  PN: 'properNoun',
+  VB: 'verb',
+  ADJ: 'adjective',
+  ADV: 'adverb',
+  PRO: 'pronoun',
+  DET: 'determiner',
+  PREP: 'preposition',
+  CNJ: 'conjunction',
+  NUM: 'numeral',
+  ABV: 'abbreviation',
+  'X-': 'prefix',
+  '-X': 'suffix',
+  '-X-': 'interfix',
+  'X-X': 'circumfix',
+  '--': 'inflection',
+  PTCL: 'particle',
+  '!!': 'interjection',
+  PRSE: 'phrase',
+  PVB: 'proverb',
+  IDM: 'idiom',
+
   NOM: 'nominative',
   GEN: 'genitive',
   DAT: 'dative',
@@ -57,8 +101,8 @@ export const unabbreviateIdentifier = {
   FEM: 'feminine',
   NEU: 'neuter',
 
-  S: 'singular',
-  P: 'plural',
+  SG: 'singular',
+  PL: 'plural',
 
   IND: 'indicative',
   SUB: 'subjunctive',

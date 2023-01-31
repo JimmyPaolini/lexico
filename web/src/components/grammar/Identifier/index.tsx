@@ -1,1 +1,1 @@
-export { IdentifierCards } from './IdentifierCards.constants'
+export { Identifiers } from './Identifiers'

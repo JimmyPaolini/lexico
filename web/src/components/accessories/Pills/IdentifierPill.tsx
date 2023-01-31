@@ -1,7 +1,7 @@
-import { Identifier, abbreviateIdentifier } from 'src/utils/identifiers'
-
 import { Pill, PillVariant } from './Pill'
+import { abbreviateIdentifier } from './identifierAbbreviations'
 import { identifierStyles } from './identifierStyles'
+import { Identifier } from './identifierTypes'
 
 type Props = { identifier: Identifier; variant?: PillVariant }
 

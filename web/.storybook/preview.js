@@ -1,4 +1,5 @@
 import { RouterContext } from 'next/dist/shared/lib/router-context'
+import * as NextImage from 'next/image'
 
 import { CacheProvider } from '@emotion/react'
 import { CssBaseline, Grid, ThemeProvider } from '@mui/material'
@@ -43,3 +44,10 @@ export const decorators = [
     </CacheProvider>
   ),
 ]
+
+const OriginalNextImage = NextImage.default
+
+Object.defineProperty(NextImage, 'default', {
+  configurable: true,
+  value: (props) => <OriginalNextImage {...props} unoptimized />,
+})

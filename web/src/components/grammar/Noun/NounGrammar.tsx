@@ -1,15 +1,15 @@
 import { useState } from 'react'
 
-import { Card, Divider, Tab, Tabs, Typography, useTheme } from '@mui/material'
+import { Card, Divider, Tab, Tabs, Typography } from '@mui/material'
 
 import { NounFormsTable } from '../../Entry/Forms/PartsOfSpeech/NounFormsTable'
 import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
+import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
 import { nounGrammarData } from './NounGrammar.constants'
 
 type Props = { expandedInitial?: boolean }
 
 export const NounGrammar = ({ expandedInitial = false }: Props) => {
-  const theme = useTheme()
   const [tab, setTab] = useState(0)
 
   return (
@@ -18,6 +18,8 @@ export const NounGrammar = ({ expandedInitial = false }: Props) => {
         expandedInitial={expandedInitial}
         title={'Nouns'}
         subheader={'Declensions, Endings, Translations'}
+        subheaderTypographyProps={{ variant: 'subtitle1' }}
+        avatar={<PartOfSpeech partOfSpeech="noun" />}
         cardContentProps={{
           sx: { padding: 0, '&:last-child': { padding: 0 } },
         }}
@@ -28,14 +30,10 @@ export const NounGrammar = ({ expandedInitial = false }: Props) => {
           onChange={(_: unknown, tab: number) => setTab(tab)}
           textColor="secondary"
           indicatorColor="secondary"
-          variant="fullWidth"
+          variant="scrollable"
         >
           {nounGrammarData.map((nounGrammarData) => (
-            <Tab
-              key={nounGrammarData.id}
-              label={nounGrammarData.id}
-              sx={{ minWidth: 0, padding: 0, maxWidth: theme.spacing(7) }}
-            />
+            <Tab key={nounGrammarData.id} label={nounGrammarData.id} />
           ))}
         </Tabs>
         <Typography align="center" variant="h6">

@@ -9,7 +9,7 @@ import { GetStaticProps } from 'next'
 import { Author, useAuthorsQuery } from 'src/graphql/generated'
 
 import { Deck } from '../components/layout/Deck'
-import { SearchBarLayout } from '../components/layout/SearchBarLayout'
+import { SearchDeckLayout } from '../components/layout/SearchDeckLayout'
 import { CustomTextsCard } from '../components/library/CustomTextsCard/CustomTextsCard'
 import { LibraryCard } from '../components/library/LibraryCard'
 import { filterLibrary } from '../components/library/filterLibrary'
@@ -45,7 +45,7 @@ export default function Library({ authors }: Props) {
             .join(', ')}`}
         />
       </Head>
-      <SearchBarLayout
+      <SearchDeckLayout
         handleSearch={(search) => setSearched(search)}
         isLoading={false}
         placeholder="Search Library"
@@ -55,7 +55,7 @@ export default function Library({ authors }: Props) {
         ) : (
           <Deck Cards={Cards} />
         )}
-      </SearchBarLayout>
+      </SearchDeckLayout>
     </>
   )
 }

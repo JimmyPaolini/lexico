@@ -9,35 +9,24 @@ import {
 
 import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
 import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
+import { partsOfSpeechCardData } from './PartsOfSpeechCard.constants'
 
-type Props = {
-  expandedInitial?: boolean
-  id: string
-  title: string
-  description: string
-  partsOfSpeech: { id: string; title: string; description: string }[]
-}
+type Props = { expandedInitial?: boolean }
 
-export const PartsOfSpeechCard = ({
-  expandedInitial,
-  id,
-  title,
-  description,
-  partsOfSpeech,
-}: Props) => {
+export const PartsOfSpeechCard = ({ expandedInitial }: Props) => {
   return (
-    <Card key={id}>
+    <Card>
       <CollapsibleCardHeader
         expandedInitial={expandedInitial}
-        title={title}
-        subheader={description}
+        title={partsOfSpeechCardData.title}
+        subheader={partsOfSpeechCardData.description}
         cardContentProps={{
           sx: { padding: 0, '&:last-child': { padding: 0 } },
         }}
       >
         <Divider variant="middle" />
         <List>
-          {partsOfSpeech.map((partOfSpeech) => (
+          {partsOfSpeechCardData.partsOfSpeech.map((partOfSpeech) => (
             <ListItem key={partOfSpeech.id}>
               {partOfSpeech.id && (
                 <ListItemIcon
