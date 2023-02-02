@@ -11,6 +11,7 @@ import {
   LibraryResolver,
   UserResolver,
 } from '../resolver'
+import { EntryResolver } from '../resolver/entry'
 import { WordResolver } from '../resolver/word'
 
 export async function initializeGraphqlApi(
@@ -24,7 +25,7 @@ export async function initializeGraphqlApi(
         BookmarkResolver,
         CustomTextResolver,
         DictionaryResolver,
-        // EntryResolver,
+        EntryResolver,
         LibraryResolver,
         UserResolver,
         WordResolver,
@@ -33,7 +34,6 @@ export async function initializeGraphqlApi(
     }),
     context: ({ req, res }) => ({ req, res }),
     introspection: true,
-    // playground: process.env.NODE_ENV !== 'production',
   })
   await api.start()
   api.applyMiddleware({ app, cors })
