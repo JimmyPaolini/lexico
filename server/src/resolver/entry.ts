@@ -1,8 +1,7 @@
-import { Arg, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql'
+import { Arg, Query, Resolver } from 'type-graphql'
 import { In } from 'typeorm'
 
 import Entry from '../entity/dictionary/Entry'
-import { DevOnly } from '../services/authorization/environment'
 import { processEntry } from '../services/entry'
 import { Log } from '../services/log'
 
@@ -28,18 +27,5 @@ export class EntryResolver {
       .map(processEntry)
 
     return entriesProcessed
-  }
-
-  @Mutation(() => Entry)
-  @UseMiddleware(DevOnly)
-  async upsertEntry(@Arg('entry') entry: Entry): Promise<Entry> {
-    return await Entry.save(entry)
-  }
-
-  @Mutation(() => Entry)
-  @UseMiddleware(DevOnly)
-  async deleteEntry(@Arg('entry') entry: Entry): Promise<Entry> {
-    await Entry.delete(entry.id)
-    return entry
   }
 }
