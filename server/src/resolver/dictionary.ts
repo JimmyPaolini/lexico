@@ -8,13 +8,8 @@ import { Database } from '../config/database'
 import Entry from '../entity/dictionary/Entry'
 import Translation from '../entity/dictionary/Translation'
 import Word from '../entity/dictionary/Word'
-import VerbForms from '../entity/dictionary/word/forms/VerbForms'
 import { GetBookmarks } from '../services/authentication/middleware'
-import {
-  camelCaseFuturePerfect,
-  determinerFormsToAdjectiveForms,
-  isDeterminerForms,
-} from '../services/forms'
+import { processEntry } from '../services/entry'
 import { Log } from '../services/log'
 
 @Resolver(Entry)
@@ -152,17 +147,4 @@ export class DictionaryResolver {
 
     return entriesProcessed
   }
-}
-
-function processEntry(entry: Entry) {
-  if (entry.partOfSpeech === 'verb' && entry.forms) {
-    entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
-  }
-  if (
-    ['pronoun', 'determiner'].includes(entry.partOfSpeech) &&
-    isDeterminerForms(entry.forms)
-  ) {
-    entry.forms = determinerFormsToAdjectiveForms(entry.forms)
-  }
-  return entry
 }
