@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-import { GOOGLE_ID, GOOGLE_SECRET } from '../../../../utils/env'
-import log from '../../../../utils/log'
+import log from '../log'
 
 export type GoogleProfile = {
   id: string
@@ -19,8 +18,8 @@ export async function fetchGoogleUser(
     .post('https://oauth2.googleapis.com/token', null, {
       params: {
         code,
-        client_id: GOOGLE_ID,
-        client_secret: GOOGLE_SECRET,
+        client_id: process.env.GOOGLE_ID,
+        client_secret: process.env.GOOGLE_SECRET,
         redirect_uri: hostname.match(/lexicolatin.com/i)
           ? 'https://lexicolatin.com/google'
           : 'http://localhost:3000/google',

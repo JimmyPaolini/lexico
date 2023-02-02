@@ -3,10 +3,10 @@ import cors from 'cors'
 import express from 'express'
 import 'reflect-metadata'
 
-import log from '../../utils/log'
 import { initializeGraphqlApi } from './config/api'
 import { corsOptions } from './config/cors'
 import { Database } from './config/database'
+import log from './services/log'
 
 async function main() {
   await Database.initialize()

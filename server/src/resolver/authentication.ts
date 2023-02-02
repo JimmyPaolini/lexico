@@ -7,13 +7,13 @@ import {
   UseMiddleware,
 } from 'type-graphql'
 
-import log from '../../../utils/log'
 import { ResolverContext } from '../config/ResolverContext'
 import User from '../entity/user/User'
 import { fetchFacebookUser } from '../services/authentication/facebook'
 import { fetchGoogleUser } from '../services/authentication/google'
 import { Authenticate } from '../services/authentication/middleware'
 import { createAccessToken } from '../services/authentication/token'
+import log from '../services/log'
 
 @Resolver(User)
 export class AuthenticationResolver {

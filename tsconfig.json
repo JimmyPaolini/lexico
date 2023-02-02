@@ -30,6 +30,7 @@
     ".github",
     ".vscode",
     "assets",
-    "infra"
+    "infra",
+    "tests"
   ]
 }

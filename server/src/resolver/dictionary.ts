@@ -1,8 +1,6 @@
 import { Arg, Ctx, Query, Resolver, UseMiddleware } from 'type-graphql'
 import { In } from 'typeorm'
 
-import identifyEntryWord from '../../../utils/identifiers'
-import { hasSuffix } from '../../../utils/string'
 import { ResolverContext } from '../config/ResolverContext'
 import { Database } from '../config/database'
 import Entry from '../entity/dictionary/Entry'
@@ -10,7 +8,9 @@ import Translation from '../entity/dictionary/Translation'
 import Word from '../entity/dictionary/Word'
 import { GetBookmarks } from '../services/authentication/middleware'
 import { processEntry } from '../services/entry'
+import identifyEntryWord from '../services/identifiers'
 import { Log } from '../services/log'
+import { hasSuffix } from '../services/string'
 
 @Resolver(Entry)
 export class DictionaryResolver {

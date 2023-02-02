@@ -24,6 +24,7 @@ export async function initializeGraphqlApi(
         BookmarkResolver,
         CustomTextResolver,
         DictionaryResolver,
+        // EntryResolver,
         LibraryResolver,
         UserResolver,
         WordResolver,
@@ -32,8 +33,9 @@ export async function initializeGraphqlApi(
     }),
     context: ({ req, res }) => ({ req, res }),
     introspection: true,
-    playground: process.env.NODE_ENV !== 'production',
+    // playground: process.env.NODE_ENV !== 'production',
   })
+  await api.start()
   api.applyMiddleware({ app, cors })
   return api
 }

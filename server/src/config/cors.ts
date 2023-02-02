@@ -1,5 +1,3 @@
-import { CorsOptions } from 'cors'
-
 export const corsOptions = {
   credentials: true,
   origin:
@@ -9,5 +7,9 @@ export const corsOptions = {
           'https://www.lexicolatin.com',
           'http://web:3000',
         ]
-      : ['http://localhost:3000', 'http://localhost:6006'],
-} as CorsOptions
+      : [
+          'http://localhost:3000',
+          'http://localhost:6006',
+          'https://studio.apollographql.com',
+        ],
+}

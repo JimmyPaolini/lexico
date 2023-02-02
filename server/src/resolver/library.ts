@@ -1,11 +1,11 @@
 import { Arg, ID, Query, Resolver } from 'type-graphql'
 import { Like } from 'typeorm'
 
-import log from '../../../utils/log'
 import Author from '../entity/library/Author'
 import Book from '../entity/library/Book'
 import Line from '../entity/library/Line'
 import Text from '../entity/library/Text'
+import log from '../services/log'
 
 const compareIds = (a: { id: string }, b: { id: string }) =>
   a.id.localeCompare(b.id, undefined, {

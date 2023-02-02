@@ -21,8 +21,6 @@
     "dotenv-expand": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
     "number-to-words": "^1.2.4",
-    "type-graphql": "^1.1.1",
-    "typeorm": "^0.2.31",
     "winston": "^3.3.3"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 import { DataSourceOptions } from 'typeorm'
 
-import { DatabaseLogger } from '../../../utils/log'
+import { DatabaseLogger } from '../services/log'
 
 export default {
   type: 'postgres',

@@ -7,10 +7,10 @@ import {
   UseMiddleware,
 } from 'type-graphql'
 
-import log from '../../../utils/log'
 import { ResolverContext } from '../config/ResolverContext'
 import CustomText from '../entity/library/CustomText'
 import { Authenticate } from '../services/authentication/middleware'
+import log from '../services/log'
 
 @Resolver(CustomText)
 export class CustomTextResolver {

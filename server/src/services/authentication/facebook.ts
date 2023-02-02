@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-import { FACEBOOK_ID, FACEBOOK_SECRET } from '../../../../utils/env'
-import log from '../../../../utils/log'
+import log from '../log'
 
 export type FacebookProfile = {
   id: string
@@ -19,8 +18,8 @@ export async function fetchFacebookUser(
     .get('https://graph.facebook.com/v10.0/oauth/access_token', {
       params: {
         code,
-        client_id: FACEBOOK_ID,
-        client_secret: FACEBOOK_SECRET,
+        client_id: process.env.FACEBOOK_ID,
+        client_secret: process.env.FACEBOOK_SECRET,
         redirect_uri: hostname.match(/lexicolatin/i)
           ? 'https://lexicolatin.com/facebook'
           : 'http://localhost:3000/facebook',
