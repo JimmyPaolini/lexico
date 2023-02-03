@@ -1,9 +1,10 @@
 {
   "scripts": {
-    "tsc": "tsc",
-    "tsw": "tsc -w",
     "dev": "nodemon -e ts --exec \"tsc && node dist/server/src/app.js\"",
     "start": "node dist/server/src/app.js",
+    "tsc": "tsc",
+    "tsw": "tsc -w",
+    "env": "export $(grep -v '^#' ./.env | xargs)",
     "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js -f src/utils/ormconfig.ts"
   },
   "dependencies": {

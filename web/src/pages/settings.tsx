@@ -2,8 +2,6 @@ import { useEffect } from 'react'
 
 import Head from 'next/head'
 
-import { useTheme } from '@mui/material/styles'
-
 import { IncomingHttpHeaders } from 'http2'
 import { GetServerSideProps } from 'next'
 import { QueryClient } from 'react-query'
@@ -15,12 +13,10 @@ import { UserDocument, useUserQuery } from 'src/graphql/generated'
 import { useSnackbar } from 'src/hooks/useSnackbar'
 
 import { DeckLayout } from '../components/layout/DeckLayout'
-import { LoginCard } from '../components/user/login/LoginCard'
 import { SettingsCard } from '../components/user/settings/SettingsCard'
 import { serverEndpoint } from './api'
 
 export default function Settings() {
-  const theme = useTheme()
   const { user } = useLexicoContext()
   const enqueueSnackbar = useSnackbar()
   useEffect(() => {
@@ -36,14 +32,7 @@ export default function Settings() {
       <Head>
         <title>Lexico - Settings</title>
       </Head>
-      <DeckLayout
-        Cards={
-          [
-            !user ? <LoginCard key="LoginCard" /> : null,
-            <SettingsCard key="SettingsCard" />,
-          ].filter(Boolean) as JSX.Element[]
-        }
-      />
+      <DeckLayout Cards={[<SettingsCard key="SettingsCard" />]} />
     </>
   )
 }

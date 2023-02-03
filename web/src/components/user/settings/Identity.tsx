@@ -2,6 +2,8 @@ import { Typography } from '@mui/material'
 
 import { useLexicoContext } from 'src/components/layout/LexicoContext'
 
+import { OAuthLogin } from '../login/OAuthLogin'
+
 export const Identity = () => {
   const { user } = useLexicoContext()
   const provider = user?.googleId
@@ -17,10 +19,11 @@ export const Identity = () => {
       {user.email}
     </Typography>
   ) : (
-    <Typography gutterBottom align="center">
-      No user signed in:
-      <br />
-      Settings saved locally on device/browser
-    </Typography>
+    <>
+      <Typography gutterBottom align="center">
+        Sign in to save your Bookmarks, User Texts, and Settings across devices
+      </Typography>
+      <OAuthLogin provider="google" />
+    </>
   )
 }
