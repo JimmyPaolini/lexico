@@ -9,8 +9,8 @@ import {
 } from '@mui/material'
 
 import { useLexicoContext } from 'src/components/layout/LexicoContext'
-import { Entry } from 'src/components/search/useSearch'
 import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
+import { Entry } from 'src/graphql/generated'
 
 import { ExpandIcon } from '../../accessories/ExpandIcon'
 import { Translation } from './Translation'

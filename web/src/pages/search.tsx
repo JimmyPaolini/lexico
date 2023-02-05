@@ -7,7 +7,7 @@ import { Typography } from '@mui/material'
 
 import { GetServerSideProps } from 'next'
 
-import { useSearch } from 'src/components/search/useSearch'
+import { Entry as EntryType, useSearchQuery } from 'src/graphql/generated'
 import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 
 import { Entry } from '../components/Entry/Entry'
@@ -23,7 +23,11 @@ export default function Search({ initialSearch }: Props) {
 
   const [search, setSearch] = useState<string>(initialSearch)
 
-  const { entries, isLoading } = useSearch(search)
+  const { data, isLoading } = useSearchQuery(
+    { search },
+    { enabled: Boolean(search) }
+  )
+  const entries = (data?.search ?? []) as EntryType[]
 
   const handleSearch = async (search: string) => {
     setSearch(search)

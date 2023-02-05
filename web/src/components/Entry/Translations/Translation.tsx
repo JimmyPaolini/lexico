@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { Entry } from 'src/components/search/useSearch'
+import { Entry } from 'src/graphql/generated'
 
 type Props = { translation: NonNullable<Entry['translations']>[0] }
 
