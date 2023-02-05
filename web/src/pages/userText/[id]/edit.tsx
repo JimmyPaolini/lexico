@@ -1,20 +1,29 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import { GetServerSideProps } from 'next'
 
 import { getUserTextLocal } from 'src/components/library/UserTextsCard/UserTexts'
 import { UserTextForm } from 'src/components/reader/UserTextForm/UserTextForm'
-import { CustomText, useUserTextQuery } from 'src/graphql/generated'
+import {
+  CustomText,
+  UserTextDocument,
+  UserTextQuery,
+  UserTextQueryVariables,
+} from 'src/graphql/generated'
 
-type Props = { id: string }
+import { fetcher } from '../../../graphql/fetcher'
 
-export default function UserTextEditor({ id }: Props) {
-  const { data } = useUserTextQuery({ id })
-  const remoteText = data?.userText
+type Props = { userText: CustomText }
 
-  const localText = getUserTextLocal(id)
+export default function UserTextEditor({ userText: userTextRemote }: Props) {
+  const router = useRouter()
+  const userTextId = router.asPath
+    .replace(/^\/userText\//, '')
+    .replace(/\/edit$/, '')
+  const userTextLocal = getUserTextLocal(userTextId)
 
-  const userText = (remoteText ? remoteText : localText) as CustomText
+  const userText = userTextRemote ?? userTextLocal
 
   return (
     <>
@@ -43,6 +52,21 @@ export default function UserTextEditor({ id }: Props) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  return { props: { id: params?.id } }
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req,
+}) => {
+  const userTextId = params?.id as string
+  if (!userTextId) return { notFound: true }
+  try {
+    const data = await fetcher<UserTextQuery, UserTextQueryVariables>(
+      UserTextDocument,
+      { id: userTextId },
+      { cookie: req.headers.cookie as string }
+    )()
+    const userText = data?.userText
+    return { props: { userText } }
+  } catch {
+    return { props: {} }
+  }
 }

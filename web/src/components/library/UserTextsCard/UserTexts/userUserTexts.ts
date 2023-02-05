@@ -33,7 +33,7 @@ export const useUserTexts = (): UseUserTexts => {
     await refreshUserTextsRemote()
   }
 
-  // Deduplicate custom texts
+  // Deduplicate user texts
   useEffect(() => {
     const userTextsCopy = [...userTexts]
     while (userTextsCopy.length) {

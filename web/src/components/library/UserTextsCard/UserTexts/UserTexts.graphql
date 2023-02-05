@@ -2,6 +2,7 @@ query UserTexts {
   userTexts {
     id
     title
+    text
     user {
       id
     }

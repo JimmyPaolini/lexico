@@ -13,16 +13,16 @@ type Props = {
 
 export const MoveToLocal = ({ text, refreshUserTexts, closeMenu }: Props) => {
   const { mutate: deleteUserTextRemote } = useDeleteUserTextMutation({
-    onMutate: closeMenu,
+    onMutate: () => closeMenu(),
     onSettled: async () => await refreshUserTexts(),
   })
 
   return (
     <Action
-      onClick={(e) => {
-        e.stopPropagation()
+      onClick={async (e) => {
         createUserTextLocal(text)
-        deleteUserTextRemote(text)
+        await deleteUserTextRemote({ id: text.id })
+        e.stopPropagation()
       }}
       Icon={<Home />}
       text="Move to Local"

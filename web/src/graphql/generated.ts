@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { clientEndpoint as endpointUrl } from '../pages/_app'
-
 import gql from 'graphql-tag'
 import {
   useQuery,
@@ -8,6 +5,7 @@ import {
   useMutation,
   UseMutationOptions,
 } from 'react-query'
+import { fetcher } from './fetcher'
 export type Maybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K]
@@ -16,28 +14,6 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
   { [SubKey in K]?: Maybe<T[SubKey]> }
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
   { [SubKey in K]: Maybe<T[SubKey]> }
-
-function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
-  return async (): Promise<TData> => {
-    const res = await fetch(endpointUrl as string, {
-      method: 'POST',
-      credentials: 'include',
-      mode: 'cors',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ query, variables }),
-    })
-
-    const json = await res.json()
-
-    if (json.errors) {
-      const { message } = json.errors[0]
-
-      throw new Error(message)
-    }
-
-    return json.data
-  }
-}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -2073,7 +2049,12 @@ export type DeleteUserTextMutation = { deleteUserText: boolean }
 export type UserTextsQueryVariables = Exact<{ [key: string]: never }>
 
 export type UserTextsQuery = {
-  userTexts: Array<{ id: string; title: string; user: { id: string } }>
+  userTexts: Array<{
+    id: string
+    title: string
+    text: string
+    user: { id: string }
+  }>
 }
 
 export type UserTextQueryVariables = Exact<{
@@ -3434,6 +3415,7 @@ export const UserTexts = gql`
     userTexts {
       id
       title
+      text
       user {
         id
       }
@@ -4420,6 +4402,7 @@ export const UserTextsDocument = `
   userTexts {
     id
     title
+    text
     user {
       id
     }

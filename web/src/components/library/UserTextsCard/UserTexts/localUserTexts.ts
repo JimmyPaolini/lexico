@@ -26,8 +26,7 @@ export function createUserTextLocal(userText: CustomText): void {
     return
   }
   userText.user = undefined as unknown as User
-  const userTextString = JSON.stringify(userText)
-  window.localStorage[KEY_PREFIX + userText.id] = userTextString
+  window.localStorage[KEY_PREFIX + userText.id] = JSON.stringify(userText)
 }
 
 export function getUserTextLocal(id: string): CustomText | undefined {

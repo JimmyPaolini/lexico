@@ -8,23 +8,14 @@ generates:
       - typescript-operations
       - typescript-document-nodes
       - typescript-react-query
-      - add:
-          content: |
-            /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-            import { clientEndpoint as endpointUrl } from '../pages/_app'
     config:
-      fetcher:
-        endpoint: 'endpointUrl'
-        fetchParams:
-          credentials: include
-          mode: cors
-          headers:
-            content-type: application/json
-      dedupeFragments: true
-      exposeQueryKeys: true
+      fetcher: ./fetcher#fetcher
       exposeFetcher: true
-      flattenGeneratedTypes: true
+      exposeQueryKeys: true
+      exposeMutationKeys: true
+      dedupeFragments: true
       dedupeOperationSuffix: true
+      flattenGeneratedTypes: true
       skipTypename: true
   src/graphql/schema.json:
     plugins:

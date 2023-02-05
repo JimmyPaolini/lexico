@@ -13,14 +13,7 @@ export const UserTexts = () => {
   const { userTexts, refreshUserTexts, isLoading, isError } = useUserTexts()
 
   return !userTexts.length ? null : (
-    <CardContent
-      sx={{
-        padding: 0,
-        '&:last-child': {
-          paddingBottom: 0,
-        },
-      }}
-    >
+    <CardContent sx={{ padding: 0, '&:last-child': { paddingBottom: 0 } }}>
       <List style={{ padding: 0 }}>
         {(userTexts.length || isLoading) && (
           <Divider sx={{ marginLeft: theme.spacing(1) }} />

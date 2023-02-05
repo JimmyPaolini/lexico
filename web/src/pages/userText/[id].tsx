@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 
-import { rawRequest } from 'graphql-request'
 import { GetServerSideProps } from 'next'
 
 import { getUserTextLocal } from 'src/components/library/UserTextsCard/UserTexts/localUserTexts'
@@ -12,21 +11,20 @@ import {
   Text,
   UserTextDocument,
   UserTextQuery,
+  UserTextQueryVariables,
 } from 'src/graphql/generated'
 
-import { serverEndpoint } from '../api'
+import { fetcher } from '../../graphql/fetcher'
 import Reader from '../text/[id]'
 
-type Props = { userText: CustomText }
+type Props = { userText?: CustomText }
 
 export default function UserTextReader({ userText: userTextRemote }: Props) {
   const router = useRouter()
-  const userTextId = router.asPath.replace('/userText/', '')
+  const userTextId = router.asPath.replace(/^\/userText\//, '')
   const userTextLocal = getUserTextLocal(userTextId)
 
-  const userText = (
-    userTextRemote ? userTextRemote : userTextLocal
-  ) as CustomText
+  const userText = userTextRemote ?? userTextLocal
 
   return !userText ? <></> : <Reader text={userTextToText(userText)} />
 }
@@ -37,14 +35,17 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const userTextId = params?.id as string
   if (!userTextId) return { notFound: true }
-  const { data } = await rawRequest<UserTextQuery>(
-    serverEndpoint,
-    UserTextDocument,
-    { id: userTextId },
-    { headers: req.headers }
-  )
-  const userText = data?.userText
-  return { props: { userText } }
+  try {
+    const data = await fetcher<UserTextQuery, UserTextQueryVariables>(
+      UserTextDocument,
+      { id: userTextId },
+      { cookie: req.headers.cookie as string }
+    )()
+    const userText = data?.userText
+    return { props: { userText } }
+  } catch {
+    return { props: {} }
+  }
 }
 
 function userTextToText({ id, title, text, user }: CustomText): Text {

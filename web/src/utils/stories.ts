@@ -1,5 +1,3 @@
-import { rawRequest } from 'graphql-request'
-
 import {
   AuthorDocument,
   AuthorQuery,
@@ -9,22 +7,22 @@ import {
   EntriesQueryVariables,
 } from 'src/graphql/generated'
 
+import { fetcher } from '../graphql/fetcher'
+
 export async function getEntry(id: string) {
-  const response = await rawRequest<EntriesQuery, EntriesQueryVariables>(
-    'http://localhost:3001/graphql',
+  const data = await fetcher<EntriesQuery, EntriesQueryVariables>(
     EntriesDocument,
     { ids: [id] }
-  )
-  if (!response?.data?.entries?.[0]) throw new Error(`Error getEntry("${id}")`)
-  return response.data.entries[0]
+  )()
+  if (!data?.entries?.[0]) throw new Error(`Error getEntry("${id}")`)
+  return data.entries[0]
 }
 
 export async function getAuthor(id: string) {
-  const response = await rawRequest<AuthorQuery, AuthorQueryVariables>(
-    'http://localhost:3001/graphql',
+  const data = await fetcher<AuthorQuery, AuthorQueryVariables>(
     AuthorDocument,
     { id }
-  )
-  if (!response?.data?.author) throw new Error(`Error getAuthor("${id}")`)
-  return response.data.author
+  )()
+  if (!data?.author) throw new Error(`Error getAuthor("${id}")`)
+  return data.author
 }

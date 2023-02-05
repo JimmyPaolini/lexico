@@ -122,33 +122,34 @@ export default log
 type Params = {
   logRuntime?: boolean
   logParams?: boolean
-  mapParams?: (params: any) => any
+  mapParams?: (params: any) => unknown
   logResult?: boolean
-  mapResult?: (result: any) => any
+  mapResult?: (result: any) => unknown
 }
 
 /**
  * Decorator to log a functions runtime, parameters, and results.
  */
 export function Log(params?: Params) {
+  const logRuntime = params?.logRuntime ?? true
+  const logParams = params?.logParams ?? true
+  const logResult = params?.logResult ?? true
+  const mapParams = params?.mapParams ?? ((params) => params)
+  const mapResult = params?.mapResult ?? ((result) => result)
   return function Log(
     _target: unknown,
     functionName: string,
     propertyDescriptor: PropertyDescriptor
   ): void {
     const decoratedFunction = propertyDescriptor.value
-    propertyDescriptor.value = async function (...functionParams: unknown[]) {
+    propertyDescriptor.value = async function (...params: unknown[]) {
       const start = process.hrtime()
-      const result = await decoratedFunction.apply(this, functionParams)
+      const result = await decoratedFunction.apply(this, params)
       const runtime = process.hrtime(start)[1] / 1000000 // in milliseconds
       log.info(functionName, {
-        ...(params?.logRuntime === false ? {} : { runtime }),
-        ...(params?.logParams === false
-          ? {}
-          : { params: params?.mapParams?.(params) ?? params }),
-        ...(params?.logResult === false
-          ? {}
-          : { result: params?.mapResult?.(result) ?? result }),
+        runtime: logRuntime ? runtime : undefined,
+        params: logParams ? mapParams?.(params) ?? params : undefined,
+        result: logResult ? mapResult?.(result) ?? result : undefined,
       })
       return result
     }

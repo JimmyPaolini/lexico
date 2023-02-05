@@ -32,7 +32,11 @@ export class UserTextResolver {
   @UseMiddleware(Authenticate)
   @Log({
     mapParams: ([id]) => id,
-    mapResult: ({ id, title, user }) => ({ id, title, user: user.email }),
+    mapResult: ({ id, title, user }: CustomText) => ({
+      id,
+      title,
+      user: user.email,
+    }),
   })
   async userText(
     @Arg('id') id: string,
