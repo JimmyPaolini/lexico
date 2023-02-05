@@ -1,6 +1,7 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType()
+@InputType('PrepositionInflectionInput')
 export default class PrepositionInflection {
   @Field(() => String)
   case: PrepositionCase = 'accusative'

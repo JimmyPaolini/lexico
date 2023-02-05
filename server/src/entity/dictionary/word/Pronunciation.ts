@@ -1,6 +1,7 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType()
+@InputType('PronunciationPartsInput')
 export class PronunciationParts {
   @Field(() => String)
   phonemes = ''
@@ -13,6 +14,7 @@ export class PronunciationParts {
 }
 
 @ObjectType()
+@InputType('PronunciationInput')
 export class Pronunciation {
   @Field(() => PronunciationParts)
   classical: PronunciationParts = new PronunciationParts()

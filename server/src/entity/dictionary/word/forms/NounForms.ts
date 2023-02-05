@@ -1,6 +1,7 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType()
+@InputType('NounNumberInput')
 export class NounNumber {
   @Field(() => [String], { nullable: true })
   singular?: string[] = []
@@ -10,6 +11,7 @@ export class NounNumber {
 }
 
 @ObjectType()
+@InputType('NounFormsInput')
 export default class NounForms {
   @Field(() => NounNumber, { nullable: true })
   nominative?: NounNumber = new NounNumber()

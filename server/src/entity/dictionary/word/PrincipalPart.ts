@@ -1,6 +1,7 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType()
+@InputType('PrincipalPartInput')
 export default class PrincipalPart {
   @Field(() => String)
   name = ''

@@ -1,6 +1,7 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType()
+@InputType('NonFinitePresentPerfectFutureInput')
 export class NonFinitePresentPerfectFuture {
   @Field(() => [String], { nullable: true })
   present: string[] = []
@@ -13,6 +14,7 @@ export class NonFinitePresentPerfectFuture {
 }
 
 @ObjectType()
+@InputType('NonFinitePresentFutureInput')
 export class NonFinitePresentFuture {
   @Field(() => [String], { nullable: true })
   present: string[] = []
@@ -22,6 +24,7 @@ export class NonFinitePresentFuture {
 }
 
 @ObjectType()
+@InputType('NonFinitePerfectFutureInput')
 export class NonFinitePerfectFuture {
   @Field(() => [String], { nullable: true })
   perfect: string[] = []
@@ -31,6 +34,7 @@ export class NonFinitePerfectFuture {
 }
 
 @ObjectType()
+@InputType('NonFiniteInfinitiveInput')
 export class NonFiniteInfinitive {
   @Field(() => NonFinitePresentPerfectFuture, { nullable: true })
   active: NonFinitePresentPerfectFuture = new NonFinitePresentPerfectFuture()
@@ -40,6 +44,7 @@ export class NonFiniteInfinitive {
 }
 
 @ObjectType()
+@InputType('NonFiniteParticipleInput')
 export class NonFiniteParticiple {
   @Field(() => NonFinitePresentFuture, { nullable: true })
   active: NonFinitePresentFuture = new NonFinitePresentFuture()
@@ -49,6 +54,7 @@ export class NonFiniteParticiple {
 }
 
 @ObjectType()
+@InputType('NonFiniteInput')
 export default class NonFinite {
   @Field(() => NonFiniteInfinitive, { nullable: true })
   infinitive: NonFiniteInfinitive = new NonFiniteInfinitive()

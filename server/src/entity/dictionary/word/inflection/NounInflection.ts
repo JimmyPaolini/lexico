@@ -1,6 +1,7 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType()
+@InputType('NounInflectionInput')
 export default class NounInflection {
   @Field(() => String)
   declension: NounDeclension = ''

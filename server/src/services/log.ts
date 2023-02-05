@@ -136,6 +136,7 @@ export function Log(params?: Params) {
   const logResult = params?.logResult ?? true
   const mapParams = params?.mapParams ?? ((params) => params)
   const mapResult = params?.mapResult ?? ((result) => result)
+
   return function Log(
     _target: unknown,
     functionName: string,

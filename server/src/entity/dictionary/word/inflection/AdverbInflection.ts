@@ -1,6 +1,7 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType()
+@InputType('AdverbInflectionInput')
 export default class AdverbInflection {
   @Field(() => String)
   type: AdverbType = ''

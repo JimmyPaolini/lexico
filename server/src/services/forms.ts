@@ -69,7 +69,6 @@ export function getWordForms(word: string, forms: object | string[]): string[] {
 export function isDeterminerForms(forms: any) {
   let isDeterminerForms = false
   if (!forms) return isDeterminerForms
-  console.log('🐋 ~ isDeterminerForms', isDeterminerForms)
   for (const case_ of Object.keys(forms)) {
     if (
       Object.getOwnPropertyNames(new NounNumber()).some(

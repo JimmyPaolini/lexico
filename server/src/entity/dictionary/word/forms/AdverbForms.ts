@@ -1,6 +1,7 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType()
+@InputType('AdverbFormsInput')
 export default class AdverbForms {
   @Field(() => [String], { nullable: true })
   positive: string[]

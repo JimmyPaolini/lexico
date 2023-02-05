@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from 'type-graphql'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import {
   BaseEntity,
   Column,
@@ -12,6 +12,7 @@ import Entry from './Entry'
 
 @Entity()
 @ObjectType()
+@InputType('TranslationInput')
 export default class Translation extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => ID)

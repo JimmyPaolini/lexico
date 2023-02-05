@@ -1,4 +1,4 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 import {
   BaseEntity,
   Entity,
@@ -11,6 +11,7 @@ import Entry from './Entry'
 
 @Entity()
 @ObjectType()
+@InputType('WordInput')
 export default class Word extends BaseEntity {
   @PrimaryColumn()
   @Field()

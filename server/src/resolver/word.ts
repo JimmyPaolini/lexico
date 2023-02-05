@@ -17,9 +17,9 @@ import {
 @Resolver(Word)
 export class WordResolver {
   /**
-   *
+   * Adds macrons to text where they are known, and adds umlauts wherever a macron is ambiguous
    * @param text macronized or unmacronized
-   * @returns text with macrons, and umlauts wherever a macron is ambiguous
+   * @returns text with macrons (and umlauts)
    */
   @Query(() => String)
   @Log()
@@ -49,9 +49,9 @@ export class WordResolver {
   }
 
   /**
-   *
+   * Converts text to phonemes which are ready to be spoken
    * @param text macronized
-   * @returns text with words replaced by phonemes, ready to be spoken
+   * @returns phonemes
    */
   @Query(() => String)
   @Log()

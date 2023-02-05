@@ -1,4 +1,4 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 import Imperative from './verbForms/Imperative'
 import Indicative from './verbForms/Indicative'
@@ -7,6 +7,7 @@ import Subjunctive from './verbForms/Subjunctive'
 import VerbalNoun from './verbForms/VerbalNoun'
 
 @ObjectType()
+@InputType('VerbFormsInput')
 export default class VerbForms {
   @Field(() => Indicative, { nullable: true })
   indicative?: Indicative = new Indicative()

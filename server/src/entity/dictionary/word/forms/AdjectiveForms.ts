@@ -1,6 +1,7 @@
-import { Field, ObjectType } from 'type-graphql'
+import { Field, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType()
+@InputType('AdjectiveNumberInput')
 export class AdjectiveNumber {
   @Field(() => [String], { nullable: true })
   singular?: string[] = []
@@ -10,6 +11,7 @@ export class AdjectiveNumber {
 }
 
 @ObjectType()
+@InputType('AdjectiveCaseInput')
 export class AdjectiveCase {
   @Field(() => AdjectiveNumber, { nullable: true })
   nominative?: AdjectiveNumber = new AdjectiveNumber()
@@ -34,6 +36,7 @@ export class AdjectiveCase {
 }
 
 @ObjectType()
+@InputType('AdjectiveFormsInput')
 export default class AdjectiveForms {
   @Field(() => AdjectiveCase, { nullable: true })
   masculine?: AdjectiveCase = new AdjectiveCase()
