@@ -1,3 +1,0 @@
-mutation DeleteCustomText($id: String!) {
-  deleteCustomText(id: $id)
-}

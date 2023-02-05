@@ -1,3 +1,5 @@
+import { CorsOptions } from 'apollo-server-express'
+
 export const corsOptions = {
   credentials: true,
   origin:
@@ -12,4 +14,4 @@ export const corsOptions = {
           'http://localhost:6006',
           'https://studio.apollographql.com',
         ],
-}
+} as CorsOptions

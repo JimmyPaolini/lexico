@@ -219,8 +219,8 @@ export type Line = {
 
 export type Mutation = {
   bookmark: Scalars['Boolean']
-  createCustomText: CustomText
-  deleteCustomText: Scalars['Boolean']
+  createUserText: CustomText
+  deleteUserText: Scalars['Boolean']
   setSettings: Settings
   unbookmark: Scalars['Boolean']
   unregister: Scalars['Boolean']
@@ -230,13 +230,13 @@ export type MutationBookmarkArgs = {
   entryId: Scalars['String']
 }
 
-export type MutationCreateCustomTextArgs = {
+export type MutationCreateUserTextArgs = {
   id: Scalars['String']
   text: Scalars['String']
   title: Scalars['String']
 }
 
-export type MutationDeleteCustomTextArgs = {
+export type MutationDeleteUserTextArgs = {
   id: Scalars['String']
 }
 
@@ -328,8 +328,6 @@ export type Query = {
   book: Book
   bookmarks: Array<Entry>
   books: Array<Book>
-  customText: CustomText
-  customTexts: Array<CustomText>
   entries: Array<Entry>
   entry: Entry
   facebook: User
@@ -352,6 +350,8 @@ export type Query = {
   textIds: Array<Scalars['ID']>
   texts: Array<Text>
   user?: Maybe<User>
+  userText: CustomText
+  userTexts: Array<CustomText>
 }
 
 export type QueryAuthorArgs = {
@@ -359,10 +359,6 @@ export type QueryAuthorArgs = {
 }
 
 export type QueryBookArgs = {
-  id: Scalars['String']
-}
-
-export type QueryCustomTextArgs = {
   id: Scalars['String']
 }
 
@@ -433,6 +429,10 @@ export type QuerySpeechArgs = {
 }
 
 export type QueryTextArgs = {
+  id: Scalars['String']
+}
+
+export type QueryUserTextArgs = {
   id: Scalars['String']
 }
 
@@ -1990,23 +1990,6 @@ export type AuthorsQuery = {
   }>
 }
 
-export type DeleteCustomTextMutationVariables = Exact<{
-  id: Scalars['String']
-}>
-
-export type DeleteCustomTextMutation = { deleteCustomText: boolean }
-
-export type CustomTextsQueryVariables = Exact<{ [key: string]: never }>
-
-export type CustomTextsQuery = {
-  customTexts: Array<{
-    id: string
-    title: string
-    text: string
-    user: { id: string }
-  }>
-}
-
 export type FindTextQueryVariables = Exact<{
   author: Scalars['String']
   book?: Maybe<Scalars['String']>
@@ -2081,22 +2064,34 @@ export type TextsQuery = {
   }>
 }
 
-export type CustomTextQueryVariables = Exact<{
+export type DeleteUserTextMutationVariables = Exact<{
   id: Scalars['String']
 }>
 
-export type CustomTextQuery = {
-  customText: { id: string; title: string; text: string }
+export type DeleteUserTextMutation = { deleteUserText: boolean }
+
+export type UserTextsQueryVariables = Exact<{ [key: string]: never }>
+
+export type UserTextsQuery = {
+  userTexts: Array<{ id: string; title: string; user: { id: string } }>
 }
 
-export type CreateCustomTextMutationVariables = Exact<{
+export type UserTextQueryVariables = Exact<{
+  id: Scalars['String']
+}>
+
+export type UserTextQuery = {
+  userText: { id: string; title: string; text: string; user: { id: string } }
+}
+
+export type CreateUserTextMutationVariables = Exact<{
   id: Scalars['String']
   title: Scalars['String']
   text: Scalars['String']
 }>
 
-export type CreateCustomTextMutation = {
-  createCustomText: { id: string; title: string; text: string }
+export type CreateUserTextMutation = {
+  createUserText: { id: string; title: string; text: string }
 }
 
 export type SearchQueryVariables = Exact<{
@@ -3344,23 +3339,6 @@ export const Authors = gql`
     }
   }
 `
-export const DeleteCustomText = gql`
-  mutation DeleteCustomText($id: String!) {
-    deleteCustomText(id: $id)
-  }
-`
-export const CustomTexts = gql`
-  query CustomTexts {
-    customTexts {
-      id
-      title
-      text
-      user {
-        id
-      }
-    }
-  }
-`
 export const FindText = gql`
   query FindText($author: String!, $book: String, $title: String!) {
     findText(author: $author, book: $book, title: $title) {
@@ -3446,18 +3424,37 @@ export const Texts = gql`
     }
   }
 `
-export const CustomText = gql`
-  query CustomText($id: String!) {
-    customText(id: $id) {
+export const DeleteUserText = gql`
+  mutation DeleteUserText($id: String!) {
+    deleteUserText(id: $id)
+  }
+`
+export const UserTexts = gql`
+  query UserTexts {
+    userTexts {
       id
       title
-      text
+      user {
+        id
+      }
     }
   }
 `
-export const CreateCustomText = gql`
-  mutation CreateCustomText($id: String!, $title: String!, $text: String!) {
-    createCustomText(id: $id, title: $title, text: $text) {
+export const UserText = gql`
+  query UserText($id: String!) {
+    userText(id: $id) {
+      id
+      title
+      text
+      user {
+        id
+      }
+    }
+  }
+`
+export const CreateUserText = gql`
+  mutation CreateUserText($id: String!, $title: String!, $text: String!) {
+    createUserText(id: $id, title: $title, text: $text) {
       id
       title
       text
@@ -4233,69 +4230,6 @@ useAuthorsQuery.getKey = (variables?: AuthorsQueryVariables) => [
 
 useAuthorsQuery.fetcher = (variables?: AuthorsQueryVariables) =>
   fetcher<AuthorsQuery, AuthorsQueryVariables>(AuthorsDocument, variables)
-export const DeleteCustomTextDocument = `
-    mutation DeleteCustomText($id: String!) {
-  deleteCustomText(id: $id)
-}
-    `
-export const useDeleteCustomTextMutation = <
-  TError = unknown,
-  TContext = unknown
->(
-  options?: UseMutationOptions<
-    DeleteCustomTextMutation,
-    TError,
-    DeleteCustomTextMutationVariables,
-    TContext
-  >
-) =>
-  useMutation<
-    DeleteCustomTextMutation,
-    TError,
-    DeleteCustomTextMutationVariables,
-    TContext
-  >(
-    (variables?: DeleteCustomTextMutationVariables) =>
-      fetcher<DeleteCustomTextMutation, DeleteCustomTextMutationVariables>(
-        DeleteCustomTextDocument,
-        variables
-      )(),
-    options
-  )
-export const CustomTextsDocument = `
-    query CustomTexts {
-  customTexts {
-    id
-    title
-    text
-    user {
-      id
-    }
-  }
-}
-    `
-export const useCustomTextsQuery = <TData = CustomTextsQuery, TError = unknown>(
-  variables?: CustomTextsQueryVariables,
-  options?: UseQueryOptions<CustomTextsQuery, TError, TData>
-) =>
-  useQuery<CustomTextsQuery, TError, TData>(
-    ['CustomTexts', variables],
-    fetcher<CustomTextsQuery, CustomTextsQueryVariables>(
-      CustomTextsDocument,
-      variables
-    ),
-    options
-  )
-useCustomTextsQuery.getKey = (variables?: CustomTextsQueryVariables) => [
-  'CustomTexts',
-  variables,
-]
-
-useCustomTextsQuery.fetcher = (variables?: CustomTextsQueryVariables) =>
-  fetcher<CustomTextsQuery, CustomTextsQueryVariables>(
-    CustomTextsDocument,
-    variables
-  )
 export const FindTextDocument = `
     query FindText($author: String!, $book: String, $title: String!) {
   findText(author: $author, book: $book, title: $title) {
@@ -4455,66 +4389,116 @@ useTextsQuery.getKey = (variables?: TextsQueryVariables) => ['Texts', variables]
 
 useTextsQuery.fetcher = (variables?: TextsQueryVariables) =>
   fetcher<TextsQuery, TextsQueryVariables>(TextsDocument, variables)
-export const CustomTextDocument = `
-    query CustomText($id: String!) {
-  customText(id: $id) {
-    id
-    title
-    text
-  }
+export const DeleteUserTextDocument = `
+    mutation DeleteUserText($id: String!) {
+  deleteUserText(id: $id)
 }
     `
-export const useCustomTextQuery = <TData = CustomTextQuery, TError = unknown>(
-  variables: CustomTextQueryVariables,
-  options?: UseQueryOptions<CustomTextQuery, TError, TData>
-) =>
-  useQuery<CustomTextQuery, TError, TData>(
-    ['CustomText', variables],
-    fetcher<CustomTextQuery, CustomTextQueryVariables>(
-      CustomTextDocument,
-      variables
-    ),
-    options
-  )
-useCustomTextQuery.getKey = (variables: CustomTextQueryVariables) => [
-  'CustomText',
-  variables,
-]
-
-useCustomTextQuery.fetcher = (variables: CustomTextQueryVariables) =>
-  fetcher<CustomTextQuery, CustomTextQueryVariables>(
-    CustomTextDocument,
-    variables
-  )
-export const CreateCustomTextDocument = `
-    mutation CreateCustomText($id: String!, $title: String!, $text: String!) {
-  createCustomText(id: $id, title: $title, text: $text) {
-    id
-    title
-    text
-  }
-}
-    `
-export const useCreateCustomTextMutation = <
-  TError = unknown,
-  TContext = unknown
->(
+export const useDeleteUserTextMutation = <TError = unknown, TContext = unknown>(
   options?: UseMutationOptions<
-    CreateCustomTextMutation,
+    DeleteUserTextMutation,
     TError,
-    CreateCustomTextMutationVariables,
+    DeleteUserTextMutationVariables,
     TContext
   >
 ) =>
   useMutation<
-    CreateCustomTextMutation,
+    DeleteUserTextMutation,
     TError,
-    CreateCustomTextMutationVariables,
+    DeleteUserTextMutationVariables,
     TContext
   >(
-    (variables?: CreateCustomTextMutationVariables) =>
-      fetcher<CreateCustomTextMutation, CreateCustomTextMutationVariables>(
-        CreateCustomTextDocument,
+    (variables?: DeleteUserTextMutationVariables) =>
+      fetcher<DeleteUserTextMutation, DeleteUserTextMutationVariables>(
+        DeleteUserTextDocument,
+        variables
+      )(),
+    options
+  )
+export const UserTextsDocument = `
+    query UserTexts {
+  userTexts {
+    id
+    title
+    user {
+      id
+    }
+  }
+}
+    `
+export const useUserTextsQuery = <TData = UserTextsQuery, TError = unknown>(
+  variables?: UserTextsQueryVariables,
+  options?: UseQueryOptions<UserTextsQuery, TError, TData>
+) =>
+  useQuery<UserTextsQuery, TError, TData>(
+    ['UserTexts', variables],
+    fetcher<UserTextsQuery, UserTextsQueryVariables>(
+      UserTextsDocument,
+      variables
+    ),
+    options
+  )
+useUserTextsQuery.getKey = (variables?: UserTextsQueryVariables) => [
+  'UserTexts',
+  variables,
+]
+
+useUserTextsQuery.fetcher = (variables?: UserTextsQueryVariables) =>
+  fetcher<UserTextsQuery, UserTextsQueryVariables>(UserTextsDocument, variables)
+export const UserTextDocument = `
+    query UserText($id: String!) {
+  userText(id: $id) {
+    id
+    title
+    text
+    user {
+      id
+    }
+  }
+}
+    `
+export const useUserTextQuery = <TData = UserTextQuery, TError = unknown>(
+  variables: UserTextQueryVariables,
+  options?: UseQueryOptions<UserTextQuery, TError, TData>
+) =>
+  useQuery<UserTextQuery, TError, TData>(
+    ['UserText', variables],
+    fetcher<UserTextQuery, UserTextQueryVariables>(UserTextDocument, variables),
+    options
+  )
+useUserTextQuery.getKey = (variables: UserTextQueryVariables) => [
+  'UserText',
+  variables,
+]
+
+useUserTextQuery.fetcher = (variables: UserTextQueryVariables) =>
+  fetcher<UserTextQuery, UserTextQueryVariables>(UserTextDocument, variables)
+export const CreateUserTextDocument = `
+    mutation CreateUserText($id: String!, $title: String!, $text: String!) {
+  createUserText(id: $id, title: $title, text: $text) {
+    id
+    title
+    text
+  }
+}
+    `
+export const useCreateUserTextMutation = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<
+    CreateUserTextMutation,
+    TError,
+    CreateUserTextMutationVariables,
+    TContext
+  >
+) =>
+  useMutation<
+    CreateUserTextMutation,
+    TError,
+    CreateUserTextMutationVariables,
+    TContext
+  >(
+    (variables?: CreateUserTextMutationVariables) =>
+      fetcher<CreateUserTextMutation, CreateUserTextMutationVariables>(
+        CreateUserTextDocument,
         variables
       )(),
     options

@@ -1,7 +1,0 @@
-query CustomText($id: String!) {
-  customText(id: $id) {
-    id
-    title
-    text
-  }
-}

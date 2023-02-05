@@ -6,10 +6,10 @@ import { buildSchema } from 'type-graphql'
 import {
   AuthenticationResolver,
   BookmarkResolver,
-  CustomTextResolver,
   DictionaryResolver,
   LibraryResolver,
   UserResolver,
+  UserTextResolver,
 } from '../resolver'
 import { EntryResolver } from '../resolver/entry'
 import { WordResolver } from '../resolver/word'
@@ -23,7 +23,7 @@ export async function initializeGraphqlApi(
       resolvers: [
         AuthenticationResolver,
         BookmarkResolver,
-        CustomTextResolver,
+        UserTextResolver,
         DictionaryResolver,
         EntryResolver,
         LibraryResolver,

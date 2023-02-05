@@ -1,0 +1,9 @@
+query UserTexts {
+  userTexts {
+    id
+    title
+    user {
+      id
+    }
+  }
+}

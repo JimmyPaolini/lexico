@@ -26,12 +26,12 @@ export const TextBox = forwardRef(function TextBox(
       name={name}
       label={sentenceCase(name)}
       ref={ref}
-      {...props}
       value={formik.values[name]}
       InputLabelProps={{ shrink: Boolean(formik.values[name]) }}
       onChange={formik.handleChange}
       error={formik.touched[name] && !!formik.errors[name]}
       helperText={formik.touched[name] && formik.errors[name]}
+      {...props}
     />
   )
 })

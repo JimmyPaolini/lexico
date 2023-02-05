@@ -26,6 +26,7 @@ import { sentenceCase } from 'src/utils/string'
 type Props = { text: TextGql }
 
 export default function Reader({ text }: Props) {
+  console.log('🐋 ~ text', text)
   const theme = useTheme()
   const router = useRouter()
   if (router.isFallback) return <ReaderLoading />

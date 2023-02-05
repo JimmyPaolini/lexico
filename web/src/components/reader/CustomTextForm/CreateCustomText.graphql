@@ -1,7 +1,0 @@
-mutation CreateCustomText($id: String!, $title: String!, $text: String!) {
-  createCustomText(id: $id, title: $title, text: $text) {
-    id
-    title
-    text
-  }
-}

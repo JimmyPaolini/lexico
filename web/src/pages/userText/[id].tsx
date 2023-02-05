@@ -1,54 +1,74 @@
+import { useRouter } from 'next/router'
+
+import { rawRequest } from 'graphql-request'
 import { GetServerSideProps } from 'next'
 
-import { getCustomTextLocal } from 'src/components/library/CustomTextsCard/CustomTexts/localCustomTexts'
+import { getUserTextLocal } from 'src/components/library/UserTextsCard/UserTexts/localUserTexts'
 import {
   Author,
   Book,
   CustomText,
+  Line,
   Text,
-  useCustomTextQuery,
+  UserTextDocument,
+  UserTextQuery,
 } from 'src/graphql/generated'
 
+import { serverEndpoint } from '../api'
 import Reader from '../text/[id]'
 
-type Props = { id: string }
+type Props = { userText: CustomText }
 
-export default function UserTextReader({ id }: Props) {
-  const { data, isSuccess } = useCustomTextQuery({ id })
-  const remoteText = data?.customText
+export default function UserTextReader({ userText: userTextRemote }: Props) {
+  const router = useRouter()
+  const userTextId = router.asPath.replace('/userText/', '')
+  const userTextLocal = getUserTextLocal(userTextId)
 
-  const localText = getCustomTextLocal(id)
-
-  const userText = (isSuccess ? remoteText : localText) as CustomText
+  const userText = (
+    userTextRemote ? userTextRemote : userTextLocal
+  ) as CustomText
 
   return !userText ? <></> : <Reader text={userTextToText(userText)} />
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  return { props: { id: params?.id } }
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req,
+}) => {
+  const userTextId = params?.id as string
+  if (!userTextId) return { notFound: true }
+  const { data } = await rawRequest<UserTextQuery>(
+    serverEndpoint,
+    UserTextDocument,
+    { id: userTextId },
+    { headers: req.headers }
+  )
+  const userText = data?.userText
+  return { props: { userText } }
 }
 
 function userTextToText({ id, title, text, user }: CustomText): Text {
-  const customText = {
+  const userText = {
     id,
     title,
-    author: { id: 'custom', name: 'custom' } as Author,
+    author: { id: 'user', name: 'user' } as Author,
     book: (user
       ? { id: 'local', title: 'local' }
-      : { id: 'user', title: 'user' }) as Book,
-    lines: [],
+      : { id: 'remote', title: 'remote' }) as Book,
+    lines: [] as Line[],
   }
-  customText.author.texts = [customText as Text]
-  customText.book.author = customText.author
-  customText.book.texts = [customText as Text]
-  customText.lines = text.split('\n').map((line, i: number) => {
+  userText.author.texts = [userText as Text]
+  userText.book.author = userText.author
+  userText.book.texts = [userText as Text]
+  userText.lines = text.split('\n').map((line, i: number) => {
     return {
       id: `${i}`,
       line: line.replace(/^#\S+ ?/, ''),
       lineNumber: i + 1,
       lineLabel: line.match(/^#\S+/)?.[0].slice(1) || `${i + 1}`,
-      text: customText,
+      text: userText,
     }
-  }) as never[]
-  return customText
+  })
+  console.log('🐋 ~ userText', userText)
+  return userText
 }

@@ -1,0 +1,7 @@
+mutation CreateUserText($id: String!, $title: String!, $text: String!) {
+  createUserText(id: $id, title: $title, text: $text) {
+    id
+    title
+    text
+  }
+}

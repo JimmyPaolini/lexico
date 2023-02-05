@@ -172,8 +172,8 @@ type Line {
 
 type Mutation {
   bookmark(entryId: String!): Boolean!
-  createCustomText(id: String!, text: String!, title: String!): CustomText!
-  deleteCustomText(id: String!): Boolean!
+  createUserText(id: String!, text: String!, title: String!): CustomText!
+  deleteUserText(id: String!): Boolean!
   setSettings(settings: SettingsInput!): Settings!
   unbookmark(entryId: String!): Boolean!
   unregister: Boolean!
@@ -259,8 +259,6 @@ type Query {
   book(id: String!): Book!
   bookmarks: [Entry!]!
   books: [Book!]!
-  customText(id: String!): CustomText!
-  customTexts: [CustomText!]!
   entries(ids: [String!]!): [Entry!]!
   entry(id: String!): Entry!
   facebook(code: String!): User!
@@ -283,6 +281,8 @@ type Query {
   textIds: [ID!]!
   texts: [Text!]!
   user: User
+  userText(id: String!): CustomText!
+  userTexts: [CustomText!]!
 }
 
 type Settings {

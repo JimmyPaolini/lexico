@@ -32,10 +32,7 @@ export async function fetchGoogleUser(
     })
   const { data: profile } = await axios
     .get('https://www.googleapis.com/oauth2/v1/userinfo', {
-      params: {
-        alt: 'json',
-        access_token,
-      },
+      params: { alt: 'json', access_token },
     })
     .catch((error) => {
       log.error('error fetching google user info', error)

@@ -2,19 +2,19 @@ import Head from 'next/head'
 
 import { GetServerSideProps } from 'next'
 
-import { getCustomTextLocal } from 'src/components/library/CustomTextsCard/CustomTexts'
-import { CustomTextForm } from 'src/components/reader/CustomTextForm/CustomTextForm'
-import { CustomText, useCustomTextQuery } from 'src/graphql/generated'
+import { getUserTextLocal } from 'src/components/library/UserTextsCard/UserTexts'
+import { UserTextForm } from 'src/components/reader/UserTextForm/UserTextForm'
+import { CustomText, useUserTextQuery } from 'src/graphql/generated'
 
 type Props = { id: string }
 
 export default function UserTextEditor({ id }: Props) {
-  const { data, isSuccess } = useCustomTextQuery({ id })
-  const remoteText = data?.customText
+  const { data } = useUserTextQuery({ id })
+  const remoteText = data?.userText
 
-  const localText = getCustomTextLocal(id)
+  const localText = getUserTextLocal(id)
 
-  const userText = (isSuccess ? remoteText : localText) as CustomText
+  const userText = (remoteText ? remoteText : localText) as CustomText
 
   return (
     <>
@@ -38,7 +38,7 @@ export default function UserTextEditor({ id }: Props) {
           background-color: black;
         }
       `}</style>
-      <CustomTextForm text={userText} />
+      <UserTextForm text={userText} />
     </>
   )
 }

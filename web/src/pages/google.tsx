@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const cookieHeader = headers.get('set-cookie')
   if (!errors && cookieHeader) res.setHeader('set-cookie', cookieHeader)
 
-  res.writeHead(302, { Location: '/user' })
+  res.writeHead(302, { Location: '/settings' })
   res.end()
   return { props: {} }
 }

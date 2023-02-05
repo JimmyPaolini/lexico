@@ -17,7 +17,9 @@ export const Text = ({ text, openModal }: Props) => {
   const router = useRouter()
   const theme = useTheme()
 
-  const title = sentenceCase(text.title)
+  const title = router.pathname.match(/\/userText/i)
+    ? text.title
+    : sentenceCase(text.title)
   const subtitle =
     sentenceCase(text.author.id) +
     (text.book
@@ -41,9 +43,7 @@ export const Text = ({ text, openModal }: Props) => {
       }}
     >
       <CardHeader
-        title={
-          router.pathname.match(/\/reader\/customText/i) ? text.title : title
-        }
+        title={title}
         titleTypographyProps={{
           sx: {
             textAlign: 'center',

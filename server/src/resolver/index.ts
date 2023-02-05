@@ -1,6 +1,6 @@
 export * from './authentication'
 export * from './bookmark'
-export * from './customText'
+export * from './userText'
 export * from './dictionary'
 export * from './library'
 export * from './user'
