@@ -1,7 +1,6 @@
-import { Field, InputType, ObjectType } from 'type-graphql'
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
-@InputType('SubjunctivePersonInput')
 export class SubjunctivePerson {
   @Field(() => [String], { nullable: true })
   first: string[] = []
@@ -14,7 +13,6 @@ export class SubjunctivePerson {
 }
 
 @ObjectType()
-@InputType('SubjunctiveNumberInput')
 export class SubjunctiveNumber {
   @Field(() => SubjunctivePerson, { nullable: true })
   singular: SubjunctivePerson = new SubjunctivePerson()
@@ -24,7 +22,6 @@ export class SubjunctiveNumber {
 }
 
 @ObjectType()
-@InputType('SubjunctiveTenseInput')
 export class SubjunctiveTense {
   @Field(() => SubjunctiveNumber, { nullable: true })
   'present': SubjunctiveNumber = new SubjunctiveNumber()
@@ -40,7 +37,6 @@ export class SubjunctiveTense {
 }
 
 @ObjectType()
-@InputType('SubjunctiveInput')
 export default class Subjunctive {
   @Field(() => SubjunctiveTense, { nullable: true })
   active: SubjunctiveTense = new SubjunctiveTense()

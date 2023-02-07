@@ -1,7 +1,6 @@
-import { Field, InputType, ObjectType } from 'type-graphql'
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
-@InputType('IndicativePersonInput')
 export class IndicativePerson {
   @Field(() => [String], { nullable: true })
   first: string[] = []
@@ -14,7 +13,6 @@ export class IndicativePerson {
 }
 
 @ObjectType()
-@InputType('IndicativeNumberInput')
 export class IndicativeNumber {
   @Field(() => IndicativePerson, { nullable: true })
   singular: IndicativePerson = new IndicativePerson()
@@ -24,7 +22,6 @@ export class IndicativeNumber {
 }
 
 @ObjectType()
-@InputType('IndicativeTenseInput')
 export class IndicativeTense {
   @Field(() => IndicativeNumber, { nullable: true })
   present: IndicativeNumber = new IndicativeNumber()
@@ -46,7 +43,6 @@ export class IndicativeTense {
 }
 
 @ObjectType()
-@InputType('IndicativeInput')
 export default class Indicative {
   @Field(() => IndicativeTense, { nullable: true })
   active: IndicativeTense = new IndicativeTense()

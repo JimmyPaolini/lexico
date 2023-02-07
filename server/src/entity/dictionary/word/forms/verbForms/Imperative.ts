@@ -1,7 +1,6 @@
-import { Field, InputType, ObjectType } from 'type-graphql'
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
-@InputType('ImperativeSecondThirdInput')
 export class ImperativeSecondThird {
   @Field(() => [String], { nullable: true })
   second: string[] = []
@@ -11,21 +10,18 @@ export class ImperativeSecondThird {
 }
 
 @ObjectType()
-@InputType('ImperativeSecondInput')
 export class ImperativeSecond {
   @Field(() => [String], { nullable: true })
   second: string[]
 }
 
 @ObjectType()
-@InputType('ImperativeThirdInput')
 export class ImperativeThird {
   @Field(() => [String], { nullable: true })
   third: string[]
 }
 
 @ObjectType()
-@InputType('ImperativePresentInput')
 export class ImperativePresent {
   @Field(() => ImperativeSecond, { nullable: true })
   singular: ImperativeSecond = new ImperativeSecond()
@@ -35,7 +31,6 @@ export class ImperativePresent {
 }
 
 @ObjectType()
-@InputType('ImperativeActiveFutureInput')
 export class ImperativeActiveFuture {
   @Field(() => ImperativeSecondThird, { nullable: true })
   singular: ImperativeSecondThird = new ImperativeSecondThird()
@@ -45,7 +40,6 @@ export class ImperativeActiveFuture {
 }
 
 @ObjectType()
-@InputType('ImperativePassiveFutureInput')
 export class ImperativePassiveFuture {
   @Field(() => ImperativeSecondThird, { nullable: true })
   singular: ImperativeSecondThird = new ImperativeSecondThird()
@@ -55,7 +49,6 @@ export class ImperativePassiveFuture {
 }
 
 @ObjectType()
-@InputType('ImperativeActiveInput')
 export class ImperativeActive {
   @Field(() => ImperativePresent, { nullable: true })
   present: ImperativePresent = new ImperativePresent()
@@ -65,7 +58,6 @@ export class ImperativeActive {
 }
 
 @ObjectType()
-@InputType('ImperativePassiveInput')
 export class ImperativePassive {
   @Field(() => ImperativePresent, { nullable: true })
   present: ImperativePresent = new ImperativePresent()
@@ -75,7 +67,6 @@ export class ImperativePassive {
 }
 
 @ObjectType()
-@InputType('ImperativeInput')
 export default class Imperative {
   @Field(() => ImperativeActive, { nullable: true })
   active: ImperativeActive = new ImperativeActive()

@@ -1,7 +1,6 @@
-import { Field, InputType, ObjectType } from 'type-graphql'
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
-@InputType('GerundInput')
 export class Gerund {
   @Field(() => [String], { nullable: true })
   genitive: string[] = []
@@ -17,7 +16,6 @@ export class Gerund {
 }
 
 @ObjectType()
-@InputType('SupineInput')
 export class Supine {
   @Field(() => [String], { nullable: true })
   accusative: string[] = []
@@ -27,7 +25,6 @@ export class Supine {
 }
 
 @ObjectType()
-@InputType('VerbalNounInput')
 export default class VerbalNoun {
   @Field(() => Gerund, { nullable: true })
   gerund: Gerund = new Gerund()

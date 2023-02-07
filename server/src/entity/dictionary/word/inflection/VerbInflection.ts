@@ -1,7 +1,6 @@
-import { Field, InputType, ObjectType } from 'type-graphql'
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
-@InputType('VerbInflectionInput')
 export default class VerbInflection {
   @Field()
   conjugation: VerbConjugation = ''
