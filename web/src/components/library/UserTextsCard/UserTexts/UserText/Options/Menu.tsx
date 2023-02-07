@@ -14,12 +14,7 @@ type Props = {
   setAnchor: Dispatch<SetStateAction<HTMLElement | null>>
 }
 
-export const Menu = ({
-  text,
-  refreshUserTexts,
-  anchor,
-  setAnchor,
-}: Props) => {
+export const Menu = ({ text, refreshUserTexts, anchor, setAnchor }: Props) => {
   const { user } = useLexicoContext()
   const closeMenu = () => setAnchor(null)
 

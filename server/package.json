@@ -1,9 +1,8 @@
 {
   "scripts": {
     "tsc": "tsc",
-    "tsw": "tsc -w",
-    "dev": "nodemon -e ts --exec \"tsc && node dist/server/src/app.js\"",
-    "start": "node dist/server/src/app.js",
+    "dev": "nodemon -e ts --exec \"tsc && node dist/app.js\"",
+    "start": "node dist/app.js",
     "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js -f src/utils/ormconfig.ts"
   },
   "dependencies": {
@@ -14,10 +13,12 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "graphql": "^15.4.0",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
-    "typeorm": "^0.3.11"
+    "typeorm": "^0.3.11",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",

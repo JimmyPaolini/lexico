@@ -17,13 +17,6 @@ import { googleAnalyticsEvent } from 'src/utils/googleAnalytics'
 import { Layout } from '../components/layout/Layout'
 import { LexicoContextProvider } from '../components/layout/LexicoContext'
 
-export const clientEndpoint =
-  process.env.NEXT_ENV === 'build'
-    ? 'https://lexicolatin.com/api'
-    : typeof window === 'undefined'
-    ? 'http://localhost:3001/graphql'
-    : window.location.origin + '/api'
-
 const clientSideEmotionCache = createEmotionCache()
 
 type Props = AppProps & {

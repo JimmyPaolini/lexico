@@ -6,32 +6,22 @@
     "format": "prettier --config cleaning/.prettierrc.js --ignore-path cleaning/.prettierignore --write .",
     "clean-check": "npm run format-check; npm run lint-check",
     "clean": "npm run format; npm run lint",
-    "dev": "docker compose -f infra/docker/docker-compose.database.yml up",
-    "undev": "docker compose -f infra/docker/docker-compose.database.yml down --remove-orphans",
-    "start": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml up -e NODE_ENV=development",
-    "stop": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml down --remove-orphans",
-    "build": "sh infra/scripts/build.sh",
-    "buildall": "npm run build database & npm run build server & npm run build web & wait; echo \"Lexico built!\"",
+    "database": "docker compose -f infra/docker/docker-compose.database.yml up",
+    "server": "docker compose -f infra/docker/docker-compose.server.yml up",
+    "web": "docker compose -f infra/docker/docker-compose.web.yml up",
+    "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
+    "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server .",
+    "build:all": "npm run build:server & npm run build:web & wait; echo \"Lexico built!\"",
     "apply": "sh infra/scripts/apply.sh",
-    "upgrade": "sh infra/scripts/upgrade.sh",
-    "env": "sh infra/scripts/env.sh"
+    "upgrade": "sh infra/scripts/upgrade.sh"
   },
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "dotenv-expand": "^5.1.0",
-    "jsonwebtoken": "^8.5.1",
-    "number-to-words": "^1.2.4",
-    "winston": "^3.3.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "^3.13.1",
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
-    "@types/graphql": "^14.5.0",
     "@types/node": "^18.11.18",
-    "@types/number-to-words": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
-    "class-validator": "^0.12.2",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-standard-with-typescript": "^24.0.0",
@@ -40,9 +30,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "prettier": "^2.8.1",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.9.4"
+    "prettier": "^2.8.1"
   },
   "bugs": {
     "url": "https://github.com/JimmyPaolini/Lexico/issues"

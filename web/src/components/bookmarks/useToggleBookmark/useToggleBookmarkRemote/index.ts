@@ -1,1 +1,1 @@
-export {useToggleBookmarkRemote} from './useToggleBookmarkRemote'
+export { useToggleBookmarkRemote } from './useToggleBookmarkRemote'

@@ -18,3 +18,4 @@ infra
 
 server/**/schema.graphql
 **/migration
+**/storybook-static

@@ -1,7 +1,6 @@
 import { Launch } from '@mui/icons-material'
 import { CardHeader } from '@mui/material'
 
-import packageJson from '../../../../package.json'
 import { Link } from '../accessories/Link'
 
 export const UpcomingFeatures = () => {
@@ -9,7 +8,7 @@ export const UpcomingFeatures = () => {
   return (
     <Link href={href} target="_blank">
       <CardHeader
-        title={`Releases (current v${packageJson.version})`}
+        title="Releases (current v2.1.0)"
         titleTypographyProps={{ variant: 'h5' }}
         action={<Launch />}
         sx={{ '& .MuiCardHeader-action': { margin: 'auto' } }}

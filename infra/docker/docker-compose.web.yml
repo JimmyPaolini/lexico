@@ -23,3 +23,16 @@ services:
     env_file: ../../.env
     depends_on:
       - database
+
+  database:
+    image: postgres:13
+    container_name: database
+    ports:
+      - 5432:5432
+    env_file: ../../.env
+    volumes:
+      - ../../data/database_volume:/var/lib/postgresql/data
+
+volumes:
+  database_volume:
+    driver: local

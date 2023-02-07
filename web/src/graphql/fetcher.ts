@@ -1,7 +1,5 @@
 export const clientEndpoint =
-  process.env.NEXT_ENV === 'build'
-    ? 'https://lexicolatin.com/api'
-    : typeof window === 'undefined'
+  typeof window === 'undefined' || process.env.NEXT_ENV === 'build'
     ? 'http://localhost:3001/graphql'
     : window.location.origin + '/api'
 

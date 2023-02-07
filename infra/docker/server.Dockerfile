@@ -2,15 +2,11 @@
 FROM node:15-alpine
 RUN apk add --update nodejs npm curl
 
-WORKDIR /Lexico
-COPY package*.json ./
-RUN npm ci
-
-WORKDIR /Lexico/server
+WORKDIR /server
 COPY server/package*.json ./
 RUN npm ci
 
-COPY . ../
+COPY ./server .
 RUN npm run tsc
 
 EXPOSE 3001

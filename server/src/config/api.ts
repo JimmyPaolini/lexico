@@ -34,6 +34,7 @@ export async function initializeGraphqlApi(
     }),
     context: ({ req, res }) => ({ req, res }),
     introspection: true,
+    cache: 'bounded',
   })
   await api.start()
   api.applyMiddleware({ app, cors })
