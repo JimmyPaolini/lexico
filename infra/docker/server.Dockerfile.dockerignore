@@ -1,17 +1,3 @@
-**/.DS_Store
-**/.vscode
-**/.gitignore
-**/.github
-**/.git
-
 **/node_modules
 **/dist
-**/*Dockerfile*
-
-**/database_volume
-**/infra
 **/*.env*
-**/ingestion
-**/web
-**/assets
-**/cypress

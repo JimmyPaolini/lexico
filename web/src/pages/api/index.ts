@@ -1,22 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export const serverEndpoint = `http://${
-  process.env.NODE_ENV === 'production' ? 'server' : 'localhost'
-}:3001/graphql`
-
-export const circularReplacer: () =>
-  | ((this: unknown, key: string, value: unknown) => unknown)
-  | undefined = () => {
-  const seen = new WeakSet()
-  return (_: unknown, value: unknown) => {
-    if (typeof value === 'object' && value !== null) {
-      if (seen.has(value)) return
-      else seen.add(value)
-    }
-    return value
-  }
-}
+export const serverEndpoint =
+  process.env.NODE_ENV === 'production'
+    ? 'http://server:3001/graphql'
+    : 'http://localhost:3001/graphql'
 
 export default async (
   req: NextApiRequest,
