@@ -23,6 +23,13 @@ spec:
                 name: web
                 port:
                   number: 3000
+          - path: /graphql
+            pathType: Prefix
+            backend:
+              service:
+                name: server
+                port:
+                  number: 3001
     - host: www.lexicolatin.com
       http:
         paths:
@@ -33,3 +40,10 @@ spec:
                 name: web
                 port:
                   number: 3000
+          - path: /graphql
+            pathType: Prefix
+            backend:
+              service:
+                name: server
+                port:
+                  number: 3001

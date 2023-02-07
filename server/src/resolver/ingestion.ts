@@ -1,11 +1,11 @@
 import { Mutation, Resolver, UseMiddleware } from 'type-graphql'
 
-import ingestBible from '../../../ingestion/src/literature/ingestBible'
 import Entry from '../entity/dictionary/Entry'
 import { DevOnly } from '../services/authorization/environment'
 import ingestEntries from '../services/ingestion/dictionary/ingestEntries'
 import ingestTranslationReferences from '../services/ingestion/dictionary/ingestTranslationReferences'
 import ingestWords from '../services/ingestion/dictionary/ingestWords'
+import ingestBible from '../services/ingestion/library/ingestBible'
 import ingestLiterature from '../services/ingestion/library/ingestLiterature'
 import ingestWiktionary from '../services/ingestion/wiktionary/ingestWiktionary'
 import { Log } from '../services/log'

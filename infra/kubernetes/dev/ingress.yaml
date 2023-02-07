@@ -17,6 +17,13 @@ spec:
     - host: dev.lexicolatin.com
       http:
         paths:
+          - path: /graphql
+            pathType: Prefix
+            backend:
+              service:
+                name: server
+                port:
+                  number: 3001
           - path: /
             pathType: Prefix
             backend:

@@ -2,8 +2,6 @@ import { useMemo, useState } from 'react'
 
 import Head from 'next/head'
 
-import { Typography } from '@mui/material'
-
 import { GetServerSideProps } from 'next'
 import { QueryClient } from 'react-query'
 import { dehydrate } from 'react-query/hydration'
@@ -18,6 +16,7 @@ import { useBookmarksQuery } from 'src/graphql/generated'
 import { identifyEntryWord } from 'src/utils/identifiers'
 
 import { Entry } from '../components/Entry/Entry'
+import { NoResultsCard } from '../components/NoResultsCard'
 import { filterBookmarks } from '../components/bookmarks/BookmarkButton'
 import { Deck } from '../components/layout/Deck'
 import { SearchDeckLayout } from '../components/layout/SearchDeckLayout'
@@ -37,11 +36,7 @@ export default function Bookmarks() {
           entry = identifyEntryWord(search, entry)
           return <Entry {...{ entry, search }} key={entry.id} />
         })
-      : [
-          <Typography variant="h4" align="center" key="NotFound">
-            Not Found
-          </Typography>,
-        ]
+      : [<NoResultsCard key="NoReusltsCard" search={search} />]
   }, [user, bookmarks, search])
 
   useBookmarkInstructions(user)

@@ -2,9 +2,10 @@ import Error from '@mui/icons-material/Error'
 import { Card, CardHeader } from '@mui/material'
 
 type Props = { search?: string }
+
 export const NoResultsCard = ({ search }: Props) => {
   let subheader = 'No results'
-  if (search) subheader += ` for search "${search}"`
+  if (search) subheader += ` for "${search}"`
   return (
     <Card>
       <CardHeader
