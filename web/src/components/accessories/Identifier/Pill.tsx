@@ -1,27 +1,32 @@
-import { PropsWithChildren } from 'react'
+import { ComponentProps } from 'react'
 
 import { Typography } from '@mui/material'
 
-import { IdentifierStyles } from './identifierStyles'
-
 export enum PillVariant {
-  REGULAR,
-  SMALL,
+  REGULAR = 'regular',
+  SMALL = 'small',
 }
 
-type Props = PropsWithChildren<IdentifierStyles & { variant?: PillVariant }>
+type Props = ComponentProps<typeof Typography> & { pillVariant?: PillVariant }
 
-export const Pill = ({ variant, children, ...identifierStyles }: Props) => {
+export function Pill({
+  pillVariant = PillVariant.REGULAR,
+  children,
+  ...props
+}: Props) {
   return (
     <Typography
       variant="caption"
       noWrap
+      {...props}
       sx={{
         display: 'inline-flex',
         justifyContent: 'center',
         alignItems: 'center',
         fontWeight: 500,
-        ...(variant === PillVariant.SMALL
+        userSelect: 'none',
+        cursor: 'inherit',
+        ...(pillVariant === PillVariant.SMALL
           ? {
               height: '16px',
               minWidth: '16px',
@@ -38,7 +43,7 @@ export const Pill = ({ variant, children, ...identifierStyles }: Props) => {
               padding: '0px 6px',
               margin: 'auto 2px',
             }),
-        ...identifierStyles,
+        ...props.sx,
       }}
     >
       {children}

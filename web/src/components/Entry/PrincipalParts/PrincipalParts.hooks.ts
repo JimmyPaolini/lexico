@@ -10,7 +10,7 @@ import {
 } from 'src/graphql/generated'
 import { unCamelCase } from 'src/utils/string'
 
-import { PartOfSpeech } from '../../accessories/Pills/identifierTypes'
+import { PartOfSpeech } from '../../accessories/Identifier/Identifier.types'
 
 export const getInflectionLabel = (
   inflection: Inflection | null | undefined,

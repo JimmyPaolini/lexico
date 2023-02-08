@@ -5,7 +5,7 @@ import { Card, Divider, Tab, Tabs, Typography } from '@mui/material'
 import { VerbFormsTable } from 'src/components/Entry/Forms/PartsOfSpeech/VerbFormsTable'
 
 import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
-import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
+import { Identifier } from '../../accessories/Identifier/Identifier'
 import { verbGrammarData } from './VerbConjugationCard.constants'
 
 type Props = {
@@ -21,7 +21,7 @@ export const VerbGrammar = ({ expandedInitial = false }: Props) => {
         expandedInitial={expandedInitial}
         title="Verbs"
         subheader="Conjugations, Endings, Translations"
-        avatar={<PartOfSpeech partOfSpeech="verb" />}
+        avatar={<Identifier identifier="verb" />}
         cardContentProps={{
           sx: { padding: 0, '&:last-child': { padding: 0 } },
         }}

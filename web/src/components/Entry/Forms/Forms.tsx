@@ -10,6 +10,10 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
+import {
+  Identifier,
+  IdentifierType,
+} from 'src/components/accessories/Identifier'
 import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import { getSettingsLocal } from 'src/components/user/settings/settingsLocal'
 import {
@@ -18,10 +22,8 @@ import {
   NounForms,
   VerbForms,
 } from 'src/graphql/generated'
-import { Identifier } from 'src/utils/identifiers'
 
 import { ExpandIcon } from '../../accessories/ExpandIcon'
-import { IdentifierPill } from '../../accessories/Pills/IdentifierPill'
 import { AdjectiveFormsTable } from './PartsOfSpeech/AdjectiveFormsTable'
 import { NounFormsTable } from './PartsOfSpeech/NounFormsTable'
 import { VerbFormsTable } from './PartsOfSpeech/VerbFormsTable'
@@ -69,8 +71,8 @@ export const Forms = ({
                   sx={{ marginTop: theme.spacing(0.5) }}
                 >
                   {identifiers.split(' ').map((identifier) => (
-                    <IdentifierPill
-                      identifier={identifier as Identifier}
+                    <Identifier
+                      identifier={identifier as IdentifierType}
                       key={identifier}
                     />
                   ))}

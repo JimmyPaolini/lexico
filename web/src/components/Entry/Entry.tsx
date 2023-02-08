@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles'
 
 import { Entry as EntryType } from 'src/graphql/generated'
 
-import { PartOfSpeech } from '../accessories/Pills/identifierTypes'
+import { PartOfSpeech } from '../accessories/Identifier/Identifier.types'
 import { Forms } from './Forms/Forms'
 import { PrincipalParts } from './PrincipalParts/PrincipalParts'
 import { Translations } from './Translations/Translations'

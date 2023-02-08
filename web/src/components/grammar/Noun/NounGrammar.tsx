@@ -4,7 +4,7 @@ import { Card, Divider, Tab, Tabs, Typography } from '@mui/material'
 
 import { NounFormsTable } from '../../Entry/Forms/PartsOfSpeech/NounFormsTable'
 import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
-import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
+import { Identifier } from '../../accessories/Identifier/Identifier'
 import { nounGrammarData } from './NounGrammar.constants'
 
 type Props = { expandedInitial?: boolean }
@@ -18,7 +18,7 @@ export const NounGrammar = ({ expandedInitial = false }: Props) => {
         expandedInitial={expandedInitial}
         title="Nouns"
         subheader="Declensions, Endings, Translations"
-        avatar={<PartOfSpeech partOfSpeech="noun" />}
+        avatar={<Identifier identifier="noun" />}
         cardContentProps={{
           sx: { padding: 0, '&:last-child': { padding: 0 } },
         }}

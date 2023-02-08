@@ -8,7 +8,8 @@ import {
 } from '@mui/material'
 
 import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
-import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
+import { Identifier } from '../../accessories/Identifier/Identifier'
+import { PartOfSpeech } from '../../accessories/Identifier/Identifier.types'
 import { partsOfSpeechCardData } from './PartsOfSpeechCard.constants'
 
 type Props = { expandedInitial?: boolean }
@@ -36,7 +37,7 @@ export const PartsOfSpeechCard = ({ expandedInitial }: Props) => {
                     justifyContent: 'center',
                   }}
                 >
-                  <PartOfSpeech partOfSpeech={partOfSpeech.id} />
+                  <Identifier identifier={partOfSpeech.id as PartOfSpeech} />
                 </ListItemIcon>
               )}
               <ListItemText

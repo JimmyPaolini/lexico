@@ -1,2 +1,2 @@
 export * from './identifyEntryWord'
-export * from '../../components/accessories/Pills/identifierTypes'
+export * from '../../components/accessories/Identifier/Identifier.types'

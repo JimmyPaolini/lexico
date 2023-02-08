@@ -15,7 +15,7 @@ import {
 
 import { Identifier } from '../../../utils/identifiers'
 import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
-import { IdentifierPill } from '../../accessories/Pills/IdentifierPill'
+import { Identifier } from '../../accessories/Identifier/Identifier'
 import { identifiersData } from './Identifiers.constants'
 
 type Props = { expandedInitial?: boolean }
@@ -45,7 +45,7 @@ export const Identifiers = ({ expandedInitial = false }: Props) => {
             <Tab
               key={identifierData.id}
               label={
-                <IdentifierPill
+                <Identifier
                   identifier={identifierData.identifiers[0].id as Identifier}
                 />
               }
@@ -77,7 +77,7 @@ export const Identifiers = ({ expandedInitial = false }: Props) => {
                     justifyContent: 'center',
                   }}
                 >
-                  <IdentifierPill identifier={identifier.id as Identifier} />
+                  <Identifier identifier={identifier.id as Identifier} />
                 </ListItemIcon>
               )}
               <ListItemText

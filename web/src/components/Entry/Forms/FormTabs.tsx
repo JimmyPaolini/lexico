@@ -3,13 +3,14 @@ import { Dispatch, ReactNode, SetStateAction } from 'react'
 import { Box, Tab, Tabs } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
-import { Identifier } from 'src/utils/identifiers'
-
-import { IdentifierPill } from '../../accessories/Pills/IdentifierPill'
-import { identifierStyles } from '../../accessories/Pills/identifierStyles'
+import {
+  Identifier,
+  IdentifierType,
+  identifierStyles,
+} from 'src/components/accessories/Identifier'
 
 type Props = {
-  tabs: Identifier[]
+  tabs: IdentifierType[]
   activeTab: number
   setActiveTab: Dispatch<SetStateAction<number>> | ((activeTab: number) => void)
   children: ReactNode
@@ -41,7 +42,7 @@ export const FormTabs = ({
         {tabs.map((tab) => (
           <Tab
             key={tab}
-            icon={<IdentifierPill identifier={tab} />}
+            icon={<Identifier identifier={tab} sx={{ cursor: 'pointer' }} />}
             aria-label={tab}
             sx={{ minWidth: 0, padding: 0 }}
           />

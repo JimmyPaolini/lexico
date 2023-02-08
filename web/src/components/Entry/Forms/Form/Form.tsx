@@ -47,7 +47,6 @@ export const Form = ({
           : ''
       }
       placement="top"
-      enterDelay={0}
       arrow
       aria-label={centerText}
       sx={{

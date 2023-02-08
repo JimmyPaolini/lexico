@@ -13,7 +13,115 @@ import { Identifier } from 'src/utils/identifiers'
 //     ${color2} ${GRADIENT_WIDTH}px,
 //     ${color2} ${GRADIENT_WIDTH * 2}px);`
 
+const partOfSpeechBorderRadius = '5px'
+
 export const identifierStyles = {
+  noun: {
+    background: 'blue',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  properNoun: {
+    background: 'blue',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  verb: {
+    background: 'red',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  adjective: {
+    background: 'green',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  adverb: {
+    background: 'orange',
+    color: 'black',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  pronoun: {
+    background: 'purple',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  determiner: {
+    background: 'purple',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  preposition: {
+    background: 'yellow',
+    color: 'black',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  conjunction: {
+    background: 'gray',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  numeral: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  abbreviation: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  prefix: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  suffix: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  interfix: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  circumfix: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  inflection: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  particle: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  interjection: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  phrase: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  proverb: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+  idiom: {
+    background: 'black',
+    color: 'white',
+    borderRadius: partOfSpeechBorderRadius,
+  },
+
   nominative: { background: 'royalblue', color: 'white' },
   genitive: { background: 'forestgreen', color: 'white' },
   dative: { background: 'chartreuse', color: 'black' },
@@ -59,4 +167,5 @@ export type IdentifierStyles = {
   background: string
   color: string
   border?: string
+  borderRadius?: string
 }

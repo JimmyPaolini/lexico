@@ -1,6 +1,10 @@
 import { CardHeader } from '@mui/material'
 
 import {
+  Identifier,
+  IdentifierType,
+} from 'src/components/accessories/Identifier'
+import {
   Inflection,
   Maybe,
   NounInflection,
@@ -8,13 +12,7 @@ import {
   PrincipalPart,
 } from 'src/graphql/generated'
 
-import {
-  Identifier,
-  PartOfSpeech as PartOfSpeechType,
-} from '../../../utils/identifiers'
-import { PartOfSpeech } from '../../accessories/Icons/PartOfSpeech'
-import { IdentifierPill } from '../../accessories/Pills/IdentifierPill'
-import { PillVariant } from '../../accessories/Pills/Pill'
+import { PartOfSpeech as PartOfSpeechType } from '../../../utils/identifiers'
 import { BookmarkButton } from '../../bookmarks/BookmarkButton'
 import {
   getInflectionLabel,
@@ -46,19 +44,19 @@ export const PrincipalParts = ({
       subheader={inflectionLabel}
       avatar={
         <>
-          <PartOfSpeech partOfSpeech={partOfSpeech} />
+          <Identifier identifier={partOfSpeech} />
           {partOfSpeech === 'noun' && (
-            <IdentifierPill
-              identifier={(inflection as NounInflection).gender as Identifier}
-              variant={PillVariant.SMALL}
+            <Identifier
+              identifier={
+                (inflection as NounInflection).gender as IdentifierType
+              }
             />
           )}
           {partOfSpeech === 'preposition' && (
-            <IdentifierPill
+            <Identifier
               identifier={
-                (inflection as PrepositionInflection).case as Identifier
+                (inflection as PrepositionInflection).case as IdentifierType
               }
-              variant={PillVariant.SMALL}
             />
           )}
         </>
