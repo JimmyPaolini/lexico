@@ -3,7 +3,7 @@ services:
   web:
     image: jimmypaolini/lexico-web
     build:
-      context: .
+      context: ../../web
       dockerfile: ./web.Dockerfile
     container_name: web
     env_file: ../../web/.env

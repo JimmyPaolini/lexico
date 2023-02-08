@@ -1,5 +1,7 @@
 export const clientEndpoint =
-  typeof window === 'undefined' || process.env.NEXT_ENV === 'build'
+  process.env.NEXT_ENV === 'build'
+    ? 'http://localhost:3001/graphql'
+    : typeof window === 'undefined'
     ? 'http://localhost:3001/graphql'
     : window.location.origin + '/api'
 

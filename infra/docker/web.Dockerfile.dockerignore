@@ -3,3 +3,5 @@
 **/.storybook
 **/storybook-static
 **/*.env*
+**/.npmrc
+**/*.stories*

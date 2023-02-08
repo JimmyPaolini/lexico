@@ -9,8 +9,8 @@
     "database": "docker compose -f infra/docker/docker-compose.database.yml up",
     "server": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.server.yml up",
     "web": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.server.yml -f infra/docker/docker-compose.web.yml up",
-    "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
-    "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server .",
+    "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server --network=host server",
+    "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web --network=host web",
     "build:all": "npm run build:server & npm run build:web & wait; echo \"Lexico built!\"",
     "apply": "sh infra/scripts/apply.sh",
     "upgrade": "sh infra/scripts/upgrade.sh"
@@ -40,6 +40,6 @@
   "author": "Jimmy Paolini",
   "description": "Latin Language Interface",
   "repository": "https://github.com/JimmyPaolini/Lexico",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "MIT"
 }
