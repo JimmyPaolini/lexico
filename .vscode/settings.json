@@ -20,35 +20,6 @@
     "titleBar.inactiveBackground": "#66023c99",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "terminals.autorun": false,
-  "terminals.autokill": true,
-  "terminals.terminals": [
-    {
-      "name": "lexico",
-      "icon": "keyboard",
-      "cwd": "./"
-    },
-    {
-      "name": "story",
-      "icon": "book",
-      "cwd": "./web"
-    },
-    {
-      "name": "web",
-      "icon": "browser",
-      "cwd": "./web"
-    },
-    {
-      "name": "server",
-      "icon": "cloud",
-      "cwd": "./server"
-    },
-    {
-      "name": "database",
-      "icon": "database",
-      "cwd": "./"
-    }
-  ],
   "material-icon-theme.files.associations": {
     "package.json": "npm",
     "package-lock.json": "npm",

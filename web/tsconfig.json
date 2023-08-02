@@ -11,7 +11,10 @@
     "target": "ESNEXT",
     "module": "ESNEXT",
     "moduleResolution": "node",
-    "lib": ["DOM", "ESNEXT"],
+    "lib": [
+      "DOM",
+      "ESNEXT"
+    ],
     "sourceMap": true,
     "strictPropertyInitialization": false,
     "removeComments": true,
@@ -24,9 +27,16 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
   "compileOnSave": true
 }
