@@ -5,7 +5,7 @@ export const partsOfSpeechCardData = {
   partsOfSpeech: [
     {
       id: 'noun',
-      title: 'Noun',
+      title: 'Noun, Proper Noun',
       description: 'Expresses things',
     },
     {
@@ -26,27 +26,47 @@ export const partsOfSpeechCardData = {
     {
       id: 'pronoun',
       title: 'Pronoun, Determiner',
-      description: 'Expresses a noun in the neuter category',
+      description: 'Substitutes for a noun that it references',
     },
     {
       id: 'preposition',
       title: 'Preposition',
-      description: 'Expresses a noun in the feminine category',
+      description: 'Expresses spacial and conceptual relationships',
     },
     {
       id: 'conjunction',
       title: 'Conjunction',
-      description: 'Expresses a noun in the neuter category',
+      description: 'Connects clauses to each other',
+    },
+    {
+      id: 'numeral',
+      title: 'Numeral',
+      description: 'Expresses numbers',
     },
     {
       id: 'abbreviation',
-      title: 'Abbreviation, Numeral',
-      description: 'Expresses a noun in the masculine category',
+      title: 'Abbreviation',
+      description: 'Expresses a word using fewer characters',
+    },
+    {
+      id: 'particle',
+      title: 'Particle',
+      description: 'A word that depends on another in the phrase',
+    },
+    {
+      id: 'interjection',
+      title: 'Interjection',
+      description: 'Expresses a noun in the feminine category',
     },
     {
       id: 'prefix',
       title: 'Prefix, Suffix, Interfix, Circumfix',
-      description: 'Expresses a noun in the feminine category',
+      description: 'Pieces of words that may be affixed to another word',
+    },
+    {
+      id: 'phrase',
+      title: 'Phrase, Idiom, Proverb',
+      description: 'Clauses',
     },
   ],
 }

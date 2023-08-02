@@ -5,8 +5,9 @@
     "start": "next start",
     "tsw": "tsc -w",
     "tsc": "tsc",
+    "env": "export $(grep -v '^#' ./.env | xargs)",
     "graphql-codegen": "graphql-codegen --config src/graphql/codegen.yml",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "NEXT_ENV=build start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {

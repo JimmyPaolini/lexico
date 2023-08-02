@@ -4,7 +4,7 @@ import { PartsOfSpeechCard } from './PartsOfSpeechCard'
 import { partsOfSpeechCardData } from './PartsOfSpeechCard.constants'
 
 export default {
-  title: 'Cards/Grammar/PartsOfSpeechCard',
+  title: 'Cards/Grammar/PartsOfSpeech',
   component: PartsOfSpeechCard,
 } as ComponentMeta<typeof PartsOfSpeechCard>
 

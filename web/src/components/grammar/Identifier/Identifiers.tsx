@@ -13,9 +13,8 @@ import {
   useTheme,
 } from '@mui/material'
 
-import { Identifier } from '../../../utils/identifiers'
 import { CollapsibleCardHeader } from '../../accessories/CollapsibleCardHeader'
-import { Identifier } from '../../accessories/Identifier/Identifier'
+import { Identifier, IdentifierType } from '../../accessories/Identifier'
 import { identifiersData } from './Identifiers.constants'
 
 type Props = { expandedInitial?: boolean }
@@ -46,7 +45,9 @@ export const Identifiers = ({ expandedInitial = false }: Props) => {
               key={identifierData.id}
               label={
                 <Identifier
-                  identifier={identifierData.identifiers[0].id as Identifier}
+                  identifier={
+                    identifierData.identifiers[0].id as IdentifierType
+                  }
                 />
               }
               aria-label={identifierData.id}
@@ -77,7 +78,7 @@ export const Identifiers = ({ expandedInitial = false }: Props) => {
                     justifyContent: 'center',
                   }}
                 >
-                  <Identifier identifier={identifier.id as Identifier} />
+                  <Identifier identifier={identifier.id as IdentifierType} />
                 </ListItemIcon>
               )}
               <ListItemText

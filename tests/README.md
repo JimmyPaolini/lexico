@@ -112,3 +112,8 @@ Clear all local storage and cache before starting.
 - Card and text is formatted correctly,
 - Icons appear
 - Link directs to GitHub Issues
+
+## Dev
+
+- Storybook stories are working
+- Build Server and Web containers

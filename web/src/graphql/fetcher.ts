@@ -3,7 +3,7 @@ export const clientEndpoint =
     ? 'http://localhost:3001/graphql'
     : typeof window === 'undefined'
     ? 'http://localhost:3001/graphql'
-    : window.location.origin + '/api'
+    : 'http://localhost:3001/graphql'
 
 export const fetcher = <TData, TVariables>(
   query: string,

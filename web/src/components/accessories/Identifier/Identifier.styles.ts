@@ -57,13 +57,13 @@ export const identifierStyles = {
     borderRadius: partOfSpeechBorderRadius,
   },
   conjunction: {
-    background: 'gray',
-    color: 'white',
+    background: 'pink',
+    color: 'black',
     borderRadius: partOfSpeechBorderRadius,
   },
   numeral: {
-    background: 'black',
-    color: 'white',
+    background: 'gray',
+    color: 'black',
     borderRadius: partOfSpeechBorderRadius,
   },
   abbreviation: {

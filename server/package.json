@@ -1,6 +1,7 @@
 {
   "scripts": {
     "tsc": "tsc",
+    "env": "export $(grep -v '^#' ./.env | xargs)",
     "dev": "nodemon -e ts --exec \"tsc && node dist/app.js\"",
     "start": "node dist/app.js",
     "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js -f src/utils/ormconfig.ts"
