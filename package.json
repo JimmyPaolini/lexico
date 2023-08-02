@@ -1,60 +1,36 @@
 {
   "scripts": {
-    "lint": "eslint --no-error-on-unmatched-pattern * && prettier --check .",
-    "lint:watch": "nodemon -e ts --exec \"clear; yarn lint\"",
-    "format": "prettier .",
-
-    "dev": "docker compose -f infra/docker/docker-compose.database.yml up",
-    "undev": "docker compose -f infra/docker/docker-compose.database.yml down --remove-orphans",
-    "build": "yarn build:database & yarn build:server & yarn build:web & wait; echo \"Lexico built!\"",
-    "start": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml up",
-    "stop": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.yml down --remove-orphans",
-
-    "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web .",
-    "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server .",
-    "build:database": "docker image pull postgres:13",
-
-    "deploy:web": "kubectl apply -f ./infra/kubernetes/web.yaml",
-    "deploy:server": "kubectl apply -f ./infra/kubernetes/server.yaml",
-    "deploy:env": "kubectl apply -f ./infra/kubernetes/.env.yaml",
-    "deploy:ingress": "kubectl apply -f ./infra/kubernetes/ingress.yaml",
-    "deploy:database": "helm install database bitnami/postgresql -f ./infra/helm/database.yaml --set postgresqlPassword=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\") --set replication.password=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\")",
-    "deploy:nginx": "helm install nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
-    "deploy:elasticsearch": "helm install elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
-    "deploy:fluentbit": "helm install fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
-    "deploy:kibana": "helm install kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml",
-    "deploy:monitoring": "helm install monitoring prometheus-community/kube-prometheus-stack -n monitoring",
-
-    "update:web": "kubectl rollout restart deployment web",
-    "update:server": "kubectl rollout restart deployment server",
-    "update:database": "helm upgrade database bitnami/postgresql -f ./infra/helm/database.yaml --set postgresqlPassword=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\") --set replication.password=(k get cm env -o \"jsonpath={.data.POSTGRES_PASSWORD}\")",
-    "update:nginx": "helm upgrade nginx ingress-nginx/ingress-nginx -f ./infra/helm/nginx.yaml",
-    "update:elasticsearch": "helm upgrade elasticsearch elastic/elasticsearch -n logging -f ./infra/helm/elasticsearch.yaml",
-    "update:fluentbit": "helm upgrade fluentbit fluent/fluent-bit -n logging -f ./infra/helm/fluentbit.yaml",
-    "update:kibana": "helm upgrade kibana elastic/kibana -n logging -f ./infra/helm/kibana.yaml",
-    "update:monitoring": "helm upgrade monitoring prometheus-community/kube-prometheus-stack -n monitoring"
+    "lint-check": "eslint --no-error-on-unmatched-pattern --config cleaning/.eslintrc.js --ignore-path cleaning/.eslintignore .",
+    "format-check": "prettier --config cleaning/.prettierrc.js --ignore-path cleaning/.prettierignore --check .",
+    "lint": "eslint --no-error-on-unmatched-pattern --config cleaning/.eslintrc.js --ignore-path cleaning/.eslintignore --fix .",
+    "format": "prettier --config cleaning/.prettierrc.js --ignore-path cleaning/.prettierignore --write .",
+    "clean-check": "yarn format-check; yarn lint-check",
+    "clean": "yarn format; yarn lint",
+    "database": "docker compose -f infra/docker/docker-compose.database.yml up",
+    "server": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.server.yml up",
+    "web": "docker compose -f infra/docker/docker-compose.database.yml -f infra/docker/docker-compose.server.yml -f infra/docker/docker-compose.web.yml up",
+    "build:server": "DOCKER_BUILDKIT=1 docker build -f infra/docker/server.Dockerfile -t jimmypaolini/lexico-server --network=host server",
+    "build:web": "DOCKER_BUILDKIT=1 docker build -f infra/docker/web.Dockerfile -t jimmypaolini/lexico-web --network=host web",
+    "build:all": "yarn build:server & yarn build:web & wait; echo \"Lexico built!\"",
+    "apply": "sh infra/scripts/apply.sh",
+    "upgrade": "sh infra/scripts/upgrade.sh"
   },
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "dotenv-expand": "^5.1.0",
-    "graphql": "^15.5.0",
-    "number-to-words": "^1.2.4",
-    "type-graphql": "^1.1.1",
-    "typeorm": "^0.2.31",
-    "winston": "^3.3.3"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/node": "^14.14.11",
-    "@types/number-to-words": "^1.2.0",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
-    "class-validator": "^0.12.2",
-    "eslint": "^7.23.0",
-    "eslint-plugin-react": "^7.24.0",
+    "@graphql-eslint/eslint-plugin": "^3.13.1",
+    "@trivago/prettier-plugin-sort-imports": "^4.0.0",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
+    "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.1.0",
-    "prettier": "^2.2.1",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.2"
+    "eslint-config-standard-with-typescript": "^24.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.8.1"
   },
   "bugs": {
     "url": "https://github.com/JimmyPaolini/Lexico/issues"
@@ -64,6 +40,6 @@
   "author": "Jimmy Paolini",
   "description": "Latin Language Interface",
   "repository": "https://github.com/JimmyPaolini/Lexico",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "MIT"
 }

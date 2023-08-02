@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef } from "react"
-export default function useEventListener(
-  eventName: string,
-  handler: any,
-): void {
+import { useEffect, useRef } from 'react'
+
+export const useEventListener = (eventName: string, handler: any): void => {
   // Create a ref that stores handler
   const savedHandler = useRef()
 
@@ -19,8 +18,7 @@ export default function useEventListener(
   useEffect(
     () => {
       // Make sure window supports addEventListener
-      const isSupported = window && window.addEventListener
-      if (!isSupported) return
+      if (!window?.addEventListener) return
 
       // Create event listener that calls handler function stored in ref
       const eventListener = (event: any) => (savedHandler.current as any)(event)
@@ -33,6 +31,6 @@ export default function useEventListener(
         window.removeEventListener(eventName, eventListener)
       }
     },
-    [eventName], // Re-run if eventName changes
+    [eventName] // Re-run if eventName changes
   )
 }

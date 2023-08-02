@@ -1,0 +1,13 @@
+version: "3"
+services:
+  server:
+    image: jimmypaolini/lexico-server
+    build:
+      context: ../../server
+      dockerfile: ./server.Dockerfile
+    container_name: server
+    env_file: ../../server/.env
+    ports:
+      - 3001:3001
+    depends_on:
+      - database

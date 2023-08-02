@@ -1,4 +1,0 @@
-fragment allPrepositionInflections on PrepositionInflection {
-  case
-  other
-}

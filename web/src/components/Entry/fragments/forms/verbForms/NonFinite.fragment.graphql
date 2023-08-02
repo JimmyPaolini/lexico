@@ -1,0 +1,42 @@
+fragment AllNonFinite on NonFinite {
+  infinitive {
+    ...AllNonFiniteInfinitive
+  }
+  participle {
+    ...AllNonFiniteParticiple
+  }
+}
+
+fragment AllNonFiniteInfinitive on NonFiniteInfinitive {
+  active {
+    ...AllNonFinitePresentPerfectFuture
+  }
+  passive {
+    ...AllNonFinitePresentPerfectFuture
+  }
+}
+
+fragment AllNonFiniteParticiple on NonFiniteParticiple {
+  active {
+    ...AllNonFinitePresentFuture
+  }
+  passive {
+    ...AllNonFinitePerfectFuture
+  }
+}
+
+fragment AllNonFinitePresentFuture on NonFinitePresentFuture {
+  present
+  future
+}
+
+fragment AllNonFinitePerfectFuture on NonFinitePerfectFuture {
+  perfect
+  future
+}
+
+fragment AllNonFinitePresentPerfectFuture on NonFinitePresentPerfectFuture {
+  present
+  perfect
+  future
+}

@@ -1,0 +1,74 @@
+{
+  "version": "2.0.0",
+  "presentation": {
+    "echo": false,
+    "reveal": "always",
+    "focus": true,
+    "panel": "dedicated",
+    "showReuseMessage": true,
+  },
+  "tasks": [
+    {
+      "label": "🌑 Lexico",
+      "dependsOn": [
+        "🖥️ web",
+        "🖥️ web:dev",
+        "📡 server",
+        "📡 server:dev",
+        "🛢️ database",
+        "🐺 lexico",
+      ],
+      "icon": { "id": "globe", "color": "terminal.ansiGreen" },
+      "problemMatcher": []
+    },
+    {
+      "label": "🐺 lexico",
+      "command": "zsh",
+      "icon": { "id": "terminal", "color": "terminal.ansiGreen" },
+      "isBackground": true,
+      "type": "shell",
+    },
+    {
+      "label": "🛢️ database",
+      "command": "yarn database",
+      "icon": { "id": "run", "color": "terminal.ansiRed" },
+      "isBackground": true,
+      "type": "shell",
+    },
+    {
+      "label": "🍽️ ingestion",
+      "command": "cd ingestion && zsh",
+      "icon": { "id": "terminal", "color": "terminal.ansiBlue" },
+      "isBackground": true,
+      "type": "shell",
+    },
+    {
+      "label": "📡 server",
+      "command": "cd ./server && zsh",
+      "icon": { "id": "terminal", "color": "terminal.ansiBlue" },
+      "isBackground": true,
+      "type": "shell",
+    },
+    {
+      "label": "📡 server:dev",
+      "command": "cd ./server && yarn dev",
+      "icon": { "id": "run", "color": "terminal.ansiRed" },
+      "isBackground": true,
+      "type": "shell",
+    },
+    {
+      "label": "🖥️ web",
+      "command": "cd ./web && zsh",
+      "icon": { "id": "terminal", "color": "terminal.ansiBlue" },
+      "isBackground": true,
+      "type": "shell",
+    },
+    {
+      "label": "🖥️ web:dev",
+      "command": "cd ./web && yarn dev",
+      "icon": { "id": "run", "color": "terminal.ansiRed" },
+      "isBackground": true,
+      "type": "shell",
+    },
+  ]
+}

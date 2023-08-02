@@ -1,141 +1,73 @@
-import { Button, Typography } from "@material-ui/core"
-import { GetServerSideProps } from "next"
-import Head from "next/head"
-import { useRouter } from "next/router"
-import { SnackbarKey } from "notistack"
-import { useContext, useEffect, useMemo, useState } from "react"
-import Entry from "../../../entity/dictionary/Entry"
-import CardDeck from "../components/accessories/CardDeck"
-import BookmarkInstructionsCard from "../components/bookmarks/BookmarkInstructionsCard"
-import EntryCard from "../components/entry/EntryCard"
-import { Context } from "../components/layout/Context"
-import SearchBarLayout from "../components/layout/SearchBarLayout"
-import useBookmarks, { bookmarks } from "../hooks/bookmarks/useBookmarks"
-import useEntries from "../hooks/bookmarks/useEntries"
-import useSnackbarEnhanced from "../hooks/useSnackbarEnhanced"
-import identifyEntryWord from "../utils/identifiers"
+import { useMemo, useState } from 'react'
+
+import Head from 'next/head'
+
+import { GetServerSideProps } from 'next'
+import { QueryClient } from 'react-query'
+import { dehydrate } from 'react-query/hydration'
+
+import { useBookmarks } from 'src/components/bookmarks'
 import {
-  getBookmarksLocal,
-  showBookmarkInstructions,
-} from "../utils/bookmarksLocal"
-import { normalize } from "../utils/string"
-import { queryClient } from "./_app"
+  BookmarkInstructions,
+  useBookmarkInstructions,
+} from 'src/components/bookmarks/BookmarkInstructions'
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
+import { useBookmarksQuery } from 'src/graphql/generated'
+import { identifyEntryWord } from 'src/utils/identifiers'
 
-export default function Bookmarks(): JSX.Element {
-  const { user } = useContext(Context)
-  const [search, setSearch] = useState<string>("")
-  const [searched, setSearched] = useState<string>(search)
+import { Entry } from '../components/Entry/Entry'
+import { NoResultsCard } from '../components/NoResultsCard'
+import { filterBookmarks } from '../components/bookmarks/BookmarkButton'
+import { Deck } from '../components/layout/Deck'
+import { SearchDeckLayout } from '../components/layout/SearchDeckLayout'
 
-  useEffect(() => {
-    if (!search) setSearched("")
-  }, [search])
+export default function Bookmarks() {
+  const { user } = useLexicoContext()
 
-  let bookmarks: Entry[], isLoading: boolean, isSuccess: boolean
-  if (user) {
-    const response = useBookmarks()
-    bookmarks = response.data as Entry[]
-    isLoading = response.isLoading
-    isSuccess = response.isSuccess
-  } else {
-    const response = useEntries(getBookmarksLocal())
-    bookmarks = response.data as Entry[]
-    isLoading = response.isLoading
-    isSuccess = response.isSuccess
-  }
+  const [search, setSearch] = useState<string>('')
 
-  const cards = useMemo(() => {
-    const filteredEntries = filterEntries(bookmarks, searched) || []
+  const { bookmarks, isLoading, isSuccess } = useBookmarks()
+
+  const Cards = useMemo(() => {
+    const filteredEntries = filterBookmarks(bookmarks, search) || []
 
     return filteredEntries.length
-      ? filteredEntries.map((entry: Entry) => {
-          entry = identifyEntryWord(searched, entry)
-          return {
-            key: entry.id,
-            Card: <EntryCard {...{ entry, searched }} />,
-          }
+      ? filteredEntries.map((entry) => {
+          entry = identifyEntryWord(search, entry)
+          return <Entry {...{ entry, search }} key={entry.id} />
         })
-      : [
-          {
-            key: "no results",
-            Card: (
-              <Typography variant="h4" align="center">
-                Not Found
-              </Typography>
-            ),
-          },
-        ]
-  }, [user, bookmarks, searched])
+      : [<NoResultsCard key="NoReusltsCard" search={search} />]
+  }, [user, bookmarks, search])
 
-  const router = useRouter()
-  const { enqueueSnackbar, closeSnackbar } = useSnackbarEnhanced()
-  useEffect(() => {
-    if (!user && showBookmarkInstructions()) {
-      const action = (key: SnackbarKey) => (
-        <Button
-          onClick={() => {
-            closeSnackbar(key)
-            router.push("/user")
-          }}
-          color="secondary">
-          Sign in
-        </Button>
-      )
-      enqueueSnackbar(
-        `Your bookmarks are saved locally, sign in to save them across devices/browsers`,
-        {
-          autoHideDuration: 10000,
-          action,
-        },
-      )
-    }
-  }, [])
+  useBookmarkInstructions(user)
 
   return (
     <>
       <Head>
         <title>Lexico - Bookmarks</title>
       </Head>
-      <SearchBarLayout
-        searchBarProps={{
-          search,
-          setSearch,
-          isLoading,
-          handleSearchExecute: () => setSearched(search),
-          target: "bookmarks",
-        }}>
+      <SearchDeckLayout
+        handleSearch={(search) => setSearch(search)}
+        isLoading={isLoading}
+        placeholder="Search Bookmarks"
+      >
         {isLoading ? null : isSuccess &&
           Array.isArray(bookmarks) &&
           !bookmarks.length ? (
-          <BookmarkInstructionsCard />
+          <BookmarkInstructions />
         ) : (
-          <CardDeck cards={cards} />
+          <Deck Cards={Cards} />
         )}
-      </SearchBarLayout>
+      </SearchDeckLayout>
     </>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  await queryClient.prefetchQuery("bookmarks", bookmarks)
-  return { props: {} }
-}
-
-const filterEntries = (entries: Entry[], search: string) => {
-  const re = new RegExp(search, "i")
-  return (
-    entries?.filter((entry: Entry) => {
-      return (
-        entry.principalParts?.some((principalPart) =>
-          principalPart.text.some((principalPartText) =>
-            normalize(principalPartText).match(re),
-          ),
-        ) ||
-        entry.translations?.some((translation) =>
-          translation.translation.match(re),
-        ) ||
-        entry.partOfSpeech.match(re) ||
-        normalize(JSON.stringify(entry?.forms || "false")).match(re)
-      )
-    }) || []
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery(
+    useBookmarksQuery.getKey({}),
+    useBookmarksQuery.fetcher()
   )
+  return { props: { dehydratedState: dehydrate(queryClient) } }
 }

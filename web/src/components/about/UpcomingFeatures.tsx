@@ -1,60 +1,18 @@
-import {
-  Box,
-  CardActionArea,
-  CardHeader as CardHeaderMui,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { Launch } from "@material-ui/icons"
-import React from "react"
-import packageJson from "../../../../package.json"
+import { Launch } from '@mui/icons-material'
+import { CardHeader } from '@mui/material'
 
-const { version } = packageJson
+import { Link } from '../accessories/Link'
 
-export default function ToolIconGrid(): JSX.Element {
-  const classes = useStyles()
-
+export const UpcomingFeatures = () => {
+  const href = 'https://github.com/JimmyPaolini/Lexico/issues'
   return (
-    <>
-      <CardActionArea
-        disableRipple
-        disableTouchRipple
-        classes={{ focusHighlight: classes.hide }}
-        href="https://github.com/JimmyPaolini/Lexico/issues"
-        target="_blank">
-        <CardHeaderMui
-          title={`Upcoming Releases (current v${version})`}
-          titleTypographyProps={{ variant: "body1" }}
-          className={classes.dropdown}
-          action={
-            <Box className={classes.iconContainer}>
-              <Launch />
-            </Box>
-          }
-        />
-      </CardActionArea>
-    </>
+    <Link href={href} target="_blank">
+      <CardHeader
+        title="Releases (current v2.1.0)"
+        titleTypographyProps={{ variant: 'h5' }}
+        action={<Launch />}
+        sx={{ '& .MuiCardHeader-action': { margin: 'auto' } }}
+      />
+    </Link>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  dropdown: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    padding: theme.spacing(1),
-  },
-  toolGrid: {
-    padding: theme.spacing(1),
-  },
-  tool: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  hide: {
-    display: "none",
-  },
-  iconContainer: {
-    padding: 12,
-    paddingTop: 20,
-    paddingRight: 20,
-  },
-}))

@@ -1,15 +1,15 @@
-import { Grid } from "@material-ui/core"
-import React, { ReactNode } from "react"
-import Navigation from "./Navigation"
-import Snackbar from "./Snackbar"
+import { PropsWithChildren } from 'react'
 
-interface Props {
-  children?: ReactNode
-}
+import { Grid } from '@mui/material'
 
-export default function Layout({ children }: Props): JSX.Element {
+import { Navigation } from './Navigation'
+import { SnackbarProvider } from './SnackbarProvider'
+
+type Props = PropsWithChildren<Record<string, unknown>>
+
+export const Layout = ({ children }: Props) => {
   return (
-    <Snackbar>
+    <SnackbarProvider>
       <Grid container>
         <Grid item>
           <Navigation />
@@ -18,6 +18,6 @@ export default function Layout({ children }: Props): JSX.Element {
           {children}
         </Grid>
       </Grid>
-    </Snackbar>
+    </SnackbarProvider>
   )
 }

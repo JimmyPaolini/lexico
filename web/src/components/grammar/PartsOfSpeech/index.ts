@@ -1,0 +1,1 @@
+export { PartsOfSpeechCard } from './PartsOfSpeechCard'

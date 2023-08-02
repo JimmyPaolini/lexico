@@ -1,0 +1,4 @@
+fragment AllAdverbInflections on AdverbInflection {
+  type
+  degree
+}

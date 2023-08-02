@@ -1,32 +1,39 @@
-import { Slider } from "@material-ui/core"
-import React from "react"
+import { Slider } from '@mui/material'
 
-interface Props {
-  formik: any
-}
-export default function SettingsSlider({ formik }: Props): JSX.Element {
-  const min = 16
-  const max = 32
-  const marks = new Array((max - min) / 2 + 1)
+import { FormikProps } from 'formik'
+
+import { Settings } from 'src/graphql/generated'
+
+type Props = { formik: FormikProps<Settings> }
+
+export const SettingsSlider = ({ formik }: Props) => {
+  const MIN = 16
+  const MAX = 32
+  const marks = new Array((MAX - MIN) / 2 + 1)
     .fill(0)
-    .map((_, i) => ({ value: i * 2 + min, label: "" + (i * 2 + min) }))
+    .map((_, i) => ({ value: i * 2 + MIN, label: '' + (i * 2 + MIN) }))
 
-  const handleSliderChange = (event: any, newValue: number | number[]) => {
-    event.target.name = "fontSize"
-    event.target.value = newValue
-    formik.handleChange(event)
+  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    formik.handleChange({
+      ...event,
+      target: {
+        ...event.target,
+        name: 'fontSize',
+        value: newValue,
+      },
+    })
   }
 
   return (
     <Slider
       id="fontSize"
       name="fontSize"
-      value={formik.values.fontSize}
+      value={formik.values.fontSize as number}
       onChange={handleSliderChange}
       onChangeCommitted={() => formik.handleSubmit()}
       valueLabelDisplay="off"
-      min={min}
-      max={max}
+      min={MIN}
+      max={MAX}
       marks={marks}
       step={2}
     />

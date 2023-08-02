@@ -1,0 +1,4 @@
+fragment AllPrincipalParts on PrincipalPart {
+  name
+  text
+}

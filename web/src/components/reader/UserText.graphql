@@ -1,0 +1,10 @@
+query UserText($id: String!) {
+  userText(id: $id) {
+    id
+    title
+    text
+    user {
+      id
+    }
+  }
+}

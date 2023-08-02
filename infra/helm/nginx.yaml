@@ -1,5 +1,11 @@
 # https://github.com/kubernetes/ingress-nginx/blob/master/charts/ingress-nginx/values.yaml
 
 fullnameOverride: nginx
-extraArgs:
-  default-ssl-certificate: default/secret/tls
+controller:
+  extraArgs:
+    default-ssl-certificate: default/tls
+  scope:
+    enabled: true
+
+rbac:
+  scope: true

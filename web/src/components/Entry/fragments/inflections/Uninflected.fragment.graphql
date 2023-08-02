@@ -1,0 +1,3 @@
+fragment AllUninflected on Uninflected {
+  other
+}

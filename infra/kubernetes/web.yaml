@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: web
   replicas: 3
-  # revisionHistoryLimit: 2
+  revisionHistoryLimit: 2
   template:
     metadata:
       labels:
@@ -17,13 +17,11 @@ spec:
     spec:
       containers:
         - name: web
-          image: jimmypaolini/lexico-web
+          image: jimmypaolini/lexico-web:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
           envFrom:
-            - configMapRef:
-                name: env
             - secretRef:
                 name: env
 

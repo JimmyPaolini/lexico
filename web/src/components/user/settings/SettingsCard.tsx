@@ -1,34 +1,51 @@
-import { Card, CardContent, Divider, Grid } from "@material-ui/core"
-import { makeStyles, Theme } from "@material-ui/core/styles"
-import React, { useContext } from "react"
-import useLogout from "../../../hooks/authentication/useLogout"
-import useUnregister from "../../../hooks/authentication/useUnregister"
-import CardHeader from "../../accessories/CardHeader"
-import SubmitButton from "../../accessories/SubmitButton"
-import { Context } from "../../layout/Context"
-import { Identity } from "./Identity"
-import SettingsForm from "./SettingsForm"
+import { Card, CardContent, Divider, Grid } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 
-export default function SettingsCard(): JSX.Element {
-  const classes = useStyles()
-  const { user } = useContext(Context)
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
+import {
+  useLogoutQuery,
+  useUnregisterMutation,
+  useUserQuery,
+} from 'src/graphql/generated'
 
-  const { mutateAsync: logout } = useLogout()
-  const { mutateAsync: unregister } = useUnregister()
+import { CardHeader } from '../../accessories/CardHeader'
+import { SubmitButton } from '../../accessories/SubmitButton'
+import { Identity } from './Identity'
+import { SettingsForm } from './SettingsForm'
+
+export const SettingsCard = () => {
+  const theme = useTheme()
+  const { user, queryClient } = useLexicoContext()
+
+  const { refetch: logout } = useLogoutQuery(
+    {},
+    {
+      enabled: false,
+      onSuccess: () => {
+        queryClient.setQueryData(useUserQuery.getKey(), undefined)
+      },
+    }
+  )
+  const { mutateAsync: unregister } = useUnregisterMutation({
+    retry: false,
+    onSuccess: () => {
+      queryClient.setQueryData(useUserQuery.getKey(), undefined)
+    },
+  })
 
   const confirmUnregister = async () => {
     const unregisterDialog =
-      "Are you sure you want to delete your account? All your bookmarks and settings will be lost."
-    if (window.confirm(unregisterDialog)) await unregister()
+      'Are you sure you want to delete your account? All your Bookmarks, Texts, and Settings will be lost.'
+    if (window.confirm(unregisterDialog)) await unregister({})
   }
 
   return (
-    <Card className={classes.card}>
+    <Card>
       <CardHeader title="Settings" />
       <Divider variant="middle" />
       <CardContent>
         <Grid container direction="column" spacing={2}>
-          <Grid item>
+          <Grid item container justifyContent="center">
             <Identity />
           </Grid>
           <Grid item>
@@ -42,7 +59,12 @@ export default function SettingsCard(): JSX.Element {
               <Grid item>
                 <SubmitButton
                   name="Delete Account"
-                  className={classes.unregister}
+                  sx={{
+                    background: theme.palette.error.main,
+                    '&:hover': {
+                      background: theme.palette.error.dark,
+                    },
+                  }}
                   onClick={confirmUnregister}
                 />
               </Grid>
@@ -53,17 +75,3 @@ export default function SettingsCard(): JSX.Element {
     </Card>
   )
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  unregister: {
-    backgroundColor: theme.palette.error.main,
-    "&:hover": {
-      backgroundColor: theme.palette.error.dark,
-    },
-  },
-}))

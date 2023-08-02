@@ -1,7 +1,0 @@
-query GetCustomText($id: String!) {
-  getCustomText(id: $id) {
-    id
-    title
-    text
-  }
-}

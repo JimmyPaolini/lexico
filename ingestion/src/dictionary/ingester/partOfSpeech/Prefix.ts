@@ -1,5 +1,5 @@
-import Uninflected from "../../../../../entity/dictionary/word/inflection/Uninflected"
-import Adjective from "./Adjective"
+import Uninflected from '../../../../../server/src/entity/dictionary/word/inflection/Uninflected'
+import Adjective from './Adjective'
 
 export default class Prefix extends Adjective {
   async ingestInflection() {

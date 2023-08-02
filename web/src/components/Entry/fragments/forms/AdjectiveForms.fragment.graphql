@@ -1,0 +1,40 @@
+fragment AllAdjectiveForms on AdjectiveForms {
+  masculine {
+    ...AllAdjectiveCase
+  }
+  feminine {
+    ...AllAdjectiveCase
+  }
+  neuter {
+    ...AllAdjectiveCase
+  }
+}
+
+fragment AllAdjectiveCase on AdjectiveCase {
+  nominative {
+    ...AllAdjectiveNumber
+  }
+  genitive {
+    ...AllAdjectiveNumber
+  }
+  dative {
+    ...AllAdjectiveNumber
+  }
+  accusative {
+    ...AllAdjectiveNumber
+  }
+  ablative {
+    ...AllAdjectiveNumber
+  }
+  vocative {
+    ...AllAdjectiveNumber
+  }
+  locative {
+    ...AllAdjectiveNumber
+  }
+}
+
+fragment AllAdjectiveNumber on AdjectiveNumber {
+  singular
+  plural
+}

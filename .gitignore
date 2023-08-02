@@ -1,10 +1,8 @@
 **/.DS_Store
-**/.vscode
-**/.idea
 
 **/node_modules
-**/dist
-**/*.env*
+**/dist/**
+**/.env
 
 **/.next/
 **/out/
@@ -13,5 +11,4 @@
 **/elasticsearch_volume
 
 **/data/wiktionary
-
-.DS_Store
+**/storybook-static

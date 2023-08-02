@@ -1,5 +1,0 @@
-fragment allAdjectiveInflections on AdjectiveInflection {
-  declension
-  degree
-  other
-}

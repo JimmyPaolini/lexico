@@ -1,27 +1,25 @@
 {
   "scripts": {
     "tsc": "tsc",
-    "dev": "nodemon -e ts --exec \"tsc && node dist/server/src/app.js\"",
-    "start": "node dist/server/src/app.js",
-    "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js -f ../utils/ormconfig.ts",
-    "migrate": "yarn typeorm migration:generate -n"
+    "env": "export $(grep -v '^#' ./.env | xargs)",
+    "dev": "nodemon -e ts --exec \"tsc && node dist/app.js\"",
+    "start": "node dist/app.js",
+    "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js -f src/utils/ormconfig.ts"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.4.4",
-    "apollo-server-express": "^2.19.0",
-    "argon2": "^0.27.1",
-    "axios": "^0.21.1",
+    "@aws-sdk/client-polly": "^3.252.0",
+    "apollo-server-express": "^3.11.1",
+    "axios": "^0.21.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "graphql": "^15.4.0",
-    "jsonwebtoken": "^8.5.1",
-    "nodemailer": "^6.4.18",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
-    "ts-node": "^9.1.1",
     "type-graphql": "^1.1.1",
-    "typeorm": "^0.2.29"
+    "typeorm": "^0.3.11",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",
@@ -34,9 +32,8 @@
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
     "class-validator": "^0.12.2",
-    "eslint": "^7.15.0",
     "nodemon": "^2.0.7",
-    "prettier": "^2.2.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.2.2"
   },
   "nodemonConfig": {

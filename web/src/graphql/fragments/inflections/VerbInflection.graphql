@@ -1,4 +1,0 @@
-fragment allVerbInflections on VerbInflection {
-  conjugation
-  other
-}

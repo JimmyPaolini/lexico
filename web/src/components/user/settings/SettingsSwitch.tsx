@@ -1,25 +1,25 @@
-import { Grid, Switch, Typography } from "@material-ui/core"
-import React from "react"
+import { Grid, Switch, Typography } from '@mui/material'
 
-interface Props {
-  field: string
+import { FormikProps } from 'formik'
+
+import { Settings } from 'src/graphql/generated'
+
+type Props = {
+  field: keyof Settings
   label: string
-  formik: any
+  formik: FormikProps<Settings>
 }
-export default function SettingsSwitch({
-  field,
-  label,
-  formik,
-}: Props): JSX.Element {
+
+export const SettingsSwitch = ({ field, label, formik }: Props) => {
   return (
-    <Grid container justify="space-between" alignItems="center">
+    <Grid container justifyContent="space-between" alignItems="center">
       <Typography>{label}:</Typography>
       <Switch
         id={field}
         name={field}
         color="primary"
-        value={formik.values[field]}
-        checked={formik.values[field]}
+        value={formik.values[field] as boolean}
+        checked={formik.values[field] as boolean}
         onChange={formik.handleChange}
       />
     </Grid>

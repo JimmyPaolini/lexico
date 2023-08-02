@@ -1,36 +1,38 @@
-import { getConnection } from "typeorm"
-import Entry from "../../../entity/dictionary/Entry"
-import Translation from "../../../entity/dictionary/Translation"
-import log from "../../../utils/log"
-import { escapeCapitals } from "../../../utils/string"
+import { getConnection } from 'typeorm'
+
+import Entry from '../../../server/src/entity/dictionary/Entry'
+import Translation from '../../../server/src/entity/dictionary/Translation'
+import log from '../../../utils/log'
+import { escapeCapitals } from '../../../utils/string'
 
 export async function ingestTranslationReference(
-  translation: Translation,
+  translation: Translation
 ): Promise<void> {
   const Translations = getConnection().getRepository(Translation)
   const Entries = getConnection().getRepository(Entry)
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   let reference = translation.translation.match(/\{\*.+\*\}/)![0].slice(2, -2)
-  if (reference.match(/\(.*\)/)) reference = reference.replace(/ ?\(.*\)/, "")
+  if (reference.match(/\(.*\)/)) reference = reference.replace(/ ?\(.*\)/, '')
 
-  const entries = await Entries.createQueryBuilder("entry")
+  const entries = await Entries.createQueryBuilder('entry')
     .where(`entry.id ~* '${escapeCapitals(reference)}:\\d'`)
     .getMany()
   const entry =
     entries.find(
-      (entry) => entry.partOfSpeech === translation.entry.partOfSpeech,
-    ) || entries[0]
+      (entry) => entry.partOfSpeech === translation.entry.partOfSpeech
+    ) ?? entries[0]
   if (!entry) log.info(translation)
 
   await Translations.save(
-    (entry?.translations || []).map(
+    (entry?.translations ?? []).map(
       (referencedTranslation) =>
-        new Translation(referencedTranslation.translation, translation.entry),
-    ),
+        new Translation(referencedTranslation.translation, translation.entry)
+    )
   )
 
   translation.translation = translation.translation
-    .replace(/{\*.*\*}/g, "")
+    .replace(/{\*.*\*}/g, '')
     .trim()
   await Translations.save(translation)
 }

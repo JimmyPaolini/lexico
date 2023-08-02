@@ -1,0 +1,20 @@
+query Text($id: String!) {
+  text(id: $id) {
+    id
+    title
+    lines {
+      id
+      line
+      lineNumber
+      lineLabel
+    }
+    book {
+      id
+      title
+    }
+    author {
+      id
+      name
+    }
+  }
+}

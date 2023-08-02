@@ -1,78 +1,34 @@
-import {
-  Box,
-  CardActionArea,
-  CardHeader as CardHeaderMui,
-  Collapse,
-  Grid,
-  Link,
-} from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import Image from "next/image"
-import React, { useState } from "react"
-import tools from "../../../../utils/tools"
-import ExpandIcon from "../accessories/ExpandIcon"
+import Image from 'next/image'
 
-export default function ToolIconGrid(): JSX.Element {
-  const classes = useStyles()
-  const [expanded, setExpanded] = useState<boolean>(false)
+import { Grid } from '@mui/material'
 
+import { TOOLS } from 'src/components/about/ToolIconGrid.constants'
+import { Link } from 'src/components/accessories/Link'
+
+import { CollapsibleCardHeader } from '../accessories/CollapsibleCardHeader'
+
+export const ToolIconGrid = () => {
   return (
-    <>
-      <CardActionArea
-        onClick={() => setExpanded((expanded) => !expanded)}
-        disableRipple
-        disableTouchRipple
-        classes={{ focusHighlight: classes.hide }}>
-        <CardHeaderMui
-          title="Frameworks, Libraries, and Tools"
-          titleTypographyProps={{ variant: "body1" }}
-          className={classes.dropdown}
-          action={
-            <Box style={{ paddingTop: 8, paddingRight: 8 }}>
-              <ExpandIcon {...{ expanded }} />
-            </Box>
-          }
-        />
-      </CardActionArea>
-      <Collapse in={expanded} appear>
-        <Grid
-          container
-          spacing={1}
-          justify="center"
-          className={classes.toolGrid}>
-          {tools.map((tool) => (
-            <Grid item xs={2} key={tool.name} container justify="center">
-              <Link
-                href={tool.url}
-                target="_blank"
-                onClick={(e: any) => e.stopPropagation()}>
-                <Image
-                  src={`/icon/tool/${tool.name}.png`}
-                  alt={tool.name}
-                  width={128}
-                  height={128}
-                  priority
-                  loading="eager"
-                />
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
-      </Collapse>
-    </>
+    <CollapsibleCardHeader
+      title="Frameworks, Libraries, and Tools"
+      expandedInitial
+    >
+      <Grid container spacing={1} justifyContent="space-between">
+        {TOOLS.map((tool) => (
+          <Grid item key={tool.name}>
+            <Link href={tool.url} target="_blank">
+              <Image
+                src={tool.icon}
+                alt={tool.name}
+                width={64}
+                height={64}
+                priority
+                loading="eager"
+              />
+            </Link>
+          </Grid>
+        ))}
+      </Grid>
+    </CollapsibleCardHeader>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  dropdown: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    padding: theme.spacing(1),
-  },
-  toolGrid: {
-    padding: theme.spacing(1),
-  },
-  hide: {
-    display: "none",
-  },
-}))

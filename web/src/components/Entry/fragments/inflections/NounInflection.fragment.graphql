@@ -1,0 +1,5 @@
+fragment AllNounInflections on NounInflection {
+  declension
+  gender
+  other
+}

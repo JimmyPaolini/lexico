@@ -1,13 +1,21 @@
 {
   "scripts": {
-    "ingest": "tsc && node dist/ingestion/src/ingest.js",
-    "clear": "tsc && node dist/ingestion/src/clear.js",
-    "backup": "tsc && node dist/ingestion/src/backup.js",
-    "restore": "tsc && node dist/ingestion/src/restore.js",
-    "rewrite": "node dist/ingestion/src/rewrite.js",
-    "script": "node dist/ingestion/src/script.js",
+    "tsc": "tsc",
     "tsw": "tsc -w",
-    "tsc": "tsc"
+    "env": "grep -v '^#' ../.env; export $(grep -v '^#' ../.env | xargs)",
+    "preingest": "tsc",
+    "ingest": "node dist/ingestion/src/ingest.js",
+    "ingest:wiktionary": "npm run ingest wiktionary",
+    "ingest:entries": "npm run ingest entries",
+    "ingest:words": "npm run ingest words",
+    "ingest:translationReferences": "npm run ingest translationReferences",
+    "ingest:entry": "npm run ingest entry",
+    "ingest:literature": "npm run ingest literature",
+    "ingest:manual": "npm run ingest manual",
+    "ingest:bible": "npm run ingest bible",
+    "rewrite:all": "node dist/ingestion/src/rewrite.js all",
+    "wordIterator": "node dist/ingestion/src/dictionary/wordIterator.js",
+    "script": "node dist/ingestion/src/script.js"
   },
   "dependencies": {
     "axios": "^0.21.1",

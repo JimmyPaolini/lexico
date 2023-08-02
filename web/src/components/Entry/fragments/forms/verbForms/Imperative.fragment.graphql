@@ -1,0 +1,66 @@
+fragment AllImperative on Imperative {
+  active {
+    ...AllImperativeActive
+  }
+  passive {
+    ...AllImperativePassive
+  }
+}
+
+fragment AllImperativeActive on ImperativeActive {
+  present {
+    ...AllImperativePresent
+  }
+  future {
+    ...AllImperativeActiveFuture
+  }
+}
+
+fragment AllImperativePassive on ImperativePassive {
+  present {
+    ...AllImperativePresent
+  }
+  future {
+    ...AllImperativePassiveFuture
+  }
+}
+
+fragment AllImperativePresent on ImperativePresent {
+  singular {
+    ...AllImperativeSecond
+  }
+  plural {
+    ...AllImperativeSecond
+  }
+}
+
+fragment AllImperativeActiveFuture on ImperativeActiveFuture {
+  singular {
+    ...AllImperativeSecondThird
+  }
+  plural {
+    ...AllImperativeSecondThird
+  }
+}
+
+fragment AllImperativePassiveFuture on ImperativePassiveFuture {
+  singular {
+    ...AllImperativeSecondThird
+  }
+  plural {
+    ...AllImperativeThird
+  }
+}
+
+fragment AllImperativeSecondThird on ImperativeSecondThird {
+  second
+  third
+}
+
+fragment AllImperativeSecond on ImperativeSecond {
+  second
+}
+
+fragment AllImperativeThird on ImperativeThird {
+  third
+}

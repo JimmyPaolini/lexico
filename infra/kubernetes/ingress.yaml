@@ -8,13 +8,10 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   tls:
-    - hosts:
+    - secretName: tls
+      hosts:
         - lexicolatin.com
         - www.lexicolatin.com
-        # - server.lexicolatin.com
-        # - kibana.lexicolatin.com
-        # - database.lexicolatin.com
-      secretName: tls
   rules:
     - host: lexicolatin.com
       http:
@@ -26,6 +23,13 @@ spec:
                 name: web
                 port:
                   number: 3000
+          - path: /graphql
+            pathType: Prefix
+            backend:
+              service:
+                name: server
+                port:
+                  number: 3001
     - host: www.lexicolatin.com
       http:
         paths:
@@ -36,27 +40,10 @@ spec:
                 name: web
                 port:
                   number: 3000
-    # - host: server.lexicolatin.com
-    #   http:
-    #     paths:
-    #       - backend:
-    #           service:
-    #             name: server
-    #             port:
-    #               number: 3001
-    # - host: kibana.lexicolatin.com
-    #   http:
-    #     paths:
-    #       - backend:
-    #           service:
-    #             name: kibana
-    #             port:
-    #               number: 5601
-    # - host: database.lexicolatin.com
-    #   http:
-    #     paths:
-    #       - backend:
-    #           service:
-    #             name: database
-    #             port:
-    #               number: 5432
+          - path: /graphql
+            pathType: Prefix
+            backend:
+              service:
+                name: server
+                port:
+                  number: 3001

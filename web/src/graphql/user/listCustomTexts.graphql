@@ -1,7 +1,0 @@
-query ListCustomTexts {
-  listCustomTexts {
-    id
-    title
-    text
-  }
-}

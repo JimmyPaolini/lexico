@@ -1,43 +1,53 @@
-import { CssBaseline, ThemeProvider } from "@material-ui/core"
-import { SnackbarProvider } from "notistack"
-import { QueryClient, QueryClientProvider } from "react-query"
-import { ContextProvider } from "../src/components/layout/Context"
-import theme from "../src/theme/theme"
+import { RouterContext } from 'next/dist/shared/lib/router-context'
+import * as NextImage from 'next/image'
+
+import { CacheProvider } from '@emotion/react'
+import { CssBaseline, Grid, ThemeProvider } from '@mui/material'
+
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+import { LexicoContextProvider } from 'src/components/layout/LexicoContext'
+import { SnackbarProvider } from 'src/components/layout/SnackbarProvider'
+import { createEmotionCache, theme } from 'src/theme'
 
 export const parameters = {
-  actions: { argTypesRegex: "^(on|set|handle)[A-Z].*" },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
+  layout: 'centered',
+  actions: { argTypesRegex: '^(on|set|handle)[A-Z].*' },
   backgrounds: {
-    default: "Lexico",
     values: [
-      {
-        name: "Lexico",
-        value: "#66023C",
-      },
-      {
-        name: "Paper",
-        value: "#424242",
-      },
+      { name: 'Lexico', value: theme.palette.primary.main },
+      { name: 'Paper', value: theme.palette.background.paper },
     ],
   },
+  nextRouter: { Provider: RouterContext.Provider },
 }
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={theme}>
-      <QueryClientProvider client={new QueryClient()}>
-        <ContextProvider>
-          <CssBaseline />
-          <SnackbarProvider style={{ display: "none" }}>
-            <Story />
-          </SnackbarProvider>
-        </ContextProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <CacheProvider value={createEmotionCache()}>
+      <ThemeProvider theme={theme}>
+        <QueryClientProvider client={new QueryClient()}>
+          <LexicoContextProvider>
+            <SnackbarProvider>
+              <CssBaseline />
+              <Grid
+                container
+                justifyContent="center"
+                sx={{ minWidth: '500px' }}
+              >
+                <Story />
+              </Grid>
+            </SnackbarProvider>
+          </LexicoContextProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </CacheProvider>
   ),
 ]
+
+const OriginalNextImage = NextImage.default
+
+Object.defineProperty(NextImage, 'default', {
+  configurable: true,
+  value: (props) => <OriginalNextImage {...props} unoptimized />,
+})

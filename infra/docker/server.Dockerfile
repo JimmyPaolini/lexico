@@ -1,18 +1,18 @@
-# context must be one folder level up
-FROM node:15-alpine
+FROM node:18-alpine AS installer
 RUN apk add --update nodejs npm curl
+WORKDIR /app
+COPY package*.json .
+RUN npm ci
 
-WORKDIR /Lexico
-COPY package*.json ./
-RUN npm install
-
-WORKDIR /Lexico/server
-COPY server/package*.json ./
-RUN npm install
-
-COPY . ../
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY --from=installer /app/node_modules ./node_modules
+COPY . .
 RUN npm run tsc
 
+FROM node:18-alpine AS runner
+WORKDIR /app
+COPY --from=builder /app .
+ENV NODE_ENV=production
 EXPOSE 3001
-HEALTHCHECK CMD curl --fail http://server:3001/health || exit 1
-CMD NODE_ENV=production npm run start
+CMD npm run start

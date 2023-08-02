@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "name": "Debug Chrome localhost:3000",
+      "request": "attach",
+      "type": "chrome",
+      "url": "http://localhost:3000",
+    }
+  ]
+}

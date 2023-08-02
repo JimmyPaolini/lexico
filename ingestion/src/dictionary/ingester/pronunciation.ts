@@ -1,18 +1,19 @@
-import { Pronunciation } from "../../../../entity/dictionary/word/Pronunciation"
-import Ingester from "../Ingester"
-import getClassicalPhonemes from "./pronunciation/classical"
+import { Pronunciation } from '../../../../server/src/entity/dictionary/word/Pronunciation'
+import Ingester from '../Ingester'
+import getClassicalPhonemes from './pronunciation/classical'
 import {
   getEcclesiasticalPronunciations,
   parsePhonics,
-} from "./pronunciation/pronunciation"
+} from './pronunciation/pronunciation'
 
 export default function parsePronunciation(
   ingester: Ingester,
   $: cheerio.Root,
   elt: any,
-  macronizedWord: string,
+  macronizedWord: string
 ): Pronunciation {
   if (!macronizedWord) {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     ingester.ingestPrincipalParts()
     return ingester.ingestPronunciation()
   }
@@ -27,26 +28,27 @@ export default function parsePronunciation(
     .first()
   if ($(pronunciationHeader).length <= 0) return pronunciation
 
-  for (const pr of $(pronunciationHeader).next("ul").children().get()) {
+  for (const pr of $(pronunciationHeader).next('ul').children().get()) {
     if (
       $(pr)
         .text()
         .match(/^audio/i)
-    )
+    ) {
       continue
-    const pronunciations = $(pr).text().split("IPA(key):")[1]?.split(", ")
+    }
+    const pronunciations = $(pr).text().split('IPA(key):')[1]?.split(', ')
     if (!pronunciations) continue
-    if ($(pr).find("a").text().includes("Classical")) {
+    if ($(pr).find('a').text().includes('Classical')) {
       pronunciation.classical = {
         ...pronunciation.classical,
         ...parsePhonics(pronunciations),
       }
-    } else if ($(pr).find("a").text().includes("Ecclesiastical")) {
+    } else if ($(pr).find('a').text().includes('Ecclesiastical')) {
       pronunciation.ecclesiastical = {
         ...pronunciation.ecclesiastical,
         ...parsePhonics(pronunciations),
       }
-    } else if ($(pr).find("a").text().includes("Vulgar")) {
+    } else if ($(pr).find('a').text().includes('Vulgar')) {
       pronunciation.vulgar = {
         ...pronunciation.vulgar,
         ...parsePhonics(pronunciations),

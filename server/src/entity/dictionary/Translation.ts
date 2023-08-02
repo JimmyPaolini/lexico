@@ -1,0 +1,37 @@
+import { Field, ID, ObjectType } from 'type-graphql'
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
+
+import Entry from './Entry'
+
+@Entity()
+@ObjectType()
+export default class Translation extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  @Field(() => ID)
+  id: string
+
+  @Column('varchar', { length: 2047 })
+  @Field(() => String)
+  translation: string
+
+  @ManyToOne(() => Entry, (entry) => entry.translations, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  @JoinColumn()
+  @Field(() => Entry)
+  entry: Entry
+
+  constructor(translation: string, entry: Entry) {
+    super()
+    this.translation = translation
+    this.entry = entry
+  }
+}

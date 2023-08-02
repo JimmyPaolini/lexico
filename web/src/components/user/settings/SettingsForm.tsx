@@ -1,41 +1,40 @@
-import { Divider, Typography } from "@material-ui/core"
-import { useFormik } from "formik"
-import React, { useContext } from "react"
-import useSetSettings from "../../../hooks/user/useSetSettings"
-import useSnackbarEnhanced from "../../../hooks/useSnackbarEnhanced"
+import { Divider, Typography } from '@mui/material'
+
+import { useFormik } from 'formik'
+
+import { useLexicoContext } from 'src/components/layout/LexicoContext'
 import {
   getSettingsLocal,
   setSettingsLocal,
-  showSettingsInstructions,
-} from "../../../utils/settingsLocal"
-import { Context } from "../../layout/Context"
-import SettingsSlider from "./SettingsSlider"
-import SettingsSwitch from "./SettingsSwitch"
+  shouldShowSettingsInstructions,
+} from 'src/components/user/settings/settingsLocal'
+import { Settings, useSetSettingsMutation } from 'src/graphql/generated'
+import { useSnackbar } from 'src/hooks/useSnackbar'
 
-export default function SettingsForm(): JSX.Element {
-  const { user } = useContext(Context)
+import { SettingsSlider } from './SettingsSlider'
+import { SettingsSwitch } from './SettingsSwitch'
 
-  const { enqueueSnackbar } = useSnackbarEnhanced()
+export const SettingsForm = () => {
+  const { user } = useLexicoContext()
+
+  const enqueueSnackbar = useSnackbar()
   const formik = useFormik({
-    initialValues: user ? user.settings : getSettingsLocal(),
+    initialValues: (user ? user.settings : getSettingsLocal()) as Settings,
     onSubmit: async () => {
       if (user) {
-        await setSettings(formik.values)
+        await setSettingsUser({ settings: formik.values })
       } else {
         setSettingsLocal(formik.values)
-        if (showSettingsInstructions()) {
+        if (shouldShowSettingsInstructions()) {
           enqueueSnackbar(
-            `Your settings are saved locally, sign in to save them across devices/browsers`,
-            {
-              autoHideDuration: 10000,
-            },
+            'Your settings are saved locally, sign in to save them across devices/browsers'
           )
         }
       }
     },
   })
 
-  const { mutateAsync: setSettings } = useSetSettings(formik.values)
+  const { mutateAsync: setSettingsUser } = useSetSettingsMutation()
 
   return (
     <form onChange={formik.handleSubmit}>
@@ -53,7 +52,7 @@ export default function SettingsForm(): JSX.Element {
       />
       <Divider />
       <Typography align="center" style={{ marginTop: 10, marginBottom: 4 }}>
-        Literature Reader font size:
+        Text font size:
       </Typography>
       <SettingsSlider formik={formik} />
     </form>

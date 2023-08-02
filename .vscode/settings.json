@@ -1,0 +1,59 @@
+{
+  "peacock.color": "#66023C",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBorder": "#121f01",
+    "activityBar.activeBackground": "#980359",
+    "activityBar.background": "#980359",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#121f01",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#980359",
+    "statusBar.background": "#66023c",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#980359",
+    "statusBarItem.remoteBackground": "#66023c",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#66023c",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#66023c99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "material-icon-theme.files.associations": {
+    "package.json": "npm",
+    "package-lock.json": "npm",
+    "tsconfig.json": "settings",
+    "docker-compose.database.yml": "docker",
+    "settings.json": "vscode",
+    "keybindings.json": "vscode"
+  },
+  "material-icon-theme.folders.associations": {
+    "database_volume": "database",
+    "infra": "environment",
+    "entity": "class",
+    "ingestion": "scripts",
+    "resolver": "routes",
+    "library": "lib",
+    "dictionary": "app",
+    "wiktionary": "content",
+    ".next": "vercel",
+    "cypress": "test",
+    "cleaning": "coverage",
+    "migration": "scripts"
+  },
+  "prettier.configPath": "cleaning/.prettierrc.js",
+  "prettier.ignorePath": "cleaning/.prettierignore",
+  "eslint.options": { "overrideConfigFile": "cleaning/.eslintrc.js" },
+  "eslint.workingDirectories": ["./"],
+  "eslint.lintTask.options": "--config cleaning/.eslintrc.js --ignore-file cleaning/.eslintignore .",
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "graphql",
+    "html",
+    "markdown"
+  ]
+}

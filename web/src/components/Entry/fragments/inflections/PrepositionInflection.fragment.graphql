@@ -1,0 +1,4 @@
+fragment AllPrepositionInflections on PrepositionInflection {
+  case
+  other
+}

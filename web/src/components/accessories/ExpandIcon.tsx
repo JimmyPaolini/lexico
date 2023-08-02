@@ -1,32 +1,15 @@
-import { Box } from "@material-ui/core"
-import { makeStyles } from "@material-ui/core/styles"
-import { ExpandMore } from "@material-ui/icons"
+import { ComponentProps } from 'react'
 
-interface Props {
-  expanded: boolean
-  [key: string]: any
-}
-export default function ExpandIcon({ expanded, ...props }: Props): JSX.Element {
-  const classes = useStyles()
+import ExpandMore from '@mui/icons-material/ExpandMore'
+
+type Props = { expanded: boolean } & ComponentProps<typeof ExpandMore>
+
+export const ExpandIcon = ({ expanded, ...props }: Props) => {
+  const transform = expanded ? 'rotateZ(-180deg)' : 'rotateZ(0deg)'
   return (
-    <Box className={classes.container} {...props}>
-      <ExpandMore
-        className={expanded ? classes.upSideDown : classes.rightSideUp}
-      />
-    </Box>
+    <ExpandMore
+      {...props}
+      sx={{ transition: '250ms ease', transform, ...props.sx }}
+    />
   )
 }
-
-const useStyles = makeStyles(() => ({
-  container: {
-    padding: 12,
-  },
-  rightSideUp: {
-    transition: "250ms ease",
-    transform: "rotateZ(0deg)",
-  },
-  upSideDown: {
-    transition: "250ms ease",
-    transform: "rotateZ(-180deg)",
-  },
-}))

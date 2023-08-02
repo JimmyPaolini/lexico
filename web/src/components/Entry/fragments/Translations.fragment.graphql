@@ -1,0 +1,4 @@
+fragment AllTranslations on Translation {
+  id
+  translation
+}

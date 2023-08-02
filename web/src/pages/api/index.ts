@@ -1,24 +1,27 @@
-import axios, { AxiosRequestConfig } from "axios"
-import type { NextApiRequest, NextApiResponse } from "next"
+import axios, { AxiosRequestConfig } from 'axios'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-export const serverEndpoint = `http://${
-  process.env.NODE_ENV === "production" ? "server" : "localhost"
-}:3001/graphql`
+export const serverEndpoint =
+  process.env.NODE_ENV === 'production'
+    ? 'http://server:3001/graphql'
+    : 'http://localhost:3001/graphql'
 
 export default async (
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ): Promise<void> => {
-  const request = {
-    method: "POST",
+  const request: AxiosRequestConfig = {
+    ...req,
+    method: 'POST',
     url: serverEndpoint,
     data: req.body,
-    headers: req.headers,
-  } as AxiosRequestConfig
+    withCredentials: true,
+    headers: req?.headers?.cookie ? { cookie: req.headers.cookie } : undefined,
+  }
 
   const response = await axios(request)
-
-  if (response.headers["set-cookie"])
-    res.setHeader("set-cookie", response.headers["set-cookie"])
+  if (response.headers['set-cookie']) {
+    res.setHeader('set-cookie', response.headers['set-cookie'])
+  }
   res.send(response.data)
 }

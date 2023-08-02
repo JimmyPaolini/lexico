@@ -1,0 +1,8 @@
+fragment AllSettings on Settings {
+  theme
+  fontSize
+  formsExpandedDefault
+  translationsExpandedDefault
+  dictionaryMacronized
+  literatureMacronized
+}

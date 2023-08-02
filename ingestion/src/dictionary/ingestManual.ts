@@ -1,28 +1,32 @@
-import { getConnection } from "typeorm"
-import hic from "../../../data/dictionary/hic.json"
-import ille from "../../../data/dictionary/ille.json"
-import Entry from "../../../entity/dictionary/Entry"
-import log from "../../../utils/log"
-import { ingestEntryWords } from "./ingestEntryWords"
-import ingestPraenomenAbbreviations from "./ingestPraenomenAbbreviations.ts"
-import ingestRomanNumerals from "./ingestRomanNumerals"
+import { getConnection } from 'typeorm'
+
+import hic from '../../../data/dictionary/hic.json'
+import ille from '../../../data/dictionary/ille.json'
+import omnis from '../../../data/dictionary/omnis.json'
+import Entry from '../../../server/src/entity/dictionary/Entry'
+import log from '../../../utils/log'
+import { ingestEntryWords } from './ingestEntryWords'
+import ingestPraenomenAbbreviations from './ingestPraenomenAbbreviations.ts'
+import ingestRomanNumerals from './ingestRomanNumerals'
 
 export default async function ingestManual(): Promise<void> {
-  log.info("ingesting manuals")
+  log.info('ingesting manuals')
 
-  await deleteManual("qui:0")
-  await deleteManual("quis:0")
-  await deleteManual("latinitas:0")
-  await deleteManual("ille:0")
-  await deleteManual("ille:1")
+  await deleteManual('qui:0')
+  await deleteManual('quis:0')
+  await deleteManual('latinitas:0')
+  await deleteManual('ille:0')
+  await deleteManual('ille:1')
+  await deleteManual('omnis:0')
 
   await createManual(hic as Entry)
   await createManual(ille as Entry)
+  await createManual(omnis as Entry)
 
   await ingestPraenomenAbbreviations()
   await ingestRomanNumerals()
 
-  log.info("ingested manuals")
+  log.info('ingested manuals')
 }
 
 export async function createManual(manual: Entry): Promise<void> {

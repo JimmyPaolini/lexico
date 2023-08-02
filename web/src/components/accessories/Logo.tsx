@@ -1,56 +1,35 @@
-import { Box, Fade, Typography } from "@material-ui/core"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import Image from "next/image"
-import React, { useRef } from "react"
+import Image from 'next/image'
 
-export default function Logo(): JSX.Element {
-  const classes = useStyles()
-  const theme = useTheme() as any
-  const ref = useRef<any>()
-  const announcement = `Announcement, not always present, this day in latin history, roman holiday, link to <a href="https://www.wikipedia.org/">wikipedia</a>, medieval scientific research, featured content, contains emojis🐋😤💯👀`
-  if (ref && ref.current && ref.current.innerHTML)
-    ref.current.innerHTML = announcement
+import { Box, Fade } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+
+import logo from 'public/lexico_logo.svg'
+
+const LOGO_DIMENTIONS = 4 / 3
+
+export const Logo = () => {
+  const theme = useTheme()
 
   return (
-    <Fade in={true}>
-      <Box position="relative">
-        <Box className={classes.container}>
-          <Image
-            src="/lexico_logo.svg"
-            alt="lexico logo"
-            className={classes.logo}
-            // layout="fill"
-            width={theme.custom.cardWidth}
-            height={(theme.custom.cardWidth * 4) / 3}
-            priority
-            loading="eager"
-          />
-        </Box>
-        {announcement ? (
-          <Typography
-            ref={ref}
-            variant="body1"
-            align="center"
-            className={classes.announcement}
-          />
-        ) : null}
+    <Fade in>
+      <Box
+        sx={{
+          padding: theme.spacing(2),
+          marginLeft: theme.spacing(1),
+          marginRight: theme.spacing(1),
+          maxwidth: theme.custom.card.maxWidth,
+          minwidth: theme.custom.card.minWidth,
+        }}
+      >
+        <Image
+          src={logo}
+          alt="lexico logo"
+          width={theme.custom.card.maxWidth}
+          height={theme.custom.card.maxWidth * LOGO_DIMENTIONS}
+          priority
+          loading="eager"
+        />
       </Box>
     </Fade>
   )
 }
-
-const useStyles = makeStyles((theme: any) => ({
-  announcement: {
-    width: 236,
-    position: "absolute",
-    right: 32,
-    top: 64,
-  },
-  container: {
-    padding: theme.spacing(2),
-  },
-  logo: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-}))

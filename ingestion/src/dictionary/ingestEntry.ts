@@ -1,36 +1,38 @@
-import cheerio from "cheerio"
-import path from "path"
-import { getConnection } from "typeorm"
-import Entry from "../../../entity/dictionary/Entry"
-import Translation from "../../../entity/dictionary/Translation"
-import { PartOfSpeech } from "../../../entity/dictionary/word/PartOfSpeech"
-import log from "../../../utils/log"
-import { normalize } from "../../../utils/string"
-import Ingester from "./Ingester"
-import Adjective from "./ingester/partOfSpeech/Adjective"
-import Adverb from "./ingester/partOfSpeech/Adverb"
-import Conjunction from "./ingester/partOfSpeech/Conjunction"
-import Noun from "./ingester/partOfSpeech/Noun"
-import Prefix from "./ingester/partOfSpeech/Prefix"
-import Preposition from "./ingester/partOfSpeech/Preposition"
-import Pronoun from "./ingester/partOfSpeech/Pronoun"
-import Verb from "./ingester/partOfSpeech/Verb"
+import cheerio from 'cheerio'
+import path from 'path'
+import { getConnection } from 'typeorm'
+
+import Entry from '../../../server/src/entity/dictionary/Entry'
+import Translation from '../../../server/src/entity/dictionary/Translation'
+import { PartOfSpeech } from '../../../server/src/entity/dictionary/word/PartOfSpeech'
+import log from '../../../utils/log'
+import { normalize } from '../../../utils/string'
+import Ingester from './Ingester'
+import Adjective from './ingester/partOfSpeech/Adjective'
+import Adverb from './ingester/partOfSpeech/Adverb'
+import Conjunction from './ingester/partOfSpeech/Conjunction'
+import Noun from './ingester/partOfSpeech/Noun'
+import Prefix from './ingester/partOfSpeech/Prefix'
+import Preposition from './ingester/partOfSpeech/Preposition'
+import Pronoun from './ingester/partOfSpeech/Pronoun'
+import Verb from './ingester/partOfSpeech/Verb'
 
 export default async function ingestEntryWord(
-  entryWord: string,
+  entryWord: string
 ): Promise<void> {
   // log.info("ingesting entry", entryWord)
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const data = require(path.join(
     process.cwd(),
-    `./data/wiktionary/${entryWord}.json`,
+    `./data/wiktionary/${entryWord}.json`
   ))
   const $ = cheerio.load(data.html)
 
   entryWord = normalize(entryWord)
   await Promise.all(
-    $("p:has(strong.Latn.headword)")
+    $('p:has(strong.Latn.headword)')
       .get()
-      .map(async (elt, i) => await ingestEntry(entryWord, $, elt, i)),
+      .map(async (elt, i) => await ingestEntry(entryWord, $, elt, i))
   )
   // for (const elt of $("p:has(strong.Latn.headword)").get()) {
   //   await ingestEntry(entryWord, $, elt)
@@ -41,13 +43,13 @@ async function ingestEntry(
   word: string,
   $: cheerio.Root,
   elt: any,
-  i: number,
+  i: number
 ): Promise<void> {
   const Entries = getConnection().getRepository(Entry)
   const Translations = getConnection().getRepository(Translation)
 
   const entry = await Entries.save({
-    id: word + ":" + i,
+    id: word + ':' + i,
     partOfSpeech: Ingester.getPartOfSpeech($, elt),
   })
   try {
@@ -77,10 +79,11 @@ async function ingestEntry(
     }
     const IngesterConstructor = ingestersMap[entry.partOfSpeech]
     if (!IngesterConstructor) {
-      if ((entry.partOfSpeech as PartOfSpeech | "") === "")
-        log.info("No partOfSpeech:", entry.id)
-      else if ((entry.partOfSpeech as PartOfSpeech | "letter") !== "letter")
-        log.info("skipping entry", entry)
+      if ((entry.partOfSpeech as PartOfSpeech | '') === '') {
+        log.info('No partOfSpeech:', entry.id)
+      } else if ((entry.partOfSpeech as PartOfSpeech | 'letter') !== 'letter') {
+        log.info('skipping entry', entry)
+      }
       await Entries.delete(entry.id)
       return
     }

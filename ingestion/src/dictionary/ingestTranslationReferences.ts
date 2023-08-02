@@ -1,16 +1,17 @@
-import { FindManyOptions, getConnection, Like } from "typeorm"
-import Translation from "../../../entity/dictionary/Translation"
-import log from "../../../utils/log"
-import { ingestTranslationReference } from "./ingestTranslationReference"
+import { FindManyOptions, Like, getConnection } from 'typeorm'
+
+import Translation from '../../../server/src/entity/dictionary/Translation'
+import log from '../../../utils/log'
+import { ingestTranslationReference } from './ingestTranslationReference'
 
 export default async function ingestTranslationReferences(): Promise<void> {
-  log.info("Ingesting Translation References")
+  log.info('Ingesting Translation References')
 
   const Translations = getConnection().getRepository(Translation)
   const params = {
-    where: { translation: Like("%{*%*}%") },
-    order: { translation: "ASC" },
-    relations: ["entry"],
+    where: { translation: Like('%{*%*}%') },
+    order: { translation: 'ASC' },
+    relations: ['entry'],
     take: 100,
   } as FindManyOptions<Translation>
 
@@ -20,12 +21,12 @@ export default async function ingestTranslationReferences(): Promise<void> {
     translations = await Translations.find(params)
   ) {
     log.info(
-      `selected ${translations.length} from translation ${translations[0].translation}`,
+      `selected ${translations.length} from translation ${translations[0].translation}`
     )
     for (const translation of translations) {
       await ingestTranslationReference(translation)
     }
   }
 
-  log.info("Ingested Translation References")
+  log.info('Ingested Translation References')
 }

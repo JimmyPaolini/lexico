@@ -1,5 +1,0 @@
-query GetTextIds {
-  getTextIds {
-    id
-  }
-}

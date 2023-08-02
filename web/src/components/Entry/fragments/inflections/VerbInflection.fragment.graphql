@@ -1,0 +1,4 @@
+fragment AllVerbInflections on VerbInflection {
+  conjugation
+  other
+}

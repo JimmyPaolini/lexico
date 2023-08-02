@@ -1,0 +1,38 @@
+fragment AllSubjunctive on Subjunctive {
+  active {
+    ...AllSubjunctiveTense
+  }
+  passive {
+    ...AllSubjunctiveTense
+  }
+}
+
+fragment AllSubjunctiveTense on SubjunctiveTense {
+  present {
+    ...AllSubjunctiveNumber
+  }
+  imperfect {
+    ...AllSubjunctiveNumber
+  }
+  perfect {
+    ...AllSubjunctiveNumber
+  }
+  pluperfect {
+    ...AllSubjunctiveNumber
+  }
+}
+
+fragment AllSubjunctiveNumber on SubjunctiveNumber {
+  singular {
+    ...AllSubjunctivePerson
+  }
+  plural {
+    ...AllSubjunctivePerson
+  }
+}
+
+fragment AllSubjunctivePerson on SubjunctivePerson {
+  first
+  second
+  third
+}

@@ -1,0 +1,28 @@
+fragment AllNounForms on NounForms {
+  nominative {
+    ...AllNounNumbers
+  }
+  genitive {
+    ...AllNounNumbers
+  }
+  dative {
+    ...AllNounNumbers
+  }
+  accusative {
+    ...AllNounNumbers
+  }
+  ablative {
+    ...AllNounNumbers
+  }
+  vocative {
+    ...AllNounNumbers
+  }
+  locative {
+    ...AllNounNumbers
+  }
+}
+
+fragment AllNounNumbers on NounNumber {
+  singular
+  plural
+}

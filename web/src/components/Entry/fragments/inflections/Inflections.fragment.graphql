@@ -1,0 +1,20 @@
+fragment AllInflections on Inflection {
+  ... on NounInflection {
+    ...AllNounInflections
+  }
+  ... on VerbInflection {
+    ...AllVerbInflections
+  }
+  ... on AdjectiveInflection {
+    ...AllAdjectiveInflections
+  }
+  ... on AdverbInflection {
+    ...AllAdverbInflections
+  }
+  ... on PrepositionInflection {
+    ...AllPrepositionInflections
+  }
+  ... on Uninflected {
+    ...AllUninflected
+  }
+}

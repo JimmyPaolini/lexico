@@ -1,0 +1,19 @@
+fragment AllEntry on Entry {
+  id
+  partOfSpeech
+  principalParts {
+    ...AllPrincipalParts
+  }
+  inflection {
+    ...AllInflections
+  }
+  translations {
+    ...AllTranslations
+  }
+  forms {
+    ...AllForms
+  }
+  identifiers
+  bookmarked
+  isLatinSearchResult
+}

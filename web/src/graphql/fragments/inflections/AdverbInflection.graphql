@@ -1,4 +1,0 @@
-fragment allAdverbInflections on AdverbInflection {
-  type
-  degree
-}

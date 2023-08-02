@@ -1,17 +1,15 @@
-import { Button } from "@material-ui/core"
-import React from "react"
-import { sentenceCase } from "../../utils/string"
+import { ComponentProps, MouseEventHandler } from 'react'
 
-interface Props {
+import { Button } from '@mui/material'
+
+import { sentenceCase } from 'src/utils/string'
+
+type Props = ComponentProps<typeof Button> & {
   name: string
-  onClick?: () => any
-  [key: string]: any
+  onClick?: MouseEventHandler<HTMLButtonElement>
 }
-export default function SubmitButton({
-  name,
-  onClick,
-  ...props
-}: Props): JSX.Element {
+
+export const SubmitButton = ({ name, onClick, ...props }: Props) => {
   return (
     <Button
       color="primary"
@@ -21,7 +19,8 @@ export default function SubmitButton({
       fullWidth
       type="submit"
       onClick={onClick}
-      {...props}>
+      {...props}
+    >
       {sentenceCase(name)}
     </Button>
   )

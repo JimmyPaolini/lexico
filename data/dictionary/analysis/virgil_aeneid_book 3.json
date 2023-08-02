@@ -1,0 +1,7368 @@
+{
+  "lineCount": 718,
+  "wordsWithNoResultsNonCapitalized": [
+    "adlabimur",
+    "longaeuo",
+    "ovantes",
+    "nitentem",
+    "caelicolum",
+    "tris",
+    "adnixi",
+    "priores",
+    "praecelsa",
+    "deriguit",
+    "talem",
+    "inanem",
+    "venientem",
+    "deriguit",
+    "omnem",
+    "hostilem",
+    "omnem",
+    "incassum",
+    "arentem",
+    "aulai",
+    "tripodas",
+    "obluctor",
+    "rarescent",
+    "interluit",
+    "implacata",
+    "trahentem",
+    "exsertantem",
+    "pistrix",
+    "cessantem",
+    "auarum",
+    "potentem",
+    "ingentem",
+    "trilicem",
+    "mandarat",
+    "felices",
+    "intraro",
+    "potentes",
+    "facilem",
+    "quadripedes",
+    "obuertimus",
+    "ui",
+    "navifragum",
+    "ingentem",
+    "adlabimur",
+    "fumantem",
+    "omnem",
+    "periisse",
+    "immemores",
+    "talem",
+    "resupinus",
+    "oblitusue",
+    "fundimur",
+    "infelicem",
+    "conlustrans",
+    "venientem",
+    "moventem",
+    "petentem",
+    "infrendens",
+    "omnes",
+    "immugiit",
+    "coniferae",
+    "cyparissi",
+    "iacentem",
+    "retrorsus",
+    "priores",
+    "stagnantis",
+    "praepingue",
+    "inlaetabilis",
+    "renarrabat",
+    "errantem",
+    "placidissima",
+    "quoue",
+    "inlabere"
+  ],
+  "entryCounts": [
+    {
+      "-que:0": 270
+    },
+    {
+      "et:1": 190
+    },
+    {
+      "et:0": 190
+    },
+    {
+      "ego:0": 82
+    },
+    {
+      "tu:0": 82
+    },
+    {
+      "vos:0": 82
+    },
+    {
+      "qui:1": 70
+    },
+    {
+      "hic:100": 58
+    },
+    {
+      "-ne:0": 53
+    },
+    {
+      "in:0": 42
+    },
+    {
+      "sum:0": 40
+    },
+    {
+      "litus:0": 36
+    },
+    {
+      "ad:0": 32
+    },
+    {
+      "fero:0": 25
+    },
+    {
+      "do:0": 25
+    },
+    {
+      "cum:0": 24
+    },
+    {
+      "cum:1": 24
+    },
+    {
+      "magnus:0": 23
+    },
+    {
+      "terra:0": 23
+    },
+    {
+      "video:0": 22
+    },
+    {
+      "at:0": 22
+    },
+    {
+      "urbs:0": 21
+    },
+    {
+      "nec:0": 21
+    },
+    {
+      "nec:1": 21
+    },
+    {
+      "primus:0": 20
+    },
+    {
+      "unda:0": 20
+    },
+    {
+      "voco:0": 19
+    },
+    {
+      "socius:0": 19
+    },
+    {
+      "deus:0": 19
+    },
+    {
+      "ventus:0": 19
+    },
+    {
+      "edo:0": 18
+    },
+    {
+      "socius:1": 18
+    },
+    {
+      "T`roia:0": 17
+    },
+    {
+      "ora:0": 17
+    },
+    {
+      "os:0": 17
+    },
+    {
+      "P`ortus:0": 17
+    },
+    {
+      "portus:0": 17
+    },
+    {
+      "iam:0": 17
+    },
+    {
+      "hic:0": 17
+    },
+    {
+      "atque:0": 17
+    },
+    {
+      "tum:0": 16
+    },
+    {
+      "pater:0": 16
+    },
+    {
+      "per:0": 16
+    },
+    {
+      "aequor:0": 16
+    },
+    {
+      "vox:0": 16
+    },
+    {
+      "ille:100": 16
+    },
+    {
+      "altus:0": 15
+    },
+    {
+      "altus:1": 15
+    },
+    {
+      "curro:0": 15
+    },
+    {
+      "fatus:0": 15
+    },
+    {
+      "e:2": 15
+    },
+    {
+      "ubi:0": 14
+    },
+    {
+      "U`bus:0": 14
+    },
+    {
+      "cursus:0": 14
+    },
+    {
+      "longus:0": 14
+    },
+    {
+      "caelus:0": 14
+    },
+    {
+      "caelum:0": 14
+    },
+    {
+      "caelum:1": 14
+    },
+    {
+      "dico:0": 14
+    },
+    {
+      "saxum:0": 14
+    },
+    {
+      "altum:0": 13
+    },
+    {
+      "iubeo:0": 13
+    },
+    {
+      "medius:0": 13
+    },
+    {
+      "for:0": 13
+    },
+    {
+      "T`erra:0": 13
+    },
+    {
+      "arma:1": 13
+    },
+    {
+      "arma:0": 13
+    },
+    {
+      "sub:0": 13
+    },
+    {
+      "manus:0": 13
+    },
+    {
+      "queo:0": 13
+    },
+    {
+      "omnis:0": 13
+    },
+    {
+      "quo:0": 12
+    },
+    {
+      "medium:1": 12
+    },
+    {
+      "noster:0": 12
+    },
+    {
+      "mons:0": 12
+    },
+    {
+      "si:0": 12
+    },
+    {
+      "divus:0": 12
+    },
+    {
+      "sic:0": 12
+    },
+    {
+      "moenia:0": 12
+    },
+    {
+      "F`ata:1": 12
+    },
+    {
+      "fata:1": 12
+    },
+    {
+      "fatum:0": 12
+    },
+    {
+      "I`talia:0": 12
+    },
+    {
+      "de:1": 12
+    },
+    {
+      "de:0": 12
+    },
+    {
+      "sed:0": 12
+    },
+    {
+      "velum:0": 12
+    },
+    {
+      "ipse:0": 12
+    },
+    {
+      "P`hoebus:0": 11
+    },
+    {
+      "neo:0": 11
+    },
+    {
+      "divus:1": 11
+    },
+    {
+      "vastus:0": 11
+    },
+    {
+      "linquo:0": 11
+    },
+    {
+      "aut:0": 11
+    },
+    {
+      "cursus:1": 11
+    },
+    {
+      "A`nchises:0": 11
+    },
+    {
+      "facio:0": 11
+    },
+    {
+      "vela:0": 11
+    },
+    {
+      "velo:0": 11
+    },
+    {
+      "ab:0": 11
+    },
+    {
+      "qui:2": 11
+    },
+    {
+      "locus:0": 10
+    },
+    {
+      "natus:0": 10
+    },
+    {
+      "natus:2": 10
+    },
+    {
+      "divum:1": 10
+    },
+    {
+      "peto:0": 10
+    },
+    {
+      "classis:0": 10
+    },
+    {
+      "ara:0": 10
+    },
+    {
+      "A`pollo:0": 10
+    },
+    {
+      "procul:0": 10
+    },
+    {
+      "multus:0": 10
+    },
+    {
+      "armo:0": 10
+    },
+    {
+      "idem:0": 10
+    },
+    {
+      "ne:2": 10
+    },
+    {
+      "ne:1": 10
+    },
+    {
+      "ne:0": 10
+    },
+    {
+      "haud:0": 10
+    },
+    {
+      "manus:1": 10
+    },
+    {
+      "solus:0": 10
+    },
+    {
+      "via:0": 10
+    },
+    {
+      "unus:1": 10
+    },
+    {
+      "animus:0": 10
+    },
+    {
+      "nam:0": 10
+    },
+    {
+      "T`ellus:0": 10
+    },
+    {
+      "tellus:0": 10
+    },
+    {
+      "is:0": 10
+    },
+    {
+      "postquam:0": 9
+    },
+    {
+      "alo:0": 9
+    },
+    {
+      "medio:0": 9
+    },
+    {
+      "regnum:0": 9
+    },
+    {
+      "oro:0": 9
+    },
+    {
+      "primum:0": 9
+    },
+    {
+      "sacer:0": 9
+    },
+    {
+      "sequor:0": 9
+    },
+    {
+      "ago:0": 9
+    },
+    {
+      "qua:0": 9
+    },
+    {
+      "ques:0": 9
+    },
+    {
+      "vastum:1": 9
+    },
+    {
+      "domus:0": 9
+    },
+    {
+      "pelagus:0": 9
+    },
+    {
+      "laetus:0": 9
+    },
+    {
+      "mare:0": 9
+    },
+    {
+      "fessus:0": 9
+    },
+    {
+      "quam:0": 9
+    },
+    {
+      "nox:0": 9
+    },
+    {
+      "dictus:0": 9
+    },
+    {
+      "cano:0": 9
+    },
+    {
+      "te:0": 9
+    },
+    {
+      "e:1": 9
+    },
+    {
+      "solum:0": 9
+    },
+    {
+      "vates:0": 9
+    },
+    {
+      "cunctus:0": 9
+    },
+    {
+      "undo:0": 9
+    },
+    {
+      "sidus:0": 9
+    },
+    {
+      "D`eus:0": 9
+    },
+    {
+      "silva:0": 9
+    },
+    {
+      "bellum:0": 9
+    },
+    {
+      "bellus:0": 9
+    },
+    {
+      "accipio:0": 9
+    },
+    {
+      "unus:0": 9
+    },
+    {
+      "patrius:0": 9
+    },
+    {
+      "numen:0": 9
+    },
+    {
+      "fluctus:0": 9
+    },
+    {
+      "aura:0": 9
+    },
+    {
+      "tantus:0": 9
+    },
+    {
+      "verus:0": 9
+    },
+    {
+      "auro:0": 9
+    },
+    {
+      "aurum:0": 9
+    },
+    {
+      "ingens:0": 9
+    },
+    {
+      "ingentior:0": 9
+    },
+    {
+      "gens:0": 8
+    },
+    {
+      "campus:0": 8
+    },
+    {
+      "o:2": 8
+    },
+    {
+      "o:1": 8
+    },
+    {
+      "o:100": 8
+    },
+    {
+      "regno:1": 8
+    },
+    {
+      "locum:0": 8
+    },
+    {
+      "sto:0": 8
+    },
+    {
+      "hinc:0": 8
+    },
+    {
+      "sacrum:0": 8
+    },
+    {
+      "iussus:0": 8
+    },
+    {
+      "duco:0": 8
+    },
+    {
+      "honos:0": 8
+    },
+    {
+      "honor:0": 8
+    },
+    {
+      "sedes:0": 8
+    },
+    {
+      "aequo:0": 8
+    },
+    {
+      "aro:0": 8
+    },
+    {
+      "tandem:0": 8
+    },
+    {
+      "arvum:0": 8
+    },
+    {
+      "arvus:0": 8
+    },
+    {
+      "corpus:0": 8
+    },
+    {
+      "mas:0": 8
+    },
+    {
+      "eo:0": 8
+    },
+    {
+      "N`ox:0": 8
+    },
+    {
+      "lumen:0": 8
+    },
+    {
+      "dictum:0": 8
+    },
+    {
+      "limen:0": 8
+    },
+    {
+      "non:0": 8
+    },
+    {
+      "nomen:0": 8
+    },
+    {
+      "talis:0": 8
+    },
+    {
+      "natis:0": 8
+    },
+    {
+      "teneo:0": 8
+    },
+    {
+      "morus:1": 8
+    },
+    {
+      "dirus:0": 8
+    },
+    {
+      "alius:0": 8
+    },
+    {
+      "daps:0": 8
+    },
+    {
+      "omnia:1": 8
+    },
+    {
+      "inter:0": 8
+    },
+    {
+      "interior:0": 8
+    },
+    {
+      "circum:1": 8
+    },
+    {
+      "circum:0": 8
+    },
+    {
+      "circus:0": 8
+    },
+    {
+      "sanguis:0": 8
+    },
+    {
+      "fugio:0": 8
+    },
+    {
+      "auris:0": 8
+    },
+    {
+      "verum:1": 8
+    },
+    {
+      "F`ata:0": 8
+    },
+    {
+      "fata:0": 8
+    },
+    {
+      "res:0": 7
+    },
+    {
+      "visus:1": 7
+    },
+    {
+      "viso:0": 7
+    },
+    {
+      "I`uppiter:0": 7
+    },
+    {
+      "arx:0": 7
+    },
+    {
+      "imus:0": 7
+    },
+    {
+      "no:0": 7
+    },
+    {
+      "subeo:0": 7
+    },
+    {
+      "ergo:1": 7
+    },
+    {
+      "ergo:0": 7
+    },
+    {
+      "colo:0": 7
+    },
+    {
+      "cedo:0": 7
+    },
+    {
+      "fama:0": 7
+    },
+    {
+      "sedo:0": 7
+    },
+    {
+      "a:1": 7
+    },
+    {
+      "a:2": 7
+    },
+    {
+      "a:3": 7
+    },
+    {
+      "a:100": 7
+    },
+    {
+      "anima:0": 7
+    },
+    {
+      "vivo:0": 7
+    },
+    {
+      "labor:0": 7
+    },
+    {
+      "ex:1": 7
+    },
+    {
+      "ex:0": 7
+    },
+    {
+      "ante:1": 7
+    },
+    {
+      "ante:0": 7
+    },
+    {
+      "anterior:0": 7
+    },
+    {
+      "curvo:0": 7
+    },
+    {
+      "fortuna:0": 7
+    },
+    {
+      "fortuno:0": 7
+    },
+    {
+      "F`ortuna:0": 7
+    },
+    {
+      "se:0": 7
+    },
+    {
+      "multo:0": 7
+    },
+    {
+      "curo:0": 7
+    },
+    {
+      "genu:0": 7
+    },
+    {
+      "L`aetus:0": 7
+    },
+    {
+      "parens:0": 7
+    },
+    {
+      "casus:0": 7
+    },
+    {
+      "cavo:0": 7
+    },
+    {
+      "cavum:0": 7
+    },
+    {
+      "cavus:0": 7
+    },
+    {
+      "vasto:0": 7
+    },
+    {
+      "dies:0": 7
+    },
+    {
+      "rex:0": 7
+    },
+    {
+      "sol:0": 7
+    },
+    {
+      "A`C`:0": 7
+    },
+    {
+      "ac:0": 7
+    },
+    {
+      "remus:0": 7
+    },
+    {
+      "monstrum:0": 7
+    },
+    {
+      "alto:0": 7
+    },
+    {
+      "relinquo:0": 7
+    },
+    {
+      "dea:0": 7
+    },
+    {
+      "ater:0": 7
+    },
+    {
+      "patria:0": 7
+    },
+    {
+      "donum:0": 7
+    },
+    {
+      "ver:0": 7
+    },
+    {
+      "ea:2": 7
+    },
+    {
+      "antrum:0": 7
+    },
+    {
+      "visum:0": 6
+    },
+    {
+      "vir:0": 6
+    },
+    {
+      "P`ontus:0": 6
+    },
+    {
+      "pontus:0": 6
+    },
+    {
+      "cretus:1": 6
+    },
+    {
+      "cretus:0": 6
+    },
+    {
+      "T`eucrus:0": 6
+    },
+    {
+      "imum:1": 6
+    },
+    {
+      "sedeo:0": 6
+    },
+    {
+      "clamor:0": 6
+    },
+    {
+      "ventus:1": 6
+    },
+    {
+      "puppis:0": 6
+    },
+    {
+      "surgo:0": 6
+    },
+    {
+      "quondam:0": 6
+    },
+    {
+      "antiquus:0": 6
+    },
+    {
+      "cognomen:0": 6
+    },
+    {
+      "novus:0": 6
+    },
+    {
+      "venio:0": 6
+    },
+    {
+      "M`arus:0": 6
+    },
+    {
+      "mas:1": 6
+    },
+    {
+      "tempto:0": 6
+    },
+    {
+      "ignis:0": 6
+    },
+    {
+      "curvum:0": 6
+    },
+    {
+      "curvus:0": 6
+    },
+    {
+      "huc:0": 6
+    },
+    {
+      "cura:0": 6
+    },
+    {
+      "tuus:0": 6
+    },
+    {
+      "possum:0": 6
+    },
+    {
+      "armus:0": 6
+    },
+    {
+      "meus:0": 6
+    },
+    {
+      "A`rva:0": 6
+    },
+    {
+      "agnosco:0": 6
+    },
+    {
+      "pando:0": 6
+    },
+    {
+      "sacro:0": 6
+    },
+    {
+      "moveo:0": 6
+    },
+    {
+      "ullus:0": 6
+    },
+    {
+      "caput:0": 6
+    },
+    {
+      "caecus:0": 6
+    },
+    {
+      "caelo:0": 6
+    },
+    {
+      "R`emi:0": 6
+    },
+    {
+      "tumulus:0": 6
+    },
+    {
+      "sono:1": 6
+    },
+    {
+      "horrendus:0": 6
+    },
+    {
+      "votum:0": 6
+    },
+    {
+      "votus:0": 6
+    },
+    {
+      "scopulus:0": 6
+    },
+    {
+      "lustro:0": 6
+    },
+    {
+      "A`eneas:0": 6
+    },
+    {
+      "aeneus:0": 6
+    },
+    {
+      "vix:0": 6
+    },
+    {
+      "multa:0": 6
+    },
+    {
+      "quid:1": 6
+    },
+    {
+      "talio:1": 6
+    },
+    {
+      "laevus:0": 6
+    },
+    {
+      "dexter:0": 6
+    },
+    {
+      "quicumque:0": 6
+    },
+    {
+      "cerno:0": 6
+    },
+    {
+      "I`ndus:0": 6
+    },
+    {
+      "inde:0": 6
+    },
+    {
+      "indo:0": 6
+    },
+    {
+      "indus:0": 6
+    },
+    {
+      "superus:0": 5
+    },
+    {
+      "visus:0": 5
+    },
+    {
+      "cado:0": 5
+    },
+    {
+      "caedo:0": 5
+    },
+    {
+      "aio:0": 5
+    },
+    {
+      "aiio:0": 5
+    },
+    {
+      "ajo:0": 5
+    },
+    {
+      "iaceo:0": 5
+    },
+    {
+      "I`nsula:0": 5
+    },
+    {
+      "insula:0": 5
+    },
+    {
+      "I`ovis:0": 5
+    },
+    {
+      "I`upiter:0": 5
+    },
+    {
+      "C`reta:0": 5
+    },
+    {
+      "creta:0": 5
+    },
+    {
+      "habito:0": 5
+    },
+    {
+      "maximus:0": 5
+    },
+    {
+      "arceo:0": 5
+    },
+    {
+      "penas:0": 5
+    },
+    {
+      "mater:0": 5
+    },
+    {
+      "aer:0": 5
+    },
+    {
+      "aes:0": 5
+    },
+    {
+      "adsum:0": 5
+    },
+    {
+      "pecus:1": 5
+    },
+    {
+      "dux:0": 5
+    },
+    {
+      "O`rtygia:0": 5
+    },
+    {
+      "lego:0": 5
+    },
+    {
+      "hortor:0": 5
+    },
+    {
+      "attollo:0": 5
+    },
+    {
+      "tectus:0": 5
+    },
+    {
+      "subitus:1": 5
+    },
+    {
+      "subitus:0": 5
+    },
+    {
+      "herba:0": 5
+    },
+    {
+      "marum:0": 5
+    },
+    {
+      "fundo:0": 5
+    },
+    {
+      "mitto:0": 5
+    },
+    {
+      "tollo:0": 5
+    },
+    {
+      "paro:0": 5
+    },
+    {
+      "paro:1": 5
+    },
+    {
+      "fuga:0": 5
+    },
+    {
+      "consido:0": 5
+    },
+    {
+      "uber:0": 5
+    },
+    {
+      "nunc:0": 5
+    },
+    {
+      "genus:0": 5
+    },
+    {
+      "parens:1": 5
+    },
+    {
+      "dicto:0": 5
+    },
+    {
+      "como:0": 5
+    },
+    {
+      "ordo:0": 5
+    },
+    {
+      "geminus:0": 5
+    },
+    {
+      "iliacus:0": 5
+    },
+    {
+      "supero:0": 5
+    },
+    {
+      "appareo:0": 5
+    },
+    {
+      "apparo:0": 5
+    },
+    {
+      "sinus:1": 5
+    },
+    {
+      "mora:0": 5
+    },
+    {
+      "morum:0": 5
+    },
+    {
+      "servo:0": 5
+    },
+    {
+      "mensa:0": 5
+    },
+    {
+      "mensus:0": 5
+    },
+    {
+      "volucris:0": 5
+    },
+    {
+      "fames:0": 5
+    },
+    {
+      "rupes:0": 5
+    },
+    {
+      "accedo:0": 5
+    },
+    {
+      "turbo:1": 5
+    },
+    {
+      "dedo:0": 5
+    },
+    {
+      "sonitus:1": 5
+    },
+    {
+      "sonitus:0": 5
+    },
+    {
+      "signum:0": 5
+    },
+    {
+      "cavus:1": 5
+    },
+    {
+      "vis:0": 5
+    },
+    {
+      "neque:1": 5
+    },
+    {
+      "neque:0": 5
+    },
+    {
+      "una:2": 5
+    },
+    {
+      "pectus:0": 5
+    },
+    {
+      "infelix:0": 5
+    },
+    {
+      "V`enta:0": 5
+    },
+    {
+      "formido:1": 5
+    },
+    {
+      "prex:0": 5
+    },
+    {
+      "di:100": 5
+    },
+    {
+      "arduus:0": 5
+    },
+    {
+      "U`lixes:0": 5
+    },
+    {
+      "parvus:0": 5
+    },
+    {
+      "interea:0": 5
+    },
+    {
+      "celsus:0": 5
+    },
+    {
+      "alter:0": 5
+    },
+    {
+      "dono:0": 5
+    },
+    {
+      "manis:0": 5
+    },
+    {
+      "manes:0": 5
+    },
+    {
+      "lacrima:0": 5
+    },
+    {
+      "vero:1": 5
+    },
+    {
+      "lacrimo:0": 5
+    },
+    {
+      "impleo:0": 5
+    },
+    {
+      "heu:0": 5
+    },
+    {
+      "mos:0": 5
+    },
+    {
+      "deinde:0": 5
+    },
+    {
+      "veneror:0": 5
+    },
+    {
+      "venero:1": 5
+    },
+    {
+      "suus:0": 5
+    },
+    {
+      "omen:0": 5
+    },
+    {
+      "auster:0": 5
+    },
+    {
+      "volo:0": 5
+    },
+    {
+      "I`uno:0": 5
+    },
+    {
+      "gemo:0": 5
+    },
+    {
+      "gemitus:0": 5
+    },
+    {
+      "T`rinacria:0": 5
+    },
+    {
+      "navis:0": 5
+    },
+    {
+      "cuncto:0": 5
+    },
+    {
+      "maneo:0": 5
+    },
+    {
+      "digredior:0": 5
+    },
+    {
+      "latus:2": 5
+    },
+    {
+      "latus:1": 5
+    },
+    {
+      "S`cylla:0": 5
+    },
+    {
+      "moneo:0": 5
+    },
+    {
+      "secundus:1": 5
+    },
+    {
+      "secundus:0": 5
+    },
+    {
+      "sinus:0": 5
+    },
+    {
+      "ecus:0": 5
+    },
+    {
+      "equus:0": 5
+    },
+    {
+      "paulum:0": 5
+    },
+    {
+      "A`etna:0": 5
+    },
+    {
+      "cyclops:0": 5
+    },
+    {
+      "superbus:0": 4
+    },
+    {
+      "S`uperbus:0": 4
+    },
+    {
+      "genitor:0": 4
+    },
+    {
+      "volvo:0": 4
+    },
+    {
+      "audio:0": 4
+    },
+    {
+      "vester:0": 4
+    },
+    {
+      "insulo:0": 4
+    },
+    {
+      "rite:0": 4
+    },
+    {
+      "unde:0": 4
+    },
+    {
+      "tertius:0": 4
+    },
+    {
+      "tertio:0": 4
+    },
+    {
+      "honoro:0": 4
+    },
+    {
+      "aris:0": 4
+    },
+    {
+      "fatus:1": 4
+    },
+    {
+      "meritus:0": 4
+    },
+    {
+      "taurus:0": 4
+    },
+    {
+      "hiems:0": 4
+    },
+    {
+      "albus:0": 4
+    },
+    {
+      "felix:0": 4
+    },
+    {
+      "desertus:0": 4
+    },
+    {
+      "asto:0": 4
+    },
+    {
+      "relictus:0": 4
+    },
+    {
+      "iugum:0": 4
+    },
+    {
+      "iugus:0": 4
+    },
+    {
+      "puppus:0": 4
+    },
+    {
+      "optatus:0": 4
+    },
+    {
+      "murus:0": 4
+    },
+    {
+      "tectum:0": 4
+    },
+    {
+      "ferus:0": 4
+    },
+    {
+      "nova:0": 4
+    },
+    {
+      "membrum:0": 4
+    },
+    {
+      "C`aelius:0": 4
+    },
+    {
+      "veneo:0": 4
+    },
+    {
+      "traho:0": 4
+    },
+    {
+      "arbos:0": 4
+    },
+    {
+      "satis:1": 4
+    },
+    {
+      "sata:0": 4
+    },
+    {
+      "satis:0": 4
+    },
+    {
+      "satus:1": 4
+    },
+    {
+      "hospitium:0": 4
+    },
+    {
+      "corporo:0": 4
+    },
+    {
+      "nego:0": 4
+    },
+    {
+      "rursus:0": 4
+    },
+    {
+      "I`ris:0": 4
+    },
+    {
+      "iris:0": 4
+    },
+    {
+      "finis:0": 4
+    },
+    {
+      "verto:0": 4
+    },
+    {
+      "somnus:0": 4
+    },
+    {
+      "multo:1": 4
+    },
+    {
+      "L`una:0": 4
+    },
+    {
+      "L`una:1": 4
+    },
+    {
+      "luna:0": 4
+    },
+    {
+      "delatus:0": 4
+    },
+    {
+      "incensus:0": 4
+    },
+    {
+      "secutus:0": 4
+    },
+    {
+      "astrum:0": 4
+    },
+    {
+      "nepos:0": 4
+    },
+    {
+      "venturus:0": 4
+    },
+    {
+      "laboro:0": 4
+    },
+    {
+      "V`irus:0": 4
+    },
+    {
+      "laetior:0": 4
+    },
+    {
+      "age:0": 4
+    },
+    {
+      "meum:0": 4
+    },
+    {
+      "vultus:0": 4
+    },
+    {
+      "coma:0": 4
+    },
+    {
+      "gelidus:0": 4
+    },
+    {
+      "mano:0": 4
+    },
+    {
+      "stratus:0": 4
+    },
+    {
+      "stratum:0": 4
+    },
+    {
+      "tendo:0": 4
+    },
+    {
+      "libo:0": 4
+    },
+    {
+      "certus:0": 4
+    },
+    {
+      "geminus:1": 4
+    },
+    {
+      "novo:0": 4
+    },
+    {
+      "caneo:0": 4
+    },
+    {
+      "italus:0": 4
+    },
+    {
+      "desero:0": 4
+    },
+    {
+      "paucus:0": 4
+    },
+    {
+      "U`lla:0": 4
+    },
+    {
+      "undique:0": 4
+    },
+    {
+      "caeruleus:0": 4
+    },
+    {
+      "ferens:0": 4
+    },
+    {
+      "gurges:0": 4
+    },
+    {
+      "erro:0": 4
+    },
+    {
+      "rego:0": 4
+    },
+    {
+      "P`alinurus:0": 4
+    },
+    {
+      "torqueo:0": 4
+    },
+    {
+      "excipio:0": 4
+    },
+    {
+      "iuxta:0": 4
+    },
+    {
+      "iuxta:1": 4
+    },
+    {
+      "ecce:0": 4
+    },
+    {
+      "laeto:0": 4
+    },
+    {
+      "nullus:1": 4
+    },
+    {
+      "nullus:0": 4
+    },
+    {
+      "ferrum:0": 4
+    },
+    {
+      "pars:0": 4
+    },
+    {
+      "praeda:0": 4
+    },
+    {
+      "labor:1": 4
+    },
+    {
+      "foedo:0": 4
+    },
+    {
+      "umbra:0": 4
+    },
+    {
+      "diversus:0": 4
+    },
+    {
+      "ut:2": 4
+    },
+    {
+      "ut:0": 4
+    },
+    {
+      "ut:1": 4
+    },
+    {
+      "obscenus:0": 4
+    },
+    {
+      "vestigium:0": 4
+    },
+    {
+      "pro-:0": 4
+    },
+    {
+      "pro:0": 4
+    },
+    {
+      "pro:100": 4
+    },
+    {
+      "dictus:1": 4
+    },
+    {
+      "horreo:0": 4
+    },
+    {
+      "praedico:1": 4
+    },
+    {
+      "datus:0": 4
+    },
+    {
+      "malus:2": 4
+    },
+    {
+      "malum:1": 4
+    },
+    {
+      "malum:3": 4
+    },
+    {
+      "malus:1": 4
+    },
+    {
+      "malus:0": 4
+    },
+    {
+      "pax:0": 4
+    },
+    {
+      "-ve:0": 4
+    },
+    {
+      "pius:0": 4
+    },
+    {
+      "funis:0": 4
+    },
+    {
+      "rudens:0": 4
+    },
+    {
+      "notus:0": 4
+    },
+    {
+      "effugio:0": 4
+    },
+    {
+      "prora:0": 4
+    },
+    {
+      "carmen:1": 4
+    },
+    {
+      "carmen:0": 4
+    },
+    {
+      "victor:1": 4
+    },
+    {
+      "victor:0": 4
+    },
+    {
+      "D`anaus:1": 4
+    },
+    {
+      "D`anai:0": 4
+    },
+    {
+      "iterum:0": 4
+    },
+    {
+      "A`mor:0": 4
+    },
+    {
+      "amor:0": 4
+    },
+    {
+      "causa:0": 4
+    },
+    {
+      "facies:0": 4
+    },
+    {
+      "recedo:0": 4
+    },
+    {
+      "vivum:1": 4
+    },
+    {
+      "vivus:0": 4
+    },
+    {
+      "extremus:0": 4
+    },
+    {
+      "coniunx:0": 4
+    },
+    {
+      "coniux:0": 4
+    },
+    {
+      "V`irgo:1": 4
+    },
+    {
+      "V`irgo:0": 4
+    },
+    {
+      "virgo:0": 4
+    },
+    {
+      "sortitus:1": 4
+    },
+    {
+      "morus:0": 4
+    },
+    {
+      "ereptus:0": 4
+    },
+    {
+      "addo:0": 4
+    },
+    {
+      "P`ergama:0": 4
+    },
+    {
+      "ignarus:0": 4
+    },
+    {
+      "puer:0": 4
+    },
+    {
+      "tamen:0": 4
+    },
+    {
+      "procedo:0": 4
+    },
+    {
+      "simul:0": 4
+    },
+    {
+      "laurus:0": 4
+    },
+    {
+      "religio:0": 4
+    },
+    {
+      "vitta:0": 4
+    },
+    {
+      "F`ides:0": 4
+    },
+    {
+      "fides:0": 4
+    },
+    {
+      "fido:0": 4
+    },
+    {
+      "fidis:0": 4
+    },
+    {
+      "fides:1": 4
+    },
+    {
+      "tutus:0": 4
+    },
+    {
+      "parcus:0": 4
+    },
+    {
+      "imo:0": 4
+    },
+    {
+      "vicinus:0": 4
+    },
+    {
+      "longa:2": 4
+    },
+    {
+      "aestus:0": 4
+    },
+    {
+      "pono:0": 4
+    },
+    {
+      "miser:0": 4
+    },
+    {
+      "siculus:0": 4
+    },
+    {
+      "angustus:0": 4
+    },
+    {
+      "ruina:0": 4
+    },
+    {
+      "vi:100": 4
+    },
+    {
+      "latior:0": 4
+    },
+    {
+      "latissimus:0": 4
+    },
+    {
+      "C`harybdis:0": 4
+    },
+    {
+      "ter:0": 4
+    },
+    {
+      "navus:0": 4
+    },
+    {
+      "homo:0": 4
+    },
+    {
+      "immanis:0": 4
+    },
+    {
+      "supplex:1": 4
+    },
+    {
+      "noto:0": 4
+    },
+    {
+      "immotus:0": 4
+    },
+    {
+      "S`axo:0": 4
+    },
+    {
+      "populus:1": 4
+    },
+    {
+      "populus:0": 4
+    },
+    {
+      "bello:0": 4
+    },
+    {
+      "haereo:0": 4
+    },
+    {
+      "A`usonia:0": 4
+    },
+    {
+      "A`urius:0": 4
+    },
+    {
+      "parum:0": 4
+    },
+    {
+      "supremus:0": 4
+    },
+    {
+      "alium:0": 4
+    },
+    {
+      "molo:0": 4
+    },
+    {
+      "templum:0": 4
+    },
+    {
+      "lateo:0": 4
+    },
+    {
+      "contra:1": 4
+    },
+    {
+      "contra:0": 4
+    },
+    {
+      "monstro:0": 4
+    },
+    {
+      "dextra:2": 4
+    },
+    {
+      "sanies:0": 4
+    },
+    {
+      "compleo:0": 4
+    },
+    {
+      "P`riamus:0": 3
+    },
+    {
+      "supo:0": 3
+    },
+    {
+      "vetera:0": 3
+    },
+    {
+      "veteres:0": 3
+    },
+    {
+      "vetus:0": 3
+    },
+    {
+      "monimentum:0": 3
+    },
+    {
+      "procer:0": 3
+    },
+    {
+      "auditus:0": 3
+    },
+    {
+      "spes:0": 3
+    },
+    {
+      "ponto:0": 3
+    },
+    {
+      "centum:0": 3
+    },
+    {
+      "ile:0": 3
+    },
+    {
+      "opto:0": 3
+    },
+    {
+      "nato:0": 3
+    },
+    {
+      "aera:0": 3
+    },
+    {
+      "domina:0": 3
+    },
+    {
+      "currus:0": 3
+    },
+    {
+      "modo:0": 3
+    },
+    {
+      "modus:0": 3
+    },
+    {
+      "lux:0": 3
+    },
+    {
+      "sisto:0": 3
+    },
+    {
+      "macto:0": 3
+    },
+    {
+      "N`eptunus:0": 3
+    },
+    {
+      "pulcher:0": 3
+    },
+    {
+      "hiemps:0": 3
+    },
+    {
+      "alba:0": 3
+    },
+    {
+      "A`lba:0": 3
+    },
+    {
+      "campe:0": 3
+    },
+    {
+      "pello:0": 3
+    },
+    {
+      "volo:1": 3
+    },
+    {
+      "desertum:0": 3
+    },
+    {
+      "H`ostus:0": 3
+    },
+    {
+      "hostis:0": 3
+    },
+    {
+      "hostus:0": 3
+    },
+    {
+      "iugis:0": 3
+    },
+    {
+      "virido:0": 3
+    },
+    {
+      "surgens:0": 3
+    },
+    {
+      "acer:0": 3
+    },
+    {
+      "molio:0": 3
+    },
+    {
+      "molior:0": 3
+    },
+    {
+      "focus:0": 3
+    },
+    {
+      "sicco:0": 3
+    },
+    {
+      "siccus:0": 3
+    },
+    {
+      "subductus:0": 3
+    },
+    {
+      "conubium:0": 3
+    },
+    {
+      "subito:0": 3
+    },
+    {
+      "miserandus:0": 3
+    },
+    {
+      "annus:0": 3
+    },
+    {
+      "arbor:0": 3
+    },
+    {
+      "aeger:0": 3
+    },
+    {
+      "animo:0": 3
+    },
+    {
+      "seges:0": 3
+    },
+    {
+      "victus:1": 3
+    },
+    {
+      "victus:0": 3
+    },
+    {
+      "vinco:0": 3
+    },
+    {
+      "M`arius:0": 3
+    },
+    {
+      "precor:0": 3
+    },
+    {
+      "habeo:0": 3
+    },
+    {
+      "effigies:0": 3
+    },
+    {
+      "effigio:0": 3
+    },
+    {
+      "ecfero:0": 3
+    },
+    {
+      "effero:0": 3
+    },
+    {
+      "oculus:0": 3
+    },
+    {
+      "dum:0": 3
+    },
+    {
+      "manifestus:0": 3
+    },
+    {
+      "adfor:0": 3
+    },
+    {
+      "quod:1": 3
+    },
+    {
+      "ulter:0": 3
+    },
+    {
+      "tumidus:0": 3
+    },
+    {
+      "loco:0": 3
+    },
+    {
+      "suadeo:0": 3
+    },
+    {
+      "V`irius:0": 3
+    },
+    {
+      "virus:0": 3
+    },
+    {
+      "proprius:0": 3
+    },
+    {
+      "D`ardanus:0": 3
+    },
+    {
+      "P`arentium:0": 3
+    },
+    {
+      "refero:0": 3
+    },
+    {
+      "meo:0": 3
+    },
+    {
+      "sopor:0": 3
+    },
+    {
+      "praesens:0": 3
+    },
+    {
+      "praesente:0": 3
+    },
+    {
+      "velatus:0": 3
+    },
+    {
+      "totus:1": 3
+    },
+    {
+      "totus:0": 3
+    },
+    {
+      "strata:0": 3
+    },
+    {
+      "perfectus:0": 3
+    },
+    {
+      "pando:1": 3
+    },
+    {
+      "gemini:0": 3
+    },
+    {
+      "repeto:0": 3
+    },
+    {
+      "saepe:0": 3
+    },
+    {
+      "saepes:0": 3
+    },
+    {
+      "saepis:0": 3
+    },
+    {
+      "melior:0": 3
+    },
+    {
+      "quisque:0": 3
+    },
+    {
+      "ample:0": 3
+    },
+    {
+      "amplior:1": 3
+    },
+    {
+      "continuo:1": 3
+    },
+    {
+      "continuo:0": 3
+    },
+    {
+      "continuus:0": 3
+    },
+    {
+      "nimbus:0": 3
+    },
+    {
+      "nubis:0": 3
+    },
+    {
+      "nubes:0": 3
+    },
+    {
+      "abruptus:0": 3
+    },
+    {
+      "excutio:0": 3
+    },
+    {
+      "fumo:0": 3
+    },
+    {
+      "humo:0": 3
+    },
+    {
+      "humus:0": 3
+    },
+    {
+      "R`egium:0": 3
+    },
+    {
+      "incertus:0": 3
+    },
+    {
+      "incertus:1": 3
+    },
+    {
+      "adeo:1": 3
+    },
+    {
+      "sino:0": 3
+    },
+    {
+      "fumus:0": 3
+    },
+    {
+      "aperio:0": 3
+    },
+    {
+      "nauta:0": 3
+    },
+    {
+      "insurgo:0": 3
+    },
+    {
+      "spuma:0": 3
+    },
+    {
+      "spumo:0": 3
+    },
+    {
+      "verro:0": 3
+    },
+    {
+      "servatus:0": 3
+    },
+    {
+      "S`trophades:0": 3
+    },
+    {
+      "summum:0": 3
+    },
+    {
+      "summus:0": 3
+    },
+    {
+      "fortis:0": 3
+    },
+    {
+      "fors:0": 3
+    },
+    {
+      "forte:1": 3
+    },
+    {
+      "metus:0": 3
+    },
+    {
+      "liquor:1": 3
+    },
+    {
+      "clausus:0": 3
+    },
+    {
+      "saevus:0": 3
+    },
+    {
+      "tristior:0": 3
+    },
+    {
+      "ira:0": 3
+    },
+    {
+      "pestis:0": 3
+    },
+    {
+      "semper:0": 3
+    },
+    {
+      "uncus:1": 3
+    },
+    {
+      "intro:0": 3
+    },
+    {
+      "bos:0": 3
+    },
+    {
+      "passim:0": 3
+    },
+    {
+      "A`rmenta:0": 3
+    },
+    {
+      "armentum:0": 3
+    },
+    {
+      "armenta:1": 3
+    },
+    {
+      "hastile:0": 3
+    },
+    {
+      "horrificus:0": 3
+    },
+    {
+      "quatio:0": 3
+    },
+    {
+      "ala:0": 3
+    },
+    {
+      "rursum:0": 3
+    },
+    {
+      "convello:0": 3
+    },
+    {
+      "instruo:0": 3
+    },
+    {
+      "latebra:0": 3
+    },
+    {
+      "pes:0": 3
+    },
+    {
+      "sonans:0": 3
+    },
+    {
+      "polluo:0": 3
+    },
+    {
+      "condo:0": 3
+    },
+    {
+      "latens:1": 3
+    },
+    {
+      "invado:0": 3
+    },
+    {
+      "ramus:0": 3
+    },
+    {
+      "R`ami:0": 3
+    },
+    {
+      "tego:0": 3
+    },
+    {
+      "volucer:0": 3
+    },
+    {
+      "fugo:0": 3
+    },
+    {
+      "infelicior:0": 3
+    },
+    {
+      "infelicissimus:0": 3
+    },
+    {
+      "rumpo:0": 3
+    },
+    {
+      "iuvencus:1": 3
+    },
+    {
+      "iuvenca:2": 3
+    },
+    {
+      "iuvencus:0": 3
+    },
+    {
+      "caedes:0": 3
+    },
+    {
+      "infero:0": 3
+    },
+    {
+      "figo:0": 3
+    },
+    {
+      "F`urius:1": 3
+    },
+    {
+      "furia:0": 3
+    },
+    {
+      "vocatus:0": 3
+    },
+    {
+      "liceo:0": 3
+    },
+    {
+      "licet:0": 3
+    },
+    {
+      "cingo:0": 3
+    },
+    {
+      "iniuria:0": 3
+    },
+    {
+      "iniurius:0": 3
+    },
+    {
+      "absumo:0": 3
+    },
+    {
+      "mala:0": 3
+    },
+    {
+      "mala:1": 3
+    },
+    {
+      "malo:0": 3
+    },
+    {
+      "refugio:0": 3
+    },
+    {
+      "penna:0": 3
+    },
+    {
+      "pennus:0": 3
+    },
+    {
+      "ruptus:0": 3
+    },
+    {
+      "radix:0": 3
+    },
+    {
+      "paco:0": 3
+    },
+    {
+      "passus:2": 3
+    },
+    {
+      "passus:0": 3
+    },
+    {
+      "averto:0": 3
+    },
+    {
+      "mino:0": 3
+    },
+    {
+      "prohibeo:0": 3
+    },
+    {
+      "P`ius:0": 3
+    },
+    {
+      "spumans:0": 3
+    },
+    {
+      "I`thaca:0": 3
+    },
+    {
+      "mox:0": 3
+    },
+    {
+      "succedo:0": 3
+    },
+    {
+      "P`otitus:0": 3
+    },
+    {
+      "potitus:0": 3
+    },
+    {
+      "incendo:0": 3
+    },
+    {
+      "tabum:0": 3
+    },
+    {
+      "labens:0": 3
+    },
+    {
+      "tot:0": 3
+    },
+    {
+      "iuvo:0": 3
+    },
+    {
+      "clipeus:0": 3
+    },
+    {
+      "adversus:0": 3
+    },
+    {
+      "signo:0": 3
+    },
+    {
+      "aerius:0": 3
+    },
+    {
+      "protinus:0": 3
+    },
+    {
+      "E`pirus:0": 3
+    },
+    {
+      "E`piros:0": 3
+    },
+    {
+      "potior:0": 3
+    },
+    {
+      "coniugium:0": 3
+    },
+    {
+      "obstipesco:0": 3
+    },
+    {
+      "compello:1": 3
+    },
+    {
+      "compello:0": 3
+    },
+    {
+      "quaero:0": 3
+    },
+    {
+      "tristis:0": 3
+    },
+    {
+      "lucus:0": 3
+    },
+    {
+      "gemino:1": 3
+    },
+    {
+      "conspicio:0": 3
+    },
+    {
+      "exterritus:0": 3
+    },
+    {
+      "O`ssa:0": 3
+    },
+    {
+      "os:1": 3
+    },
+    {
+      "ossum:0": 3
+    },
+    {
+      "tempus:2": 3
+    },
+    {
+      "tempus:0": 3
+    },
+    {
+      "tempus:1": 3
+    },
+    {
+      "adfero:0": 3
+    },
+    {
+      "penitus:1": 3
+    },
+    {
+      "penitior:0": 3
+    },
+    {
+      "penitissimus:0": 3
+    },
+    {
+      "penitus:0": 3
+    },
+    {
+      "vita:0": 3
+    },
+    {
+      "digno:1": 3
+    },
+    {
+      "serva:0": 3
+    },
+    {
+      "servus:1": 3
+    },
+    {
+      "F`elix:0": 3
+    },
+    {
+      "felicior:0": 3
+    },
+    {
+      "felicissimus:0": 3
+    },
+    {
+      "sortior:0": 3
+    },
+    {
+      "perfero:0": 3
+    },
+    {
+      "tango:0": 3
+    },
+    {
+      "herus:0": 3
+    },
+    {
+      "stirpes:0": 3
+    },
+    {
+      "stirps:0": 3
+    },
+    {
+      "iuvenis:1": 3
+    },
+    {
+      "enixus:0": 3
+    },
+    {
+      "famulus:0": 3
+    },
+    {
+      "ast:0": 3
+    },
+    {
+      "scelus:0": 3
+    },
+    {
+      "agito:0": 3
+    },
+    {
+      "obtrunco:0": 3
+    },
+    {
+      "redditus:0": 3
+    },
+    {
+      "appello:0": 3
+    },
+    {
+      "vescor:0": 3
+    },
+    {
+      "A`scanius:0": 3
+    },
+    {
+      "cieo:0": 3
+    },
+    {
+      "cio:0": 3
+    },
+    {
+      "lacrimans:0": 3
+    },
+    {
+      "fleo:0": 3
+    },
+    {
+      "fletus:0": 3
+    },
+    {
+      "X`anthus:0": 3
+    },
+    {
+      "xanthos:0": 3
+    },
+    {
+      "xanthus:0": 3
+    },
+    {
+      "amplector:0": 3
+    },
+    {
+      "porta:0": 3
+    },
+    {
+      "impositus:0": 3
+    },
+    {
+      "patera:0": 3
+    },
+    {
+      "adgredior:0": 3
+    },
+    {
+      "interpres:0": 3
+    },
+    {
+      "sentio:0": 3
+    },
+    {
+      "maior:1": 3
+    },
+    {
+      "maior:0": 3
+    },
+    {
+      "numus:0": 3
+    },
+    {
+      "resolvo:0": 3
+    },
+    {
+      "harena:0": 3
+    },
+    {
+      "capio:0": 3
+    },
+    {
+      "sacerdos:0": 3
+    },
+    {
+      "divinus:0": 3
+    },
+    {
+      "auspicium:0": 3
+    },
+    {
+      "vicis:0": 3
+    },
+    {
+      "hospito:0": 3
+    },
+    {
+      "A`usonius:0": 3
+    },
+    {
+      "expedio:0": 3
+    },
+    {
+      "cetera:1": 3
+    },
+    {
+      "cetera:0": 3
+    },
+    {
+      "ceterum:0": 3
+    },
+    {
+      "ceterus:0": 3
+    },
+    {
+      "scio:0": 3
+    },
+    {
+      "propinquus:0": 3
+    },
+    {
+      "vio:0": 3
+    },
+    {
+      "lacus:0": 3
+    },
+    {
+      "tuto:1": 3
+    },
+    {
+      "mens:0": 3
+    },
+    {
+      "sus:0": 3
+    },
+    {
+      "tumulo:0": 3
+    },
+    {
+      "album:1": 3
+    },
+    {
+      "ubero:0": 3
+    },
+    {
+      "uber:1": 3
+    },
+    {
+      "assum:0": 3
+    },
+    {
+      "autem:0": 3
+    },
+    {
+      "italus:1": 3
+    },
+    {
+      "obsideo:0": 3
+    },
+    {
+      "augurium:0": 3
+    },
+    {
+      "sepultus:0": 3
+    },
+    {
+      "parco:0": 3
+    },
+    {
+      "quin:0": 3
+    },
+    {
+      "amictus:1": 3
+    },
+    {
+      "amicio:0": 3
+    },
+    {
+      "sanctus:0": 3
+    },
+    {
+      "occurro:0": 3
+    },
+    {
+      "hac:0": 3
+    },
+    {
+      "digressus:0": 3
+    },
+    {
+      "P`elorus:0": 3
+    },
+    {
+      "lino:0": 3
+    },
+    {
+      "vetustus:0": 3
+    },
+    {
+      "aevum:0": 3
+    },
+    {
+      "aevom:0": 3
+    },
+    {
+      "muto:0": 3
+    },
+    {
+      "uterque:0": 3
+    },
+    {
+      "uter:0": 3
+    },
+    {
+      "angusto:0": 3
+    },
+    {
+      "cruor:0": 3
+    },
+    {
+      "abrumpo:0": 3
+    },
+    {
+      "erigo:0": 3
+    },
+    {
+      "P`achynus:0": 3
+    },
+    {
+      "meta:0": 3
+    },
+    {
+      "crudelis:0": 3
+    },
+    {
+      "canis:0": 3
+    },
+    {
+      "canes:0": 3
+    },
+    {
+      "supplex:0": 3
+    },
+    {
+      "aspicio:0": 3
+    },
+    {
+      "nota:0": 3
+    },
+    {
+      "folia:1": 3
+    },
+    {
+      "folium:0": 3
+    },
+    {
+      "mando:1": 3
+    },
+    {
+      "quaecumque:0": 3
+    },
+    {
+      "carmino:1": 3
+    },
+    {
+      "carminum:0": 3
+    },
+    {
+      "carmino:0": 3
+    },
+    {
+      "numerus:0": 3
+    },
+    {
+      "eadem:0": 3
+    },
+    {
+      "verum:0": 3
+    },
+    {
+      "numquam:0": 3
+    },
+    {
+      "acutus:0": 3
+    },
+    {
+      "telum:0": 3
+    },
+    {
+      "iungo:0": 3
+    },
+    {
+      "posco:0": 3
+    },
+    {
+      "fera:0": 3
+    },
+    {
+      "aether:0": 3
+    },
+    {
+      "vas:1": 3
+    },
+    {
+      "vado:0": 3
+    },
+    {
+      "factus:0": 3
+    },
+    {
+      "factum:0": 3
+    },
+    {
+      "amicus:1": 3
+    },
+    {
+      "amicus:0": 3
+    },
+    {
+      "consertus:1": 3
+    },
+    {
+      "consertus:0": 3
+    },
+    {
+      "V`ento:0": 3
+    },
+    {
+      "vento:0": 3
+    },
+    {
+      "fio:0": 3
+    },
+    {
+      "proveho:0": 3
+    },
+    {
+      "maestus:0": 3
+    },
+    {
+      "P`hrygia:0": 3
+    },
+    {
+      "testor:0": 3
+    },
+    {
+      "retro:0": 3
+    },
+    {
+      "T`hybris:0": 3
+    },
+    {
+      "vicina:0": 3
+    },
+    {
+      "datum:0": 3
+    },
+    {
+      "olim:0": 3
+    },
+    {
+      "ruo:1": 3
+    },
+    {
+      "ruo:0": 3
+    },
+    {
+      "umbro:0": 3
+    },
+    {
+      "opacus:0": 3
+    },
+    {
+      "obsidio:0": 3
+    },
+    {
+      "artus:1": 3
+    },
+    {
+      "artior:0": 3
+    },
+    {
+      "artissimus:0": 3
+    },
+    {
+      "artus:0": 3
+    },
+    {
+      "actus:0": 3
+    },
+    {
+      "necdum:0": 3
+    },
+    {
+      "T`acitus:0": 3
+    },
+    {
+      "tacitus:0": 3
+    },
+    {
+      "consto:0": 3
+    },
+    {
+      "fractus:0": 3
+    },
+    {
+      "A`urora:0": 3
+    },
+    {
+      "aurora:0": 3
+    },
+    {
+      "obscurus:0": 3
+    },
+    {
+      "prior:0": 3
+    },
+    {
+      "merum:0": 3
+    },
+    {
+      "merus:0": 3
+    },
+    {
+      "tempestas:0": 3
+    },
+    {
+      "secundum:2": 3
+    },
+    {
+      "curvatus:0": 3
+    },
+    {
+      "cautes:0": 3
+    },
+    {
+      "helenium:0": 3
+    },
+    {
+      "cornu:0": 3
+    },
+    {
+      "longe:0": 3
+    },
+    {
+      "vado:1": 3
+    },
+    {
+      "vadum:0": 3
+    },
+    {
+      "interdum:0": 3
+    },
+    {
+      "flamma:0": 3
+    },
+    {
+      "viscus:0": 3
+    },
+    {
+      "eructans:0": 3
+    },
+    {
+      "eructo:0": 3
+    },
+    {
+      "moles:0": 3
+    },
+    {
+      "polus:0": 3
+    },
+    {
+      "missus:0": 3
+    },
+    {
+      "praeceps:0": 3
+    },
+    {
+      "praeceps:2": 3
+    },
+    {
+      "hoc:1": 3
+    },
+    {
+      "hoc:2": 3
+    },
+    {
+      "fateor:0": 3
+    },
+    {
+      "firmo:0": 3
+    },
+    {
+      "comedo:0": 3
+    },
+    {
+      "comes:0": 3
+    },
+    {
+      "achaemenis:0": 3
+    },
+    {
+      "trepidus:0": 3
+    },
+    {
+      "cruentus:0": 3
+    },
+    {
+      "tremo:0": 3
+    },
+    {
+      "dens:0": 3
+    },
+    {
+      "tepidus:0": 3
+    },
+    {
+      "discrimen:0": 3
+    },
+    {
+      "immensus:0": 3
+    },
+    {
+      "solum:1": 3
+    },
+    {
+      "torvus:0": 3
+    },
+    {
+      "fugitus:0": 3
+    },
+    {
+      "qualis:0": 3
+    },
+    {
+      "P`olyphemus:0": 3
+    },
+    {
+      "laniger:0": 3
+    },
+    {
+      "potior:1": 3
+    },
+    {
+      "letum:0": 3
+    },
+    {
+      "quocumque:0": 3
+    },
+    {
+      "quocum:0": 3
+    },
+    {
+      "nequiquam:0": 3
+    },
+    {
+      "durus:0": 3
+    },
+    {
+      "deeo:0": 3
+    },
+    {
+      "A`sia:0": 2
+    },
+    {
+      "asia:0": 2
+    },
+    {
+      "everto:0": 2
+    },
+    {
+      "immeritus:0": 2
+    },
+    {
+      "exsul:0": 2
+    },
+    {
+      "revertor:0": 2
+    },
+    {
+      "reverto:0": 2
+    },
+    {
+      "errans:0": 2
+    },
+    {
+      "viror:0": 2
+    },
+    {
+      "genetrix:0": 2
+    },
+    {
+      "geno:0": 2
+    },
+    {
+      "genitrix:0": 2
+    },
+    {
+      "volvens:0": 2
+    },
+    {
+      "discitus:0": 2
+    },
+    {
+      "disco:0": 2
+    },
+    {
+      "cunabulum:0": 2
+    },
+    {
+      "uberrimus:0": 2
+    },
+    {
+      "magnas:0": 2
+    },
+    {
+      "recordor:0": 2
+    },
+    {
+      "M`aximus:0": 2
+    },
+    {
+      "advectus:0": 2
+    },
+    {
+      "adveho:0": 2
+    },
+    {
+      "nondum:0": 2
+    },
+    {
+      "vallis:0": 2
+    },
+    {
+      "valles:0": 2
+    },
+    {
+      "dis:0": 2
+    },
+    {
+      "ditior:0": 2
+    },
+    {
+      "ditissimus:0": 2
+    },
+    {
+      "cultor:0": 2
+    },
+    {
+      "cultrix:0": 2
+    },
+    {
+      "nemus:0": 2
+    },
+    {
+      "silens:0": 2
+    },
+    {
+      "silentium:0": 2
+    },
+    {
+      "fidus:0": 2
+    },
+    {
+      "iunctus:0": 2
+    },
+    {
+      "leo:0": 2
+    },
+    {
+      "placeo:0": 2
+    },
+    {
+      "placo:0": 2
+    },
+    {
+      "disto:0": 2
+    },
+    {
+      "pulchrior:0": 2
+    },
+    {
+      "niger:0": 2
+    },
+    {
+      "zephyrus:0": 2
+    },
+    {
+      "paternus:0": 2
+    },
+    {
+      "pulsus:0": 2
+    },
+    {
+      "pulsus:1": 2
+    },
+    {
+      "vaco:0": 2
+    },
+    {
+      "N`axos:0": 2
+    },
+    {
+      "D`onusa:0": 2
+    },
+    {
+      "niveus:0": 2
+    },
+    {
+      "sparsus:0": 2
+    },
+    {
+      "P`aros:0": 2
+    },
+    {
+      "creber:0": 2
+    },
+    {
+      "fretum:0": 2
+    },
+    {
+      "fretus:0": 2
+    },
+    {
+      "concito:0": 2
+    },
+    {
+      "concitus:0": 2
+    },
+    {
+      "concitus:1": 2
+    },
+    {
+      "nauticus:0": 2
+    },
+    {
+      "exorior:0": 2
+    },
+    {
+      "clamo:0": 2
+    },
+    {
+      "certamen:0": 2
+    },
+    {
+      "V`arius:0": 2
+    },
+    {
+      "vario:0": 2
+    },
+    {
+      "varius:0": 2
+    },
+    {
+      "proavus:0": 2
+    },
+    {
+      "iens:0": 2
+    },
+    {
+      "prosequor:0": 2
+    },
+    {
+      "L`ycurgus:0": 2
+    },
+    {
+      "regnatus:0": 2
+    },
+    {
+      "thrax:1": 2
+    },
+    {
+      "T`hrax:1": 2
+    },
+    {
+      "avidissimus:0": 2
+    },
+    {
+      "avidus:0": 2
+    },
+    {
+      "amarus:0": 2
+    },
+    {
+      "amo:0": 2
+    },
+    {
+      "fere:0": 2
+    },
+    {
+      "ferus:1": 2
+    },
+    {
+      "iuventus:0": 2
+    },
+    {
+      "operatus:0": 2
+    },
+    {
+      "ius:1": 2
+    },
+    {
+      "iuro:0": 2
+    },
+    {
+      "ius:0": 2
+    },
+    {
+      "tabidus:0": 2
+    },
+    {
+      "corruptus:0": 2
+    },
+    {
+      "tractus:1": 2
+    },
+    {
+      "letifer:0": 2
+    },
+    {
+      "lues:0": 2
+    },
+    {
+      "luo:1": 2
+    },
+    {
+      "luo:0": 2
+    },
+    {
+      "dulcior:0": 2
+    },
+    {
+      "dulcis:0": 2
+    },
+    {
+      "dulcissimus:0": 2
+    },
+    {
+      "exuro:0": 2
+    },
+    {
+      "ager:0": 2
+    },
+    {
+      "S`irius:0": 2
+    },
+    {
+      "sterilis:0": 2
+    },
+    {
+      "areo:0": 2
+    },
+    {
+      "remensus:0": 2
+    },
+    {
+      "oraclum:0": 2
+    },
+    {
+      "venia:0": 2
+    },
+    {
+      "A`uxilium:0": 2
+    },
+    {
+      "auxilium:0": 2
+    },
+    {
+      "animal:0": 2
+    },
+    {
+      "animalis:0": 2
+    },
+    {
+      "mecum:0": 2
+    },
+    {
+      "iacens:0": 2
+    },
+    {
+      "insertus:0": 2
+    },
+    {
+      "fenestra:0": 2
+    },
+    {
+      "luno:0": 2
+    },
+    {
+      "plenus:0": 2
+    },
+    {
+      "demereo:0": 2
+    },
+    {
+      "demo:0": 2
+    },
+    {
+      "dicturus:0": 2
+    },
+    {
+      "en:1": 2
+    },
+    {
+      "en:0": 2
+    },
+    {
+      "ultro:0": 2
+    },
+    {
+      "permensus:0": 2
+    },
+    {
+      "imperium:0": 2
+    },
+    {
+      "ingressus:1": 2
+    },
+    {
+      "ingredior:0": 2
+    },
+    {
+      "ingressus:0": 2
+    },
+    {
+      "iniquus:0": 2
+    },
+    {
+      "mutandus:0": 2
+    },
+    {
+      "potens:0": 2
+    },
+    {
+      "potentior:0": 2
+    },
+    {
+      "potentissimus:0": 2
+    },
+    {
+      "glaeba:0": 2
+    },
+    {
+      "antiquo:0": 2
+    },
+    {
+      "minor:1": 2
+    },
+    {
+      "minoro:0": 2
+    },
+    {
+      "ortus:1": 2
+    },
+    {
+      "ortus:0": 2
+    },
+    {
+      "orior:0": 2
+    },
+    {
+      "princeps:1": 2
+    },
+    {
+      "dubitandus:0": 2
+    },
+    {
+      "requiro:0": 2
+    },
+    {
+      "fingo:0": 2
+    },
+    {
+      "attonitus:0": 2
+    },
+    {
+      "attono:0": 2
+    },
+    {
+      "C`ora:0": 2
+    },
+    {
+      "coram:1": 2
+    },
+    {
+      "cora:0": 2
+    },
+    {
+      "coram:0": 2
+    },
+    {
+      "praesentia:0": 2
+    },
+    {
+      "sudo:0": 2
+    },
+    {
+      "sudor:0": 2
+    },
+    {
+      "supinus:0": 2
+    },
+    {
+      "corripio:0": 2
+    },
+    {
+      "tendo:1": 2
+    },
+    {
+      "munero:0": 2
+    },
+    {
+      "munus:0": 2
+    },
+    {
+      "libus:0": 2
+    },
+    {
+      "L`ibo:0": 2
+    },
+    {
+      "libum:0": 2
+    },
+    {
+      "intemeratus:0": 2
+    },
+    {
+      "ambiguus:0": 2
+    },
+    {
+      "proles:0": 2
+    },
+    {
+      "decipio:0": 2
+    },
+    {
+      "deceptus:0": 2
+    },
+    {
+      "error:0": 2
+    },
+    {
+      "memoro:0": 2
+    },
+    {
+      "exercitus:0": 2
+    },
+    {
+      "talus:0": 2
+    },
+    {
+      "portendo:0": 2
+    },
+    {
+      "debitum:0": 2
+    },
+    {
+      "debitus:0": 2
+    },
+    {
+      "gener:0": 2
+    },
+    {
+      "credo:0": 2
+    },
+    {
+      "melioro:0": 2
+    },
+    {
+      "monitus:0": 2
+    },
+    {
+      "pareo:0": 2
+    },
+    {
+      "quoque:1": 2
+    },
+    {
+      "coeptum:2": 2
+    },
+    {
+      "coeptus:0": 2
+    },
+    {
+      "opus:0": 2
+    },
+    {
+      "auspex:0": 2
+    },
+    {
+      "trabs:0": 2
+    },
+    {
+      "ratis:0": 2
+    },
+    {
+      "tenuo:0": 2
+    },
+    {
+      "supra:1": 2
+    },
+    {
+      "supra:0": 2
+    },
+    {
+      "imber:0": 2
+    },
+    {
+      "assisto:0": 2
+    },
+    {
+      "tenebra:0": 2
+    },
+    {
+      "tenebrae:0": 2
+    },
+    {
+      "inhorreo:0": 2
+    },
+    {
+      "inhorresco:0": 2
+    },
+    {
+      "hiemo:0": 2
+    },
+    {
+      "iacto:0": 2
+    },
+    {
+      "dispergo:0": 2
+    },
+    {
+      "dispersus:0": 2
+    },
+    {
+      "umidus:0": 2
+    },
+    {
+      "involvo:0": 2
+    },
+    {
+      "ingemino:0": 2
+    },
+    {
+      "aufero:0": 2
+    },
+    {
+      "neptunium:0": 2
+    },
+    {
+      "discerno:0": 2
+    },
+    {
+      "memini:0": 2
+    },
+    {
+      "caeco:0": 2
+    },
+    {
+      "soleo:0": 2
+    },
+    {
+      "adeo:0": 2
+    },
+    {
+      "caligo:0": 2
+    },
+    {
+      "S`ideris:0": 2
+    },
+    {
+      "sido:0": 2
+    },
+    {
+      "totidem:0": 2
+    },
+    {
+      "sine:0": 2
+    },
+    {
+      "quartus:0": 2
+    },
+    {
+      "dius:0": 2
+    },
+    {
+      "caerulus:0": 2
+    },
+    {
+      "D`icte:0": 2
+    },
+    {
+      "corneus:1": 2
+    },
+    {
+      "corneus:0": 2
+    },
+    {
+      "liqueo:0": 2
+    },
+    {
+      "liquo:0": 2
+    },
+    {
+      "clausum:0": 2
+    },
+    {
+      "saevior:0": 2
+    },
+    {
+      "stygius:0": 2
+    },
+    {
+      "S`tygius:0": 2
+    },
+    {
+      "foedissimus:0": 2
+    },
+    {
+      "virgineus:0": 2
+    },
+    {
+      "venter:0": 2
+    },
+    {
+      "pallidus:0": 2
+    },
+    {
+      "proluvies:0": 2
+    },
+    {
+      "virgultum:0": 2
+    },
+    {
+      "virgultus:0": 2
+    },
+    {
+      "densus:0": 2
+    },
+    {
+      "horridus:0": 2
+    },
+    {
+      "myrtus:0": 2
+    },
+    {
+      "pecu:0": 2
+    },
+    {
+      "pecus:0": 2
+    },
+    {
+      "custos:0": 2
+    },
+    {
+      "inruo:0": 2
+    },
+    {
+      "torus:0": 2
+    },
+    {
+      "opimus:0": 2
+    },
+    {
+      "epulor:0": 2
+    },
+    {
+      "exstruo:0": 2
+    },
+    {
+      "lapsus:0": 2
+    },
+    {
+      "clangor:0": 2
+    },
+    {
+      "contactus:1": 2
+    },
+    {
+      "contingo:0": 2
+    },
+    {
+      "diripio:0": 2
+    },
+    {
+      "odor:0": 2
+    },
+    {
+      "odoro:0": 2
+    },
+    {
+      "immundus:0": 2
+    },
+    {
+      "taeter:0": 2
+    },
+    {
+      "cavatus:0": 2
+    },
+    {
+      "secedo:0": 2
+    },
+    {
+      "secessus:1": 2
+    },
+    {
+      "horrens:0": 2
+    },
+    {
+      "umber:0": 2
+    },
+    {
+      "accessus:0": 2
+    },
+    {
+      "repono:0": 2
+    },
+    {
+      "circumvolo:0": 2
+    },
+    {
+      "pedis:0": 2
+    },
+    {
+      "uncus:0": 2
+    },
+    {
+      "turba:0": 2
+    },
+    {
+      "capesso:0": 2
+    },
+    {
+      "tunc:0": 2
+    },
+    {
+      "gerendus:0": 2
+    },
+    {
+      "gero:0": 2
+    },
+    {
+      "edico:0": 2
+    },
+    {
+      "secus:0": 2
+    },
+    {
+      "secus:1": 2
+    },
+    {
+      "secus:2": 2
+    },
+    {
+      "ensis:0": 2
+    },
+    {
+      "scutum:0": 2
+    },
+    {
+      "dispono:0": 2
+    },
+    {
+      "delapsus:0": 2
+    },
+    {
+      "specula:2": 2
+    },
+    {
+      "specula:0": 2
+    },
+    {
+      "speculum:0": 2
+    },
+    {
+      "proelium:0": 2
+    },
+    {
+      "conatus:1": 2
+    },
+    {
+      "conatus:0": 2
+    },
+    {
+      "conor:0": 2
+    },
+    {
+      "frondens:0": 2
+    },
+    {
+      "volucra:0": 2
+    },
+    {
+      "volucrum:0": 2
+    },
+    {
+      "tergo:0": 2
+    },
+    {
+      "tergum:0": 2
+    },
+    {
+      "pluma:0": 2
+    },
+    {
+      "vulnero:0": 2
+    },
+    {
+      "vulnus:0": 2
+    },
+    {
+      "lapsus:1": 2
+    },
+    {
+      "C`eler:0": 2
+    },
+    {
+      "celer:0": 2
+    },
+    {
+      "semesus:0": 2
+    },
+    {
+      "foedus:1": 2
+    },
+    {
+      "etiam:0": 2
+    },
+    {
+      "paratus:0": 2
+    },
+    {
+      "insons:0": 2
+    },
+    {
+      "mirabile:1": 2
+    },
+    {
+      "mirabilis:0": 2
+    },
+    {
+      "omnipotens:0": 2
+    },
+    {
+      "petitus:0": 2
+    },
+    {
+      "ambesus:0": 2
+    },
+    {
+      "subigo:0": 2
+    },
+    {
+      "ablatus:0": 2
+    },
+    {
+      "exposco:0": 2
+    },
+    {
+      "seu:0": 2
+    },
+    {
+      "sive:0": 2
+    },
+    {
+      "palma:2": 2
+    },
+    {
+      "palmus:0": 2
+    },
+    {
+      "palma:0": 2
+    },
+    {
+      "passum:0": 2
+    },
+    {
+      "indico:1": 2
+    },
+    {
+      "mina:0": 2
+    },
+    {
+      "minae:0": 2
+    },
+    {
+      "P`lacidus:0": 2
+    },
+    {
+      "placidus:0": 2
+    },
+    {
+      "deripio:0": 2
+    },
+    {
+      "excussus:0": 2
+    },
+    {
+      "laxo:0": 2
+    },
+    {
+      "N`otium:0": 2
+    },
+    {
+      "gubernator:0": 2
+    },
+    {
+      "guberno:0": 2
+    },
+    {
+      "nemorosus:0": 2
+    },
+    {
+      "gutta:0": 2
+    },
+    {
+      "vello:0": 2
+    },
+    {
+      "S`amos:0": 2
+    },
+    {
+      "D`ulichium:0": 2
+    },
+    {
+      "S`aevius:0": 2
+    },
+    {
+      "saevio:0": 2
+    },
+    {
+      "exsecror:0": 2
+    },
+    {
+      "altrix:0": 2
+    },
+    {
+      "cacumen:0": 2
+    },
+    {
+      "cacumino:0": 2
+    },
+    {
+      "nimbosus:0": 2
+    },
+    {
+      "formidatus:0": 2
+    },
+    {
+      "formido:0": 2
+    },
+    {
+      "ancora:0": 2
+    },
+    {
+      "iacio:0": 2
+    },
+    {
+      "insperatus:0": 2
+    },
+    {
+      "P`otitius:0": 2
+    },
+    {
+      "celebro:0": 2
+    },
+    {
+      "ludus:0": 2
+    },
+    {
+      "ludo:0": 2
+    },
+    {
+      "frigidus:0": 2
+    },
+    {
+      "frigidior:0": 2
+    },
+    {
+      "frigidissimus:0": 2
+    },
+    {
+      "maculo:0": 2
+    },
+    {
+      "horror:0": 2
+    },
+    {
+      "oleo:0": 2
+    },
+    {
+      "oleum:0": 2
+    },
+    {
+      "exerceo:0": 2
+    },
+    {
+      "palaestra:0": 2
+    },
+    {
+      "nudatus:0": 2
+    },
+    {
+      "evado:0": 2
+    },
+    {
+      "circumvolvo:0": 2
+    },
+    {
+      "aquilo:0": 2
+    },
+    {
+      "aspero:0": 2
+    },
+    {
+      "glacialis:0": 2
+    },
+    {
+      "gestamen:0": 2
+    },
+    {
+      "A`bas:0": 2
+    },
+    {
+      "postis:0": 2
+    },
+    {
+      "transtrum:0": 2
+    },
+    {
+      "certatim:0": 2
+    },
+    {
+      "certatus:0": 2
+    },
+    {
+      "ferio:0": 2
+    },
+    {
+      "coeo:0": 2
+    },
+    {
+      "abscondo:0": 2
+    },
+    {
+      "B`uthrotum:0": 2
+    },
+    {
+      "incredibilis:0": 2
+    },
+    {
+      "occupo:0": 2
+    },
+    {
+      "sceptrum:0": 2
+    },
+    {
+      "marito:0": 2
+    },
+    {
+      "maritus:0": 2
+    },
+    {
+      "maritus:1": 2
+    },
+    {
+      "incensus:1": 2
+    },
+    {
+      "miro:0": 2
+    },
+    {
+      "mirus:0": 2
+    },
+    {
+      "cognosco:0": 2
+    },
+    {
+      "progredior:0": 2
+    },
+    {
+      "linquens:0": 2
+    },
+    {
+      "exsilium:0": 2
+    },
+    {
+      "lentus:0": 2
+    },
+    {
+      "vimen:0": 2
+    },
+    {
+      "sollemne:0": 2
+    },
+    {
+      "sollemnior:0": 2
+    },
+    {
+      "sollemnis:0": 2
+    },
+    {
+      "falsum:0": 2
+    },
+    {
+      "falsus:0": 2
+    },
+    {
+      "falsus:1": 2
+    },
+    {
+      "S`imois:0": 2
+    },
+    {
+      "cinis:0": 2
+    },
+    {
+      "viridis:0": 2
+    },
+    {
+      "caespes:0": 2
+    },
+    {
+      "amens:0": 2
+    },
+    {
+      "amentior:0": 2
+    },
+    {
+      "amentissimus:0": 2
+    },
+    {
+      "C`alor:0": 2
+    },
+    {
+      "calor:0": 2
+    },
+    {
+      "calo:2": 2
+    },
+    {
+      "calo:0": 2
+    },
+    {
+      "verior:0": 2
+    },
+    {
+      "verissimus:0": 2
+    },
+    {
+      "veru:0": 2
+    },
+    {
+      "nuntius:0": 2
+    },
+    {
+      "insequor:0": 2
+    },
+    {
+      "almus:0": 2
+    },
+    {
+      "effundo:0": 2
+    },
+    {
+      "furens:0": 2
+    },
+    {
+      "subicio:0": 2
+    },
+    {
+      "rarus:0": 2
+    },
+    {
+      "turbatus:0": 2
+    },
+    {
+      "hisco:0": 2
+    },
+    {
+      "equidem:0": 2
+    },
+    {
+      "dubito:0": 2
+    },
+    {
+      "deiectus:1": 2
+    },
+    {
+      "dignus:0": 2
+    },
+    {
+      "reviso:0": 2
+    },
+    {
+      "locutus:0": 2
+    },
+    {
+      "deicio:0": 2
+    },
+    {
+      "demissus:1": 2
+    },
+    {
+      "demissus:0": 2
+    },
+    {
+      "vultum:0": 2
+    },
+    {
+      "aterrimus:0": 2
+    },
+    {
+      "cortex:0": 2
+    },
+    {
+      "alias:0": 2
+    },
+    {
+      "sortitus:0": 2
+    },
+    {
+      "M`orius:0": 2
+    },
+    {
+      "morior:0": 2
+    },
+    {
+      "captivo:0": 2
+    },
+    {
+      "captivus:1": 2
+    },
+    {
+      "cubile:0": 2
+    },
+    {
+      "H`erius:0": 2
+    },
+    {
+      "H`erius:1": 2
+    },
+    {
+      "heri:0": 2
+    },
+    {
+      "V`ecta:0": 2
+    },
+    {
+      "vectus:0": 2
+    },
+    {
+      "fastus:2": 2
+    },
+    {
+      "fastus:1": 2
+    },
+    {
+      "fastus:0": 2
+    },
+    {
+      "servitium:0": 2
+    },
+    {
+      "hymenaeus:0": 2
+    },
+    {
+      "H`ermione:0": 2
+    },
+    {
+      "transmitto:0": 2
+    },
+    {
+      "habendus:0": 2
+    },
+    {
+      "famulus:1": 2
+    },
+    {
+      "famula:0": 2
+    },
+    {
+      "flammatus:0": 2
+    },
+    {
+      "flammo:0": 2
+    },
+    {
+      "agrestis:0": 2
+    },
+    {
+      "movens:0": 2
+    },
+    {
+      "nympha:0": 2
+    },
+    {
+      "nymphe:0": 2
+    },
+    {
+      "agitatus:0": 2
+    },
+    {
+      "incautus:0": 2
+    },
+    {
+      "mors:0": 2
+    },
+    {
+      "C`haos:0": 2
+    },
+    {
+      "chaos:0": 2
+    },
+    {
+      "T`roianus:0": 2
+    },
+    {
+      "C`haonia:0": 2
+    },
+    {
+      "quisnam:0": 2
+    },
+    {
+      "patro:0": 2
+    },
+    {
+      "praesideo:0": 2
+    },
+    {
+      "ecqui:0": 2
+    },
+    {
+      "amissus:0": 2
+    },
+    {
+      "ecquis:0": 2
+    },
+    {
+      "virtus:0": 2
+    },
+    {
+      "virilior:0": 2
+    },
+    {
+      "virilis:0": 2
+    },
+    {
+      "avunculus:0": 2
+    },
+    {
+      "excito:0": 2
+    },
+    {
+      "fletus:1": 2
+    },
+    {
+      "heros:0": 2
+    },
+    {
+      "comitans:0": 2
+    },
+    {
+      "verbum:0": 2
+    },
+    {
+      "singulus:0": 2
+    },
+    {
+      "multum:0": 2
+    },
+    {
+      "simulatus:0": 2
+    },
+    {
+      "rivus:0": 2
+    },
+    {
+      "levo:0": 2
+    },
+    {
+      "levo:1": 2
+    },
+    {
+      "secundo:1": 2
+    },
+    {
+      "socio:0": 2
+    },
+    {
+      "fruor:0": 2
+    },
+    {
+      "ampla:0": 2
+    },
+    {
+      "amplus:0": 2
+    },
+    {
+      "porticus:0": 2
+    },
+    {
+      "B`acchus:0": 2
+    },
+    {
+      "poculum:0": 2
+    },
+    {
+      "carbasus:0": 2
+    },
+    {
+      "inflo:0": 2
+    },
+    {
+      "tumido:0": 2
+    },
+    {
+      "quaeso:0": 2
+    },
+    {
+      "sentis:0": 2
+    },
+    {
+      "sentus:0": 2
+    },
+    {
+      "nisus:1": 2
+    },
+    {
+      "nitor:0": 2
+    },
+    {
+      "praepes:0": 2
+    },
+    {
+      "lingua:0": 2
+    },
+    {
+      "prospero:0": 2
+    },
+    {
+      "prosperus:0": 2
+    },
+    {
+      "namque:0": 2
+    },
+    {
+      "repostus:1": 2
+    },
+    {
+      "nefas:0": 2
+    },
+    {
+      "tristissimus:0": 2
+    },
+    {
+      "denuntio:0": 2
+    },
+    {
+      "prodigium:0": 2
+    },
+    {
+      "vito:0": 2
+    },
+    {
+      "periculum:0": 2
+    },
+    {
+      "sequens:0": 2
+    },
+    {
+      "caesum:0": 2
+    },
+    {
+      "caesus:0": 2
+    },
+    {
+      "exoro:0": 2
+    },
+    {
+      "sacratus:0": 2
+    },
+    {
+      "suspendo:0": 2
+    },
+    {
+      "suspensus:0": 2
+    },
+    {
+      "divino:0": 2
+    },
+    {
+      "manifesto:1": 2
+    },
+    {
+      "tutior:0": 2
+    },
+    {
+      "P`arca:0": 2
+    },
+    {
+      "veto:0": 2
+    },
+    {
+      "an:0": 2
+    },
+    {
+      "lacrimabilis:0": 2
+    },
+    {
+      "sileo:0": 2
+    },
+    {
+      "eloquor:0": 2
+    },
+    {
+      "principium:0": 2
+    },
+    {
+      "reor:0": 2
+    },
+    {
+      "vicinus:1": 2
+    },
+    {
+      "invius:0": 2
+    },
+    {
+      "divido:0": 2
+    },
+    {
+      "lentandus:0": 2
+    },
+    {
+      "lento:0": 2
+    },
+    {
+      "R`emus:0": 2
+    },
+    {
+      "lustrandus:0": 2
+    },
+    {
+      "sal:0": 2
+    },
+    {
+      "salio:0": 2
+    },
+    {
+      "salio:1": 2
+    },
+    {
+      "infernus:1": 2
+    },
+    {
+      "inferni:0": 2
+    },
+    {
+      "infernum:0": 2
+    },
+    {
+      "infernus:0": 2
+    },
+    {
+      "compono:0": 2
+    },
+    {
+      "dica:0": 2
+    },
+    {
+      "conditus:1": 2
+    },
+    {
+      "conditus:0": 2
+    },
+    {
+      "flumen:0": 2
+    },
+    {
+      "sollicito:0": 2
+    },
+    {
+      "sollicitus:0": 2
+    },
+    {
+      "secretus:0": 2
+    },
+    {
+      "ilex:0": 2
+    },
+    {
+      "inventum:0": 2
+    },
+    {
+      "inventus:0": 2
+    },
+    {
+      "litoreus:0": 2
+    },
+    {
+      "triginta:0": 2
+    },
+    {
+      "fetus:0": 2
+    },
+    {
+      "fetus:1": 2
+    },
+    {
+      "A`lbis:0": 2
+    },
+    {
+      "A`lbius:0": 2
+    },
+    {
+      "albo:0": 2
+    },
+    {
+      "recubans:0": 2
+    },
+    {
+      "recubo:0": 2
+    },
+    {
+      "certo:0": 2
+    },
+    {
+      "requies:0": 2
+    },
+    {
+      "mordeo:0": 2
+    },
+    {
+      "morsus:1": 2
+    },
+    {
+      "morsus:0": 2
+    },
+    {
+      "morsus:2": 2
+    },
+    {
+      "futurus:0": 2
+    },
+    {
+      "horresco:0": 2
+    },
+    {
+      "invenio:0": 2
+    },
+    {
+      "proximo:0": 2
+    },
+    {
+      "proximus:0": 2
+    },
+    {
+      "perfundo:0": 2
+    },
+    {
+      "L`ocri:0": 2
+    },
+    {
+      "miles:0": 2
+    },
+    {
+      "lacer:0": 2
+    },
+    {
+      "lacero:0": 2
+    },
+    {
+      "P`etelia:0": 2
+    },
+    {
+      "subnixus:0": 2
+    },
+    {
+      "trans:0": 2
+    },
+    {
+      "transmissus:0": 2
+    },
+    {
+      "positus:0": 2
+    },
+    {
+      "solvo:0": 2
+    },
+    {
+      "adoperio:0": 2
+    },
+    {
+      "adopertus:0": 2
+    },
+    {
+      "purpureus:0": 2
+    },
+    {
+      "ignio:0": 2
+    },
+    {
+      "sanctus:1": 2
+    },
+    {
+      "hostilis:0": 2
+    },
+    {
+      "castus:0": 2
+    },
+    {
+      "caveo:0": 2
+    },
+    {
+      "admoveo:0": 2
+    },
+    {
+      "scelero:0": 2
+    },
+    {
+      "pio:0": 2
+    },
+    {
+      "claustra:0": 2
+    },
+    {
+      "claustrum:0": 2
+    },
+    {
+      "circuitus:0": 2
+    },
+    {
+      "circueo:0": 2
+    },
+    {
+      "ruino:0": 2
+    },
+    {
+      "convulsus:0": 2
+    },
+    {
+      "valeo:0": 2
+    },
+    {
+      "vetustas:0": 2
+    },
+    {
+      "aevus:0": 2
+    },
+    {
+      "tantum:0": 2
+    },
+    {
+      "longinquo:1": 2
+    },
+    {
+      "longinquus:0": 2
+    },
+    {
+      "dissilio:0": 2
+    },
+    {
+      "utraque:0": 2
+    },
+    {
+      "foro:0": 2
+    },
+    {
+      "abscido:0": 2
+    },
+    {
+      "abscindo:0": 2
+    },
+    {
+      "diductus:0": 2
+    },
+    {
+      "externus:0": 2
+    },
+    {
+      "stipes:0": 2
+    },
+    {
+      "barathrum:0": 2
+    },
+    {
+      "sorbeo:0": 2
+    },
+    {
+      "verbero:0": 2
+    },
+    {
+      "alternus:0": 2
+    },
+    {
+      "spelunca:0": 2
+    },
+    {
+      "cohibeo:0": 2
+    },
+    {
+      "pulchrum:0": 2
+    },
+    {
+      "tenus:0": 2
+    },
+    {
+      "pubes:1": 2
+    },
+    {
+      "postremus:0": 2
+    },
+    {
+      "delphinus:0": 2
+    },
+    {
+      "cauda:0": 2
+    },
+    {
+      "uterum:0": 2
+    },
+    {
+      "uterus:0": 2
+    },
+    {
+      "lupus:0": 2
+    },
+    {
+      "commissus:0": 2
+    },
+    {
+      "praesto:1": 2
+    },
+    {
+      "meto:0": 2
+    },
+    {
+      "circumflecto:0": 2
+    },
+    {
+      "crudelior:0": 2
+    },
+    {
+      "crudelissimus:0": 2
+    },
+    {
+      "informo:0": 2
+    },
+    {
+      "semel:0": 2
+    },
+    {
+      "resonans:0": 2
+    },
+    {
+      "resonantia:0": 2
+    },
+    {
+      "prudens:0": 2
+    },
+    {
+      "prudentia:0": 2
+    },
+    {
+      "praeterea:0": 2
+    },
+    {
+      "repetens:0": 2
+    },
+    {
+      "ador:0": 2
+    },
+    {
+      "adoro:0": 2
+    },
+    {
+      "C`anis:0": 2
+    },
+    {
+      "canus:0": 2
+    },
+    {
+      "libens:0": 2
+    },
+    {
+      "libentior:0": 2
+    },
+    {
+      "libentissimus:0": 2
+    },
+    {
+      "libet:0": 2
+    },
+    {
+      "victrix:0": 2
+    },
+    {
+      "denique:0": 2
+    },
+    {
+      "deni:0": 2
+    },
+    {
+      "finio:0": 2
+    },
+    {
+      "texo:0": 2
+    },
+    {
+      "ferreus:0": 2
+    },
+    {
+      "configo:0": 2
+    },
+    {
+      "confixus:0": 2
+    },
+    {
+      "defero:0": 2
+    },
+    {
+      "insanus:0": 2
+    },
+    {
+      "mando:0": 2
+    },
+    {
+      "nomino:0": 2
+    },
+    {
+      "describo:0": 2
+    },
+    {
+      "digero:0": 2
+    },
+    {
+      "seclusus:0": 2
+    },
+    {
+      "tenuior:0": 2
+    },
+    {
+      "tenuis:0": 2
+    },
+    {
+      "tenuissimus:0": 2
+    },
+    {
+      "versus:0": 2
+    },
+    {
+      "verso:0": 2
+    },
+    {
+      "versus:3": 2
+    },
+    {
+      "cardo:0": 2
+    },
+    {
+      "cardus:0": 2
+    },
+    {
+      "tener:0": 2
+    },
+    {
+      "impello:0": 2
+    },
+    {
+      "frondeo:0": 2
+    },
+    {
+      "frons:1": 2
+    },
+    {
+      "ianua:0": 2
+    },
+    {
+      "prendo:0": 2
+    },
+    {
+      "volitans:0": 2
+    },
+    {
+      "incerno:0": 2
+    },
+    {
+      "incresco:0": 2
+    },
+    {
+      "iaculus:1": 2
+    },
+    {
+      "iaculum:0": 2
+    },
+    {
+      "iaculus:0": 2
+    },
+    {
+      "revoco:0": 2
+    },
+    {
+      "situs:2": 2
+    },
+    {
+      "situs:0": 2
+    },
+    {
+      "situs:1": 2
+    },
+    {
+      "S`ibylla:0": 2
+    },
+    {
+      "abeo:0": 2
+    },
+    {
+      "odi:0": 2
+    },
+    {
+      "inconsultus:0": 2
+    },
+    {
+      "dispendium:0": 2
+    },
+    {
+      "quamvis:0": 2
+    },
+    {
+      "increpito:0": 2
+    },
+    {
+      "oraculum:0": 2
+    },
+    {
+      "posca:0": 2
+    },
+    {
+      "volens:0": 2
+    },
+    {
+      "volentior:0": 2
+    },
+    {
+      "veneratus:0": 2
+    },
+    {
+      "anceps:0": 2
+    },
+    {
+      "premo:0": 2
+    },
+    {
+      "pressior:0": 2
+    },
+    {
+      "pressus:0": 2
+    },
+    {
+      "vero:0": 2
+    },
+    {
+      "effatus:0": 2
+    },
+    {
+      "effor:0": 2
+    },
+    {
+      "amico:0": 2
+    },
+    {
+      "sectus:0": 2
+    },
+    {
+      "elephantus:0": 2
+    },
+    {
+      "dehinc:0": 2
+    },
+    {
+      "gravis:0": 2
+    },
+    {
+      "impero:0": 2
+    },
+    {
+      "carina:0": 2
+    },
+    {
+      "carinus:0": 2
+    },
+    {
+      "stipo:0": 2
+    },
+    {
+      "lebes:0": 2
+    },
+    {
+      "argentum:0": 2
+    },
+    {
+      "lorica:0": 2
+    },
+    {
+      "hama:0": 2
+    },
+    {
+      "hamus:0": 2
+    },
+    {
+      "comans:0": 2
+    },
+    {
+      "insigne:0": 2
+    },
+    {
+      "insignio:0": 2
+    },
+    {
+      "insignior:0": 2
+    },
+    {
+      "insignis:0": 2
+    },
+    {
+      "conus:0": 2
+    },
+    {
+      "galea:0": 2
+    },
+    {
+      "crista:0": 2
+    },
+    {
+      "fauces:0": 2
+    },
+    {
+      "remigium:0": 2
+    },
+    {
+      "suppleo:0": 2
+    },
+    {
+      "apto:0": 2
+    },
+    {
+      "V`enus:0": 2
+    },
+    {
+      "venor:0": 2
+    },
+    {
+      "dignatus:0": 2
+    },
+    {
+      "bis:0": 2
+    },
+    {
+      "arripio:0": 2
+    },
+    {
+      "necesse:0": 2
+    },
+    {
+      "praeterlabor:0": 2
+    },
+    {
+      "ultra:0": 2
+    },
+    {
+      "ultra:1": 2
+    },
+    {
+      "pietas:0": 2
+    },
+    {
+      "pondus:0": 2
+    },
+    {
+      "fandus:0": 2
+    },
+    {
+      "demoror:0": 2
+    },
+    {
+      "picturatus:0": 2
+    },
+    {
+      "V`esta:0": 2
+    },
+    {
+      "vestio:0": 2
+    },
+    {
+      "vestis:0": 2
+    },
+    {
+      "subtemen:0": 2
+    },
+    {
+      "chlamys:0": 2
+    },
+    {
+      "onero:0": 2
+    },
+    {
+      "textile:0": 2
+    },
+    {
+      "textilis:0": 2
+    },
+    {
+      "M`earus:0": 2
+    },
+    {
+      "super:0": 2
+    },
+    {
+      "super:1": 2
+    },
+    {
+      "imago:0": 2
+    },
+    {
+      "alendus:0": 2
+    },
+    {
+      "furtim:0": 2
+    },
+    {
+      "T`ecum:0": 2
+    },
+    {
+      "tecum:0": 2
+    },
+    {
+      "pubesco:0": 2
+    },
+    {
+      "aequalis:0": 2
+    },
+    {
+      "obortus:0": 2
+    },
+    {
+      "digrediens:0": 2
+    },
+    {
+      "peractus:0": 2
+    },
+    {
+      "quies:1": 2
+    },
+    {
+      "quies:0": 2
+    },
+    {
+      "partus:0": 2
+    },
+    {
+      "arandus:0": 2
+    },
+    {
+      "cedens:0": 2
+    },
+    {
+      "quaerendus:0": 2
+    },
+    {
+      "obvio:0": 2
+    },
+    {
+      "obvius:0": 2
+    },
+    {
+      "quando:0": 2
+    },
+    {
+      "quando:1": 2
+    },
+    {
+      "A`ntandrus:0": 2
+    },
+    {
+      "I`da:0": 2
+    },
+    {
+      "diffido:0": 2
+    },
+    {
+      "cognatus:0": 2
+    },
+    {
+      "cognatus:1": 2
+    },
+    {
+      "aucto:0": 2
+    },
+    {
+      "auctor:0": 2
+    },
+    {
+      "auctrix:0": 2
+    },
+    {
+      "ceraunia:0": 2
+    },
+    {
+      "iter:0": 2
+    },
+    {
+      "brevissimus:0": 2
+    },
+    {
+      "brevis:0": 2
+    },
+    {
+      "sterno:0": 2
+    },
+    {
+      "gremium:0": 2
+    },
+    {
+      "inrigo:0": 2
+    },
+    {
+      "hora:0": 2
+    },
+    {
+      "acta:0": 2
+    },
+    {
+      "acta:3": 2
+    },
+    {
+      "orbis:0": 2
+    },
+    {
+      "orbo:0": 2
+    },
+    {
+      "S`tratus:0": 2
+    },
+    {
+      "segnior:0": 2
+    },
+    {
+      "segnis:0": 2
+    },
+    {
+      "exploro:0": 2
+    },
+    {
+      "capto:0": 2
+    },
+    {
+      "A`rcturus:0": 2
+    },
+    {
+      "trio:0": 2
+    },
+    {
+      "pluvius:0": 2
+    },
+    {
+      "pluvia:0": 2
+    },
+    {
+      "circumspicio:0": 2
+    },
+    {
+      "armatus:0": 2
+    },
+    {
+      "armatus:1": 2
+    },
+    {
+      "sereno:0": 2
+    },
+    {
+      "serenus:0": 2
+    },
+    {
+      "clarus:0": 2
+    },
+    {
+      "castra:0": 2
+    },
+    {
+      "castro:0": 2
+    },
+    {
+      "castrum:0": 2
+    },
+    {
+      "ops:0": 2
+    },
+    {
+      "fugatus:0": 2
+    },
+    {
+      "stella:0": 2
+    },
+    {
+      "rubesco:0": 2
+    },
+    {
+      "collus:0": 2
+    },
+    {
+      "collis:0": 2
+    },
+    {
+      "collum:0": 2
+    },
+    {
+      "conclamo:0": 2
+    },
+    {
+      "A`chates:0": 2
+    },
+    {
+      "achates:0": 2
+    },
+    {
+      "saluto:0": 2
+    },
+    {
+      "crater:0": 2
+    },
+    {
+      "cratera:0": 2
+    },
+    {
+      "corona:0": 2
+    },
+    {
+      "corono:0": 2
+    },
+    {
+      "induo:0": 2
+    },
+    {
+      "stans:0": 2
+    },
+    {
+      "fertus:0": 2
+    },
+    {
+      "spiro:0": 2
+    },
+    {
+      "patesco:0": 2
+    },
+    {
+      "crebresco:0": 2
+    },
+    {
+      "M`inerva:0": 2
+    },
+    {
+      "propior:0": 2
+    },
+    {
+      "eurous:0": 2
+    },
+    {
+      "arcus:0": 2
+    },
+    {
+      "salsus:0": 2
+    },
+    {
+      "obiectus:0": 2
+    },
+    {
+      "aspergo:1": 2
+    },
+    {
+      "aspergo:0": 2
+    },
+    {
+      "demitto:0": 2
+    },
+    {
+      "bracchium:0": 2
+    },
+    {
+      "G`eminus:0": 2
+    },
+    {
+      "turritus:0": 2
+    },
+    {
+      "gramen:0": 2
+    },
+    {
+      "quattuor:0": 2
+    },
+    {
+      "tondens:0": 2
+    },
+    {
+      "late:0": 2
+    },
+    {
+      "candor:0": 2
+    },
+    {
+      "nivalis:0": 2
+    },
+    {
+      "porto:0": 2
+    },
+    {
+      "E`quus:0": 2
+    },
+    {
+      "minor:2": 2
+    },
+    {
+      "fas:0": 2
+    },
+    {
+      "suetus:0": 2
+    },
+    {
+      "S`uetius:0": 2
+    },
+    {
+      "iugo:0": 2
+    },
+    {
+      "freno:0": 2
+    },
+    {
+      "frenum:0": 2
+    },
+    {
+      "C`oncordia:0": 2
+    },
+    {
+      "concors:0": 2
+    },
+    {
+      "concordia:0": 2
+    },
+    {
+      "armisonus:0": 2
+    },
+    {
+      "ovans:0": 2
+    },
+    {
+      "praeceptum:0": 2
+    },
+    {
+      "praeceptus:0": 2
+    },
+    {
+      "adoleo:0": 2
+    },
+    {
+      "adoleo:1": 2
+    },
+    {
+      "A`ntemnae:0": 2
+    },
+    {
+      "suspecto:0": 2
+    },
+    {
+      "suspectus:0": 2
+    },
+    {
+      "cogo:0": 2
+    },
+    {
+      "mortalis:0": 2
+    },
+    {
+      "H`erculeus:0": 2
+    },
+    {
+      "herculeus:0": 2
+    },
+    {
+      "T`arentum:0": 2
+    },
+    {
+      "lacinia:0": 2
+    },
+    {
+      "S`cylaceum:0": 2
+    },
+    {
+      "pulsatus:0": 2
+    },
+    {
+      "misceo:0": 2
+    },
+    {
+      "exsulto:0": 2
+    },
+    {
+      "nimirum:0": 2
+    },
+    {
+      "eripio:0": 2
+    },
+    {
+      "par:0": 2
+    },
+    {
+      "pariter:0": 2
+    },
+    {
+      "pavor:0": 2
+    },
+    {
+      "contorqueo:0": 2
+    },
+    {
+      "cohors:0": 2
+    },
+    {
+      "desideo:0": 2
+    },
+    {
+      "E`lisa:0": 2
+    },
+    {
+      "elisus:0": 2
+    },
+    {
+      "rorans:0": 2
+    },
+    {
+      "accessus:1": 2
+    },
+    {
+      "delectus:0": 2
+    },
+    {
+      "parento:0": 2
+    },
+    {
+      "tono:0": 2
+    },
+    {
+      "prorumpo:0": 2
+    },
+    {
+      "candens:0": 2
+    },
+    {
+      "piceus:0": 2
+    },
+    {
+      "turbo:0": 2
+    },
+    {
+      "favilla:0": 2
+    },
+    {
+      "lambo:0": 2
+    },
+    {
+      "globus:0": 2
+    },
+    {
+      "avulsus:0": 2
+    },
+    {
+      "liquefactus:0": 2
+    },
+    {
+      "exaestuo:0": 2
+    },
+    {
+      "glomero:0": 2
+    },
+    {
+      "fundus:0": 2
+    },
+    {
+      "fundo:2": 2
+    },
+    {
+      "semustus:0": 2
+    },
+    {
+      "fulmen:0": 2
+    },
+    {
+      "insuper:0": 2
+    },
+    {
+      "urgeo:0": 2
+    },
+    {
+      "exspiro:0": 2
+    },
+    {
+      "F`lamma:0": 2
+    },
+    {
+      "caminus:0": 2
+    },
+    {
+      "sententia:0": 2
+    },
+    {
+      "intremo:0": 2
+    },
+    {
+      "quotiens:0": 2
+    },
+    {
+      "murmur:0": 2
+    },
+    {
+      "subtexo:0": 2
+    },
+    {
+      "lucidior:0": 2
+    },
+    {
+      "lucidissimus:0": 2
+    },
+    {
+      "lucidus:0": 2
+    },
+    {
+      "aethra:0": 2
+    },
+    {
+      "sidereus:0": 2
+    },
+    {
+      "obscurum:1": 2
+    },
+    {
+      "obscuro:0": 2
+    },
+    {
+      "nubilo:0": 2
+    },
+    {
+      "nubilum:0": 2
+    },
+    {
+      "nubilus:0": 2
+    },
+    {
+      "intempestum:1": 2
+    },
+    {
+      "intempestus:0": 2
+    },
+    {
+      "primo:0": 2
+    },
+    {
+      "posterus:0": 2
+    },
+    {
+      "dimoveo:0": 2
+    },
+    {
+      "confectus:0": 2
+    },
+    {
+      "macies:0": 2
+    },
+    {
+      "sceleratus:0": 2
+    },
+    {
+      "excedo:0": 2
+    },
+    {
+      "cultus:1": 2
+    },
+    {
+      "forma:0": 2
+    },
+    {
+      "formo:0": 2
+    },
+    {
+      "formus:0": 2
+    },
+    {
+      "ignotus:1": 2
+    },
+    {
+      "ignotus:0": 2
+    },
+    {
+      "B`arba:0": 2
+    },
+    {
+      "barba:1": 2
+    },
+    {
+      "barba:0": 2
+    },
+    {
+      "inluvies:0": 2
+    },
+    {
+      "respicio:0": 2
+    },
+    {
+      "immissus:0": 2
+    },
+    {
+      "spina:0": 2
+    },
+    {
+      "spinus:0": 2
+    },
+    {
+      "consero:1": 2
+    },
+    {
+      "tegimen:0": 2
+    },
+    {
+      "habitus:1": 2
+    },
+    {
+      "habitus:0": 2
+    },
+    {
+      "conterreo:0": 2
+    },
+    {
+      "conterritus:0": 2
+    },
+    {
+      "aspectus:0": 2
+    },
+    {
+      "P`aulus:0": 2
+    },
+    {
+      "paulus:0": 2
+    },
+    {
+      "praeceps:1": 2
+    },
+    {
+      "contineo:0": 2
+    },
+    {
+      "gradus:0": 2
+    },
+    {
+      "spirabilis:0": 2
+    },
+    {
+      "pollutus:0": 2
+    },
+    {
+      "abduco:0": 2
+    },
+    {
+      "sat:0": 2
+    },
+    {
+      "scius:0": 2
+    },
+    {
+      "immergo:0": 2
+    },
+    {
+      "spargo:0": 2
+    },
+    {
+      "pereo:0": 2
+    },
+    {
+      "volutans:0": 2
+    },
+    {
+      "voluto:0": 2
+    },
+    {
+      "amplexus:1": 2
+    },
+    {
+      "amplexus:0": 2
+    },
+    {
+      "G`enua:0": 2
+    },
+    {
+      "moratus:0": 2
+    },
+    {
+      "moratus:1": 2
+    },
+    {
+      "moror:0": 2
+    },
+    {
+      "funus:0": 2
+    },
+    {
+      "instauro:0": 2
+    },
+    {
+      "pignus:0": 2
+    },
+    {
+      "praesentio:0": 2
+    },
+    {
+      "iuvenis:0": 2
+    },
+    {
+      "depositus:0": 2
+    },
+    {
+      "profectus:1": 2
+    },
+    {
+      "profectus:2": 2
+    },
+    {
+      "profectus:0": 2
+    },
+    {
+      "proficiscor:0": 2
+    },
+    {
+      "utinam:0": 2
+    },
+    {
+      "pauper:0": 2
+    },
+    {
+      "intus:0": 2
+    },
+    {
+      "pulso:0": 2
+    },
+    {
+      "aggero:0": 2
+    },
+    {
+      "adfabilis:0": 2
+    },
+    {
+      "facilior:0": 2
+    },
+    {
+      "facilis:0": 2
+    },
+    {
+      "facillimus:0": 2
+    },
+    {
+      "duo:0": 2
+    },
+    {
+      "numero:0": 2
+    },
+    {
+      "egomet:0": 2
+    },
+    {
+      "prensus:0": 2
+    },
+    {
+      "prenso:0": 2
+    },
+    {
+      "frango:0": 2
+    },
+    {
+      "aspersus:0": 2
+    },
+    {
+      "fluens:0": 2
+    },
+    {
+      "quidem:0": 2
+    },
+    {
+      "passus:1": 2
+    },
+    {
+      "patior:0": 2
+    },
+    {
+      "impune:0": 2
+    },
+    {
+      "impunis:0": 2
+    },
+    {
+      "suo:0": 2
+    },
+    {
+      "expleo:0": 2
+    },
+    {
+      "expletus:0": 2
+    },
+    {
+      "sepelio:0": 2
+    },
+    {
+      "vinum:0": 2
+    },
+    {
+      "vinus:0": 2
+    },
+    {
+      "cupressus:0": 2
+    },
+    {
+      "cervix:0": 2
+    },
+    {
+      "inflexus:0": 2
+    },
+    {
+      "cruento:0": 2
+    },
+    {
+      "frustum:0": 2
+    },
+    {
+      "commixtus:0": 2
+    },
+    {
+      "precatus:0": 2
+    },
+    {
+      "terebro:0": 2
+    },
+    {
+      "T`elos:0": 2
+    },
+    {
+      "frons:0": 2
+    },
+    {
+      "instar:0": 2
+    },
+    {
+      "lampas:0": 2
+    },
+    {
+      "lampada:0": 2
+    },
+    {
+      "ulciscor:0": 2
+    },
+    {
+      "ulcisco:0": 2
+    },
+    {
+      "I`lias:0": 2
+    },
+    {
+      "solutus:0": 2
+    },
+    {
+      "crinis:0": 2
+    },
+    {
+      "qualum:0": 2
+    },
+    {
+      "quantus:0": 2
+    },
+    {
+      "claudo:0": 2
+    },
+    {
+      "claudo:1": 2
+    },
+    {
+      "presso:0": 2
+    },
+    {
+      "vulgo:0": 2
+    },
+    {
+      "vulgo:1": 2
+    },
+    {
+      "vulgus:0": 2
+    },
+    {
+      "infandus:0": 2
+    },
+    {
+      "lustrum:0": 2
+    },
+    {
+      "lustrum:1": 2
+    },
+    {
+      "prospicio:0": 2
+    },
+    {
+      "tremesco:0": 2
+    },
+    {
+      "P`edum:0": 2
+    },
+    {
+      "baca:0": 2
+    },
+    {
+      "cornum:0": 2
+    },
+    {
+      "cornum:1": 2
+    },
+    {
+      "lapidosus:0": 2
+    },
+    {
+      "vulsus:0": 2
+    },
+    {
+      "pasco:0": 2
+    },
+    {
+      "cymbium:0": 2
+    },
+    {
+      "lac:0": 2
+    },
+    {
+      "lacte:0": 2
+    },
+    {
+      "nefandus:0": 2
+    },
+    {
+      "addico:0": 2
+    },
+    {
+      "potius:1": 2
+    },
+    {
+      "leto:0": 2
+    },
+    {
+      "pastor:0": 2
+    },
+    {
+      "ademptus:0": 2
+    },
+    {
+      "adimo:0": 2
+    },
+    {
+      "informis:0": 2
+    },
+    {
+      "pinus:0": 2
+    },
+    {
+      "trunco:0": 2
+    },
+    {
+      "truncus:0": 2
+    },
+    {
+      "ovis:0": 2
+    },
+    {
+      "ovo:0": 2
+    },
+    {
+      "voluptas:0": 2
+    },
+    {
+      "comito:0": 2
+    },
+    {
+      "comitor:0": 2
+    },
+    {
+      "sacrium:0": 2
+    },
+    {
+      "sepulcrum:0": 2
+    },
+    {
+      "M`alium:0": 2
+    },
+    {
+      "solamen:0": 2
+    },
+    {
+      "lavo:0": 2
+    },
+    {
+      "effossus:0": 2
+    },
+    {
+      "fluidus:0": 2
+    },
+    {
+      "gradior:0": 2
+    },
+    {
+      "tingo:0": 2
+    },
+    {
+      "tinguo:0": 2
+    },
+    {
+      "recepto:0": 2
+    },
+    {
+      "receptus:0": 2
+    },
+    {
+      "celero:0": 2
+    },
+    {
+      "merito:1": 2
+    },
+    {
+      "merito:0": 2
+    },
+    {
+      "meritum:0": 2
+    },
+    {
+      "incido:0": 2
+    },
+    {
+      "incido:1": 2
+    },
+    {
+      "pronus:0": 2
+    },
+    {
+      "certans:0": 2
+    },
+    {
+      "adfecto:0": 2
+    },
+    {
+      "adfector:0": 2
+    },
+    {
+      "potestas:0": 2
+    },
+    {
+      "dextra:3": 2
+    },
+    {
+      "condio:0": 2
+    },
+    {
+      "potissimus:0": 2
+    },
+    {
+      "potis:0": 2
+    },
+    {
+      "potus:1": 2
+    },
+    {
+      "sequendus:0": 2
+    },
+    {
+      "contremesco:0": 2
+    },
+    {
+      "contremisco:0": 2
+    },
+    {
+      "contremo:0": 2
+    },
+    {
+      "caverna:0": 2
+    },
+    {
+      "excieo:0": 2
+    },
+    {
+      "excio:0": 2
+    },
+    {
+      "excitus:1": 2
+    },
+    {
+      "excitus:0": 2
+    },
+    {
+      "astans:0": 2
+    },
+    {
+      "frater:0": 2
+    },
+    {
+      "concilium:0": 2
+    },
+    {
+      "vertex:0": 2
+    },
+    {
+      "quercus:0": 2
+    },
+    {
+      "placatus:0": 2
+    },
+    {
+      "D`iana:0": 2
+    },
+    {
+      "consisto:0": 2
+    },
+    {
+      "acer:1": 2
+    },
+    {
+      "acerrimus:0": 2
+    },
+    {
+      "acrior:0": 2
+    },
+    {
+      "acrissimus:0": 2
+    },
+    {
+      "praecipio:0": 2
+    },
+    {
+      "intendo:0": 2
+    },
+    {
+      "utrimque:0": 2
+    },
+    {
+      "ni:1": 2
+    },
+    {
+      "ni:0": 2
+    },
+    {
+      "T`enea:0": 2
+    },
+    {
+      "linteum:0": 2
+    },
+    {
+      "linteus:0": 2
+    },
+    {
+      "boreas:0": 2
+    },
+    {
+      "boreus:0": 2
+    },
+    {
+      "praetervehor:0": 2
+    },
+    {
+      "O`stia:0": 2
+    },
+    {
+      "ostium:0": 2
+    },
+    {
+      "P`antagias:0": 2
+    },
+    {
+      "M`egari:0": 2
+    },
+    {
+      "T`hapsus:0": 2
+    },
+    {
+      "erratus:0": 2
+    },
+    {
+      "relegens:0": 2
+    },
+    {
+      "relego:0": 2
+    },
+    {
+      "lena:0": 2
+    },
+    {
+      "lenio:0": 2
+    },
+    {
+      "lenior:0": 2
+    },
+    {
+      "lenis:0": 2
+    },
+    {
+      "lenissimus:0": 2
+    },
+    {
+      "M`aria:0": 2
+    },
+    {
+      "crepitans:0": 2
+    },
+    {
+      "crepito:0": 2
+    },
+    {
+      "praetento:0": 2
+    },
+    {
+      "undosus:0": 2
+    },
+    {
+      "amnis:0": 2
+    },
+    {
+      "E`lis:0": 2
+    },
+    {
+      "elido:0": 2
+    },
+    {
+      "A`lpheus:0": 2
+    },
+    {
+      "subter:1": 2
+    },
+    {
+      "subter:0": 2
+    },
+    {
+      "occulto:1": 2
+    },
+    {
+      "occultus:0": 2
+    },
+    {
+      "S`iculi:0": 2
+    },
+    {
+      "A`rethusa:0": 2
+    },
+    {
+      "confundo:0": 2
+    },
+    {
+      "locor:0": 2
+    },
+    {
+      "exsupero:0": 2
+    },
+    {
+      "H`elorum:0": 2
+    },
+    {
+      "H`elorus:0": 2
+    },
+    {
+      "proiectus:0": 2
+    },
+    {
+      "concessus:0": 2
+    },
+    {
+      "rado:0": 2
+    },
+    {
+      "aestas:0": 2
+    },
+    {
+      "incipio:0": 2
+    },
+    {
+      "contraho:0": 2
+    },
+    {
+      "deduco:0": 2
+    },
+    {
+      "G`ela:1": 2
+    },
+    {
+      "G`ela:0": 2
+    },
+    {
+      "G`elas:0": 2
+    },
+    {
+      "gelo:0": 2
+    },
+    {
+      "fluvius:0": 2
+    },
+    {
+      "immanior:0": 2
+    },
+    {
+      "immanissimus:0": 2
+    },
+    {
+      "ostento:0": 2
+    },
+    {
+      "magnanimus:0": 2
+    },
+    {
+      "genero:0": 2
+    },
+    {
+      "S`elinus:0": 2
+    },
+    {
+      "palmosus:0": 2
+    },
+    {
+      "duro:1": 2
+    },
+    {
+      "lego:1": 2
+    },
+    {
+      "D`repanum:0": 2
+    },
+    {
+      "drepanis:0": 2
+    },
+    {
+      "drepanus:0": 2
+    },
+    {
+      "actus:1": 2
+    },
+    {
+      "levamen:0": 2
+    },
+    {
+      "bene:0": 2
+    },
+    {
+      "optime:0": 2
+    },
+    {
+      "optimus:0": 2
+    },
+    {
+      "amitto:0": 2
+    },
+    {
+      "P`ericles:0": 2
+    },
+    {
+      "periclum:0": 2
+    },
+    {
+      "luctus:1": 2
+    },
+    {
+      "lugeo:0": 2
+    },
+    {
+      "luctus:0": 2
+    },
+    {
+      "exter:0": 2
+    },
+    {
+      "extremus:1": 2
+    },
+    {
+      "labo:0": 2
+    },
+    {
+      "intentus:0": 2
+    },
+    {
+      "doceo:0": 2
+    },
+    {
+      "conticisco:0": 2
+    },
+    {
+      "conticeo:0": 2
+    },
+    {
+      "conticesco:0": 2
+    },
+    {
+      "quiesco:0": 2
+    },
+    {
+      "facto:0": 2
+    },
+    {
+      "fi:0": 2
+    },
+    {
+      "gratissimus:0": 2
+    },
+    {
+      "N`ereis:0": 2
+    },
+    {
+      "aegaeus:0": 2
+    },
+    {
+      "piissimus:0": 2
+    },
+    {
+      "pie:0": 2
+    },
+    {
+      "revincio:0": 2
+    },
+    {
+      "M`yconos:0": 2
+    },
+    {
+      "G`yaros:0": 2
+    },
+    {
+      "colus:1": 2
+    },
+    {
+      "colon:0": 2
+    },
+    {
+      "colon:1": 2
+    },
+    {
+      "colum:0": 2
+    },
+    {
+      "colus:0": 2
+    },
+    {
+      "colum:1": 2
+    },
+    {
+      "contemno:0": 2
+    },
+    {
+      "tuto:0": 2
+    },
+    {
+      "egressus:1": 2
+    },
+    {
+      "redimio:0": 2
+    },
+    {
+      "redimitus:0": 2
+    },
+    {
+      "vetero:0": 2
+    },
+    {
+      "structus:0": 2
+    },
+    {
+      "altero:0": 2
+    },
+    {
+      "mansurus:0": 2
+    },
+    {
+      "immitis:0": 2
+    },
+    {
+      "reliquia:0": 2
+    },
+    {
+      "reliquiae:0": 2
+    },
+    {
+      "A`chilles:0": 2
+    },
+    {
+      "D`anaus:0": 2
+    },
+    {
+      "repens:1": 2
+    },
+    {
+      "repens:0": 2
+    },
+    {
+      "repente:0": 2
+    },
+    {
+      "era:0": 2
+    },
+    {
+      "adytum:0": 2
+    },
+    {
+      "reclusus:0": 2
+    },
+    {
+      "cortina:0": 2
+    },
+    {
+      "mugio:0": 2
+    },
+    {
+      "summissus:0": 2
+    },
+    {
+      "D`urius:0": 2
+    },
+    {
+      "exquiro:0": 2
+    },
+    {
+      "reduco:0": 2
+    },
+    {
+      "dominor:0": 2
+    },
+    {
+      "nascor:0": 2
+    },
+    {
+      "exortus:0": 2
+    },
+    {
+      "tumultus:0": 2
+    },
+    {
+      "mixtus:0": 2
+    },
+    {
+      "laetitia:0": 2
+    }
+  ],
+  "wordsWithNoResults": [
+    "Idaeus",
+    "Rhoeteas",
+    "Pergameae",
+    "Cybeli",
+    "Cnosia",
+    "Cretaeis",
+    "Mauortia",
+    "Idomenea",
+    "Olearon",
+    "Cycladas",
+    "adlabimur",
+    "Curetum",
+    "Dardania",
+    "Delius",
+    "Hesperiam",
+    "Grai",
+    "Oenotri",
+    "longaeuo",
+    "Corythum",
+    "Ausonias",
+    "Dictaea",
+    "Dionaeae",
+    "Cassandra",
+    "Hesperiam",
+    "Hesperiae",
+    "Cassandra",
+    "ovantes",
+    "nitentem",
+    "caelicolum",
+    "tris",
+    "adnixi",
+    "Graio",
+    "Ionio",
+    "Celaeno",
+    "Phineia",
+    "priores",
+    "Harpyiae",
+    "Misenus",
+    "Celaeno",
+    "praecelsa",
+    "Laomedontiadae",
+    "Harpyias",
+    "deriguit",
+    "talem",
+    "Zacynthos",
+    "Neritos",
+    "Laertia",
+    "Leucatae",
+    "Argolicas",
+    "Phaeacum",
+    "Chaonio",
+    "Helenum",
+    "Priamiden",
+    "Graias",
+    "Pyrrhi",
+    "Aeacidae",
+    "Andromachen",
+    "Andromache",
+    "Hectoreum",
+    "inanem",
+    "venientem",
+    "deriguit",
+    "omnem",
+    "Hector",
+    "Pyrrhin",
+    "Andromache",
+    "Hectoris",
+    "Priameia",
+    "hostilem",
+    "Achilleae",
+    "Ledaeam",
+    "Heleno",
+    "Orestes",
+    "Neoptolemi",
+    "Chaonios",
+    "Heleno",
+    "omnem",
+    "Geticis",
+    "Hector",
+    "incassum",
+    "Helenus",
+    "Priamides",
+    "arentem",
+    "aulai",
+    "Troiugena",
+    "Clarii",
+    "tripodas",
+    "Celaeno",
+    "Harpyia",
+    "Helenus",
+    "obluctor",
+    "Saturnia",
+    "Helenum",
+    "Circae",
+    "Grais",
+    "Narycii",
+    "Sallentinos",
+    "Lyctius",
+    "Meliboei",
+    "Idomeneus",
+    "Philoctetae",
+    "rarescent",
+    "Hesperium",
+    "interluit",
+    "implacata",
+    "trahentem",
+    "exsertantem",
+    "pistrix",
+    "Trinacrii",
+    "cessantem",
+    "auarum",
+    "Heleno",
+    "potentem",
+    "Polydorus",
+    "Cumaeam",
+    "Averna",
+    "ingentem",
+    "trilicem",
+    "Neoptolemi",
+    "Anchisa",
+    "Pergameis",
+    "Polydorum",
+    "Andromache",
+    "Andromachae",
+    "Hectoreae",
+    "Astyanactis",
+    "mandarat",
+    "felices",
+    "Grais",
+    "Threicio",
+    "intraro",
+    "Hesperiam",
+    "Prouehimur",
+    "Dardaniae",
+    "Hyadas",
+    "Oriona",
+    "potentes",
+    "facilem",
+    "Agamemnonias",
+    "Polydorum",
+    "quadripedes",
+    "Palladis",
+    "Phrygio",
+    "Argiuae",
+    "obuertimus",
+    "ui",
+    "navifragum",
+    "ingentem",
+    "Helenus",
+    "adlabimur",
+    "fumantem",
+    "Enceladi",
+    "omnem",
+    "Eoo",
+    "Graius",
+    "Dardanios",
+    "periisse",
+    "Polydoro",
+    "Adamasto",
+    "immemores",
+    "talem",
+    "resupinus",
+    "oblitusue",
+    "Ithacus",
+    "fundimur",
+    "Phoebeae",
+    "Argolici",
+    "Cyclopas",
+    "infelicem",
+    "conlustrans",
+    "venientem",
+    "moventem",
+    "petentem",
+    "infrendens",
+    "Ionios",
+    "omnes",
+    "immugiit",
+    "Aetnaeos",
+    "coniferae",
+    "cyparissi",
+    "iacentem",
+    "retrorsus",
+    "Sicanio",
+    "priores",
+    "Plemyrium",
+    "stagnantis",
+    "praepingue",
+    "Geloi",
+    "Camerina",
+    "Acragas",
+    "Lilybeia",
+    "inlaetabilis",
+    "Helenus",
+    "Celaeno",
+    "renarrabat",
+    "Arquitenens",
+    "errantem",
+    "placidissima",
+    "Anius",
+    "Thymbraee",
+    "quoue",
+    "inlabere",
+    "Dardanidae"
+  ]
+}

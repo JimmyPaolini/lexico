@@ -1,0 +1,1 @@
+export { NounGrammar } from './NounGrammar'

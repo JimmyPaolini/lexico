@@ -1,18 +1,20 @@
-# context must be one folder level up
-FROM node:15-alpine
+FROM node:15-alpine AS installer
 RUN apk add --update nodejs npm curl
+WORKDIR /app
+COPY package*.json .
+RUN npm ci
 
-WORKDIR /Lexico
-COPY package*.json ./
-RUN npm install
+FROM node:15-alpine AS builder
+WORKDIR /app
+COPY --from=installer /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
 
-WORKDIR /Lexico/web
-COPY web/package*.json ./
-RUN npm install
-
-COPY . ../
-RUN NEXT_ENV=build npm run build
-
+FROM node:15-alpine AS runner
+WORKDIR /app
+# COPY --from=builder /app/public ./public
+# COPY --from=builder /app/.next ./.next
+COPY --from=builder /app .
+ENV NODE_ENV=production
 EXPOSE 3000
-HEALTHCHECK CMD curl --fail http://web:3000/ || exit 1
-CMD NODE_ENV=production npm run start
+CMD npm run start

@@ -1,0 +1,3 @@
+query Macronize($text: String!) {
+  macronize(text: $text)
+}

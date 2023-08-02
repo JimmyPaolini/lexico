@@ -1,0 +1,44 @@
+fragment AllIndicative on Indicative {
+  active {
+    ...AllIndicativeTense
+  }
+  passive {
+    ...AllIndicativeTense
+  }
+}
+
+fragment AllIndicativeTense on IndicativeTense {
+  present {
+    ...AllIndicativeNumber
+  }
+  imperfect {
+    ...AllIndicativeNumber
+  }
+  future {
+    ...AllIndicativeNumber
+  }
+  perfect {
+    ...AllIndicativeNumber
+  }
+  pluperfect {
+    ...AllIndicativeNumber
+  }
+  futurePerfect {
+    ...AllIndicativeNumber
+  }
+}
+
+fragment AllIndicativeNumber on IndicativeNumber {
+  singular {
+    ...AllIndicativePerson
+  }
+  plural {
+    ...AllIndicativePerson
+  }
+}
+
+fragment AllIndicativePerson on IndicativePerson {
+  first
+  second
+  third
+}

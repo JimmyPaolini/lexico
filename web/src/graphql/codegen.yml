@@ -1,0 +1,27 @@
+overwrite: true
+schema: ../server/src/graphql/schema.graphql
+documents: src/**/*.graphql
+generates:
+  src/graphql/generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-document-nodes
+      - typescript-react-query
+    config:
+      fetcher: ./fetcher#fetcher
+      exposeFetcher: true
+      exposeQueryKeys: true
+      exposeMutationKeys: true
+      dedupeFragments: true
+      dedupeOperationSuffix: true
+      flattenGeneratedTypes: true
+      skipTypename: true
+  src/graphql/schema.json:
+    plugins:
+      - introspection
+hooks:
+  afterAllFileWrite:
+    - sed -r -i '' -e '1h;2,$H;$!d;g' -e 's/FragmentDoc = `([^$]+)[^`]+`/FragmentDoc = `\1`/g' src/graphql/generated.ts
+    - eslint --no-ignore --no-error-on-unmatched-pattern --config ../cleaning/.eslintrc.js --ignore-path ../cleaning/.eslintignore --fix
+    - prettier --config ../cleaning/.prettierrc.js --ignore-path ../cleaning/.prettierignore --write

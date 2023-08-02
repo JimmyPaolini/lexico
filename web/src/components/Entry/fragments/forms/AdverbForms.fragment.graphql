@@ -1,0 +1,5 @@
+fragment AllAdverbForms on AdverbForms {
+  positive
+  comparative
+  superlative
+}

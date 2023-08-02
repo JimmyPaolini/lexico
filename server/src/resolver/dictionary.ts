@@ -1,114 +1,150 @@
-import { performance } from "perf_hooks"
-import { Arg, Ctx, Query, Resolver, UseMiddleware } from "type-graphql"
-import { getConnection } from "typeorm"
-import Entry from "../../../entity/dictionary/Entry"
-import Translation from "../../../entity/dictionary/Translation"
-import Word from "../../../entity/dictionary/Word"
-import VerbForms from "../../../entity/dictionary/word/forms/VerbForms"
-import identifyEntryWord from "../../../utils/identifiers"
-import log from "../../../utils/log"
-import { hasSuffix } from "../../../utils/string"
-import { GetBookmarks } from "../authentication/token"
-import { camelCaseFuturePerfect } from "../utils/forms"
-import { ResolverContext } from "../utils/ResolverContext"
+import { Arg, Ctx, Query, Resolver, UseMiddleware } from 'type-graphql'
+import { In } from 'typeorm'
+
+import { ResolverContext } from '../config/ResolverContext'
+import { Database } from '../config/database'
+import Entry from '../entity/dictionary/Entry'
+import Translation from '../entity/dictionary/Translation'
+import Word from '../entity/dictionary/Word'
+import { GetBookmarks } from '../services/authentication/middleware'
+import { processEntry } from '../services/entry'
+import identifyEntryWord from '../services/identifiers'
+import { Log } from '../services/log'
+import { hasSuffix } from '../services/string'
 
 @Resolver(Entry)
-export default class DictionaryResolver {
-  Entries = getConnection().getRepository(Entry)
-  Translations = getConnection().getRepository(Translation)
-  Words = getConnection().getRepository(Word)
+export class DictionaryResolver {
+  @Query(() => [Entry])
+  @UseMiddleware(GetBookmarks)
+  @Log({
+    mapParams: (params) => [params[0]],
+    mapResult: (entries: Entry[]) => entries.map(({ id }) => id),
+  })
+  async search(
+    @Arg('search') search: string,
+    @Ctx() context: ResolverContext
+  ): Promise<Entry[]> {
+    const [latinEntries, englishEntries] = await Promise.all([
+      this.searchLatin(search, context),
+      this.searchEnglish(search, context),
+    ])
+    const entries = [
+      ...latinEntries,
+      ...englishEntries.filter(
+        (englishEntry) =>
+          !latinEntries.some((latinEntry) => latinEntry.id !== englishEntry.id)
+      ),
+    ]
+
+    return entries
+  }
 
   @Query(() => [Entry])
   @UseMiddleware(GetBookmarks)
   async searchLatin(
-    @Arg("search") search: string,
-    @Ctx() { bookmarks }: ResolverContext,
+    @Arg('search') search: string,
+    @Ctx() { bookmarks }: ResolverContext
   ): Promise<Entry[]> {
-    const t0 = performance.now()
-    if (!search || !search.match(/^-?(\w| )+\.?$/)) return []
-    // log.info("searchLatin request", { search })
+    if (!search?.match(/^-?(\w| )+\.?$/)) return []
 
-    search = search.toLowerCase()
-    const pushSuffix = async (suffix: string) => {
-      const [nonSuffixWord, suffixEntry] = await Promise.all([
-        this.Words.findOne(search.replace(new RegExp(suffix + "$", "i"), "")),
-        this.Entries.findOne(`-${suffix}:0`),
-      ])
-      if (nonSuffixWord) entries.push(...nonSuffixWord.entries)
-      entries.push(suffixEntry)
-    }
+    search = search.toLowerCase().trim()
 
-    let entries = []
-    const word = await this.Words.findOne(search)
-    if (word) entries.push(...word.entries)
-    if (hasSuffix(search, "que")) await pushSuffix("que")
-    else if (hasSuffix(search, "ve")) await pushSuffix("ve")
-    else if (hasSuffix(search, "ne")) await pushSuffix("ne")
+    const word = await Word.findOne({ where: { word: search } })
+    const entries = word?.entries ?? []
+    entries.concat(await this.searchSuffixes(search))
 
-    entries = entries
+    const entriesProcessed = entries
       .filter((entry) => !!entry.translations?.length)
       .map((entry) => {
         entry = identifyEntryWord(search, entry)
-        if (entry.partOfSpeech === "verb" && entry.forms) {
-          entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
-        }
         entry.bookmarked = bookmarks?.some(
-          (bookmark) => bookmark.id === entry.id,
+          (bookmark) => bookmark.id === entry.id
         )
-        return entry
+        return processEntry(entry)
       })
-    log.info("searchLatin", {
-      search,
-      responseTime: performance.now() - t0,
-      entries: entries.map(({ id }) => id),
-    })
-    return entries
+
+    return entriesProcessed
+  }
+
+  async searchSuffix(search: string, suffix: string): Promise<Entry[]> {
+    if (!hasSuffix(search, suffix)) return []
+    const [nonSuffixWord, suffixEntry] = await Promise.all([
+      Word.findOne({
+        where: { word: search.replace(new RegExp(suffix + '$', 'i'), '') },
+      }),
+      Entry.findOne({ where: { id: `-${suffix}:0` } }),
+    ])
+    return [
+      ...(nonSuffixWord ? nonSuffixWord.entries : []),
+      ...(suffixEntry ? [suffixEntry] : []),
+    ]
+  }
+
+  async searchSuffixes(search: string): Promise<Entry[]> {
+    return (
+      await Promise.all([
+        this.searchSuffix(search, 'que'),
+        this.searchSuffix(search, 've'),
+        this.searchSuffix(search, 'ne'),
+      ])
+    ).flat()
   }
 
   @Query(() => [Entry])
   @UseMiddleware(GetBookmarks)
   async searchEnglish(
-    @Arg("search") search: string,
-    @Ctx() { bookmarks }: ResolverContext,
+    @Arg('search') search: string,
+    @Ctx() { bookmarks }: ResolverContext
   ): Promise<Entry[]> {
-    const t0 = performance.now()
     if (!search) return []
-    // log.info("searchEnglish request", { search })
-    const translations = await this.Translations.createQueryBuilder(
-      "translation",
-    )
+    search = search.trim()
+
+    const translations = await Database.getRepository(Translation)
+      .createQueryBuilder('translation')
       .where(`translation.translation ~* '(^| )${search}( |$)'`)
-      .leftJoinAndSelect("translation.entry", "entry")
-      .leftJoinAndSelect("entry.translations", "entryTranslations")
+      .leftJoinAndSelect('translation.entry', 'entry')
+      .leftJoinAndSelect('entry.translations', 'entryTranslations')
       .getMany()
 
     const entries = translations
       .map((t) => t.entry)
-      .filter((entry) => entry.partOfSpeech !== "properNoun")
+      .filter((entry) => entry.partOfSpeech !== 'properNoun')
       .map((entry) => {
-        if (entry.partOfSpeech === "verb" && entry.forms) {
-          entry.forms = camelCaseFuturePerfect(entry.forms as VerbForms)
-        }
         entry.bookmarked = bookmarks?.some(
-          (bookmark) => bookmark.id === entry.id,
+          (bookmark) => bookmark.id === entry.id
         )
-        return entry
+        entry.isLatinSearchResult = false
+        return processEntry(entry)
       })
-    log.info("searchEnglish", {
-      search,
-      responseTime: performance.now() - t0,
-      entries: entries.map(({ id }) => id),
-    })
+      .filter(
+        (entry, index, self) =>
+          index === self.findIndex((duplicate) => duplicate.id === entry.id)
+      )
+
     return entries
   }
 
   @Query(() => Entry)
-  async entry(@Arg("id") id: string): Promise<Entry> {
-    return await this.Entries.findOneOrFail(id)
+  @Log({ mapResult: ({ id }) => id })
+  async entry(@Arg('id') id: string): Promise<Entry> {
+    const entry = await Entry.findOneOrFail({ where: { id } })
+    if (!entry.translations?.length) throw Error(`entry "${id}" not found`)
+    return processEntry(entry)
   }
 
   @Query(() => [Entry])
-  async entries(@Arg("ids", () => [String]) ids: string[]): Promise<Entry[]> {
-    return await this.Entries.findByIds(ids)
+  @Log({
+    mapResult: (entries: Entry[]) => entries.map(({ id }) => id),
+  })
+  async entries(@Arg('ids', () => [String]) ids: string[]): Promise<Entry[]> {
+    const entries = await Entry.find({
+      where: { id: In(ids) },
+      order: { id: 'ASC' },
+    })
+    const entriesProcessed = entries
+      .filter((entry) => !!entry.translations?.length)
+      .map(processEntry)
+
+    return entriesProcessed
   }
 }

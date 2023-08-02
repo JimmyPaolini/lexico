@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: server
   replicas: 3
-  # revisionHistoryLimit: 2
+  revisionHistoryLimit: 2
   template:
     metadata:
       labels:
@@ -17,13 +17,11 @@ spec:
     spec:
       containers:
         - name: server
-          image: jimmypaolini/lexico-server
+          image: jimmypaolini/lexico-server:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3001
           envFrom:
-            - configMapRef:
-                name: env
             - secretRef:
                 name: env
       # affinity:
